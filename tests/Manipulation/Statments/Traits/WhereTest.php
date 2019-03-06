@@ -37,18 +37,19 @@ class WhereTest extends TestCase
 		$this->statement->where('id', '=', 10);
 		$this->assertEquals(' WHERE `id` = 10', $this->statement->render());
 		$this->statement->where('name', '=', "'foo");
-		$this->assertEquals(" WHERE `id` = 10 AND `name` = '\'foo'", $this->statement->render());
+		$this->assertEquals(" WHERE `id` = 10 AND `name` = '\\'foo'", $this->statement->render());
 		$this->statement->orWhere('created_at', '>', function () {
 			return 'NOW() - 60';
 		});
 		$this->assertEquals(
-			" WHERE `id` = 10 AND `name` = '\'foo' OR `created_at` > (NOW() - 60)",
+			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->render()
-		);$this->statement->where(function (Manipulation $manipulation) {
+		);
+		$this->statement->where(function (Manipulation $manipulation) {
 			return $manipulation->database->protectIdentifier('random_table');
 		}, '!=', 'bar');
 		$this->assertEquals(
-			" WHERE `id` = 10 AND `name` = '\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",
+			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",
 			$this->statement->render()
 		);
 	}
