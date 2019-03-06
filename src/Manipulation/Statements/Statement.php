@@ -61,25 +61,32 @@ abstract class Statement
 	}
 
 	/**
-	 * @param array|\Closure|string $column
+	 * @param \Closure|string $column
 	 *
 	 * @return string
 	 */
 	protected function renderColumn($column) : string
+	{
+		return $column instanceof \Closure
+			? $this->subquery($column)
+			: $this->manipulation->database->protectIdentifier($column);
+	}
+
+	/**
+	 * @param array|\Closure|string $column
+	 *
+	 * @return string
+	 */
+	protected function renderAliasedColumn($column) : string
 	{
 		if (\is_array($column)) {
 			if (\count($column) !== 1) {
 				throw new \InvalidArgumentException('Aliased column must have only 1 key');
 			}
 			$alias = \array_key_first($column);
-			$name = $column[$alias];
-			$column = $name instanceof \Closure
-					? $this->subquery($name)
-					: $this->manipulation->database->protectIdentifier($name);
-			return $column . ' AS ' . $this->manipulation->database->protectIdentifier($alias);
+			return $this->renderColumn($column[$alias]) . ' AS '
+				. $this->manipulation->database->protectIdentifier($alias);
 		}
-		return $column instanceof \Closure
-			? $this->subquery($column)
-			: $this->manipulation->database->protectIdentifier($column);
+		return $this->renderColumn($column);
 	}
 }

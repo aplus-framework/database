@@ -31,7 +31,7 @@ trait Join
 		}
 		$tables = [];
 		foreach ($this->sql['from'] as $table) {
-			$tables[] = $this->renderColumn($table);
+			$tables[] = $this->renderAliasedColumn($table);
 		}
 		return ' FROM ' . \implode(', ', $tables);
 	}
@@ -155,7 +155,7 @@ trait Join
 			return null;
 		}
 		$type = $this->renderJoinType($this->sql['join']['type']);
-		$table = $this->renderColumn($this->sql['join']['table']);
+		$table = $this->renderAliasedColumn($this->sql['join']['table']);
 		$condition_type = $this->renderJoinConditionType($this->sql['join']['condition_type']);
 		$condition = $this->renderJoinCondition($condition_type, $this->sql['join']['condition']);
 		if ($type) {

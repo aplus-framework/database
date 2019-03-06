@@ -146,7 +146,7 @@ class Select extends Statement
 		}
 		$expressions = [];
 		foreach ($this->sql['expressions'] as $expression) {
-			$expressions[] = $this->renderColumn($expression);
+			$expressions[] = $this->renderAliasedColumn($expression);
 		}
 		return \implode(', ', $expressions);
 	}
