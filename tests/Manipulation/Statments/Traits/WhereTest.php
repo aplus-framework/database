@@ -31,7 +31,7 @@ class WhereTest extends TestCase
 		};
 	}
 
-	public function testSimpleWhere()
+	public function testWhere()
 	{
 		$this->assertNull($this->statement->render());
 		$this->statement->where('id', '=', 10);
@@ -50,6 +50,46 @@ class WhereTest extends TestCase
 		}, '!=', 'bar');
 		$this->assertEquals(
 			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",
+			$this->statement->render()
+		);
+	}
+
+	public function testWhereLike()
+	{
+		$this->statement->whereLike('email', '%@mail.com');
+		$this->assertEquals(" WHERE `email` LIKE '%@mail.com'", $this->statement->render());
+		$this->statement->orWhereLike('name', 'foo%');
+		$this->assertEquals(
+			" WHERE `email` LIKE '%@mail.com' OR `name` LIKE 'foo%'",
+			$this->statement->render()
+		);
+		$this->statement->whereLike(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `email` LIKE '%@mail.com' OR `name` LIKE 'foo%' AND (id) LIKE (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testWhereNotLike()
+	{
+		$this->statement->whereNotLike('email', '%@mail.com');
+		$this->assertEquals(" WHERE `email` NOT LIKE '%@mail.com'", $this->statement->render());
+		$this->statement->orWhereNotLike('name', 'foo%');
+		$this->assertEquals(
+			" WHERE `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%'",
+			$this->statement->render()
+		);
+		$this->statement->whereNotLike(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%' AND (id) NOT LIKE (10)",
 			$this->statement->render()
 		);
 	}
