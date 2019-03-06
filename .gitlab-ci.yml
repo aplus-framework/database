@@ -29,7 +29,7 @@ test:php7.3:
     - php -l src/*
     - php -l tests/*
     # Analyse code with PHPStan
-    - vendor/bin/phpstan analyse
+    # - vendor/bin/phpstan analyse
     # PHPMD
     - vendor/bin/phpmd src/ text phpmd.xml
     - vendor/bin/phpmd tests/ text phpmd.xml
