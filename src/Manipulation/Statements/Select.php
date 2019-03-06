@@ -117,7 +117,7 @@ class Select extends Statement
 	 *
 	 * @param mixed $expressions Each expresion must be of type: array, string or \Closure
 	 *
-	 * @return $this;
+	 * @return $this
 	 */
 	public function expressions(...$expressions)
 	{
@@ -132,7 +132,7 @@ class Select extends Statement
 	 *
 	 * @param mixed $expressions Each expresion must be of type: array, string or \Closure
 	 *
-	 * @return $this;
+	 * @return $this
 	 */
 	public function columns(...$expressions)
 	{

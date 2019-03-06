@@ -14,7 +14,7 @@ trait Join
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *
-	 * @return $this;
+	 * @return $this
 	 */
 	public function from(...$references)
 	{

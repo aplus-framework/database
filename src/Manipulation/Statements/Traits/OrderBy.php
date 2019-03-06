@@ -10,7 +10,7 @@ trait OrderBy
 	/**
 	 * @param mixed $columns Each column must be of type: string or \Closure
 	 *
-	 * @return $this;
+	 * @return $this
 	 */
 	public function orderBy(...$columns)
 	{
@@ -20,7 +20,7 @@ trait OrderBy
 	/**
 	 * @param mixed $columns Each column must be of type: string or \Closure
 	 *
-	 * @return $this;
+	 * @return $this
 	 */
 	public function orderByAsc(...$columns)
 	{
@@ -30,7 +30,7 @@ trait OrderBy
 	/**
 	 * @param mixed $columns Each column must be of type: string or \Closure
 	 *
-	 * @return $this;
+	 * @return $this
 	 */
 	public function orderByDesc(...$columns)
 	{
