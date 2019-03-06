@@ -31,8 +31,8 @@ test:php7.3:
     # Analyse code with PHPStan
     # - vendor/bin/phpstan analyse
     # PHPMD
-    - vendor/bin/phpmd src/ text phpmd.xml
-    - vendor/bin/phpmd tests/ text phpmd.xml
+    # - vendor/bin/phpmd src/ text phpmd.xml
+    # - vendor/bin/phpmd tests/ text phpmd.xml
     # Run PHPUnit
     - vendor/bin/phpunit --colors=never
     # ApiGen
