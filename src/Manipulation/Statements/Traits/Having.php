@@ -18,7 +18,7 @@ trait Having
 	 */
 	public function having($column, string $operator, ...$values)
 	{
-		return $this->addWhere('AND', $column, $operator, $values, 'having');
+		return $this->addHaving('AND', $column, $operator, $values);
 	}
 
 	/**
@@ -32,7 +32,16 @@ trait Having
 	 */
 	public function orHaving($column, string $operator, ...$values)
 	{
-		return $this->addWhere('OR', $column, $operator, $values, 'having');
+		return $this->addHaving('OR', $column, $operator, $values);
+	}
+
+	private function addHaving(
+		string $glue,
+		$column,
+		string $operator,
+		array $values
+	) {
+		return $this->addWhere($glue, $column, $operator, $values, 'having');
 	}
 
 	protected function renderHaving() : ?string
