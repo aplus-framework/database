@@ -1,0 +1,56 @@
+{
+	"name": "framework/database",
+	"type": "library",
+	"description": "The Database abstraction package",
+	"keywords": [
+		"database"
+	],
+	"homepage": "https://gitlab.com/the-framework/database",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Natan Felles",
+			"email": "natanfelles@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.3",
+		"ext-pdo": "*"
+	},
+	"require-dev": {
+		"ext-xdebug": "*",
+		"apigen/apigen": "dev-master#85290e8",
+		"friendsofphp/php-cs-fixer": "^2.14",
+		"localheinz/composer-normalize": "^1.1",
+		"phpmd/phpmd": "^2.6",
+		"phpstan/phpstan": "^0.11",
+		"phpunit/phpunit": "^7.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"Framework\\Database\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tests\\Database\\": "tests/"
+		}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"scripts": {
+		"post-install-cmd": [
+			".hooks/init"
+		],
+		"post-update-cmd": [
+			"composer dump-autoload"
+		]
+	},
+	"support": {
+		"email": "natanfelles@gmail.com",
+		"issues": "https://gitlab.com/the-framework/database/issues",
+		"wiki": "https://gitlab.com/the-framework/packages/database",
+		"source": "https://gitlab.com/the-framework/database",
+		"docs": "https://the-framework.gitlab.io/the-framework/packages/database/docs"
+	}
+}
