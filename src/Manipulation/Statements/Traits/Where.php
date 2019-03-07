@@ -10,7 +10,7 @@ trait Where
 	 *
 	 * @param \Closure|string $column
 	 * @param string          $operator
-	 * @param mixed           $values Each value must be of type: string or \Closure
+	 * @param mixed           $values   Each value must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -24,7 +24,7 @@ trait Where
 	 *
 	 * @param \Closure|string $column
 	 * @param string          $operator
-	 * @param mixed           $values Each value must be of type: string or \Closure
+	 * @param mixed           $values   Each value must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -284,6 +284,10 @@ trait Where
 		], true)) {
 			return $this->renderWhereValuesPartIsNull($operator, $values);
 		}
+		// @codeCoverageIgnoreStart
+		// Should never throw - renderWhereOperator runs before on renderWhere
+		throw new \InvalidArgumentException("Invalid comparison operator: {$operator}");
+		// @codeCoverageIgnoreEnd
 	}
 
 	private function prepareWhereValues(array $values) : array
