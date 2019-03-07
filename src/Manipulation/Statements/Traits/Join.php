@@ -10,7 +10,8 @@ trait Join
 	/**
 	 * Sets the FROM clause.
 	 *
-	 * @param mixed $expressions Table references. Each reference must be of type: string or \Closure
+	 * @param mixed $references Table references. Each reference must be of type: array, string or
+	 *                          \Closure
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *
@@ -36,11 +37,15 @@ trait Join
 		return ' FROM ' . \implode(', ', $tables);
 	}
 
-	protected function checkFrom(string $clause)
+	protected function hasFrom(string $clause = null) : bool
 	{
 		if ( ! isset($this->sql['from'])) {
+			if ($clause === null) {
+				return false;
+			}
 			throw new \RuntimeException("Clause {$clause} only works with FROM");
 		}
+		return true;
 	}
 
 	public function join(string $type, $table, string $condition, $conditional)
@@ -53,7 +58,7 @@ trait Join
 		return $this->addJoin('', $table, 'USING', $columns);
 	}
 
-	public function innerJoin($table, Closure $condition)
+	public function innerJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('INNER', $table, 'ON', $condition);
 	}
@@ -63,7 +68,7 @@ trait Join
 		return $this->addJoin('INNER', $table, 'USING', $columns);
 	}
 
-	public function crossJoin($table, Closure $condition)
+	public function crossJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('CROSS', $table, 'ON', $condition);
 	}
@@ -73,7 +78,7 @@ trait Join
 		return $this->addJoin('CROSS', $table, 'USING', $columns);
 	}
 
-	public function leftJoin($table, Closure $condition)
+	public function leftJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('LEFT', $table, 'ON', $condition);
 	}
@@ -83,12 +88,12 @@ trait Join
 		return $this->addJoin('LEFT', $table, 'USING', $columns);
 	}
 
-	public function leftOuterJoin($table, Closure $condition)
+	public function leftOuterJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('LEFT OUTER', $table, 'ON', $condition);
 	}
 
-	public function rightJoin($table, Closure $condition)
+	public function rightJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('RIGHT', $table, 'ON', $condition);
 	}
@@ -98,17 +103,17 @@ trait Join
 		return $this->addJoin('RIGHT', $table, 'USING', $columns);
 	}
 
-	public function rightOuterJoin($table, Closure $condition)
+	public function rightOuterJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('RIGHT OUTER', $table, 'ON', $condition);
 	}
 
-	public function naturalJoin($table, Closure $condition)
+	public function naturalJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('NATURAL', $table, 'ON', $condition);
 	}
 
-	public function naturalLeftJoin($table, Closure $condition)
+	public function naturalLeftJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('NATURAL LEFT', $table, 'ON', $condition);
 	}
@@ -118,12 +123,12 @@ trait Join
 		return $this->addJoin('NATURAL LEFT', $table, 'USING', $columns);
 	}
 
-	public function naturalLeftOuterJoin($table, Closure $condition)
+	public function naturalLeftOuterJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('NATURAL LEFT OUTER', $table, 'ON', $condition);
 	}
 
-	public function naturalRightJoin($table, Closure $condition)
+	public function naturalRightJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('NATURAL RIGHT', $table, 'ON', $condition);
 	}
@@ -133,7 +138,7 @@ trait Join
 		return $this->addJoin('NATURAL RIGHT', $table, 'USING', $columns);
 	}
 
-	public function naturalRightOuterJoin($table, Closure $condition)
+	public function naturalRightOuterJoin($table, \Closure $condition)
 	{
 		return $this->addJoin('NATURAL RIGHT OUTER', $table, 'ON', $condition);
 	}
@@ -200,8 +205,11 @@ trait Join
 
 	private function renderJoinCondition(string $type, $condition) : string
 	{
-		if ($type === 'ON') {
-			return $this->subquery($condition);
+		if ($type === 'ON' && ! $condition instanceof \Closure) {
+			throw new \InvalidArgumentException(
+				'JOIN conditional ON must have an instance of \Closure as condition parameter'
+			);
 		}
+		return $this->subquery($condition);
 	}
 }
