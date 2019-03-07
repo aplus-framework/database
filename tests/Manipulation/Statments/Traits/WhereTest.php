@@ -80,6 +80,146 @@ class WhereTest extends TestCase
 		$this->statement->where('email', 'is null', 1)->render();
 	}
 
+	public function testEqual()
+	{
+		$this->statement->whereEqual('email', 'user@mail.com');
+		$this->assertEquals(" WHERE `email` = 'user@mail.com'", $this->statement->render());
+		$this->statement->orWhereEqual('name', 'foo');
+		$this->assertEquals(
+			" WHERE `email` = 'user@mail.com' OR `name` = 'foo'",
+			$this->statement->render()
+		);
+		$this->statement->whereEqual(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `email` = 'user@mail.com' OR `name` = 'foo' AND (id) = (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testNotEqual()
+	{
+		$this->statement->whereNotEqual('email', 'user@mail.com');
+		$this->assertEquals(" WHERE `email` != 'user@mail.com'", $this->statement->render());
+		$this->statement->orWhereNotEqual('name', 'foo');
+		$this->assertEquals(
+			" WHERE `email` != 'user@mail.com' OR `name` != 'foo'",
+			$this->statement->render()
+		);
+		$this->statement->whereNotEqual(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `email` != 'user@mail.com' OR `name` != 'foo' AND (id) != (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testNullSafeEqual()
+	{
+		$this->statement->whereNullSafeEqual('email', 'user@mail.com');
+		$this->assertEquals(" WHERE `email` <=> 'user@mail.com'", $this->statement->render());
+		$this->statement->orWhereNullSafeEqual('name', null);
+		$this->assertEquals(
+			" WHERE `email` <=> 'user@mail.com' OR `name` <=> NULL",
+			$this->statement->render()
+		);
+		$this->statement->whereNullSafeEqual(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `email` <=> 'user@mail.com' OR `name` <=> NULL AND (id) <=> (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testLessThan()
+	{
+		$this->statement->whereLessThan('count', 5);
+		$this->assertEquals(" WHERE `count` < 5", $this->statement->render());
+		$this->statement->orWhereLessThan('name', 'foo');
+		$this->assertEquals(
+			" WHERE `count` < 5 OR `name` < 'foo'",
+			$this->statement->render()
+		);
+		$this->statement->whereLessThan(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `count` < 5 OR `name` < 'foo' AND (id) < (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testLessThanOrEqual()
+	{
+		$this->statement->whereLessThanOrEqual('count', 5);
+		$this->assertEquals(" WHERE `count` <= 5", $this->statement->render());
+		$this->statement->orWhereLessThanOrEqual('name', 'foo');
+		$this->assertEquals(
+			" WHERE `count` <= 5 OR `name` <= 'foo'",
+			$this->statement->render()
+		);
+		$this->statement->whereLessThanOrEqual(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `count` <= 5 OR `name` <= 'foo' AND (id) <= (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testGreaterThan()
+	{
+		$this->statement->whereGreaterThan('count', 5);
+		$this->assertEquals(" WHERE `count` > 5", $this->statement->render());
+		$this->statement->orWhereGreaterThan('name', 'foo');
+		$this->assertEquals(
+			" WHERE `count` > 5 OR `name` > 'foo'",
+			$this->statement->render()
+		);
+		$this->statement->whereGreaterThan(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `count` > 5 OR `name` > 'foo' AND (id) > (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testGreaterThanOrEqual()
+	{
+		$this->statement->whereGreaterThanOrEqual('count', 5);
+		$this->assertEquals(" WHERE `count` >= 5", $this->statement->render());
+		$this->statement->orWhereGreaterThanOrEqual('name', 'foo');
+		$this->assertEquals(
+			" WHERE `count` >= 5 OR `name` >= 'foo'",
+			$this->statement->render()
+		);
+		$this->statement->whereGreaterThanOrEqual(function () {
+			return 'id';
+		}, function () {
+			return 10;
+		});
+		$this->assertEquals(
+			" WHERE `count` >= 5 OR `name` >= 'foo' AND (id) >= (10)",
+			$this->statement->render()
+		);
+	}
+
 	public function testLike()
 	{
 		$this->statement->whereLike('email', '%@mail.com');

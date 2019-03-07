@@ -10,7 +10,7 @@ trait Where
 	 *
 	 * @param \Closure|string $column
 	 * @param string          $operator
-	 * @param mixed           $values   Each value must be of type: string or \Closure
+	 * @param mixed           $values Each value must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -24,13 +24,83 @@ trait Where
 	 *
 	 * @param \Closure|string $column
 	 * @param string          $operator
-	 * @param mixed           $values   Each value must be of type: string or \Closure
+	 * @param mixed           $values Each value must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
 	public function orWhere($column, string $operator, ...$values)
 	{
 		return $this->addWhere('OR', $column, $operator, $values);
+	}
+
+	public function whereEqual($column, $value)
+	{
+		return $this->where($column, '=', $value);
+	}
+
+	public function orWhereEqual($column, $value)
+	{
+		return $this->orWhere($column, '=', $value);
+	}
+
+	public function whereNotEqual($column, $value)
+	{
+		return $this->where($column, '!=', $value);
+	}
+
+	public function orWhereNotEqual($column, $value)
+	{
+		return $this->orWhere($column, '!=', $value);
+	}
+
+	public function whereNullSafeEqual($column, $value)
+	{
+		return $this->where($column, '<=>', $value);
+	}
+
+	public function orWhereNullSafeEqual($column, $value)
+	{
+		return $this->orWhere($column, '<=>', $value);
+	}
+
+	public function whereLessThan($column, $value)
+	{
+		return $this->where($column, '<', $value);
+	}
+
+	public function orWhereLessThan($column, $value)
+	{
+		return $this->orWhere($column, '<', $value);
+	}
+
+	public function whereLessThanOrEqual($column, $value)
+	{
+		return $this->where($column, '<=', $value);
+	}
+
+	public function orWhereLessThanOrEqual($column, $value)
+	{
+		return $this->orWhere($column, '<=', $value);
+	}
+
+	public function whereGreaterThan($column, $value)
+	{
+		return $this->where($column, '>', $value);
+	}
+
+	public function orWhereGreaterThan($column, $value)
+	{
+		return $this->orWhere($column, '>', $value);
+	}
+
+	public function whereGreaterThanOrEqual($column, $value)
+	{
+		return $this->where($column, '>=', $value);
+	}
+
+	public function orWhereGreaterThanOrEqual($column, $value)
+	{
+		return $this->orWhere($column, '>=', $value);
 	}
 
 	public function whereLike($column, $value)
