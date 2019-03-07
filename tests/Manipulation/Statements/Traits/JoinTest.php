@@ -1,4 +1,4 @@
-<?php namespace Tests\Database\Manipulation\Statments\Traits;
+<?php namespace Tests\Database\Manipulation\Statements\Traits;
 
 use PHPUnit\Framework\TestCase;
 
