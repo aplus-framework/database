@@ -143,7 +143,7 @@ class WhereTest extends TestCase
 	public function testLessThan()
 	{
 		$this->statement->whereLessThan('count', 5);
-		$this->assertEquals(" WHERE `count` < 5", $this->statement->render());
+		$this->assertEquals(' WHERE `count` < 5', $this->statement->render());
 		$this->statement->orWhereLessThan('name', 'foo');
 		$this->assertEquals(
 			" WHERE `count` < 5 OR `name` < 'foo'",
@@ -163,7 +163,7 @@ class WhereTest extends TestCase
 	public function testLessThanOrEqual()
 	{
 		$this->statement->whereLessThanOrEqual('count', 5);
-		$this->assertEquals(" WHERE `count` <= 5", $this->statement->render());
+		$this->assertEquals(' WHERE `count` <= 5', $this->statement->render());
 		$this->statement->orWhereLessThanOrEqual('name', 'foo');
 		$this->assertEquals(
 			" WHERE `count` <= 5 OR `name` <= 'foo'",
@@ -183,7 +183,7 @@ class WhereTest extends TestCase
 	public function testGreaterThan()
 	{
 		$this->statement->whereGreaterThan('count', 5);
-		$this->assertEquals(" WHERE `count` > 5", $this->statement->render());
+		$this->assertEquals(' WHERE `count` > 5', $this->statement->render());
 		$this->statement->orWhereGreaterThan('name', 'foo');
 		$this->assertEquals(
 			" WHERE `count` > 5 OR `name` > 'foo'",
@@ -203,7 +203,7 @@ class WhereTest extends TestCase
 	public function testGreaterThanOrEqual()
 	{
 		$this->statement->whereGreaterThanOrEqual('count', 5);
-		$this->assertEquals(" WHERE `count` >= 5", $this->statement->render());
+		$this->assertEquals(' WHERE `count` >= 5', $this->statement->render());
 		$this->statement->orWhereGreaterThanOrEqual('name', 'foo');
 		$this->assertEquals(
 			" WHERE `count` >= 5 OR `name` >= 'foo'",
@@ -421,6 +421,14 @@ class WhereTest extends TestCase
 		$this->statement->where('any', 'foo');
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid comparison operator: foo');
+		$this->statement->render();
+	}
+
+	public function testInvalidValueType()
+	{
+		$this->statement->where('id', '=', []);
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid value type: array');
 		$this->statement->render();
 	}
 }
