@@ -85,7 +85,7 @@ class StatementTest extends TestCase
 			$this->statement->renderAliasedColumn(['foo' => 'name`'])
 		);
 		$this->assertEquals(
-			"(SELECT id from table where username = '\'hack') AS `foo`",
+			"(SELECT id from table where username = '\\'hack') AS `foo`",
 			$this->statement->renderAliasedColumn([
 				'foo' => function ($manipulation) {
 					return 'SELECT id from table where username = '
