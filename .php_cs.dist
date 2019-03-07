@@ -30,6 +30,7 @@ return Config::create()
 		'blank_line_after_opening_tag' => false,
 		'blank_line_before_statement' => false,
 		'braces' => [
+			'allow_single_line_closure' => false,
 			'position_after_anonymous_constructs' => 'same',
 			'position_after_control_structures' => 'same',
 			'position_after_functions_and_oop_constructs' => 'next',
@@ -123,7 +124,7 @@ return Config::create()
 		'native_function_invocation' => true,
 		'new_with_braces' => true,
 		'no_alias_functions' => true,
-		'no_alternative_syntax' => false,
+		'no_alternative_syntax' => true,
 		'no_binary_string' => true,
 		'no_blank_lines_after_class_opening' => true,
 		'no_blank_lines_after_phpdoc' => true,
