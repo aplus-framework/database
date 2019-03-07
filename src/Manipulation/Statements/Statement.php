@@ -42,16 +42,16 @@ abstract class Statement
 		return $this;
 	}
 
-	protected function renderLimit() : string
+	protected function renderLimit() : ?string
 	{
 		if ( ! isset($this->sql['limit'])) {
-			return '';
+			return null;
 		}
 		if ($this->sql['limit']['limit'] < 1) {
 			throw new \InvalidArgumentException('LIMIT must be greater than 0');
 		}
 		$offset = $this->sql['limit']['offset'];
-		if ($offset) {
+		if ($offset !== null) {
 			if ($offset < 1) {
 				throw new \InvalidArgumentException('LIMIT OFFSET must be greater than 0');
 			}
