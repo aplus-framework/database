@@ -38,6 +38,48 @@ class WhereTest extends TestCase
 		);
 	}
 
+	public function testOperatorWithoutRequiredArgument()
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Operator = must receive 1 parameter');
+		$this->statement->where('email', '=')->render();
+	}
+
+	public function testOperatorWithTooManyArguments()
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Operator = must receive only 1 parameter');
+		$this->statement->where('email', '=', 1, 2)->render();
+	}
+
+	public function testOperatorInWithoutRequiredArgument()
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Operator NOT IN must receive at least 1 parameter');
+		$this->statement->where('email', 'not in')->render();
+	}
+
+	public function testOperatorBetweenWithoutRequiredArguments()
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Operator BETWEEN must receive exactly 2 parameters');
+		$this->statement->where('email', 'between', 1)->render();
+	}
+
+	public function testOperatorBetweenWithTooManyArguments()
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Operator BETWEEN must receive exactly 2 parameters');
+		$this->statement->where('email', 'between', 1, 5, 15)->render();
+	}
+
+	public function testOperatorIsNullWithArguments()
+	{
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Operator IS NULL must not receive parameters');
+		$this->statement->where('email', 'is null', 1)->render();
+	}
+
 	public function testLike()
 	{
 		$this->statement->whereLike('email', '%@mail.com');
@@ -74,6 +116,126 @@ class WhereTest extends TestCase
 		});
 		$this->assertEquals(
 			" WHERE `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%' AND (id) NOT LIKE (10)",
+			$this->statement->render()
+		);
+	}
+
+	public function testIn()
+	{
+		$this->statement->whereIn('id', 1, 2, 8);
+		$this->assertEquals(' WHERE `id` IN (1, 2, 8)', $this->statement->render());
+		$this->statement->orWhereIn('code', 'abc', 'def');
+		$this->assertEquals(
+			" WHERE `id` IN (1, 2, 8) OR `code` IN ('abc', 'def')",
+			$this->statement->render()
+		);
+		$this->statement->whereIn(function () {
+			return 'id';
+		}, function () {
+			return 'SELECT * FROM foo';
+		});
+		$this->assertEquals(
+			" WHERE `id` IN (1, 2, 8) OR `code` IN ('abc', 'def') AND (id) IN ((SELECT * FROM foo))",
+			$this->statement->render()
+		);
+	}
+
+	public function testNotIn()
+	{
+		$this->statement->whereNotIn('id', 1, 2, 8);
+		$this->assertEquals(' WHERE `id` NOT IN (1, 2, 8)', $this->statement->render());
+		$this->statement->orWhereNotIn('code', 'abc', 'def');
+		$this->assertEquals(
+			" WHERE `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def')",
+			$this->statement->render()
+		);
+		$this->statement->whereNotIn(function () {
+			return 'id';
+		}, function () {
+			return 'SELECT * FROM foo';
+		});
+		$this->assertEquals(
+			" WHERE `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def') AND (id) NOT IN ((SELECT * FROM foo))",
+			$this->statement->render()
+		);
+	}
+
+	public function testBetween()
+	{
+		$this->statement->whereBetween('id', 1, 10);
+		$this->assertEquals(' WHERE `id` BETWEEN 1 AND 10', $this->statement->render());
+		$this->statement->orWhereBetween('code', 'abc', 'def');
+		$this->assertEquals(
+			" WHERE `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def'",
+			$this->statement->render()
+		);
+		$this->statement->whereBetween(function () {
+			return 'id';
+		}, function () {
+			return 'SELECT * FROM foo';
+		}, function () {
+			return 'SELECT * FROM bar';
+		});
+		$this->assertEquals(
+			" WHERE `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def' AND (id) BETWEEN (SELECT * FROM foo) AND (SELECT * FROM bar)",
+			$this->statement->render()
+		);
+	}
+
+	public function testNotBetween()
+	{
+		$this->statement->whereNotBetween('id', 1, 10);
+		$this->assertEquals(' WHERE `id` NOT BETWEEN 1 AND 10', $this->statement->render());
+		$this->statement->orWhereNotBetween('code', 'abc', 'def');
+		$this->assertEquals(
+			" WHERE `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def'",
+			$this->statement->render()
+		);
+		$this->statement->whereNotBetween(function () {
+			return 'id';
+		}, function () {
+			return 'SELECT * FROM foo';
+		}, function () {
+			return 'SELECT * FROM bar';
+		});
+		$this->assertEquals(
+			" WHERE `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def' AND (id) NOT BETWEEN (SELECT * FROM foo) AND (SELECT * FROM bar)",
+			$this->statement->render()
+		);
+	}
+
+	public function testIsNull()
+	{
+		$this->statement->whereIsNull('email');
+		$this->assertEquals(' WHERE `email` IS NULL', $this->statement->render());
+		$this->statement->orWhereIsNull('name');
+		$this->assertEquals(
+			' WHERE `email` IS NULL OR `name` IS NULL',
+			$this->statement->render()
+		);
+		$this->statement->whereIsNull(function () {
+			return 'id';
+		});
+		$this->assertEquals(
+			' WHERE `email` IS NULL OR `name` IS NULL AND (id) IS NULL',
+			$this->statement->render()
+		);
+	}
+
+	public function testIsNotNull()
+	{
+		$this->statement->whereIsNotNull('email');
+		$this->assertEquals(' WHERE `email` IS NOT NULL', $this->statement->render());
+		$this->statement->orWhereIsNotNull('name');
+		$this->assertEquals(
+			' WHERE `email` IS NOT NULL OR `name` IS NOT NULL',
+			$this->statement->render()
+		);
+		$this->statement->whereIsNotNull(function () {
+			return 'id';
+		});
+		$this->assertEquals(
+			' WHERE `email` IS NOT NULL OR `name` IS NOT NULL AND (id) IS NOT NULL',
 			$this->statement->render()
 		);
 	}

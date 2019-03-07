@@ -53,6 +53,66 @@ trait Where
 		return $this->orWhere($column, 'NOT LIKE', $value);
 	}
 
+	public function whereIn($column, ...$values)
+	{
+		return $this->where($column, 'IN', ...$values);
+	}
+
+	public function whereNotIn($column, ...$values)
+	{
+		return $this->where($column, 'NOT IN', ...$values);
+	}
+
+	public function orWhereIn($column, ...$values)
+	{
+		return $this->orWhere($column, 'IN', ...$values);
+	}
+
+	public function orWhereNotIn($column, ...$values)
+	{
+		return $this->orWhere($column, 'NOT IN', ...$values);
+	}
+
+	public function whereBetween($column, ...$values)
+	{
+		return $this->where($column, 'BETWEEN', ...$values);
+	}
+
+	public function whereNotBetween($column, ...$values)
+	{
+		return $this->where($column, 'NOT BETWEEN', ...$values);
+	}
+
+	public function orWhereBetween($column, ...$values)
+	{
+		return $this->orWhere($column, 'BETWEEN', ...$values);
+	}
+
+	public function orWhereNotBetween($column, ...$values)
+	{
+		return $this->orWhere($column, 'NOT BETWEEN', ...$values);
+	}
+
+	public function whereIsNull($column)
+	{
+		return $this->where($column, 'IS NULL');
+	}
+
+	public function orWhereIsNull($column)
+	{
+		return $this->orWhere($column, 'IS NULL');
+	}
+
+	public function whereIsNotNull($column)
+	{
+		return $this->where($column, 'IS NOT NULL');
+	}
+
+	public function orWhereIsNotNull($column)
+	{
+		return $this->orWhere($column, 'IS NOT NULL');
+	}
+
 	private function addWhere(
 		string $glue,
 		$column,
@@ -152,7 +212,7 @@ trait Where
 			'IS NULL',
 			'IS NOT NULL',
 		], true)) {
-			return $this->renderWhereValuesPartNull($operator, $values);
+			return $this->renderWhereValuesPartIsNull($operator, $values);
 		}
 	}
 
@@ -173,6 +233,11 @@ trait Where
 				"Operator {$operator} must receive only 1 parameter"
 			);
 		}
+		if ( ! isset($values[0])) {
+			throw new \InvalidArgumentException(
+				"Operator {$operator} must receive 1 parameter"
+			);
+		}
 		return $values[0];
 	}
 
@@ -190,13 +255,13 @@ trait Where
 	{
 		if (isset($values[2]) || ! isset($values[0], $values[1])) {
 			throw new \InvalidArgumentException(
-				"Operator {$operator} must receive only 2 parameters"
+				"Operator {$operator} must receive exactly 2 parameters"
 			);
 		}
 		return "{$values[0]} AND {$values[1]}";
 	}
 
-	private function renderWhereValuesPartNull(string $operator, array $values)
+	private function renderWhereValuesPartIsNull(string $operator, array $values)
 	{
 		if ( ! empty($values)) {
 			throw new \InvalidArgumentException(
