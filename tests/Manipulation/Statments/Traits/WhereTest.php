@@ -1,34 +1,18 @@
 <?php namespace Tests\Database\Manipulation\Statments\Traits;
 
-use Framework\Database\Database;
 use Framework\Database\Manipulation\Manipulation;
-use Framework\Database\Manipulation\Statements\Statement;
-use Framework\Database\Manipulation\Statements\Traits\Where;
 use PHPUnit\Framework\TestCase;
 
 class WhereTest extends TestCase
 {
+	/**
+	 * @var WhereMock
+	 */
 	protected $statement;
 
 	public function setup()
 	{
-		$this->statement = new class() extends Statement {
-			use Where;
-
-			public function __construct()
-			{
-				parent::__construct(new Manipulation(new Database()));
-			}
-
-			public function render() : ?string
-			{
-				return $this->renderWhere();
-			}
-
-			public function sql() : string
-			{
-			}
-		};
+		$this->statement = new WhereMock();
 	}
 
 	public function testWhere()
