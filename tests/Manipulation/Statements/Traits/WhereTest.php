@@ -41,14 +41,14 @@ class WhereTest extends TestCase
 	public function testOperatorWithoutRequiredArgument()
 	{
 		$this->expectException(\InvalidArgumentException::class);
-		$this->expectExceptionMessage('Operator = must receive 1 parameter');
+		$this->expectExceptionMessage('Operator = must receive exactly 1 parameter');
 		$this->statement->where('email', '=')->render();
 	}
 
 	public function testOperatorWithTooManyArguments()
 	{
 		$this->expectException(\InvalidArgumentException::class);
-		$this->expectExceptionMessage('Operator = must receive only 1 parameter');
+		$this->expectExceptionMessage('Operator = must receive exactly 1 parameter');
 		$this->statement->where('email', '=', 1, 2)->render();
 	}
 

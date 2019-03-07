@@ -302,14 +302,9 @@ trait Where
 
 	private function renderWhereValuesPartComparator(string $operator, array $values) : string
 	{
-		if (isset($values[1])) {
+		if (isset($values[1]) || ! isset($values[0])) {
 			throw new \InvalidArgumentException(
-				"Operator {$operator} must receive only 1 parameter"
-			);
-		}
-		if ( ! isset($values[0])) {
-			throw new \InvalidArgumentException(
-				"Operator {$operator} must receive 1 parameter"
+				"Operator {$operator} must receive exactly 1 parameter"
 			);
 		}
 		return $values[0];
