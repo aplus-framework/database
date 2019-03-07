@@ -58,4 +58,25 @@ class JoinTest extends TestCase
 		$this->expectExceptionMessage('Clause WHERe only works with FROM');
 		$this->statement->hasFrom('WHERe');
 	}
+
+	public function testJoin()
+	{
+		$this->assertNull($this->statement->renderJoin());
+		$this->statement->join('users');
+		$this->assertEquals(' JOIN `users`', $this->statement->renderJoin());
+		$this->statement->join('users', 'natural');
+		$this->assertEquals(' NATURAL JOIN `users`', $this->statement->renderJoin());
+		$this->statement->join('users', 'cross', 'using', ['user_id']);
+		$this->assertEquals(
+			' CROSS JOIN `users` USING (`user_id`)',
+			$this->statement->renderJoin()
+		);
+		$this->statement->join('users', 'left', 'on', function () {
+			return 'profiles.user_id = users.id';
+		});
+		$this->assertEquals(
+			' LEFT JOIN `users` ON (profiles.user_id = users.id)',
+			$this->statement->renderJoin()
+		);
+	}
 }
