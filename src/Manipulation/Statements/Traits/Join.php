@@ -145,6 +145,11 @@ trait Join
 		return $this->setJoin($table, 'LEFT OUTER', 'ON', $conditional);
 	}
 
+	public function leftOuterJoinUsing($table, ...$columns)
+	{
+		return $this->setJoin($table, 'LEFT OUTER', 'USING', $columns);
+	}
+
 	public function rightJoinOn($table, \Closure $conditional)
 	{
 		return $this->setJoin($table, 'RIGHT', 'ON', $conditional);

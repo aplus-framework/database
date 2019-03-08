@@ -171,12 +171,27 @@ class JoinTest extends TestCase
 		);
 	}
 
+	public function testLeftOuterJoinUsing()
+	{
+		$this->statement->leftOuterJoinUsing('t1', 'user_id');
+		$this->assertEquals(
+			' LEFT OUTER JOIN `t1` USING (`user_id`)',
+			$this->statement->renderJoin()
+		);
+	}
+
 	public function testRightJoinOn()
 	{
 		$this->statement->rightJoinOn('t1', function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(' RIGHT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
+	}
+
+	public function testRightJoinUsing()
+	{
+		$this->statement->rightJoinUsing('t1', 'user_id');
+		$this->assertEquals(' RIGHT JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
 	public function testRightOuterJoinOn()
@@ -188,12 +203,6 @@ class JoinTest extends TestCase
 			' RIGHT OUTER JOIN `t1` ON (t1.id = t2.id)',
 			$this->statement->renderJoin()
 		);
-	}
-
-	public function testRightJoinUsing()
-	{
-		$this->statement->rightJoinUsing('t1', 'user_id');
-		$this->assertEquals(' RIGHT JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
 	public function testRightOuterJoinUsing()
