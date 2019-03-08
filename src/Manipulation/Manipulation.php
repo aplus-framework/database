@@ -7,6 +7,8 @@ use Framework\Database\Manipulation\Statements\Select;
  * Class Manipulation.
  *
  * @see https://mariadb.com/kb/en/library/data-manipulation/
+ *
+ * @property-read Database $database
  */
 class Manipulation
 {
@@ -22,7 +24,6 @@ class Manipulation
 		if ($property === 'database') {
 			return $this->database;
 		}
-
 		throw new \LogicException('Undefined property: ' . __CLASS__ . '::$' . $property);
 	}
 
