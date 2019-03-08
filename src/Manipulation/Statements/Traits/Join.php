@@ -3,7 +3,9 @@
 /**
  * Trait Join.
  *
- * @see https://mariadb.com/kb/en/library/joins/
+ * @see  https://mariadb.com/kb/en/library/joins/
+ *
+ * @todo https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/
  */
 trait Join
 {
