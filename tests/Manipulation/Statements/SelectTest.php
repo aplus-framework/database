@@ -40,6 +40,30 @@ class SelectTest extends TestCase
 		);
 	}
 
+	public function testInvalidOption()
+	{
+		$this->select->options('al');
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid option: al');
+		$this->select->sql();
+	}
+
+	public function testIOptionsConflictAllAndDistinct()
+	{
+		$this->select->options($this->select::OPT_ALL, $this->select::OPT_DISTINCT);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('Options ALL and DISTINCT can not be used together');
+		$this->select->sql();
+	}
+
+	public function testIOptionsConflictSqlCacheAndSqlNoCache()
+	{
+		$this->select->options($this->select::OPT_SQL_CACHE, $this->select::OPT_SQL_NO_CACHE);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('Options SQL_CACHE and SQL_NO_CACHE can not be used together');
+		$this->select->sql();
+	}
+
 	public function testExpressions()
 	{
 		$this->select->expressions('1');
@@ -120,6 +144,32 @@ class SelectTest extends TestCase
 		);
 	}
 
+	public function testIntoOutfileFileExists()
+	{
+		$this->selectAllFrom('t1');
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('INTO OUTFILE filename must not exist: ' . __FILE__);
+		$this->select->intoOutfile(__FILE__)->sql();
+	}
+
+	public function testInvalidIntoOutfileFieldOption()
+	{
+		$this->selectAllFrom('t1');
+		$this->select->intoOutfile('/tmp/foo-bar', null, ['foo' => 'bar']);
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid INTO OUTFILE fields option: foo');
+		$this->select->sql();
+	}
+
+	public function testInvalidIntoOutfileLineOption()
+	{
+		$this->selectAllFrom('t1');
+		$this->select->intoOutfile('/tmp/foo-bar', null, [], ['foo' => 'bar']);
+		$this->expectException(\InvalidArgumentException::class);
+		$this->expectExceptionMessage('Invalid INTO OUTFILE lines option: foo');
+		$this->select->sql();
+	}
+
 	public function testIntoDumpfile()
 	{
 		$part = $this->selectAllFrom('t1');
@@ -131,6 +181,14 @@ class SelectTest extends TestCase
 			$part . " INTO DUMPFILE '/tmp/foo-bar' INTO @var1, @Var2\n",
 			$this->select->intoDumpfile('/tmp/foo-bar', 'var1', 'Var2')->sql()
 		);
+	}
+
+	public function testIntoDumpfileFileExists()
+	{
+		$this->selectAllFrom('t1');
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('INTO DUMPFILE filepath must not exist: ' . __FILE__);
+		$this->select->intoDumpfile(__FILE__)->sql();
 	}
 
 	public function testLockForUpdate()
@@ -146,6 +204,14 @@ class SelectTest extends TestCase
 		);
 	}
 
+	public function testInvalidLockForUpdateWait()
+	{
+		$this->selectAllFrom('t1');
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('Invalid FOR UPDATE WAIT value: -1');
+		$this->select->lockForUpdate(-1)->sql();
+	}
+
 	public function testLockInShareMode()
 	{
 		$part = $this->selectAllFrom('t1');
@@ -157,6 +223,14 @@ class SelectTest extends TestCase
 			$part . " LOCK IN SHARE MODE WAIT 1\n",
 			$this->select->lockInShareMode(1)->sql()
 		);
+	}
+
+	public function testInvalidLockInShareModeWait()
+	{
+		$this->selectAllFrom('t1');
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('Invalid LOCK IN SHARE MODE WAIT value: -10');
+		$this->select->lockInShareMode(-10)->sql();
 	}
 
 	public function testJoin()
