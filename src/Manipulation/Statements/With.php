@@ -54,7 +54,7 @@ class With extends Statement
 	 */
 	public function reference($table, \Closure $alias)
 	{
-		$this->sql['reference'] = [
+		$this->sql['references'][] = [
 			'table' => $table,
 			'alias' => $alias,
 		];
@@ -63,12 +63,15 @@ class With extends Statement
 
 	protected function renderReference() : string
 	{
-		if ( ! isset($this->sql['reference'])) {
-			throw new \LogicException('Reference must be set');
+		if ( ! isset($this->sql['references'])) {
+			throw new \LogicException('References must be set');
 		}
-		$reference = $this->renderColumn($this->sql['reference']['table']);
-		$alias = $this->renderAsSelect($this->sql['reference']['alias']);
-		return " {$reference} AS {$alias}";
+		$references = [];
+		foreach ($this->sql['references'] as $reference) {
+			$references[] = $this->renderColumn($reference['table'])
+				. ' AS ' . $this->renderAsSelect($reference['alias']);
+		}
+		return \implode(', ', $references);
 	}
 
 	private function renderAsSelect(\Closure $subquery) : string
@@ -94,12 +97,12 @@ class With extends Statement
 	{
 		$sql = 'WITH' . \PHP_EOL;
 		if ($part = $this->renderOptions()) {
-			$sql .= '-- options ' . \PHP_EOL;
+			//$sql .= '-- options ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
-		$sql .= '-- reference ' . \PHP_EOL;
+		//$sql .= '-- reference ' . \PHP_EOL;
 		$sql .= $this->renderReference() . \PHP_EOL;
-		$sql .= '-- select ' . \PHP_EOL;
+		//$sql .= '-- select ' . \PHP_EOL;
 		$sql .= $this->renderSelect();
 		return $sql;
 	}
