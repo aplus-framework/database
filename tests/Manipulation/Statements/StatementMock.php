@@ -1,14 +1,13 @@
 <?php namespace Tests\Database\Manipulation\Statements;
 
-use Framework\Database\Database;
-use Framework\Database\Manipulation\Manipulation;
 use Framework\Database\Manipulation\Statements\Statement;
+use Tests\Database\Manipulation\ManipulationMock;
 
 class StatementMock extends Statement
 {
 	public function __construct()
 	{
-		parent::__construct(new Manipulation(new Database()));
+		parent::__construct(new ManipulationMock());
 	}
 
 	public function subquery(\Closure $subquery) : string

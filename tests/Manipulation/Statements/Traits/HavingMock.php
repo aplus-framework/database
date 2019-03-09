@@ -1,25 +1,11 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
-use Framework\Database\Database;
-use Framework\Database\Manipulation\Manipulation;
-use Framework\Database\Manipulation\Statements\Statement;
 use Framework\Database\Manipulation\Statements\Traits\Having;
+use Tests\Database\Manipulation\Statements\StatementMock;
 
-class HavingMock extends Statement
+class HavingMock extends StatementMock
 {
-	use Having;
-
-	public function __construct()
-	{
-		parent::__construct(new Manipulation(new Database()));
-	}
-
-	public function render() : ?string
-	{
-		return $this->renderHaving();
-	}
-
-	public function sql() : string
-	{
+	use Having {
+		renderHaving as public;
 	}
 }

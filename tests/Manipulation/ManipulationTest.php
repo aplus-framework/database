@@ -14,7 +14,7 @@ class ManipulationTest extends TestCase
 
 	public function setup()
 	{
-		$this->manipulation = new Manipulation(new Database());
+		$this->manipulation = new ManipulationMock();
 	}
 
 	public function testMagicGet()
