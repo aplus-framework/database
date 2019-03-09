@@ -101,31 +101,31 @@ class Select extends Statement
 	 *
 	 * @see intoOutfile
 	 */
-	public const EXP_FIELD_TERMINATED_BY = 'TERMINATED BY';
+	public const EXP_FIELDS_TERMINATED_BY = 'TERMINATED BY';
 	/**
 	 * Clause to set the enclosure character of the fields. Default is ".
 	 *
 	 * @see intoOutfile
 	 */
-	public const EXP_FIELD_ENCLOSED_BY = 'ENCLOSED BY';
+	public const EXP_FIELDS_ENCLOSED_BY = 'ENCLOSED BY';
 	/**
 	 * @see intoOutfile
 	 */
-	public const EXP_FIELD_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
+	public const EXP_FIELDS_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
 	/**
 	 * @see intoOutfile
 	 */
-	public const EXP_FIELD_ESCAPED_BY = 'ESCAPED BY';
+	public const EXP_FIELDS_ESCAPED_BY = 'ESCAPED BY';
 	/**
 	 * @see intoOutfile
 	 */
-	public const EXP_LINE_STARTING_BY = 'STARTING BY';
+	public const EXP_LINES_STARTING_BY = 'STARTING BY';
 	/**
 	 * Clause to set the file End-Of-Line character. Default is \n.
 	 *
 	 * @see intoOutfile
 	 */
-	public const EXP_LINE_TERMINATED_BY = 'TERMINATED BY';
+	public const EXP_LINES_TERMINATED_BY = 'TERMINATED BY';
 
 	/**
 	 * Set the statement options.
@@ -270,8 +270,8 @@ class Select extends Statement
 	 *
 	 * @param string      $filename
 	 * @param string|null $charset
-	 * @param array       $fields_options Each key must be one of the EXP_FIELD_* constants
-	 * @param array       $lines_options  Each key must be one of the EXP_LINES_* constants
+	 * @param array       $fields_options Each key must be one of the EXP_FIELDS_* constants
+	 * @param array       $lines_options  Each key must be one of the EXP_LINESS_* constants
 	 *
 	 * @see https://mariadb.com/kb/en/library/select-into-outfile/
 	 *
@@ -322,10 +322,10 @@ class Select extends Statement
 			foreach ($this->sql['into_outfile']['fields_options'] as $option => $value) {
 				$fields_option = \strtoupper($option);
 				if ( ! \in_array($fields_option, [
-					static::EXP_FIELD_TERMINATED_BY,
-					static::EXP_FIELD_ENCLOSED_BY,
-					static::EXP_FIELD_OPTIONALLY_ENCLOSED_BY,
-					static::EXP_FIELD_ESCAPED_BY,
+					static::EXP_FIELDS_TERMINATED_BY,
+					static::EXP_FIELDS_ENCLOSED_BY,
+					static::EXP_FIELDS_OPTIONALLY_ENCLOSED_BY,
+					static::EXP_FIELDS_ESCAPED_BY,
 				], true)) {
 					throw new \InvalidArgumentException(
 						"Invalid INTO OUTFILE fields option: {$option}"
@@ -345,8 +345,8 @@ class Select extends Statement
 			foreach ($this->sql['into_outfile']['lines_options'] as $option => $value) {
 				$lines_option = \strtoupper($option);
 				if ( ! \in_array($lines_option, [
-					static::EXP_LINE_STARTING_BY,
-					static::EXP_LINE_TERMINATED_BY,
+					static::EXP_LINES_STARTING_BY,
+					static::EXP_LINES_TERMINATED_BY,
 				], true)) {
 					throw new \InvalidArgumentException(
 						"Invalid INTO OUTFILE lines option: {$option}"
@@ -442,68 +442,68 @@ class Select extends Statement
 			}
 			$wait .= " WAIT {$this->sql['lock']['wait']}";
 		}
-		return "{$this->sql['lock']['type']}{$wait}";
+		return " {$this->sql['lock']['type']}{$wait}";
 	}
 
 	public function sql() : string
 	{
 		$sql = 'SELECT' . \PHP_EOL;
 		if ($part = $this->renderOptions()) {
-			$sql .= '-- options ' . \PHP_EOL;
+			//$sql .= '-- options ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderExpressions()) {
-			$sql .= '-- expressions ' . \PHP_EOL;
+			//$sql .= '-- expressions ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderFrom()) {
-			$sql .= '-- from ' . \PHP_EOL;
+			//$sql .= '-- from ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderJoin()) {
-			$sql .= '-- join ' . \PHP_EOL;
+			//$sql .= '-- join ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderWhere()) {
 			$this->hasFrom('WHERE');
-			$sql .= '-- where ' . \PHP_EOL;
+			//$sql .= '-- where ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderHaving()) {
 			$this->hasFrom('HAVING');
-			$sql .= '-- having ' . \PHP_EOL;
+			//$sql .= '-- having ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderOrderBy()) {
 			$this->hasFrom('ORDER BY');
-			$sql .= '-- order by ' . \PHP_EOL;
+			//$sql .= '-- order by ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderLimit()) {
 			$this->hasFrom('LIMIT');
-			$sql .= '-- limit ' . \PHP_EOL;
+			//$sql .= '-- limit ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderProcedure()) {
 			$this->hasFrom('PROCEDURE');
-			$sql .= '-- procedure ' . \PHP_EOL;
+			//$sql .= '-- procedure ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderIntoOutfile()) {
 			$this->hasFrom('INTO OUTFILE');
-			$sql .= '-- into outfile ' . \PHP_EOL;
+			//$sql .= '-- into outfile ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderIntoDumpfile()) {
 			$into_dump = true;
-			$sql .= '-- into dumpfile ' . \PHP_EOL;
+			//$sql .= '-- into dumpfile ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderLock()) {
 			if (empty($into_dump)) {
 				$this->hasFrom($this->sql['lock']['type']);
 			}
-			$sql .= '-- lock ' . \PHP_EOL;
+			//$sql .= '-- lock ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;
