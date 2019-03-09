@@ -12,14 +12,21 @@ class Select extends Statement
 	use Traits\OrderBy;
 	/**
 	 * Option to retrieve identical rows.
+	 *
+	 * @see options
 	 */
 	public const OPT_ALL = 'ALL';
 	/**
 	 * Option to not retrieve identical rows. Remove duplicates from the resultset.
+	 *
+	 * @see options
+	 * @see https://mariadb.com/kb/en/library/select/#distinct
 	 */
 	public const OPT_DISTINCT = 'DISTINCT';
 	/**
 	 * Alias of OPT_DISTINCT.
+	 *
+	 * @see options
 	 */
 	public const OPT_DISTINCTROW = 'DISTINCTROW';
 	/**
@@ -27,28 +34,46 @@ class Select extends Statement
 	 * even if other statements are queued.
 	 * Only supports table-level locking (MyISAM, MEMORY, MERGE).
 	 *
+	 * @see options
 	 * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
 	 */
 	public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
 	/**
-	 * STRAIGHT_JOIN applies to the JOIN queries, and tells the optimizer that
+	 * Applicable to the JOIN queries. Tells the optimizer that
 	 * the tables must be read in the order they appear.
-	 * For const and system table this options is sometimes ignored.
+	 * For const and system table this option is sometimes ignored.
 	 *
+	 * @see options
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
+	 * @see https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/#forcing-join-order
 	 */
 	public const OPT_STRAIGHT_JOIN = 'STRAIGHT_JOIN';
+	/**
+	 * Forces the optimizer to use a temporary table.
+	 *
+	 * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
+	 */
 	public const OPT_SQL_SMALL_RESULT = 'SQL_SMALL_RESULT';
+	/**
+	 * Forces the optimizer to avoid usage of a temporary table.
+	 *
+	 * @see options
+	 * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
+	 */
 	public const OPT_SQL_BIG_RESULT = 'SQL_BIG_RESULT';
 	/**
-	 * SQL_BUFFER_RESULT forces the optimizer to use a temporary table to process the result.
+	 * Forces the optimizer to use a temporary table to process the result.
 	 * This is useful to free locks as soon as possible.
+	 *
+	 * @see options
+	 * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_buffer_result
 	 */
 	public const OPT_SQL_BUFFER_RESULT = 'SQL_BUFFER_RESULT';
 	/**
 	 * If the query_cache_type system variable is set to 2 or DEMAND, and the current statement is
 	 * cacheable, SQL_CACHE causes the query to be cached.
 	 *
+	 * @see options
 	 * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
 	 * @see https://mariadb.com/kb/en/library/query-cache/
 	 */
@@ -57,6 +82,7 @@ class Select extends Statement
 	 * If the query_cache_type system variable is set to 2 or DEMAND, and the current statement is
 	 * cacheable, SQL_NO_CACHE causes the query not to be cached.
 	 *
+	 * @see options
 	 * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
 	 * @see https://mariadb.com/kb/en/library/query-cache/
 	 */
@@ -66,22 +92,38 @@ class Select extends Statement
 	 * MariaDB will count how many rows would match the query, without the LIMIT clause.
 	 * That number can be retrieved in the next query, using FOUND_ROWS().
 	 *
+	 * @see options
 	 * @see https://mariadb.com/kb/en/library/found_rows/
 	 */
 	public const OPT_SQL_CALC_FOUND_ROWS = 'SQL_CALC_FOUND_ROWS';
 	/**
 	 * Clause to set the character of separation between fields. Default is \t.
+	 *
+	 * @see intoOutfile
 	 */
 	public const EXP_FIELD_TERMINATED_BY = 'TERMINATED BY';
 	/**
 	 * Clause to set the enclosure character of the fields. Default is ".
+	 *
+	 * @see intoOutfile
 	 */
 	public const EXP_FIELD_ENCLOSED_BY = 'ENCLOSED BY';
+	/**
+	 * @see intoOutfile
+	 */
 	public const EXP_FIELD_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
+	/**
+	 * @see intoOutfile
+	 */
 	public const EXP_FIELD_ESCAPED_BY = 'ESCAPED BY';
+	/**
+	 * @see intoOutfile
+	 */
 	public const EXP_LINE_STARTING_BY = 'STARTING BY';
 	/**
 	 * Clause to set the file End-Of-Line character. Default is \n.
+	 *
+	 * @see intoOutfile
 	 */
 	public const EXP_LINE_TERMINATED_BY = 'TERMINATED BY';
 
@@ -107,7 +149,42 @@ class Select extends Statement
 		if ( ! isset($this->sql['options'])) {
 			return null;
 		}
-		return \implode(' ', $this->sql['options']);
+		$options = $this->sql['options'];
+		foreach ($options as &$option) {
+			$input = $option;
+			$option = \strtoupper($option);
+			if ( ! \in_array($option, [
+				static::OPT_ALL,
+				static::OPT_DISTINCT,
+				static::OPT_DISTINCTROW,
+				static::OPT_HIGH_PRIORITY,
+				static::OPT_STRAIGHT_JOIN,
+				static::OPT_SQL_SMALL_RESULT,
+				static::OPT_SQL_BIG_RESULT,
+				static::OPT_SQL_BUFFER_RESULT,
+				static::OPT_SQL_CACHE,
+				static::OPT_SQL_NO_CACHE,
+				static::OPT_SQL_CALC_FOUND_ROWS,
+			], true)) {
+				throw new \InvalidArgumentException("Invalid option: {$input}");
+			}
+		}
+		unset($option);
+		$intersection = \array_intersect(
+			$options,
+			[static::OPT_ALL, static::OPT_DISTINCT, static::OPT_DISTINCTROW]
+		);
+		if (\count($intersection) > 1) {
+			throw new \LogicException('Options ALL and DISTINCT can not be used together');
+		}
+		$intersection = \array_intersect(
+			$options,
+			[static::OPT_SQL_CACHE, static::OPT_SQL_NO_CACHE]
+		);
+		if (\count($intersection) > 1) {
+			throw new \LogicException('Options SQL_CACHE and SQL_NO_CACHE can not be used together');
+		}
+		return \implode(' ', $options);
 	}
 
 	/**
@@ -116,6 +193,8 @@ class Select extends Statement
 	 * Gerally used with the FROM clause as column names.
 	 *
 	 * @param mixed $expressions Each expresion must be of type: array, string or \Closure
+	 *
+	 * @see https://mariadb.com/kb/en/library/select/#select-expressions
 	 *
 	 * @return $this
 	 */
@@ -219,7 +298,7 @@ class Select extends Statement
 			return null;
 		}
 		if (\is_file($this->sql['into_outfile']['filename'])) {
-			throw new \InvalidArgumentException(
+			throw new \LogicException(
 				"INTO OUTFILE filename must not exist: {$this->sql['into_outfile']['filename']}"
 			);
 		}
@@ -243,10 +322,10 @@ class Select extends Statement
 			foreach ($this->sql['into_outfile']['fields_options'] as $option => $value) {
 				$fields_option = \strtoupper($option);
 				if ( ! \in_array($fields_option, [
-					'TERMINATED BY',
-					'ENCLOSED BY',
-					'OPTIONALLY ENCLOSED BY',
-					'ESCAPED BY',
+					static::EXP_FIELD_TERMINATED_BY,
+					static::EXP_FIELD_ENCLOSED_BY,
+					static::EXP_FIELD_OPTIONALLY_ENCLOSED_BY,
+					static::EXP_FIELD_ESCAPED_BY,
 				], true)) {
 					throw new \InvalidArgumentException(
 						"Invalid INTO OUTFILE fields option: {$option}"
@@ -266,8 +345,8 @@ class Select extends Statement
 			foreach ($this->sql['into_outfile']['lines_options'] as $option => $value) {
 				$lines_option = \strtoupper($option);
 				if ( ! \in_array($lines_option, [
-					'STARTING BY',
-					'TERMINATED BY',
+					static::EXP_LINE_STARTING_BY,
+					static::EXP_LINE_TERMINATED_BY,
 				], true)) {
 					throw new \InvalidArgumentException(
 						"Invalid INTO OUTFILE lines option: {$option}"
@@ -283,7 +362,7 @@ class Select extends Statement
 	 * @param string $filepath
 	 * @param mixed  $variables
 	 *
-	 *@see https://mariadb.com/kb/en/library/select-into-dumpfile/
+	 * @see https://mariadb.com/kb/en/library/select-into-dumpfile/
 	 *
 	 * @return $this
 	 */
@@ -294,7 +373,6 @@ class Select extends Statement
 			'variables' => $variables,
 		];
 		return $this;
-		return $this;
 	}
 
 	protected function renderIntoDumpfile() : ?string
@@ -303,7 +381,7 @@ class Select extends Statement
 			return null;
 		}
 		if (\is_file($this->sql['into_dumpfile']['filepath'])) {
-			throw new \InvalidArgumentException(
+			throw new \LogicException(
 				"INTO DUMPFILE filepath must not exist: {$this->sql['into_dumpfile']['filepath']}"
 			);
 		}
@@ -357,6 +435,11 @@ class Select extends Statement
 		}
 		$wait = '';
 		if ($this->sql['lock']['wait'] !== null) {
+			if ($this->sql['lock']['wait'] < 0) {
+				throw new \InvalidArgumentException(
+					"Invalid {$this->sql['lock']['type']} WAIT value: {$this->sql['lock']['wait']}"
+				);
+			}
 			$wait .= " WAIT {$this->sql['lock']['wait']}";
 		}
 		return "{$this->sql['lock']['type']}{$wait}";
@@ -382,32 +465,32 @@ class Select extends Statement
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderWhere()) {
-			$this->checkFrom('WHERE');
+			$this->hasFrom('WHERE');
 			$sql .= '-- where ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderHaving()) {
-			$this->checkFrom('HAVING');
+			$this->hasFrom('HAVING');
 			$sql .= '-- having ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderOrderBy()) {
-			$this->checkFrom('ORDER BY');
+			$this->hasFrom('ORDER BY');
 			$sql .= '-- order by ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderLimit()) {
-			$this->checkFrom('LIMIT');
+			$this->hasFrom('LIMIT');
 			$sql .= '-- limit ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderProcedure()) {
-			$this->checkFrom('PROCEDURE');
+			$this->hasFrom('PROCEDURE');
 			$sql .= '-- procedure ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderIntoOutfile()) {
-			$this->checkFrom('INTO OUTFILE');
+			$this->hasFrom('INTO OUTFILE');
 			$sql .= '-- into outfile ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
@@ -418,7 +501,7 @@ class Select extends Statement
 		}
 		if ($part = $this->renderLock()) {
 			if (empty($into_dump)) {
-				$this->checkFrom($this->sql['lock']['type']);
+				$this->hasFrom($this->sql['lock']['type']);
 			}
 			$sql .= '-- lock ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
