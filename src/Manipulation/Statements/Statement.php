@@ -10,22 +10,58 @@ use Framework\Database\Manipulation\Manipulation;
  */
 abstract class Statement
 {
+	/**
+	 * @var Manipulation
+	 */
 	protected $manipulation;
+	/**
+	 * SQL clauses and parts.
+	 *
+	 * @var array
+	 */
 	protected $sql = [];
 
+	/**
+	 * Statement constructor.
+	 *
+	 * @param Manipulation $manipulation
+	 */
 	public function __construct(Manipulation $manipulation)
 	{
 		$this->manipulation = $manipulation;
 	}
 
+	public function __toString()
+	{
+		return $this->sql();
+	}
+
+	/**
+	 * Renders the statement.
+	 *
+	 * @return string
+	 */
 	abstract public function sql() : string;
 
+	/**
+	 * Returns a SQL part between parentheses.
+	 *
+	 * @param \Closure $subquery A \Closure having the current Manipulation instance as first
+	 *                           argument. The returned value must be scalar
+	 *
+	 * @see https://mariadb.com/kb/en/library/subqueries/
+	 * @see https://mariadb.com/kb/en/library/built-in-functions/
+	 *
+	 * @return string
+	 */
 	protected function subquery(\Closure $subquery) : string
 	{
 		return '(' . $subquery($this->manipulation) . ')';
 	}
 
 	/**
+	 * Sets the LIMIT clause.
+	 *
 	 * @param int      $limit
 	 * @param int|null $offset
 	 *
@@ -42,6 +78,11 @@ abstract class Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the LIMIT clause.
+	 *
+	 * @return string|null
+	 */
 	protected function renderLimit() : ?string
 	{
 		if ( ! isset($this->sql['limit'])) {
@@ -61,7 +102,9 @@ abstract class Statement
 	}
 
 	/**
-	 * @param \Closure|string $column
+	 * Renders a column part.
+	 *
+	 * @param \Closure|string $column The column name or a subquery
 	 *
 	 * @return string
 	 */
@@ -73,7 +116,10 @@ abstract class Statement
 	}
 
 	/**
-	 * @param array|\Closure|string $column
+	 * Renders a column part with an optional alias name, AS clause.
+	 *
+	 * @param array|\Closure|string $column The column name, a subquery or an array where the index
+	 *                                      is the alias and the value is the column/subquery
 	 *
 	 * @return string
 	 */
