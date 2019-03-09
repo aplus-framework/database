@@ -37,5 +37,6 @@ class StatementMock extends Statement
 
 	public function sql() : string
 	{
+		return 'SQL';
 	}
 }

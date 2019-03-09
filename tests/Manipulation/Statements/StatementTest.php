@@ -97,4 +97,9 @@ class StatementTest extends TestCase
 		$this->expectExceptionMessage('Aliased column must have only 1 key');
 		$this->statement->renderAliasedColumn(['foo' => 'name', 'bar']);
 	}
+
+	public function testToString()
+	{
+		$this->assertEquals('SQL', (string) $this->statement);
+	}
 }
