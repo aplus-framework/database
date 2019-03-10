@@ -12,21 +12,6 @@ class With extends Statement
 	 */
 	public const OPT_RECURSIVE = 'RECURSIVE';
 
-	/**
-	 * Set the statement options.
-	 *
-	 * @param mixed $options Each option value must be one of the OPT_* constants
-	 *
-	 * @return $this
-	 */
-	public function options(...$options)
-	{
-		foreach ($options as $option) {
-			$this->sql['options'][] = $option;
-		}
-		return $this;
-	}
-
 	protected function renderOptions() : ?string
 	{
 		if ( ! isset($this->sql['options'])) {
@@ -68,7 +53,7 @@ class With extends Statement
 		}
 		$references = [];
 		foreach ($this->sql['references'] as $reference) {
-			$references[] = $this->renderColumn($reference['table'])
+			$references[] = $this->renderIdentifier($reference['table'])
 				. ' AS ' . $this->renderAsSelect($reference['alias']);
 		}
 		return \implode(', ', $references);
@@ -105,5 +90,10 @@ class With extends Statement
 		//$sql .= '-- select ' . \PHP_EOL;
 		$sql .= $this->renderSelect();
 		return $sql;
+	}
+
+	public function run()
+	{
+		// TODO: Implement run() method.
 	}
 }

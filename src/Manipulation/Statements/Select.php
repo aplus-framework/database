@@ -127,24 +127,7 @@ class Select extends Statement
 	 */
 	public const EXP_LINES_TERMINATED_BY = 'TERMINATED BY';
 
-	/**
-	 * Set the statement options.
-	 *
-	 * @param mixed $options Each option value must be one of the OPT_* constants
-	 *
-	 * @see https://mariadb.com/kb/en/library/optimizer-hints/
-	 *
-	 * @return $this
-	 */
-	public function options(...$options)
-	{
-		foreach ($options as $option) {
-			$this->sql['options'][] = $option;
-		}
-		return $this;
-	}
-
-	public function renderOptions() : ?string
+	protected function renderOptions() : ?string
 	{
 		if ( ! isset($this->sql['options'])) {
 			return null;
@@ -225,14 +208,14 @@ class Select extends Statement
 		}
 		$expressions = [];
 		foreach ($this->sql['expressions'] as $expression) {
-			$expressions[] = $this->renderAliasedColumn($expression);
+			$expressions[] = $this->renderAliasedIdentifier($expression);
 		}
 		return \implode(', ', $expressions);
 	}
 
 	public function limit(int $limit, int $offset = null)
 	{
-		return parent::limit($limit, $offset);
+		return $this->setLimit($limit, $offset);
 	}
 
 	/**
@@ -507,5 +490,14 @@ class Select extends Statement
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;
+	}
+
+	public function run(string $class_entity = null, ...$constructor_params)
+	{
+		$statement = $this->manipulation->database->pdo->query($this->sql());
+		if ($class_entity !== null && $statement) {
+			$statement->setFetchMode(\PDO::FETCH_CLASS, $class_entity, $constructor_params);
+		}
+		return $statement;
 	}
 }

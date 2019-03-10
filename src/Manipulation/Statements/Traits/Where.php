@@ -183,6 +183,16 @@ trait Where
 		return $this->orWhere($column, 'IS NOT NULL');
 	}
 
+	public function whereExists(\Closure $subquery)
+	{
+		$this->subquery($subquery);
+	}
+
+	public function whereNotExists(\Closure $subquery)
+	{
+		$this->subquery($subquery);
+	}
+
 	private function addWhere(
 		string $glue,
 		$column,
@@ -206,7 +216,7 @@ trait Where
 		}
 		$parts = $this->sql[$clause];
 		foreach ($parts as &$part) {
-			$part['column'] = $this->renderColumn($part['column']);
+			$part['column'] = $this->renderIdentifier($part['column']);
 			$part['operator'] = $this->renderWhereOperator($part['operator']);
 			$part['values'] = $this->renderWhereValues($part['operator'], $part['values']);
 		}

@@ -60,33 +60,33 @@ class StatementTest extends TestCase
 		);
 	}
 
-	public function testRenderColumn()
+	public function testRenderIdentifier()
 	{
-		$this->assertEquals('`name```', $this->statement->renderColumn('name`'));
+		$this->assertEquals('`name```', $this->statement->renderIdentifier('name`'));
 		$this->assertEquals(
 			'(SELECT * from `foo`)',
-			$this->statement->renderColumn(function ($manipulation) {
+			$this->statement->renderIdentifier(function ($manipulation) {
 				return 'SELECT * from ' . $manipulation->database->protectIdentifier('foo');
 			})
 		);
 	}
 
-	public function testRenderAliasedColumn()
+	public function testRenderAliasedidentifier()
 	{
-		$this->assertEquals('`name```', $this->statement->renderAliasedColumn('name`'));
+		$this->assertEquals('`name```', $this->statement->renderAliasedIdentifier('name`'));
 		$this->assertEquals(
 			'(SELECT * from `foo`)',
-			$this->statement->renderAliasedColumn(function ($manipulation) {
+			$this->statement->renderAliasedIdentifier(function ($manipulation) {
 				return 'SELECT * from ' . $manipulation->database->protectIdentifier('foo');
 			})
 		);
 		$this->assertEquals(
 			'`name``` AS `foo`',
-			$this->statement->renderAliasedColumn(['foo' => 'name`'])
+			$this->statement->renderAliasedIdentifier(['foo' => 'name`'])
 		);
 		$this->assertEquals(
 			"(SELECT id from table where username = '\\'hack') AS `foo`",
-			$this->statement->renderAliasedColumn([
+			$this->statement->renderAliasedIdentifier([
 				'foo' => function ($manipulation) {
 					return 'SELECT id from table where username = '
 						. $manipulation->database->quote("'hack");
@@ -95,7 +95,7 @@ class StatementTest extends TestCase
 		);
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Aliased column must have only 1 key');
-		$this->statement->renderAliasedColumn(['foo' => 'name', 'bar']);
+		$this->statement->renderAliasedIdentifier(['foo' => 'name', 'bar']);
 	}
 
 	public function testToString()

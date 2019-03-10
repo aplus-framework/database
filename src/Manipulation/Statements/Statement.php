@@ -37,11 +37,30 @@ abstract class Statement
 	}
 
 	/**
+	 * Set the statement options.
+	 *
+	 * @param mixed $options Each option value must be one of the OPT_* constants
+	 *
+	 * @return $this
+	 */
+	public function options(...$options)
+	{
+		foreach ($options as $option) {
+			$this->sql['options'][] = $option;
+		}
+		return $this;
+	}
+
+	abstract protected function renderOptions() : ?string;
+
+	/**
 	 * Renders the statement.
 	 *
 	 * @return string
 	 */
 	abstract public function sql() : string;
+
+	abstract public function run();
 
 	/**
 	 * Returns a SQL part between parentheses.
@@ -69,7 +88,7 @@ abstract class Statement
 	 *
 	 * @return $this
 	 */
-	protected function limit(int $limit, int $offset = null)
+	protected function setLimit(int $limit, int $offset = null)
 	{
 		$this->sql['limit'] = [
 			'limit' => $limit,
@@ -108,7 +127,7 @@ abstract class Statement
 	 *
 	 * @return string
 	 */
-	protected function renderColumn($column) : string
+	protected function renderIdentifier($column) : string
 	{
 		return $column instanceof \Closure
 			? $this->subquery($column)
@@ -123,17 +142,17 @@ abstract class Statement
 	 *
 	 * @return string
 	 */
-	protected function renderAliasedColumn($column) : string
+	protected function renderAliasedIdentifier($column) : string
 	{
 		if (\is_array($column)) {
 			if (\count($column) !== 1) {
 				throw new \InvalidArgumentException('Aliased column must have only 1 key');
 			}
 			$alias = \array_key_first($column);
-			return $this->renderColumn($column[$alias]) . ' AS '
+			return $this->renderIdentifier($column[$alias]) . ' AS '
 				. $this->manipulation->database->protectIdentifier($alias);
 		}
-		return $this->renderColumn($column);
+		return $this->renderIdentifier($column);
 	}
 
 	/**

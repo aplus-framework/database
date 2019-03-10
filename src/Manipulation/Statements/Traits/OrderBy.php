@@ -55,7 +55,7 @@ trait OrderBy
 		}
 		$expressions = [];
 		foreach ($this->sql['order_by'] as $part) {
-			$expression = $this->renderColumn($part['column']);
+			$expression = $this->renderIdentifier($part['column']);
 			if ($part['direction']) {
 				$expression .= " {$part['direction']}";
 			}

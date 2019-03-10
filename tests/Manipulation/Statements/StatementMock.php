@@ -17,7 +17,7 @@ class StatementMock extends Statement
 
 	public function limit(int $limit, int $offset = null)
 	{
-		return parent::limit($limit, $offset);
+		return $this->setLimit($limit, $offset);
 	}
 
 	public function renderLimit() : ?string
@@ -25,14 +25,14 @@ class StatementMock extends Statement
 		return parent::renderLimit();
 	}
 
-	public function renderColumn($column) : string
+	public function renderIdentifier($column) : string
 	{
-		return parent::renderColumn($column);
+		return parent::renderIdentifier($column);
 	}
 
-	public function renderAliasedColumn($column) : string
+	public function renderAliasedIdentifier($column) : string
 	{
-		return parent::renderAliasedColumn($column);
+		return parent::renderAliasedIdentifier($column);
 	}
 
 	public function sql() : string

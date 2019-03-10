@@ -7,6 +7,7 @@
  */
 class Insert extends Statement
 {
+	use Traits\Set;
 	/**
 	 * @see https://mariadb.com/kb/en/library/insert-delayed/
 	 */
@@ -26,15 +27,7 @@ class Insert extends Statement
 	 */
 	public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
-	public function options(...$options)
-	{
-		foreach ($options as $option) {
-			$this->sql['options'][] = $option;
-		}
-		return $this;
-	}
-
-	public function renderOptions() : ?string
+	protected function renderOptions() : ?string
 	{
 		if ( ! isset($this->sql['options'])) {
 			return null;
@@ -77,7 +70,7 @@ class Insert extends Statement
 		if ( ! isset($this->sql['into'])) {
 			throw new \LogicException('INTO table must be set');
 		}
-		return ' INTO ' . $this->renderColumn($this->sql['into']);
+		return ' INTO ' . $this->renderIdentifier($this->sql['into']);
 	}
 
 	public function columns(string $column, ...$columns)
@@ -95,7 +88,7 @@ class Insert extends Statement
 		}
 		$columns = [];
 		foreach ($this->sql['columns'] as $column) {
-			$columns[] = $this->renderColumn($column);
+			$columns[] = $this->renderIdentifier($column);
 		}
 		$columns = \implode(', ', $columns);
 		return " ({$columns})";
@@ -124,31 +117,6 @@ class Insert extends Statement
 		}
 		$values = \implode(',' . \PHP_EOL, $values);
 		return " VALUES{$values}";
-	}
-
-	public function set(array $columns)
-	{
-		$this->sql['set'] = $columns;
-		return $this;
-	}
-
-	protected function renderSet() : ?string
-	{
-		if ( ! isset($this->sql['set'])) {
-			return null;
-		}
-		if (isset($this->sql['columns'])) {
-			throw new \LogicException('SET statement is not allowed when columns are set');
-		}
-		if (isset($this->sql['values'])) {
-			throw new \LogicException('SET statement is not allowed when VALUES is set');
-		}
-		$set = [];
-		foreach ($this->sql['set'] as $column => $value) {
-			$set[] = $this->renderAssignment($column, $value);
-		}
-		$set = \implode(', ', $set);
-		return " SET {$set}";
 	}
 
 	public function select(\Closure $select)
@@ -211,6 +179,12 @@ class Insert extends Statement
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderSet()) {
+			if (isset($this->sql['columns'])) {
+				throw new \LogicException('SET statement is not allowed when columns are set');
+			}
+			if (isset($this->sql['values'])) {
+				throw new \LogicException('SET statement is not allowed when VALUES is set');
+			}
 			$has_rows = true;
 			$sql .= $part . \PHP_EOL;
 		}

@@ -34,7 +34,7 @@ trait Join
 		}
 		$tables = [];
 		foreach ($this->sql['from'] as $table) {
-			$tables[] = $this->renderAliasedColumn($table);
+			$tables[] = $this->renderAliasedIdentifier($table);
 		}
 		return ' FROM ' . \implode(', ', $tables);
 	}
@@ -234,7 +234,7 @@ trait Join
 		$clause,
 		$expression
 	) : string {
-		$table = $this->renderAliasedColumn($table);
+		$table = $this->renderAliasedIdentifier($table);
 		$is_natural = $this->checkNaturalJoinType($type, $clause, $expression);
 		if ($is_natural) {
 			return $table;
@@ -316,7 +316,7 @@ trait Join
 			return $this->subquery($expression);
 		}
 		foreach ($expression as &$column) {
-			$column = $this->renderColumn($column);
+			$column = $this->renderIdentifier($column);
 		}
 		return '(' . \implode(', ', $expression) . ')';
 	}
