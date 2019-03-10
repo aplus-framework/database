@@ -35,8 +35,16 @@ class StatementMock extends Statement
 		return parent::renderAliasedIdentifier($column);
 	}
 
+	protected function renderOptions() : ?string
+	{
+	}
+
 	public function sql() : string
 	{
 		return 'SQL';
+	}
+
+	public function run()
+	{
 	}
 }
