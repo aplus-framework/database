@@ -99,12 +99,6 @@ class Insert extends Statement
 		return ' (' . \implode(', ', $columns) . ')';
 	}
 
-	public function value($value, ...$values)
-	{
-		$this->sql['values'] = [];
-		return $this->values($value, ...$values);
-	}
-
 	public function values($value, ...$values)
 	{
 		$this->sql['values'][] = $values
@@ -137,6 +131,31 @@ class Insert extends Statement
 			: $this->manipulation->database->quote($value);
 	}
 
+	public function set(array $columns)
+	{
+		$this->sql['set'] = $columns;
+		return $this;
+	}
+
+	protected function renderSet() : ?string
+	{
+		if ( ! isset($this->sql['set'])) {
+			return null;
+		}
+		if (isset($this->sql['columns'])) {
+			throw new \LogicException('SET statement is not allowed when columns are set');
+		}
+		if (isset($this->sql['values'])) {
+			throw new \LogicException('SET statement is not allowed when VALUES is set');
+		}
+		$set = [];
+		foreach ($this->sql['set'] as $column => $value) {
+			$set[] = $this->manipulation->database->protectIdentifier($column)
+				. ' = ' . $this->renderValue($value);
+		}
+		return ' SET ' . \implode(', ', $set);
+	}
+
 	public function select(\Closure $select)
 	{
 		$this->sql['select'] = $select(new Select($this->manipulation));
@@ -148,30 +167,23 @@ class Insert extends Statement
 		if ( ! isset($this->sql['select'])) {
 			return null;
 		}
+		if (isset($this->sql['values'])) {
+			throw new \LogicException('SELECT statement is not allowed when VALUES is set');
+		}
+		if (isset($this->sql['set'])) {
+			throw new \LogicException('SELECT statement is not allowed when SET is set');
+		}
 		return ' ' . $this->sql['select'];
 	}
 
 	/**
-	 * @param array $column_expression      Column name as index, column value/expression as array
-	 *                                      value
-	 * @param mixed ...$columns_expressions Each column must be an array
+	 * @param array $columns Column name as index, column value/expression as array value
 	 *
 	 * @return $this
 	 */
-	public function onDuplicateKeyUpdate(array $column_expression, ...$columns_expressions)
+	public function onDuplicateKeyUpdate(array $columns)
 	{
-		$columns_expressions = $columns_expressions
-			? \array_merge([$column_expression], $columns_expressions)
-			: [$column_expression];
-		$on_duplicate = [];
-		foreach ($columns_expressions as $column_expression) {
-			$name = \array_key_first($column_expression);
-			$on_duplicate[] = [
-				'column' => $name,
-				'value' => $column_expression[$name],
-			];
-		}
-		$this->sql['on_duplicate'] = $on_duplicate;
+		$this->sql['on_duplicate'] = $columns;
 		return $this;
 	}
 
@@ -180,16 +192,13 @@ class Insert extends Statement
 		if ( ! isset($this->sql['on_duplicate'])) {
 			return null;
 		}
-		$values = [];
-		foreach ($this->sql['on_duplicate'] as $column) {
-			$column['value'] = $column['value'] instanceof \Closure
-				? $this->subquery($column['value'])
-				: $this->manipulation->database->quote($column['value']);
-			$values[] = $this->manipulation->database->protectIdentifier($column['column'])
-				. ' = ' . $column['value'];
+		$on_duplicate = [];
+		foreach ($this->sql['on_duplicate'] as $column => $value) {
+			$on_duplicate[] = $this->manipulation->database->protectIdentifier($column)
+				. ' = ' . $this->renderValue($value);
 		}
-		$values = \implode(', ', $values);
-		return " ON DUPLICATE KEY UPDATE {$values}";
+		$on_duplicate = \implode(', ', $on_duplicate);
+		return " ON DUPLICATE KEY UPDATE {$on_duplicate}";
 	}
 
 	public function sql() : string
@@ -202,11 +211,23 @@ class Insert extends Statement
 		if ($part = $this->renderColumns()) {
 			$sql .= $part . \PHP_EOL;
 		}
+		$has_rows = false;
 		if ($part = $this->renderValues()) {
+			$has_rows = true;
+			$sql .= $part . \PHP_EOL;
+		}
+		if ($part = $this->renderSet()) {
+			$has_rows = true;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderSelect()) {
+			$has_rows = true;
 			$sql .= $part . \PHP_EOL;
+		}
+		if ( ! $has_rows) {
+			throw new \LogicException(
+				'The INSERT INTO must be followed by VALUES, SET or SELECT statement'
+			);
 		}
 		if ($part = $this->renderOnDuplicateKeyUpdate()) {
 			$sql .= $part . \PHP_EOL;

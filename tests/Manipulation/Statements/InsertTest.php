@@ -20,13 +20,16 @@ class InsertTest extends TestCase
 	protected function prepare()
 	{
 		$this->insert->into('t1');
-		return $this->insert->sql();
 	}
 
-	public function testInto()
+	public function testIntoOnly()
 	{
 		$this->insert->into('t1');
-		$this->assertEquals("INSERT\n INTO `t1`\n", $this->insert->sql());
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage(
+			'The INSERT INTO must be followed by VALUES, SET or SELECT statement'
+		);
+		$this->insert->sql();
 	}
 
 	public function testRenderWithoutInto()
@@ -38,15 +41,15 @@ class InsertTest extends TestCase
 
 	public function testOptions()
 	{
-		$this->insert->into('t1');
+		$this->insert->into('t1')->set(['id' => 1]);
 		$this->insert->options($this->insert::OPT_DELAYED);
 		$this->assertEquals(
-			"INSERT\n DELAYED\n INTO `t1`\n",
+			"INSERT\n DELAYED\n INTO `t1`\n SET `id` = 1\n",
 			$this->insert->sql()
 		);
 		$this->insert->options($this->insert::OPT_IGNORE);
 		$this->assertEquals(
-			"INSERT\n DELAYED IGNORE\n INTO `t1`\n",
+			"INSERT\n DELAYED IGNORE\n INTO `t1`\n SET `id` = 1\n",
 			$this->insert->sql()
 		);
 	}
@@ -54,6 +57,7 @@ class InsertTest extends TestCase
 	public function testInvalidOption()
 	{
 		$this->prepare();
+		$this->insert->set(['id' => 1]);
 		$this->insert->options('foo');
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid option: foo');
@@ -69,37 +73,6 @@ class InsertTest extends TestCase
 			'Options LOW_PRIORITY, DELAYED or HIGH_PRIORITY can not be used together'
 		);
 		$this->insert->sql();
-	}
-
-	public function testColumns()
-	{
-		$this->prepare();
-		$this->insert->columns('id', 'name', 'email');
-		$this->assertEquals(
-			"INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n",
-			$this->insert->sql()
-		);
-		$this->insert->columns('ids');
-		$this->assertEquals(
-			"INSERT\n INTO `t1`\n (`ids`)\n",
-			$this->insert->sql()
-		);
-	}
-
-	public function testValue()
-	{
-		$this->prepare();
-		$this->insert->columns('id', 'name', 'email');
-		$this->insert->value(1, 'Foo', 'foo@baz.com');
-		$this->assertEquals(
-			"INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com')\n",
-			$this->insert->sql()
-		);
-		$this->insert->value(2, 'Bar', 'bar@baz.com');
-		$this->assertEquals(
-			"INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (2, 'Bar', 'bar@baz.com')\n",
-			$this->insert->sql()
-		);
 	}
 
 	public function testValues()
@@ -125,6 +98,42 @@ class InsertTest extends TestCase
 		);
 	}
 
+	public function testSet()
+	{
+		$this->prepare();
+		$this->insert->set([
+			'id' => 1,
+			'name' => 'Foo',
+			'other' => function () {
+				return "CONCAT('Foo', ' ', 1)";
+			},
+		]);
+		$this->assertEquals(
+			"INSERT\n INTO `t1`\n SET `id` = 1, `name` = 'Foo', `other` = (CONCAT('Foo', ' ', 1))\n",
+			$this->insert->sql()
+		);
+	}
+
+	public function testSetWithColumns()
+	{
+		$this->prepare();
+		$this->insert->columns('id');
+		$this->insert->set(['id' => 1]);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('SET statement is not allowed when columns are set');
+		$this->insert->sql();
+	}
+
+	public function testSetWithValues()
+	{
+		$this->prepare();
+		$this->insert->values('id');
+		$this->insert->set(['id' => 1]);
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('SET statement is not allowed when VALUES is set');
+		$this->insert->sql();
+	}
+
 	public function testSelect()
 	{
 		$this->prepare();
@@ -137,20 +146,43 @@ class InsertTest extends TestCase
 		);
 	}
 
+	public function testSelectWithValues()
+	{
+		$this->prepare();
+		$this->insert->values('id');
+		$this->insert->select(function (Select $select) {
+			return $select->columns('*')->from('t2');
+		});
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('SELECT statement is not allowed when VALUES is set');
+		$this->insert->sql();
+	}
+
+	public function testSelectWithSet()
+	{
+		$this->prepare();
+		$this->insert->set(['id' => 1]);
+		$this->insert->select(function (Select $select) {
+			return $select->columns('*')->from('t2');
+		});
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('SELECT statement is not allowed when SET is set');
+		$this->insert->sql();
+	}
+
 	public function testOnDuplicateKeyUpdate()
 	{
 		$this->prepare();
-		$this->insert->onDuplicateKeyUpdate(
-			['id' => null],
-			['name' => 'Foo'],
-			[
-				'other' => function () {
-					return "CONCAT('Foo', 'id')";
-				},
-			]
-		);
+		$this->insert->set(['id' => 1]);
+		$this->insert->onDuplicateKeyUpdate([
+			'id' => null,
+			'name' => 'Foo',
+			'other' => function () {
+				return "CONCAT('Foo', 'id')";
+			},
+		]);
 		$this->assertEquals(
-			"INSERT\n INTO `t1`\n ON DUPLICATE KEY UPDATE `id` = NULL, `name` = 'Foo', `other` = (CONCAT('Foo', 'id'))\n",
+			"INSERT\n INTO `t1`\n SET `id` = 1\n ON DUPLICATE KEY UPDATE `id` = NULL, `name` = 'Foo', `other` = (CONCAT('Foo', 'id'))\n",
 			$this->insert->sql()
 		);
 	}
