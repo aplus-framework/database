@@ -1,7 +1,10 @@
 <?php namespace Framework\Database\Manipulation;
 
 use Framework\Database\Database;
+use Framework\Database\Manipulation\Statements\Insert;
 use Framework\Database\Manipulation\Statements\Select;
+use Framework\Database\Manipulation\Statements\Update;
+use Framework\Database\Manipulation\Statements\With;
 
 /**
  * Class Manipulation.
@@ -27,8 +30,23 @@ class Manipulation
 		throw new \LogicException('Undefined property: ' . __CLASS__ . '::$' . $property);
 	}
 
+	public function insert() : Insert
+	{
+		return new Insert($this);
+	}
+
 	public function select() : Select
 	{
 		return new Select($this);
+	}
+
+	public function update() : Update
+	{
+		return new Update($this);
+	}
+
+	public function with() : With
+	{
+		return new With($this);
 	}
 }
