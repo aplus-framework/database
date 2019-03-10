@@ -305,7 +305,7 @@ trait Where
 		foreach ($values as &$value) {
 			$value = $value instanceof \Closure
 				? $this->subquery($value)
-				: $this->manipulation->database->quote($value);
+				: $this->database->quote($value);
 		}
 		return $values;
 	}

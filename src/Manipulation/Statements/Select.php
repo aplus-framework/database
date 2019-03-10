@@ -242,7 +242,7 @@ class Select extends Statement
 		}
 		$arguments = [];
 		foreach ($this->sql['procedure']['arguments'] as $argument) {
-			$arguments[] = $this->manipulation->database->quote($argument);
+			$arguments[] = $this->database->quote($argument);
 		}
 		$arguments = \implode(', ', $arguments);
 		return " PROCEDURE {$this->sql['procedure']['name']}({$arguments})";
@@ -285,10 +285,10 @@ class Select extends Statement
 				"INTO OUTFILE filename must not exist: {$this->sql['into_outfile']['filename']}"
 			);
 		}
-		$definition = $this->manipulation->database->quote($this->sql['into_outfile']['filename']);
+		$definition = $this->database->quote($this->sql['into_outfile']['filename']);
 		if ($this->sql['into_outfile']['charset']) {
 			$definition .= ' CHARACTER SET '
-				. $this->manipulation->database->quote(
+				. $this->database->quote(
 					$this->sql['into_outfile']['charset']
 				);
 		}
@@ -314,7 +314,7 @@ class Select extends Statement
 						"Invalid INTO OUTFILE fields option: {$option}"
 					);
 				}
-				$definition .= " {$fields_option} " . $this->manipulation->database->quote($value);
+				$definition .= " {$fields_option} " . $this->database->quote($value);
 			}
 		}
 		return $definition;
@@ -335,7 +335,7 @@ class Select extends Statement
 						"Invalid INTO OUTFILE lines option: {$option}"
 					);
 				}
-				$definition .= " {$lines_option} " . $this->manipulation->database->quote($value);
+				$definition .= " {$lines_option} " . $this->database->quote($value);
 			}
 		}
 		return $definition;
@@ -368,7 +368,7 @@ class Select extends Statement
 				"INTO DUMPFILE filepath must not exist: {$this->sql['into_dumpfile']['filepath']}"
 			);
 		}
-		$definition = $this->manipulation->database->quote($this->sql['into_dumpfile']['filepath']);
+		$definition = $this->database->quote($this->sql['into_dumpfile']['filepath']);
 		if ($this->sql['into_dumpfile']['variables']) {
 			$variables = [];
 			foreach ($this->sql['into_dumpfile']['variables'] as $variable) {
@@ -494,7 +494,7 @@ class Select extends Statement
 
 	public function run(string $class_entity = null, ...$constructor_params)
 	{
-		$statement = $this->manipulation->database->pdo->query($this->sql());
+		$statement = $this->database->pdo->query($this->sql());
 		if ($class_entity !== null && $statement) {
 			$statement->setFetchMode(\PDO::FETCH_CLASS, $class_entity, $constructor_params);
 		}

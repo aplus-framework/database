@@ -3,7 +3,7 @@
 use Framework\Database\Manipulation\Statements\Select;
 use Framework\Database\Manipulation\Statements\With;
 use PHPUnit\Framework\TestCase;
-use Tests\Database\Manipulation\ManipulationMock;
+use Tests\Database\DatabaseMock;
 
 class WithTest extends TestCase
 {
@@ -14,7 +14,7 @@ class WithTest extends TestCase
 
 	public function setup()
 	{
-		$this->with = new With(new ManipulationMock());
+		$this->with = new With(new DatabaseMock());
 	}
 
 	protected function prepareWith()

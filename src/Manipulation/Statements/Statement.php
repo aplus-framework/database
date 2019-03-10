@@ -1,6 +1,6 @@
 <?php namespace Framework\Database\Manipulation\Statements;
 
-use Framework\Database\Manipulation\Manipulation;
+use Framework\Database\Database;
 
 /**
  * Class Statement.
@@ -11,9 +11,9 @@ use Framework\Database\Manipulation\Manipulation;
 abstract class Statement
 {
 	/**
-	 * @var Manipulation
+	 * @var Database
 	 */
-	protected $manipulation;
+	protected $database;
 	/**
 	 * SQL clauses and parts.
 	 *
@@ -21,14 +21,9 @@ abstract class Statement
 	 */
 	protected $sql = [];
 
-	/**
-	 * Statement constructor.
-	 *
-	 * @param Manipulation $manipulation
-	 */
-	public function __construct(Manipulation $manipulation)
+	public function __construct(Database $database)
 	{
-		$this->manipulation = $manipulation;
+		$this->database = $database;
 	}
 
 	public function __toString()
@@ -75,7 +70,7 @@ abstract class Statement
 	 */
 	protected function subquery(\Closure $subquery) : string
 	{
-		return '(' . $subquery($this->manipulation) . ')';
+		return '(' . $subquery($this->database) . ')';
 	}
 
 	/**
@@ -131,7 +126,7 @@ abstract class Statement
 	{
 		return $column instanceof \Closure
 			? $this->subquery($column)
-			: $this->manipulation->database->protectIdentifier($column);
+			: $this->database->protectIdentifier($column);
 	}
 
 	/**
@@ -150,7 +145,7 @@ abstract class Statement
 			}
 			$alias = \array_key_first($column);
 			return $this->renderIdentifier($column[$alias]) . ' AS '
-				. $this->manipulation->database->protectIdentifier($alias);
+				. $this->database->protectIdentifier($alias);
 		}
 		return $this->renderIdentifier($column);
 	}
@@ -166,7 +161,7 @@ abstract class Statement
 	{
 		return $value instanceof \Closure
 			? $this->subquery($value)
-			: $this->manipulation->database->quote($value);
+			: $this->database->quote($value);
 	}
 
 	/**
@@ -182,7 +177,7 @@ abstract class Statement
 	 */
 	protected function renderAssignment(string $identifier, $expression) : string
 	{
-		return $this->manipulation->database->protectIdentifier($identifier)
+		return $this->database->protectIdentifier($identifier)
 			. ' = ' . $this->renderValue($expression);
 	}
 }

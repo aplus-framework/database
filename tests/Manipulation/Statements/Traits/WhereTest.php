@@ -1,6 +1,6 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
-use Framework\Database\Manipulation\Manipulation;
+use Framework\Database\Database;
 use PHPUnit\Framework\TestCase;
 
 class WhereTest extends TestCase
@@ -32,8 +32,8 @@ class WhereTest extends TestCase
 			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->renderWhere()
 		);
-		$this->statement->where(function (Manipulation $manipulation) {
-			return $manipulation->database->protectIdentifier('random_table');
+		$this->statement->where(function (Database $database) {
+			return $database->protectIdentifier('random_table');
 		}, '!=', 'bar');
 		$this->assertEquals(
 			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",

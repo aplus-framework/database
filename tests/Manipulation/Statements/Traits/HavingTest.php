@@ -1,6 +1,6 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
-use Framework\Database\Manipulation\Manipulation;
+use Framework\Database\Database;
 use PHPUnit\Framework\TestCase;
 
 class HavingTest extends TestCase
@@ -32,8 +32,8 @@ class HavingTest extends TestCase
 			" HAVING `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->renderHaving()
 		);
-		$this->statement->having(function (Manipulation $manipulation) {
-			return $manipulation->database->protectIdentifier('random_table');
+		$this->statement->having(function (Database $database) {
+			return $database->protectIdentifier('random_table');
 		}, '!=', 'bar');
 		$this->assertEquals(
 			" HAVING `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",

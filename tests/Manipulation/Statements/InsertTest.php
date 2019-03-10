@@ -3,7 +3,7 @@
 use Framework\Database\Manipulation\Statements\Insert;
 use Framework\Database\Manipulation\Statements\Select;
 use PHPUnit\Framework\TestCase;
-use Tests\Database\Manipulation\ManipulationMock;
+use Tests\Database\DatabaseMock;
 
 class InsertTest extends TestCase
 {
@@ -14,7 +14,7 @@ class InsertTest extends TestCase
 
 	public function setup()
 	{
-		$this->insert = new Insert(new ManipulationMock());
+		$this->insert = new Insert(new DatabaseMock());
 	}
 
 	protected function prepare()

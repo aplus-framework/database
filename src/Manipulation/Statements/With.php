@@ -61,12 +61,12 @@ class With extends Statement
 
 	private function renderAsSelect(\Closure $subquery) : string
 	{
-		return '(' . $subquery(new Select($this->manipulation)) . ')';
+		return '(' . $subquery(new Select($this->database)) . ')';
 	}
 
 	public function select(\Closure $select)
 	{
-		$this->sql['select'] = $select(new Select($this->manipulation));
+		$this->sql['select'] = $select(new Select($this->database));
 		return $this;
 	}
 

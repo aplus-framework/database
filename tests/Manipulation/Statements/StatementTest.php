@@ -1,6 +1,6 @@
 <?php namespace Tests\Database\Manipulation\Statements;
 
-use Framework\Database\Manipulation\Manipulation;
+use Framework\Database\Database;
 use PHPUnit\Framework\TestCase;
 
 class StatementTest extends TestCase
@@ -53,9 +53,9 @@ class StatementTest extends TestCase
 		);
 		$this->assertEquals(
 			'(select * from `posts`)',
-			$this->statement->subquery(function ($manipulation) {
-				$this->assertInstanceOf(Manipulation::class, $manipulation);
-				return 'select * from ' . $manipulation->database->protectIdentifier('posts');
+			$this->statement->subquery(function ($database) {
+				$this->assertInstanceOf(Database::class, $database);
+				return 'select * from ' . $database->protectIdentifier('posts');
 			})
 		);
 	}
@@ -65,8 +65,8 @@ class StatementTest extends TestCase
 		$this->assertEquals('`name```', $this->statement->renderIdentifier('name`'));
 		$this->assertEquals(
 			'(SELECT * from `foo`)',
-			$this->statement->renderIdentifier(function ($manipulation) {
-				return 'SELECT * from ' . $manipulation->database->protectIdentifier('foo');
+			$this->statement->renderIdentifier(function ($database) {
+				return 'SELECT * from ' . $database->protectIdentifier('foo');
 			})
 		);
 	}
@@ -76,8 +76,8 @@ class StatementTest extends TestCase
 		$this->assertEquals('`name```', $this->statement->renderAliasedIdentifier('name`'));
 		$this->assertEquals(
 			'(SELECT * from `foo`)',
-			$this->statement->renderAliasedIdentifier(function ($manipulation) {
-				return 'SELECT * from ' . $manipulation->database->protectIdentifier('foo');
+			$this->statement->renderAliasedIdentifier(function ($database) {
+				return 'SELECT * from ' . $database->protectIdentifier('foo');
 			})
 		);
 		$this->assertEquals(
@@ -87,9 +87,9 @@ class StatementTest extends TestCase
 		$this->assertEquals(
 			"(SELECT id from table where username = '\\'hack') AS `foo`",
 			$this->statement->renderAliasedIdentifier([
-				'foo' => function ($manipulation) {
+				'foo' => function ($database) {
 					return 'SELECT id from table where username = '
-						. $manipulation->database->quote("'hack");
+						. $database->quote("'hack");
 				},
 			])
 		);

@@ -121,7 +121,7 @@ class Insert extends Statement
 
 	public function select(\Closure $select)
 	{
-		$this->sql['select'] = $select(new Select($this->manipulation));
+		$this->sql['select'] = $select(new Select($this->database));
 		return $this;
 	}
 
@@ -205,6 +205,6 @@ class Insert extends Statement
 
 	public function run()
 	{
-		return $this->manipulation->database->pdo->exec($this->sql());
+		return $this->database->pdo->exec($this->sql());
 	}
 }

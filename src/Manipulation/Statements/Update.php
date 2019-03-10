@@ -93,6 +93,6 @@ class Update extends Statement
 
 	public function run()
 	{
-		return $this->manipulation->database->pdo->exec($this->sql());
+		return $this->database->pdo->exec($this->sql());
 	}
 }

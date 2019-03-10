@@ -2,7 +2,7 @@
 
 use Framework\Database\Manipulation\Statements\Select;
 use PHPUnit\Framework\TestCase;
-use Tests\Database\Manipulation\ManipulationMock;
+use Tests\Database\DatabaseMock;
 
 class SelectTest extends TestCase
 {
@@ -13,7 +13,7 @@ class SelectTest extends TestCase
 
 	public function setup()
 	{
-		$this->select = new Select(new ManipulationMock());
+		$this->select = new Select(new DatabaseMock());
 	}
 
 	protected function selectAllFrom(...$from) : string

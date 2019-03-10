@@ -32,21 +32,21 @@ class Manipulation
 
 	public function insert() : Insert
 	{
-		return new Insert($this);
+		return new Insert($this->database);
 	}
 
 	public function select() : Select
 	{
-		return new Select($this);
+		return new Select($this->database);
 	}
 
 	public function update() : Update
 	{
-		return new Update($this);
+		return new Update($this->database);
 	}
 
 	public function with() : With
 	{
-		return new With($this);
+		return new With($this->database);
 	}
 }
