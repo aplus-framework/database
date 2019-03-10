@@ -1,11 +1,30 @@
 <?php namespace Framework\Database\Manipulation\Statements;
 
+/**
+ * Class Insert.
+ *
+ * @see https://mariadb.com/kb/en/library/insert/
+ */
 class Insert extends Statement
 {
-	public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
+	/**
+	 * @see https://mariadb.com/kb/en/library/insert-delayed/
+	 */
 	public const OPT_DELAYED = 'DELAYED';
-	public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
+	/**
+	 * Convert errors to warnings, which will not stop inserts of additional rows.
+	 *
+	 * @see https://mariadb.com/kb/en/library/insert-ignore/
+	 */
 	public const OPT_IGNORE = 'IGNORE';
+	/**
+	 * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+	 */
+	public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
+	/**
+	 * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+	 */
+	public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
 	public function options(...$options)
 	{
@@ -25,10 +44,10 @@ class Insert extends Statement
 			$input = $option;
 			$option = \strtoupper($option);
 			if ( ! \in_array($option, [
-				static::OPT_LOW_PRIORITY,
 				static::OPT_DELAYED,
-				static::OPT_HIGH_PRIORITY,
 				static::OPT_IGNORE,
+				static::OPT_LOW_PRIORITY,
+				static::OPT_HIGH_PRIORITY,
 			], true)) {
 				throw new \InvalidArgumentException("Invalid option: {$input}");
 			}
@@ -36,14 +55,14 @@ class Insert extends Statement
 		unset($option);
 		$intersection = \array_intersect(
 			$options,
-			[static::OPT_LOW_PRIORITY, static::OPT_DELAYED, static::OPT_HIGH_PRIORITY]
+			[static::OPT_DELAYED, static::OPT_HIGH_PRIORITY, static::OPT_LOW_PRIORITY]
 		);
 		if (\count($intersection) > 1) {
 			throw new \LogicException(
 				'Options LOW_PRIORITY, DELAYED or HIGH_PRIORITY can not be used together'
 			);
 		}
-		return \implode(' ', $options);
+		return ' ' . \implode(' ', $options);
 	}
 
 	public function into(string $table)
@@ -60,12 +79,11 @@ class Insert extends Statement
 		return ' INTO ' . $this->renderColumn($this->sql['into']);
 	}
 
-	public function columns(string $name, ...$names)
+	public function columns(string $column, ...$columns)
 	{
-		$names = \array_merge([$name], $names);
-		foreach ($names as $name) {
-			$this->sql['columns'][] = $name;
-		}
+		$this->sql['columns'] = $columns
+			? \array_merge([$column], $columns)
+			: [$column];
 		return $this;
 	}
 
@@ -78,12 +96,20 @@ class Insert extends Statement
 		foreach ($this->sql['columns'] as $column) {
 			$columns[] = $this->renderColumn($column);
 		}
-		return '(' . \implode(', ', $columns) . ')';
+		return ' (' . \implode(', ', $columns) . ')';
 	}
 
-	public function values(...$values)
+	public function value($value, ...$values)
 	{
-		$this->sql['values'][] = $values;
+		$this->sql['values'] = [];
+		return $this->values($value, ...$values);
+	}
+
+	public function values($value, ...$values)
+	{
+		$this->sql['values'][] = $values
+			? \array_merge([$value], $values)
+			: [$value];
 		return $this;
 	}
 
@@ -98,10 +124,10 @@ class Insert extends Statement
 				$item = $this->renderValue($item);
 			}
 			unset($item);
-			$values[] = '(' . \implode(', ', $value) . ')';
+			$values[] = ' (' . \implode(', ', $value) . ')';
 		}
-		$values = \implode(', ' . \PHP_EOL, $values);
-		return "VALUES {$values}";
+		$values = \implode(',' . \PHP_EOL, $values);
+		return " VALUES{$values}";
 	}
 
 	private function renderValue($value) : string
@@ -122,7 +148,7 @@ class Insert extends Statement
 		if ( ! isset($this->sql['select'])) {
 			return null;
 		}
-		return $this->sql['select'];
+		return ' ' . $this->sql['select'];
 	}
 
 	/**
@@ -134,14 +160,18 @@ class Insert extends Statement
 	 */
 	public function onDuplicateKeyUpdate(array $column_expression, ...$columns_expressions)
 	{
-		$columns_expressions = \array_merge([$column_expression], $columns_expressions);
+		$columns_expressions = $columns_expressions
+			? \array_merge([$column_expression], $columns_expressions)
+			: [$column_expression];
+		$on_duplicate = [];
 		foreach ($columns_expressions as $column_expression) {
 			$name = \array_key_first($column_expression);
-			$this->sql['on_duplicate'][] = [
+			$on_duplicate[] = [
 				'column' => $name,
 				'value' => $column_expression[$name],
 			];
 		}
+		$this->sql['on_duplicate'] = $on_duplicate;
 		return $this;
 	}
 
@@ -182,5 +212,10 @@ class Insert extends Statement
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;
+	}
+
+	public function run()
+	{
+		return $this->manipulation->database->pdo->exec($this->sql());
 	}
 }
