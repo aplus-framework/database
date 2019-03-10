@@ -62,7 +62,8 @@ class Insert extends Statement
 				'Options LOW_PRIORITY, DELAYED or HIGH_PRIORITY can not be used together'
 			);
 		}
-		return ' ' . \implode(' ', $options);
+		$options = \implode(' ', $options);
+		return " {$options}";
 	}
 
 	public function into(string $table)
@@ -96,7 +97,8 @@ class Insert extends Statement
 		foreach ($this->sql['columns'] as $column) {
 			$columns[] = $this->renderColumn($column);
 		}
-		return ' (' . \implode(', ', $columns) . ')';
+		$columns = \implode(', ', $columns);
+		return " ({$columns})";
 	}
 
 	public function values($value, ...$values)
@@ -124,13 +126,6 @@ class Insert extends Statement
 		return " VALUES{$values}";
 	}
 
-	private function renderValue($value) : string
-	{
-		return $value instanceof \Closure
-			? $this->subquery($value)
-			: $this->manipulation->database->quote($value);
-	}
-
 	public function set(array $columns)
 	{
 		$this->sql['set'] = $columns;
@@ -150,10 +145,10 @@ class Insert extends Statement
 		}
 		$set = [];
 		foreach ($this->sql['set'] as $column => $value) {
-			$set[] = $this->manipulation->database->protectIdentifier($column)
-				. ' = ' . $this->renderValue($value);
+			$set[] = $this->renderAssignment($column, $value);
 		}
-		return ' SET ' . \implode(', ', $set);
+		$set = \implode(', ', $set);
+		return " SET {$set}";
 	}
 
 	public function select(\Closure $select)
@@ -173,7 +168,7 @@ class Insert extends Statement
 		if (isset($this->sql['set'])) {
 			throw new \LogicException('SELECT statement is not allowed when SET is set');
 		}
-		return ' ' . $this->sql['select'];
+		return " {$this->sql['select']}";
 	}
 
 	/**
@@ -194,8 +189,7 @@ class Insert extends Statement
 		}
 		$on_duplicate = [];
 		foreach ($this->sql['on_duplicate'] as $column => $value) {
-			$on_duplicate[] = $this->manipulation->database->protectIdentifier($column)
-				. ' = ' . $this->renderValue($value);
+			$on_duplicate[] = $this->renderAssignment($column, $value);
 		}
 		$on_duplicate = \implode(', ', $on_duplicate);
 		return " ON DUPLICATE KEY UPDATE {$on_duplicate}";

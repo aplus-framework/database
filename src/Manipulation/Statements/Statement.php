@@ -135,4 +135,35 @@ abstract class Statement
 		}
 		return $this->renderColumn($column);
 	}
+
+	/**
+	 * Renders a subquery or quote a value.
+	 *
+	 * @param \Closure|float|int|string|null $value \Closure for subquery, other types to quote
+	 *
+	 * @return string
+	 */
+	protected function renderValue($value) : string
+	{
+		return $value instanceof \Closure
+			? $this->subquery($value)
+			: $this->manipulation->database->quote($value);
+	}
+
+	/**
+	 * Renders an assignment part.
+	 *
+	 * @param string                         $identifier Identifier/column name
+	 * @param \Closure|float|int|string|null $expression Expression/value
+	 *
+	 * @see renderValue
+	 * @see https://mariadb.com/kb/en/library/assignment-operators-assignment-operator/
+	 *
+	 * @return string
+	 */
+	protected function renderAssignment(string $identifier, $expression) : string
+	{
+		return $this->manipulation->database->protectIdentifier($identifier)
+			. ' = ' . $this->renderValue($expression);
+	}
 }
