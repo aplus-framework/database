@@ -69,7 +69,6 @@ class Update extends Statement
 		foreach ($this->sql['table'] as $table) {
 			$tables[] = $this->renderAliasedIdentifier($table);
 		}
-		// TODO: throw if empty
 		return ' ' . \implode(', ', $tables);
 	}
 

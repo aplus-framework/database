@@ -91,18 +91,19 @@ class With extends Statement
 	{
 		$sql = 'WITH' . \PHP_EOL;
 		if ($part = $this->renderOptions()) {
-			//$sql .= '-- options ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
-		//$sql .= '-- reference ' . \PHP_EOL;
 		$sql .= $this->renderReference() . \PHP_EOL;
-		//$sql .= '-- select ' . \PHP_EOL;
 		$sql .= $this->renderSelect();
 		return $sql;
 	}
 
-	public function run()
+	public function run(string $class_entity = null, ...$constructor_params)
 	{
-		// TODO: Implement run() method.
+		$statement = $this->database->pdo->query($this->sql());
+		if ($class_entity !== null && $statement) {
+			$statement->setFetchMode(\PDO::FETCH_CLASS, $class_entity, $constructor_params);
+		}
+		return $statement;
 	}
 }

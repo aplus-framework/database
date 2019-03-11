@@ -5,14 +5,14 @@
  *
  * @see  https://mariadb.com/kb/en/library/joins/
  *
- * @todo https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/
+ * @todo STRAIGHT_JOIN - https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/
  */
 trait Join
 {
 	/**
 	 * Sets the FROM clause.
 	 *
-	 * @param array|\Closure|string $reference  table reference
+	 * @param array|\Closure|string $reference  Table reference
 	 * @param mixed                 $references
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
@@ -38,7 +38,6 @@ trait Join
 		foreach ($this->sql['from'] as $table) {
 			$tables[] = $this->renderAliasedIdentifier($table);
 		}
-		// TODO: throw if empty
 		return ' FROM ' . \implode(', ', $tables);
 	}
 

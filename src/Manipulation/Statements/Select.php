@@ -447,61 +447,49 @@ class Select extends Statement
 	{
 		$sql = 'SELECT' . \PHP_EOL;
 		if ($part = $this->renderOptions()) {
-			//$sql .= '-- options ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderExpressions()) {
-			//$sql .= '-- expressions ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderFrom()) {
-			//$sql .= '-- from ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderJoin()) {
-			//$sql .= '-- join ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderWhere()) {
 			$this->hasFrom('WHERE');
-			//$sql .= '-- where ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderHaving()) {
 			$this->hasFrom('HAVING');
-			//$sql .= '-- having ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderOrderBy()) {
 			$this->hasFrom('ORDER BY');
-			//$sql .= '-- order by ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderLimit()) {
 			$this->hasFrom('LIMIT');
-			//$sql .= '-- limit ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderProcedure()) {
 			$this->hasFrom('PROCEDURE');
-			//$sql .= '-- procedure ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderIntoOutfile()) {
 			$this->hasFrom('INTO OUTFILE');
-			//$sql .= '-- into outfile ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderIntoDumpfile()) {
 			$into_dump = true;
-			//$sql .= '-- into dumpfile ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderLock()) {
 			if (empty($into_dump)) {
 				$this->hasFrom($this->sql['lock']['type']);
 			}
-			//$sql .= '-- lock ' . \PHP_EOL;
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;

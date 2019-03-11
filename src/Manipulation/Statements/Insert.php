@@ -191,7 +191,6 @@ class Insert extends Statement
 		foreach ($this->sql['on_duplicate'] as $column => $value) {
 			$on_duplicate[] = $this->renderAssignment($column, $value);
 		}
-		// TODO: Throw if empty
 		$on_duplicate = \implode(', ', $on_duplicate);
 		return " ON DUPLICATE KEY UPDATE {$on_duplicate}";
 	}
