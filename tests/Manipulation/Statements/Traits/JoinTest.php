@@ -24,14 +24,14 @@ class JoinTest extends TestCase
 		);
 		$this->statement->from(['aliasname' => 't3']);
 		$this->assertEquals(
-			' FROM `t1`, `t2`, `t3` AS `aliasname`',
+			' FROM `t3` AS `aliasname`',
 			$this->statement->renderFrom()
 		);
 		$this->statement->from(function () {
 			return 'NOW()';
 		});
 		$this->assertEquals(
-			' FROM `t1`, `t2`, `t3` AS `aliasname`, (NOW())',
+			' FROM (NOW())',
 			$this->statement->renderFrom()
 		);
 		$this->statement->from([
@@ -39,6 +39,26 @@ class JoinTest extends TestCase
 				return 'SELECT NOW()';
 			},
 		], ['noindex']);
+		$this->assertEquals(
+			' FROM (SELECT NOW()) AS `time`, `noindex` AS `0`',
+			$this->statement->renderFrom()
+		);
+		$this->statement->from(
+			't1',
+			't2',
+			['aliasname' => 't3'],
+			function () {
+				return 'NOW()';
+			},
+			[
+				'time' => function () {
+					return 'SELECT NOW()';
+				},
+			],
+			[
+				'noindex',
+			]
+		);
 		$this->assertEquals(
 			' FROM `t1`, `t2`, `t3` AS `aliasname`, (NOW()), (SELECT NOW()) AS `time`, `noindex` AS `0`',
 			$this->statement->renderFrom()

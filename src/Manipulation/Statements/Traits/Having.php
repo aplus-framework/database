@@ -145,24 +145,24 @@ trait Having
 		return $this->orHaving($column, 'NOT IN', ...$values);
 	}
 
-	public function havingBetween($column, ...$values)
+	public function havingBetween($column, $min, $max)
 	{
-		return $this->having($column, 'BETWEEN', ...$values);
+		return $this->having($column, 'BETWEEN', $min, $max);
 	}
 
-	public function havingNotBetween($column, ...$values)
+	public function havingNotBetween($column, $min, $max)
 	{
-		return $this->having($column, 'NOT BETWEEN', ...$values);
+		return $this->having($column, 'NOT BETWEEN', $min, $max);
 	}
 
-	public function orHavingBetween($column, ...$values)
+	public function orHavingBetween($column, $min, $max)
 	{
-		return $this->orHaving($column, 'BETWEEN', ...$values);
+		return $this->orHaving($column, 'BETWEEN', $min, $max);
 	}
 
-	public function orHavingNotBetween($column, ...$values)
+	public function orHavingNotBetween($column, $min, $max)
 	{
-		return $this->orHaving($column, 'NOT BETWEEN', ...$values);
+		return $this->orHaving($column, 'NOT BETWEEN', $min, $max);
 	}
 
 	public function havingIsNull($column)

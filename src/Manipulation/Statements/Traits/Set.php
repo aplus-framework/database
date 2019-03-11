@@ -1,7 +1,17 @@
 <?php namespace Framework\Database\Manipulation\Statements\Traits;
 
+/**
+ * Trait Set.
+ */
 trait Set
 {
+	/**
+	 * Sets the SET statement.
+	 *
+	 * @param array $columns Array of columns => values
+	 *
+	 * @return $this
+	 */
 	public function set(array $columns)
 	{
 		$this->sql['set'] = $columns;
@@ -10,7 +20,7 @@ trait Set
 
 	protected function renderSet() : ?string
 	{
-		if ( ! isset($this->sql['set'])) {
+		if ( ! $this->hasSet()) {
 			return null;
 		}
 		$set = [];
@@ -19,5 +29,10 @@ trait Set
 		}
 		$set = \implode(', ', $set);
 		return " SET {$set}";
+	}
+
+	protected function hasSet() : bool
+	{
+		return isset($this->sql['set']);
 	}
 }

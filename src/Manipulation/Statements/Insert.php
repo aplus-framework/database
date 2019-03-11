@@ -29,7 +29,7 @@ class Insert extends Statement
 
 	protected function renderOptions() : ?string
 	{
-		if ( ! isset($this->sql['options'])) {
+		if ( ! $this->hasOptions()) {
 			return null;
 		}
 		$options = $this->sql['options'];
@@ -75,9 +75,7 @@ class Insert extends Statement
 
 	public function columns(string $column, ...$columns)
 	{
-		$this->sql['columns'] = $columns
-			? \array_merge([$column], $columns)
-			: [$column];
+		$this->sql['columns'] = $this->mergeExpressions($column, $columns);
 		return $this;
 	}
 
@@ -96,9 +94,7 @@ class Insert extends Statement
 
 	public function values($value, ...$values)
 	{
-		$this->sql['values'][] = $values
-			? \array_merge([$value], $values)
-			: [$value];
+		$this->sql['values'][] = $this->mergeExpressions($value, $values);
 		return $this;
 	}
 
@@ -180,8 +176,8 @@ class Insert extends Statement
 	protected function checkRowStatementsConflict() : void
 	{
 		if ( ! isset($this->sql['values'])
-			&& ! isset($this->sql['set'])
 			&& ! isset($this->sql['select'])
+			&& ! $this->hasSet()
 		) {
 			throw new \LogicException(
 				'The INSERT INTO must be followed by VALUES, SET or SELECT statement'

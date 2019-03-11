@@ -129,7 +129,7 @@ class Select extends Statement
 
 	protected function renderOptions() : ?string
 	{
-		if ( ! isset($this->sql['options'])) {
+		if ( ! $this->hasOptions()) {
 			return null;
 		}
 		$options = $this->sql['options'];
@@ -175,14 +175,17 @@ class Select extends Statement
 	 *
 	 * Gerally used with the FROM clause as column names.
 	 *
-	 * @param mixed $expressions Each expresion must be of type: array, string or \Closure
+	 * @param array|\Closure|string $expression
+	 * @param mixed                 $expressions Each expresion must be of type: array, string or
+	 *                                           \Closure
 	 *
 	 * @see https://mariadb.com/kb/en/library/select/#select-expressions
 	 *
 	 * @return $this
 	 */
-	public function expressions(...$expressions)
+	public function expressions($expression, ...$expressions)
 	{
+		$expressions = $this->mergeExpressions($expression, $expressions);
 		foreach ($expressions as $expression) {
 			$this->sql['expressions'][] = $expression;
 		}
@@ -192,13 +195,15 @@ class Select extends Statement
 	/**
 	 * Alias of the expressions method.
 	 *
-	 * @param mixed $expressions Each expresion must be of type: array, string or \Closure
+	 * @param array|\Closure|string $expression
+	 * @param mixed                 $expressions Each expresion must be of type: array, string or
+	 *                                           \Closure
 	 *
 	 * @return $this
 	 */
-	public function columns(...$expressions)
+	public function columns($expression, ...$expressions)
 	{
-		return $this->expressions(...$expressions);
+		return $this->expressions($expression, ...$expressions);
 	}
 
 	protected function renderExpressions() : ?string

@@ -49,6 +49,11 @@ class InsertTest extends TestCase
 		);
 		$this->insert->options($this->insert::OPT_IGNORE);
 		$this->assertEquals(
+			"INSERT\n IGNORE\n INTO `t1`\n SET `id` = 1\n",
+			$this->insert->sql()
+		);
+		$this->insert->options($this->insert::OPT_DELAYED, $this->insert::OPT_IGNORE);
+		$this->assertEquals(
 			"INSERT\n DELAYED IGNORE\n INTO `t1`\n SET `id` = 1\n",
 			$this->insert->sql()
 		);

@@ -46,6 +46,11 @@ class UpdateTest extends TestCase
 		);
 		$this->update->options($this->update::OPT_IGNORE);
 		$this->assertEquals(
+			"UPDATE\n IGNORE\n `t1`\n SET `id` = 1\n",
+			$this->update->sql()
+		);
+		$this->update->options($this->update::OPT_LOW_PRIORITY, $this->update::OPT_IGNORE);
+		$this->assertEquals(
 			"UPDATE\n LOW_PRIORITY IGNORE\n `t1`\n SET `id` = 1\n",
 			$this->update->sql()
 		);

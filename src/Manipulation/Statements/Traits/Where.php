@@ -143,24 +143,24 @@ trait Where
 		return $this->orWhere($column, 'NOT IN', ...$values);
 	}
 
-	public function whereBetween($column, ...$values)
+	public function whereBetween($column, $min, $max)
 	{
-		return $this->where($column, 'BETWEEN', ...$values);
+		return $this->where($column, 'BETWEEN', $min, $max);
 	}
 
-	public function whereNotBetween($column, ...$values)
+	public function whereNotBetween($column, $min, $max)
 	{
-		return $this->where($column, 'NOT BETWEEN', ...$values);
+		return $this->where($column, 'NOT BETWEEN', $min, $max);
 	}
 
-	public function orWhereBetween($column, ...$values)
+	public function orWhereBetween($column, $min, $max)
 	{
-		return $this->orWhere($column, 'BETWEEN', ...$values);
+		return $this->orWhere($column, 'BETWEEN', $min, $max);
 	}
 
-	public function orWhereNotBetween($column, ...$values)
+	public function orWhereNotBetween($column, $min, $max)
 	{
-		return $this->orWhere($column, 'NOT BETWEEN', ...$values);
+		return $this->orWhere($column, 'NOT BETWEEN', $min, $max);
 	}
 
 	public function whereIsNull($column)

@@ -23,7 +23,7 @@ class Update extends Statement
 
 	protected function renderOptions() : ?string
 	{
-		if ( ! isset($this->sql['options'])) {
+		if ( ! $this->hasOptions()) {
 			return null;
 		}
 		$options = $this->sql['options'];
@@ -69,11 +69,10 @@ class Update extends Statement
 
 	protected function renderSetPart() : string
 	{
-		$part = $this->renderSet();
-		if (empty($part)) {
+		if ( ! $this->hasSet()) {
 			throw new \LogicException('SET statement must be set');
 		}
-		return $part;
+		return $this->renderSet();
 	}
 
 	public function sql() : string

@@ -12,15 +12,17 @@ trait Join
 	/**
 	 * Sets the FROM clause.
 	 *
-	 * @param mixed $references Table references. Each reference must be of type: array, string or
-	 *                          \Closure
+	 * @param array|\Closure|string $reference  table reference
+	 * @param mixed                 $references
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *
 	 * @return $this
 	 */
-	public function from(...$references)
+	public function from($reference, ...$references)
 	{
+		$this->sql['from'] = [];
+		$references = $this->mergeExpressions($reference, $references);
 		foreach ($references as $reference) {
 			$this->sql['from'][] = $reference;
 		}

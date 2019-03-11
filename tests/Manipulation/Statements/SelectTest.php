@@ -35,6 +35,11 @@ class SelectTest extends TestCase
 		);
 		$this->select->options($this->select::OPT_HIGH_PRIORITY);
 		$this->assertEquals(
+			"SELECT\nHIGH_PRIORITY\n",
+			$this->select->sql()
+		);
+		$this->select->options($this->select::OPT_ALL, $this->select::OPT_HIGH_PRIORITY);
+		$this->assertEquals(
 			"SELECT\nALL HIGH_PRIORITY\n",
 			$this->select->sql()
 		);

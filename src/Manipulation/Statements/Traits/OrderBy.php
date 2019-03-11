@@ -8,37 +8,41 @@
 trait OrderBy
 {
 	/**
-	 * @param mixed $columns Each column must be of type: string or \Closure
+	 * @param \Closure|string $column
+	 * @param mixed           $columns Each column must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
-	public function orderBy(...$columns)
+	public function orderBy($column, ...$columns)
 	{
-		return $this->addOrderBy($columns, null);
+		return $this->addOrderBy($column, $columns, null);
 	}
 
 	/**
-	 * @param mixed $columns Each column must be of type: string or \Closure
+	 * @param \Closure|string $column
+	 * @param mixed           $columns Each column must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
-	public function orderByAsc(...$columns)
+	public function orderByAsc($column, ...$columns)
 	{
-		return $this->addOrderBy($columns, 'ASC');
+		return $this->addOrderBy($column, $columns, 'ASC');
 	}
 
 	/**
-	 * @param mixed $columns Each column must be of type: string or \Closure
+	 * @param \Closure|string $column
+	 * @param mixed           $columns Each column must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
-	public function orderByDesc(...$columns)
+	public function orderByDesc($column, ...$columns)
 	{
-		return $this->addOrderBy($columns, 'DESC');
+		return $this->addOrderBy($column, $columns, 'DESC');
 	}
 
-	private function addOrderBy(array $columns, ?string $direction)
+	private function addOrderBy($column, array $columns, ?string $direction)
 	{
+		$columns = $this->mergeExpressions($column, $columns);
 		foreach ($columns as $column) {
 			$this->sql['order_by'][] = [
 				'column' => $column,

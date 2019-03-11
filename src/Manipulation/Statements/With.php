@@ -14,7 +14,7 @@ class With extends Statement
 
 	protected function renderOptions() : ?string
 	{
-		if ( ! isset($this->sql['options'])) {
+		if ( ! $this->hasOptions()) {
 			return null;
 		}
 		$options = $this->sql['options'];
