@@ -240,25 +240,25 @@ class JoinTest extends TestCase
 		$this->assertEquals(' NATURAL JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testLeftJoin()
+	public function testNaturalLeftJoin()
 	{
 		$this->statement->naturalLeftJoin('t1');
 		$this->assertEquals(' NATURAL LEFT JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testLeftOuterJoin()
+	public function testNaturalLeftOuterJoin()
 	{
 		$this->statement->naturalLeftOuterJoin('t1');
 		$this->assertEquals(' NATURAL LEFT OUTER JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testRightJoin()
+	public function testNaturalRightJoin()
 	{
 		$this->statement->naturalRightJoin('t1');
 		$this->assertEquals(' NATURAL RIGHT JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testRightOuterJoin()
+	public function testNaturalRightOuterJoin()
 	{
 		$this->statement->naturalRightOuterJoin('t1');
 		$this->assertEquals(' NATURAL RIGHT OUTER JOIN `t1`', $this->statement->renderJoin());

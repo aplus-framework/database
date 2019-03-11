@@ -324,60 +324,72 @@ trait Where
 	/**
 	 * Appends a "AND $column IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function whereIn($column, ...$values)
+	public function whereIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->where($column, 'IN', ...$values);
 	}
 
 	/**
 	 * Appends a "OR $column IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function orWhereIn($column, ...$values)
+	public function orWhereIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->orWhere($column, 'IN', ...$values);
 	}
 
 	/**
 	 * Appends a "AND $column NOT IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function whereNotIn($column, ...$values)
+	public function whereNotIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->where($column, 'NOT IN', ...$values);
 	}
 
 	/**
 	 * Appends a "OR $column NOT IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function orWhereNotIn($column, ...$values)
+	public function orWhereNotIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->orWhere($column, 'NOT IN', ...$values);
 	}
 

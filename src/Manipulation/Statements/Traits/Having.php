@@ -326,60 +326,72 @@ trait Having
 	/**
 	 * Appends a "AND $column IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function havingIn($column, ...$values)
+	public function havingIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->having($column, 'IN', ...$values);
 	}
 
 	/**
 	 * Appends a "OR $column IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function orHavingIn($column, ...$values)
+	public function orHavingIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->orHaving($column, 'IN', ...$values);
 	}
 
 	/**
 	 * Appends a "AND $column NOT IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function havingNotIn($column, ...$values)
+	public function havingNotIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->having($column, 'NOT IN', ...$values);
 	}
 
 	/**
 	 * Appends a "OR $column NOT IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param \Closure|string $column \Closure for a subquery or a string with the column name
-	 * @param mixed           $values
+	 * @param \Closure|string                $column \Closure for a subquery or a string with the
+	 *                                               column name
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          $values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function orHavingNotIn($column, ...$values)
+	public function orHavingNotIn($column, $value, ...$values)
 	{
+		$values = $this->mergeExpressions($value, $values);
 		return $this->orHaving($column, 'NOT IN', ...$values);
 	}
 
