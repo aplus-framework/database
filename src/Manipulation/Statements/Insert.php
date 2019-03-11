@@ -65,7 +65,7 @@ class Insert extends Statement
 		return $this;
 	}
 
-	protected function renderInto() : ?string
+	protected function renderInto() : string
 	{
 		if ( ! isset($this->sql['into'])) {
 			throw new \LogicException('INTO table must be set');
@@ -163,6 +163,32 @@ class Insert extends Statement
 		return " ON DUPLICATE KEY UPDATE {$on_duplicate}";
 	}
 
+	protected function renderSetPart() : ?string
+	{
+		$part = $this->renderSet();
+		if ($part) {
+			if (isset($this->sql['columns'])) {
+				throw new \LogicException('SET statement is not allowed when columns are set');
+			}
+			if (isset($this->sql['values'])) {
+				throw new \LogicException('SET statement is not allowed when VALUES is set');
+			}
+		}
+		return $part;
+	}
+
+	protected function checkRowStatementsConflict() : void
+	{
+		if ( ! isset($this->sql['values'])
+			&& ! isset($this->sql['set'])
+			&& ! isset($this->sql['select'])
+		) {
+			throw new \LogicException(
+				'The INSERT INTO must be followed by VALUES, SET or SELECT statement'
+			);
+		}
+	}
+
 	public function sql() : string
 	{
 		$sql = 'INSERT' . \PHP_EOL;
@@ -173,29 +199,15 @@ class Insert extends Statement
 		if ($part = $this->renderColumns()) {
 			$sql .= $part . \PHP_EOL;
 		}
-		$has_rows = false;
+		$this->checkRowStatementsConflict();
 		if ($part = $this->renderValues()) {
-			$has_rows = true;
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderSet()) {
-			if (isset($this->sql['columns'])) {
-				throw new \LogicException('SET statement is not allowed when columns are set');
-			}
-			if (isset($this->sql['values'])) {
-				throw new \LogicException('SET statement is not allowed when VALUES is set');
-			}
-			$has_rows = true;
+		if ($part = $this->renderSetPart()) {
 			$sql .= $part . \PHP_EOL;
 		}
 		if ($part = $this->renderSelect()) {
-			$has_rows = true;
 			$sql .= $part . \PHP_EOL;
-		}
-		if ( ! $has_rows) {
-			throw new \LogicException(
-				'The INSERT INTO must be followed by VALUES, SET or SELECT statement'
-			);
 		}
 		if ($part = $this->renderOnDuplicateKeyUpdate()) {
 			$sql .= $part . \PHP_EOL;

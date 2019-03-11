@@ -67,6 +67,15 @@ class Update extends Statement
 		return $this->setLimit($limit);
 	}
 
+	protected function renderSetPart() : string
+	{
+		$part = $this->renderSet();
+		if (empty($part)) {
+			throw new \LogicException('SET statement must be set');
+		}
+		return $part;
+	}
+
 	public function sql() : string
 	{
 		$sql = 'UPDATE' . \PHP_EOL;
@@ -74,11 +83,7 @@ class Update extends Statement
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderTable() . \PHP_EOL;
-		$part = $this->renderSet();
-		if (empty($part)) {
-			throw new \LogicException('SET statement must be set');
-		}
-		$sql .= $part . \PHP_EOL;
+		$sql .= $this->renderSetPart() . \PHP_EOL;
 		if ($part = $this->renderWhere()) {
 			$sql .= $part . \PHP_EOL;
 		}
