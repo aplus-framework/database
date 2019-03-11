@@ -35,8 +35,22 @@ class StatementMock extends Statement
 		return parent::renderAliasedIdentifier($column);
 	}
 
-	protected function renderOptions() : ?string
+	public function renderAssignment(string $identifier, $expression) : string
 	{
+		return parent::renderAssignment($identifier, $expression);
+	}
+
+	public function mergeExpressions($expression, array $expressions) : array
+	{
+		return parent::mergeExpressions($expression, $expressions);
+	}
+
+	public function renderOptions() : ?string
+	{
+		if ( ! $this->hasOptions()) {
+			return null;
+		}
+		return \implode(' ', $this->sql['options']);
 	}
 
 	public function sql() : string

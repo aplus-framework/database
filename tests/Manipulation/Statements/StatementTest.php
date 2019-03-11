@@ -102,4 +102,46 @@ class StatementTest extends TestCase
 	{
 		$this->assertEquals('SQL', (string) $this->statement);
 	}
+
+	public function testOptions()
+	{
+		$this->assertNull($this->statement->renderOptions());
+		$this->statement->options('foo');
+		$this->assertEquals('foo', $this->statement->renderOptions());
+		$this->statement->options('bar', 'baz');
+		$this->assertEquals('bar baz', $this->statement->renderOptions());
+	}
+
+	public function testReset()
+	{
+		$this->assertNull($this->statement->renderOptions());
+		$this->statement->options('foo');
+		$this->assertEquals('foo', $this->statement->renderOptions());
+		$this->statement->reset('where');
+		$this->assertEquals('foo', $this->statement->renderOptions());
+		$this->statement->reset('options');
+		$this->assertNull($this->statement->renderOptions());
+		$this->statement->options('foo');
+		$this->assertEquals('foo', $this->statement->renderOptions());
+		$this->statement->reset();
+		$this->assertNull($this->statement->renderOptions());
+	}
+
+	public function testRenderAssignment()
+	{
+		$this->assertEquals('`id` = 1', $this->statement->renderAssignment('id', 1));
+		$this->assertEquals("`id` = '1'", $this->statement->renderAssignment('id', '1'));
+		$this->assertEquals(
+			'`id` = (select 1)',
+			$this->statement->renderAssignment('id', function () {
+				return 'select 1';
+			})
+		);
+	}
+
+	public function testMergeExpressions()
+	{
+		$this->assertEquals(['a'], $this->statement->mergeExpressions('a', []));
+		$this->assertEquals(['a', 'a'], $this->statement->mergeExpressions('a', ['a']));
+	}
 }

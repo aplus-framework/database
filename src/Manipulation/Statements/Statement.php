@@ -31,19 +31,37 @@ abstract class Statement
 		return $this->sql();
 	}
 
+	public function reset(string $sql = null)
+	{
+		if ($sql === null) {
+			unset($this->sql);
+			return $this;
+		}
+		unset($this->sql[$sql]);
+		return $this;
+	}
+
 	/**
-	 * Set the statement options.
+	 * Sets the statement options.
 	 *
-	 * @param mixed $options Each option value must be one of the OPT_* constants
+	 * @param string $option  One of the OPT_* constants
+	 * @param mixed  $options Each option value must be one of the OPT_* constants
 	 *
 	 * @return $this
 	 */
-	public function options(...$options)
+	public function options($option, ...$options)
 	{
+		$this->sql['options'] = [];
+		$options = $this->mergeExpressions($option, $options);
 		foreach ($options as $option) {
 			$this->sql['options'][] = $option;
 		}
 		return $this;
+	}
+
+	protected function hasOptions() : bool
+	{
+		return isset($this->sql['options']);
 	}
 
 	abstract protected function renderOptions() : ?string;
@@ -179,5 +197,12 @@ abstract class Statement
 	{
 		return $this->database->protectIdentifier($identifier)
 			. ' = ' . $this->renderValue($expression);
+	}
+
+	protected function mergeExpressions($expression, array $expressions) : array
+	{
+		return $expressions
+			? \array_merge([$expression], $expressions)
+			: [$expression];
 	}
 }
