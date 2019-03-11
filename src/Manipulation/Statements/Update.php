@@ -50,10 +50,10 @@ class Update extends Statement
 		return $this;
 	}
 
-	protected function renderTable() : ?string
+	protected function renderTable() : string
 	{
 		if ( ! isset($this->sql['table'])) {
-			return null;
+			throw new \LogicException('Table references must be set');
 		}
 		$tables = [];
 		foreach ($this->sql['table'] as $table) {
@@ -73,12 +73,12 @@ class Update extends Statement
 		if ($part = $this->renderOptions()) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderTable()) {
-			$sql .= $part . \PHP_EOL;
+		$sql .= $this->renderTable() . \PHP_EOL;
+		$part = $this->renderSet();
+		if (empty($part)) {
+			throw new \LogicException('SET statement must be set');
 		}
-		if ($part = $this->renderSet()) {
-			$sql .= $part . \PHP_EOL;
-		}
+		$sql .= $part . \PHP_EOL;
 		if ($part = $this->renderWhere()) {
 			$sql .= $part . \PHP_EOL;
 		}
