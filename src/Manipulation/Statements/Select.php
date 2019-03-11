@@ -218,6 +218,16 @@ class Select extends Statement
 		return \implode(', ', $expressions);
 	}
 
+	/**
+	 * Sets the LIMIT clause.
+	 *
+	 * @param int      $limit
+	 * @param int|null $offset
+	 *
+	 * @see https://mariadb.com/kb/en/library/limit/
+	 *
+	 * @return $this
+	 */
 	public function limit(int $limit, int $offset = null)
 	{
 		return $this->setLimit($limit, $offset);

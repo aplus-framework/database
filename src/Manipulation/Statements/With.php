@@ -29,6 +29,8 @@ class With extends Statement
 	}
 
 	/**
+	 * Adds a table reference.
+	 *
 	 * @param \Closure|string $table
 	 * @param \Closure        $alias
 	 *
@@ -64,6 +66,13 @@ class With extends Statement
 		return '(' . $subquery(new Select($this->database)) . ')';
 	}
 
+	/**
+	 * Sets the SELECT statement part.
+	 *
+	 * @param \Closure $select
+	 *
+	 * @return $this
+	 */
 	public function select(\Closure $select)
 	{
 		$this->sql['select'] = $select(new Select($this->database));

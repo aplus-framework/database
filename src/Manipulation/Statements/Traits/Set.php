@@ -6,7 +6,7 @@
 trait Set
 {
 	/**
-	 * Sets the SET statement.
+	 * Sets the SET clause.
 	 *
 	 * @param array $columns Array of columns => values
 	 *

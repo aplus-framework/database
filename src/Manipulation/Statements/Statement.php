@@ -21,6 +21,11 @@ abstract class Statement
 	 */
 	protected $sql = [];
 
+	/**
+	 * Statement constructor.
+	 *
+	 * @param Database $database
+	 */
 	public function __construct(Database $database)
 	{
 		$this->database = $database;
@@ -31,6 +36,15 @@ abstract class Statement
 		return $this->sql();
 	}
 
+	/**
+	 * Resets SQL clauses and parts.
+	 *
+	 * @param string|null $sql A part name or null to reset all
+	 *
+	 * @see Statement::$sql
+	 *
+	 * @return $this
+	 */
 	public function reset(string $sql = null)
 	{
 		if ($sql === null) {
@@ -67,12 +81,15 @@ abstract class Statement
 	abstract protected function renderOptions() : ?string;
 
 	/**
-	 * Renders the statement.
+	 * Renders the SQL statement.
 	 *
 	 * @return string
 	 */
 	abstract public function sql() : string;
 
+	/**
+	 * Runs the SQL statement.
+	 */
 	abstract public function run();
 
 	/**
@@ -199,6 +216,14 @@ abstract class Statement
 			. ' = ' . $this->renderValue($expression);
 	}
 
+	/**
+	 * Used when a function requires at least one expression (identifier or value).
+	 *
+	 * @param mixed         $expression
+	 * @param array|mixed[] $expressions
+	 *
+	 * @return array
+	 */
 	protected function mergeExpressions($expression, array $expressions) : array
 	{
 		return $expressions

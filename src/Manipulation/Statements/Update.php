@@ -42,8 +42,18 @@ class Update extends Statement
 		return " {$options}";
 	}
 
-	public function table(...$references)
+	/**
+	 * Sets the table references.
+	 *
+	 * @param array|\Closure|string $reference
+	 * @param mixed                 ...$references
+	 *
+	 * @return $this
+	 */
+	public function table($reference, ...$references)
 	{
+		$this->sql['table'] = [];
+		$references = $this->mergeExpressions($reference, $references);
 		foreach ($references as $reference) {
 			$this->sql['table'][] = $reference;
 		}
@@ -59,9 +69,19 @@ class Update extends Statement
 		foreach ($this->sql['table'] as $table) {
 			$tables[] = $this->renderAliasedIdentifier($table);
 		}
+		// TODO: throw if empty
 		return ' ' . \implode(', ', $tables);
 	}
 
+	/**
+	 * Sets the LIMIT clause.
+	 *
+	 * @param int $limit
+	 *
+	 * @see https://mariadb.com/kb/en/library/limit/
+	 *
+	 * @return $this
+	 */
 	public function limit(int $limit)
 	{
 		return $this->setLimit($limit);

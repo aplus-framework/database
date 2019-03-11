@@ -59,6 +59,13 @@ class Insert extends Statement
 		return " {$options}";
 	}
 
+	/**
+	 * Sets the INTO table.
+	 *
+	 * @param string $table Table name
+	 *
+	 * @return $this
+	 */
 	public function into(string $table)
 	{
 		$this->sql['into'] = $table;
@@ -73,6 +80,14 @@ class Insert extends Statement
 		return ' INTO ' . $this->renderIdentifier($this->sql['into']);
 	}
 
+	/**
+	 * Sets the INTO columns.
+	 *
+	 * @param string $column
+	 * @param mixed  $columns
+	 *
+	 * @return $this
+	 */
 	public function columns(string $column, ...$columns)
 	{
 		$this->sql['columns'] = $this->mergeExpressions($column, $columns);
@@ -92,6 +107,14 @@ class Insert extends Statement
 		return " ({$columns})";
 	}
 
+	/**
+	 * Adds a row values to the VALUES clause.
+	 *
+	 * @param \Closure|float|int|string|null $value
+	 * @param mixed                          ...$values
+	 *
+	 * @return $this
+	 */
 	public function values($value, ...$values)
 	{
 		$this->sql['values'][] = $this->mergeExpressions($value, $values);
@@ -115,6 +138,15 @@ class Insert extends Statement
 		return " VALUES{$values}";
 	}
 
+	/**
+	 * Sets the SELECT statement part.
+	 *
+	 * @param \Closure $select
+	 *
+	 * @see https://mariadb.com/kb/en/library/insert-select/
+	 *
+	 * @return $this
+	 */
 	public function select(\Closure $select)
 	{
 		$this->sql['select'] = $select(new Select($this->database));
@@ -136,7 +168,11 @@ class Insert extends Statement
 	}
 
 	/**
+	 * Sets the ON DUPLICATE KEY UPDATE part.
+	 *
 	 * @param array $columns Column name as index, column value/expression as array value
+	 *
+	 * @see https://mariadb.com/kb/en/library/insert-on-duplicate-key-update/
 	 *
 	 * @return $this
 	 */
@@ -155,6 +191,7 @@ class Insert extends Statement
 		foreach ($this->sql['on_duplicate'] as $column => $value) {
 			$on_duplicate[] = $this->renderAssignment($column, $value);
 		}
+		// TODO: Throw if empty
 		$on_duplicate = \implode(', ', $on_duplicate);
 		return " ON DUPLICATE KEY UPDATE {$on_duplicate}";
 	}

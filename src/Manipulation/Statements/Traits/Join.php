@@ -38,6 +38,7 @@ trait Join
 		foreach ($this->sql['from'] as $table) {
 			$tables[] = $this->renderAliasedIdentifier($table);
 		}
+		// TODO: throw if empty
 		return ' FROM ' . \implode(', ', $tables);
 	}
 
@@ -53,6 +54,8 @@ trait Join
 	}
 
 	/**
+	 * Sets the JOIN clause as "$type JOIN $table $clause $conditional".
+	 *
 	 * @param \Closure|string $table       Table factor
 	 * @param string          $type        JOIN type. One of: CROSS, INNER, LEFT, LEFT OUTER,
 	 *                                     RIGHT, RIGHT OUTER, NATURAL, NATURAL LEFT, NATURAL LEFT
@@ -71,7 +74,7 @@ trait Join
 	}
 
 	/**
-	 * Sets JOIN ON.
+	 * Sets the JOIN clause as "JOIN $table ON $conditional".
 	 *
 	 * @param \Closure|string $table       Table factor
 	 * @param \Closure        $conditional Conditional expression
@@ -84,7 +87,7 @@ trait Join
 	}
 
 	/**
-	 * Sets JOIN USING.
+	 * Sets the JOIN clause as "JOIN $table USING ...$columns".
 	 *
 	 * @param \Closure|string $table   Table factor
 	 * @param mixed           $columns Columns list
@@ -97,7 +100,7 @@ trait Join
 	}
 
 	/**
-	 * Sets INNER JOIN ON.
+	 * Sets the JOIN clause as "INNER JOIN $table ON $conditional".
 	 *
 	 * @param \Closure|string $table       Table factor
 	 * @param \Closure        $conditional Conditional expression
@@ -110,7 +113,7 @@ trait Join
 	}
 
 	/**
-	 * Sets INNER JOIN USING.
+	 * Sets the JOIN clause as "INNER JOIN $table USING ...$columns".
 	 *
 	 * @param \Closure|string $table   Table factor
 	 * @param mixed           $columns Columns list
@@ -122,76 +125,191 @@ trait Join
 		return $this->setJoin($table, 'INNER', 'USING', $columns);
 	}
 
+	/**
+	 * Sets the JOIN clause as "CROSS JOIN $table ON $conditional".
+	 *
+	 * @param \Closure|string $table       Table factor
+	 * @param \Closure        $conditional Conditional expression
+	 *
+	 * @return $this
+	 */
 	public function crossJoinOn($table, \Closure $conditional)
 	{
 		return $this->setJoin($table, 'CROSS', 'ON', $conditional);
 	}
 
+	/**
+	 * Sets the JOIN clause as "CROSS JOIN $table USING ...$columns".
+	 *
+	 * @param \Closure|string $table   Table factor
+	 * @param mixed           $columns Columns list
+	 *
+	 * @return $this
+	 */
 	public function crossJoinUsing($table, ...$columns)
 	{
 		return $this->setJoin($table, 'CROSS', 'USING', $columns);
 	}
 
+	/**
+	 * Sets the JOIN clause as "LEFT JOIN $table ON $conditional".
+	 *
+	 * @param \Closure|string $table       Table factor
+	 * @param \Closure        $conditional Conditional expression
+	 *
+	 * @return $this
+	 */
 	public function leftJoinOn($table, \Closure $conditional)
 	{
 		return $this->setJoin($table, 'LEFT', 'ON', $conditional);
 	}
 
+	/**
+	 * Sets the JOIN clause as "LEFT JOIN $table USING ...$columns".
+	 *
+	 * @param \Closure|string $table   Table factor
+	 * @param mixed           $columns Columns list
+	 *
+	 * @return $this
+	 */
 	public function leftJoinUsing($table, ...$columns)
 	{
 		return $this->setJoin($table, 'LEFT', 'USING', $columns);
 	}
 
+	/**
+	 * Sets the JOIN clause as "LEFT OUTER JOIN $table ON $conditional".
+	 *
+	 * @param \Closure|string $table       Table factor
+	 * @param \Closure        $conditional Conditional expression
+	 *
+	 * @return $this
+	 */
 	public function leftOuterJoinOn($table, \Closure $conditional)
 	{
 		return $this->setJoin($table, 'LEFT OUTER', 'ON', $conditional);
 	}
 
+	/**
+	 * Sets the JOIN clause as "LEFT OUTER JOIN $table USING ...$columns".
+	 *
+	 * @param \Closure|string $table   Table factor
+	 * @param mixed           $columns Columns list
+	 *
+	 * @return $this
+	 */
 	public function leftOuterJoinUsing($table, ...$columns)
 	{
 		return $this->setJoin($table, 'LEFT OUTER', 'USING', $columns);
 	}
 
+	/**
+	 * Sets the JOIN clause as "RIGHT JOIN $table ON $conditional".
+	 *
+	 * @param \Closure|string $table       Table factor
+	 * @param \Closure        $conditional Conditional expression
+	 *
+	 * @return $this
+	 */
 	public function rightJoinOn($table, \Closure $conditional)
 	{
 		return $this->setJoin($table, 'RIGHT', 'ON', $conditional);
 	}
 
+	/**
+	 * Sets the JOIN clause as "RIGHT JOIN $table USING ...$columns".
+	 *
+	 * @param \Closure|string $table   Table factor
+	 * @param mixed           $columns Columns list
+	 *
+	 * @return $this
+	 */
 	public function rightJoinUsing($table, ...$columns)
 	{
 		return $this->setJoin($table, 'RIGHT', 'USING', $columns);
 	}
 
+	/**
+	 * Sets the JOIN clause as "RIGHT OUTER JOIN $table ON $conditional".
+	 *
+	 * @param \Closure|string $table       Table factor
+	 * @param \Closure        $conditional Conditional expression
+	 *
+	 * @return $this
+	 */
 	public function rightOuterJoinOn($table, \Closure $conditional)
 	{
 		return $this->setJoin($table, 'RIGHT OUTER', 'ON', $conditional);
 	}
 
+	/**
+	 * Sets the JOIN clause as "RIGHT OUTER JOIN $table USING ...$columns".
+	 *
+	 * @param \Closure|string $table   Table factor
+	 * @param mixed           $columns Columns list
+	 *
+	 * @return $this
+	 */
 	public function rightOuterJoinUsing($table, ...$columns)
 	{
 		return $this->setJoin($table, 'RIGHT OUTER', 'USING', $columns);
 	}
 
+	/**
+	 * Sets the JOIN clause as "NATURAL JOIN $table".
+	 *
+	 * @param \Closure|string $table Table factor
+	 *
+	 * @return $this
+	 */
 	public function naturalJoin($table)
 	{
 		return $this->setJoin($table, 'NATURAL');
 	}
 
+	/**
+	 * Sets the JOIN clause as "NATURAL LEFT JOIN $table".
+	 *
+	 * @param \Closure|string $table Table factor
+	 *
+	 * @return $this
+	 */
 	public function naturalLeftJoin($table)
 	{
 		return $this->setJoin($table, 'NATURAL LEFT');
 	}
 
+	/**
+	 * Sets the JOIN clause as "NATURAL LEFT OUTER JOIN $table".
+	 *
+	 * @param \Closure|string $table Table factor
+	 *
+	 * @return $this
+	 */
 	public function naturalLeftOuterJoin($table)
 	{
 		return $this->setJoin($table, 'NATURAL LEFT OUTER');
 	}
 
+	/**
+	 * Sets the JOIN clause as "NATURAL RIGHT JOIN $table".
+	 *
+	 * @param \Closure|string $table Table factor
+	 *
+	 * @return $this
+	 */
 	public function naturalRightJoin($table)
 	{
 		return $this->setJoin($table, 'NATURAL RIGHT');
 	}
 
+	/**
+	 * Sets the JOIN clause as "NATURAL RIGHT OUTER JOIN $table".
+	 *
+	 * @param \Closure|string $table Table factor
+	 *
+	 * @return $this
+	 */
 	public function naturalRightOuterJoin($table)
 	{
 		return $this->setJoin($table, 'NATURAL RIGHT OUTER');
