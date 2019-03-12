@@ -247,6 +247,11 @@ class Insert extends Statement
 		return $sql;
 	}
 
+	/**
+	 * Runs the INSERT statement.
+	 *
+	 * @return false|int The number of affected rows or false if an error occurs
+	 */
 	public function run()
 	{
 		return $this->database->pdo->exec($this->sql());

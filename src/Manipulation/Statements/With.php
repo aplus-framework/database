@@ -98,6 +98,14 @@ class With extends Statement
 		return $sql;
 	}
 
+	/**
+	 * Runs the WITH statement.
+	 *
+	 * @param string|null $class_entity          The class returned on fetch's
+	 * @param mixed       ...$constructor_params Constructor arguments passed to the class
+	 *
+	 * @return false|\PDOStatement A \PDOStatement or false on fail
+	 */
 	public function run(string $class_entity = null, ...$constructor_params)
 	{
 		$statement = $this->database->pdo->query($this->sql());
