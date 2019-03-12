@@ -23,6 +23,10 @@ class ManipulationTest extends TestCase
 			$this->manipulation->insert()
 		);
 		$this->assertInstanceOf(
+			Statements\LoadData::class,
+			$this->manipulation->loadData()
+		);
+		$this->assertInstanceOf(
 			Statements\Select::class,
 			$this->manipulation->select()
 		);

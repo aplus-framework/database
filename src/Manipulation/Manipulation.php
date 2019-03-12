@@ -2,6 +2,7 @@
 
 use Framework\Database\Database;
 use Framework\Database\Manipulation\Statements\Insert;
+use Framework\Database\Manipulation\Statements\LoadData;
 use Framework\Database\Manipulation\Statements\Select;
 use Framework\Database\Manipulation\Statements\Update;
 use Framework\Database\Manipulation\Statements\With;
@@ -31,6 +32,11 @@ class Manipulation
 	public function insert() : Insert
 	{
 		return new Insert($this->database);
+	}
+
+	public function loadData() : LoadData
+	{
+		return new LoadData($this->database);
 	}
 
 	public function select() : Select
