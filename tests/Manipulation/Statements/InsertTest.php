@@ -146,7 +146,7 @@ class InsertTest extends TestCase
 			return $select->columns('*')->from('t2');
 		});
 		$this->assertEquals(
-			"INSERT\n INTO `t1`\n SELECT\n*\n FROM `t2`\n\n",
+			"INSERT\n INTO `t1`\n SELECT\n *\n FROM `t2`\n\n",
 			$this->insert->sql()
 		);
 	}

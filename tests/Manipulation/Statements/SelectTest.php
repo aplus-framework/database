@@ -72,21 +72,21 @@ class SelectTest extends TestCase
 	public function testExpressions()
 	{
 		$this->select->expressions('1');
-		$this->assertEquals("SELECT\n`1`\n", $this->select->sql());
+		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
 		$this->select->expressions(function () {
 			return 'now()';
 		});
-		$this->assertEquals("SELECT\n`1`, (now())\n", $this->select->sql());
+		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
 	public function testColumns()
 	{
 		$this->select->columns('1');
-		$this->assertEquals("SELECT\n`1`\n", $this->select->sql());
+		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
 		$this->select->columns(function () {
 			return 'now()';
 		});
-		$this->assertEquals("SELECT\n`1`, (now())\n", $this->select->sql());
+		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
 	public function testLimit()

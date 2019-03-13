@@ -30,7 +30,7 @@ class WithTest extends TestCase
 	{
 		$this->prepareWith();
 		$this->assertEquals(
-			"WITH\n`t1` AS (SELECT\n*\n FROM `folks`\n)\nSELECT\n*\n FROM `ancestors`\n",
+			"WITH\n`t1` AS (SELECT\n *\n FROM `folks`\n)\nSELECT\n *\n FROM `ancestors`\n",
 			$this->with->sql()
 		);
 	}
@@ -40,7 +40,7 @@ class WithTest extends TestCase
 		$this->prepareWith();
 		$this->with->options($this->with::OPT_RECURSIVE);
 		$this->assertEquals(
-			"WITH\nRECURSIVE\n`t1` AS (SELECT\n*\n FROM `folks`\n)\nSELECT\n*\n FROM `ancestors`\n",
+			"WITH\nRECURSIVE\n`t1` AS (SELECT\n *\n FROM `folks`\n)\nSELECT\n *\n FROM `ancestors`\n",
 			$this->with->sql()
 		);
 	}
@@ -52,7 +52,7 @@ class WithTest extends TestCase
 			return 'select * from foo';
 		});
 		$this->assertEquals(
-			"WITH\n`t1` AS (SELECT\n*\n FROM `folks`\n), `t2` AS (select * from foo)\nSELECT\n*\n FROM `ancestors`\n",
+			"WITH\n`t1` AS (SELECT\n *\n FROM `folks`\n), `t2` AS (select * from foo)\nSELECT\n *\n FROM `ancestors`\n",
 			$this->with->sql()
 		);
 	}
