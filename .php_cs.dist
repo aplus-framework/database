@@ -3,7 +3,7 @@
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
-$year = \date('Y');
+$year = date('Y');
 $header = <<<EOF
 Copyright (C) 2018-{$year} Natan Felles <natanfelles@gmail.com>
 EOF;
@@ -14,8 +14,8 @@ $finder = Finder::create()
 return Config::create()
 	->setRiskyAllowed(true)
 	->setFinder($finder)
-	->setCacheFile('/tmp/' . \md5(__FILE__))
-	->setUsingCache((bool) \getenv('GITLAB_CI'))
+	->setCacheFile('/tmp/' . md5(__FILE__))
+	->setUsingCache((bool) getenv('GITLAB_CI'))
 	->setIndent("\t")
 	->setLineEnding("\n")
 	->setRules([
@@ -121,7 +121,10 @@ return Config::create()
 		],
 		'native_constant_invocation' => true,
 		'native_function_casing' => true,
-		'native_function_invocation' => true,
+		'native_function_invocation' => [
+			'scope' => 'namespaced',
+			'strict' => true,
+		],
 		'new_with_braces' => true,
 		'no_alias_functions' => true,
 		'no_alternative_syntax' => true,
