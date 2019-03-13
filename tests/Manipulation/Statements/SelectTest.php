@@ -88,6 +88,14 @@ class SelectTest extends TestCase
 		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
+	public function testEmptyExpressionsWithFrom()
+	{
+		$this->select->from('Users');
+		$this->assertEquals("SELECT\n *\n FROM `Users`\n", $this->select->sql());
+		$this->select->columns('id', 'name');
+		$this->assertEquals("SELECT\n `id`, `name`\n FROM `Users`\n", $this->select->sql());
+	}
+
 	public function testLimit()
 	{
 		$part = $this->selectAllFrom('t1');
