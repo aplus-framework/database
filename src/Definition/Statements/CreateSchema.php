@@ -101,10 +101,10 @@ class CreateSchema extends Statement
 	/**
 	 * Runs the CREATE SCHEMA statement.
 	 *
-	 * @return false|int The number of affected rows or false if an error occurs
+	 * @return int The number of affected rows
 	 */
-	public function run()
+	public function run() : int
 	{
-		return $this->database->pdo->exec($this->sql());
+		return $this->database->exec($this->sql());
 	}
 }

@@ -1,5 +1,7 @@
 <?php namespace Framework\Database\Manipulation\Statements;
 
+use Framework\Database\Driver\Result;
+
 /**
  * Class With.
  *
@@ -101,17 +103,10 @@ class With extends Statement
 	/**
 	 * Runs the WITH statement.
 	 *
-	 * @param string|null $class_entity          The class returned on fetch's
-	 * @param mixed       ...$constructor_params Constructor arguments passed to the class
-	 *
-	 * @return false|\PDOStatement A \PDOStatement or false on fail
+	 * @return Result
 	 */
-	public function run(string $class_entity = null, ...$constructor_params)
+	public function run() : Result
 	{
-		$statement = $this->database->pdo->query($this->sql());
-		if ($class_entity !== null && $statement) {
-			$statement->setFetchMode(\PDO::FETCH_CLASS, $class_entity, $constructor_params);
-		}
-		return $statement;
+		return $this->database->query($this->sql());
 	}
 }
