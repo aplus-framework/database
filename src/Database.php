@@ -1,14 +1,14 @@
 <?php namespace Framework\Database;
 
-use Framework\Database\Definition\Statements\CreateSchema;
-use Framework\Database\Definition\Statements\DropSchema;
+use Framework\Database\Definition\CreateSchema;
+use Framework\Database\Definition\DropSchema;
 use Framework\Database\Driver\PreparedStatement;
 use Framework\Database\Driver\Result;
-use Framework\Database\Manipulation\Statements\Insert;
-use Framework\Database\Manipulation\Statements\LoadData;
-use Framework\Database\Manipulation\Statements\Select;
-use Framework\Database\Manipulation\Statements\Update;
-use Framework\Database\Manipulation\Statements\With;
+use Framework\Database\Manipulation\Insert;
+use Framework\Database\Manipulation\LoadData;
+use Framework\Database\Manipulation\Select;
+use Framework\Database\Manipulation\Update;
+use Framework\Database\Manipulation\With;
 
 class Database
 {
