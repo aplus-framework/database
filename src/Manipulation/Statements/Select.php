@@ -211,13 +211,16 @@ class Select extends Statement
 	protected function renderExpressions() : ?string
 	{
 		if ( ! isset($this->sql['expressions'])) {
+			if ($this->hasFrom()) {
+				return ' *';
+			}
 			return null;
 		}
 		$expressions = [];
 		foreach ($this->sql['expressions'] as $expression) {
 			$expressions[] = $this->renderAliasedIdentifier($expression);
 		}
-		return \implode(', ', $expressions);
+		return ' ' . \implode(', ', $expressions);
 	}
 
 	/**
