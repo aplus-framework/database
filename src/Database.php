@@ -57,6 +57,10 @@ class Database
 	 * @var int|null integer representing the array index or null for none
 	 */
 	protected $failoverIndex;
+	/**
+	 * @var bool
+	 */
+	protected $inTransaction = false;
 
 	public function __construct(
 		$username,
@@ -159,9 +163,9 @@ class Database
 		return $this->mysqli->error ?: null;
 	}
 
-	public function use(string $database) : void
+	public function use(string $schema) : void
 	{
-		$this->mysqli->select_db($database);
+		$this->mysqli->select_db($schema);
 	}
 
 	public function createSchema() : CreateSchema
@@ -245,16 +249,23 @@ class Database
 		return new PreparedStatement($this->mysqli->prepare($statement));
 	}
 
-	public function transaction(callable $queries) : bool
+	public function transaction(callable $statements) : bool
 	{
+		if ($this->inTransaction) {
+			throw new \LogicException('Transaction already is active');
+		}
+		$this->inTransaction = true;
 		$this->mysqli->autocommit(false);
 		$this->mysqli->begin_transaction();
-		$queries($this);
-		$commit = $this->mysqli->commit();
-		if ( ! $commit) {
+		try {
+			$statements($this);
+			return $this->mysqli->commit();
+		} catch (\Exception $exception) {
 			$this->mysqli->rollback();
+			throw $exception;
+		} finally {
+			$this->inTransaction = false;
 		}
-		return $commit;
 	}
 
 	/**
