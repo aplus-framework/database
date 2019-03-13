@@ -1,6 +1,6 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class OrderByTest extends TestCase
 {
@@ -11,7 +11,7 @@ class OrderByTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new OrderByMock();
+		$this->statement = new OrderByMock($this->database);
 	}
 
 	public function testOrderBy()

@@ -1,7 +1,7 @@
 <?php namespace Tests\Database\Manipulation\Statements;
 
 use Framework\Database\Database;
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class StatementTest extends TestCase
 {
@@ -12,7 +12,7 @@ class StatementTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new StatementMock();
+		$this->statement = new StatementMock($this->database);
 	}
 
 	public function testLimit()

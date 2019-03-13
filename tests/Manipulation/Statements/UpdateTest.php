@@ -1,8 +1,7 @@
 <?php namespace Tests\Database\Manipulation\Statements;
 
 use Framework\Database\Manipulation\Statements\Update;
-use PHPUnit\Framework\TestCase;
-use Tests\Database\DatabaseMock;
+use Tests\Database\TestCase;
 
 class UpdateTest extends TestCase
 {
@@ -13,7 +12,7 @@ class UpdateTest extends TestCase
 
 	public function setup()
 	{
-		$this->update = new Update(new DatabaseMock());
+		$this->update = new Update($this->database);
 	}
 
 	protected function prepare()

@@ -2,7 +2,7 @@
 
 use Framework\Database\Manipulation\Manipulation;
 use Framework\Database\Manipulation\Statements;
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class ManipulationTest extends TestCase
 {
@@ -13,7 +13,7 @@ class ManipulationTest extends TestCase
 
 	public function setup()
 	{
-		$this->manipulation = new ManipulationMock();
+		$this->manipulation = new Manipulation($this->database);
 	}
 
 	public function testStatementsInstances()

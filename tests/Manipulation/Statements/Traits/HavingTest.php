@@ -1,7 +1,7 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
 use Framework\Database\Database;
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class HavingTest extends TestCase
 {
@@ -12,7 +12,7 @@ class HavingTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new HavingMock();
+		$this->statement = new HavingMock($this->database);
 	}
 
 	public function testHaving()

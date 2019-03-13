@@ -1,15 +1,9 @@
 <?php namespace Tests\Database\Manipulation\Statements;
 
 use Framework\Database\Manipulation\Statements\Statement;
-use Tests\Database\DatabaseMock;
 
 class StatementMock extends Statement
 {
-	public function __construct()
-	{
-		parent::__construct(new DatabaseMock());
-	}
-
 	public function subquery(\Closure $subquery) : string
 	{
 		return parent::subquery($subquery);

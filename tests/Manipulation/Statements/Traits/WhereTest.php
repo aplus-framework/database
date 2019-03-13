@@ -1,7 +1,7 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
 use Framework\Database\Database;
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class WhereTest extends TestCase
 {
@@ -12,7 +12,7 @@ class WhereTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new WhereMock();
+		$this->statement = new WhereMock($this->database);
 	}
 
 	public function testWhere()

@@ -1,19 +1,7 @@
 <?php namespace Tests\Database;
 
-use PHPUnit\Framework\TestCase;
-
 class DatabaseTest extends TestCase
 {
-	/**
-	 * @var DatabaseMock
-	 */
-	protected $database;
-
-	public function setup()
-	{
-		$this->database = new DatabaseMock();
-	}
-
 	public function testProtectIdentifier()
 	{
 		$this->assertEquals('`foo`', $this->database->protectIdentifier('foo'));

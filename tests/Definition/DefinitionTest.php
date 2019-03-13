@@ -2,7 +2,7 @@
 
 use Framework\Database\Definition\Definition;
 use Framework\Database\Definition\Statements;
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class DefinitionTest extends TestCase
 {
@@ -13,7 +13,7 @@ class DefinitionTest extends TestCase
 
 	public function setup()
 	{
-		$this->definition = new DefinitionMock();
+		$this->definition = new Definition($this->database);
 	}
 
 	public function testStatementsInstances()

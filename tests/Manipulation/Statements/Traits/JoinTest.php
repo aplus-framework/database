@@ -1,6 +1,6 @@
 <?php namespace Tests\Database\Manipulation\Statements\Traits;
 
-use PHPUnit\Framework\TestCase;
+use Tests\Database\TestCase;
 
 class JoinTest extends TestCase
 {
@@ -11,7 +11,7 @@ class JoinTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new JoinMock();
+		$this->statement = new JoinMock($this->database);
 	}
 
 	public function testFrom()
