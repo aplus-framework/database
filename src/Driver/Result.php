@@ -1,11 +1,22 @@
 <?php namespace Framework\Database\Driver;
 
+/**
+ * Class Result.
+ */
 class Result
 {
 	/**
 	 * @var \mysqli_result
 	 */
 	protected $result;
+	/**
+	 * @var string
+	 */
+	protected $fetchClass = 'stdClass';
+	/**
+	 * @var array
+	 */
+	protected $fetchConstructor = [];
 
 	public function __construct(\mysqli_result $result)
 	{
@@ -29,71 +40,113 @@ class Result
 		}
 	}
 
-	public function dataSeek(int $offset) : bool
+	public function moveCursor(int $offset) : bool
 	{
+		if ($offset < 0 || ($offset !== 0 && $offset >= $this->result->num_rows)) {
+			throw new \OutOfRangeException(
+				"Invalid cursor offset: {$offset}"
+			);
+		}
 		return $this->result->data_seek($offset);
 	}
 
-	/**
-	 * @param string $class_name
-	 * @param mixed  ...$constructor_params
-	 *
-	 * @return mixed|null
-	 */
-	public function fetch(string $class_name = 'stdClass', ...$constructor_params)
+	public function setFetchClass(string $class, ...$constructor)
 	{
-		if ($constructor_params) {
-			return $this->result->fetch_object($class_name, $constructor_params);
-		}
-		return $this->result->fetch_object($class_name);
+		$this->fetchClass = $class;
+		$this->fetchConstructor = $constructor;
+		return $this;
 	}
 
 	/**
-	 * @param string $class_name
-	 * @param mixed  ...$constructor_params
+	 * Fetches the current row as object and move the cursor to the next.
+	 *
+	 * @param string|null $class
+	 * @param mixed       ...$constructor
+	 *
+	 * @return mixed|null
+	 */
+	public function fetch(string $class = null, ...$constructor)
+	{
+		$class = $class ?? $this->fetchClass;
+		$constructor = $constructor ?: $this->fetchConstructor;
+		if ($constructor) {
+			return $this->result->fetch_object($class, $constructor);
+		}
+		return $this->result->fetch_object($class);
+	}
+
+	/**
+	 * Fetches all rows as objects.
+	 *
+	 * @param string|null $class
+	 * @param mixed       ...$constructor
 	 *
 	 * @return array|mixed[]
 	 */
-	public function fetchAll(string $class_name = 'stdClass', ...$constructor_params) : array
+	public function fetchAll(string $class = null, ...$constructor) : array
 	{
-		$this->result->data_seek(0);
+		$this->moveCursor(0);
 		$all = [];
 		for ($i = $this->result->num_rows; $i > 0; $i--) {
-			$all[] = $this->fetch($class_name, ...$constructor_params);
+			$all[] = $this->fetch($class, ...$constructor);
 		}
 		return $all;
 	}
 
 	/**
-	 * @param int    $row
-	 * @param string $class_name
-	 * @param mixed  ...$params
+	 * Fetches a specific row as object and move the cursor to the next.
+	 *
+	 * @param int         $offset
+	 * @param string|null $class
+	 * @param mixed       ...$constructor
 	 *
 	 * @return mixed|null
 	 */
-	public function fetchRow(int $row, string $class_name = 'stdClass', ...$params)
+	public function fetchRow(int $offset, string $class = null, ...$constructor)
 	{
-		$this->result->data_seek($row);
-		return $this->fetch($class_name, ...$params);
+		$this->moveCursor($offset);
+		return $this->fetch($class, ...$constructor);
 	}
 
+	/**
+	 * Fetches the current row as array and move the cursor to the next.
+	 *
+	 * @return array|null
+	 */
 	public function fetchArray() : ?array
 	{
 		return $this->result->fetch_assoc();
 	}
 
+	/**
+	 * Fetches all rows as arrays.
+	 *
+	 * @return array
+	 */
 	public function fetchArrayAll() : array
 	{
-		$this->result->data_seek(0);
+		$this->moveCursor(0);
 		return $this->result->fetch_all(\MYSQLI_ASSOC);
 	}
 
-	public function fetchArrayRow(int $row) : array
+	/**
+	 * Fetches a specific row as array and move the cursor to the next.
+	 *
+	 * @param int $offset
+	 *
+	 * @return array
+	 */
+	public function fetchArrayRow(int $offset) : array
 	{
-		$this->result->data_seek($row);
+		$this->moveCursor($offset);
 		return $this->result->fetch_assoc();
 	}
 
+	/**
+	 * Gets the number of rows in the result set.
+	 *
+	 * @return int
+	 */
 	public function numRows() : int
 	{
 		return $this->result->num_rows;
