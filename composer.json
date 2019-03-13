@@ -15,7 +15,7 @@
 	],
 	"require": {
 		"php": ">=7.3",
-		"ext-pdo": "*"
+		"ext-mysqli": "*"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
