@@ -10,6 +10,9 @@ use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
 
+/**
+ * Class Database.
+ */
 class Database
 {
 	/**
@@ -17,36 +20,11 @@ class Database
 	 */
 	protected $mysqli;
 	/**
-	 * Base Connection configurations.
-	 *
-	 * Read only data.
-	 *
-	 * @var array
-	 */
-	protected $baseConfig = [
-		'host' => 'localhost',
-		'port' => 3306,
-		'username' => null,
-		'password' => null,
-		'schema' => null,
-		'socket' => null,
-		'engine' => 'InnoDB',
-		'charset' => 'utf8mb4',
-		'collation' => 'utf8mb4_general_ci',
-		'timezone' => '+00:00',
-		'ssl' => [
-			'key' => null,
-			'cert' => null,
-			'ca' => null,
-			'capath' => null,
-			'cipher' => null,
-		],
-		'failover' => [],
-	];
-	/**
 	 * Connection configurations.
 	 *
 	 * Custom configs merged with the Base Connection configurations.
+	 *
+	 * @see makeConfig
 	 *
 	 * @var array
 	 */
@@ -54,10 +32,14 @@ class Database
 	/**
 	 * The current $config failover index to be used in a connection.
 	 *
-	 * @var int|null integer representing the array index or null for none
+	 * @see connect
+	 *
+	 * @var int|null Integer representing the array index or null for none
 	 */
 	protected $failoverIndex;
 	/**
+	 * @see transaction
+	 *
 	 * @var bool
 	 */
 	protected $inTransaction = false;
@@ -83,6 +65,37 @@ class Database
 		}
 	}
 
+	/**
+	 * Make Base Connection configurations.
+	 *
+	 * @param array $config
+	 *
+	 * @return array
+	 */
+	protected function makeConfig(array $config) : array
+	{
+		return \array_replace_recursive([
+			'host' => 'localhost',
+			'port' => 3306,
+			'username' => null,
+			'password' => null,
+			'schema' => null,
+			'socket' => null,
+			'engine' => 'InnoDB',
+			'charset' => 'utf8mb4',
+			'collation' => 'utf8mb4_general_ci',
+			'timezone' => '+00:00',
+			'ssl' => [
+				'key' => null,
+				'cert' => null,
+				'ca' => null,
+				'capath' => null,
+				'cipher' => null,
+			],
+			'failover' => [],
+		], $config);
+	}
+
 	protected function connect(
 		$username,
 		string $password = null,
@@ -99,7 +112,7 @@ class Database
 				'schema' => $schema,
 			];
 		}
-		$username = \array_replace_recursive($this->baseConfig, $username);
+		$username = $this->makeConfig($username);
 		if ($this->failoverIndex === null) {
 			$this->config = $username;
 		}
@@ -118,8 +131,6 @@ class Database
 				? 0
 				: $this->failoverIndex + 1;
 			if (empty($username['failover'][$this->failoverIndex])) {
-				//$this->setError($exception);
-				//return false;
 				throw $exception;
 			}
 			$username = \array_replace_recursive(
