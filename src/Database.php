@@ -3,6 +3,7 @@
 use Framework\Database\Definition\AlterSchema;
 use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\DropSchema;
+use Framework\Database\Definition\DropTable;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
 use Framework\Database\Manipulation\Select;
@@ -191,6 +192,11 @@ class Database
 	public function alterSchema() : AlterSchema
 	{
 		return new AlterSchema($this);
+	}
+
+	public function dropTable() : DropTable
+	{
+		return new DropTable($this);
 	}
 
 	public function insert() : Insert
