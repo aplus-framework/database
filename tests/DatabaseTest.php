@@ -220,11 +220,24 @@ class DatabaseTest extends TestCase
 
 	public function testTransactionRollback()
 	{
-		$schema = \getenv('DB_SCHEMA');
-		$this->expectException(\mysqli_sql_exception::class);
-		$this->expectExceptionMessage("Table '{$schema}.t1000' doesn't exist");
+		$this->createDummyData();
+		$this->assertEquals(5, $this->database->exec('SELECT * FROM `t1`'));
 		$this->database->transaction(function (Database $db) {
-			$db->exec('INSERT INTO `t1000` SET `c2` = "a"');
+			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
+			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 		});
+		$this->assertEquals(7, $this->database->exec('SELECT * FROM `t1`'));
+		try {
+			$this->database->transaction(function (Database $db) {
+				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
+				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
+				$db->exec('INSERT INTO `t1000` SET `c2` = "a"');
+			});
+		} catch (\Exception $exception) {
+			$schema = \getenv('DB_SCHEMA');
+			$this->assertInstanceOf(\mysqli_sql_exception::class, $exception);
+			$this->assertEquals("Table '{$schema}.t1000' doesn't exist", $exception->getMessage());
+		}
+		$this->assertEquals(7, $this->database->exec('SELECT * FROM `t1`'));
 	}
 }
