@@ -1,4 +1,4 @@
-<?php namespace Framework\Database\Driver;
+<?php namespace Framework\Database;
 
 class PreparedStatement
 {

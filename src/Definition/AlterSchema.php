@@ -1,5 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
+use Framework\Database\Statement;
+
 /**
  * Class AlterSchema.
  *

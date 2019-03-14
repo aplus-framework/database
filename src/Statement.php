@@ -1,6 +1,4 @@
-<?php namespace Framework\Database\Definition;
-
-use Framework\Database\Database;
+<?php namespace Framework\Database;
 
 /**
  * Class Statement.

@@ -1,9 +1,8 @@
 <?php namespace Framework\Database;
 
+use Framework\Database\Definition\AlterSchema;
 use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\DropSchema;
-use Framework\Database\Driver\PreparedStatement;
-use Framework\Database\Driver\Result;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
 use Framework\Database\Manipulation\Select;
@@ -187,6 +186,11 @@ class Database
 	public function dropSchema() : DropSchema
 	{
 		return new DropSchema($this);
+	}
+
+	public function alterSchema() : AlterSchema
+	{
+		return new AlterSchema($this);
 	}
 
 	public function insert() : Insert

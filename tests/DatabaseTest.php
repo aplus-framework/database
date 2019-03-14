@@ -1,15 +1,16 @@
 <?php namespace Tests\Database;
 
 use Framework\Database\Database;
+use Framework\Database\Definition\AlterSchema;
 use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\DropSchema;
-use Framework\Database\Driver\PreparedStatement;
-use Framework\Database\Driver\Result;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
+use Framework\Database\PreparedStatement;
+use Framework\Database\Result;
 
 class DatabaseTest extends TestCase
 {
@@ -129,6 +130,7 @@ class DatabaseTest extends TestCase
 	{
 		$this->assertInstanceOf(CreateSchema::class, $this->database->createSchema());
 		$this->assertInstanceOf(DropSchema::class, $this->database->dropSchema());
+		$this->assertInstanceOf(AlterSchema::class, $this->database->alterSchema());
 	}
 
 	public function testManipulationInstances()
