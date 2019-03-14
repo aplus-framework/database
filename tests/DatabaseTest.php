@@ -1,5 +1,6 @@
 <?php namespace Tests\Database;
 
+use Framework\Database\Database;
 use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\DropSchema;
 use Framework\Database\Driver\PreparedStatement;
@@ -12,6 +13,87 @@ use Framework\Database\Manipulation\With;
 
 class DatabaseTest extends TestCase
 {
+	public function testConnection()
+	{
+		$database = new Database(
+			\getenv('DB_USERNAME'),
+			\getenv('DB_PASSWORD'),
+			\getenv('DB_SCHEMA'),
+			\getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			\getenv('DB_PORT')
+		);
+		$this->assertInstanceOf(Database::class, $database);
+	}
+
+	public function testConnectionWithArray()
+	{
+		$database = new Database([
+			'username' => \getenv('DB_USERNAME'),
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+		]);
+		$this->assertInstanceOf(Database::class, $database);
+	}
+
+	public function testConnectionFail()
+	{
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessageRegExp("#^Access denied for user 'error-1'@'#");
+		new Database([
+			'username' => 'error-1',
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+		]);
+	}
+
+	public function testConnectionWithFailover()
+	{
+		$database = new Database([
+			'username' => 'error-1',
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+			'failover' => [
+				[
+					'username' => 'error-3',
+					'password' => 'error-2',
+				],
+				[
+					'username' => \getenv('DB_USERNAME'),
+					'password' => \getenv('DB_PASSWORD'),
+				],
+			],
+		]);
+		$this->assertInstanceOf(Database::class, $database);
+	}
+
+	public function testConnectionFailWithfailover()
+	{
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessageRegExp("#^Access denied for user 'error-3'@'#");
+		new Database([
+			'username' => 'error-1',
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+			'failover' => [
+				[
+					'username' => 'error-3',
+					'password' => 'error-2',
+				],
+				[
+					'password' => \getenv('DB_PASSWORD'),
+				],
+			],
+		]);
+	}
+
 	public function testProtectIdentifier()
 	{
 		$this->assertEquals('`foo`', $this->database->protectIdentifier('foo'));
@@ -110,5 +192,39 @@ class DatabaseTest extends TestCase
 			'INSERT INTO `t1` SET `c2` = "a"'
 		);
 		$this->assertEquals(10, $this->database->insertId());
+	}
+
+	public function testTransaction()
+	{
+		$this->createDummyData();
+		$this->database->transaction(function (Database $db) {
+			$db->exec('INSERT INTO `t1` SET `c1` = 100, `c2` = "tr"');
+		});
+		$this->assertEquals(
+			'tr',
+			$this->database->query('SELECT `c2` FROM `t1` WHERE `c1` = 100')->fetch()->c2
+		);
+	}
+
+	public function testTransactionInTransaction()
+	{
+		$this->createDummyData();
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('Transaction already is active');
+		$this->database->transaction(function (Database $db) {
+			$db->transaction(function (Database $db) {
+				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
+			});
+		});
+	}
+
+	public function testTransactionRollback()
+	{
+		$schema = \getenv('DB_SCHEMA');
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessage("Table '{$schema}.t1000' doesn't exist");
+		$this->database->transaction(function (Database $db) {
+			$db->exec('INSERT INTO `t1000` SET `c2` = "a"');
+		});
 	}
 }

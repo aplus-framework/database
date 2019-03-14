@@ -233,7 +233,11 @@ class Database
 	/**
 	 * Executes an SQL statement, returning a result set as a Result object.
 	 *
+	 * Must be: SELECT, SHOW, DESCRIBE or EXPLAIN
+	 *
 	 * @param string $statement
+	 *
+	 * @throws \InvalidArgumentException if $statement does not return result
 	 *
 	 * @return Result
 	 */
@@ -260,7 +264,7 @@ class Database
 		return new PreparedStatement($this->mysqli->prepare($statement));
 	}
 
-	public function transaction(callable $statements) : bool
+	public function transaction(callable $statements) : void
 	{
 		if ($this->inTransaction) {
 			throw new \LogicException('Transaction already is active');
@@ -270,7 +274,7 @@ class Database
 		$this->mysqli->begin_transaction();
 		try {
 			$statements($this);
-			return $this->mysqli->commit();
+			$this->mysqli->commit();
 		} catch (\Exception $exception) {
 			$this->mysqli->rollback();
 			throw $exception;
