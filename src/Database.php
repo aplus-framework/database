@@ -322,28 +322,33 @@ class Database
 	/**
 	 * Quote SQL values.
 	 *
-	 * @param float|int|string|null $value Value to be quoted
+	 * @param bool|float|int|string|null $value Value to be quoted
 	 *
 	 * @see https://mariadb.com/kb/en/library/quote/
 	 *
 	 * @throws \InvalidArgumentException For invalid value type
 	 *
-	 * @return float|int|string If the value is null, returns a string containing the word "NULL".
-	 *                          If is a string, returns the quoted string. The types int or float
-	 *                          returns the same input value.
+	 * @return bool|float|int|string If the value is null, returns a string containing the word
+	 *                               "NULL". If is false, "FALSE". If is true, "TRUE". If is a
+	 *                               string, returns the quoted string. The types int or float
+	 *                               returns the same input value.
 	 */
 	public function quote($value)
 	{
-		if (\is_string($value)) {
+		$type = \gettype($value);
+		if ($type === 'string') {
 			$value = $this->mysqli->real_escape_string($value);
 			return "'{$value}'";
 		}
-		if (\is_int($value) || \is_float($value)) {
+		if ($type === 'integer' || $type === 'double') {
 			return $value;
+		}
+		if ($type === 'boolean') {
+			return $value ? 'TRUE' : 'FALSE';
 		}
 		if ($value === null) {
 			return 'NULL';
 		}
-		throw new \InvalidArgumentException('Invalid value type: ' . \gettype($value));
+		throw new \InvalidArgumentException("Invalid value type: {$type}");
 	}
 }
