@@ -5,13 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/timestamp/
  */
-class TimestampColumn extends DateDataType
+class TimestampColumn extends TimeColumn
 {
-	protected $type = 'TIMESTAMP';
-
-	public function length($microsecond_precision)
-	{
-		$this->length = $microsecond_precision;
-		return $this;
-	}
+	protected $type = 'timestamp';
 }

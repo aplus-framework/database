@@ -7,5 +7,5 @@
  */
 class MediumblobColumn extends BinaryDataType
 {
-	protected $type = 'MEDIUMBLOB';
+	protected $type = 'mediumblob';
 }

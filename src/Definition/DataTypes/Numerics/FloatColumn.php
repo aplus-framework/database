@@ -2,13 +2,13 @@
 
 class FloatColumn extends NumericDataType
 {
-	protected $type = 'FLOAT';
+	protected $type = 'float';
 	protected $maxLength = 11;
 	protected $decimal;
 
-	public function length(int $length, int $decimal)
+	public function length(int $maximum, int $decimal)
 	{
-		$this->length = $length;
+		$this->length = $maximum;
 		$this->decimal = $decimal;
 		return $this;
 	}

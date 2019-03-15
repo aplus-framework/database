@@ -5,15 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/blob/
  */
-class BlobColumn extends BinaryDataType
+class BlobColumn extends BinaryColumn
 {
-	protected $type = 'BLOB';
-	protected $minLength = 0;
-	protected $maxLength = 65535;
-
-	public function length(int $maximum)
-	{
-		$this->length = $maximum;
-		return $this;
-	}
+	protected $type = 'blob';
 }

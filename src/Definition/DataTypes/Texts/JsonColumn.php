@@ -7,5 +7,5 @@
  */
 class JsonColumn extends LongtextColumn
 {
-	protected $type = 'JSON';
+	protected $type = 'json';
 }

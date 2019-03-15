@@ -7,5 +7,5 @@
  */
 class TinyblobColumn extends BinaryDataType
 {
-	protected $type = 'TINYBLOB';
+	protected $type = 'tinyblob';
 }

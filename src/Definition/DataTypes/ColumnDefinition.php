@@ -52,12 +52,9 @@ class ColumnDefinition
 		$this->database = $database;
 	}
 
-	public function __call($method, $arguments)
+	public function __toString()
 	{
-		if ($method === 'sql') {
-			return $this->sql();
-		}
-		throw new \BadMethodCallException("Method not found: {$method}");
+		return $this->sql();
 	}
 
 	protected function setLength($column, ?int $length)
@@ -238,7 +235,7 @@ class ColumnDefinition
 	{
 		$sql = [];
 		foreach ($this->columns as $column) {
-			$sql[] = $column->sql();
+			$sql[] = ' ' . $column;
 		}
 		return \implode(',' . \PHP_EOL, $sql) . \PHP_EOL;
 	}

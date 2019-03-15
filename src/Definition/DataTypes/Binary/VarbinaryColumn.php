@@ -5,15 +5,8 @@
  *
  * @see https://mariadb.com/kb/en/library/varbinary/
  */
-class VarbinaryColumn extends BinaryDataType
+class VarbinaryColumn extends BinaryColumn
 {
-	protected $type = 'VARBINARY';
-	protected $minLength = 0;
+	protected $type = 'varbinary';
 	protected $maxLength = 65535;
-
-	public function length(int $maximum)
-	{
-		$this->length = $maximum;
-		return $this;
-	}
 }

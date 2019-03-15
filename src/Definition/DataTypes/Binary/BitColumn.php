@@ -5,15 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/bit/
  */
-class BitColumn extends BinaryDataType
+class BitColumn extends BinaryColumn
 {
-	protected $type = 'BIT';
-	protected $minLength = 0;
-	protected $maxLength = 65535;
-
-	public function length(int $maximum)
-	{
-		$this->length = $maximum;
-		return $this;
-	}
+	protected $type = 'bit';
 }

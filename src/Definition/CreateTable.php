@@ -1,5 +1,6 @@
 <?php namespace Framework\Database\Definition;
 
+use Framework\Database\Definition\DataTypes\ColumnDefinition;
 use Framework\Database\Statement;
 
 /**
@@ -65,16 +66,32 @@ class CreateTable extends Statement
 	protected function renderTable() : string
 	{
 		if (isset($this->sql['table'])) {
-			return ' ' . $this->database->protectIdentifier($this->sql['schema']);
+			return ' ' . $this->database->protectIdentifier($this->sql['table']);
 		}
 		throw new \LogicException('TABLE name must be set');
+	}
+
+	public function columns(callable $definition)
+	{
+		$this->sql['columns'] = $definition;
+	}
+
+	protected function renderColumns() : string
+	{
+		if ( ! isset($this->sql['columns'])) {
+			throw new \LogicException('Columns must be defined');
+		}
+		$definition = new ColumnDefinition($this->database);
+		$this->sql['columns']($definition);
+		return $definition;
 	}
 
 	public function sql() : string
 	{
 		$sql = 'CREATE' . $this->renderOrReplace() . $this->renderTemporary();
 		$sql .= ' TABLE' . $this->renderIfNotExists();
-		$sql .= $this->renderTable() . \PHP_EOL;
+		$sql .= $this->renderTable() . ' (' . \PHP_EOL;
+		$sql .= $this->renderColumns() . ')';
 		return $sql;
 	}
 

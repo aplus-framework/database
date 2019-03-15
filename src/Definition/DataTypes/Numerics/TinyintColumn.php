@@ -1,13 +1,7 @@
 <?php namespace Framework\Database\Definition\DataTypes\Numerics;
 
-class TinyintColumn extends NumericDataType
+class TinyintColumn extends IntColumn
 {
-	protected $type = 'TINYINT';
+	protected $type = 'tinyint';
 	protected $maxLength = 127;
-
-	public function length($length)
-	{
-		$this->length = $length;
-		return $this;
-	}
 }

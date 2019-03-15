@@ -7,5 +7,5 @@
  */
 class SetColumn extends ListDataType
 {
-	protected $type = 'ENUM';
+	protected $type = 'enum';
 }

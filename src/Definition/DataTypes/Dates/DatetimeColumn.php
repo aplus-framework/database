@@ -5,13 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/datetime/
  */
-class DatetimeColumn extends DateDataType
+class DatetimeColumn extends TimeColumn
 {
-	protected $type = 'DATETIME';
-
-	public function length($microsecond_precision)
-	{
-		$this->length = $microsecond_precision;
-		return $this;
-	}
+	protected $type = 'datetime';
 }

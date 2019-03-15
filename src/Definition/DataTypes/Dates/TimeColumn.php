@@ -7,7 +7,7 @@
  */
 class TimeColumn extends DateDataType
 {
-	protected $type = 'TIME';
+	protected $type = 'time';
 
 	public function length($microsecond_precision)
 	{

@@ -7,9 +7,9 @@
  */
 class BinaryColumn extends BinaryDataType
 {
-	protected $type = 'BINARY';
+	protected $type = 'binary';
 	protected $minLength = 0;
-	protected $maxLength = 65535;
+	protected $maxLength = 255;
 
 	public function length(int $maximum)
 	{

@@ -7,13 +7,7 @@ abstract class NumericDataType extends Column
 	protected $signed;
 	protected $unsigned;
 	protected $zerofill;
-	protected $length;
 	protected $autoIncrement;
-	/*public function length($length)
-	{
-		$this->length = $length;
-		return $this;
-	}*/
 
 	/**
 	 * @see https://mariadb.com/kb/en/library/auto_increment/
@@ -45,7 +39,7 @@ abstract class NumericDataType extends Column
 		if ( ! isset($this->signed)) {
 			return null;
 		}
-		return ' SIGNED';
+		return ' signed';
 	}
 
 	public function unsigned()
@@ -59,7 +53,7 @@ abstract class NumericDataType extends Column
 		if ( ! isset($this->unsigned)) {
 			return null;
 		}
-		return ' UNSIGNED';
+		return ' unsigned';
 	}
 
 	public function zerofill()
@@ -73,23 +67,14 @@ abstract class NumericDataType extends Column
 		if ( ! isset($this->zerofill)) {
 			return null;
 		}
-		return ' ZEROFILL';
+		return ' zerofill';
 	}
 
-	protected function sql() : string
+	protected function renderTypeAttributes() : ?string
 	{
-		$sql = $this->renderName();
-		$sql .= $this->renderType();
-		$sql .= $this->renderLength();
-		$sql .= $this->renderSigned();
-		$sql .= $this->renderUnsigned();
-		$sql .= $this->renderZerofill();
-		$sql .= $this->renderNull();
-		$sql .= $this->renderAutoIncrement();
-		$sql .= $this->renderDefault();
-		$sql .= $this->renderComment();
-		$sql .= $this->renderUniqueKey();
-		$sql .= $this->renderPrimaryKey();
-		return $sql;
+		return $this->renderSigned()
+			. $this->renderUnsigned()
+			. $this->renderZerofill()
+			. $this->renderAutoIncrement();
 	}
 }

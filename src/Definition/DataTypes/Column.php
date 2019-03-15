@@ -17,15 +17,21 @@ abstract class Column
 	 */
 	protected $type;
 	/**
-	 * @var array|int
+	 * @var array|int|null
 	 */
 	protected $length;
 	/**
 	 * @var bool|null
 	 */
 	protected $null;
-	protected $uniqueKey = false;
-	protected $primaryKey = false;
+	/**
+	 * @var bool|null
+	 */
+	protected $uniqueKey;
+	/**
+	 * @var bool|null
+	 */
+	protected $primaryKey;
 	/**
 	 * @var string|null
 	 */
@@ -35,18 +41,21 @@ abstract class Column
 	 */
 	protected $comment;
 
+	/**
+	 * Column constructor.
+	 *
+	 * @param string   $name     Column name
+	 * @param Database $database
+	 */
 	public function __construct(string $name, Database $database)
 	{
 		$this->name = $name;
 		$this->database = $database;
 	}
 
-	public function __call($name, $arguments)
+	public function __toString()
 	{
-		if ($name === 'sql') {
-			return $this->sql();
-		}
-		throw new \BadMethodCallException("Method not found: {$name}");
+		return $this->sql();
 	}
 
 	protected function renderName() : string
@@ -70,7 +79,8 @@ abstract class Column
 		if ( ! isset($this->length)) {
 			return null;
 		}
-		return "({$this->length})";
+		$length = $this->database->quote($this->length);
+		return "({$length})";
 	}
 
 	public function null()
@@ -93,7 +103,12 @@ abstract class Column
 		return $this->null ? ' NULL' : ' NOT NULL';
 	}
 
-	public function default(string $default)
+	/**
+	 * @param bool|\Closure|float|int|string|null $default
+	 *
+	 * @return $this
+	 */
+	public function default($default)
 	{
 		$this->default = $default;
 		return $this;
@@ -104,7 +119,10 @@ abstract class Column
 		if ( ! isset($this->default)) {
 			return null;
 		}
-		return ' DEFAULT ' . $this->database->quote($this->default);
+		$default = $this->default instanceof \Closure
+			? '(' . ($this->default)($this->database) . ')'
+			: $this->database->quote($this->default);
+		return ' DEFAULT ' . $default;
 	}
 
 	public function comment(string $comment)
@@ -149,5 +167,22 @@ abstract class Column
 		return ' UNIQUE KEY';
 	}
 
-	abstract protected function sql() : string;
+	protected function renderTypeAttributes() : ?string
+	{
+		return null;
+	}
+
+	protected function sql() : string
+	{
+		$sql = $this->renderName();
+		$sql .= $this->renderType();
+		$sql .= $this->renderLength();
+		$sql .= $this->renderTypeAttributes();
+		$sql .= $this->renderNull();
+		$sql .= $this->renderDefault();
+		$sql .= $this->renderComment();
+		$sql .= $this->renderUniqueKey();
+		$sql .= $this->renderPrimaryKey();
+		return $sql;
+	}
 }

@@ -7,13 +7,13 @@
  */
 class TextColumn extends TextDataType
 {
-	protected $type = 'TEXT';
+	protected $type = 'text';
 	protected $minLength = 0;
 	protected $maxLength = 65535;
 
-	public function length(int $length)
+	public function length(int $maximum)
 	{
-		$this->length = $length;
+		$this->length = $maximum;
 		return $this;
 	}
 }

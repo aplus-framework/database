@@ -7,5 +7,5 @@
  */
 class DateColumn extends DateDataType
 {
-	protected $type = 'DATE';
+	protected $type = 'date';
 }

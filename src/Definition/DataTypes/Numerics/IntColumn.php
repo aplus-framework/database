@@ -2,12 +2,12 @@
 
 class IntColumn extends NumericDataType
 {
-	protected $type = 'INT';
+	protected $type = 'int';
 	protected $maxLength = 11;
 
-	public function length($length)
+	public function length(int $maximum)
 	{
-		$this->length = $length;
+		$this->length = $maximum;
 		return $this;
 	}
 }

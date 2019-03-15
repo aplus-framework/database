@@ -7,7 +7,5 @@
  */
 class MediumtextColumn extends TextDataType
 {
-	protected $type = 'MEDIUMTEXT';
-	protected $minLength = 0;
-	protected $maxLength = 65535;
+	protected $type = 'mediumtext';
 }

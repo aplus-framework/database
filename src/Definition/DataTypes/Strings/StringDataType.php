@@ -6,13 +6,6 @@ abstract class StringDataType extends Column
 {
 	protected $charset;
 	protected $collation;
-	protected $length;
-
-	/*public function length(int $length)
-	{
-		$this->length = $length;
-		return $this;
-	}*/
 
 	public function charset(string $charset)
 	{
@@ -42,18 +35,8 @@ abstract class StringDataType extends Column
 		return ' COLLATE ' . $this->database->quote($this->collation);
 	}
 
-	protected function sql() : string
+	protected function renderTypeAttributes() : ?string
 	{
-		$sql = $this->renderName();
-		$sql .= $this->renderType();
-		$sql .= $this->renderLength();
-		$sql .= $this->renderCharset();
-		$sql .= $this->renderCollate();
-		$sql .= $this->renderNull();
-		$sql .= $this->renderDefault();
-		$sql .= $this->renderComment();
-		$sql .= $this->renderUniqueKey();
-		$sql .= $this->renderPrimaryKey();
-		return $sql;
+		return $this->renderCharset() . $this->renderCollate();
 	}
 }

@@ -5,14 +5,8 @@
  *
  * @see https://mariadb.com/kb/en/library/smallint/
  */
-class SmallintColumn extends NumericDataType
+class SmallintColumn extends IntColumn
 {
-	protected $type = 'SMALLINT';
+	protected $type = 'smallint';
 	protected $maxLength = 127;
-
-	public function length($length)
-	{
-		$this->length = $length;
-		return $this;
-	}
 }

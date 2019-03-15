@@ -7,5 +7,5 @@
  */
 class LongblobColumn extends BinaryDataType
 {
-	protected $type = 'LONGBLOB';
+	protected $type = 'longblob';
 }

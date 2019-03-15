@@ -7,8 +7,4 @@ use Framework\Database\Definition\DataTypes\Column;
  */
 abstract class DateDataType extends Column
 {
-	protected function sql() : string
-	{
-		// TODO: Implement sql() method.
-	}
 }

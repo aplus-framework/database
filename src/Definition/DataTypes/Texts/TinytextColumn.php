@@ -7,7 +7,5 @@
  */
 class TinytextColumn extends TextDataType
 {
-	protected $type = 'TINYTEXT';
-	protected $minLength = 0;
-	protected $maxLength = 65535;
+	protected $type = 'tinytext';
 }
