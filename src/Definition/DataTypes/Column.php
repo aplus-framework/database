@@ -17,6 +17,10 @@ abstract class Column
 	 */
 	protected $type;
 	/**
+	 * @var array|int
+	 */
+	protected $length;
+	/**
 	 * @var bool|null
 	 */
 	protected $null;
@@ -59,6 +63,14 @@ abstract class Column
 			throw new \LogicException('Column type is empty');
 		}
 		return ' ' . $this->type;
+	}
+
+	protected function renderLength() : ?string
+	{
+		if ( ! isset($this->length)) {
+			return null;
+		}
+		return "({$this->length})";
 	}
 
 	public function null()

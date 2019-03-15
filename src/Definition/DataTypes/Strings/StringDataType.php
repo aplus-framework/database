@@ -46,6 +46,7 @@ abstract class StringDataType extends Column
 	{
 		$sql = $this->renderName();
 		$sql .= $this->renderType();
+		$sql .= $this->renderLength();
 		$sql .= $this->renderCharset();
 		$sql .= $this->renderCollate();
 		$sql .= $this->renderNull();

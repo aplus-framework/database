@@ -8,19 +8,30 @@ abstract class NumericDataType extends Column
 	protected $unsigned;
 	protected $zerofill;
 	protected $length;
-
+	protected $autoIncrement;
 	/*public function length($length)
 	{
 		$this->length = $length;
 		return $this;
 	}*/
 
-	protected function renderLength() : ?string
+	/**
+	 * @see https://mariadb.com/kb/en/library/auto_increment/
+	 *
+	 * @return $this
+	 */
+	public function autoIncrement()
 	{
-		if ( ! isset($this->length)) {
+		$this->autoIncrement = true;
+		return $this;
+	}
+
+	protected function renderAutoIncrement() : ?string
+	{
+		if ( ! isset($this->autoIncrement)) {
 			return null;
 		}
-		return "({$this->length})";
+		return ' AUTO_INCREMENT';
 	}
 
 	public function signed()
@@ -74,6 +85,7 @@ abstract class NumericDataType extends Column
 		$sql .= $this->renderUnsigned();
 		$sql .= $this->renderZerofill();
 		$sql .= $this->renderNull();
+		$sql .= $this->renderAutoIncrement();
 		$sql .= $this->renderDefault();
 		$sql .= $this->renderComment();
 		$sql .= $this->renderUniqueKey();
