@@ -12,7 +12,7 @@ class StatementTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new StatementMock($this->database);
+		$this->statement = new StatementMock(static::$database);
 	}
 
 	public function testLimit()

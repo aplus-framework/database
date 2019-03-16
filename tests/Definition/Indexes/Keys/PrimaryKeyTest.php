@@ -7,7 +7,7 @@ class PrimaryKeyTest extends TestCase
 {
 	public function testType()
 	{
-		$index = new PrimaryKey($this->database, 'id');
+		$index = new PrimaryKey(static::$database, 'id');
 		$this->assertEquals(
 			' PRIMARY KEY (`id`)',
 			$index->sql()

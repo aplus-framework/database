@@ -7,7 +7,7 @@ class FulltextKeyTest extends TestCase
 {
 	public function testType()
 	{
-		$index = new FulltextKey($this->database, 'id');
+		$index = new FulltextKey(static::$database, 'id');
 		$this->assertEquals(
 			' FULLTEXT KEY (`id`)',
 			$index->sql()

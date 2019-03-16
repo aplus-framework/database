@@ -14,7 +14,7 @@ class CreateTableTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->createTable = new CreateTable($this->database);
+		$this->createTable = new CreateTable(static::$database);
 	}
 
 	protected function prepare()
@@ -107,6 +107,7 @@ class CreateTableTest extends TestCase
 				$definition->int('c1', 11);
 			});
 		$this->assertEquals(0, $statement->run());
+		$this->resetDatabase();
 		$this->expectException(\mysqli_sql_exception::class);
 		$this->expectExceptionMessage("Table 't1' already exists");
 		$statement->run();

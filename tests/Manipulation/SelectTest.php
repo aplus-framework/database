@@ -12,7 +12,7 @@ class SelectTest extends TestCase
 
 	public function setup()
 	{
-		$this->select = new Select($this->database);
+		$this->select = new Select(static::$database);
 	}
 
 	protected function selectAllFrom(...$from) : string

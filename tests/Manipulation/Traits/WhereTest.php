@@ -12,7 +12,7 @@ class WhereTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new WhereMock($this->database);
+		$this->statement = new WhereMock(static::$database);
 	}
 
 	public function testWhere()

@@ -12,7 +12,7 @@ class AlterSchemaTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->alterSchema = new AlterSchema($this->database);
+		$this->alterSchema = new AlterSchema(static::$database);
 	}
 
 	public function testSchemaWithoutSpecification()

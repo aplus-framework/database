@@ -12,7 +12,7 @@ class CreateSchemaTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->createSchema = new CreateSchema($this->database);
+		$this->createSchema = new CreateSchema(static::$database);
 	}
 
 	public function testEmptySchema()

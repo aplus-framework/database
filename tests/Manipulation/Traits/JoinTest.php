@@ -11,7 +11,7 @@ class JoinTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new JoinMock($this->database);
+		$this->statement = new JoinMock(static::$database);
 	}
 
 	public function testFrom()

@@ -7,7 +7,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 	/**
 	 * @var Database
 	 */
-	protected $database;
+	protected static $database;
 
 	public function __construct(...$params)
 	{
@@ -17,9 +17,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
 
 	protected function setDatabase() : Database
 	{
-		static $database;
-		if ($database === null) {
-			$database = new Database([
+		if (static::$database === null) {
+			static::$database = new Database([
 				'username' => \getenv('DB_USERNAME'),
 				'password' => \getenv('DB_PASSWORD'),
 				'schema' => \getenv('DB_SCHEMA'),
@@ -27,18 +26,24 @@ class TestCase extends \PHPUnit\Framework\TestCase
 				'port' => \getenv('DB_PORT'),
 			]);
 		}
-		return $this->database = $database;
+		return static::$database;
+	}
+
+	protected function resetDatabase()
+	{
+		static::$database = null;
+		$this->setDatabase();
 	}
 
 	protected function dropDummyData()
 	{
-		$this->database->exec('DROP TABLE IF EXISTS `t1`');
+		static::$database->exec('DROP TABLE IF EXISTS `t1`');
 	}
 
 	protected function createDummyData()
 	{
 		$this->dropDummyData();
-		$this->database->exec(
+		static::$database->exec(
 			<<<SQL
 			CREATE TABLE `t1` (
 			  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
@@ -46,7 +51,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 			)
 		SQL
 		);
-		$this->database->exec(
+		static::$database->exec(
 			"INSERT INTO `t1` (`c2`) VALUES ('a'), ('b'), ('c'), ('d'), ('e')"
 		);
 	}

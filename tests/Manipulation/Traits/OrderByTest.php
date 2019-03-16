@@ -11,7 +11,7 @@ class OrderByTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new OrderByMock($this->database);
+		$this->statement = new OrderByMock(static::$database);
 	}
 
 	public function testOrderBy()

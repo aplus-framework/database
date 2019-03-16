@@ -18,7 +18,7 @@ class IndexDefinitionTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->definition = new IndexDefinition($this->database);
+		$this->definition = new IndexDefinition(static::$database);
 	}
 
 	public function testInstances()

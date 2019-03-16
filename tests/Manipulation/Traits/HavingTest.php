@@ -12,7 +12,7 @@ class HavingTest extends TestCase
 
 	public function setup()
 	{
-		$this->statement = new HavingMock($this->database);
+		$this->statement = new HavingMock(static::$database);
 	}
 
 	public function testHaving()

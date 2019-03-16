@@ -12,7 +12,7 @@ class DropTableTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->dropTable = new DropTable($this->database);
+		$this->dropTable = new DropTable(static::$database);
 	}
 
 	public function testEmptyTable()
@@ -74,6 +74,7 @@ class DropTableTest extends TestCase
 		$statement = $this->dropTable->table('t1');
 		$this->createDummyData();
 		$this->assertEquals(0, $statement->run());
+		$this->resetDatabase();
 		$this->expectException(\mysqli_sql_exception::class);
 		$schema = \getenv('DB_SCHEMA');
 		$this->expectExceptionMessage("Unknown table '{$schema}.t1'");

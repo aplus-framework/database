@@ -12,7 +12,7 @@ class UpdateTest extends TestCase
 
 	public function setup()
 	{
-		$this->update = new Update($this->database);
+		$this->update = new Update(static::$database);
 	}
 
 	protected function prepare()

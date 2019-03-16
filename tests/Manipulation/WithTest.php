@@ -13,7 +13,7 @@ class WithTest extends TestCase
 
 	public function setup()
 	{
-		$this->with = new With($this->database);
+		$this->with = new With(static::$database);
 	}
 
 	protected function prepareWith()

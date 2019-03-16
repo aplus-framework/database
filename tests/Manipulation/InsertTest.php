@@ -13,7 +13,7 @@ class InsertTest extends TestCase
 
 	public function setup()
 	{
-		$this->insert = new Insert($this->database);
+		$this->insert = new Insert(static::$database);
 	}
 
 	protected function prepare()

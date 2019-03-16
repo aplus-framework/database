@@ -99,69 +99,69 @@ class DatabaseTest extends TestCase
 
 	public function testProtectIdentifier()
 	{
-		$this->assertEquals('`foo`', $this->database->protectIdentifier('foo'));
-		$this->assertEquals('```foo```', $this->database->protectIdentifier('`foo`'));
-		$this->assertEquals('`foo ``bar`', $this->database->protectIdentifier('foo `bar'));
-		$this->assertEquals('`foo`.`bar`', $this->database->protectIdentifier('foo.bar'));
-		$this->assertEquals('`foo`.*', $this->database->protectIdentifier('foo.*'));
-		$this->assertEquals('```foo```.*', $this->database->protectIdentifier('`foo`.*'));
-		$this->assertEquals('`db`.`table`.*', $this->database->protectIdentifier('db.table.*'));
+		$this->assertEquals('`foo`', static::$database->protectIdentifier('foo'));
+		$this->assertEquals('```foo```', static::$database->protectIdentifier('`foo`'));
+		$this->assertEquals('`foo ``bar`', static::$database->protectIdentifier('foo `bar'));
+		$this->assertEquals('`foo`.`bar`', static::$database->protectIdentifier('foo.bar'));
+		$this->assertEquals('`foo`.*', static::$database->protectIdentifier('foo.*'));
+		$this->assertEquals('```foo```.*', static::$database->protectIdentifier('`foo`.*'));
+		$this->assertEquals('`db`.`table`.*', static::$database->protectIdentifier('db.table.*'));
 	}
 
 	public function testQuote()
 	{
-		$this->assertEquals(0, $this->database->quote(0));
-		$this->assertEquals(1, $this->database->quote(1));
-		$this->assertEquals(-1, $this->database->quote(-1));
-		$this->assertEquals(.0, $this->database->quote(.0));
-		$this->assertEquals(1.1, $this->database->quote(1.1));
-		$this->assertEquals(-1.1, $this->database->quote(-1.1));
-		$this->assertEquals("'0'", $this->database->quote('0'));
-		$this->assertEquals("'-1'", $this->database->quote('-1'));
-		$this->assertEquals("'abc'", $this->database->quote('abc'));
-		$this->assertEquals("'ab\\'c'", $this->database->quote("ab'c"));
-		$this->assertEquals("'ab\\'cd\\'\\''", $this->database->quote("ab'cd''"));
-		$this->assertEquals('\'ab\"cd\"\"\'', $this->database->quote('ab"cd""'));
-		$this->assertEquals('NULL', $this->database->quote(null));
+		$this->assertEquals(0, static::$database->quote(0));
+		$this->assertEquals(1, static::$database->quote(1));
+		$this->assertEquals(-1, static::$database->quote(-1));
+		$this->assertEquals(.0, static::$database->quote(.0));
+		$this->assertEquals(1.1, static::$database->quote(1.1));
+		$this->assertEquals(-1.1, static::$database->quote(-1.1));
+		$this->assertEquals("'0'", static::$database->quote('0'));
+		$this->assertEquals("'-1'", static::$database->quote('-1'));
+		$this->assertEquals("'abc'", static::$database->quote('abc'));
+		$this->assertEquals("'ab\\'c'", static::$database->quote("ab'c"));
+		$this->assertEquals("'ab\\'cd\\'\\''", static::$database->quote("ab'cd''"));
+		$this->assertEquals('\'ab\"cd\"\"\'', static::$database->quote('ab"cd""'));
+		$this->assertEquals('NULL', static::$database->quote(null));
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid value type: array');
-		$this->database->quote([]);
+		static::$database->quote([]);
 	}
 
 	public function testDefinitionInstances()
 	{
-		$this->assertInstanceOf(CreateSchema::class, $this->database->createSchema());
-		$this->assertInstanceOf(DropSchema::class, $this->database->dropSchema());
-		$this->assertInstanceOf(AlterSchema::class, $this->database->alterSchema());
-		$this->assertInstanceOf(CreateTable::class, $this->database->createTable());
-		$this->assertInstanceOf(DropTable::class, $this->database->dropTable());
+		$this->assertInstanceOf(CreateSchema::class, static::$database->createSchema());
+		$this->assertInstanceOf(DropSchema::class, static::$database->dropSchema());
+		$this->assertInstanceOf(AlterSchema::class, static::$database->alterSchema());
+		$this->assertInstanceOf(CreateTable::class, static::$database->createTable());
+		$this->assertInstanceOf(DropTable::class, static::$database->dropTable());
 	}
 
 	public function testManipulationInstances()
 	{
-		$this->assertInstanceOf(Insert::class, $this->database->insert());
-		$this->assertInstanceOf(LoadData::class, $this->database->loadData());
-		$this->assertInstanceOf(Select::class, $this->database->select());
-		$this->assertInstanceOf(Update::class, $this->database->update());
-		$this->assertInstanceOf(With::class, $this->database->with());
+		$this->assertInstanceOf(Insert::class, static::$database->insert());
+		$this->assertInstanceOf(LoadData::class, static::$database->loadData());
+		$this->assertInstanceOf(Select::class, static::$database->select());
+		$this->assertInstanceOf(Update::class, static::$database->update());
+		$this->assertInstanceOf(With::class, static::$database->with());
 	}
 
 	public function testExec()
 	{
 		$this->createDummyData();
-		$this->assertEquals(1, $this->database->exec(
+		$this->assertEquals(1, static::$database->exec(
 			'INSERT INTO `t1` SET `c2` = "a"'
 		));
-		$this->assertEquals(3, $this->database->exec(
+		$this->assertEquals(3, static::$database->exec(
 			'INSERT INTO `t1` (`c2`) VALUES ("a"),("a"),("a")'
 		));
-		$this->assertEquals(9, $this->database->exec('SELECT * FROM `t1`'));
+		$this->assertEquals(9, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
 	public function testQuery()
 	{
 		$this->createDummyData();
-		$this->assertInstanceOf(Result::class, $this->database->query('SELECT * FROM `t1`'));
+		$this->assertInstanceOf(Result::class, static::$database->query('SELECT * FROM `t1`'));
 	}
 
 	public function testQueryNoResult()
@@ -171,44 +171,44 @@ class DatabaseTest extends TestCase
 		$this->expectExceptionMessage(
 			'Statement does not return result: INSERT INTO `t1` SET `c2` = "a"'
 		);
-		$this->database->query('INSERT INTO `t1` SET `c2` = "a"');
+		static::$database->query('INSERT INTO `t1` SET `c2` = "a"');
 	}
 
 	public function testPrepare()
 	{
 		$this->assertInstanceOf(
 			PreparedStatement::class,
-			$this->database->prepare('SELECT * FROM `t1` WHERE `c1` = ?')
+			static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?')
 		);
 	}
 
 	public function testInsertId()
 	{
 		$this->createDummyData();
-		$this->assertEquals(1, $this->database->insertId());
-		$this->database->exec(
+		$this->assertEquals(1, static::$database->insertId());
+		static::$database->exec(
 			'INSERT INTO `t1` SET `c2` = "a"'
 		);
-		$this->assertEquals(6, $this->database->insertId());
-		$this->database->exec(
+		$this->assertEquals(6, static::$database->insertId());
+		static::$database->exec(
 			'INSERT INTO `t1` (`c2`) VALUES ("a"),("a"),("a")'
 		);
-		$this->assertEquals(7, $this->database->insertId());
-		$this->database->exec(
+		$this->assertEquals(7, static::$database->insertId());
+		static::$database->exec(
 			'INSERT INTO `t1` SET `c2` = "a"'
 		);
-		$this->assertEquals(10, $this->database->insertId());
+		$this->assertEquals(10, static::$database->insertId());
 	}
 
 	public function testTransaction()
 	{
 		$this->createDummyData();
-		$this->database->transaction(function (Database $db) {
+		static::$database->transaction(function (Database $db) {
 			$db->exec('INSERT INTO `t1` SET `c1` = 100, `c2` = "tr"');
 		});
 		$this->assertEquals(
 			'tr',
-			$this->database->query('SELECT `c2` FROM `t1` WHERE `c1` = 100')->fetch()->c2
+			static::$database->query('SELECT `c2` FROM `t1` WHERE `c1` = 100')->fetch()->c2
 		);
 	}
 
@@ -217,7 +217,7 @@ class DatabaseTest extends TestCase
 		$this->createDummyData();
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Transaction already is active');
-		$this->database->transaction(function (Database $db) {
+		static::$database->transaction(function (Database $db) {
 			$db->transaction(function (Database $db) {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			});
@@ -227,14 +227,14 @@ class DatabaseTest extends TestCase
 	public function testTransactionRollback()
 	{
 		$this->createDummyData();
-		$this->assertEquals(5, $this->database->exec('SELECT * FROM `t1`'));
-		$this->database->transaction(function (Database $db) {
+		$this->assertEquals(5, static::$database->exec('SELECT * FROM `t1`'));
+		static::$database->transaction(function (Database $db) {
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 		});
-		$this->assertEquals(7, $this->database->exec('SELECT * FROM `t1`'));
+		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
 		try {
-			$this->database->transaction(function (Database $db) {
+			static::$database->transaction(function (Database $db) {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 				$db->exec('INSERT INTO `t1000` SET `c2` = "a"');
@@ -244,6 +244,6 @@ class DatabaseTest extends TestCase
 			$this->assertInstanceOf(\mysqli_sql_exception::class, $exception);
 			$this->assertEquals("Table '{$schema}.t1000' doesn't exist", $exception->getMessage());
 		}
-		$this->assertEquals(7, $this->database->exec('SELECT * FROM `t1`'));
+		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
 	}
 }
