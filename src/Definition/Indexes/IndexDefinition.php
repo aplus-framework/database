@@ -24,11 +24,6 @@ class IndexDefinition
 		$this->database = $database;
 	}
 
-	public function __toString()
-	{
-		return $this->sql();
-	}
-
 	public function __call($method, $arguments)
 	{
 		if ($method === 'sql') {

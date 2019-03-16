@@ -32,11 +32,6 @@ abstract class Index
 		$this->columns = $columns ? \array_merge([$column], $columns) : [$column];
 	}
 
-	public function __toString()
-	{
-		return $this->sql();
-	}
-
 	public function __call($method, $arguments)
 	{
 		if ($method === 'sql') {
