@@ -1,7 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
-use Framework\Database\Definition\DataTypes\ColumnDefinition;
-use Framework\Database\Definition\DataTypes\KeyDefinition;
+use Framework\Database\Definition\Columns\ColumnDefinition;
+use Framework\Database\Definition\Indexes\IndexDefinition;
 use Framework\Database\Statement;
 
 /**
@@ -87,18 +87,18 @@ class CreateTable extends Statement
 		return $definition;
 	}
 
-	public function keys(callable $definition)
+	public function indexes(callable $definition)
 	{
-		$this->sql['keys'] = $definition;
+		$this->sql['indexes'] = $definition;
 	}
 
-	protected function renderKeys() : ?string
+	protected function renderIndexes() : ?string
 	{
-		if ( ! isset($this->sql['keys'])) {
+		if ( ! isset($this->sql['indexes'])) {
 			return null;
 		}
-		$definition = new KeyDefinition($this->database);
-		$this->sql['keys']($definition);
+		$definition = new IndexDefinition($this->database);
+		$this->sql['indexes']($definition);
 		return $definition;
 	}
 
@@ -108,7 +108,7 @@ class CreateTable extends Statement
 		$sql .= ' TABLE' . $this->renderIfNotExists();
 		$sql .= $this->renderTable() . ' (' . \PHP_EOL;
 		$sql .= $this->renderColumns();
-		if ($part = $this->renderKeys()) {
+		if ($part = $this->renderIndexes()) {
 			$sql .= ',' . \PHP_EOL . $part;
 		}
 		$sql .= \PHP_EOL . ')';
