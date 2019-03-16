@@ -29,6 +29,14 @@ class IndexDefinition
 		return $this->sql();
 	}
 
+	public function __call($method, $arguments)
+	{
+		if ($method === 'sql') {
+			return $this->sql();
+		}
+		throw new \BadMethodCallException("Method not found: {$method}");
+	}
+
 	public function key(string $column, ...$columns) : Key
 	{
 		return $this->keys[] = new Key($this->database, $column, ...$columns);
@@ -63,7 +71,7 @@ class IndexDefinition
 	{
 		$sql = [];
 		foreach ($this->keys as $key) {
-			$sql[] = ' ' . $key;
+			$sql[] = ' ' . $key->sql();
 		}
 		return \implode(',' . \PHP_EOL, $sql);
 	}

@@ -37,6 +37,14 @@ abstract class Index
 		return $this->sql();
 	}
 
+	public function __call($method, $arguments)
+	{
+		if ($method === 'sql') {
+			return $this->sql();
+		}
+		throw new \BadMethodCallException("Method not found: {$method}");
+	}
+
 	protected function renderType() : string
 	{
 		if ( ! isset($this->type)) {
