@@ -75,6 +75,7 @@ class CreateTable extends Statement
 	public function columns(callable $definition)
 	{
 		$this->sql['columns'] = $definition;
+		return $this;
 	}
 
 	protected function renderColumns() : string
@@ -90,6 +91,7 @@ class CreateTable extends Statement
 	public function indexes(callable $definition)
 	{
 		$this->sql['indexes'] = $definition;
+		return $this;
 	}
 
 	protected function renderIndexes() : ?string
@@ -99,7 +101,7 @@ class CreateTable extends Statement
 		}
 		$definition = new IndexDefinition($this->database);
 		$this->sql['indexes']($definition);
-		return $definition;
+		return $definition->sql();
 	}
 
 	public function sql() : string

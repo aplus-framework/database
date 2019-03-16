@@ -30,9 +30,14 @@ class TestCase extends \PHPUnit\Framework\TestCase
 		return $this->database = $database;
 	}
 
-	protected function createDummyData()
+	protected function dropDummyData()
 	{
 		$this->database->exec('DROP TABLE IF EXISTS `t1`');
+	}
+
+	protected function createDummyData()
+	{
+		$this->dropDummyData();
 		$this->database->exec(
 			<<<SQL
 			CREATE TABLE `t1` (
