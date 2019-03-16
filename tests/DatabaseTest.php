@@ -123,6 +123,8 @@ class DatabaseTest extends TestCase
 		$this->assertEquals("'ab\\'cd\\'\\''", static::$database->quote("ab'cd''"));
 		$this->assertEquals('\'ab\"cd\"\"\'', static::$database->quote('ab"cd""'));
 		$this->assertEquals('NULL', static::$database->quote(null));
+		$this->assertEquals('TRUE', static::$database->quote(true));
+		$this->assertEquals('FALSE', static::$database->quote(false));
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid value type: array');
 		static::$database->quote([]);
