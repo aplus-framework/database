@@ -237,6 +237,6 @@ class ColumnDefinition
 		foreach ($this->columns as $column) {
 			$sql[] = ' ' . $column;
 		}
-		return \implode(',' . \PHP_EOL, $sql) . \PHP_EOL;
+		return \implode(',' . \PHP_EOL, $sql);
 	}
 }

@@ -1,6 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
 use Framework\Database\Definition\DataTypes\ColumnDefinition;
+use Framework\Database\Definition\DataTypes\KeyDefinition;
 use Framework\Database\Statement;
 
 /**
@@ -86,12 +87,31 @@ class CreateTable extends Statement
 		return $definition;
 	}
 
+	public function keys(callable $definition)
+	{
+		$this->sql['keys'] = $definition;
+	}
+
+	protected function renderKeys() : ?string
+	{
+		if ( ! isset($this->sql['keys'])) {
+			return null;
+		}
+		$definition = new KeyDefinition($this->database);
+		$this->sql['keys']($definition);
+		return $definition;
+	}
+
 	public function sql() : string
 	{
 		$sql = 'CREATE' . $this->renderOrReplace() . $this->renderTemporary();
 		$sql .= ' TABLE' . $this->renderIfNotExists();
 		$sql .= $this->renderTable() . ' (' . \PHP_EOL;
-		$sql .= $this->renderColumns() . ')';
+		$sql .= $this->renderColumns();
+		if ($part = $this->renderKeys()) {
+			$sql .= ',' . \PHP_EOL . $part;
+		}
+		$sql .= \PHP_EOL . ')';
 		return $sql;
 	}
 
