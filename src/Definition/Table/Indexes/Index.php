@@ -27,9 +27,10 @@ abstract class Index extends DefinitionPart
 	 */
 	protected $name;
 
-	public function __construct(Database $database, string $column, ...$columns)
+	public function __construct(Database $database, ?string $name, string $column, ...$columns)
 	{
 		$this->database = $database;
+		$this->name = $name;
 		$this->columns = $columns ? \array_merge([$column], $columns) : [$column];
 	}
 
@@ -39,9 +40,10 @@ abstract class Index extends DefinitionPart
 			throw new \LogicException('Key type is empty');
 		}
 		return ' ' . $this->type;
+		//return $this->type;
 	}
 
-	public function name(string $name)
+	protected function name(string $name)
 	{
 		$this->name = $name;
 		return $this;

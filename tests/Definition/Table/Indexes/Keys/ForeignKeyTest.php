@@ -12,7 +12,7 @@ class ForeignKeyTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->index = new ForeignKey(static::$database, 'user_id');
+		$this->index = new ForeignKey(static::$database, null, 'user_id');
 	}
 
 	public function testEmptyReferences()

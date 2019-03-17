@@ -57,7 +57,7 @@ class TableDefinition extends DefinitionPart
 	 */
 	public function index(string $name = null) : IndexDefinition
 	{
-		$definition = new IndexDefinition($this->database);
+		$definition = new IndexDefinition($this->database, $name);
 		$this->indexes[] = [
 			'name' => $name,
 			'definition' => $definition,
@@ -67,8 +67,8 @@ class TableDefinition extends DefinitionPart
 
 	protected function renderColumns(string $prefix = null) : string
 	{
-		if ($prefix === 'ADD ') {
-			$prefix = 'ADD COLUMN ';
+		if ($prefix === 'ADD') {
+			$prefix = 'ADD COLUMN';
 		}
 		$sql = [];
 		foreach ($this->columns as $column) {
@@ -77,7 +77,7 @@ class TableDefinition extends DefinitionPart
 				? ' ' . $this->database->protectIdentifier($column['change_name'])
 				: null;
 			$definition = $column['definition']->sql();
-			$sql[] = "  {$prefix}{$name}{$change_name}{$definition}";
+			$sql[] = " {$prefix} {$name}{$change_name}{$definition}";
 		}
 		return \implode(',' . \PHP_EOL, $sql);
 	}
@@ -95,12 +95,12 @@ class TableDefinition extends DefinitionPart
 	protected function sql(string $prefix = null) : string
 	{
 		if ($prefix) {
-			$prefix = "{$prefix} ";
+			//$prefix = "{$prefix} ";
 		}
-		$sql = \PHP_EOL . $this->renderColumns($prefix);
+		$sql = $this->renderColumns($prefix);
 		if ($part = $this->renderIndexes($prefix)) {
 			$sql .= ',' . \PHP_EOL . $part;
 		}
-		return $sql . \PHP_EOL;
+		return $sql;
 	}
 }

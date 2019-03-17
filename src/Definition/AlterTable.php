@@ -1,7 +1,6 @@
 <?php namespace Framework\Database\Definition;
 
-use Framework\Database\Definition\Columns\ColumnDefinition;
-use Framework\Database\Definition\Indexes\IndexDefinition;
+use Framework\Database\Definition\Table\TableDefinition;
 use Framework\Database\Statement;
 
 /**
@@ -72,36 +71,52 @@ class AlterTable extends Statement
 		return " WAIT {$this->sql['wait']}";
 	}
 
-	public function addColumns(callable $definition)
+	public function add(callable $definition)
 	{
-		$this->sql['add_columns'] = $definition;
+		$this->sql['add'] = $definition;
 		return $this;
 	}
 
-	protected function renderAddColumns() : ?string
+	protected function renderAdd() : ?string
 	{
-		if ( ! isset($this->sql['add_columns'])) {
+		if ( ! isset($this->sql['add'])) {
 			return null;
 		}
-		$definition = new ColumnDefinition($this->database);
-		$this->sql['add_columns']($definition);
-		return $definition->sql('ADD COLUMN');
+		$definition = new TableDefinition($this->database);
+		$this->sql['add']($definition);
+		return $definition->sql('ADD');
 	}
 
-	public function changeColumns(callable $definition)
+	public function change(callable $definition)
 	{
-		$this->sql['change_columns'] = $definition;
+		$this->sql['change'] = $definition;
 		return $this;
 	}
 
-	protected function renderChangeColumns() : ?string
+	protected function renderChange() : ?string
 	{
-		if ( ! isset($this->sql['change_columns'])) {
+		if ( ! isset($this->sql['change'])) {
 			return null;
 		}
-		$definition = new ColumnDefinition($this->database);
-		$this->sql['change_columns']($definition);
-		return $definition->sql('CHANGE COLUMN');
+		$definition = new TableDefinition($this->database);
+		$this->sql['change']($definition);
+		return $definition->sql('CHANGE');
+	}
+
+	public function modify(callable $definition)
+	{
+		$this->sql['modify'] = $definition;
+		return $this;
+	}
+
+	protected function renderModify() : ?string
+	{
+		if ( ! isset($this->sql['modify'])) {
+			return null;
+		}
+		$definition = new TableDefinition($this->database);
+		$this->sql['modify']($definition);
+		return $definition->sql('MODIFY');
 	}
 
 	public function dropColumns(callable $definition)
@@ -110,25 +125,9 @@ class AlterTable extends Statement
 		return $this;
 	}
 
-	public function addIndexes(callable $definition)
+	public function drop(callable $definition)
 	{
-		$this->sql['add_indexes'] = $definition;
-		return $this;
-	}
-
-	protected function renderAddIndexes() : ?string
-	{
-		if ( ! isset($this->sql['add_indexes'])) {
-			return null;
-		}
-		$definition = new IndexDefinition($this->database);
-		$this->sql['add_indexes']($definition);
-		return $definition->sql('ADD');
-	}
-
-	public function dropIndexes(callable $definition)
-	{
-		$this->sql['drop_indexes'] = $definition;
+		$this->sql['drop'] = $definition;
 		return $this;
 	}
 
@@ -140,20 +139,23 @@ class AlterTable extends Statement
 		if ($part = $this->renderWait()) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderAddColumns()) {
+		$sql .= $this->renderAdd();
+		$sql .= $this->renderChange();
+		$sql .= $this->renderModify();
+
+		/*if ($part = $this->renderAddIndexes()) {
 			$sql .= $part . \PHP_EOL;
-		}
-		if ($part = $this->renderChangeColumns()) {
-			$sql .= $part . \PHP_EOL;
-		}
-		if ($part = $this->renderAddIndexes()) {
-			$sql .= $part . \PHP_EOL;
-		}
+		}*/
 		return $sql;
 	}
 
-	public function run()
+	/**
+	 * Runs the ALTER TABLE statement.
+	 *
+	 * @return int The number of affected rows
+	 */
+	public function run() : int
 	{
-		// TODO: Implement run() method.
+		return $this->database->exec($this->sql());
 	}
 }

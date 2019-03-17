@@ -18,45 +18,50 @@ use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
 class IndexDefinition extends DefinitionPart
 {
 	protected $database;
+	protected $name;
 	protected $index;
 
-	public function __construct(Database $database)
+	public function __construct(Database $database, string $name = null)
 	{
 		$this->database = $database;
+		$this->name = $name;
 	}
 
 	public function key(string $column, ...$columns) : Key
 	{
-		return $this->index = new Key($this->database, $column, ...$columns);
+		return $this->index = new Key($this->database, $this->name, $column, ...$columns);
 	}
 
 	public function primaryKey(string $column, ...$columns) : PrimaryKey
 	{
-		return $this->index = new PrimaryKey($this->database, $column, ...$columns);
+		return $this->index = new PrimaryKey($this->database, $this->name, $column, ...$columns);
 	}
 
 	public function uniqueKey(string $column, ...$columns) : UniqueKey
 	{
-		return $this->index = new UniqueKey($this->database, $column, ...$columns);
+		return $this->index = new UniqueKey($this->database, $this->name, $column, ...$columns);
 	}
 
 	public function fulltextKey(string $column, ...$columns) : FulltextKey
 	{
-		return $this->index = new FulltextKey($this->database, $column, ...$columns);
+		return $this->index = new FulltextKey($this->database, $this->name, $column, ...$columns);
 	}
 
 	public function foreignKey(string $column, ...$columns) : ForeignKey
 	{
-		return $this->index = new ForeignKey($this->database, $column, ...$columns);
+		return $this->index = new ForeignKey($this->database, $this->name, $column, ...$columns);
 	}
 
 	public function spatialKey(string $column, ...$columns) : SpatialKey
 	{
-		return $this->index = new SpatialKey($this->database, $column, ...$columns);
+		return $this->index = new SpatialKey($this->database, $this->name, $column, ...$columns);
 	}
 
 	protected function sql() : string
 	{
+		if ( ! $this->index) {
+			throw new \RuntimeException("Key type not set in index {$this->name}");
+		}
 		return $this->index->sql();
 	}
 }

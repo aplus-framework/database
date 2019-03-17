@@ -7,7 +7,7 @@ class UniqueKeyTest extends TestCase
 {
 	public function testType()
 	{
-		$index = new UniqueKey(static::$database, 'id');
+		$index = new UniqueKey(static::$database, null, 'id');
 		$this->assertEquals(
 			' UNIQUE KEY (`id`)',
 			$index->sql()

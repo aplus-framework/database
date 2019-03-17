@@ -7,7 +7,7 @@ class KeyTest extends TestCase
 {
 	public function testType()
 	{
-		$index = new Key(static::$database, 'id');
+		$index = new Key(static::$database, null, 'id');
 		$this->assertEquals(
 			' KEY (`id`)',
 			$index->sql()

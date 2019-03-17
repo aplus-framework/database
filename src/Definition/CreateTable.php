@@ -91,8 +91,8 @@ class CreateTable extends Statement
 	{
 		$sql = 'CREATE' . $this->renderOrReplace() . $this->renderTemporary();
 		$sql .= ' TABLE' . $this->renderIfNotExists();
-		$sql .= $this->renderTable() . ' (';
-		$sql .= $this->renderDefinition();
+		$sql .= $this->renderTable() . ' (' . \PHP_EOL;
+		$sql .= $this->renderDefinition() . \PHP_EOL;
 		$sql .= ')';
 		return $sql;
 	}

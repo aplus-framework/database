@@ -11,7 +11,7 @@ class IndexTest extends TestCase
 
 	protected function setUp()
 	{
-		$this->index = new IndexMock(static::$database, 'id');
+		$this->index = new IndexMock(static::$database, null, 'id');
 	}
 
 	public function testEmptyType()
@@ -24,7 +24,7 @@ class IndexTest extends TestCase
 
 	public function testMultiColumns()
 	{
-		$index = new IndexMock(static::$database, 'id', 'email', 'foo');
+		$index = new IndexMock(static::$database, null, 'id', 'email', 'foo');
 		$this->assertEquals(
 			' index_mock (`id`, `email`, `foo`)',
 			$index->sql()
@@ -33,10 +33,10 @@ class IndexTest extends TestCase
 
 	public function testName()
 	{
-		$this->index->name('foo');
+		$index = new IndexMock(static::$database, 'foo', 'id');
 		$this->assertEquals(
 			' index_mock `foo` (`id`)',
-			$this->index->sql()
+			$index->sql()
 		);
 	}
 
