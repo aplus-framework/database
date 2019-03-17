@@ -1,4 +1,4 @@
-<?php namespace Tests\Database\Definition\Indexes\Keys\Traits;
+<?php namespace Tests\Database\Definition\Table\Indexes\Keys\Traits;
 
 use Tests\Database\TestCase;
 

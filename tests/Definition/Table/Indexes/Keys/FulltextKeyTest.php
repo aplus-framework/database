@@ -1,6 +1,6 @@
-<?php namespace Tests\Database\Definition\Indexes\Keys;
+<?php namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Indexes\Keys\FulltextKey;
+use Framework\Database\Definition\Table\Indexes\Keys\FulltextKey;
 use Tests\Database\TestCase;
 
 class FulltextKeyTest extends TestCase

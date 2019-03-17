@@ -1,12 +1,12 @@
-<?php namespace Tests\Database\Definition\Indexes;
+<?php namespace Tests\Database\Definition\Table\Indexes;
 
-use Framework\Database\Definition\Indexes\IndexDefinition;
-use Framework\Database\Definition\Indexes\Keys\ForeignKey;
-use Framework\Database\Definition\Indexes\Keys\FulltextKey;
-use Framework\Database\Definition\Indexes\Keys\Key;
-use Framework\Database\Definition\Indexes\Keys\PrimaryKey;
-use Framework\Database\Definition\Indexes\Keys\SpatialKey;
-use Framework\Database\Definition\Indexes\Keys\UniqueKey;
+use Framework\Database\Definition\Table\Indexes\IndexDefinition;
+use Framework\Database\Definition\Table\Indexes\Keys\ForeignKey;
+use Framework\Database\Definition\Table\Indexes\Keys\FulltextKey;
+use Framework\Database\Definition\Table\Indexes\Keys\Key;
+use Framework\Database\Definition\Table\Indexes\Keys\PrimaryKey;
+use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
+use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
 use Tests\Database\TestCase;
 
 class IndexDefinitionTest extends TestCase
@@ -33,11 +33,10 @@ class IndexDefinitionTest extends TestCase
 
 	public function testSql()
 	{
-		$this->assertEquals('', $this->definition->sql());
 		$this->definition->primaryKey('id');
 		$this->definition->uniqueKey('email');
 		$this->assertEquals(
-			"  PRIMARY KEY (`id`),\n  UNIQUE KEY (`email`)",
+			' UNIQUE KEY (`email`)',
 			$this->definition->sql()
 		);
 	}

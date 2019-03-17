@@ -1,6 +1,6 @@
-<?php namespace Tests\Database\Definition\Indexes\Keys;
+<?php namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Indexes\Keys\ForeignKey;
+use Framework\Database\Definition\Table\Indexes\Keys\ForeignKey;
 use Tests\Database\TestCase;
 
 class ForeignKeyTest extends TestCase

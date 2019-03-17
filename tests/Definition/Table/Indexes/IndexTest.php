@@ -1,4 +1,4 @@
-<?php namespace Tests\Database\Definition\Indexes;
+<?php namespace Tests\Database\Definition\Table\Indexes;
 
 use Tests\Database\TestCase;
 

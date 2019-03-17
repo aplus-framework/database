@@ -87,7 +87,7 @@ class TableDefinition extends DefinitionPart
 		$sql = [];
 		foreach ($this->indexes as $index) {
 			$definition = $index['definition']->sql();
-			$sql[] = "  {$prefix}{$definition}";
+			$sql[] = " {$prefix}{$definition}";
 		}
 		return \implode(',' . \PHP_EOL, $sql);
 	}

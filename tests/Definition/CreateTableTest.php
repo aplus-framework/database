@@ -1,8 +1,7 @@
 <?php namespace Tests\Database\Definition;
 
-use Framework\Database\Definition\Columns\ColumnDefinition;
 use Framework\Database\Definition\CreateTable;
-use Framework\Database\Definition\Indexes\IndexDefinition;
+use Framework\Database\Definition\Table\TableDefinition;
 use Tests\Database\TestCase;
 
 class CreateTableTest extends TestCase
@@ -20,8 +19,8 @@ class CreateTableTest extends TestCase
 	protected function prepare()
 	{
 		return $this->createTable->table('t1')
-			->columns(function (ColumnDefinition $definition) {
-				$definition->int('c1');
+			->definition(function (TableDefinition $definition) {
+				$definition->column('c1')->int();
 			});
 	}
 
@@ -36,16 +35,16 @@ class CreateTableTest extends TestCase
 	{
 		$this->createTable->table('t1');
 		$this->expectException(\LogicException::class);
-		$this->expectExceptionMessage('Columns must be defined');
+		$this->expectExceptionMessage('Table definition must be set');
 		$this->createTable->sql();
 	}
 
 	public function testColumns()
 	{
 		$sql = $this->createTable->table('t1')
-			->columns(function (ColumnDefinition $definition) {
-				$definition->int('c1', 11);
-				$definition->varchar('c2', 255);
+			->definition(function (TableDefinition $definition) {
+				$definition->column('c1')->int(11);
+				$definition->column('c2')->varchar(255);
 			});
 		$this->assertEquals(
 			"CREATE TABLE `t1` (\n  `c1` int(11),\n  `c2` varchar(255)\n)",
@@ -55,9 +54,10 @@ class CreateTableTest extends TestCase
 
 	public function testIndexes()
 	{
-		$sql = $this->prepare()
-			->indexes(function (IndexDefinition $definition) {
-				$definition->primaryKey('c1');
+		$sql = $this->createTable->table('t1')
+			->definition(function (TableDefinition $definition) {
+				$definition->column('c1')->int();
+				$definition->index()->primaryKey('c1');
 			});
 		$this->assertEquals(
 			"CREATE TABLE `t1` (\n  `c1` int,\n  PRIMARY KEY (`c1`)\n)",
@@ -103,8 +103,8 @@ class CreateTableTest extends TestCase
 	{
 		$this->dropDummyData();
 		$statement = $this->createTable->table('t1')
-			->columns(function (ColumnDefinition $definition) {
-				$definition->int('c1', 11);
+			->definition(function (TableDefinition $definition) {
+				$definition->column('c1')->int(11);
 			});
 		$this->assertEquals(0, $statement->run());
 		$this->resetDatabase();

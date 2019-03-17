@@ -1,6 +1,6 @@
-<?php namespace Tests\Database\Definition\Indexes\Keys;
+<?php namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Indexes\Keys\Key;
+use Framework\Database\Definition\Table\Indexes\Keys\Key;
 use Tests\Database\TestCase;
 
 class KeyTest extends TestCase

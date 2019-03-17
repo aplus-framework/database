@@ -1,7 +1,6 @@
 <?php namespace Framework\Database\Definition;
 
-use Framework\Database\Definition\Columns\ColumnDefinition;
-use Framework\Database\Definition\Indexes\IndexDefinition;
+use Framework\Database\Definition\Table\TableDefinition;
 use Framework\Database\Statement;
 
 /**
@@ -58,9 +57,9 @@ class CreateTable extends Statement
 		return ' IF NOT EXISTS';
 	}
 
-	public function table(string $schema_name)
+	public function table(string $table_name)
 	{
-		$this->sql['table'] = $schema_name;
+		$this->sql['table'] = $table_name;
 		return $this;
 	}
 
@@ -72,35 +71,19 @@ class CreateTable extends Statement
 		throw new \LogicException('TABLE name must be set');
 	}
 
-	public function columns(callable $definition)
+	public function definition(callable $definition)
 	{
-		$this->sql['columns'] = $definition;
+		$this->sql['definition'] = $definition;
 		return $this;
 	}
 
-	protected function renderColumns() : string
+	protected function renderDefinition() : string
 	{
-		if ( ! isset($this->sql['columns'])) {
-			throw new \LogicException('Columns must be defined');
+		if ( ! isset($this->sql['definition'])) {
+			throw new \LogicException('Table definition must be set');
 		}
-		$definition = new ColumnDefinition($this->database);
-		$this->sql['columns']($definition);
-		return $definition->sql();
-	}
-
-	public function indexes(callable $definition)
-	{
-		$this->sql['indexes'] = $definition;
-		return $this;
-	}
-
-	protected function renderIndexes() : ?string
-	{
-		if ( ! isset($this->sql['indexes'])) {
-			return null;
-		}
-		$definition = new IndexDefinition($this->database);
-		$this->sql['indexes']($definition);
+		$definition = new TableDefinition($this->database);
+		$this->sql['definition']($definition);
 		return $definition->sql();
 	}
 
@@ -108,12 +91,9 @@ class CreateTable extends Statement
 	{
 		$sql = 'CREATE' . $this->renderOrReplace() . $this->renderTemporary();
 		$sql .= ' TABLE' . $this->renderIfNotExists();
-		$sql .= $this->renderTable() . ' (' . \PHP_EOL;
-		$sql .= $this->renderColumns();
-		if ($part = $this->renderIndexes()) {
-			$sql .= ',' . \PHP_EOL . $part;
-		}
-		$sql .= \PHP_EOL . ')';
+		$sql .= $this->renderTable() . ' (';
+		$sql .= $this->renderDefinition();
+		$sql .= ')';
 		return $sql;
 	}
 
