@@ -1,6 +1,7 @@
 <?php namespace Framework\Database;
 
 use Framework\Database\Definition\AlterSchema;
+use Framework\Database\Definition\AlterTable;
 use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\CreateTable;
 use Framework\Database\Definition\DropSchema;
@@ -203,6 +204,11 @@ class Database
 	public function dropTable() : DropTable
 	{
 		return new DropTable($this);
+	}
+
+	public function alterTable() : AlterTable
+	{
+		return new AlterTable($this);
 	}
 
 	public function insert() : Insert

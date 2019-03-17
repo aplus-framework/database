@@ -2,6 +2,7 @@
 
 use Framework\Database\Database;
 use Framework\Database\Definition\AlterSchema;
+use Framework\Database\Definition\AlterTable;
 use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\CreateTable;
 use Framework\Database\Definition\DropSchema;
@@ -137,6 +138,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(AlterSchema::class, static::$database->alterSchema());
 		$this->assertInstanceOf(CreateTable::class, static::$database->createTable());
 		$this->assertInstanceOf(DropTable::class, static::$database->dropTable());
+		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable());
 	}
 
 	public function testManipulationInstances()
