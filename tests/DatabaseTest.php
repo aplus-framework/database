@@ -100,6 +100,7 @@ class DatabaseTest extends TestCase
 
 	public function testProtectIdentifier()
 	{
+		$this->assertEquals('*', static::$database->protectIdentifier('*'));
 		$this->assertEquals('`foo`', static::$database->protectIdentifier('foo'));
 		$this->assertEquals('```foo```', static::$database->protectIdentifier('`foo`'));
 		$this->assertEquals('`foo ``bar`', static::$database->protectIdentifier('foo `bar'));

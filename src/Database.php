@@ -320,8 +320,11 @@ class Database
 
 	public function protectIdentifier(string $identifier) : string
 	{
+		if ($identifier === '*') {
+			return '*';
+		}
 		$identifier = \strtr($identifier, ['`' => '``', '.' => '`.`']);
-		$identifier = '`' . $identifier . '`';
+		$identifier = "`{$identifier}`";
 		return \strtr($identifier, ['`*`' => '*']);
 	}
 
