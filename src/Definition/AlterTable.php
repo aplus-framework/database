@@ -142,10 +142,6 @@ class AlterTable extends Statement
 		$sql .= $this->renderAdd();
 		$sql .= $this->renderChange();
 		$sql .= $this->renderModify();
-
-		/*if ($part = $this->renderAddIndexes()) {
-			$sql .= $part . \PHP_EOL;
-		}*/
 		return $sql;
 	}
 

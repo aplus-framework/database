@@ -67,8 +67,8 @@ class TableDefinition extends DefinitionPart
 
 	protected function renderColumns(string $prefix = null) : string
 	{
-		if ($prefix === 'ADD') {
-			$prefix = 'ADD COLUMN';
+		if ($prefix) {
+			$prefix .= ' COLUMN';
 		}
 		$sql = [];
 		foreach ($this->columns as $column) {
