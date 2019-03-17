@@ -1,5 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
+use Framework\Database\Definition\Columns\ColumnDefinition;
+use Framework\Database\Definition\Indexes\IndexDefinition;
 use Framework\Database\Statement;
 
 /**
@@ -9,6 +11,34 @@ use Framework\Database\Statement;
  */
 class AlterTable extends Statement
 {
+	public function online()
+	{
+		$this->sql['online'] = true;
+		return $this;
+	}
+
+	protected function renderOnline() : ?string
+	{
+		if ( ! isset($this->sql['online'])) {
+			return null;
+		}
+		return ' ONLINE';
+	}
+
+	public function ignore()
+	{
+		$this->sql['ignore'] = true;
+		return $this;
+	}
+
+	protected function renderIgnore() : ?string
+	{
+		if ( ! isset($this->sql['ignore'])) {
+			return null;
+		}
+		return ' IGNORE';
+	}
+
 	public function table(string $table_name)
 	{
 		$this->sql['table'] = $table_name;
@@ -48,6 +78,32 @@ class AlterTable extends Statement
 		return $this;
 	}
 
+	protected function renderAddColumns() : ?string
+	{
+		if ( ! isset($this->sql['add_columns'])) {
+			return null;
+		}
+		$definition = new ColumnDefinition($this->database);
+		$this->sql['add_columns']($definition);
+		return $definition->sql('ADD COLUMN');
+	}
+
+	public function changeColumns(callable $definition)
+	{
+		$this->sql['change_columns'] = $definition;
+		return $this;
+	}
+
+	protected function renderChangeColumns() : ?string
+	{
+		if ( ! isset($this->sql['change_columns'])) {
+			return null;
+		}
+		$definition = new ColumnDefinition($this->database);
+		$this->sql['change_columns']($definition);
+		return $definition->sql('CHANGE COLUMN');
+	}
+
 	public function dropColumns(callable $definition)
 	{
 		$this->sql['drop_columns'] = $definition;
@@ -60,6 +116,16 @@ class AlterTable extends Statement
 		return $this;
 	}
 
+	protected function renderAddIndexes() : ?string
+	{
+		if ( ! isset($this->sql['add_indexes'])) {
+			return null;
+		}
+		$definition = new IndexDefinition($this->database);
+		$this->sql['add_indexes']($definition);
+		return $definition->sql('ADD');
+	}
+
 	public function dropIndexes(callable $definition)
 	{
 		$this->sql['drop_indexes'] = $definition;
@@ -68,7 +134,22 @@ class AlterTable extends Statement
 
 	public function sql() : string
 	{
-		// TODO: Implement sql() method.
+		$sql = 'ALTER' . $this->renderOnline() . $this->renderIgnore();
+		$sql .= ' TABLE';
+		$sql .= $this->renderTable() . \PHP_EOL;
+		if ($part = $this->renderWait()) {
+			$sql .= $part . \PHP_EOL;
+		}
+		if ($part = $this->renderAddColumns()) {
+			$sql .= $part . \PHP_EOL;
+		}
+		if ($part = $this->renderChangeColumns()) {
+			$sql .= $part . \PHP_EOL;
+		}
+		if ($part = $this->renderAddIndexes()) {
+			$sql .= $part . \PHP_EOL;
+		}
+		return $sql;
 	}
 
 	public function run()

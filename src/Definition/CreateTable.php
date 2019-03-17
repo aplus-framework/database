@@ -85,7 +85,7 @@ class CreateTable extends Statement
 		}
 		$definition = new ColumnDefinition($this->database);
 		$this->sql['columns']($definition);
-		return $definition;
+		return $definition->sql();
 	}
 
 	public function indexes(callable $definition)
