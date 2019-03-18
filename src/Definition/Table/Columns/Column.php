@@ -202,9 +202,9 @@ abstract class Column extends DefinitionPart
 		$sql .= $this->renderTypeAttributes();
 		$sql .= $this->renderNull();
 		$sql .= $this->renderDefault();
-		$sql .= $this->renderComment();
 		$sql .= $this->renderUniqueKey();
 		$sql .= $this->renderPrimaryKey();
+		$sql .= $this->renderComment();
 		$sql .= $this->renderFirst();
 		$sql .= $this->renderAfter();
 		return $sql;

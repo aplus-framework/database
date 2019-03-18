@@ -94,9 +94,6 @@ class TableDefinition extends DefinitionPart
 
 	protected function sql(string $prefix = null) : string
 	{
-		if ($prefix) {
-			//$prefix = "{$prefix} ";
-		}
 		$sql = $this->renderColumns($prefix);
 		if ($part = $this->renderIndexes($prefix)) {
 			$sql .= ',' . \PHP_EOL . $part;

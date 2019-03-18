@@ -4,7 +4,7 @@ trait ListLength
 {
 	protected function renderLength() : ?string
 	{
-		if ( ! isset($this->length)) {
+		if (empty($this->length)) {
 			return null;
 		}
 		$values = [];

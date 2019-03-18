@@ -8,7 +8,7 @@ trait DecimalLength
 			return null;
 		}
 		$maximum = $this->database->quote($this->length[0]);
-		if ($this->length[1] !== null) {
+		if (isset($this->length[1])) {
 			$decimals = $this->database->quote($this->length[1]);
 			$maximum .= ",{$decimals}";
 		}

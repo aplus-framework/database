@@ -47,4 +47,11 @@ class IndexDefinitionTest extends TestCase
 		$this->expectExceptionMessage('Method not found: foo');
 		$this->definition->foo();
 	}
+
+	public function testEmptyKeyType()
+	{
+		$this->expectException(\RuntimeException::class);
+		$this->expectExceptionMessage('Key type not set in index');
+		$this->definition->sql();
+	}
 }

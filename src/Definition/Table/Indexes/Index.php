@@ -39,14 +39,7 @@ abstract class Index extends DefinitionPart
 		if ( ! isset($this->type)) {
 			throw new \LogicException('Key type is empty');
 		}
-		return ' ' . $this->type;
-		//return $this->type;
-	}
-
-	protected function name(string $name)
-	{
-		$this->name = $name;
-		return $this;
+		return " {$this->type}";
 	}
 
 	protected function renderName() : ?string
