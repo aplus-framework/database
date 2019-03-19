@@ -79,4 +79,21 @@ class PreparedStatementTest extends TestCase
 		$this->expectExceptionMessage('Invalid param data type: array');
 		$this->assertInstanceOf(Result::class, $prepared->query([]));
 	}
+
+	public function testSendBlob()
+	{
+		$this->createDummyData();
+		$this->assertEquals(
+			'c',
+			static::$database->query('SELECT `c2` FROM `t1` WHERE `c1` = 3')->fetch()->c2
+		);
+		$prepared = static::$database->prepare('UPDATE `t1` SET `c2` = ? WHERE `c1` = 3');
+		$prepared->sendBlob('chunk1');
+		$prepared->sendBlob('chunk2');
+		$this->assertEquals(1, $prepared->exec());
+		$this->assertEquals(
+			'chunk1chunk2',
+			static::$database->query('SELECT `c2` FROM `t1` WHERE `c1` = 3')->fetch()->c2
+		);
+	}
 }

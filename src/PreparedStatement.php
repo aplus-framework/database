@@ -6,6 +6,10 @@ class PreparedStatement
 	 * @var \mysqli_stmt
 	 */
 	protected $statement;
+	/**
+	 * @var bool
+	 */
+	protected $sendingBlob = false;
 
 	public function __construct(\mysqli_stmt $statement)
 	{
@@ -45,12 +49,12 @@ class PreparedStatement
 
 	protected function bindParams(array $params) : void
 	{
+		$this->sendingBlob = false;
 		if (empty($params)) {
 			return;
 		}
 		$types = '';
-		$blobs = [];
-		foreach ($params as $n => &$param) {
+		foreach ($params as &$param) {
 			$type = \gettype($param);
 			switch ($type) {
 				case 'boolean':
@@ -63,16 +67,8 @@ class PreparedStatement
 				case 'integer':
 					$types .= 'i';
 					break;
-				case 'string':
-					if (\strlen($param) > 8000000) {
-						$types .= 'b';
-						$blobs[$n] = $param;
-						$param = null;
-						break;
-					}
-					$types .= 's';
-					break;
 				case 'NULL':
+				case 'string':
 					$types .= 's';
 					break;
 				default:
@@ -83,12 +79,15 @@ class PreparedStatement
 		}
 		unset($param);
 		$this->statement->bind_param($types, ...$params);
-		foreach ($blobs as $n => $blob) {
-			// - https://mariolurig.com/coding/mysqli-and-blob-binary-database-fields/
-			// - https://blogs.oracle.com/oswald/phps-mysqli-extension:-storing-and-retrieving-blobs
-			foreach (\str_split($blob, 8000000) as $chunk) {
-				$this->statement->send_long_data($n, $chunk);
-			}
+	}
+
+	public function sendBlob(string $chunk) : bool
+	{
+		if ( ! $this->sendingBlob) {
+			$this->sendingBlob = true;
+			$null = null;
+			$this->statement->bind_param('b', $null);
 		}
+		return $this->statement->send_long_data(0, $chunk);
 	}
 }
