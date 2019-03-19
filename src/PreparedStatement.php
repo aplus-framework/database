@@ -53,6 +53,10 @@ class PreparedStatement
 		foreach ($params as $n => &$param) {
 			$type = \gettype($param);
 			switch ($type) {
+				case 'boolean':
+					$types .= 'i';
+					$param = (int) $param;
+					break;
 				case 'double':
 					$types .= 'd';
 					break;
@@ -66,6 +70,9 @@ class PreparedStatement
 						$param = null;
 						break;
 					}
+					$types .= 's';
+					break;
+				case 'NULL':
 					$types .= 's';
 					break;
 				default:
