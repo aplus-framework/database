@@ -1,6 +1,6 @@
 <?php namespace Framework\Database\Manipulation;
 
-use Framework\Database\Driver\Result;
+use Framework\Database\Result;
 
 /**
  * Class With.

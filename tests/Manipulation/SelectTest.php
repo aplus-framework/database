@@ -1,6 +1,7 @@
 <?php namespace Tests\Database\Manipulation;
 
 use Framework\Database\Manipulation\Select;
+use Framework\Database\Result;
 use Tests\Database\TestCase;
 
 class SelectTest extends TestCase
@@ -279,5 +280,13 @@ class SelectTest extends TestCase
 			$part . " ORDER BY `name` ASC, `id`\n",
 			$this->select->orderByAsc('name')->orderBy('id')->sql()
 		);
+	}
+
+	public function testRun()
+	{
+		$this->createDummyData();
+		$this->selectAllFrom('t1');
+		$this->select->limit(1);
+		$this->assertInstanceOf(Result::class, $this->select->run());
 	}
 }
