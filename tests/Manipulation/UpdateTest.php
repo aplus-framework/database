@@ -99,4 +99,13 @@ class UpdateTest extends TestCase
 			$this->update->sql()
 		);
 	}
+
+	public function testRun()
+	{
+		$this->createDummyData();
+		$this->assertEquals(
+			3,
+			$this->update->table('t1')->set(['c2' => 'x'])->whereIn('c1', 1, 2, 3)->run()
+		);
+	}
 }

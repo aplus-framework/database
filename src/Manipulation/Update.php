@@ -121,6 +121,6 @@ class Update extends Statement
 	 */
 	public function run() : int
 	{
-		return $this->database->pdo->exec($this->sql());
+		return $this->database->exec($this->sql());
 	}
 }
