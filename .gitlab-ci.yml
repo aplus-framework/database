@@ -10,6 +10,7 @@ test:php7.3:
   services:
     - mariadb
   variables:
+    MYSQL_HOST: mariadb
     MYSQL_DATABASE: framework-tests
     MYSQL_ROOT_PASSWORD: password
   before_script:
@@ -44,6 +45,13 @@ test:php7.3:
       - build/coverage/
       # - build/api/
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+
+test:php7.3:mysql:
+  extends: test:php7.3
+  services:
+    - mysql:5.7
+  variables:
+    MYSQL_HOST: mysql
 
 pages:
   stage: deploy
