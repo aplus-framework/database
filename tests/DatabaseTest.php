@@ -23,7 +23,7 @@ class DatabaseTest extends TestCase
 			\getenv('DB_USERNAME'),
 			\getenv('DB_PASSWORD'),
 			\getenv('DB_SCHEMA'),
-			\getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			\getenv('DB_HOST'),
 			\getenv('DB_PORT')
 		);
 		$this->assertInstanceOf(Database::class, $database);
@@ -35,7 +35,7 @@ class DatabaseTest extends TestCase
 			'username' => \getenv('DB_USERNAME'),
 			'password' => \getenv('DB_PASSWORD'),
 			'schema' => \getenv('DB_SCHEMA'),
-			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'host' => \getenv('DB_HOST'),
 			'port' => \getenv('DB_PORT'),
 		]);
 		$this->assertInstanceOf(Database::class, $database);
@@ -49,7 +49,7 @@ class DatabaseTest extends TestCase
 			'username' => 'error-1',
 			'password' => \getenv('DB_PASSWORD'),
 			'schema' => \getenv('DB_SCHEMA'),
-			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'host' => \getenv('DB_HOST'),
 			'port' => \getenv('DB_PORT'),
 		]);
 	}
@@ -60,7 +60,7 @@ class DatabaseTest extends TestCase
 			'username' => 'error-1',
 			'password' => \getenv('DB_PASSWORD'),
 			'schema' => \getenv('DB_SCHEMA'),
-			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'host' => \getenv('DB_HOST'),
 			'port' => \getenv('DB_PORT'),
 			'failover' => [
 				[
@@ -84,7 +84,7 @@ class DatabaseTest extends TestCase
 			'username' => 'error-1',
 			'password' => \getenv('DB_PASSWORD'),
 			'schema' => \getenv('DB_SCHEMA'),
-			'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+			'host' => \getenv('DB_HOST'),
 			'port' => \getenv('DB_PORT'),
 			'failover' => [
 				[

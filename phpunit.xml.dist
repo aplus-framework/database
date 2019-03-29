@@ -27,7 +27,7 @@
 	</logging>
 
 	<php>
-		<env name="DB_HOST" value="localhost"/>
+		<env name="DB_HOST" value="mariadb"/>
 		<env name="DB_PORT" value="3306"/>
 		<env name="DB_USERNAME" value="root"/>
 		<env name="DB_PASSWORD" value="password"/>

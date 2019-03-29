@@ -22,7 +22,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 				'username' => \getenv('DB_USERNAME'),
 				'password' => \getenv('DB_PASSWORD'),
 				'schema' => \getenv('DB_SCHEMA'),
-				'host' => \getenv('GITLAB_CI') ? 'mariadb' : \getenv('DB_HOST'),
+				'host' => \getenv('DB_HOST'),
 				'port' => \getenv('DB_PORT'),
 			]);
 		}
