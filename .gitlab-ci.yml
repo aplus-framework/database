@@ -37,7 +37,8 @@ test:php7.3:
 test:php7.3:mysql:
   extends: test:php7.3
   services:
-    - mysql:5.7
+    - name: mysql
+      command: ["--default-authentication-plugin=mysql_native_password"]
   variables:
     MYSQL_HOST: mysql
     DB_HOST: mysql
