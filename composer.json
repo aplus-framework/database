@@ -3,7 +3,11 @@
 	"type": "library",
 	"description": "The Database abstraction package",
 	"keywords": [
-		"database"
+		"database",
+		"mariadb",
+		"mysql",
+		"data-definition",
+		"data-manipulation"
 	],
 	"homepage": "https://gitlab.com/the-framework/database",
 	"license": "proprietary",
