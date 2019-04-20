@@ -6,6 +6,7 @@ use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\CreateTable;
 use Framework\Database\Definition\DropSchema;
 use Framework\Database\Definition\DropTable;
+use Framework\Database\Manipulation\Delete;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
 use Framework\Database\Manipulation\Select;
@@ -209,6 +210,11 @@ class Database
 	public function alterTable() : AlterTable
 	{
 		return new AlterTable($this);
+	}
+
+	public function delete() : Delete
+	{
+		return new Delete($this);
 	}
 
 	public function insert() : Insert

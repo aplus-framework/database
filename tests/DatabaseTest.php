@@ -7,6 +7,7 @@ use Framework\Database\Definition\CreateSchema;
 use Framework\Database\Definition\CreateTable;
 use Framework\Database\Definition\DropSchema;
 use Framework\Database\Definition\DropTable;
+use Framework\Database\Manipulation\Delete;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
 use Framework\Database\Manipulation\Select;
@@ -144,6 +145,7 @@ class DatabaseTest extends TestCase
 
 	public function testManipulationInstances()
 	{
+		$this->assertInstanceOf(Delete::class, static::$database->delete());
 		$this->assertInstanceOf(Insert::class, static::$database->insert());
 		$this->assertInstanceOf(LoadData::class, static::$database->loadData());
 		$this->assertInstanceOf(Select::class, static::$database->select());
