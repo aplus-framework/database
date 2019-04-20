@@ -7,6 +7,7 @@
  */
 class Update extends Statement
 {
+	use Traits\Join;
 	use Traits\Set;
 	use Traits\Where;
 	use Traits\OrderBy;
@@ -101,6 +102,9 @@ class Update extends Statement
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderTable() . \PHP_EOL;
+		if ($part = $this->renderJoin()) {
+			$sql .= $part . \PHP_EOL;
+		}
 		$sql .= $this->renderSetPart() . \PHP_EOL;
 		if ($part = $this->renderWhere()) {
 			$sql .= $part . \PHP_EOL;
