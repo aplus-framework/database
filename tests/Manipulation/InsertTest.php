@@ -190,4 +190,14 @@ class InsertTest extends TestCase
 			$this->insert->sql()
 		);
 	}
+
+	public function testRun()
+	{
+		$this->createDummyData();
+		$this->prepare();
+		$this->assertEquals(
+			1,
+			$this->insert->set(['c2' => 'foo'])->run()
+		);
+	}
 }

@@ -38,6 +38,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
 	protected function dropDummyData()
 	{
 		static::$database->exec('DROP TABLE IF EXISTS `t1`');
+		static::$database->exec('DROP TABLE IF EXISTS `t2`');
 	}
 
 	protected function createDummyData()
@@ -46,6 +47,14 @@ class TestCase extends \PHPUnit\Framework\TestCase
 		static::$database->exec(
 			<<<SQL
 			CREATE TABLE `t1` (
+			  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
+			  `c2` VARCHAR(255)
+			)
+		SQL
+		);
+		static::$database->exec(
+			<<<SQL
+			CREATE TABLE `t2` (
 			  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
 			  `c2` VARCHAR(255)
 			)

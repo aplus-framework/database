@@ -2,6 +2,7 @@
 
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\With;
+use Framework\Database\Result;
 use Tests\Database\TestCase;
 
 class WithTest extends TestCase
@@ -79,5 +80,19 @@ class WithTest extends TestCase
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('SELECT must be set');
 		$this->with->sql();
+	}
+
+	public function testRun()
+	{
+		$this->createDummyData();
+		$this->with->reference('t1', function (Select $select) {
+			return $select->columns('*')->from('t1')->sql();
+		})->select(function (Select $select) {
+			return $select->columns('*')->from('t2')->sql();
+		});
+		$this->assertInstanceOf(
+			Result::class,
+			$this->with->run()
+		);
 	}
 }
