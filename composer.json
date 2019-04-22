@@ -24,7 +24,7 @@
 	"require-dev": {
 		"ext-xdebug": "*",
 		"apigen/apigen": "dev-master#85290e8",
-		"friendsofphp/php-cs-fixer": "^2.14",
+		"framework/coding-standard": "dev-master",
 		"localheinz/composer-normalize": "^1.1",
 		"phpmd/phpmd": "^2.6",
 		"phpstan/phpstan": "^0.11",
@@ -40,6 +40,12 @@
 			"Tests\\Database\\": "tests/"
 		}
 	},
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://the-framework.gitlab.io/satis/"
+		}
+	],
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
