@@ -9,6 +9,7 @@ use Framework\Database\Definition\DropTable;
 use Framework\Database\Manipulation\Delete;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
+use Framework\Database\Manipulation\Replace;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
@@ -225,6 +226,11 @@ class Database
 	public function loadData() : LoadData
 	{
 		return new LoadData($this);
+	}
+
+	public function replace() : Replace
+	{
+		return new Replace($this);
 	}
 
 	public function select() : Select

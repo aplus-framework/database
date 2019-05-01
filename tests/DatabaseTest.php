@@ -10,6 +10,7 @@ use Framework\Database\Definition\DropTable;
 use Framework\Database\Manipulation\Delete;
 use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\LoadData;
+use Framework\Database\Manipulation\Replace;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
@@ -148,6 +149,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Delete::class, static::$database->delete());
 		$this->assertInstanceOf(Insert::class, static::$database->insert());
 		$this->assertInstanceOf(LoadData::class, static::$database->loadData());
+		$this->assertInstanceOf(Replace::class, static::$database->replace());
 		$this->assertInstanceOf(Select::class, static::$database->select());
 		$this->assertInstanceOf(Update::class, static::$database->update());
 		$this->assertInstanceOf(With::class, static::$database->with());
