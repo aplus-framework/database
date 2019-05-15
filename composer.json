@@ -19,7 +19,8 @@
 	],
 	"require": {
 		"php": ">=7.3",
-		"ext-mysqli": "*"
+		"ext-mysqli": "*",
+		"framework/autoload": "dev-master"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
