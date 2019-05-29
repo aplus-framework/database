@@ -28,6 +28,10 @@ class MigratorTest extends TestCase
 			->ifExists()
 			->run();
 		static::$database->dropTable()
+			->table('Posts')
+			->ifExists()
+			->run();
+		static::$database->dropTable()
 			->table('Users')
 			->ifExists()
 			->run();
@@ -38,31 +42,45 @@ class MigratorTest extends TestCase
 		$this->assertEquals('', $this->migrator->getCurrentVersion());
 	}
 
+	protected function migrateTo(string $version)
+	{
+		foreach ($this->migrator->migrateTo($version) as $item) {
+		}
+	}
+
 	public function testMigrateTo()
 	{
 		$this->assertEquals('', $this->migrator->getCurrentVersion());
-		$this->migrator->migrateTo('001');
+		$this->migrateTo('001');
 		$this->assertEquals('001', $this->migrator->getCurrentVersion());
-		$this->migrator->migrateTo('004');
+		$this->migrateTo('004');
 		$this->assertEquals('004', $this->migrator->getCurrentVersion());
-		$this->migrator->migrateTo('004');
+		$this->migrateTo('004');
 		$this->assertEquals('004', $this->migrator->getCurrentVersion());
-		$this->migrator->migrateTo('001');
+		$this->migrateTo('001');
 		$this->assertEquals('001', $this->migrator->getCurrentVersion());
-		$this->migrator->migrateTo('');
+		$this->migrateTo('');
 		$this->assertEquals('', $this->migrator->getCurrentVersion());
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Migration version not found: 005');
-		$this->migrator->migrateTo('005');
+		$this->migrateTo('005');
 	}
 
 	public function testMigrateUpAndDown()
 	{
 		$this->assertCount(0, $this->migrator->getVersions());
-		$this->migrator->migrateUp();
+		$versions = [];
+		foreach ($this->migrator->migrateUp() as $version) {
+			$versions[] = $version;
+		}
+		$this->assertEquals(['001', '004'], $versions);
 		$this->assertEquals('004', $this->migrator->getCurrentVersion());
 		$this->assertCount(2, $this->migrator->getVersions());
-		$this->migrator->migrateDown();
+		$versions = [];
+		foreach ($this->migrator->migrateDown() as $version) {
+			$versions[] = $version;
+		}
+		$this->assertEquals(['004', '001'], $versions);
 		$this->assertEquals('', $this->migrator->getCurrentVersion());
 		$this->assertCount(0, $this->migrator->getVersions());
 	}

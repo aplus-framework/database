@@ -148,18 +148,22 @@ class Migrator
 
 	/**
 	 * Migrate down all Migration files.
+	 *
+	 * @return \Generator
 	 */
-	public function migrateDown()
+	public function migrateDown() : \Generator
 	{
-		$this->migrateTo('');
+		yield from $this->migrateTo('');
 	}
 
 	/**
 	 * Migrate up all Migration files.
+	 *
+	 * @return \Generator
 	 */
-	public function migrateUp()
+	public function migrateUp() : \Generator
 	{
-		$this->migrateTo(\array_key_last($this->getFiles()));
+		yield from $this->migrateTo(\array_key_last($this->getFiles()));
 	}
 
 	/**
@@ -168,8 +172,10 @@ class Migrator
 	 * @param string $version
 	 *
 	 * @throws \InvalidArgumentException if migration version is not found
+	 *
+	 * @return \Generator
 	 */
-	public function migrateTo(string $version)
+	public function migrateTo(string $version) : \Generator
 	{
 		$current_version = $this->getCurrentVersion();
 		if ($version === $current_version) {
@@ -189,7 +195,7 @@ class Migrator
 		$files = $direction === 'up'
 			? $this->getRangeUp($current_version, $version)
 			: $this->getRangeDown($current_version, $version);
-		$this->migrate($files, $direction);
+		yield from $this->migrate($files, $direction);
 	}
 
 	protected function getRangeDown(string $current, string $target) : array
@@ -215,7 +221,7 @@ class Migrator
 		return $files;
 	}
 
-	protected function migrate(array $files, string $direction)
+	protected function migrate(array $files, string $direction) : \Generator
 	{
 		foreach ($files as $version => $file) {
 			$className = $this->locator->getClassName($file);
@@ -237,6 +243,7 @@ class Migrator
 						'migratedAt' => \gmdate('Y-m-d H:i:s'),
 					])->run();
 			}
+			yield $version;
 		}
 	}
 }
