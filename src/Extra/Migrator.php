@@ -124,7 +124,9 @@ class Migrator
 		return $this->database->select()
 			->columns('version')
 			->from($this->getMigrationTable())
-			->orderByDesc('version')
+			->orderByDesc(static function () {
+				return 'CAST(`version` AS SIGNED INTEGER)';
+			})
 			->orderByAsc('name')
 			->limit(1)
 			->run()
@@ -140,7 +142,9 @@ class Migrator
 	{
 		return $this->database->select()
 			->from($this->getMigrationTable())
-			->orderByAsc('version')
+			->orderByAsc(static function () {
+				return 'CAST(`version` AS SIGNED INTEGER)';
+			})
 			->orderByAsc('name')
 			->run()
 			->fetchAll();
