@@ -83,6 +83,51 @@ class WhereTest extends TestCase
 		$this->statement->where('email', 'is null', 1)->renderWhere();
 	}
 
+	public function testMatch()
+	{
+		$this->statement->whereMatch(['title'], 'foo');
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo')",
+			$this->statement->renderWhere()
+		);
+		$this->statement->orWhereMatch(['content', 'description'], ['bar', "ba'z"]);
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo') OR MATCH (`content`, `description`) AGAINST ('bar, ba\\'z')",
+			$this->statement->renderWhere()
+		);
+	}
+
+	public function testMatchWithQueryExpansion()
+	{
+		$this->statement->whereMatchWithQueryExpansion(['title'], 'foo');
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo' WITH QUERY EXPANSION)",
+			$this->statement->renderWhere()
+		);
+		$this->statement->orWhereMatchWithQueryExpansion(
+			['content', 'description'],
+			['bar', "ba'z"]
+		);
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo' WITH QUERY EXPANSION) OR MATCH (`content`, `description`) AGAINST ('bar, ba\\'z' WITH QUERY EXPANSION)",
+			$this->statement->renderWhere()
+		);
+	}
+
+	public function testWhereMatchInBooleanMode()
+	{
+		$this->statement->whereMatchInBooleanMode(['title'], 'foo');
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo' IN BOOLEAN MODE)",
+			$this->statement->renderWhere()
+		);
+		$this->statement->orWhereMatchInBooleanMode(['content', 'description'], ['+bar', "-ba'z"]);
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo' IN BOOLEAN MODE) OR MATCH (`content`, `description`) AGAINST ('+bar, -ba\\'z' IN BOOLEAN MODE)",
+			$this->statement->renderWhere()
+		);
+	}
+
 	public function testEqual()
 	{
 		$this->statement->whereEqual('email', 'user@mail.com');

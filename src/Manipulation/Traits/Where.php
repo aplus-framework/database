@@ -8,9 +8,10 @@ trait Where
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param \Closure|string $column   \Closure for a subquery or a string with the column name
-	 * @param string          $operator
-	 * @param mixed           $values   Each value must be of type: string or \Closure
+	 * @param array|\Closure|string $column   \Closure for a subquery, a string with the column name
+	 *                                        or and array with column names on WHERE MATCH clause
+	 * @param string                $operator
+	 * @param mixed                 $values   Each value must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -22,9 +23,10 @@ trait Where
 	/**
 	 * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param \Closure|string $column   \Closure for a subquery or a string with the column name
-	 * @param string          $operator
-	 * @param mixed           $values   Each value must be of type: string or \Closure
+	 * @param array|\Closure|string $column   \Closure for a subquery, a string with the column name
+	 *                                        or and array with column names on WHERE MATCH clause
+	 * @param string                $operator
+	 * @param mixed                 $values   Each value must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -527,6 +529,108 @@ trait Where
 		$this->subquery($subquery);
 	}
 
+	/**
+	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
+	 * searching in the WHERE clause.
+	 *
+	 * @param array        $columns Columns to MATCH
+	 * @param array|string $against AGAINST expression
+	 *
+	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+	 * @see https://mariadb.com/kb/en/library/match-against/
+	 *
+	 * @return $this
+	 */
+	public function whereMatch(array $columns, $against)
+	{
+		return $this->where($columns, 'MATCH', $against);
+	}
+
+	/**
+	 * Appends a "OR MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
+	 * searching in the WHERE clause.
+	 *
+	 * @param array        $columns Columns to MATCH
+	 * @param array|string $against AGAINST expression
+	 *
+	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+	 * @see https://mariadb.com/kb/en/library/match-against/
+	 *
+	 * @return $this
+	 */
+	public function orWhereMatch(array $columns, $against)
+	{
+		return $this->orWhere($columns, 'MATCH', $against);
+	}
+
+	/**
+	 * Appends a "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
+	 * searching in the WHERE clause.
+	 *
+	 * @param array        $columns Columns to MATCH
+	 * @param array|string $against AGAINST expression
+	 *
+	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+	 * @see https://mariadb.com/kb/en/library/match-against/
+	 *
+	 * @return $this
+	 */
+	public function whereMatchWithQueryExpansion(array $columns, $against)
+	{
+		return $this->where($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
+	}
+
+	/**
+	 * Appends a "OR MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
+	 * searching in the WHERE clause.
+	 *
+	 * @param array        $columns Columns to MATCH
+	 * @param array|string $against AGAINST expression
+	 *
+	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+	 * @see https://mariadb.com/kb/en/library/match-against/
+	 *
+	 * @return $this
+	 */
+	public function orWhereMatchWithQueryExpansion(array $columns, $against)
+	{
+		return $this->orWhere($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
+	}
+
+	/**
+	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
+	 * the WHERE clause.
+	 *
+	 * @param array        $columns Columns to MATCH
+	 * @param array|string $against AGAINST expression
+	 *
+	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+	 * @see https://mariadb.com/kb/en/library/match-against/
+	 *
+	 * @return $this
+	 */
+	public function whereMatchInBooleanMode(array $columns, $against)
+	{
+		return $this->where($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
+	}
+
+	/**
+	 * Appends a "OR MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
+	 * the WHERE clause.
+	 *
+	 * @param array        $columns Columns to MATCH
+	 * @param array|string $against AGAINST expression
+	 *
+	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+	 * @see https://mariadb.com/kb/en/library/match-against/
+	 *
+	 * @return $this
+	 */
+	public function orWhereMatchInBooleanMode(array $columns, $against)
+	{
+		return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
+	}
+
 	private function addWhere(
 		string $glue,
 		$column,
@@ -543,27 +647,53 @@ trait Where
 		return $this;
 	}
 
+	private function renderMatch(array $columns, $expression, string $modifier = '')
+	{
+		foreach ($columns as &$column) {
+			$column = $this->renderIdentifier($column);
+		}
+		unset($column);
+		$columns = \implode(', ', $columns);
+		if (\is_array($expression)) {
+			$expression = \implode(', ', $expression);
+		}
+		$expression = $this->database->quote($expression);
+		if ($modifier) {
+			$modifier = ' ' . $modifier;
+		}
+		return "MATCH ({$columns}) AGAINST ({$expression}{$modifier})";
+	}
+
 	protected function renderWhere(string $clause = 'where') : ?string
 	{
 		if ( ! isset($this->sql[$clause])) {
 			return null;
 		}
 		$parts = $this->sql[$clause];
-		foreach ($parts as &$part) {
-			$part['column'] = $this->renderIdentifier($part['column']);
-			$part['operator'] = $this->renderWhereOperator($part['operator']);
-			$part['values'] = $this->renderWhereValues($part['operator'], $part['values']);
-		}
-		unset($part);
-		$condition = "{$parts[0]['column']} {$parts[0]['operator']}";
-		$condition .= $parts[0]['values'] === null ? '' : " {$parts[0]['values']}";
+		$condition = $this->renderWherePart($parts[0], true);
 		unset($parts[0]);
 		foreach ($parts as $part) {
-			$condition .= " {$part['glue']} {$part['column']} {$part['operator']}";
-			$condition .= $part['values'] === null ? '' : " {$part['values']}";
+			$condition .= $this->renderWherePart($part);
 		}
 		$clause = \strtoupper($clause);
 		return " {$clause} {$condition}";
+	}
+
+	private function renderWherePart(array $part, bool $first = false) : string
+	{
+		$condition = '';
+		if ($first === false) {
+			$condition .= " {$part['glue']} ";
+		}
+		if ($part['operator'] === 'MATCH') {
+			return $condition . $this->renderMatch($part['column'], ...$part['values']);
+		}
+		$part['column'] = $this->renderIdentifier($part['column']);
+		$part['operator'] = $this->renderWhereOperator($part['operator']);
+		$part['values'] = $this->renderWhereValues($part['operator'], $part['values']);
+		$condition .= "{$part['column']} {$part['operator']}";
+		$condition .= $part['values'] === null ? '' : " {$part['values']}";
+		return $condition;
 	}
 
 	private function renderWhereOperator(string $operator) : string
