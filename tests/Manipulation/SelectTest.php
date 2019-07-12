@@ -11,7 +11,7 @@ class SelectTest extends TestCase
 	 */
 	protected $select;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->select = new Select(static::$database);
 	}

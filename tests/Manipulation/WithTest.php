@@ -12,7 +12,7 @@ class WithTest extends TestCase
 	 */
 	protected $with;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->with = new With(static::$database);
 	}

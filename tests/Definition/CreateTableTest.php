@@ -11,7 +11,7 @@ class CreateTableTest extends TestCase
 	 */
 	protected $createTable;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->createTable = new CreateTable(static::$database);
 	}

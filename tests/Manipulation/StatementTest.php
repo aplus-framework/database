@@ -10,7 +10,7 @@ class StatementTest extends TestCase
 	 */
 	protected $statement;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->statement = new StatementMock(static::$database);
 	}

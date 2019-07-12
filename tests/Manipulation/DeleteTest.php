@@ -10,7 +10,7 @@ class DeleteTest extends TestCase
 	 */
 	protected $delete;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->delete = new Delete(static::$database);
 	}

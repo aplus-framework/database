@@ -10,7 +10,7 @@ class UpdateTest extends TestCase
 	 */
 	protected $update;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->update = new Update(static::$database);
 	}

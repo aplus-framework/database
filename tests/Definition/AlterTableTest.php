@@ -11,7 +11,7 @@ class AlterTableTest extends TestCase
 	 */
 	protected $alterTable;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->alterTable = new AlterTable(static::$database);
 	}

@@ -11,7 +11,7 @@ class ReplaceTest extends TestCase
 	 */
 	protected $replace;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->replace = new Replace(static::$database);
 	}

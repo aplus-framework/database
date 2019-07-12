@@ -9,7 +9,7 @@ class StringDataTypeTest extends TestCase
 	 */
 	protected $column;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->column = new StringDataTypeMock(static::$database);
 	}

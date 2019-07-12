@@ -10,7 +10,7 @@ class ForeignKeyTest extends TestCase
 	 */
 	protected $index;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->index = new ForeignKey(static::$database, null, 'user_id');
 	}

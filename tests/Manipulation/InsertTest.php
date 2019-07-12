@@ -11,7 +11,7 @@ class InsertTest extends TestCase
 	 */
 	protected $insert;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->insert = new Insert(static::$database);
 	}

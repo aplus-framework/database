@@ -9,7 +9,7 @@ class ColumnTest extends TestCase
 	 */
 	protected $column;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->column = new ColumnMock(static::$database);
 	}

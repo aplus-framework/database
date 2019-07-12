@@ -10,7 +10,7 @@ class DropTableTest extends TestCase
 	 */
 	protected $dropTable;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->dropTable = new DropTable(static::$database);
 	}

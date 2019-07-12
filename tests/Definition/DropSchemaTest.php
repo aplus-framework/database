@@ -10,7 +10,7 @@ class DropSchemaTest extends TestCase
 	 */
 	protected $dropSchema;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->dropSchema = new DropSchema(static::$database);
 	}

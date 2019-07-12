@@ -10,7 +10,7 @@ class MigratorTest extends TestCase
 	 */
 	protected $migrator;
 
-	public function setup()
+	public function setup() : void
 	{
 		$this->migrator = new Migrator(static::$database);
 		$this->migrator->addFiles([
@@ -21,7 +21,7 @@ class MigratorTest extends TestCase
 		]);
 	}
 
-	protected function tearDown()
+	protected function tearDown() : void
 	{
 		static::$database->dropTable()
 			->table($this->migrator->getMigrationTable())

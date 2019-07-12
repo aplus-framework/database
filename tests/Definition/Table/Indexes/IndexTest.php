@@ -9,7 +9,7 @@ class IndexTest extends TestCase
 	 */
 	protected $index;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->index = new IndexMock(static::$database, null, 'id');
 	}

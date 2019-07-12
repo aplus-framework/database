@@ -47,7 +47,7 @@ class ColumnDefinitionTest extends TestCase
 	 */
 	protected $definition;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->definition = new ColumnDefinition(static::$database);
 	}

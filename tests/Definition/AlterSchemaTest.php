@@ -10,7 +10,7 @@ class AlterSchemaTest extends TestCase
 	 */
 	protected $alterSchema;
 
-	protected function setUp()
+	protected function setUp() : void
 	{
 		$this->alterSchema = new AlterSchema(static::$database);
 	}
