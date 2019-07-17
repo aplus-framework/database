@@ -1,7 +1,7 @@
 {
 	"name": "framework/database",
 	"type": "library",
-	"description": "The Database abstraction package",
+	"description": "The Framework Database Library",
 	"keywords": [
 		"database",
 		"mariadb",
@@ -9,7 +9,7 @@
 		"data-definition",
 		"data-manipulation"
 	],
-	"homepage": "https://gitlab.com/the-framework/database",
+	"homepage": "https://the-framework.gitlab.io/libraries/database.html",
 	"license": "proprietary",
 	"authors": [
 		{
@@ -58,9 +58,9 @@
 	},
 	"support": {
 		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/database/issues",
-		"wiki": "https://gitlab.com/the-framework/packages/database",
-		"source": "https://gitlab.com/the-framework/database",
-		"docs": "https://the-framework.gitlab.io/the-framework/packages/database/docs"
+		"issues": "https://gitlab.com/the-framework/libraries/database/issues",
+		"wiki": "https://gitlab.com/the-framework/libraries/database/wikis/home",
+		"source": "https://gitlab.com/the-framework/libraries/database",
+		"docs": "https://the-framework.gitlab.io/libraries/database/docs/"
 	}
 }
