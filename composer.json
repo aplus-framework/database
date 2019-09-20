@@ -10,7 +10,7 @@
 		"data-manipulation"
 	],
 	"homepage": "https://the-framework.gitlab.io/libraries/database.html",
-	"license": "proprietary",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Natan Felles",
