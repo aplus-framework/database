@@ -48,6 +48,17 @@ class Database
 	 */
 	protected $inTransaction = false;
 
+	/**
+	 * Database constructor.
+	 *
+	 * @param array|string $username
+	 * @param string|null  $password
+	 * @param string|null  $schema
+	 * @param string       $host
+	 * @param int          $port
+	 *
+	 * @see Database::makeConfig
+	 */
 	public function __construct(
 		$username,
 		string $password = null,
@@ -168,11 +179,21 @@ class Database
 		return $this->mysqli->warning_count;
 	}
 
+	/**
+	 * Get a list of latest errors.
+	 *
+	 * @return array
+	 */
 	public function errors() : array
 	{
 		return $this->mysqli->error_list;
 	}
 
+	/**
+	 * Get latest error.
+	 *
+	 * @return string|null
+	 */
 	public function error() : ?string
 	{
 		return $this->mysqli->error ?: null;
@@ -183,66 +204,131 @@ class Database
 		$this->mysqli->select_db($schema);
 	}
 
+	/**
+	 * Call a CREATE SCHEMA statement.
+	 *
+	 * @return CreateSchema
+	 */
 	public function createSchema() : CreateSchema
 	{
 		return new CreateSchema($this);
 	}
 
+	/**
+	 * Call a DROP SCHEMA statement.
+	 *
+	 * @return DropSchema
+	 */
 	public function dropSchema() : DropSchema
 	{
 		return new DropSchema($this);
 	}
 
+	/**
+	 * Call a ALTER SCHEMA statement.
+	 *
+	 * @return AlterSchema
+	 */
 	public function alterSchema() : AlterSchema
 	{
 		return new AlterSchema($this);
 	}
 
+	/**
+	 * Call a CREATE TABLE statement.
+	 *
+	 * @return CreateTable
+	 */
 	public function createTable() : CreateTable
 	{
 		return new CreateTable($this);
 	}
 
+	/**
+	 * Call a DROP TABLE statement.
+	 *
+	 * @return DropTable
+	 */
 	public function dropTable() : DropTable
 	{
 		return new DropTable($this);
 	}
 
+	/**
+	 * Call a ALTER TABLE statement.
+	 *
+	 * @return AlterTable
+	 */
 	public function alterTable() : AlterTable
 	{
 		return new AlterTable($this);
 	}
 
+	/**
+	 * Call a DELETE statement.
+	 *
+	 * @return Delete
+	 */
 	public function delete() : Delete
 	{
 		return new Delete($this);
 	}
 
+	/**
+	 * Call a INSERT statement.
+	 *
+	 * @return Insert
+	 */
 	public function insert() : Insert
 	{
 		return new Insert($this);
 	}
 
+	/**
+	 * Call a LOAD DATA statement.
+	 *
+	 * @return LoadData
+	 */
 	public function loadData() : LoadData
 	{
 		return new LoadData($this);
 	}
 
+	/**
+	 * Call a REPLACE statement.
+	 *
+	 * @return Replace
+	 */
 	public function replace() : Replace
 	{
 		return new Replace($this);
 	}
 
+	/**
+	 * Call a SELECT statement.
+	 *
+	 * @return Select
+	 */
 	public function select() : Select
 	{
 		return new Select($this);
 	}
 
+	/**
+	 * Call a UPDATE statement.
+	 *
+	 * @return Update
+	 */
 	public function update() : Update
 	{
 		return new Update($this);
 	}
 
+	/**
+	 * Call a WITH statement.
+	 *
+	 * @return With
+	 */
 	public function with() : With
 	{
 		return new With($this);
@@ -298,6 +384,11 @@ class Database
 		return new PreparedStatement($this->mysqli->prepare($statement));
 	}
 
+	/**
+	 * Run statements in a transaction.
+	 *
+	 * @param callable $statements
+	 */
 	public function transaction(callable $statements) : void
 	{
 		if ($this->inTransaction) {
@@ -330,6 +421,15 @@ class Database
 		return $this->mysqli->insert_id;
 	}
 
+	/**
+	 * Protect identifier.
+	 *
+	 * @param string $identifier
+	 *
+	 * @see https://mariadb.com/kb/en/library/identifier-names/
+	 *
+	 * @return string
+	 */
 	public function protectIdentifier(string $identifier) : string
 	{
 		if ($identifier === '*') {
