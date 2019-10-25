@@ -43,9 +43,6 @@
 	"minimum-stability": "dev",
 	"prefer-stable": true,
 	"scripts": {
-		"post-install-cmd": [
-			".hooks/init"
-		],
 		"post-update-cmd": [
 			"composer dump-autoload"
 		]
