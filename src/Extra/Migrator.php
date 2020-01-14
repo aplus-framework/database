@@ -229,7 +229,7 @@ class Migrator
 	{
 		foreach ($files as $version => $file) {
 			$className = $this->locator->getClassName($file);
-			if ($className === false) {
+			if ($className === null) {
 				continue;
 			}
 			require_once $file;
