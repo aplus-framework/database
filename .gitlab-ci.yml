@@ -1,7 +1,7 @@
 ---
 image: natanfelles/php-base
 
-test:php7.3:
+test:php:
   stage: test
   cache:
     paths:
@@ -34,8 +34,8 @@ test:php7.3:
       - build/docs/
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
-test:php7.3:mysql:
-  extends: test:php7.3
+test:php:mysql:
+  extends: test:php
   services:
     - name: mysql
       command: ["--default-authentication-plugin=mysql_native_password"]
@@ -46,8 +46,8 @@ test:php7.3:mysql:
 pages:
   stage: deploy
   dependencies:
-    - test:php7.3
-    - test:php7.3:mysql
+    - test:php
+    - test:php:mysql
   environment:
     name: production
     url: https://the-framework.gitlab.io
