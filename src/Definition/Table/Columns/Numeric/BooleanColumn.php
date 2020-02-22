@@ -7,5 +7,5 @@
  */
 class BooleanColumn extends NumericDataType
 {
-	protected $type = 'boolean';
+	protected string $type = 'boolean';
 }

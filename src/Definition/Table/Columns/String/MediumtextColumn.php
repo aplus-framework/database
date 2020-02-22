@@ -7,5 +7,5 @@
  */
 class MediumtextColumn extends StringDataType
 {
-	protected $type = 'mediumtext';
+	protected string $type = 'mediumtext';
 }

@@ -7,6 +7,6 @@
  */
 class SmallintColumn extends NumericDataType
 {
-	protected $type = 'smallint';
-	protected $maxLength = 127;
+	protected string $type = 'smallint';
+	protected int $maxLength = 127;
 }

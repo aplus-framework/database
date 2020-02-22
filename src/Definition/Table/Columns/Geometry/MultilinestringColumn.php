@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class MultilinestringColumn extends Column
 {
-	protected $type = 'multilinestring';
+	protected string $type = 'multilinestring';
 }

@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class PointColumn extends Column
 {
-	protected $type = 'point';
+	protected string $type = 'point';
 }

@@ -7,5 +7,5 @@
  */
 class TinytextColumn extends StringDataType
 {
-	protected $type = 'tinytext';
+	protected string $type = 'tinytext';
 }

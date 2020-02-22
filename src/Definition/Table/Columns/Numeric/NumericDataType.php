@@ -4,10 +4,10 @@ use Framework\Database\Definition\Table\Columns\Column;
 
 abstract class NumericDataType extends Column
 {
-	protected $signed;
-	protected $unsigned;
-	protected $zerofill;
-	protected $autoIncrement;
+	protected bool $signed = false;
+	protected bool $unsigned = false;
+	protected bool $zerofill = false;
+	protected bool $autoIncrement = false;
 
 	/**
 	 * @see https://mariadb.com/kb/en/library/auto_increment/
@@ -22,7 +22,7 @@ abstract class NumericDataType extends Column
 
 	protected function renderAutoIncrement() : ?string
 	{
-		if ( ! isset($this->autoIncrement)) {
+		if ( ! $this->autoIncrement) {
 			return null;
 		}
 		return ' AUTO_INCREMENT';
@@ -36,7 +36,7 @@ abstract class NumericDataType extends Column
 
 	protected function renderSigned() : ?string
 	{
-		if ( ! isset($this->signed)) {
+		if ( ! $this->signed) {
 			return null;
 		}
 		return ' signed';
@@ -50,7 +50,7 @@ abstract class NumericDataType extends Column
 
 	protected function renderUnsigned() : ?string
 	{
-		if ( ! isset($this->unsigned)) {
+		if ( ! $this->unsigned) {
 			return null;
 		}
 		return ' unsigned';
@@ -64,7 +64,7 @@ abstract class NumericDataType extends Column
 
 	protected function renderZerofill() : ?string
 	{
-		if ( ! isset($this->zerofill)) {
+		if ( ! $this->zerofill) {
 			return null;
 		}
 		return ' zerofill';

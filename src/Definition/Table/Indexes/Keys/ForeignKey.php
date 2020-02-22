@@ -10,23 +10,11 @@ use Framework\Database\Definition\Table\Indexes\Index;
 class ForeignKey extends Index
 {
 	use Traits\Constraint;
-	protected $type = 'FOREIGN KEY';
-	/**
-	 * @var string
-	 */
-	protected $referenceTable;
-	/**
-	 * @var array
-	 */
-	protected $referenceColumns;
-	/**
-	 * @var string|null
-	 */
-	protected $onDelete;
-	/**
-	 * @var string|null
-	 */
-	protected $onUpdate;
+	protected string $type = 'FOREIGN KEY';
+	protected ?string $referenceTable = null;
+	protected array $referenceColumns = [];
+	protected ?string $onDelete = null;
+	protected ?string $onUpdate = null;
 
 	public function references(string $table, string $column, string ...$columns)
 	{

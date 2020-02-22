@@ -12,24 +12,14 @@ class Migrator
 {
 	/**
 	 * Migrations Table name.
-	 *
-	 * @var string
 	 */
-	protected $migrationTable = 'Migrations';
+	protected string $migrationTable = 'Migrations';
 	/**
 	 * Added files.
-	 *
-	 * @var array
 	 */
-	protected $files = [];
-	/**
-	 * @var Database
-	 */
-	protected $database;
-	/**
-	 * @var Locator
-	 */
-	protected $locator;
+	protected array $files = [];
+	protected Database $database;
+	protected Locator $locator;
 
 	/**
 	 * Migrator constructor.

@@ -6,18 +6,9 @@ use Framework\Database\Definition\Table\Indexes\IndexDefinition;
 
 class TableDefinition extends DefinitionPart
 {
-	/**
-	 * @var Database
-	 */
-	protected $database;
-	/**
-	 * @var array
-	 */
-	protected $columns = [];
-	/**
-	 * @var array
-	 */
-	protected $indexes = [];
+	protected Database $database;
+	protected array $columns = [];
+	protected array $indexes = [];
 
 	/**
 	 * TableDefinition constructor.

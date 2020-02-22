@@ -10,22 +10,10 @@ use Framework\Database\Definition\Table\DefinitionPart;
  */
 abstract class Index extends DefinitionPart
 {
-	/**
-	 * @var Database
-	 */
-	protected $database;
-	/**
-	 * @var array
-	 */
-	protected $columns;
-	/**
-	 * @var string
-	 */
-	protected $type;
-	/**
-	 * @var string|null
-	 */
-	protected $name;
+	protected Database $database;
+	protected array $columns;
+	protected string $type = '';
+	protected ?string $name;
 
 	public function __construct(Database $database, ?string $name, string $column, ...$columns)
 	{
@@ -36,7 +24,7 @@ abstract class Index extends DefinitionPart
 
 	protected function renderType() : string
 	{
-		if ( ! isset($this->type)) {
+		if (empty($this->type)) {
 			throw new \LogicException('Key type is empty');
 		}
 		return " {$this->type}";

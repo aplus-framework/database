@@ -17,9 +17,9 @@ use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
  */
 class IndexDefinition extends DefinitionPart
 {
-	protected $database;
-	protected $name;
-	protected $index;
+	protected Database$database;
+	protected ?string $name;
+	protected ?Index $index = null;
 
 	public function __construct(Database $database, string $name = null)
 	{

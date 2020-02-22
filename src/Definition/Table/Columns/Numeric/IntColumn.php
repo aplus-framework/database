@@ -2,6 +2,6 @@
 
 class IntColumn extends NumericDataType
 {
-	protected $type = 'int';
-	protected $maxLength = 11;
+	protected string $type = 'int';
+	protected int $maxLength = 11;
 }

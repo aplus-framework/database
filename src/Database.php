@@ -19,20 +19,15 @@ use Framework\Database\Manipulation\With;
  */
 class Database
 {
-	/**
-	 * @var \mysqli
-	 */
-	protected $mysqli;
+	protected \mysqli $mysqli;
 	/**
 	 * Connection configurations.
 	 *
 	 * Custom configs merged with the Base Connection configurations.
 	 *
 	 * @see makeConfig
-	 *
-	 * @var array
 	 */
-	protected $config = [];
+	protected array $config = [];
 	/**
 	 * The current $config failover index to be used in a connection.
 	 *
@@ -40,13 +35,11 @@ class Database
 	 *
 	 * @var int|null Integer representing the array index or null for none
 	 */
-	protected $failoverIndex;
+	protected ?int $failoverIndex = null;
 	/**
 	 * @see transaction
-	 *
-	 * @var bool
 	 */
-	protected $inTransaction = false;
+	protected bool $inTransaction = false;
 
 	/**
 	 * Database constructor.

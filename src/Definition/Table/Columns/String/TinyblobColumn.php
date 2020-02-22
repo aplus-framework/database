@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class TinyblobColumn extends Column
 {
-	protected $type = 'tinyblob';
+	protected string $type = 'tinyblob';
 }

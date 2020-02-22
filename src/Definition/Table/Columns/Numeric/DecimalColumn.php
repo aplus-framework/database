@@ -5,7 +5,7 @@ use Framework\Database\Definition\Table\Columns\Traits\DecimalLength;
 class DecimalColumn extends NumericDataType
 {
 	use DecimalLength;
-	protected $type = 'decimal';
-	protected $maxLength = 11;
-	protected $decimal;
+	protected string $type = 'decimal';
+	protected int $maxLength = 11;
+	protected float $decimal;
 }

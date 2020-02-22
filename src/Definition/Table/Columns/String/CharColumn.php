@@ -7,7 +7,7 @@
  */
 class CharColumn extends StringDataType
 {
-	protected $type = 'char';
-	protected $minLength = 0;
-	protected $maxLength = 255;
+	protected string $type = 'char';
+	protected int $minLength = 0;
+	protected int $maxLength = 255;
 }

@@ -7,5 +7,5 @@
  */
 class JsonColumn extends StringDataType
 {
-	protected $type = 'json';
+	protected string $type = 'json';
 }

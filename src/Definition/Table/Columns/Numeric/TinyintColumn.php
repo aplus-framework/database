@@ -2,6 +2,6 @@
 
 class TinyintColumn extends NumericDataType
 {
-	protected $type = 'tinyint';
-	protected $maxLength = 127;
+	protected string $type = 'tinyint';
+	protected int $maxLength = 127;
 }

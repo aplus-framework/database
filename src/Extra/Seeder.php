@@ -7,10 +7,7 @@ use Framework\Database\Database;
  */
 abstract class Seeder
 {
-	/**
-	 * @var Database
-	 */
-	protected $database;
+	protected Database $database;
 
 	/**
 	 * Seeder constructor.

@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class LinestringColumn extends Column
 {
-	protected $type = 'linestring';
+	protected string $type = 'linestring';
 }

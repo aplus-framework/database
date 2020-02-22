@@ -5,18 +5,9 @@
  */
 class Result
 {
-	/**
-	 * @var \mysqli_result
-	 */
-	protected $result;
-	/**
-	 * @var string
-	 */
-	protected $fetchClass = 'stdClass';
-	/**
-	 * @var array
-	 */
-	protected $fetchConstructor = [];
+	protected \mysqli_result $result;
+	protected string $fetchClass = 'stdClass';
+	protected array $fetchConstructor = [];
 
 	public function __construct(\mysqli_result $result)
 	{

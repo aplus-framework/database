@@ -4,5 +4,5 @@ use Framework\Database\Definition\Table\Columns\Column;
 
 class ColumnMock extends Column
 {
-	public $type = 'mock';
+	public string $type = 'mock';
 }

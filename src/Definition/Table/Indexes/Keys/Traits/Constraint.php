@@ -2,10 +2,7 @@
 
 trait Constraint
 {
-	/**
-	 * @var string|null
-	 */
-	protected $constraint;
+	protected ?string $constraint = null;
 
 	public function constraint(string $name)
 	{

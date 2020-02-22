@@ -4,10 +4,7 @@ use Tests\Database\TestCase;
 
 class IndexTest extends TestCase
 {
-	/**
-	 * @var IndexMock
-	 */
-	protected $index;
+	protected IndexMock $index;
 
 	protected function setUp() : void
 	{
@@ -16,7 +13,7 @@ class IndexTest extends TestCase
 
 	public function testEmptyType()
 	{
-		$this->index->type = null;
+		$this->index->type = '';
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Key type is empty');
 		$this->index->sql();

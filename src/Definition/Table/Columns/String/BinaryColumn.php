@@ -9,7 +9,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class BinaryColumn extends Column
 {
-	protected $type = 'binary';
-	protected $minLength = 0;
-	protected $maxLength = 255;
+	protected string $type = 'binary';
+	protected int $minLength = 0;
+	protected int $maxLength = 255;
 }

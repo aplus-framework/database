@@ -9,6 +9,6 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class VarbinaryColumn extends Column
 {
-	protected $type = 'varbinary';
-	protected $maxLength = 65535;
+	protected string $type = 'varbinary';
+	protected int $maxLength = 65535;
 }

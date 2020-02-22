@@ -5,46 +5,21 @@ use Framework\Database\Definition\Table\DefinitionPart;
 
 abstract class Column extends DefinitionPart
 {
+	protected Database $database;
+	protected string $type;
+	protected array $length;
+	protected ?bool $null = null;
+	protected ?bool $uniqueKey = null;
+	protected ?bool $primaryKey = null;
 	/**
-	 * @var Database
-	 */
-	protected $database;
-	/**
-	 * @var string
-	 */
-	protected $type;
-	/**
-	 * @var array
-	 */
-	protected $length;
-	/**
-	 * @var bool|null
-	 */
-	protected $null;
-	/**
-	 * @var bool|null
-	 */
-	protected $uniqueKey;
-	/**
-	 * @var bool|null
-	 */
-	protected $primaryKey;
-	/**
-	 * @var string|null
+	 * @see default
+	 *
+	 * @var mixed
 	 */
 	protected $default;
-	/**
-	 * @var string|null
-	 */
-	protected $comment;
-	/**
-	 * @var bool|null
-	 */
-	protected $first;
-	/**
-	 * @var string|null
-	 */
-	protected $after;
+	protected ?string $comment;
+	protected ?bool $first = null;
+	protected ?string $after;
 
 	/**
 	 * Column constructor.
@@ -60,7 +35,7 @@ abstract class Column extends DefinitionPart
 
 	protected function renderType() : string
 	{
-		if ( ! isset($this->type)) {
+		if (empty($this->type)) {
 			throw new \LogicException('Column type is empty');
 		}
 		return ' ' . $this->type;

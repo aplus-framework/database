@@ -7,6 +7,6 @@
  */
 class VarcharColumn extends StringDataType
 {
-	protected $type = 'varchar';
-	protected $maxLength = 65535;
+	protected string $type = 'varchar';
+	protected int $maxLength = 65535;
 }

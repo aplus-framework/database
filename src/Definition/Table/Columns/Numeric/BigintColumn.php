@@ -2,5 +2,5 @@
 
 class BigintColumn extends NumericDataType
 {
-	protected $type = 'bigint';
+	protected string $type = 'bigint';
 }

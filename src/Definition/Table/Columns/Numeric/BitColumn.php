@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class BitColumn extends Column
 {
-	protected $type = 'bit';
+	protected string $type = 'bit';
 }

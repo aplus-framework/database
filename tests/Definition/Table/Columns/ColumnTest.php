@@ -30,7 +30,7 @@ class ColumnTest extends TestCase
 
 	public function testEmptyType()
 	{
-		$this->column->type = null;
+		$this->column->type = '';
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Column type is empty');
 		$this->column->sql();

@@ -7,7 +7,7 @@
  */
 class TextColumn extends StringDataType
 {
-	protected $type = 'text';
-	protected $minLength = 0;
-	protected $maxLength = 65535;
+	protected string $type = 'text';
+	protected int $minLength = 0;
+	protected int $maxLength = 65535;
 }

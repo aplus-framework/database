@@ -7,5 +7,5 @@
  */
 class LongtextColumn extends StringDataType
 {
-	protected $type = 'longtext';
+	protected string $type = 'longtext';
 }

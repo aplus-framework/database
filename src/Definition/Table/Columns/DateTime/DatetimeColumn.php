@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 class DatetimeColumn extends Column
 {
-	protected $type = 'datetime';
+	protected string $type = 'datetime';
 }

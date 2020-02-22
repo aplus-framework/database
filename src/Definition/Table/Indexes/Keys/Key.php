@@ -4,5 +4,5 @@ use Framework\Database\Definition\Table\Indexes\Index;
 
 class Key extends Index
 {
-	protected $type = 'KEY';
+	protected string $type = 'KEY';
 }

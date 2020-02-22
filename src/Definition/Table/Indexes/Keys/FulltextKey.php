@@ -9,5 +9,5 @@ use Framework\Database\Definition\Table\Indexes\Index;
  */
 class FulltextKey extends Index
 {
-	protected $type = 'FULLTEXT KEY';
+	protected string $type = 'FULLTEXT KEY';
 }

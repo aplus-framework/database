@@ -10,5 +10,5 @@ use Framework\Database\Definition\Table\Indexes\Index;
 class UniqueKey extends Index
 {
 	use Traits\Constraint;
-	protected $type = 'UNIQUE KEY';
+	protected string $type = 'UNIQUE KEY';
 }

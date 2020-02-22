@@ -5,16 +5,11 @@
  */
 abstract class Statement
 {
-	/**
-	 * @var Database
-	 */
-	protected $database;
+	protected Database $database;
 	/**
 	 * SQL clauses and parts.
-	 *
-	 * @var array
 	 */
-	protected $sql = [];
+	protected array $sql = [];
 
 	/**
 	 * Statement constructor.

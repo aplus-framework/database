@@ -2,14 +2,8 @@
 
 class PreparedStatement
 {
-	/**
-	 * @var \mysqli_stmt
-	 */
-	protected $statement;
-	/**
-	 * @var bool
-	 */
-	protected $sendingBlob = false;
+	protected \mysqli_stmt $statement;
+	protected bool $sendingBlob = false;
 
 	public function __construct(\mysqli_stmt $statement)
 	{

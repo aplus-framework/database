@@ -10,5 +10,5 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
 class SetColumn extends StringDataType
 {
 	use ListLength;
-	protected $type = 'set';
+	protected string $type = 'set';
 }

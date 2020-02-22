@@ -47,14 +47,8 @@ use Framework\Database\Definition\Table\DefinitionPart;
  */
 class ColumnDefinition extends DefinitionPart
 {
-	/**
-	 * @var Database
-	 */
-	protected $database;
-	/**
-	 * @var Column
-	 */
-	protected $column;
+	protected Database $database;
+	protected Column $column;
 
 	public function __construct(Database $database)
 	{

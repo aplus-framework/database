@@ -4,8 +4,8 @@ use Framework\Database\Definition\Table\Columns\Column;
 
 abstract class StringDataType extends Column
 {
-	protected $charset;
-	protected $collation;
+	protected string $charset;
+	protected string $collation;
 
 	public function charset(string $charset)
 	{

@@ -7,10 +7,7 @@ use Framework\Database\Database;
  */
 abstract class Migration
 {
-	/**
-	 * @var Database
-	 */
-	protected $database;
+	protected Database $database;
 
 	/**
 	 * Migration constructor.

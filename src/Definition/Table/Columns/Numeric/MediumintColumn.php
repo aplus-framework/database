@@ -7,6 +7,6 @@
  */
 class MediumintColumn extends NumericDataType
 {
-	protected $type = 'mediumint';
-	protected $maxLength = 127;
+	protected string $type = 'mediumint';
+	protected int $maxLength = 127;
 }
