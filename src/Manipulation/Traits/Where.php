@@ -519,7 +519,8 @@ trait Where
 		return $this->orWhere($column, 'IS NOT NULL');
 	}
 
-	public function whereExists(\Closure $subquery)
+	/* TODO: https://mariadb.com/kb/en/subqueries-and-exists/
+	 public function whereExists(\Closure $subquery)
 	{
 		$this->subquery($subquery);
 	}
@@ -527,7 +528,7 @@ trait Where
 	public function whereNotExists(\Closure $subquery)
 	{
 		$this->subquery($subquery);
-	}
+	}*/
 
 	/**
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext

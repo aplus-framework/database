@@ -19,7 +19,8 @@ class Result
 		$this->result->free();
 	}
 
-	public function meta()
+	/* TODO: meta infos
+	 public function meta()
 	{
 		foreach ($this->result->fetch_fields() as $field) {
 			if ($field->flags & \MYSQLI_NOT_NULL_FLAG) {
@@ -29,7 +30,7 @@ class Result
 				echo 'Field type VARCHAR';
 			}
 		}
-	}
+	}*/
 
 	public function moveCursor(int $offset) : bool
 	{
