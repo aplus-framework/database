@@ -6,7 +6,7 @@
 class Result
 {
 	protected \mysqli_result $result;
-	protected string $fetchClass = 'stdClass';
+	protected string $fetchClass = \stdClass::class;
 	protected array $fetchConstructor = [];
 
 	public function __construct(\mysqli_result $result)

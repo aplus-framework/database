@@ -255,4 +255,44 @@ class DatabaseTest extends TestCase
 		}
 		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
 	}
+
+	public function testUse()
+	{
+		static::$database->use(\getenv('DB_SCHEMA'));
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessage("Unknown database 'Foo'");
+		static::$database->use('Foo');
+	}
+
+	/**
+	 * @runInSeparateProcess
+	 */
+	public function testErrors()
+	{
+		$this->assertEquals([], static::$database->errors());
+		$this->assertNull(static::$database->error());
+		try {
+			static::$database->use('Foo');
+		} catch (\mysqli_sql_exception $e) {
+			//
+		}
+		try {
+			static::$database->use('Bar');
+		} catch (\mysqli_sql_exception $e) {
+			//
+		}
+		$this->assertEquals([
+			[
+				'errno' => 1049,
+				'sqlstate' => '42000',
+				'error' => "Unknown database 'Bar'",
+			],
+		], static::$database->errors());
+		$this->assertEquals("Unknown database 'Bar'", static::$database->error());
+	}
+
+	public function testWarnings()
+	{
+		$this->assertEquals(0, static::$database->warnings());
+	}
 }

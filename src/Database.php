@@ -192,6 +192,9 @@ class Database
 		return $this->mysqli->error ?: null;
 	}
 
+	/**
+	 * @throws \mysqli_sql_exception if schema is unknown
+	 */
 	public function use(string $schema) : void
 	{
 		$this->mysqli->select_db($schema);
