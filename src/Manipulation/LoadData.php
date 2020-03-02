@@ -48,7 +48,10 @@ class LoadData extends Statement
 
 	protected function renderInfile() : string
 	{
-		$filename = $this->database->protectIdentifier($this->sql['infile']);
+		if (empty($this->sql['infile'])) {
+			throw new \LogicException('INFILE statement is required');
+		}
+		$filename = $this->database->quote($this->sql['infile']);
 		return " INFILE {$filename}";
 	}
 
@@ -56,6 +59,14 @@ class LoadData extends Statement
 	{
 		$this->sql['table'] = $table;
 		return $this;
+	}
+
+	protected function renderIntoTable()
+	{
+		if (empty($this->sql['table'])) {
+			throw new \LogicException('Table is required');
+		}
+		return ' INTO TABLE ' . $this->database->protectIdentifier($this->sql['table']);
 	}
 
 	public function charset(string $charset)
@@ -88,11 +99,16 @@ class LoadData extends Statement
 
 	public function sql() : string
 	{
-		// TODO: Implement sql() method.
+		return 'LOAD DATA' . \PHP_EOL
+			. $this->renderOptions()
+			. $this->renderInfile()
+			. $this->renderIntoTable()
+			. $this->renderCharset()
+			. $this->renderIgnoreLines();
 	}
 
-	public function run()
+	public function run() : int
 	{
-		// TODO: Implement run() method.
+		return $this->database->exec($this->sql());
 	}
 }
