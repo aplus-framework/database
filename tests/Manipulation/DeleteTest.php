@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class DeleteTest extends TestCase
 {
-	/**
-	 * @var Delete
-	 */
-	protected $delete;
+	protected Delete $delete;
 
 	public function setup() : void
 	{

@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class CreateSchemaTest extends TestCase
 {
-	/**
-	 * @var CreateSchema
-	 */
-	protected $createSchema;
+	protected CreateSchema $createSchema;
 
 	protected function setUp() : void
 	{

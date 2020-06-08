@@ -42,10 +42,7 @@ use Tests\Database\TestCase;
 
 class ColumnDefinitionTest extends TestCase
 {
-	/**
-	 * @var ColumnDefinition
-	 */
-	protected $definition;
+	protected ColumnDefinition $definition;
 
 	protected function setUp() : void
 	{

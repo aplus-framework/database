@@ -17,7 +17,7 @@ use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
  */
 class IndexDefinition extends DefinitionPart
 {
-	protected Database$database;
+	protected Database $database;
 	protected ?string $name;
 	protected ?Index $index = null;
 

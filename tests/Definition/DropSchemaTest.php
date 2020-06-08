@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class DropSchemaTest extends TestCase
 {
-	/**
-	 * @var DropSchema
-	 */
-	protected $dropSchema;
+	protected DropSchema $dropSchema;
 
 	protected function setUp() : void
 	{

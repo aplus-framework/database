@@ -7,10 +7,7 @@ use Tests\Database\TestCase;
 
 class WithTest extends TestCase
 {
-	/**
-	 * @var With
-	 */
-	protected $with;
+	protected With $with;
 
 	public function setup() : void
 	{

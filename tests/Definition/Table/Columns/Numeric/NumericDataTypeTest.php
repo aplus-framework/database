@@ -4,10 +4,7 @@ use Tests\Database\TestCase;
 
 class NumericDataTypeTest extends TestCase
 {
-	/**
-	 * @var NumericDataTypeMock
-	 */
-	protected $column;
+	protected NumericDataTypeMock $column;
 
 	protected function setUp() : void
 	{

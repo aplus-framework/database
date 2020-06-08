@@ -6,10 +6,7 @@ use Tests\Database\TestCase;
 
 class AlterTableTest extends TestCase
 {
-	/**
-	 * @var AlterTable
-	 */
-	protected $alterTable;
+	protected AlterTable $alterTable;
 
 	protected function setUp() : void
 	{

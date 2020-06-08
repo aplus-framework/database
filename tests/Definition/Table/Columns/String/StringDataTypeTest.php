@@ -4,10 +4,7 @@ use Tests\Database\TestCase;
 
 class StringDataTypeTest extends TestCase
 {
-	/**
-	 * @var StringDataTypeMock
-	 */
-	protected $column;
+	protected StringDataTypeMock $column;
 
 	protected function setUp() : void
 	{

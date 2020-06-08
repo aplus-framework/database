@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class UpdateTest extends TestCase
 {
-	/**
-	 * @var Update
-	 */
-	protected $update;
+	protected Update $update;
 
 	public function setup() : void
 	{

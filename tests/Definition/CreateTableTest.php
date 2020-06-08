@@ -6,10 +6,7 @@ use Tests\Database\TestCase;
 
 class CreateTableTest extends TestCase
 {
-	/**
-	 * @var CreateTable
-	 */
-	protected $createTable;
+	protected CreateTable $createTable;
 
 	protected function setUp() : void
 	{

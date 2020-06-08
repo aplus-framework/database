@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class ForeignKeyTest extends TestCase
 {
-	/**
-	 * @var ForeignKey
-	 */
-	protected $index;
+	protected ForeignKey $index;
 
 	protected function setUp() : void
 	{

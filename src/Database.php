@@ -51,6 +51,8 @@ class Database
 	 * @param int          $port
 	 *
 	 * @see Database::makeConfig
+	 *
+	 * @throws \Exception if connections fail
 	 */
 	public function __construct(
 		$username,

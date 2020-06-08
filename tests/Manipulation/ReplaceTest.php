@@ -6,10 +6,7 @@ use Tests\Database\TestCase;
 
 class ReplaceTest extends TestCase
 {
-	/**
-	 * @var Replace
-	 */
-	protected $replace;
+	protected Replace $replace;
 
 	public function setup() : void
 	{

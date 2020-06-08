@@ -4,10 +4,7 @@ use Tests\Database\TestCase;
 
 class ColumnTest extends TestCase
 {
-	/**
-	 * @var ColumnMock
-	 */
-	protected $column;
+	protected ColumnMock $column;
 
 	protected function setUp() : void
 	{

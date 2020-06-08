@@ -11,10 +11,7 @@ use Tests\Database\TestCase;
 
 class IndexDefinitionTest extends TestCase
 {
-	/**
-	 * @var IndexDefinition
-	 */
-	protected $definition;
+	protected IndexDefinition $definition;
 
 	protected function setUp() : void
 	{

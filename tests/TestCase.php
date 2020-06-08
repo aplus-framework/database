@@ -4,10 +4,7 @@ use Framework\Database\Database;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
-	/**
-	 * @var Database
-	 */
-	protected static $database;
+	protected static ?Database $database = null;
 
 	public function __construct(...$params)
 	{

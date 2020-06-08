@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class AlterSchemaTest extends TestCase
 {
-	/**
-	 * @var AlterSchema
-	 */
-	protected $alterSchema;
+	protected AlterSchema $alterSchema;
 
 	protected function setUp() : void
 	{

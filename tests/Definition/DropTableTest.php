@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class DropTableTest extends TestCase
 {
-	/**
-	 * @var DropTable
-	 */
-	protected $dropTable;
+	protected DropTable $dropTable;
 
 	protected function setUp() : void
 	{

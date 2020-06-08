@@ -6,10 +6,7 @@ use Tests\Database\TestCase;
 
 class InsertTest extends TestCase
 {
-	/**
-	 * @var Insert
-	 */
-	protected $insert;
+	protected Insert $insert;
 
 	public function setup() : void
 	{

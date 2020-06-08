@@ -6,10 +6,7 @@ use Tests\Database\TestCase;
 
 class SelectTest extends TestCase
 {
-	/**
-	 * @var Select
-	 */
-	protected $select;
+	protected Select $select;
 
 	public function setup() : void
 	{
