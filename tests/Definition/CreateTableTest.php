@@ -44,7 +44,7 @@ class CreateTableTest extends TestCase
 				$definition->column('c2')->varchar(255);
 			});
 		$this->assertEquals(
-			"CREATE TABLE `t1` (\n  `c1` int(11),\n  `c2` varchar(255)\n)",
+			"CREATE TABLE `t1` (\n  `c1` int(11) NOT NULL,\n  `c2` varchar(255) NOT NULL\n)",
 			$sql->sql()
 		);
 	}
@@ -57,7 +57,7 @@ class CreateTableTest extends TestCase
 				$definition->index()->primaryKey('c1');
 			});
 		$this->assertEquals(
-			"CREATE TABLE `t1` (\n  `c1` int,\n  PRIMARY KEY (`c1`)\n)",
+			"CREATE TABLE `t1` (\n  `c1` int NOT NULL,\n  PRIMARY KEY (`c1`)\n)",
 			$sql->sql()
 		);
 	}
@@ -65,7 +65,7 @@ class CreateTableTest extends TestCase
 	public function testIfNotExists()
 	{
 		$this->assertEquals(
-			"CREATE TABLE IF NOT EXISTS `t1` (\n  `c1` int\n)",
+			"CREATE TABLE IF NOT EXISTS `t1` (\n  `c1` int NOT NULL\n)",
 			$this->prepare()->ifNotExists()->sql()
 		);
 	}
@@ -73,7 +73,7 @@ class CreateTableTest extends TestCase
 	public function testOrReplace()
 	{
 		$this->assertEquals(
-			"CREATE OR REPLACE TABLE `t1` (\n  `c1` int\n)",
+			"CREATE OR REPLACE TABLE `t1` (\n  `c1` int NOT NULL\n)",
 			$this->prepare()->orReplace()->sql()
 		);
 	}
@@ -91,7 +91,7 @@ class CreateTableTest extends TestCase
 	public function testTemporary()
 	{
 		$this->assertEquals(
-			"CREATE TEMPORARY TABLE `t1` (\n  `c1` int\n)",
+			"CREATE TEMPORARY TABLE `t1` (\n  `c1` int NOT NULL\n)",
 			$this->prepare()->temporary()->sql()
 		);
 	}

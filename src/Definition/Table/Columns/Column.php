@@ -8,9 +8,9 @@ abstract class Column extends DefinitionPart
 	protected Database $database;
 	protected string $type;
 	protected array $length;
-	protected ?bool $null = null;
-	protected ?bool $uniqueKey = null;
-	protected ?bool $primaryKey = null;
+	protected bool $null = false;
+	protected bool $uniqueKey = false;
+	protected bool $primaryKey = false;
 	/**
 	 * @see default
 	 *
@@ -18,7 +18,7 @@ abstract class Column extends DefinitionPart
 	 */
 	protected $default;
 	protected ?string $comment;
-	protected ?bool $first = null;
+	protected bool $first = false;
 	protected ?string $after;
 
 	/**
@@ -64,9 +64,6 @@ abstract class Column extends DefinitionPart
 
 	protected function renderNull() : ?string
 	{
-		if ( ! isset($this->null)) {
-			return null;
-		}
 		return $this->null ? ' NULL' : ' NOT NULL';
 	}
 

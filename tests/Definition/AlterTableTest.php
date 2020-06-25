@@ -37,7 +37,7 @@ class AlterTableTest extends TestCase
 				$definition->index('Foo')->uniqueKey('c2');
 			});
 		$this->assertEquals(
-			"ALTER TABLE `t1`\n ADD COLUMN `c1` int,\n ADD PRIMARY KEY (`c1`),\n ADD UNIQUE KEY `Foo` (`c2`)",
+			"ALTER TABLE `t1`\n ADD COLUMN `c1` int NOT NULL,\n ADD PRIMARY KEY (`c1`),\n ADD UNIQUE KEY `Foo` (`c2`)",
 			$sql->sql()
 		);
 	}
@@ -49,7 +49,7 @@ class AlterTableTest extends TestCase
 				$definition->column('c1', 'c5')->bigint();
 			});
 		$this->assertEquals(
-			"ALTER TABLE `t1`\n CHANGE COLUMN `c1` `c5` bigint",
+			"ALTER TABLE `t1`\n CHANGE COLUMN `c1` `c5` bigint NOT NULL",
 			$sql->sql()
 		);
 	}
@@ -69,7 +69,7 @@ class AlterTableTest extends TestCase
 	public function testWait()
 	{
 		$this->assertEquals(
-			"ALTER TABLE `t1`\n WAIT 10\n ADD COLUMN `c1` int",
+			"ALTER TABLE `t1`\n WAIT 10\n ADD COLUMN `c1` int NOT NULL",
 			$this->prepare()->wait(10)->sql()
 		);
 	}
@@ -84,7 +84,7 @@ class AlterTableTest extends TestCase
 	public function testOnline()
 	{
 		$this->assertEquals(
-			"ALTER ONLINE TABLE `t1`\n ADD COLUMN `c1` int",
+			"ALTER ONLINE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
 			$this->prepare()->online()->sql()
 		);
 	}
@@ -92,7 +92,7 @@ class AlterTableTest extends TestCase
 	public function testIgnore()
 	{
 		$this->assertEquals(
-			"ALTER IGNORE TABLE `t1`\n ADD COLUMN `c1` int",
+			"ALTER IGNORE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
 			$this->prepare()->ignore()->sql()
 		);
 	}

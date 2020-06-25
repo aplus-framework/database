@@ -8,17 +8,17 @@ class DecimalLengthTest extends TestCase
 	{
 		$column = new DecimalLengthMock(static::$database);
 		$this->assertEquals(
-			' mock',
+			' mock NOT NULL',
 			$column->sql()
 		);
 		$column = new DecimalLengthMock(static::$database, 12);
 		$this->assertEquals(
-			' mock(12)',
+			' mock(12) NOT NULL',
 			$column->sql()
 		);
 		$column = new DecimalLengthMock(static::$database, 16, 4);
 		$this->assertEquals(
-			' mock(16,4)',
+			' mock(16,4) NOT NULL',
 			$column->sql()
 		);
 	}

@@ -15,12 +15,12 @@ class ColumnTest extends TestCase
 	{
 		$column = new ColumnMock(static::$database, 25);
 		$this->assertEquals(
-			' mock(25)',
+			' mock(25) NOT NULL',
 			$column->sql()
 		);
 		$column = new ColumnMock(static::$database, "'a'");
 		$this->assertEquals(
-			" mock('\\'a\\'')",
+			" mock('\\'a\\'') NOT NULL",
 			$column->sql()
 		);
 	}
@@ -36,7 +36,7 @@ class ColumnTest extends TestCase
 	public function testType()
 	{
 		$this->assertEquals(
-			' mock',
+			' mock NOT NULL',
 			$this->column->sql()
 		);
 	}
@@ -56,11 +56,11 @@ class ColumnTest extends TestCase
 	public function testDefault()
 	{
 		$this->assertEquals(
-			" mock DEFAULT 'abc'",
+			" mock NOT NULL DEFAULT 'abc'",
 			$this->column->default('abc')->sql()
 		);
 		$this->assertEquals(
-			' mock DEFAULT (now())',
+			' mock NOT NULL DEFAULT (now())',
 			$this->column->default(function () {
 				return 'now()';
 			})->sql()
@@ -70,7 +70,7 @@ class ColumnTest extends TestCase
 	public function testComment()
 	{
 		$this->assertEquals(
-			" mock COMMENT 'abc'",
+			" mock NOT NULL COMMENT 'abc'",
 			$this->column->comment('abc')->sql()
 		);
 	}
@@ -78,7 +78,7 @@ class ColumnTest extends TestCase
 	public function testPrimaryKey()
 	{
 		$this->assertEquals(
-			' mock PRIMARY KEY',
+			' mock NOT NULL PRIMARY KEY',
 			$this->column->primaryKey()->sql()
 		);
 	}
@@ -86,7 +86,7 @@ class ColumnTest extends TestCase
 	public function testUniqueKey()
 	{
 		$this->assertEquals(
-			' mock UNIQUE KEY',
+			' mock NOT NULL UNIQUE KEY',
 			$this->column->uniqueKey()->sql()
 		);
 	}
@@ -94,7 +94,7 @@ class ColumnTest extends TestCase
 	public function testFirst()
 	{
 		$this->assertEquals(
-			' mock FIRST',
+			' mock NOT NULL FIRST',
 			$this->column->first()->sql()
 		);
 	}
@@ -102,7 +102,7 @@ class ColumnTest extends TestCase
 	public function testAfter()
 	{
 		$this->assertEquals(
-			' mock AFTER `c1`',
+			' mock NOT NULL AFTER `c1`',
 			$this->column->after('c1')->sql()
 		);
 	}
