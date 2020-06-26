@@ -46,6 +46,7 @@ class Database
 	 * @see transaction
 	 */
 	protected bool $inTransaction = false;
+	protected string $lastQuery = '';
 
 	/**
 	 * Database constructor.
@@ -414,6 +415,11 @@ class Database
 		return new With($this);
 	}
 
+	public function lastQuery() : string
+	{
+		return $this->lastQuery;
+	}
+
 	/**
 	 * Executes an SQL statement and return the number of affected rows.
 	 *
@@ -423,6 +429,7 @@ class Database
 	 */
 	public function exec(string $statement) : int
 	{
+		$this->lastQuery = $statement;
 		$this->mysqli->real_query($statement);
 		if ($this->mysqli->field_count) {
 			$this->mysqli->store_result()->free();
@@ -443,6 +450,7 @@ class Database
 	 */
 	public function query(string $statement) : Result
 	{
+		$this->lastQuery = $statement;
 		$result = $this->mysqli->query($statement);
 		if (\is_bool($result)) {
 			throw new InvalidArgumentException(
