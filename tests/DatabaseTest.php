@@ -144,6 +144,16 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable());
 	}
 
+	public function testDefinitionInstancesWithParams()
+	{
+		$this->assertInstanceOf(CreateSchema::class, static::$database->createSchema('foo'));
+		$this->assertInstanceOf(DropSchema::class, static::$database->dropSchema('foo'));
+		$this->assertInstanceOf(AlterSchema::class, static::$database->alterSchema('foo'));
+		$this->assertInstanceOf(CreateTable::class, static::$database->createTable('foo'));
+		$this->assertInstanceOf(DropTable::class, static::$database->dropTable('foo'));
+		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable('foo'));
+	}
+
 	public function testManipulationInstances()
 	{
 		$this->assertInstanceOf(Delete::class, static::$database->delete());
@@ -152,6 +162,17 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Replace::class, static::$database->replace());
 		$this->assertInstanceOf(Select::class, static::$database->select());
 		$this->assertInstanceOf(Update::class, static::$database->update());
+		$this->assertInstanceOf(With::class, static::$database->with());
+	}
+
+	public function testManipulationInstancesWithParams()
+	{
+		$this->assertInstanceOf(Delete::class, static::$database->delete('foo'));
+		$this->assertInstanceOf(Insert::class, static::$database->insert('foo'));
+		$this->assertInstanceOf(LoadData::class, static::$database->loadData('foo'));
+		$this->assertInstanceOf(Replace::class, static::$database->replace('foo'));
+		$this->assertInstanceOf(Select::class, static::$database->select('foo'));
+		$this->assertInstanceOf(Update::class, static::$database->update('foo'));
 		$this->assertInstanceOf(With::class, static::$database->with());
 	}
 

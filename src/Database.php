@@ -205,71 +205,115 @@ class Database
 	/**
 	 * Call a CREATE SCHEMA statement.
 	 *
+	 * @param string|null $schema_name
+	 *
 	 * @return CreateSchema
 	 */
-	public function createSchema() : CreateSchema
+	public function createSchema(string $schema_name = null) : CreateSchema
 	{
-		return new CreateSchema($this);
+		$instance = new CreateSchema($this);
+		if ($schema_name) {
+			$instance->schema($schema_name);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a DROP SCHEMA statement.
 	 *
+	 * @param string|null $schema_name
+	 *
 	 * @return DropSchema
 	 */
-	public function dropSchema() : DropSchema
+	public function dropSchema(string $schema_name = null) : DropSchema
 	{
-		return new DropSchema($this);
+		$instance = new DropSchema($this);
+		if ($schema_name) {
+			$instance->schema($schema_name);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a ALTER SCHEMA statement.
 	 *
+	 * @param string|null $schema_name
+	 *
 	 * @return AlterSchema
 	 */
-	public function alterSchema() : AlterSchema
+	public function alterSchema(string $schema_name = null) : AlterSchema
 	{
-		return new AlterSchema($this);
+		$instance = new AlterSchema($this);
+		if ($schema_name) {
+			$instance->schema($schema_name);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a CREATE TABLE statement.
 	 *
+	 * @param string|null $table_name
+	 *
 	 * @return CreateTable
 	 */
-	public function createTable() : CreateTable
+	public function createTable(string $table_name = null) : CreateTable
 	{
-		return new CreateTable($this);
+		$instance = new CreateTable($this);
+		if ($table_name) {
+			$instance->table($table_name);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a DROP TABLE statement.
 	 *
+	 * @param string|null  $table
+	 * @param array|string $tables
+	 *
 	 * @return DropTable
 	 */
-	public function dropTable() : DropTable
+	public function dropTable(string $table = null, string ...$tables) : DropTable
 	{
-		return new DropTable($this);
+		$instance = new DropTable($this);
+		if ($table) {
+			$instance->table($table, ...$tables);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a ALTER TABLE statement.
 	 *
+	 * @param string|null $table_name
+	 *
 	 * @return AlterTable
 	 */
-	public function alterTable() : AlterTable
+	public function alterTable(string $table_name = null) : AlterTable
 	{
-		return new AlterTable($this);
+		$instance = new AlterTable($this);
+		if ($table_name) {
+			$instance->table($table_name);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a DELETE statement.
 	 *
+	 * @param array|\Closure|string $reference
+	 * @param mixed                 $references
+	 *
 	 * @return Delete
 	 */
-	public function delete() : Delete
+	public function delete($reference = null, ...$references) : Delete
 	{
-		return new Delete($this);
+		$instance = new Delete($this);
+		if ($reference) {
+			$instance->table($reference, ...$references);
+		}
+		return $instance;
 	}
 
 	/**
@@ -277,9 +321,13 @@ class Database
 	 *
 	 * @return Insert
 	 */
-	public function insert() : Insert
+	public function insert(string $into_table = null) : Insert
 	{
-		return new Insert($this);
+		$instance = new Insert($this);
+		if ($into_table) {
+			$instance->into($into_table);
+		}
+		return $instance;
 	}
 
 	/**
@@ -287,39 +335,63 @@ class Database
 	 *
 	 * @return LoadData
 	 */
-	public function loadData() : LoadData
+	public function loadData(string $into_table = null) : LoadData
 	{
-		return new LoadData($this);
+		$instance = new LoadData($this);
+		if ($into_table) {
+			$instance->intoTable($into_table);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a REPLACE statement.
 	 *
+	 * @param string|null $into_table
+	 *
 	 * @return Replace
 	 */
-	public function replace() : Replace
+	public function replace(string $into_table = null) : Replace
 	{
-		return new Replace($this);
+		$instance = new Replace($this);
+		if ($into_table) {
+			$instance->into($into_table);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a SELECT statement.
 	 *
+	 * @param array|\Closure|string|null $reference
+	 * @param mixed                      $references
+	 *
 	 * @return Select
 	 */
-	public function select() : Select
+	public function select($reference = null, ...$references) : Select
 	{
-		return new Select($this);
+		$instance = new Select($this);
+		if ($reference) {
+			$instance->from($reference, ...$references);
+		}
+		return $instance;
 	}
 
 	/**
 	 * Call a UPDATE statement.
 	 *
+	 * @param array|\Closure|string|null $reference
+	 * @param mixed                      $references
+	 *
 	 * @return Update
 	 */
-	public function update() : Update
+	public function update($reference = null, ...$references) : Update
 	{
-		return new Update($this);
+		$instance = new Update($this);
+		if ($reference) {
+			$instance->from($reference, ...$references);
+		}
+		return $instance;
 	}
 
 	/**
