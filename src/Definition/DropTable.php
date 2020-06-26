@@ -1,6 +1,8 @@
 <?php namespace Framework\Database\Definition;
 
 use Framework\Database\Statement;
+use InvalidArgumentException;
+use LogicException;
 
 /**
  * Class DropTable.
@@ -61,7 +63,7 @@ class DropTable extends Statement
 	protected function renderTables() : string
 	{
 		if ( ! isset($this->sql['tables'])) {
-			throw new \LogicException('Table names can not be empty');
+			throw new LogicException('Table names can not be empty');
 		}
 		$tables = $this->sql['tables'];
 		foreach ($tables as &$table) {
@@ -84,7 +86,7 @@ class DropTable extends Statement
 			return null;
 		}
 		if ($this->sql['wait'] < 0) {
-			throw new \InvalidArgumentException(
+			throw new InvalidArgumentException(
 				"Invalid WAIT value: {$this->sql['wait']}"
 			);
 		}

@@ -1,5 +1,8 @@
 <?php namespace Framework\Database\Manipulation\Traits;
 
+use Closure;
+use InvalidArgumentException;
+
 /**
  * Trait Join.
  *
@@ -12,8 +15,8 @@ trait Join
 	/**
 	 * Sets the FROM clause.
 	 *
-	 * @param array|\Closure|string $reference  Table reference
-	 * @param mixed                 $references
+	 * @param array|Closure|string $reference  Table reference
+	 * @param mixed                $references
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *
@@ -55,15 +58,15 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "$type JOIN $table $clause $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param string          $type        JOIN type. One of: CROSS, INNER, LEFT, LEFT OUTER,
-	 *                                     RIGHT, RIGHT OUTER, NATURAL, NATURAL LEFT, NATURAL LEFT
-	 *                                     OUTER, NATURAL RIGHT, NATURAL RIGHT OUTE or empty (same
-	 *                                     as INNER)
-	 * @param string|null     $clause      Condition clause. NULL if has a NATURAL type otherwise
-	 *                                     ON or USING
-	 * @param array|\Closure  $conditional A conditional expression as \Closure or the columns list
-	 *                                     as array
+	 * @param Closure|string $table       Table factor
+	 * @param string         $type        JOIN type. One of: CROSS, INNER, LEFT, LEFT OUTER,
+	 *                                    RIGHT, RIGHT OUTER, NATURAL, NATURAL LEFT, NATURAL LEFT
+	 *                                    OUTER, NATURAL RIGHT, NATURAL RIGHT OUTE or empty (same
+	 *                                    as INNER)
+	 * @param string|null    $clause      Condition clause. NULL if has a NATURAL type otherwise
+	 *                                    ON or USING
+	 * @param array|Closure  $conditional A conditional expression as \Closure or the columns list
+	 *                                    as array
 	 *
 	 * @return $this
 	 */
@@ -75,12 +78,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function joinOn($table, \Closure $conditional)
+	public function joinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, '', 'ON', $conditional);
 	}
@@ -88,8 +91,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -101,12 +104,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "INNER JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function innerJoinOn($table, \Closure $conditional)
+	public function innerJoinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, 'INNER', 'ON', $conditional);
 	}
@@ -114,8 +117,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "INNER JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -127,12 +130,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "CROSS JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function crossJoinOn($table, \Closure $conditional)
+	public function crossJoinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, 'CROSS', 'ON', $conditional);
 	}
@@ -140,8 +143,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "CROSS JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -153,12 +156,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function leftJoinOn($table, \Closure $conditional)
+	public function leftJoinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, 'LEFT', 'ON', $conditional);
 	}
@@ -166,8 +169,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -179,12 +182,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT OUTER JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function leftOuterJoinOn($table, \Closure $conditional)
+	public function leftOuterJoinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, 'LEFT OUTER', 'ON', $conditional);
 	}
@@ -192,8 +195,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT OUTER JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -205,12 +208,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function rightJoinOn($table, \Closure $conditional)
+	public function rightJoinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, 'RIGHT', 'ON', $conditional);
 	}
@@ -218,8 +221,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -231,12 +234,12 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT OUTER JOIN $table ON $conditional".
 	 *
-	 * @param \Closure|string $table       Table factor
-	 * @param \Closure        $conditional Conditional expression
+	 * @param Closure|string $table       Table factor
+	 * @param Closure        $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
-	public function rightOuterJoinOn($table, \Closure $conditional)
+	public function rightOuterJoinOn($table, Closure $conditional)
 	{
 		return $this->setJoin($table, 'RIGHT OUTER', 'ON', $conditional);
 	}
@@ -244,8 +247,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT OUTER JOIN $table USING ...$columns".
 	 *
-	 * @param \Closure|string $table   Table factor
-	 * @param mixed           $columns Columns list
+	 * @param Closure|string $table   Table factor
+	 * @param mixed          $columns Columns list
 	 *
 	 * @return $this
 	 */
@@ -257,7 +260,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "NATURAL JOIN $table".
 	 *
-	 * @param \Closure|string $table Table factor
+	 * @param Closure|string $table Table factor
 	 *
 	 * @return $this
 	 */
@@ -269,7 +272,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "NATURAL LEFT JOIN $table".
 	 *
-	 * @param \Closure|string $table Table factor
+	 * @param Closure|string $table Table factor
 	 *
 	 * @return $this
 	 */
@@ -281,7 +284,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "NATURAL LEFT OUTER JOIN $table".
 	 *
-	 * @param \Closure|string $table Table factor
+	 * @param Closure|string $table Table factor
 	 *
 	 * @return $this
 	 */
@@ -293,7 +296,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "NATURAL RIGHT JOIN $table".
 	 *
-	 * @param \Closure|string $table Table factor
+	 * @param Closure|string $table Table factor
 	 *
 	 * @return $this
 	 */
@@ -305,7 +308,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "NATURAL RIGHT OUTER JOIN $table".
 	 *
-	 * @param \Closure|string $table Table factor
+	 * @param Closure|string $table Table factor
 	 *
 	 * @return $this
 	 */
@@ -389,7 +392,7 @@ trait Join
 		], true)) {
 			return $result;
 		}
-		throw new \InvalidArgumentException("Invalid JOIN type: {$type}");
+		throw new InvalidArgumentException("Invalid JOIN type: {$type}");
 	}
 
 	private function checkNaturalJoinType(string $type, ?string $clause, $expression) : bool
@@ -402,7 +405,7 @@ trait Join
 			'NATURAL RIGHT OUTER',
 		], true)) {
 			if ($clause !== null || $expression !== null) {
-				throw new \InvalidArgumentException(
+				throw new InvalidArgumentException(
 					"{$type} JOIN has not condition"
 				);
 			}
@@ -423,7 +426,7 @@ trait Join
 		], true)) {
 			return $result;
 		}
-		throw new \InvalidArgumentException("Invalid JOIN condition clause: {$clause}");
+		throw new InvalidArgumentException("Invalid JOIN condition clause: {$clause}");
 	}
 
 	private function renderJoinConditionExpression(?string $clause, $expression) : ?string

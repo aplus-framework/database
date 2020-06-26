@@ -1,5 +1,7 @@
 <?php namespace Framework\Database;
 
+use InvalidArgumentException;
+
 class PreparedStatement
 {
 	protected \mysqli_stmt $statement;
@@ -66,7 +68,7 @@ class PreparedStatement
 					$types .= 's';
 					break;
 				default:
-					throw new \InvalidArgumentException(
+					throw new InvalidArgumentException(
 						"Invalid param data type: {$type}"
 					);
 			}

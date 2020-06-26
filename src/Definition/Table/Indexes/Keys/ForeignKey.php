@@ -1,6 +1,8 @@
 <?php namespace Framework\Database\Definition\Table\Indexes\Keys;
 
 use Framework\Database\Definition\Table\Indexes\Index;
+use InvalidArgumentException;
+use LogicException;
 
 /**
  * Class ForeignKey.
@@ -26,7 +28,7 @@ class ForeignKey extends Index
 	protected function renderReferences() : string
 	{
 		if ($this->referenceTable === null) {
-			throw new \LogicException('REFERENCES clause was not set');
+			throw new LogicException('REFERENCES clause was not set');
 		}
 		$table = $this->database->protectIdentifier($this->referenceTable);
 		$columns = [];
@@ -73,7 +75,7 @@ class ForeignKey extends Index
 		if (\in_array($result, ['RESTRICT', 'CASCADE', 'SET NULL', 'NO ACTION'], true)) {
 			return $result;
 		}
-		throw new \InvalidArgumentException("Invalid reference option: {$option}");
+		throw new InvalidArgumentException("Invalid reference option: {$option}");
 	}
 
 	protected function renderTypeAttributes() : ?string

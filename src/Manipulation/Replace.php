@@ -1,5 +1,9 @@
 <?php namespace Framework\Database\Manipulation;
 
+use Closure;
+use InvalidArgumentException;
+use LogicException;
+
 /**
  * Class Replace.
  *
@@ -26,7 +30,7 @@ class Replace extends Statement
 	protected function renderInto() : string
 	{
 		if ( ! isset($this->sql['into'])) {
-			throw new \LogicException('INTO table must be set');
+			throw new LogicException('INTO table must be set');
 		}
 		return ' INTO ' . $this->renderIdentifier($this->sql['into']);
 	}
@@ -63,7 +67,7 @@ class Replace extends Statement
 				static::OPT_DELAYED,
 				static::OPT_LOW_PRIORITY,
 			], true)) {
-				throw new \InvalidArgumentException("Invalid option: {$input}");
+				throw new InvalidArgumentException("Invalid option: {$input}");
 			}
 		}
 		unset($option);
@@ -72,7 +76,7 @@ class Replace extends Statement
 			[static::OPT_DELAYED, static::OPT_LOW_PRIORITY]
 		);
 		if (\count($intersection) > 1) {
-			throw new \LogicException(
+			throw new LogicException(
 				'Options LOW_PRIORITY and DELAYED can not be used together'
 			);
 		}
@@ -109,7 +113,7 @@ class Replace extends Statement
 			&& ! isset($this->sql['select'])
 			&& ! $this->hasSet()
 		) {
-			throw new \LogicException(
+			throw new LogicException(
 				'The REPLACE INTO must be followed by VALUES, SET or SELECT statement'
 			);
 		}
@@ -118,13 +122,13 @@ class Replace extends Statement
 	/**
 	 * Sets the SELECT statement part.
 	 *
-	 * @param \Closure $select
+	 * @param Closure $select
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-select/
 	 *
 	 * @return $this
 	 */
-	public function select(\Closure $select)
+	public function select(Closure $select)
 	{
 		$this->sql['select'] = $select(new Select($this->database));
 		return $this;
@@ -136,10 +140,10 @@ class Replace extends Statement
 			return null;
 		}
 		if (isset($this->sql['values'])) {
-			throw new \LogicException('SELECT statement is not allowed when VALUES is set');
+			throw new LogicException('SELECT statement is not allowed when VALUES is set');
 		}
 		if (isset($this->sql['set'])) {
-			throw new \LogicException('SELECT statement is not allowed when SET is set');
+			throw new LogicException('SELECT statement is not allowed when SET is set');
 		}
 		return " {$this->sql['select']}";
 	}
@@ -149,10 +153,10 @@ class Replace extends Statement
 		$part = $this->renderSet();
 		if ($part) {
 			if (isset($this->sql['columns'])) {
-				throw new \LogicException('SET statement is not allowed when columns are set');
+				throw new LogicException('SET statement is not allowed when columns are set');
 			}
 			if (isset($this->sql['values'])) {
-				throw new \LogicException('SET statement is not allowed when VALUES is set');
+				throw new LogicException('SET statement is not allowed when VALUES is set');
 			}
 		}
 		return $part;

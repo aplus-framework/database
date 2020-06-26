@@ -1,5 +1,9 @@
 <?php namespace Framework\Database\Manipulation;
 
+use Closure;
+use InvalidArgumentException;
+use LogicException;
+
 /**
  * Class Update.
  *
@@ -35,7 +39,7 @@ class Update extends Statement
 				static::OPT_IGNORE,
 				static::OPT_LOW_PRIORITY,
 			], true)) {
-				throw new \InvalidArgumentException("Invalid option: {$input}");
+				throw new InvalidArgumentException("Invalid option: {$input}");
 			}
 		}
 		unset($option);
@@ -46,8 +50,8 @@ class Update extends Statement
 	/**
 	 * Sets the table references.
 	 *
-	 * @param array|\Closure|string $reference
-	 * @param mixed                 ...$references
+	 * @param array|Closure|string $reference
+	 * @param mixed                ...$references
 	 *
 	 * @return $this
 	 */
@@ -64,7 +68,7 @@ class Update extends Statement
 	protected function renderTable() : string
 	{
 		if ( ! isset($this->sql['table'])) {
-			throw new \LogicException('Table references must be set');
+			throw new LogicException('Table references must be set');
 		}
 		$tables = [];
 		foreach ($this->sql['table'] as $table) {
@@ -90,7 +94,7 @@ class Update extends Statement
 	protected function renderSetPart() : string
 	{
 		if ( ! $this->hasSet()) {
-			throw new \LogicException('SET statement must be set');
+			throw new LogicException('SET statement must be set');
 		}
 		return $this->renderSet();
 	}

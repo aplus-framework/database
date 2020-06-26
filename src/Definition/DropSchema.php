@@ -1,6 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
 use Framework\Database\Statement;
+use LogicException;
 
 /**
  * Class DropSchema.
@@ -34,7 +35,7 @@ class DropSchema extends Statement
 		if (isset($this->sql['schema'])) {
 			return ' ' . $this->database->protectIdentifier($this->sql['schema']);
 		}
-		throw new \LogicException('SCHEMA name must be set');
+		throw new LogicException('SCHEMA name must be set');
 	}
 
 	public function sql() : string

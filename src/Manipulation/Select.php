@@ -1,6 +1,9 @@
 <?php namespace Framework\Database\Manipulation;
 
+use Closure;
 use Framework\Database\Result;
+use InvalidArgumentException;
+use LogicException;
 
 /**
  * Class Select.
@@ -151,7 +154,7 @@ class Select extends Statement
 				static::OPT_SQL_NO_CACHE,
 				static::OPT_SQL_CALC_FOUND_ROWS,
 			], true)) {
-				throw new \InvalidArgumentException("Invalid option: {$input}");
+				throw new InvalidArgumentException("Invalid option: {$input}");
 			}
 		}
 		unset($option);
@@ -160,14 +163,14 @@ class Select extends Statement
 			[static::OPT_ALL, static::OPT_DISTINCT, static::OPT_DISTINCTROW]
 		);
 		if (\count($intersection) > 1) {
-			throw new \LogicException('Options ALL and DISTINCT can not be used together');
+			throw new LogicException('Options ALL and DISTINCT can not be used together');
 		}
 		$intersection = \array_intersect(
 			$options,
 			[static::OPT_SQL_CACHE, static::OPT_SQL_NO_CACHE]
 		);
 		if (\count($intersection) > 1) {
-			throw new \LogicException('Options SQL_CACHE and SQL_NO_CACHE can not be used together');
+			throw new LogicException('Options SQL_CACHE and SQL_NO_CACHE can not be used together');
 		}
 		return \implode(' ', $options);
 	}
@@ -177,9 +180,9 @@ class Select extends Statement
 	 *
 	 * Gerally used with the FROM clause as column names.
 	 *
-	 * @param array|\Closure|string $expression
-	 * @param mixed                 $expressions Each expresion must be of type: array, string or
-	 *                                           \Closure
+	 * @param array|Closure|string $expression
+	 * @param mixed                $expressions Each expresion must be of type: array, string or
+	 *                                          \Closure
 	 *
 	 * @see https://mariadb.com/kb/en/library/select/#select-expressions
 	 *
@@ -197,9 +200,9 @@ class Select extends Statement
 	/**
 	 * Alias of the expressions method.
 	 *
-	 * @param array|\Closure|string $expression
-	 * @param mixed                 $expressions Each expresion must be of type: array, string or
-	 *                                           \Closure
+	 * @param array|Closure|string $expression
+	 * @param mixed                $expressions Each expresion must be of type: array, string or
+	 *                                          \Closure
 	 *
 	 * @return $this
 	 */
@@ -301,7 +304,7 @@ class Select extends Statement
 			return null;
 		}
 		if (\is_file($this->sql['into_outfile']['filename'])) {
-			throw new \LogicException(
+			throw new LogicException(
 				"INTO OUTFILE filename must not exist: {$this->sql['into_outfile']['filename']}"
 			);
 		}
@@ -330,7 +333,7 @@ class Select extends Statement
 					static::EXP_FIELDS_OPTIONALLY_ENCLOSED_BY,
 					static::EXP_FIELDS_ESCAPED_BY,
 				], true)) {
-					throw new \InvalidArgumentException(
+					throw new InvalidArgumentException(
 						"Invalid INTO OUTFILE fields option: {$option}"
 					);
 				}
@@ -351,7 +354,7 @@ class Select extends Statement
 					static::EXP_LINES_STARTING_BY,
 					static::EXP_LINES_TERMINATED_BY,
 				], true)) {
-					throw new \InvalidArgumentException(
+					throw new InvalidArgumentException(
 						"Invalid INTO OUTFILE lines option: {$option}"
 					);
 				}
@@ -384,7 +387,7 @@ class Select extends Statement
 			return null;
 		}
 		if (\is_file($this->sql['into_dumpfile']['filepath'])) {
-			throw new \LogicException(
+			throw new LogicException(
 				"INTO DUMPFILE filepath must not exist: {$this->sql['into_dumpfile']['filepath']}"
 			);
 		}
@@ -439,7 +442,7 @@ class Select extends Statement
 		$wait = '';
 		if ($this->sql['lock']['wait'] !== null) {
 			if ($this->sql['lock']['wait'] < 0) {
-				throw new \InvalidArgumentException(
+				throw new InvalidArgumentException(
 					"Invalid {$this->sql['lock']['type']} WAIT value: {$this->sql['lock']['wait']}"
 				);
 			}

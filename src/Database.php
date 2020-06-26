@@ -1,5 +1,7 @@
 <?php namespace Framework\Database;
 
+use Closure;
+use Exception;
 use Framework\Database\Definition\AlterSchema;
 use Framework\Database\Definition\AlterTable;
 use Framework\Database\Definition\CreateSchema;
@@ -13,13 +15,17 @@ use Framework\Database\Manipulation\Replace;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
+use InvalidArgumentException;
+use LogicException;
+use mysqli;
+use mysqli_sql_exception;
 
 /**
  * Class Database.
  */
 class Database
 {
-	protected \mysqli $mysqli;
+	protected mysqli $mysqli;
 	/**
 	 * Connection configurations.
 	 *
@@ -52,7 +58,7 @@ class Database
 	 *
 	 * @see Database::makeConfig
 	 *
-	 * @throws \Exception if connections fail
+	 * @throws Exception if connections fail
 	 */
 	public function __construct(
 		$username,
@@ -62,7 +68,7 @@ class Database
 		int $port = 3306
 	) {
 		\mysqli_report(\MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX);
-		$this->mysqli = new \mysqli();
+		$this->mysqli = new mysqli();
 		$this->mysqli->options(\MYSQLI_OPT_INT_AND_FLOAT_NATIVE, true);
 		$this->mysqli->options(\MYSQLI_OPT_CONNECT_TIMEOUT, 10);
 		$this->connect($username, $password, $schema, $host, $port);
@@ -136,7 +142,7 @@ class Database
 				$username['port'],
 				$username['socket']
 			);
-		} catch (\Exception $exception) {
+		} catch (Exception $exception) {
 			$this->failoverIndex = $this->failoverIndex === null
 				? 0
 				: $this->failoverIndex + 1;
@@ -195,7 +201,7 @@ class Database
 	}
 
 	/**
-	 * @throws \mysqli_sql_exception if schema is unknown
+	 * @throws mysqli_sql_exception if schema is unknown
 	 */
 	public function use(string $schema) : void
 	{
@@ -302,8 +308,8 @@ class Database
 	/**
 	 * Call a DELETE statement.
 	 *
-	 * @param array|\Closure|string $reference
-	 * @param mixed                 $references
+	 * @param array|Closure|string $reference
+	 * @param mixed                $references
 	 *
 	 * @return Delete
 	 */
@@ -319,6 +325,8 @@ class Database
 	/**
 	 * Call a INSERT statement.
 	 *
+	 * @param string|null $into_table
+	 *
 	 * @return Insert
 	 */
 	public function insert(string $into_table = null) : Insert
@@ -332,6 +340,8 @@ class Database
 
 	/**
 	 * Call a LOAD DATA statement.
+	 *
+	 * @param string|null $into_table
 	 *
 	 * @return LoadData
 	 */
@@ -363,8 +373,8 @@ class Database
 	/**
 	 * Call a SELECT statement.
 	 *
-	 * @param array|\Closure|string|null $reference
-	 * @param mixed                      $references
+	 * @param array|Closure|string|null $reference
+	 * @param mixed                     $references
 	 *
 	 * @return Select
 	 */
@@ -380,8 +390,8 @@ class Database
 	/**
 	 * Call a UPDATE statement.
 	 *
-	 * @param array|\Closure|string|null $reference
-	 * @param mixed                      $references
+	 * @param array|Closure|string|null $reference
+	 * @param mixed                     $references
 	 *
 	 * @return Update
 	 */
@@ -427,7 +437,7 @@ class Database
 	 *
 	 * @param string $statement
 	 *
-	 * @throws \InvalidArgumentException if $statement does not return result
+	 * @throws InvalidArgumentException if $statement does not return result
 	 *
 	 * @return Result
 	 */
@@ -435,7 +445,7 @@ class Database
 	{
 		$result = $this->mysqli->query($statement);
 		if (\is_bool($result)) {
-			throw new \InvalidArgumentException(
+			throw new InvalidArgumentException(
 				"Statement does not return result: {$statement}"
 			);
 		}
@@ -462,7 +472,7 @@ class Database
 	public function transaction(callable $statements) : void
 	{
 		if ($this->inTransaction) {
-			throw new \LogicException('Transaction already is active');
+			throw new LogicException('Transaction already is active');
 		}
 		$this->inTransaction = true;
 		$this->mysqli->autocommit(false);
@@ -470,7 +480,7 @@ class Database
 		try {
 			$statements($this);
 			$this->mysqli->commit();
-		} catch (\Exception $exception) {
+		} catch (Exception $exception) {
 			$this->mysqli->rollback();
 			throw $exception;
 		} finally {
@@ -517,7 +527,7 @@ class Database
 	 *
 	 * @see https://mariadb.com/kb/en/library/quote/
 	 *
-	 * @throws \InvalidArgumentException For invalid value type
+	 * @throws InvalidArgumentException For invalid value type
 	 *
 	 * @return bool|float|int|string If the value is null, returns a string containing the word
 	 *                               "NULL". If is false, "FALSE". If is true, "TRUE". If is a
@@ -540,6 +550,6 @@ class Database
 		if ($value === null) {
 			return 'NULL';
 		}
-		throw new \InvalidArgumentException("Invalid value type: {$type}");
+		throw new InvalidArgumentException("Invalid value type: {$type}");
 	}
 }

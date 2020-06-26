@@ -1,6 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
 use Framework\Database\Statement;
+use LogicException;
 
 /**
  * Class AlterSchema.
@@ -69,7 +70,7 @@ class AlterSchema extends Statement
 			return null;
 		}
 		if (isset($this->sql['charset']) || isset($this->sql['collation'])) {
-			throw new \LogicException(
+			throw new LogicException(
 				'UPGRADE DATA DIRECTORY NAME can not be used with CHARACTER SET or COLLATE'
 			);
 		}
@@ -82,7 +83,7 @@ class AlterSchema extends Statement
 			&& ! isset($this->sql['collation'])
 			&& ! isset($this->sql['upgrade'])
 		) {
-			throw new \LogicException(
+			throw new LogicException(
 				'ALTER SCHEMA must have a specification'
 			);
 		}

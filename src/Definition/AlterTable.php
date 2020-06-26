@@ -2,6 +2,8 @@
 
 use Framework\Database\Definition\Table\TableDefinition;
 use Framework\Database\Statement;
+use InvalidArgumentException;
+use LogicException;
 
 /**
  * Class AlterTable.
@@ -49,7 +51,7 @@ class AlterTable extends Statement
 		if (isset($this->sql['table'])) {
 			return ' ' . $this->database->protectIdentifier($this->sql['table']);
 		}
-		throw new \LogicException('TABLE name must be set');
+		throw new LogicException('TABLE name must be set');
 	}
 
 	public function wait(int $seconds)
@@ -64,7 +66,7 @@ class AlterTable extends Statement
 			return null;
 		}
 		if ($this->sql['wait'] < 0) {
-			throw new \InvalidArgumentException(
+			throw new InvalidArgumentException(
 				"Invalid WAIT value: {$this->sql['wait']}"
 			);
 		}

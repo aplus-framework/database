@@ -1,5 +1,7 @@
 <?php namespace Framework\Database\Manipulation\Traits;
 
+use Closure;
+
 /**
  * Trait OrderBy.
  *
@@ -10,8 +12,8 @@ trait OrderBy
 	/**
 	 * Appends columns to the ORDER BY clause.
 	 *
-	 * @param \Closure|string $column
-	 * @param mixed           $columns Each column must be of type: string or \Closure
+	 * @param Closure|string $column
+	 * @param mixed          $columns Each column must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -23,8 +25,8 @@ trait OrderBy
 	/**
 	 * Appends columns with the ASC direction to the ORDER BY clause.
 	 *
-	 * @param \Closure|string $column
-	 * @param mixed           $columns Each column must be of type: string or \Closure
+	 * @param Closure|string $column
+	 * @param mixed          $columns Each column must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */
@@ -36,8 +38,8 @@ trait OrderBy
 	/**
 	 * Appends columns with the DESC direction to the ORDER BY clause.
 	 *
-	 * @param \Closure|string $column
-	 * @param mixed           $columns Each column must be of type: string or \Closure
+	 * @param Closure|string $column
+	 * @param mixed          $columns Each column must be of type: string or \Closure
 	 *
 	 * @return $this
 	 */

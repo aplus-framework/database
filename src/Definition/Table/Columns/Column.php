@@ -1,7 +1,9 @@
 <?php namespace Framework\Database\Definition\Table\Columns;
 
+use Closure;
 use Framework\Database\Database;
 use Framework\Database\Definition\Table\DefinitionPart;
+use LogicException;
 
 abstract class Column extends DefinitionPart
 {
@@ -36,7 +38,7 @@ abstract class Column extends DefinitionPart
 	protected function renderType() : string
 	{
 		if (empty($this->type)) {
-			throw new \LogicException('Column type is empty');
+			throw new LogicException('Column type is empty');
 		}
 		return ' ' . $this->type;
 	}
@@ -68,7 +70,7 @@ abstract class Column extends DefinitionPart
 	}
 
 	/**
-	 * @param bool|\Closure|float|int|string|null $default
+	 * @param bool|Closure|float|int|string|null $default
 	 *
 	 * @return $this
 	 */
@@ -83,7 +85,7 @@ abstract class Column extends DefinitionPart
 		if ( ! isset($this->default)) {
 			return null;
 		}
-		$default = $this->default instanceof \Closure
+		$default = $this->default instanceof Closure
 			? '(' . ($this->default)($this->database) . ')'
 			: $this->database->quote($this->default);
 		return ' DEFAULT ' . $default;
@@ -157,7 +159,7 @@ abstract class Column extends DefinitionPart
 			return null;
 		}
 		if ($this->first) {
-			throw new \LogicException('Clauses FIRST and AFTER can not be used together');
+			throw new LogicException('Clauses FIRST and AFTER can not be used together');
 		}
 		return ' AFTER ' . $this->database->protectIdentifier($this->after);
 	}

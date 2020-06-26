@@ -2,6 +2,7 @@
 
 use Framework\Database\Definition\Table\TableDefinition;
 use Framework\Database\Statement;
+use LogicException;
 
 /**
  * Class CreateTable.
@@ -50,7 +51,7 @@ class CreateTable extends Statement
 			return null;
 		}
 		if (isset($this->sql['or_replace'])) {
-			throw new \LogicException(
+			throw new LogicException(
 				'Clauses OR REPLACE and IF NOT EXISTS can not be used together'
 			);
 		}
@@ -68,7 +69,7 @@ class CreateTable extends Statement
 		if (isset($this->sql['table'])) {
 			return ' ' . $this->database->protectIdentifier($this->sql['table']);
 		}
-		throw new \LogicException('TABLE name must be set');
+		throw new LogicException('TABLE name must be set');
 	}
 
 	public function definition(callable $definition)
@@ -80,7 +81,7 @@ class CreateTable extends Statement
 	protected function renderDefinition() : string
 	{
 		if ( ! isset($this->sql['definition'])) {
-			throw new \LogicException('Table definition must be set');
+			throw new LogicException('Table definition must be set');
 		}
 		$definition = new TableDefinition($this->database);
 		$this->sql['definition']($definition);

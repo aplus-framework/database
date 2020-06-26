@@ -1,5 +1,8 @@
 <?php namespace Framework\Database\Manipulation;
 
+use Closure;
+use InvalidArgumentException;
+
 /**
  * Class Statement.
  *
@@ -35,15 +38,15 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Returns a SQL part between parentheses.
 	 *
-	 * @param \Closure $subquery A \Closure having the current Manipulation instance as first
-	 *                           argument. The returned value must be scalar
+	 * @param Closure $subquery A \Closure having the current Manipulation instance as first
+	 *                          argument. The returned value must be scalar
 	 *
 	 * @see https://mariadb.com/kb/en/library/subqueries/
 	 * @see https://mariadb.com/kb/en/library/built-in-functions/
 	 *
 	 * @return string
 	 */
-	protected function subquery(\Closure $subquery) : string
+	protected function subquery(Closure $subquery) : string
 	{
 		return '(' . $subquery($this->database) . ')';
 	}
@@ -78,12 +81,12 @@ abstract class Statement extends \Framework\Database\Statement
 			return null;
 		}
 		if ($this->sql['limit']['limit'] < 1) {
-			throw new \InvalidArgumentException('LIMIT must be greater than 0');
+			throw new InvalidArgumentException('LIMIT must be greater than 0');
 		}
 		$offset = $this->sql['limit']['offset'];
 		if ($offset !== null) {
 			if ($offset < 1) {
-				throw new \InvalidArgumentException('LIMIT OFFSET must be greater than 0');
+				throw new InvalidArgumentException('LIMIT OFFSET must be greater than 0');
 			}
 			$offset = " OFFSET {$this->sql['limit']['offset']}";
 		}
@@ -93,13 +96,13 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders a column part.
 	 *
-	 * @param \Closure|string $column The column name or a subquery
+	 * @param Closure|string $column The column name or a subquery
 	 *
 	 * @return string
 	 */
 	protected function renderIdentifier($column) : string
 	{
-		return $column instanceof \Closure
+		return $column instanceof Closure
 			? $this->subquery($column)
 			: $this->database->protectIdentifier($column);
 	}
@@ -107,8 +110,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders a column part with an optional alias name, AS clause.
 	 *
-	 * @param array|\Closure|string $column The column name, a subquery or an array where the index
-	 *                                      is the alias and the value is the column/subquery
+	 * @param array|Closure|string $column The column name, a subquery or an array where the index
+	 *                                     is the alias and the value is the column/subquery
 	 *
 	 * @return string
 	 */
@@ -116,7 +119,7 @@ abstract class Statement extends \Framework\Database\Statement
 	{
 		if (\is_array($column)) {
 			if (\count($column) !== 1) {
-				throw new \InvalidArgumentException('Aliased column must have only 1 key');
+				throw new InvalidArgumentException('Aliased column must have only 1 key');
 			}
 			$alias = \array_key_first($column);
 			return $this->renderIdentifier($column[$alias]) . ' AS '
@@ -128,13 +131,13 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders a subquery or quote a value.
 	 *
-	 * @param \Closure|float|int|string|null $value \Closure for subquery, other types to quote
+	 * @param Closure|float|int|string|null $value \Closure for subquery, other types to quote
 	 *
 	 * @return string
 	 */
 	protected function renderValue($value) : string
 	{
-		return $value instanceof \Closure
+		return $value instanceof Closure
 			? $this->subquery($value)
 			: $this->database->quote($value);
 	}
@@ -142,8 +145,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders an assignment part.
 	 *
-	 * @param string                         $identifier Identifier/column name
-	 * @param \Closure|float|int|string|null $expression Expression/value
+	 * @param string                        $identifier Identifier/column name
+	 * @param Closure|float|int|string|null $expression Expression/value
 	 *
 	 * @see renderValue
 	 * @see https://mariadb.com/kb/en/library/assignment-operators-assignment-operator/

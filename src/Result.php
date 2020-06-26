@@ -1,5 +1,7 @@
 <?php namespace Framework\Database;
 
+use OutOfRangeException;
+
 /**
  * Class Result.
  */
@@ -35,7 +37,7 @@ class Result
 	public function moveCursor(int $offset) : bool
 	{
 		if ($offset < 0 || ($offset !== 0 && $offset >= $this->result->num_rows)) {
-			throw new \OutOfRangeException(
+			throw new OutOfRangeException(
 				"Invalid cursor offset: {$offset}"
 			);
 		}

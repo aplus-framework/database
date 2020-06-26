@@ -1,5 +1,8 @@
 <?php namespace Framework\Database\Manipulation;
 
+use InvalidArgumentException;
+use LogicException;
+
 /**
  * Class LoadData.
  *
@@ -26,7 +29,7 @@ class LoadData extends Statement
 				static::OPT_CONCURRENT,
 				static::OPT_LOCAL,
 			], true)) {
-				throw new \InvalidArgumentException("Invalid option: {$input}");
+				throw new InvalidArgumentException("Invalid option: {$input}");
 			}
 		}
 		unset($option);
@@ -35,7 +38,7 @@ class LoadData extends Statement
 			[static::OPT_LOW_PRIORITY, static::OPT_CONCURRENT]
 		);
 		if (\count($intersection) > 1) {
-			throw new \LogicException('Options LOW_PRIORITY and CONCURRENT can not be used together');
+			throw new LogicException('Options LOW_PRIORITY and CONCURRENT can not be used together');
 		}
 		return \implode(' ', $options);
 	}
@@ -49,7 +52,7 @@ class LoadData extends Statement
 	protected function renderInfile() : string
 	{
 		if (empty($this->sql['infile'])) {
-			throw new \LogicException('INFILE statement is required');
+			throw new LogicException('INFILE statement is required');
 		}
 		$filename = $this->database->quote($this->sql['infile']);
 		return " INFILE {$filename}";
@@ -64,7 +67,7 @@ class LoadData extends Statement
 	protected function renderIntoTable()
 	{
 		if (empty($this->sql['table'])) {
-			throw new \LogicException('Table is required');
+			throw new LogicException('Table is required');
 		}
 		return ' INTO TABLE ' . $this->database->protectIdentifier($this->sql['table']);
 	}

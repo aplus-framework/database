@@ -2,6 +2,7 @@
 
 use Framework\Database\Database;
 use Framework\Database\Definition\Table\DefinitionPart;
+use LogicException;
 
 /**
  * Class Index.
@@ -25,7 +26,7 @@ abstract class Index extends DefinitionPart
 	protected function renderType() : string
 	{
 		if (empty($this->type)) {
-			throw new \LogicException('Key type is empty');
+			throw new LogicException('Key type is empty');
 		}
 		return " {$this->type}";
 	}

@@ -8,6 +8,7 @@ use Framework\Database\Definition\Table\Indexes\Keys\Key;
 use Framework\Database\Definition\Table\Indexes\Keys\PrimaryKey;
 use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
 use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
+use RuntimeException;
 
 /**
  * Class IndexDefinition.
@@ -60,7 +61,7 @@ class IndexDefinition extends DefinitionPart
 	protected function sql() : string
 	{
 		if ( ! $this->index) {
-			throw new \RuntimeException("Key type not set in index {$this->name}");
+			throw new RuntimeException("Key type not set in index {$this->name}");
 		}
 		return $this->index->sql();
 	}

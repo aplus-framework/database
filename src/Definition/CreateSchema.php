@@ -1,6 +1,7 @@
 <?php namespace Framework\Database\Definition;
 
 use Framework\Database\Statement;
+use LogicException;
 
 /**
  * Class CreateSchema.
@@ -35,7 +36,7 @@ class CreateSchema extends Statement
 			return null;
 		}
 		if (isset($this->sql['or_replace'])) {
-			throw new \LogicException(
+			throw new LogicException(
 				'Clauses OR REPLACE and IF NOT EXISTS can not be used together'
 			);
 		}
@@ -53,7 +54,7 @@ class CreateSchema extends Statement
 		if (isset($this->sql['schema'])) {
 			return ' ' . $this->database->protectIdentifier($this->sql['schema']);
 		}
-		throw new \LogicException('SCHEMA name must be set');
+		throw new LogicException('SCHEMA name must be set');
 	}
 
 	public function charset(string $charset)

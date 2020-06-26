@@ -1,6 +1,9 @@
 <?php namespace Framework\Database\Manipulation;
 
+use Closure;
 use Framework\Database\Result;
+use InvalidArgumentException;
+use LogicException;
 
 /**
  * Class With.
@@ -24,7 +27,7 @@ class With extends Statement
 			$input = $option;
 			$option = \strtoupper($option);
 			if ($option !== static::OPT_RECURSIVE) {
-				throw new \InvalidArgumentException("Invalid option: {$input}");
+				throw new InvalidArgumentException("Invalid option: {$input}");
 			}
 		}
 		return \implode(' ', $options);
@@ -33,15 +36,15 @@ class With extends Statement
 	/**
 	 * Adds a table reference.
 	 *
-	 * @param \Closure|string $table
-	 * @param \Closure        $alias
+	 * @param Closure|string $table
+	 * @param Closure        $alias
 	 *
 	 * @see https://mariadb.com/kb/en/library/non-recursive-common-table-expressions-overview/
 	 * @see https://mariadb.com/kb/en/library/recursive-common-table-expressions-overview/
 	 *
 	 * @return $this
 	 */
-	public function reference($table, \Closure $alias)
+	public function reference($table, Closure $alias)
 	{
 		$this->sql['references'][] = [
 			'table' => $table,
@@ -53,7 +56,7 @@ class With extends Statement
 	protected function renderReference() : string
 	{
 		if ( ! isset($this->sql['references'])) {
-			throw new \LogicException('References must be set');
+			throw new LogicException('References must be set');
 		}
 		$references = [];
 		foreach ($this->sql['references'] as $reference) {
@@ -63,7 +66,7 @@ class With extends Statement
 		return \implode(', ', $references);
 	}
 
-	private function renderAsSelect(\Closure $subquery) : string
+	private function renderAsSelect(Closure $subquery) : string
 	{
 		return '(' . $subquery(new Select($this->database)) . ')';
 	}
@@ -71,11 +74,11 @@ class With extends Statement
 	/**
 	 * Sets the SELECT statement part.
 	 *
-	 * @param \Closure $select
+	 * @param Closure $select
 	 *
 	 * @return $this
 	 */
-	public function select(\Closure $select)
+	public function select(Closure $select)
 	{
 		$this->sql['select'] = $select(new Select($this->database));
 		return $this;
@@ -84,7 +87,7 @@ class With extends Statement
 	protected function renderSelect() : string
 	{
 		if ( ! isset($this->sql['select'])) {
-			throw new \LogicException('SELECT must be set');
+			throw new LogicException('SELECT must be set');
 		}
 		return $this->sql['select'];
 	}

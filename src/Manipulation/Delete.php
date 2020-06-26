@@ -1,5 +1,7 @@
 <?php namespace Framework\Database\Manipulation;
 
+use InvalidArgumentException;
+
 /**
  * Class Delete.
  *
@@ -28,7 +30,7 @@ class Delete extends Statement
 				static::OPT_QUICK,
 				static::OPT_IGNORE,
 			], true)) {
-				throw new \InvalidArgumentException("Invalid option: {$input}");
+				throw new InvalidArgumentException("Invalid option: {$input}");
 			}
 		}
 		unset($option);
