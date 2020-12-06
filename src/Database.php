@@ -411,7 +411,7 @@ class Database
 	{
 		$instance = new Update($this);
 		if ($reference) {
-			$instance->from($reference, ...$references);
+			$instance->table($reference, ...$references);
 		}
 		return $instance;
 	}
