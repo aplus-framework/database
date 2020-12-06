@@ -15,6 +15,7 @@ class Select extends Statement
 	use Traits\Join;
 	use Traits\Having;
 	use Traits\OrderBy;
+
 	/**
 	 * Option to retrieve identical rows.
 	 *
@@ -178,7 +179,7 @@ class Select extends Statement
 	/**
 	 * Set expressions.
 	 *
-	 * Gerally used with the FROM clause as column names.
+	 * Generally used with the FROM clause as column names.
 	 *
 	 * @param array|Closure|string $expression
 	 * @param mixed                $expressions Each expresion must be of type: array, string or
@@ -454,47 +455,59 @@ class Select extends Statement
 	public function sql() : string
 	{
 		$sql = 'SELECT' . \PHP_EOL;
-		if ($part = $this->renderOptions()) {
+		$part = $this->renderOptions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderExpressions()) {
+		$part = $this->renderExpressions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderFrom()) {
+		$part = $this->renderFrom();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderJoin()) {
+		$part = $this->renderJoin();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderWhere()) {
+		$part = $this->renderWhere();
+		if ($part) {
 			$this->hasFrom('WHERE');
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderHaving()) {
+		$part = $this->renderHaving();
+		if ($part) {
 			$this->hasFrom('HAVING');
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderOrderBy()) {
+		$part = $this->renderOrderBy();
+		if ($part) {
 			$this->hasFrom('ORDER BY');
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderLimit()) {
+		$part = $this->renderLimit();
+		if ($part) {
 			$this->hasFrom('LIMIT');
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderProcedure()) {
+		$part = $this->renderProcedure();
+		if ($part) {
 			$this->hasFrom('PROCEDURE');
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderIntoOutfile()) {
+		$part = $this->renderIntoOutfile();
+		if ($part) {
 			$this->hasFrom('INTO OUTFILE');
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderIntoDumpfile()) {
+		$part = $this->renderIntoDumpfile();
+		if ($part) {
 			$into_dump = true;
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderLock()) {
+		$part = $this->renderLock();
+		if ($part) {
 			if (empty($into_dump)) {
 				$this->hasFrom($this->sql['lock']['type']);
 			}

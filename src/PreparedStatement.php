@@ -43,6 +43,9 @@ class PreparedStatement
 		return $this->statement->affected_rows;
 	}
 
+	/**
+	 * @param array|mixed[] $params
+	 */
 	protected function bindParams(array $params) : void
 	{
 		$this->sendingBlob = false;

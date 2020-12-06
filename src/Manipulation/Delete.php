@@ -12,6 +12,7 @@ class Delete extends Statement
 	use Traits\Join;
 	use Traits\OrderBy;
 	use Traits\Where;
+
 	public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 	public const OPT_QUICK = 'QUICK';
 	public const OPT_IGNORE = 'IGNORE';
@@ -85,25 +86,32 @@ class Delete extends Statement
 	public function sql() : string
 	{
 		$sql = 'DELETE' . \PHP_EOL;
-		if ($part = $this->renderOptions()) {
+		$part = $this->renderOptions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderTable()) {
+		$part = $this->renderTable();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderFrom()) {
+		$part = $this->renderFrom();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderJoin()) {
+		$part = $this->renderJoin();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderWhere()) {
+		$part = $this->renderWhere();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderOrderBy()) {
+		$part = $this->renderOrderBy();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderLimit()) {
+		$part = $this->renderLimit();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;

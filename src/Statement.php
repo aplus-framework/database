@@ -8,6 +8,8 @@ abstract class Statement
 	protected Database $database;
 	/**
 	 * SQL clauses and parts.
+	 *
+	 * @var mixed[]
 	 */
 	protected array $sql = [];
 
@@ -21,7 +23,7 @@ abstract class Statement
 		$this->database = $database;
 	}
 
-	public function __toString()
+	public function __toString() : string
 	{
 		return $this->sql();
 	}
@@ -54,6 +56,8 @@ abstract class Statement
 
 	/**
 	 * Runs the SQL statement.
+	 *
+	 * @return mixed
 	 */
 	abstract public function run();
 }

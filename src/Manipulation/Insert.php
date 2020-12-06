@@ -12,6 +12,7 @@ use LogicException;
 class Insert extends Statement
 {
 	use Traits\Set;
+
 	/**
 	 * @see https://mariadb.com/kb/en/library/insert-delayed/
 	 */
@@ -228,24 +229,30 @@ class Insert extends Statement
 	public function sql() : string
 	{
 		$sql = 'INSERT' . \PHP_EOL;
-		if ($part = $this->renderOptions()) {
+		$part = $this->renderOptions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderInto() . \PHP_EOL;
-		if ($part = $this->renderColumns()) {
+		$part = $this->renderColumns();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$this->checkRowStatementsConflict();
-		if ($part = $this->renderValues()) {
+		$part = $this->renderValues();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderSetPart()) {
+		$part = $this->renderSetPart();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderSelect()) {
+		$part = $this->renderSelect();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderOnDuplicateKeyUpdate()) {
+		$part = $this->renderOnDuplicateKeyUpdate();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;

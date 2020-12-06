@@ -44,6 +44,12 @@ class Result
 		return $this->result->data_seek($offset);
 	}
 
+	/**
+	 * @param string $class
+	 * @param mixed  ...$constructor
+	 *
+	 * @return $this
+	 */
 	public function setFetchClass(string $class, ...$constructor)
 	{
 		$this->fetchClass = $class;
@@ -105,7 +111,7 @@ class Result
 	/**
 	 * Fetches the current row as array and move the cursor to the next.
 	 *
-	 * @return array|null
+	 * @return array|mixed[]|null
 	 */
 	public function fetchArray() : ?array
 	{

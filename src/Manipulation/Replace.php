@@ -12,6 +12,7 @@ use LogicException;
 class Replace extends Statement
 {
 	use Traits\Set;
+
 	/**
 	 * @see https://mariadb.com/kb/en/library/insert-delayed/
 	 */
@@ -21,6 +22,11 @@ class Replace extends Statement
 	 */
 	public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
+	/**
+	 * @param string $table
+	 *
+	 * @return $this
+	 */
 	public function into(string $table)
 	{
 		$this->sql['into'] = $table;
@@ -35,6 +41,12 @@ class Replace extends Statement
 		return ' INTO ' . $this->renderIdentifier($this->sql['into']);
 	}
 
+	/**
+	 * @param string $column
+	 * @param mixed  $columns
+	 *
+	 * @return $this
+	 */
 	public function columns(string $column, ...$columns)
 	{
 		$this->sql['columns'] = $this->mergeExpressions($column, $columns);
@@ -84,6 +96,12 @@ class Replace extends Statement
 		return " {$options}";
 	}
 
+	/**
+	 * @param mixed $value
+	 * @param mixed $values
+	 *
+	 * @return $this
+	 */
 	public function values($value, ...$values)
 	{
 		$this->sql['values'][] = $this->mergeExpressions($value, $values);
@@ -165,21 +183,26 @@ class Replace extends Statement
 	public function sql() : string
 	{
 		$sql = 'REPLACE' . \PHP_EOL;
-		if ($part = $this->renderOptions()) {
+		$part = $this->renderOptions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderInto() . \PHP_EOL;
-		if ($part = $this->renderColumns()) {
+		$part = $this->renderColumns();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$this->checkRowStatementsConflict();
-		if ($part = $this->renderValues()) {
+		$part = $this->renderValues();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderSetPart()) {
+		$part = $this->renderSetPart();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderSelect()) {
+		$part = $this->renderSelect();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;

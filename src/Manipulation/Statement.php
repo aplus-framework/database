@@ -18,7 +18,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return $this
 	 */
-	public function options($option, ...$options)
+	public function options(string $option, string ...$options)
 	{
 		$this->sql['options'] = [];
 		$options = $this->mergeExpressions($option, $options);
@@ -165,7 +165,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 * @param mixed         $expression
 	 * @param array|mixed[] $expressions
 	 *
-	 * @return array
+	 * @return array|mixed[]
 	 */
 	protected function mergeExpressions($expression, array $expressions) : array
 	{

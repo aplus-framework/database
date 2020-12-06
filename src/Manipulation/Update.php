@@ -15,6 +15,7 @@ class Update extends Statement
 	use Traits\Set;
 	use Traits\Where;
 	use Traits\OrderBy;
+
 	/**
 	 * Convert errors to warnings, which will not stop inserts of additional rows.
 	 *
@@ -102,21 +103,26 @@ class Update extends Statement
 	public function sql() : string
 	{
 		$sql = 'UPDATE' . \PHP_EOL;
-		if ($part = $this->renderOptions()) {
+		$part = $this->renderOptions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderTable() . \PHP_EOL;
-		if ($part = $this->renderJoin()) {
+		$part = $this->renderJoin();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderSetPart() . \PHP_EOL;
-		if ($part = $this->renderWhere()) {
+		$part = $this->renderWhere();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderOrderBy()) {
+		$part = $this->renderOrderBy();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
-		if ($part = $this->renderLimit()) {
+		$part = $this->renderLimit();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		return $sql;

@@ -95,7 +95,8 @@ class With extends Statement
 	public function sql() : string
 	{
 		$sql = 'WITH' . \PHP_EOL;
-		if ($part = $this->renderOptions()) {
+		$part = $this->renderOptions();
+		if ($part) {
 			$sql .= $part . \PHP_EOL;
 		}
 		$sql .= $this->renderReference() . \PHP_EOL;

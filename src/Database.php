@@ -51,11 +51,11 @@ class Database
 	/**
 	 * Database constructor.
 	 *
-	 * @param array|string $username
-	 * @param string|null  $password
-	 * @param string|null  $schema
-	 * @param string       $host
-	 * @param int          $port
+	 * @param array|mixed[]|string $username
+	 * @param string|null          $password
+	 * @param string|null          $schema
+	 * @param string               $host
+	 * @param int                  $port
 	 *
 	 * @see Database::makeConfig
 	 *
@@ -77,17 +77,15 @@ class Database
 
 	public function __destruct()
 	{
-		if ($this->mysqli) {
-			$this->mysqli->close();
-		}
+		$this->mysqli->close();
 	}
 
 	/**
 	 * Make Base Connection configurations.
 	 *
-	 * @param array $config
+	 * @param array|mixed[] $config
 	 *
-	 * @return array
+	 * @return array|mixed[]
 	 */
 	protected function makeConfig(array $config) : array
 	{
@@ -113,6 +111,17 @@ class Database
 		], $config);
 	}
 
+	/**
+	 * @param mixed[]|string $username
+	 * @param string|null    $password
+	 * @param string|null    $schema
+	 * @param string         $host
+	 * @param int            $port
+	 *
+	 * @throws Exception
+	 *
+	 * @return $this
+	 */
 	protected function connect(
 		$username,
 		string $password = null,
@@ -162,21 +171,21 @@ class Database
 		return $this;
 	}
 
-	protected function setCollations(string $charset, string $collation)
+	protected function setCollations(string $charset, string $collation) : bool
 	{
 		$this->mysqli->set_charset($charset);
 		$charset = $this->quote($charset);
 		$collation = $this->quote($collation);
-		$this->mysqli->real_query("SET NAMES {$charset} COLLATE {$collation}");
+		return $this->mysqli->real_query("SET NAMES {$charset} COLLATE {$collation}");
 	}
 
-	protected function setTimezone(string $timezone)
+	protected function setTimezone(string $timezone) : bool
 	{
 		$timezone = $this->quote($timezone);
-		$this->mysqli->real_query("SET time_zone = {$timezone}");
+		return $this->mysqli->real_query("SET time_zone = {$timezone}");
 	}
 
-	public function warnings()
+	public function warnings() : int
 	{
 		return $this->mysqli->warning_count;
 	}
@@ -184,7 +193,7 @@ class Database
 	/**
 	 * Get a list of latest errors.
 	 *
-	 * @return array
+	 * @return array|array[]
 	 */
 	public function errors() : array
 	{
@@ -202,6 +211,8 @@ class Database
 	}
 
 	/**
+	 * @param string $schema
+	 *
 	 * @throws mysqli_sql_exception if schema is unknown
 	 */
 	public function use(string $schema) : void
@@ -276,8 +287,8 @@ class Database
 	/**
 	 * Call a DROP TABLE statement.
 	 *
-	 * @param string|null  $table
-	 * @param array|string $tables
+	 * @param string|null $table
+	 * @param mixed       $tables
 	 *
 	 * @return DropTable
 	 */
@@ -476,6 +487,9 @@ class Database
 	 * Run statements in a transaction.
 	 *
 	 * @param callable $statements
+	 *
+	 * @throws Exception      if statements fail
+	 * @throws LogicException if transaction already is active
 	 */
 	public function transaction(callable $statements) : void
 	{
