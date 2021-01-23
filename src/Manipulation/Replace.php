@@ -97,8 +97,8 @@ class Replace extends Statement
 	}
 
 	/**
-	 * @param mixed $value
-	 * @param mixed $values
+	 * @param Closure|float|int|string|null $value
+	 * @param mixed                         $values
 	 *
 	 * @return $this
 	 */

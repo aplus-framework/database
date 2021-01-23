@@ -316,4 +316,13 @@ class DatabaseTest extends TestCase
 	{
 		$this->assertEquals(0, static::$database->warnings());
 	}
+
+	public function testLastQuery()
+	{
+		$sql = 'SELECT COUNT(*) FROM t1';
+		static::$database->query($sql);
+		$this->assertEquals($sql, static::$database->lastQuery());
+		static::$database->exec($sql);
+		$this->assertEquals($sql, static::$database->lastQuery());
+	}
 }

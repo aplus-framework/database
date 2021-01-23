@@ -56,7 +56,7 @@ class Update extends Statement
 	 *
 	 * @return $this
 	 */
-	public function table($reference, ...$references)
+	public function table(array | Closure | string $reference, ...$references)
 	{
 		$this->sql['table'] = [];
 		$references = $this->mergeExpressions($reference, $references);

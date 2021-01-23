@@ -70,7 +70,7 @@ class Database
 	) {
 		\mysqli_report(\MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX);
 		$this->mysqli = new mysqli();
-		$this->mysqli->options(\MYSQLI_OPT_INT_AND_FLOAT_NATIVE, true);
+		$this->mysqli->options(\MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
 		$this->mysqli->options(\MYSQLI_OPT_CONNECT_TIMEOUT, 10);
 		$this->connect($username, $password, $schema, $host, $port);
 	}

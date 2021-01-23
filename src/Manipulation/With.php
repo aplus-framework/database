@@ -44,7 +44,7 @@ class With extends Statement
 	 *
 	 * @return $this
 	 */
-	public function reference($table, Closure $alias)
+	public function reference(Closure | string $table, Closure $alias)
 	{
 		$this->sql['references'][] = [
 			'table' => $table,

@@ -1,5 +1,6 @@
 <?php namespace Framework\Database\Manipulation;
 
+use Closure;
 use InvalidArgumentException;
 
 /**
@@ -42,8 +43,8 @@ class Delete extends Statement
 	/**
 	 * Sets the table references.
 	 *
-	 * @param array|\Closure|string $reference
-	 * @param mixed                 ...$references
+	 * @param array|Closure|string $reference
+	 * @param mixed                ...$references
 	 *
 	 * @return $this
 	 */

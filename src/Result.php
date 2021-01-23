@@ -67,7 +67,7 @@ class Result
 	 */
 	public function fetch(string $class = null, ...$constructor)
 	{
-		$class = $class ?? $this->fetchClass;
+		$class ??= $this->fetchClass;
 		$constructor = $constructor ?: $this->fetchConstructor;
 		if ($constructor) {
 			return $this->result->fetch_object($class, $constructor);

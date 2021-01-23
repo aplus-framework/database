@@ -189,7 +189,7 @@ class Select extends Statement
 	 *
 	 * @return $this
 	 */
-	public function expressions($expression, ...$expressions)
+	public function expressions(array | Closure | string $expression, ...$expressions)
 	{
 		$expressions = $this->mergeExpressions($expression, $expressions);
 		foreach ($expressions as $expression) {
@@ -207,7 +207,7 @@ class Select extends Statement
 	 *
 	 * @return $this
 	 */
-	public function columns($expression, ...$expressions)
+	public function columns(array | Closure | string $expression, ...$expressions)
 	{
 		return $this->expressions($expression, ...$expressions);
 	}
