@@ -61,7 +61,7 @@ class ColumnTest extends TestCase
 		);
 		$this->assertEquals(
 			' mock NOT NULL DEFAULT (now())',
-			$this->column->default(function () {
+			$this->column->default(static function () {
 				return 'now()';
 			})->sql()
 		);

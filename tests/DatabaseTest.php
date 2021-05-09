@@ -233,7 +233,7 @@ class DatabaseTest extends TestCase
 	public function testTransaction()
 	{
 		$this->createDummyData();
-		static::$database->transaction(function (Database $db) {
+		static::$database->transaction(static function (Database $db) {
 			$db->exec('INSERT INTO `t1` SET `c1` = 100, `c2` = "tr"');
 		});
 		$this->assertEquals(
@@ -247,8 +247,8 @@ class DatabaseTest extends TestCase
 		$this->createDummyData();
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Transaction already is active');
-		static::$database->transaction(function (Database $db) {
-			$db->transaction(function (Database $db) {
+		static::$database->transaction(static function (Database $db) {
+			$db->transaction(static function (Database $db) {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			});
 		});
@@ -258,13 +258,13 @@ class DatabaseTest extends TestCase
 	{
 		$this->createDummyData();
 		$this->assertEquals(5, static::$database->exec('SELECT * FROM `t1`'));
-		static::$database->transaction(function (Database $db) {
+		static::$database->transaction(static function (Database $db) {
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 		});
 		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
 		try {
-			static::$database->transaction(function (Database $db) {
+			static::$database->transaction(static function (Database $db) {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 				$db->exec('INSERT INTO `t1000` SET `c2` = "a"');

@@ -25,14 +25,14 @@ class WhereTest extends TestCase
 			" WHERE `id` = 10 AND `name` = '\\'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->orWhere('created_at', '>', function () {
+		$this->statement->orWhere('created_at', '>', static function () {
 			return 'NOW() - 60';
 		});
 		$this->assertEquals(
 			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->renderWhere()
 		);
-		$this->statement->where(function (Database $database) {
+		$this->statement->where(static function (Database $database) {
 			return $database->protectIdentifier('random_table');
 		}, '!=', 'bar');
 		$this->assertEquals(
@@ -137,9 +137,9 @@ class WhereTest extends TestCase
 			" WHERE `email` = 'user@mail.com' OR `name` = 'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereEqual(function () {
+		$this->statement->whereEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -157,9 +157,9 @@ class WhereTest extends TestCase
 			" WHERE `email` != 'user@mail.com' OR `name` != 'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereNotEqual(function () {
+		$this->statement->whereNotEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -177,9 +177,9 @@ class WhereTest extends TestCase
 			" WHERE `email` <=> 'user@mail.com' OR `name` <=> NULL",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereNullSafeEqual(function () {
+		$this->statement->whereNullSafeEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -197,9 +197,9 @@ class WhereTest extends TestCase
 			" WHERE `count` < 5 OR `name` < 'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereLessThan(function () {
+		$this->statement->whereLessThan(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -217,9 +217,9 @@ class WhereTest extends TestCase
 			" WHERE `count` <= 5 OR `name` <= 'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereLessThanOrEqual(function () {
+		$this->statement->whereLessThanOrEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -237,9 +237,9 @@ class WhereTest extends TestCase
 			" WHERE `count` > 5 OR `name` > 'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereGreaterThan(function () {
+		$this->statement->whereGreaterThan(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -257,9 +257,9 @@ class WhereTest extends TestCase
 			" WHERE `count` >= 5 OR `name` >= 'foo'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereGreaterThanOrEqual(function () {
+		$this->statement->whereGreaterThanOrEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -277,9 +277,9 @@ class WhereTest extends TestCase
 			" WHERE `email` LIKE '%@mail.com' OR `name` LIKE 'foo%'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereLike(function () {
+		$this->statement->whereLike(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -300,9 +300,9 @@ class WhereTest extends TestCase
 			" WHERE `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereNotLike(function () {
+		$this->statement->whereNotLike(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -320,9 +320,9 @@ class WhereTest extends TestCase
 			" WHERE `id` IN (1, 2, 8) OR `code` IN ('abc', 'def')",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereIn(function () {
+		$this->statement->whereIn(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
 		});
 		$this->assertEquals(
@@ -340,9 +340,9 @@ class WhereTest extends TestCase
 			" WHERE `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def')",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereNotIn(function () {
+		$this->statement->whereNotIn(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
 		});
 		$this->assertEquals(
@@ -360,11 +360,11 @@ class WhereTest extends TestCase
 			" WHERE `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereBetween(function () {
+		$this->statement->whereBetween(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM bar';
 		});
 		$this->assertEquals(
@@ -382,11 +382,11 @@ class WhereTest extends TestCase
 			" WHERE `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def'",
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereNotBetween(function () {
+		$this->statement->whereNotBetween(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM bar';
 		});
 		$this->assertEquals(
@@ -404,7 +404,7 @@ class WhereTest extends TestCase
 			' WHERE `email` IS NULL OR `name` IS NULL',
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereIsNull(function () {
+		$this->statement->whereIsNull(static function () {
 			return 'id';
 		});
 		$this->assertEquals(
@@ -422,7 +422,7 @@ class WhereTest extends TestCase
 			' WHERE `email` IS NOT NULL OR `name` IS NOT NULL',
 			$this->statement->renderWhere()
 		);
-		$this->statement->whereIsNotNull(function () {
+		$this->statement->whereIsNotNull(static function () {
 			return 'id';
 		});
 		$this->assertEquals(

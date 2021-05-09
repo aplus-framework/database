@@ -70,7 +70,7 @@ class SelectTest extends TestCase
 	{
 		$this->select->expressions('1');
 		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
-		$this->select->expressions(function () {
+		$this->select->expressions(static function () {
 			return 'now()';
 		});
 		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
@@ -80,7 +80,7 @@ class SelectTest extends TestCase
 	{
 		$this->select->columns('1');
 		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
-		$this->select->columns(function () {
+		$this->select->columns(static function () {
 			return 'now()';
 		});
 		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());

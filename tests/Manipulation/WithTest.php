@@ -16,9 +16,9 @@ class WithTest extends TestCase
 
 	protected function prepareWith()
 	{
-		$this->with->reference('t1', function (Select $select) {
+		$this->with->reference('t1', static function (Select $select) {
 			return $select->columns('*')->from('folks')->sql();
-		})->select(function (Select $select) {
+		})->select(static function (Select $select) {
 			return $select->columns('*')->from('ancestors')->sql();
 		});
 	}
@@ -45,7 +45,7 @@ class WithTest extends TestCase
 	public function testManyReferences()
 	{
 		$this->prepareWith();
-		$this->with->reference('t2', function () {
+		$this->with->reference('t2', static function () {
 			return 'select * from foo';
 		});
 		$this->assertEquals(
@@ -71,7 +71,7 @@ class WithTest extends TestCase
 
 	public function testWithoutSelect()
 	{
-		$this->with->reference('t1', function (Select $select) {
+		$this->with->reference('t1', static function (Select $select) {
 			return $select->columns('*')->from('folks')->sql();
 		});
 		$this->expectException(\LogicException::class);
@@ -82,9 +82,9 @@ class WithTest extends TestCase
 	public function testRun()
 	{
 		$this->createDummyData();
-		$this->with->reference('t1', function (Select $select) {
+		$this->with->reference('t1', static function (Select $select) {
 			return $select->columns('*')->from('t1')->sql();
-		})->select(function (Select $select) {
+		})->select(static function (Select $select) {
 			return $select->columns('*')->from('t2')->sql();
 		});
 		$this->assertInstanceOf(

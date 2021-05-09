@@ -19,11 +19,11 @@ class OrderByTest extends TestCase
 		$this->assertNull($this->statement->renderOrderBy());
 		$this->statement->orderBy('c1');
 		$this->assertEquals(' ORDER BY `c1`', $this->statement->renderOrderBy());
-		$this->statement->orderBy(function () {
+		$this->statement->orderBy(static function () {
 			return 'select c2';
 		});
 		$this->assertEquals(' ORDER BY `c1`, (select c2)', $this->statement->renderOrderBy());
-		$this->statement->orderBy(function () {
+		$this->statement->orderBy(static function () {
 			return 'select c3';
 		}, 'c4');
 		$this->assertEquals(
@@ -61,7 +61,7 @@ class OrderByTest extends TestCase
 		$this->statement->orderByDesc('c3');
 		$this->statement->orderBy('a', 'b');
 		$this->statement->orderByAsc('c', 'D');
-		$this->statement->orderByDesc('e', function () {
+		$this->statement->orderByDesc('e', static function () {
 			return 'select "f"';
 		});
 		$this->assertEquals(

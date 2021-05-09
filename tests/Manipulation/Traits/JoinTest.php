@@ -27,7 +27,7 @@ class JoinTest extends TestCase
 			' FROM `t3` AS `aliasname`',
 			$this->statement->renderFrom()
 		);
-		$this->statement->from(function () {
+		$this->statement->from(static function () {
 			return 'NOW()';
 		});
 		$this->assertEquals(
@@ -35,7 +35,7 @@ class JoinTest extends TestCase
 			$this->statement->renderFrom()
 		);
 		$this->statement->from([
-			'time' => function () {
+			'time' => static function () {
 				return 'SELECT NOW()';
 			},
 		], ['noindex']);
@@ -47,11 +47,11 @@ class JoinTest extends TestCase
 			't1',
 			't2',
 			['aliasname' => 't3'],
-			function () {
+			static function () {
 				return 'NOW()';
 			},
 			[
-				'time' => function () {
+				'time' => static function () {
 					return 'SELECT NOW()';
 				},
 			],
@@ -91,7 +91,7 @@ class JoinTest extends TestCase
 			' CROSS JOIN `users` USING (`user_id`)',
 			$this->statement->renderJoin()
 		);
-		$this->statement->join('users', 'left', 'on', function () {
+		$this->statement->join('users', 'left', 'on', static function () {
 			return 'profiles.user_id = users.id';
 		});
 		$this->assertEquals(
@@ -126,7 +126,7 @@ class JoinTest extends TestCase
 
 	public function testJoinOn()
 	{
-		$this->statement->joinOn('t1', function () {
+		$this->statement->joinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(' JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
@@ -140,7 +140,7 @@ class JoinTest extends TestCase
 
 	public function testInnerJoinOn()
 	{
-		$this->statement->innerJoinOn('t1', function () {
+		$this->statement->innerJoinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(' INNER JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
@@ -154,7 +154,7 @@ class JoinTest extends TestCase
 
 	public function testCrossJoinOn()
 	{
-		$this->statement->crossJoinOn('t1', function () {
+		$this->statement->crossJoinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(' CROSS JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
@@ -168,7 +168,7 @@ class JoinTest extends TestCase
 
 	public function testLeftJoinOn()
 	{
-		$this->statement->leftJoinOn('t1', function () {
+		$this->statement->leftJoinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(' LEFT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
@@ -182,7 +182,7 @@ class JoinTest extends TestCase
 
 	public function testLeftOuterJoinOn()
 	{
-		$this->statement->leftOuterJoinOn('t1', function () {
+		$this->statement->leftOuterJoinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(
@@ -202,7 +202,7 @@ class JoinTest extends TestCase
 
 	public function testRightJoinOn()
 	{
-		$this->statement->rightJoinOn('t1', function () {
+		$this->statement->rightJoinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(' RIGHT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
@@ -216,7 +216,7 @@ class JoinTest extends TestCase
 
 	public function testRightOuterJoinOn()
 	{
-		$this->statement->rightOuterJoinOn('t1', function () {
+		$this->statement->rightOuterJoinOn('t1', static function () {
 			return 't1.id = t2.id';
 		});
 		$this->assertEquals(

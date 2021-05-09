@@ -90,7 +90,7 @@ class InsertTest extends TestCase
 			"INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com')\n",
 			$this->insert->sql()
 		);
-		$this->insert->values(10, 'Baz', function () {
+		$this->insert->values(10, 'Baz', static function () {
 			return 'select email from foo';
 		});
 		$this->assertEquals(
@@ -105,7 +105,7 @@ class InsertTest extends TestCase
 		$this->insert->set([
 			'id' => 1,
 			'name' => 'Foo',
-			'other' => function () {
+			'other' => static function () {
 				return "CONCAT('Foo', ' ', 1)";
 			},
 		]);
@@ -138,7 +138,7 @@ class InsertTest extends TestCase
 	public function testSelect()
 	{
 		$this->prepare();
-		$this->insert->select(function (Select $select) {
+		$this->insert->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
 		$this->assertEquals(
@@ -151,7 +151,7 @@ class InsertTest extends TestCase
 	{
 		$this->prepare();
 		$this->insert->values('id');
-		$this->insert->select(function (Select $select) {
+		$this->insert->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
 		$this->expectException(\LogicException::class);
@@ -163,7 +163,7 @@ class InsertTest extends TestCase
 	{
 		$this->prepare();
 		$this->insert->set(['id' => 1]);
-		$this->insert->select(function (Select $select) {
+		$this->insert->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
 		$this->expectException(\LogicException::class);
@@ -178,7 +178,7 @@ class InsertTest extends TestCase
 		$this->insert->onDuplicateKeyUpdate([
 			'id' => null,
 			'name' => 'Foo',
-			'other' => function () {
+			'other' => static function () {
 				return "CONCAT('Foo', 'id')";
 			},
 		]);

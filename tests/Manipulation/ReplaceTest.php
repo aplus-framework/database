@@ -80,7 +80,7 @@ class ReplaceTest extends TestCase
 			"REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com')\n",
 			$this->replace->sql()
 		);
-		$this->replace->values(10, 'Baz', function () {
+		$this->replace->values(10, 'Baz', static function () {
 			return 'select email from foo';
 		});
 		$this->assertEquals(
@@ -95,7 +95,7 @@ class ReplaceTest extends TestCase
 		$this->replace->set([
 			'id' => 1,
 			'name' => 'Foo',
-			'other' => function () {
+			'other' => static function () {
 				return "CONCAT('Foo', ' ', 1)";
 			},
 		]);
@@ -128,7 +128,7 @@ class ReplaceTest extends TestCase
 	public function testSelect()
 	{
 		$this->prepare();
-		$this->replace->select(function (Select $select) {
+		$this->replace->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
 		$this->assertEquals(
@@ -141,7 +141,7 @@ class ReplaceTest extends TestCase
 	{
 		$this->prepare();
 		$this->replace->values('id');
-		$this->replace->select(function (Select $select) {
+		$this->replace->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
 		$this->expectException(\LogicException::class);
@@ -153,7 +153,7 @@ class ReplaceTest extends TestCase
 	{
 		$this->prepare();
 		$this->replace->set(['id' => 1]);
-		$this->replace->select(function (Select $select) {
+		$this->replace->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
 		$this->expectException(\LogicException::class);

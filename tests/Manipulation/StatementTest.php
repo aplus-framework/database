@@ -39,12 +39,12 @@ class StatementTest extends TestCase
 
 	public function testSubquery()
 	{
-		$this->assertEquals('(select database())', $this->statement->subquery(function () {
+		$this->assertEquals('(select database())', $this->statement->subquery(static function () {
 			return 'select database()';
 		}));
 		$this->assertEquals(
 			'(select * from posts)',
-			$this->statement->subquery(function () {
+			$this->statement->subquery(static function () {
 				return 'select * from posts';
 			})
 		);
@@ -62,7 +62,7 @@ class StatementTest extends TestCase
 		$this->assertEquals('`name```', $this->statement->renderIdentifier('name`'));
 		$this->assertEquals(
 			'(SELECT * from `foo`)',
-			$this->statement->renderIdentifier(function ($database) {
+			$this->statement->renderIdentifier(static function ($database) {
 				return 'SELECT * from ' . $database->protectIdentifier('foo');
 			})
 		);
@@ -73,7 +73,7 @@ class StatementTest extends TestCase
 		$this->assertEquals('`name```', $this->statement->renderAliasedIdentifier('name`'));
 		$this->assertEquals(
 			'(SELECT * from `foo`)',
-			$this->statement->renderAliasedIdentifier(function ($database) {
+			$this->statement->renderAliasedIdentifier(static function ($database) {
 				return 'SELECT * from ' . $database->protectIdentifier('foo');
 			})
 		);
@@ -84,7 +84,7 @@ class StatementTest extends TestCase
 		$this->assertEquals(
 			"(SELECT id from table where username = '\\'hack') AS `foo`",
 			$this->statement->renderAliasedIdentifier([
-				'foo' => function ($database) {
+				'foo' => static function ($database) {
 					return 'SELECT id from table where username = '
 						. $database->quote("'hack");
 				},
@@ -130,7 +130,7 @@ class StatementTest extends TestCase
 		$this->assertEquals("`id` = '1'", $this->statement->renderAssignment('id', '1'));
 		$this->assertEquals(
 			'`id` = (select 1)',
-			$this->statement->renderAssignment('id', function () {
+			$this->statement->renderAssignment('id', static function () {
 				return 'select 1';
 			})
 		);

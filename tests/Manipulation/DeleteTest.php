@@ -80,7 +80,7 @@ class DeleteTest extends TestCase
 	{
 		$this->delete->table('t1', 't2')
 			->from('t1')
-			->innerJoinOn('t2', function () {
+			->innerJoinOn('t2', static function () {
 				return 't2.ref = t1.id';
 			});
 		$this->assertEquals(

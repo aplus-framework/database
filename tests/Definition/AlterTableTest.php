@@ -16,7 +16,7 @@ class AlterTableTest extends TestCase
 	protected function prepare()
 	{
 		return $this->alterTable->table('t1')
-			->add(function (TableDefinition $definition) {
+			->add(static function (TableDefinition $definition) {
 				$definition->column('c1')->int();
 			});
 	}
@@ -31,7 +31,7 @@ class AlterTableTest extends TestCase
 	public function testAdd()
 	{
 		$sql = $this->alterTable->table('t1')
-			->add(function (TableDefinition $definition) {
+			->add(static function (TableDefinition $definition) {
 				$definition->column('c1')->int();
 				$definition->index()->primaryKey('c1');
 				$definition->index('Foo')->uniqueKey('c2');
@@ -45,7 +45,7 @@ class AlterTableTest extends TestCase
 	public function testChange()
 	{
 		$sql = $this->alterTable->table('t1')
-			->change(function (TableDefinition $definition) {
+			->change(static function (TableDefinition $definition) {
 				$definition->column('c1', 'c5')->bigint();
 			});
 		$this->assertEquals(
@@ -57,7 +57,7 @@ class AlterTableTest extends TestCase
 	public function testModify()
 	{
 		$sql = $this->alterTable->table('t1')
-			->modify(function (TableDefinition $definition) {
+			->modify(static function (TableDefinition $definition) {
 				$definition->column('c1')->smallint()->notNull();
 			});
 		$this->assertEquals(
@@ -101,7 +101,7 @@ class AlterTableTest extends TestCase
 	{
 		$this->createDummyData();
 		$statement = $this->alterTable->table('t1')
-			->add(function (TableDefinition $definition) {
+			->add(static function (TableDefinition $definition) {
 				$definition->column('c3')->varchar(100)->default('Foo Bar');
 			});
 		$this->assertEquals(0, $statement->run());

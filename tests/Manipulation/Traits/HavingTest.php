@@ -25,14 +25,14 @@ class HavingTest extends TestCase
 			" HAVING `id` = 10 AND `name` = '\\'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->orHaving('created_at', '>', function () {
+		$this->statement->orHaving('created_at', '>', static function () {
 			return 'NOW() - 60';
 		});
 		$this->assertEquals(
 			" HAVING `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->renderHaving()
 		);
-		$this->statement->having(function (Database $database) {
+		$this->statement->having(static function (Database $database) {
 			return $database->protectIdentifier('random_table');
 		}, '!=', 'bar');
 		$this->assertEquals(
@@ -50,9 +50,9 @@ class HavingTest extends TestCase
 			" HAVING `email` = 'user@mail.com' OR `name` = 'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingEqual(function () {
+		$this->statement->havingEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -70,9 +70,9 @@ class HavingTest extends TestCase
 			" HAVING `email` != 'user@mail.com' OR `name` != 'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingNotEqual(function () {
+		$this->statement->havingNotEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -93,9 +93,9 @@ class HavingTest extends TestCase
 			" HAVING `email` <=> 'user@mail.com' OR `name` <=> NULL",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingNullSafeEqual(function () {
+		$this->statement->havingNullSafeEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -113,9 +113,9 @@ class HavingTest extends TestCase
 			" HAVING `count` < 5 OR `name` < 'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingLessThan(function () {
+		$this->statement->havingLessThan(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -133,9 +133,9 @@ class HavingTest extends TestCase
 			" HAVING `count` <= 5 OR `name` <= 'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingLessThanOrEqual(function () {
+		$this->statement->havingLessThanOrEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -153,9 +153,9 @@ class HavingTest extends TestCase
 			" HAVING `count` > 5 OR `name` > 'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingGreaterThan(function () {
+		$this->statement->havingGreaterThan(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -173,9 +173,9 @@ class HavingTest extends TestCase
 			" HAVING `count` >= 5 OR `name` >= 'foo'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingGreaterThanOrEqual(function () {
+		$this->statement->havingGreaterThanOrEqual(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -193,9 +193,9 @@ class HavingTest extends TestCase
 			" HAVING `email` LIKE '%@mail.com' OR `name` LIKE 'foo%'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingLike(function () {
+		$this->statement->havingLike(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -216,9 +216,9 @@ class HavingTest extends TestCase
 			" HAVING `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingNotLike(function () {
+		$this->statement->havingNotLike(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 10;
 		});
 		$this->assertEquals(
@@ -236,9 +236,9 @@ class HavingTest extends TestCase
 			" HAVING `id` IN (1, 2, 8) OR `code` IN ('abc', 'def')",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingIn(function () {
+		$this->statement->havingIn(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
 		});
 		$this->assertEquals(
@@ -256,9 +256,9 @@ class HavingTest extends TestCase
 			" HAVING `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def')",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingNotIn(function () {
+		$this->statement->havingNotIn(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
 		});
 		$this->assertEquals(
@@ -276,11 +276,11 @@ class HavingTest extends TestCase
 			" HAVING `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingBetween(function () {
+		$this->statement->havingBetween(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM bar';
 		});
 		$this->assertEquals(
@@ -298,11 +298,11 @@ class HavingTest extends TestCase
 			" HAVING `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def'",
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingNotBetween(function () {
+		$this->statement->havingNotBetween(static function () {
 			return 'id';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM foo';
-		}, function () {
+		}, static function () {
 			return 'SELECT * FROM bar';
 		});
 		$this->assertEquals(
@@ -320,7 +320,7 @@ class HavingTest extends TestCase
 			' HAVING `email` IS NULL OR `name` IS NULL',
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingIsNull(function () {
+		$this->statement->havingIsNull(static function () {
 			return 'id';
 		});
 		$this->assertEquals(
@@ -338,7 +338,7 @@ class HavingTest extends TestCase
 			' HAVING `email` IS NOT NULL OR `name` IS NOT NULL',
 			$this->statement->renderHaving()
 		);
-		$this->statement->havingIsNotNull(function () {
+		$this->statement->havingIsNotNull(static function () {
 			return 'id';
 		});
 		$this->assertEquals(
