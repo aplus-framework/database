@@ -23,11 +23,16 @@
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.0",
-		"natanfelles/coding-standard": "^1.0",
-		"phpmd/phpmd": "^2.9",
+		"ergebnis/composer-normalize": "^2.13",
+		"natanfelles/coding-standard": "^1.2",
+		"phpmd/phpmd": "^2.10",
 		"phpstan/phpstan": "^0.12",
-		"phpunit/phpunit": "^9.3"
+		"phpunit/phpunit": "^9.5"
+	},
+	"config": {
+		"optimize-autoloader": true,
+		"preferred-install": "dist",
+		"sort-packages": true
 	},
 	"autoload": {
 		"psr-4": {
@@ -41,11 +46,6 @@
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
-	"scripts": {
-		"post-update-cmd": [
-			"composer dump-autoload"
-		]
-	},
 	"support": {
 		"email": "natanfelles@gmail.com",
 		"issues": "https://gitlab.com/the-framework/libraries/database/issues",
