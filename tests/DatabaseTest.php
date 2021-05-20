@@ -73,6 +73,16 @@ class DatabaseTest extends TestCase
 			],
 		]);
 		$this->assertInstanceOf(Database::class, $database);
+		$this->cipherStatus($database);
+	}
+
+	protected function cipherStatus(Database $database)
+	{
+		$status = $database->query("SHOW STATUS LIKE 'ssl_cipher'")->fetchArray();
+		$this->assertEquals([
+			'Variable_name' => 'Ssl_cipher',
+			'Value' => 'TLS_AES_256_GCM_SHA384',
+		], $status);
 	}
 
 	public function testConnectionWithSSLNotVerified()
@@ -93,6 +103,7 @@ class DatabaseTest extends TestCase
 			],
 		]);
 		$this->assertInstanceOf(Database::class, $database);
+		$this->cipherStatus($database);
 	}
 
 	public function testConnectionWithFailover()
