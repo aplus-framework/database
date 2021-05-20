@@ -101,6 +101,8 @@ class Database
 			'collation' => 'utf8mb4_general_ci',
 			'timezone' => '+00:00',
 			'ssl' => [
+				'enabled' => false,
+				'verify' => true,
 				'key' => null,
 				'cert' => null,
 				'ca' => null,
@@ -143,14 +145,28 @@ class Database
 			$this->config = $username;
 		}
 		try {
-			// $this->mysqli->ssl_set();
+			$flags = null;
+			if ($username['ssl']['enabled'] === true) {
+				$this->mysqli->ssl_set(
+					$username['ssl']['key'],
+					$username['ssl']['cert'],
+					$username['ssl']['ca'],
+					$username['ssl']['capath'],
+					$username['ssl']['cipher']
+				);
+				$flags += \MYSQLI_CLIENT_SSL;
+				if ($username['ssl']['verify'] === false) {
+					$flags += \MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
+				}
+			}
 			$this->mysqli->real_connect(
 				$username['host'],
 				$username['username'],
 				$username['password'],
 				$username['schema'],
 				$username['port'],
-				$username['socket']
+				$username['socket'],
+				$flags
 			);
 		} catch (Exception $exception) {
 			$this->failoverIndex = $this->failoverIndex === null

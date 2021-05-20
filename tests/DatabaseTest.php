@@ -56,6 +56,41 @@ class DatabaseTest extends TestCase
 		]);
 	}
 
+	public function testConnectionWithSSL()
+	{
+		// TODO: Test with SSL success
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessage('MySQL server has gone away');
+		new Database([
+			'username' => \getenv('DB_USERNAME'),
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+			'ssl' => [
+				'enabled' => true,
+			],
+		]);
+	}
+
+	public function testConnectionWithSSLNotVerified()
+	{
+		// TODO: Test with SSL success
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessage('MySQL server has gone away');
+		new Database([
+			'username' => \getenv('DB_USERNAME'),
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+			'ssl' => [
+				'enabled' => true,
+				'verify' => false,
+			],
+		]);
+	}
+
 	public function testConnectionWithFailover()
 	{
 		$database = new Database([
