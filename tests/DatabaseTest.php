@@ -58,10 +58,11 @@ class DatabaseTest extends TestCase
 
 	public function testConnectionWithSSL()
 	{
-		// TODO: Test with SSL success
-		$this->expectException(\mysqli_sql_exception::class);
-		$this->expectExceptionMessage('MySQL server has gone away');
-		new Database([
+		if (\getenv('DB_HOST') === 'mariadb') {
+			$this->expectException(\mysqli_sql_exception::class);
+			$this->expectExceptionMessage('MySQL server has gone away');
+		}
+		$database = new Database([
 			'username' => \getenv('DB_USERNAME'),
 			'password' => \getenv('DB_PASSWORD'),
 			'schema' => \getenv('DB_SCHEMA'),
@@ -71,14 +72,16 @@ class DatabaseTest extends TestCase
 				'enabled' => true,
 			],
 		]);
+		$this->assertInstanceOf(Database::class, $database);
 	}
 
 	public function testConnectionWithSSLNotVerified()
 	{
-		// TODO: Test with SSL success
-		$this->expectException(\mysqli_sql_exception::class);
-		$this->expectExceptionMessage('MySQL server has gone away');
-		new Database([
+		if (\getenv('DB_HOST') === 'mariadb') {
+			$this->expectException(\mysqli_sql_exception::class);
+			$this->expectExceptionMessage('MySQL server has gone away');
+		}
+		$database = new Database([
 			'username' => \getenv('DB_USERNAME'),
 			'password' => \getenv('DB_PASSWORD'),
 			'schema' => \getenv('DB_SCHEMA'),
@@ -89,6 +92,7 @@ class DatabaseTest extends TestCase
 				'verify' => false,
 			],
 		]);
+		$this->assertInstanceOf(Database::class, $database);
 	}
 
 	public function testConnectionWithFailover()
