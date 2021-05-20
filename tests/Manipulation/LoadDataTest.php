@@ -15,7 +15,7 @@ class LoadDataTest extends TestCase
 	public function testOptions()
 	{
 		$this->assertEquals(
-			"LOAD DATA\nCONCURRENT INFILE '/tmp/foo' INTO TABLE `Users`",
+			"LOAD DATA\nCONCURRENT INFILE '/tmp/foo'\n INTO TABLE `Users`",
 			$this->loadData->options($this->loadData::OPT_CONCURRENT)
 				->infile('/tmp/foo')
 				->intoTable('Users')
@@ -45,10 +45,37 @@ class LoadDataTest extends TestCase
 	public function testCharset()
 	{
 		$this->assertEquals(
-			"LOAD DATA\n INFILE '/tmp/foo' INTO TABLE `users` CHARACTER SET utf8",
+			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n CHARACTER SET utf8",
 			$this->loadData->infile('/tmp/foo')
 				->intoTable('users')
 				->charset('utf8')
+				->sql()
+		);
+	}
+
+	public function testColumns()
+	{
+		$this->assertEquals(
+			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
+			. " COLUMNS\n  TERMINATED BY ','\n  OPTIONALLY ENCLOSED BY '\\\"'\n  ESCAPED BY '\\\\'",
+			$this->loadData->infile('/tmp/foo')
+				->intoTable('users')
+				->columnsTerminatedBy(',')
+				->columnsEnclosedBy('"', true)
+				->columnsEscapedBy('\\')
+				->sql()
+		);
+	}
+
+	public function testLines()
+	{
+		$this->assertEquals(
+			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
+			. " LINES\n  STARTING BY '-'\n  TERMINATED BY '\\\\n'",
+			$this->loadData->infile('/tmp/foo')
+				->intoTable('users')
+				->linesStartingBy('-')
+				->linesTerminatedBy('\n')
 				->sql()
 		);
 	}
@@ -70,11 +97,29 @@ class LoadDataTest extends TestCase
 	public function testIgnoreLines()
 	{
 		$this->assertEquals(
-			"LOAD DATA\n INFILE '/tmp/foo' INTO TABLE `users` IGNORE 25 LINES",
+			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n IGNORE 25 LINES",
 			$this->loadData->intoTable('users')
 				->infile('/tmp/foo')
 				->ignoreLines(25)
 				->sql()
 		);
+	}
+
+	public function todo_testRun()
+	{
+		static::$database->exec(
+			<<<SQL
+CREATE OR REPLACE TABLE `Users` (
+    `id` INT,
+    `name` VARCHAR(64),
+    `birthday` DATE
+)
+SQL
+		);
+		$this->loadData
+			->options($this->loadData::OPT_LOCAL)
+			->infile(__DIR__ . '/LoadDataTest.csv')
+			->intoTable('Users')
+			->run();
 	}
 }

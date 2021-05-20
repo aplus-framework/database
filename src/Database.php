@@ -72,6 +72,7 @@ class Database
 		$this->mysqli = new mysqli();
 		$this->mysqli->options(\MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
 		$this->mysqli->options(\MYSQLI_OPT_CONNECT_TIMEOUT, 10);
+		$this->mysqli->options(\MYSQLI_OPT_LOCAL_INFILE, 1);
 		$this->connect($username, $password, $schema, $host, $port);
 	}
 
