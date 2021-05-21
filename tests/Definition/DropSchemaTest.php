@@ -34,4 +34,13 @@ class DropSchemaTest extends TestCase
 			$this->dropSchema->ifExists()->schema('app')->sql()
 		);
 	}
+
+	public function testRun()
+	{
+		static::$database->createSchema('app')->ifNotExists()->run();
+		$this->assertEquals(
+			0,
+			$this->dropSchema->schema('app')->run()
+		);
+	}
 }

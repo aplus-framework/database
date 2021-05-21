@@ -71,4 +71,14 @@ class AlterSchemaTest extends TestCase
 				->sql()
 		);
 	}
+
+	public function testRun()
+	{
+		static::$database->dropSchema()->schema('app')->ifExists()->run();
+		static::$database->createSchema()->schema('app')->charset('utf8')->run();
+		$this->assertEquals(
+			1,
+			$this->alterSchema->schema('app')->charset('utf8mb4')->run()
+		);
+	}
 }

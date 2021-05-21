@@ -77,4 +77,13 @@ class CreateSchemaTest extends TestCase
 				->sql()
 		);
 	}
+
+	public function testRun()
+	{
+		static::$database->dropSchema('app')->ifExists()->run();
+		$this->assertEquals(
+			1,
+			$this->createSchema->schema('app')->run()
+		);
+	}
 }
