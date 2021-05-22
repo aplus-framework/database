@@ -9,6 +9,7 @@ services:
     depends_on:
       - mariadb
       - mysql
+    tty: true
   mariadb:
     image: mariadb
     restart: always
