@@ -75,9 +75,8 @@ class PreparedStatementTest extends TestCase
 		$this->assertInstanceOf(Result::class, $prepared->query('a'));
 		$this->assertInstanceOf(Result::class, $prepared->query(true));
 		$this->assertInstanceOf(Result::class, $prepared->query(null));
-		$this->expectException(\InvalidArgumentException::class);
-		$this->expectExceptionMessage('Invalid param data type: array');
-		$this->assertInstanceOf(Result::class, $prepared->query([]));
+		$this->expectException(\TypeError::class);
+		$prepared->query([]);
 	}
 
 	public function testSendBlob()

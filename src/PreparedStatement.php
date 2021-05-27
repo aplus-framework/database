@@ -15,11 +15,11 @@ class PreparedStatement
 	/**
 	 * Executes the prepared statement, returning a result set as a Result object.
 	 *
-	 * @param mixed ...$params Parameters sent to the prepared statement
+	 * @param bool|float|int|string|null ...$params Parameters sent to the prepared statement
 	 *
 	 * @return Result
 	 */
-	public function query(...$params) : Result
+	public function query(bool | float | int | string | null ...$params) : Result
 	{
 		$this->bindParams($params);
 		$this->statement->execute();
@@ -29,11 +29,11 @@ class PreparedStatement
 	/**
 	 * Executes the prepared statement and return the number of affected rows.
 	 *
-	 * @param mixed ...$params Parameters sent to the prepared statement
+	 * @param bool|float|int|string|null ...$params Parameters sent to the prepared statement
 	 *
 	 * @return int
 	 */
-	public function exec(...$params) : int
+	public function exec(bool | float | int | string | null ...$params) : int
 	{
 		$this->bindParams($params);
 		$this->statement->execute();
@@ -44,7 +44,7 @@ class PreparedStatement
 	}
 
 	/**
-	 * @param array|mixed[] $params
+	 * @param array|mixed[] $params Values types: bool, float, int, string or null
 	 */
 	protected function bindParams(array $params) : void
 	{

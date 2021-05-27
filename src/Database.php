@@ -62,7 +62,7 @@ class Database
 	 * @throws Exception if connections fail
 	 */
 	public function __construct(
-		$username,
+		array | string $username,
 		string $password = null,
 		string $schema = null,
 		string $host = 'localhost',
@@ -126,7 +126,7 @@ class Database
 	 * @return $this
 	 */
 	protected function connect(
-		$username,
+		array | string $username,
 		string $password = null,
 		string $schema = null,
 		string $host = 'localhost',
@@ -247,7 +247,7 @@ class Database
 	public function createSchema(string $schema_name = null) : CreateSchema
 	{
 		$instance = new CreateSchema($this);
-		if ($schema_name) {
+		if ($schema_name !== null) {
 			$instance->schema($schema_name);
 		}
 		return $instance;
@@ -263,7 +263,7 @@ class Database
 	public function dropSchema(string $schema_name = null) : DropSchema
 	{
 		$instance = new DropSchema($this);
-		if ($schema_name) {
+		if ($schema_name !== null) {
 			$instance->schema($schema_name);
 		}
 		return $instance;
@@ -279,7 +279,7 @@ class Database
 	public function alterSchema(string $schema_name = null) : AlterSchema
 	{
 		$instance = new AlterSchema($this);
-		if ($schema_name) {
+		if ($schema_name !== null) {
 			$instance->schema($schema_name);
 		}
 		return $instance;
@@ -295,7 +295,7 @@ class Database
 	public function createTable(string $table_name = null) : CreateTable
 	{
 		$instance = new CreateTable($this);
-		if ($table_name) {
+		if ($table_name !== null) {
 			$instance->table($table_name);
 		}
 		return $instance;
@@ -312,7 +312,7 @@ class Database
 	public function dropTable(string $table = null, string ...$tables) : DropTable
 	{
 		$instance = new DropTable($this);
-		if ($table) {
+		if ($table !== null) {
 			$instance->table($table, ...$tables);
 		}
 		return $instance;
@@ -328,7 +328,7 @@ class Database
 	public function alterTable(string $table_name = null) : AlterTable
 	{
 		$instance = new AlterTable($this);
-		if ($table_name) {
+		if ($table_name !== null) {
 			$instance->table($table_name);
 		}
 		return $instance;
@@ -337,15 +337,17 @@ class Database
 	/**
 	 * Call a DELETE statement.
 	 *
-	 * @param array|Closure|string $reference
-	 * @param mixed                $references
+	 * @param array|Closure|string|null $reference
+	 * @param array|Closure|string      ...$references
 	 *
 	 * @return Delete
 	 */
-	public function delete($reference = null, ...$references) : Delete
-	{
+	public function delete(
+		array | Closure | string $reference = null,
+		array | Closure | string ...$references
+	) : Delete {
 		$instance = new Delete($this);
-		if ($reference) {
+		if ($reference !== null) {
 			$instance->table($reference, ...$references);
 		}
 		return $instance;
@@ -361,7 +363,7 @@ class Database
 	public function insert(string $into_table = null) : Insert
 	{
 		$instance = new Insert($this);
-		if ($into_table) {
+		if ($into_table !== null) {
 			$instance->into($into_table);
 		}
 		return $instance;
@@ -377,7 +379,7 @@ class Database
 	public function loadData(string $into_table = null) : LoadData
 	{
 		$instance = new LoadData($this);
-		if ($into_table) {
+		if ($into_table !== null) {
 			$instance->intoTable($into_table);
 		}
 		return $instance;
@@ -393,7 +395,7 @@ class Database
 	public function replace(string $into_table = null) : Replace
 	{
 		$instance = new Replace($this);
-		if ($into_table) {
+		if ($into_table !== null) {
 			$instance->into($into_table);
 		}
 		return $instance;
@@ -403,14 +405,16 @@ class Database
 	 * Call a SELECT statement.
 	 *
 	 * @param array|Closure|string|null $reference
-	 * @param mixed                     $references
+	 * @param array|Closure|string      ...$references
 	 *
 	 * @return Select
 	 */
-	public function select($reference = null, ...$references) : Select
-	{
+	public function select(
+		array | Closure | string $reference = null,
+		array | Closure | string ...$references
+	) : Select {
 		$instance = new Select($this);
-		if ($reference) {
+		if ($reference !== null) {
 			$instance->from($reference, ...$references);
 		}
 		return $instance;
@@ -420,14 +424,16 @@ class Database
 	 * Call a UPDATE statement.
 	 *
 	 * @param array|Closure|string|null $reference
-	 * @param mixed                     $references
+	 * @param array|Closure|string      ...$references
 	 *
 	 * @return Update
 	 */
-	public function update($reference = null, ...$references) : Update
-	{
+	public function update(
+		array | Closure | string $reference = null,
+		array | Closure | string ...$references
+	) : Update {
 		$instance = new Update($this);
-		if ($reference) {
+		if ($reference !== null) {
 			$instance->table($reference, ...$references);
 		}
 		return $instance;
@@ -535,7 +541,7 @@ class Database
 	 *
 	 * @return int|string
 	 */
-	public function insertId()
+	public function insertId() : int | string
 	{
 		return $this->mysqli->insert_id;
 	}

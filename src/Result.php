@@ -50,7 +50,7 @@ class Result
 	 *
 	 * @return $this
 	 */
-	public function setFetchClass(string $class, ...$constructor)
+	public function setFetchClass(string $class, mixed ...$constructor)
 	{
 		$this->fetchClass = $class;
 		$this->fetchConstructor = $constructor;
@@ -65,7 +65,7 @@ class Result
 	 *
 	 * @return mixed|null
 	 */
-	public function fetch(string $class = null, ...$constructor)
+	public function fetch(string $class = null, mixed ...$constructor)
 	{
 		$class ??= $this->fetchClass;
 		$constructor = $constructor ?: $this->fetchConstructor;
@@ -83,7 +83,7 @@ class Result
 	 *
 	 * @return array|mixed[]
 	 */
-	public function fetchAll(string $class = null, ...$constructor) : array
+	public function fetchAll(string $class = null, mixed ...$constructor) : array
 	{
 		$this->moveCursor(0);
 		$all = [];
@@ -102,7 +102,7 @@ class Result
 	 *
 	 * @return mixed|null
 	 */
-	public function fetchRow(int $offset, string $class = null, ...$constructor)
+	public function fetchRow(int $offset, string $class = null, mixed ...$constructor)
 	{
 		$this->moveCursor($offset);
 		return $this->fetch($class, ...$constructor);
