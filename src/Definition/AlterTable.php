@@ -60,7 +60,7 @@ class AlterTable extends Statement
 		return $this;
 	}
 
-	public function renderWait() : ?string
+	protected function renderWait() : ?string
 	{
 		if ( ! isset($this->sql['wait'])) {
 			return null;
