@@ -41,7 +41,7 @@ class IndexDefinitionTest extends TestCase
 	public function testBadMethod()
 	{
 		$this->expectException(\BadMethodCallException::class);
-		$this->expectExceptionMessage('Method not found: foo');
+		$this->expectExceptionMessage('Method not found or not allowed: foo');
 		$this->definition->foo();
 	}
 

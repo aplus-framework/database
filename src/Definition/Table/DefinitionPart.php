@@ -9,7 +9,7 @@ abstract class DefinitionPart
 		if ($method === 'sql') {
 			return $this->sql(...$arguments);
 		}
-		throw new BadMethodCallException("Method not found: {$method}");
+		throw new BadMethodCallException("Method not found or not allowed: {$method}");
 	}
 
 	abstract protected function sql() : string;
