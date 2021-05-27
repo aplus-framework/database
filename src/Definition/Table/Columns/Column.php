@@ -13,12 +13,7 @@ abstract class Column extends DefinitionPart
 	protected bool $null = false;
 	protected bool $uniqueKey = false;
 	protected bool $primaryKey = false;
-	/**
-	 * @see default
-	 *
-	 * @var mixed
-	 */
-	protected $default;
+	protected bool | Closure | float | int | string | null $default;
 	protected ?string $comment;
 	protected bool $first = false;
 	protected ?string $after;
@@ -26,10 +21,10 @@ abstract class Column extends DefinitionPart
 	/**
 	 * Column constructor.
 	 *
-	 * @param Database $database
-	 * @param mixed    $length
+	 * @param Database                   $database
+	 * @param bool|float|int|string|null ...$length
 	 */
-	public function __construct(Database $database, ...$length)
+	public function __construct(Database $database, bool | float | int | string | null ...$length)
 	{
 		$this->database = $database;
 		$this->length = $length;
@@ -74,7 +69,7 @@ abstract class Column extends DefinitionPart
 	 *
 	 * @return $this
 	 */
-	public function default($default)
+	public function default(bool | Closure | float | int | string | null $default)
 	{
 		$this->default = $default;
 		return $this;

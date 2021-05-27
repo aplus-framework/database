@@ -28,32 +28,32 @@ class IndexDefinition extends DefinitionPart
 		$this->name = $name;
 	}
 
-	public function key(string $column, ...$columns) : Key
+	public function key(string $column, string ...$columns) : Key
 	{
 		return $this->index = new Key($this->database, $this->name, $column, ...$columns);
 	}
 
-	public function primaryKey(string $column, ...$columns) : PrimaryKey
+	public function primaryKey(string $column, string ...$columns) : PrimaryKey
 	{
 		return $this->index = new PrimaryKey($this->database, $this->name, $column, ...$columns);
 	}
 
-	public function uniqueKey(string $column, ...$columns) : UniqueKey
+	public function uniqueKey(string $column, string ...$columns) : UniqueKey
 	{
 		return $this->index = new UniqueKey($this->database, $this->name, $column, ...$columns);
 	}
 
-	public function fulltextKey(string $column, ...$columns) : FulltextKey
+	public function fulltextKey(string $column, string ...$columns) : FulltextKey
 	{
 		return $this->index = new FulltextKey($this->database, $this->name, $column, ...$columns);
 	}
 
-	public function foreignKey(string $column, ...$columns) : ForeignKey
+	public function foreignKey(string $column, string ...$columns) : ForeignKey
 	{
 		return $this->index = new ForeignKey($this->database, $this->name, $column, ...$columns);
 	}
 
-	public function spatialKey(string $column, ...$columns) : SpatialKey
+	public function spatialKey(string $column, string ...$columns) : SpatialKey
 	{
 		return $this->index = new SpatialKey($this->database, $this->name, $column, ...$columns);
 	}

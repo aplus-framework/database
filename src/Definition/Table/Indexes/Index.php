@@ -16,7 +16,7 @@ abstract class Index extends DefinitionPart
 	protected string $type = '';
 	protected ?string $name;
 
-	public function __construct(Database $database, ?string $name, string $column, ...$columns)
+	public function __construct(Database $database, ?string $name, string $column, string ...$columns)
 	{
 		$this->database = $database;
 		$this->name = $name;
