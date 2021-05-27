@@ -11,10 +11,10 @@ trait Where
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array|Closure|string $column   \Closure for a subquery, a string with the column name
+	 * @param array|Closure|string $column   Closure for a subquery, a string with the column name
 	 *                                       or and array with column names on WHERE MATCH clause
 	 * @param string               $operator
-	 * @param mixed                $values   Each value must be of type: string or \Closure
+	 * @param mixed                $values   Each value must be of type: string or Closure
 	 *
 	 * @return $this
 	 */
@@ -26,10 +26,10 @@ trait Where
 	/**
 	 * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array|Closure|string $column   \Closure for a subquery, a string with the column name
+	 * @param array|Closure|string $column   Closure for a subquery, a string with the column name
 	 *                                       or and array with column names on WHERE MATCH clause
 	 * @param string               $operator
-	 * @param mixed                $values   Each value must be of type: string or \Closure
+	 * @param mixed                $values   Each value must be of type: string or Closure
 	 *
 	 * @return $this
 	 */
@@ -41,7 +41,7 @@ trait Where
 	/**
 	 * Appends a "AND $column = $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -57,7 +57,7 @@ trait Where
 	/**
 	 * Appends a "OR $column = $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -73,7 +73,7 @@ trait Where
 	/**
 	 * Appends a "AND $column != $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -89,7 +89,7 @@ trait Where
 	/**
 	 * Appends a "OR $column != $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -105,7 +105,7 @@ trait Where
 	/**
 	 * Appends a "AND $column <=> $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -121,7 +121,7 @@ trait Where
 	/**
 	 * Appends a "OR $column <=> $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -137,7 +137,7 @@ trait Where
 	/**
 	 * Appends a "AND $column < $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -153,7 +153,7 @@ trait Where
 	/**
 	 * Appends a "OR $column < $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -169,7 +169,7 @@ trait Where
 	/**
 	 * Appends a "AND $column <= $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -185,7 +185,7 @@ trait Where
 	/**
 	 * Appends a "OR $column <= $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -201,7 +201,7 @@ trait Where
 	/**
 	 * Appends a "AND $column > $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -217,7 +217,7 @@ trait Where
 	/**
 	 * Appends a "OR $column > $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -233,7 +233,7 @@ trait Where
 	/**
 	 * Appends a "AND $column >= $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -249,7 +249,7 @@ trait Where
 	/**
 	 * Appends a "OR $column >= $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -265,7 +265,7 @@ trait Where
 	/**
 	 * Appends a "AND $column LIKE $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -281,7 +281,7 @@ trait Where
 	/**
 	 * Appends a "OR $column LIKE $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -297,7 +297,7 @@ trait Where
 	/**
 	 * Appends a "AND $column NOT LIKE" $value condition.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -313,7 +313,7 @@ trait Where
 	/**
 	 * Appends a "OR $column NOT LIKE $value" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -329,7 +329,7 @@ trait Where
 	/**
 	 * Appends a "AND $column IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 * @param mixed                         $values
@@ -347,7 +347,7 @@ trait Where
 	/**
 	 * Appends a "OR $column IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 * @param mixed                         $values
@@ -365,7 +365,7 @@ trait Where
 	/**
 	 * Appends a "AND $column NOT IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 * @param mixed                         $values
@@ -383,7 +383,7 @@ trait Where
 	/**
 	 * Appends a "OR $column NOT IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 * @param mixed                         $values
@@ -401,7 +401,7 @@ trait Where
 	/**
 	 * Appends a "AND $column BETWEEN $min AND $max" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -418,7 +418,7 @@ trait Where
 	/**
 	 * Appends a "OR $column BETWEEN $min AND $max" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -435,7 +435,7 @@ trait Where
 	/**
 	 * Appends a "AND $column NOT BETWEEN $min AND $max" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -452,7 +452,7 @@ trait Where
 	/**
 	 * Appends a "OR $column NOT BETWEEN $min AND $max" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -469,7 +469,7 @@ trait Where
 	/**
 	 * Appends a "AND $column IS NULL" condition in the WHERE clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
@@ -483,7 +483,7 @@ trait Where
 	/**
 	 * Appends a "OR $column IS NULL" condition in the WHERE clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
@@ -497,7 +497,7 @@ trait Where
 	/**
 	 * Appends a "AND $column IS NOT NULL" condition in the WHERE clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
@@ -511,7 +511,7 @@ trait Where
 	/**
 	 * Appends a "OR $column IS NOT NULL" condition in the WHERE clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
@@ -523,12 +523,12 @@ trait Where
 	}
 
 	/* TODO: https://mariadb.com/kb/en/subqueries-and-exists/
-	 public function whereExists(\Closure $subquery)
+	 public function whereExists(Closure $subquery)
 	{
 		$this->subquery($subquery);
 	}
 
-	public function whereNotExists(\Closure $subquery)
+	public function whereNotExists(Closure $subquery)
 	{
 		$this->subquery($subquery);
 	}*/
@@ -537,15 +537,15 @@ trait Where
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array        $columns Columns to MATCH
-	 * @param array|string $against AGAINST expression
+	 * @param array|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
 	 * @return $this
 	 */
-	public function whereMatch(array $columns, $against)
+	public function whereMatch($columns, $against)
 	{
 		return $this->where($columns, 'MATCH', $against);
 	}
@@ -554,15 +554,15 @@ trait Where
 	 * Appends a "OR MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array        $columns Columns to MATCH
-	 * @param array|string $against AGAINST expression
+	 * @param array|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
 	 * @return $this
 	 */
-	public function orWhereMatch(array $columns, $against)
+	public function orWhereMatch($columns, $against)
 	{
 		return $this->orWhere($columns, 'MATCH', $against);
 	}
@@ -571,15 +571,15 @@ trait Where
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array        $columns Columns to MATCH
-	 * @param array|string $against AGAINST expression
+	 * @param array|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
 	 * @return $this
 	 */
-	public function whereMatchWithQueryExpansion(array $columns, $against)
+	public function whereMatchWithQueryExpansion($columns, $against)
 	{
 		return $this->where($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
 	}
@@ -588,15 +588,15 @@ trait Where
 	 * Appends a "OR MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array        $columns Columns to MATCH
-	 * @param array|string $against AGAINST expression
+	 * @param array|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
 	 * @return $this
 	 */
-	public function orWhereMatchWithQueryExpansion(array $columns, $against)
+	public function orWhereMatchWithQueryExpansion($columns, $against)
 	{
 		return $this->orWhere($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
 	}
@@ -605,15 +605,15 @@ trait Where
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
 	 * the WHERE clause.
 	 *
-	 * @param array        $columns Columns to MATCH
-	 * @param array|string $against AGAINST expression
+	 * @param array|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
 	 * @return $this
 	 */
-	public function whereMatchInBooleanMode(array $columns, $against)
+	public function whereMatchInBooleanMode($columns, $against)
 	{
 		return $this->where($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
@@ -622,15 +622,15 @@ trait Where
 	 * Appends a "OR MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
 	 * the WHERE clause.
 	 *
-	 * @param array        $columns Columns to MATCH
-	 * @param array|string $against AGAINST expression
+	 * @param array|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
 	 * @return $this
 	 */
-	public function orWhereMatchInBooleanMode(array $columns, $against)
+	public function orWhereMatchInBooleanMode($columns, $against)
 	{
 		return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
@@ -651,17 +651,30 @@ trait Where
 		return $this;
 	}
 
-	private function renderMatch(array $columns, $expression, string $modifier = '')
-	{
-		foreach ($columns as &$column) {
-			$column = $this->renderIdentifier($column);
+	private function renderMatch(
+		array | Closure | string $columns,
+		array | Closure | string $expression,
+		string $modifier = ''
+	) {
+		if (\is_array($columns)) {
+			foreach ($columns as &$column) {
+				$column = $this->renderIdentifier($column);
+			}
+			unset($column);
+			$columns = \implode(', ', $columns);
+		} elseif (\is_string($columns)) {
+			$columns = $this->renderIdentifier($columns);
+		} else {
+			$columns = $this->subquery($columns);
 		}
-		unset($column);
-		$columns = \implode(', ', $columns);
 		if (\is_array($expression)) {
 			$expression = \implode(', ', $expression);
+			$expression = $this->database->quote($expression);
+		} elseif (\is_string($expression)) {
+			$expression = $this->database->quote($expression);
+		} else {
+			$expression = $this->subquery($expression);
 		}
-		$expression = $this->database->quote($expression);
 		if ($modifier) {
 			$modifier = ' ' . $modifier;
 		}

@@ -97,6 +97,28 @@ class WhereTest extends TestCase
 		);
 	}
 
+	public function testMatchWithStringParams()
+	{
+		$this->statement->whereMatch('title', 'foo');
+		$this->assertEquals(
+			" WHERE MATCH (`title`) AGAINST ('foo')",
+			$this->statement->renderWhere()
+		);
+	}
+
+	public function testMatchWithClosureParams()
+	{
+		$this->statement->whereMatch(static function () {
+			return 'title';
+		}, static function () {
+			return "'foo'";
+		});
+		$this->assertEquals(
+			" WHERE MATCH ((title)) AGAINST (('foo'))",
+			$this->statement->renderWhere()
+		);
+	}
+
 	public function testMatchWithQueryExpansion()
 	{
 		$this->statement->whereMatchWithQueryExpansion(['title'], 'foo');
