@@ -100,7 +100,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return string
 	 */
-	protected function renderIdentifier($column) : string
+	protected function renderIdentifier(Closure | string $column) : string
 	{
 		return $column instanceof Closure
 			? $this->subquery($column)
@@ -115,7 +115,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return string
 	 */
-	protected function renderAliasedIdentifier($column) : string
+	protected function renderAliasedIdentifier(array | Closure | string $column) : string
 	{
 		if (\is_array($column)) {
 			if (\count($column) !== 1) {
@@ -135,7 +135,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return string
 	 */
-	protected function renderValue($value) : string
+	protected function renderValue(Closure | float | int | string | null $value) : string
 	{
 		return $value instanceof Closure
 			? $this->subquery($value)
@@ -153,7 +153,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return string
 	 */
-	protected function renderAssignment(string $identifier, $expression) : string
+	protected function renderAssignment(string $identifier, Closure | float | int | string | null $expression) : string
 	{
 		return $this->database->protectIdentifier($identifier)
 			. ' = ' . $this->renderValue($expression);
@@ -167,7 +167,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return array|mixed[]
 	 */
-	protected function mergeExpressions($expression, array $expressions) : array
+	protected function mergeExpressions(mixed $expression, array $expressions) : array
 	{
 		return $expressions
 			? \array_merge([$expression], $expressions)

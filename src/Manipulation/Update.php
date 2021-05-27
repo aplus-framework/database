@@ -52,11 +52,11 @@ class Update extends Statement
 	 * Sets the table references.
 	 *
 	 * @param array|Closure|string $reference
-	 * @param mixed                ...$references
+	 * @param array|Closure|string ...$references
 	 *
 	 * @return $this
 	 */
-	public function table(array | Closure | string $reference, ...$references)
+	public function table(array | Closure | string $reference, array | Closure | string ...$references)
 	{
 		$this->sql['table'] = [];
 		$references = $this->mergeExpressions($reference, $references);

@@ -43,11 +43,11 @@ class Replace extends Statement
 
 	/**
 	 * @param string $column
-	 * @param mixed  $columns
+	 * @param string ...$columns
 	 *
 	 * @return $this
 	 */
-	public function columns(string $column, ...$columns)
+	public function columns(string $column, string ...$columns)
 	{
 		$this->sql['columns'] = $this->mergeExpressions($column, $columns);
 		return $this;
@@ -98,11 +98,11 @@ class Replace extends Statement
 
 	/**
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
-	public function values($value, ...$values)
+	public function values(Closure | float | int | string | null $value, Closure | float | int | string | null ...$values)
 	{
 		$this->sql['values'][] = $this->mergeExpressions($value, $values);
 		return $this;

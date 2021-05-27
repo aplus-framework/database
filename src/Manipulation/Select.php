@@ -182,14 +182,13 @@ class Select extends Statement
 	 * Generally used with the FROM clause as column names.
 	 *
 	 * @param array|Closure|string $expression
-	 * @param mixed                $expressions Each expresion must be of type: array, string or
-	 *                                          \Closure
+	 * @param array|Closure|string ...$expressions
 	 *
 	 * @see https://mariadb.com/kb/en/library/select/#select-expressions
 	 *
 	 * @return $this
 	 */
-	public function expressions(array | Closure | string $expression, ...$expressions)
+	public function expressions(array | Closure | string $expression, array | Closure | string ...$expressions)
 	{
 		$expressions = $this->mergeExpressions($expression, $expressions);
 		foreach ($expressions as $expression) {
@@ -202,12 +201,11 @@ class Select extends Statement
 	 * Alias of the expressions method.
 	 *
 	 * @param array|Closure|string $expression
-	 * @param mixed                $expressions Each expresion must be of type: array, string or
-	 *                                          \Closure
+	 * @param array|Closure|string ...$expressions
 	 *
 	 * @return $this
 	 */
-	public function columns(array | Closure | string $expression, ...$expressions)
+	public function columns(array | Closure | string $expression, array | Closure | string ...$expressions)
 	{
 		return $this->expressions($expression, ...$expressions);
 	}
@@ -243,14 +241,14 @@ class Select extends Statement
 	}
 
 	/**
-	 * @param string $name
-	 * @param mixed  $arguments
+	 * @param string                     $name
+	 * @param bool|float|int|string|null ...$arguments
 	 *
 	 * @see https://mariadb.com/kb/en/library/procedure/
 	 *
 	 * @return $this
 	 */
-	public function procedure(string $name, ...$arguments)
+	public function procedure(string $name, bool | float | int | string | null ...$arguments)
 	{
 		$this->sql['procedure'] = [
 			'name' => $name,
@@ -367,13 +365,13 @@ class Select extends Statement
 
 	/**
 	 * @param string $filepath
-	 * @param mixed  $variables
+	 * @param string ...$variables
 	 *
 	 * @see https://mariadb.com/kb/en/library/select-into-dumpfile/
 	 *
 	 * @return $this
 	 */
-	public function intoDumpfile(string $filepath, ...$variables)
+	public function intoDumpfile(string $filepath, string ...$variables)
 	{
 		$this->sql['into_dumpfile'] = [
 			'filepath' => $filepath,
