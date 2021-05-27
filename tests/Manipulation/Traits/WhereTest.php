@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class WhereTest extends TestCase
 {
-	/**
-	 * @var WhereMock
-	 */
-	protected $statement;
+	protected WhereMock $statement;
 
 	public function setup() : void
 	{

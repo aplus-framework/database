@@ -4,10 +4,7 @@ use Tests\Database\TestCase;
 
 class JoinTest extends TestCase
 {
-	/**
-	 * @var JoinMock
-	 */
-	protected $statement;
+	protected JoinMock $statement;
 
 	public function setup() : void
 	{

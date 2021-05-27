@@ -5,10 +5,7 @@ use Tests\Database\TestCase;
 
 class HavingTest extends TestCase
 {
-	/**
-	 * @var HavingMock
-	 */
-	protected $statement;
+	protected HavingMock $statement;
 
 	public function setup() : void
 	{

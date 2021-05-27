@@ -11,30 +11,38 @@ trait Where
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array|Closure|string $column   Closure for a subquery, a string with the column name
-	 *                                       or and array with column names on WHERE MATCH clause
-	 * @param string               $operator
-	 * @param mixed                $values   Each value must be of type: string or Closure
+	 * @param array|Closure|string                $column    Closure for a subquery, a string with the
+	 *                                                       column name or and array with column names on
+	 *                                                       WHERE MATCH clause
+	 * @param string                              $operator
+	 * @param array|Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
-	public function where($column, string $operator, ...$values)
-	{
+	public function where(
+		array | Closure | string $column,
+		string $operator,
+		array | Closure | float | int | string | null ...$values
+	) {
 		return $this->addWhere('AND', $column, $operator, $values);
 	}
 
 	/**
 	 * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array|Closure|string $column   Closure for a subquery, a string with the column name
-	 *                                       or and array with column names on WHERE MATCH clause
-	 * @param string               $operator
-	 * @param mixed                $values   Each value must be of type: string or Closure
+	 * @param array|Closure|string                $column    Closure for a subquery, a string with the
+	 *                                                       column name or and array with column
+	 *                                                       names on WHERE MATCH clause
+	 * @param string                              $operator
+	 * @param array|Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
-	public function orWhere($column, string $operator, ...$values)
-	{
+	public function orWhere(
+		array | Closure | string $column,
+		string $operator,
+		array | Closure | float | int | string | null ...$values
+	) {
 		return $this->addWhere('OR', $column, $operator, $values);
 	}
 
@@ -49,7 +57,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereEqual($column, $value)
+	public function whereEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, '=', $value);
 	}
@@ -65,7 +73,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereEqual($column, $value)
+	public function orWhereEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orWhere($column, '=', $value);
 	}
@@ -81,7 +89,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereNotEqual($column, $value)
+	public function whereNotEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, '!=', $value);
 	}
@@ -97,7 +105,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereNotEqual($column, $value)
+	public function orWhereNotEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orWhere($column, '!=', $value);
 	}
@@ -113,7 +121,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereNullSafeEqual($column, $value)
+	public function whereNullSafeEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, '<=>', $value);
 	}
@@ -129,8 +137,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereNullSafeEqual($column, $value)
-	{
+	public function orWhereNullSafeEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orWhere($column, '<=>', $value);
 	}
 
@@ -145,7 +155,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereLessThan($column, $value)
+	public function whereLessThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, '<', $value);
 	}
@@ -161,7 +171,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereLessThan($column, $value)
+	public function orWhereLessThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orWhere($column, '<', $value);
 	}
@@ -177,8 +187,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereLessThanOrEqual($column, $value)
-	{
+	public function whereLessThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->where($column, '<=', $value);
 	}
 
@@ -193,8 +205,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereLessThanOrEqual($column, $value)
-	{
+	public function orWhereLessThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orWhere($column, '<=', $value);
 	}
 
@@ -209,7 +223,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereGreaterThan($column, $value)
+	public function whereGreaterThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, '>', $value);
 	}
@@ -225,7 +239,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereGreaterThan($column, $value)
+	public function orWhereGreaterThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orWhere($column, '>', $value);
 	}
@@ -241,8 +255,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereGreaterThanOrEqual($column, $value)
-	{
+	public function whereGreaterThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->where($column, '>=', $value);
 	}
 
@@ -257,8 +273,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereGreaterThanOrEqual($column, $value)
-	{
+	public function orWhereGreaterThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orWhere($column, '>=', $value);
 	}
 
@@ -273,7 +291,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereLike($column, $value)
+	public function whereLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, 'LIKE', $value);
 	}
@@ -289,7 +307,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereLike($column, $value)
+	public function orWhereLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orWhere($column, 'LIKE', $value);
 	}
@@ -305,7 +323,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereNotLike($column, $value)
+	public function whereNotLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->where($column, 'NOT LIKE', $value);
 	}
@@ -321,7 +339,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereNotLike($column, $value)
+	public function orWhereNotLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orWhere($column, 'NOT LIKE', $value);
 	}
@@ -329,17 +347,20 @@ trait Where
 	/**
 	 * Appends a "AND $column IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function whereIn($column, $value, ...$values)
-	{
+	public function whereIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->where($column, 'IN', ...$values);
 	}
@@ -347,17 +368,20 @@ trait Where
 	/**
 	 * Appends a "OR $column IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function orWhereIn($column, $value, ...$values)
-	{
+	public function orWhereIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orWhere($column, 'IN', ...$values);
 	}
@@ -365,17 +389,20 @@ trait Where
 	/**
 	 * Appends a "AND $column NOT IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function whereNotIn($column, $value, ...$values)
-	{
+	public function whereNotIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->where($column, 'NOT IN', ...$values);
 	}
@@ -383,17 +410,20 @@ trait Where
 	/**
 	 * Appends a "OR $column NOT IN (...$values)" condition in the WHERE clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function orWhereNotIn($column, $value, ...$values)
-	{
+	public function orWhereNotIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orWhere($column, 'NOT IN', ...$values);
 	}
@@ -410,8 +440,11 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereBetween($column, $min, $max)
-	{
+	public function whereBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->where($column, 'BETWEEN', $min, $max);
 	}
 
@@ -427,8 +460,11 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereBetween($column, $min, $max)
-	{
+	public function orWhereBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->orWhere($column, 'BETWEEN', $min, $max);
 	}
 
@@ -444,8 +480,11 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereNotBetween($column, $min, $max)
-	{
+	public function whereNotBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->where($column, 'NOT BETWEEN', $min, $max);
 	}
 
@@ -461,8 +500,11 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereNotBetween($column, $min, $max)
-	{
+	public function orWhereNotBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->orWhere($column, 'NOT BETWEEN', $min, $max);
 	}
 
@@ -475,7 +517,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereIsNull($column)
+	public function whereIsNull(Closure | string $column)
 	{
 		return $this->where($column, 'IS NULL');
 	}
@@ -489,7 +531,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereIsNull($column)
+	public function orWhereIsNull(Closure | string $column)
 	{
 		return $this->orWhere($column, 'IS NULL');
 	}
@@ -503,7 +545,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereIsNotNull($column)
+	public function whereIsNotNull(Closure | string $column)
 	{
 		return $this->where($column, 'IS NOT NULL');
 	}
@@ -517,7 +559,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereIsNotNull($column)
+	public function orWhereIsNotNull(Closure | string $column)
 	{
 		return $this->orWhere($column, 'IS NOT NULL');
 	}
@@ -545,7 +587,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereMatch($columns, $against)
+	public function whereMatch(array | Closure | string $columns, array | Closure | string $against)
 	{
 		return $this->where($columns, 'MATCH', $against);
 	}
@@ -562,7 +604,7 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereMatch($columns, $against)
+	public function orWhereMatch(array | Closure | string $columns, array | Closure | string $against)
 	{
 		return $this->orWhere($columns, 'MATCH', $against);
 	}
@@ -579,8 +621,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereMatchWithQueryExpansion($columns, $against)
-	{
+	public function whereMatchWithQueryExpansion(
+		array | Closure | string $columns,
+		array | Closure | string $against
+	) {
 		return $this->where($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
 	}
 
@@ -596,8 +640,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereMatchWithQueryExpansion($columns, $against)
-	{
+	public function orWhereMatchWithQueryExpansion(
+		array | Closure | string $columns,
+		array | Closure | string $against
+	) {
 		return $this->orWhere($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
 	}
 
@@ -613,8 +659,10 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function whereMatchInBooleanMode($columns, $against)
-	{
+	public function whereMatchInBooleanMode(
+		array | Closure | string $columns,
+		array | Closure | string $against
+	) {
 		return $this->where($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
 
@@ -630,14 +678,16 @@ trait Where
 	 *
 	 * @return $this
 	 */
-	public function orWhereMatchInBooleanMode($columns, $against)
-	{
+	public function orWhereMatchInBooleanMode(
+		array | Closure | string $columns,
+		array | Closure | string $against
+	) {
 		return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
 
 	private function addWhere(
 		string $glue,
-		$column,
+		array | Closure | string $column,
 		string $operator,
 		array $values,
 		string $clause = 'where'

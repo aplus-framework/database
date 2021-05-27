@@ -4,10 +4,7 @@ use Tests\Database\TestCase;
 
 class OrderByTest extends TestCase
 {
-	/**
-	 * @var OrderByMock
-	 */
-	protected $statement;
+	protected OrderByMock $statement;
 
 	public function setup() : void
 	{
@@ -72,8 +69,7 @@ class OrderByTest extends TestCase
 
 	public function testInvalidExpressionDataType()
 	{
-		$this->statement->orderBy([]);
 		$this->expectException(\TypeError::class);
-		$this->statement->renderOrderBy();
+		$this->statement->orderBy([]);
 	}
 }

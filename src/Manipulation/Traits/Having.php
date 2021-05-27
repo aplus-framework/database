@@ -12,35 +12,43 @@ trait Having
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the HAVING clause.
 	 *
-	 * @param Closure|string $column   \Closure for a subquery or a string with the column name
-	 * @param string         $operator
-	 * @param mixed          $values   Each value must be of type: string or \Closure
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
+	 * @param string                        $operator
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
-	public function having($column, string $operator, ...$values)
-	{
+	public function having(
+		Closure | string $column,
+		string $operator,
+		Closure | float | int | string | null ...$values
+	) {
 		return $this->addHaving('AND', $column, $operator, $values);
 	}
 
 	/**
 	 * Appends a "OR $column $operator ...$values" condition in the HAVING clause.
 	 *
-	 * @param Closure|string $column   \Closure for a subquery or a string with the column name
-	 * @param string         $operator
-	 * @param mixed          $values   Each value must be of type: string or \Closure
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
+	 * @param string                        $operator
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
-	public function orHaving($column, string $operator, ...$values)
-	{
+	public function orHaving(
+		Closure | string $column,
+		string $operator,
+		Closure | float | int | string | null ...$values
+	) {
 		return $this->addHaving('OR', $column, $operator, $values);
 	}
 
 	/**
 	 * Appends a "AND $column = $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -48,7 +56,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingEqual($column, $value)
+	public function havingEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->having($column, '=', $value);
 	}
@@ -56,7 +64,7 @@ trait Having
 	/**
 	 * Appends a "OR $column = $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -64,7 +72,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingEqual($column, $value)
+	public function orHavingEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orHaving($column, '=', $value);
 	}
@@ -72,7 +80,7 @@ trait Having
 	/**
 	 * Appends a "AND $column != $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -80,7 +88,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingNotEqual($column, $value)
+	public function havingNotEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->having($column, '!=', $value);
 	}
@@ -88,7 +96,7 @@ trait Having
 	/**
 	 * Appends a "OR $column != $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -96,7 +104,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingNotEqual($column, $value)
+	public function orHavingNotEqual(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orHaving($column, '!=', $value);
 	}
@@ -104,7 +112,7 @@ trait Having
 	/**
 	 * Appends a "AND $column <=> $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -112,15 +120,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingNullSafeEqual($column, $value)
-	{
+	public function havingNullSafeEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->having($column, '<=>', $value);
 	}
 
 	/**
 	 * Appends a "OR $column <=> $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -128,15 +138,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingNullSafeEqual($column, $value)
-	{
+	public function orHavingNullSafeEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orHaving($column, '<=>', $value);
 	}
 
 	/**
 	 * Appends a "AND $column < $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -144,7 +156,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingLessThan($column, $value)
+	public function havingLessThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->having($column, '<', $value);
 	}
@@ -152,7 +164,7 @@ trait Having
 	/**
 	 * Appends a "OR $column < $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -160,7 +172,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingLessThan($column, $value)
+	public function orHavingLessThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orHaving($column, '<', $value);
 	}
@@ -168,7 +180,7 @@ trait Having
 	/**
 	 * Appends a "AND $column <= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -176,15 +188,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingLessThanOrEqual($column, $value)
-	{
+	public function havingLessThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->having($column, '<=', $value);
 	}
 
 	/**
 	 * Appends a "OR $column <= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -192,15 +206,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingLessThanOrEqual($column, $value)
-	{
+	public function orHavingLessThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orHaving($column, '<=', $value);
 	}
 
 	/**
 	 * Appends a "AND $column > $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -208,7 +224,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingGreaterThan($column, $value)
+	public function havingGreaterThan(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->having($column, '>', $value);
 	}
@@ -216,7 +232,7 @@ trait Having
 	/**
 	 * Appends a "OR $column > $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -224,15 +240,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingGreaterThan($column, $value)
-	{
+	public function orHavingGreaterThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orHaving($column, '>', $value);
 	}
 
 	/**
 	 * Appends a "AND $column >= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -240,15 +258,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingGreaterThanOrEqual($column, $value)
-	{
+	public function havingGreaterThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->having($column, '>=', $value);
 	}
 
 	/**
 	 * Appends a "OR $column >= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -256,15 +276,17 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingGreaterThanOrEqual($column, $value)
-	{
+	public function orHavingGreaterThanOrEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) {
 		return $this->orHaving($column, '>=', $value);
 	}
 
 	/**
 	 * Appends a "AND $column LIKE $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -272,7 +294,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingLike($column, $value)
+	public function havingLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->having($column, 'LIKE', $value);
 	}
@@ -280,7 +302,7 @@ trait Having
 	/**
 	 * Appends a "OR $column LIKE $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -288,7 +310,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingLike($column, $value)
+	public function orHavingLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orHaving($column, 'LIKE', $value);
 	}
@@ -296,7 +318,7 @@ trait Having
 	/**
 	 * Appends a "AND $column NOT LIKE" $value condition.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -304,7 +326,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingNotLike($column, $value)
+	public function havingNotLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->having($column, 'NOT LIKE', $value);
 	}
@@ -312,7 +334,7 @@ trait Having
 	/**
 	 * Appends a "OR $column NOT LIKE $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $value
 	 *
@@ -320,7 +342,7 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingNotLike($column, $value)
+	public function orHavingNotLike(Closure | string $column, Closure | float | int | string | null $value)
 	{
 		return $this->orHaving($column, 'NOT LIKE', $value);
 	}
@@ -328,17 +350,20 @@ trait Having
 	/**
 	 * Appends a "AND $column IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function havingIn($column, $value, ...$values)
-	{
+	public function havingIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->having($column, 'IN', ...$values);
 	}
@@ -346,17 +371,20 @@ trait Having
 	/**
 	 * Appends a "OR $column IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
 	 * @return $this
 	 */
-	public function orHavingIn($column, $value, ...$values)
-	{
+	public function orHavingIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orHaving($column, 'IN', ...$values);
 	}
@@ -364,17 +392,20 @@ trait Having
 	/**
 	 * Appends a "AND $column NOT IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function havingNotIn($column, $value, ...$values)
-	{
+	public function havingNotIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->having($column, 'NOT IN', ...$values);
 	}
@@ -382,17 +413,20 @@ trait Having
 	/**
 	 * Appends a "OR $column NOT IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string                $column    Closure for a subquery or a string with the
+	 *                                                 column name
 	 * @param Closure|float|int|string|null $value
-	 * @param mixed                         $values
+	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
 	 * @return $this
 	 */
-	public function orHavingNotIn($column, $value, ...$values)
-	{
+	public function orHavingNotIn(
+		Closure | string $column,
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orHaving($column, 'NOT IN', ...$values);
 	}
@@ -400,7 +434,7 @@ trait Having
 	/**
 	 * Appends a "AND $column BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -409,15 +443,18 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingBetween($column, $min, $max)
-	{
+	public function havingBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->having($column, 'BETWEEN', $min, $max);
 	}
 
 	/**
 	 * Appends a "OR $column BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -426,15 +463,18 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingBetween($column, $min, $max)
-	{
+	public function orHavingBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->orHaving($column, 'BETWEEN', $min, $max);
 	}
 
 	/**
 	 * Appends a "AND $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -443,15 +483,18 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function havingNotBetween($column, $min, $max)
-	{
+	public function havingNotBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->having($column, 'NOT BETWEEN', $min, $max);
 	}
 
 	/**
 	 * Appends a "OR $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column \Closure for a subquery or a string with the
+	 * @param Closure|string                $column Closure for a subquery or a string with the
 	 *                                              column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
@@ -460,21 +503,24 @@ trait Having
 	 *
 	 * @return $this
 	 */
-	public function orHavingNotBetween($column, $min, $max)
-	{
+	public function orHavingNotBetween(
+		Closure | string $column,
+		Closure | float | int | string | null $min,
+		Closure | float | int | string | null $max
+	) {
 		return $this->orHaving($column, 'NOT BETWEEN', $min, $max);
 	}
 
 	/**
 	 * Appends a "AND $column IS NULL" condition in the HAVING clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
 	 * @return $this
 	 */
-	public function havingIsNull($column)
+	public function havingIsNull(Closure | string $column)
 	{
 		return $this->having($column, 'IS NULL');
 	}
@@ -482,13 +528,13 @@ trait Having
 	/**
 	 * Appends a "OR $column IS NULL" condition in the HAVING clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
 	 * @return $this
 	 */
-	public function orHavingIsNull($column)
+	public function orHavingIsNull(Closure | string $column)
 	{
 		return $this->orHaving($column, 'IS NULL');
 	}
@@ -496,13 +542,13 @@ trait Having
 	/**
 	 * Appends a "AND $column IS NOT NULL" condition in the HAVING clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
 	 * @return $this
 	 */
-	public function havingIsNotNull($column)
+	public function havingIsNotNull(Closure | string $column)
 	{
 		return $this->having($column, 'IS NOT NULL');
 	}
@@ -510,20 +556,20 @@ trait Having
 	/**
 	 * Appends a "OR $column IS NOT NULL" condition in the HAVING clause.
 	 *
-	 * @param Closure|string $column \Closure for a subquery or a string with the column name
+	 * @param Closure|string $column Closure for a subquery or a string with the column name
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
 	 * @return $this
 	 */
-	public function orHavingIsNotNull($column)
+	public function orHavingIsNotNull(Closure | string $column)
 	{
 		return $this->orHaving($column, 'IS NOT NULL');
 	}
 
 	private function addHaving(
 		string $glue,
-		$column,
+		array | Closure | string $column,
 		string $operator,
 		array $values
 	) {

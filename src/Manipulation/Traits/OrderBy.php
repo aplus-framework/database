@@ -13,11 +13,11 @@ trait OrderBy
 	 * Appends columns to the ORDER BY clause.
 	 *
 	 * @param Closure|string $column
-	 * @param mixed          $columns Each column must be of type: string or \Closure
+	 * @param Closure|string ...$columns
 	 *
 	 * @return $this
 	 */
-	public function orderBy($column, ...$columns)
+	public function orderBy(Closure | string $column, Closure | string ...$columns)
 	{
 		return $this->addOrderBy($column, $columns, null);
 	}
@@ -26,11 +26,11 @@ trait OrderBy
 	 * Appends columns with the ASC direction to the ORDER BY clause.
 	 *
 	 * @param Closure|string $column
-	 * @param mixed          $columns Each column must be of type: string or \Closure
+	 * @param Closure|string ...$columns
 	 *
 	 * @return $this
 	 */
-	public function orderByAsc($column, ...$columns)
+	public function orderByAsc(Closure | string $column, Closure | string ...$columns)
 	{
 		return $this->addOrderBy($column, $columns, 'ASC');
 	}
@@ -39,16 +39,16 @@ trait OrderBy
 	 * Appends columns with the DESC direction to the ORDER BY clause.
 	 *
 	 * @param Closure|string $column
-	 * @param mixed          $columns Each column must be of type: string or \Closure
+	 * @param Closure|string ...$columns
 	 *
 	 * @return $this
 	 */
-	public function orderByDesc($column, ...$columns)
+	public function orderByDesc(Closure | string $column, Closure | string ...$columns)
 	{
 		return $this->addOrderBy($column, $columns, 'DESC');
 	}
 
-	private function addOrderBy($column, array $columns, ?string $direction)
+	private function addOrderBy(Closure | string $column, array $columns, ?string $direction)
 	{
 		$columns = $this->mergeExpressions($column, $columns);
 		foreach ($columns as $column) {
