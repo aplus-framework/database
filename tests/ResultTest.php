@@ -2,9 +2,14 @@
 
 class ResultTest extends TestCase
 {
+	protected function setUp() : void
+	{
+		parent::setUp();
+		$this->createDummyData();
+	}
+
 	public function testNumRows()
 	{
-		$this->createDummyData();
 		$this->assertEquals(
 			5,
 			static::$database->query('SELECT * FROM `t1`')->numRows()
@@ -21,7 +26,6 @@ class ResultTest extends TestCase
 
 	public function testMoveCursor()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetch()->c1);
 		$this->assertEquals(2, $result->fetch()->c1);
@@ -36,7 +40,6 @@ class ResultTest extends TestCase
 
 	public function testMoveCursorLessThanZero()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->expectException(\OutOfRangeException::class);
 		$this->expectExceptionMessage('Invalid cursor offset: -1');
@@ -45,7 +48,6 @@ class ResultTest extends TestCase
 
 	public function testFetchRow()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchRow(0)->c1);
 		$this->assertEquals(4, $result->fetchRow(3)->c1);
@@ -53,7 +55,6 @@ class ResultTest extends TestCase
 
 	public function testFetchArrayRow()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchArrayRow(0)['c1']);
 		$this->assertEquals(4, $result->fetchArrayRow(3)['c1']);
@@ -61,7 +62,6 @@ class ResultTest extends TestCase
 
 	public function testFetchClass()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$result->setFetchClass(ResultEntity::class, 'a', 'b');
 		$row = $result->fetch();
@@ -75,7 +75,6 @@ class ResultTest extends TestCase
 
 	public function testFetch()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetch()->c1);
 		$this->assertEquals(2, $result->fetch()->c1);
@@ -87,7 +86,6 @@ class ResultTest extends TestCase
 
 	public function testFetchAll()
 	{
-		$this->createDummyData();
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchAll();
 		$this->assertCount(5, $all);
 		$this->assertEquals(1, $all[0]->c1);
@@ -97,7 +95,6 @@ class ResultTest extends TestCase
 
 	public function testFetchArray()
 	{
-		$this->createDummyData();
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchArray()['c1']);
 		$this->assertEquals(2, $result->fetchArray()['c1']);
@@ -109,11 +106,23 @@ class ResultTest extends TestCase
 
 	public function testFetchArrayAll()
 	{
-		$this->createDummyData();
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchArrayAll();
 		$this->assertCount(5, $all);
 		$this->assertEquals(1, $all[0]['c1']);
 		$this->assertEquals(2, $all[1]['c1']);
 		$this->assertEquals('c', $all[2]['c2']);
+	}
+
+	public function testFetchFields()
+	{
+		$fields = static::$database->query('SELECT * FROM `t1`')->fetchFields();
+		$this->assertEquals('c1', $fields[0]->name);
+		$this->assertEquals('LONG', $fields[0]->type_name);
+		$this->assertTrue($fields[0]->pri_key_flag);
+		$this->assertTrue($fields[0]->auto_increment_flag);
+		$this->assertEquals('c2', $fields[1]->name);
+		$this->assertEquals('VAR_STRING', $fields[1]->type_name);
+		$this->assertFalse($fields[1]->pri_key_flag);
+		$this->assertFalse($fields[1]->auto_increment_flag);
 	}
 }
