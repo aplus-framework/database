@@ -497,8 +497,7 @@ class WhereTest extends TestCase
 	public function testInvalidValueType()
 	{
 		$this->statement->where('id', '=', []);
-		$this->expectException(\InvalidArgumentException::class);
-		$this->expectExceptionMessage('Invalid value type: array');
+		$this->expectException(\TypeError::class);
 		$this->statement->renderWhere();
 	}
 }
