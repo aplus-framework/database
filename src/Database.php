@@ -16,6 +16,7 @@ use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
 use InvalidArgumentException;
+use JetBrains\PhpStorm\Language;
 use LogicException;
 use mysqli;
 use mysqli_sql_exception;
@@ -461,7 +462,7 @@ class Database
 	 *
 	 * @return int
 	 */
-	public function exec(string $statement) : int
+	public function exec(#[Language('SQL')] string $statement) : int
 	{
 		$this->lastQuery = $statement;
 		$this->mysqli->real_query($statement);
@@ -482,7 +483,7 @@ class Database
 	 *
 	 * @return Result
 	 */
-	public function query(string $statement) : Result
+	public function query(#[Language('SQL')] string $statement) : Result
 	{
 		$this->lastQuery = $statement;
 		$result = $this->mysqli->query($statement);
@@ -501,7 +502,7 @@ class Database
 	 *
 	 * @return PreparedStatement
 	 */
-	public function prepare(string $statement) : PreparedStatement
+	public function prepare(#[Language('SQL')] string $statement) : PreparedStatement
 	{
 		return new PreparedStatement($this->mysqli->prepare($statement));
 	}
