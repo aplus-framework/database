@@ -72,10 +72,9 @@ class Result
 	 */
 	public function fetchAll(string $class = null, mixed ...$constructor) : array
 	{
-		$this->moveCursor(0);
 		$all = [];
-		for ($i = $this->result->num_rows; $i > 0; $i--) {
-			$all[] = $this->fetch($class, ...$constructor);
+		while ($row = $this->fetch($class, ...$constructor)) {
+			$all[] = $row;
 		}
 		return $all;
 	}
@@ -112,7 +111,6 @@ class Result
 	 */
 	public function fetchArrayAll() : array
 	{
-		$this->moveCursor(0);
 		return $this->result->fetch_all(\MYSQLI_ASSOC);
 	}
 

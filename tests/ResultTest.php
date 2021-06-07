@@ -93,6 +93,18 @@ class ResultTest extends TestCase
 		$this->assertEquals('c', $all[2]->c2);
 	}
 
+	public function testFetchAllRest()
+	{
+		$result = static::$database->query('SELECT * FROM `t1`');
+		$result->fetch();
+		$result->fetch();
+		$all = $result->fetchAll();
+		$this->assertCount(3, $all);
+		$this->assertEquals(3, $all[0]->c1);
+		$this->assertEquals(4, $all[1]->c1);
+		$this->assertEquals('e', $all[2]->c2);
+	}
+
 	public function testFetchArray()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
@@ -111,6 +123,18 @@ class ResultTest extends TestCase
 		$this->assertEquals(1, $all[0]['c1']);
 		$this->assertEquals(2, $all[1]['c1']);
 		$this->assertEquals('c', $all[2]['c2']);
+	}
+
+	public function testFetchArrayAllRest()
+	{
+		$result = static::$database->query('SELECT * FROM `t1`');
+		$result->fetchArray();
+		$result->fetchArray();
+		$rest = $result->fetchArrayAll();
+		$this->assertCount(3, $rest);
+		$this->assertEquals(3, $rest[0]['c1']);
+		$this->assertEquals(4, $rest[1]['c1']);
+		$this->assertEquals('e', $rest[2]['c2']);
 	}
 
 	public function testFetchFields()
