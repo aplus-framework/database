@@ -478,15 +478,21 @@ class Database
 	 * Must be: SELECT, SHOW, DESCRIBE or EXPLAIN
 	 *
 	 * @param string $statement
+	 * @param bool   $buffered
 	 *
 	 * @throws InvalidArgumentException if $statement does not return result
 	 *
 	 * @return Result
 	 */
-	public function query(#[Language('SQL')] string $statement) : Result
-	{
+	public function query(
+		#[Language('SQL')] string $statement,
+		bool $buffered = true
+	) : Result {
 		$this->lastQuery = $statement;
-		$result = $this->mysqli->query($statement);
+		$result = $this->mysqli->query(
+			$statement,
+			$buffered ? \MYSQLI_STORE_RESULT : \MYSQLI_USE_RESULT
+		);
 		if (\is_bool($result)) {
 			throw new InvalidArgumentException(
 				"Statement does not return result: {$statement}"
