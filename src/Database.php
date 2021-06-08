@@ -480,6 +480,8 @@ class Database
 	 * @param string $statement
 	 * @param bool   $buffered
 	 *
+	 * @see https://www.php.net/manual/en/mysqlinfo.concepts.buffering.php
+	 *
 	 * @throws InvalidArgumentException if $statement does not return result
 	 *
 	 * @return Result
