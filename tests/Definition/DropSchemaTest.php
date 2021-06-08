@@ -21,7 +21,7 @@ class DropSchemaTest extends TestCase
 
 	public function testSchema()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"DROP SCHEMA `app`\n",
 			$this->dropSchema->schema('app')->sql()
 		);
@@ -29,7 +29,7 @@ class DropSchemaTest extends TestCase
 
 	public function testIfExists()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"DROP SCHEMA IF EXISTS `app`\n",
 			$this->dropSchema->ifExists()->schema('app')->sql()
 		);
@@ -38,7 +38,7 @@ class DropSchemaTest extends TestCase
 	public function testRun()
 	{
 		static::$database->createSchema('app')->ifNotExists()->run();
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			$this->dropSchema->schema('app')->run()
 		);

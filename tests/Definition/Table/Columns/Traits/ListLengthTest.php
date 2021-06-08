@@ -7,17 +7,17 @@ class ListLengthTest extends TestCase
 	public function testLength()
 	{
 		$column = new ListLengthMock(static::$database);
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL',
 			$column->sql()
 		);
 		$column = new ListLengthMock(static::$database, 1);
-		$this->assertEquals(
+		$this->assertSame(
 			' mock(1) NOT NULL',
 			$column->sql()
 		);
 		$column = new ListLengthMock(static::$database, 'a', 2, 'c');
-		$this->assertEquals(
+		$this->assertSame(
 			" mock('a', 2, 'c') NOT NULL",
 			$column->sql()
 		);

@@ -22,7 +22,7 @@ class ForeignKeyTest extends TestCase
 	public function testReferences()
 	{
 		$this->index->references('users', 'id');
-		$this->assertEquals(
+		$this->assertSame(
 			' FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)',
 			$this->index->sql()
 		);
@@ -31,7 +31,7 @@ class ForeignKeyTest extends TestCase
 	public function testOnDelete()
 	{
 		$this->index->references('users', 'id')->onDelete('restrict');
-		$this->assertEquals(
+		$this->assertSame(
 			' FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT',
 			$this->index->sql()
 		);
@@ -40,7 +40,7 @@ class ForeignKeyTest extends TestCase
 	public function testOnUpdate()
 	{
 		$this->index->references('users', 'id')->onUpdate('cascade');
-		$this->assertEquals(
+		$this->assertSame(
 			' FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE CASCADE',
 			$this->index->sql()
 		);

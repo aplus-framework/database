@@ -36,7 +36,7 @@ class AlterTableTest extends TestCase
 				$definition->index()->primaryKey('c1');
 				$definition->index('Foo')->uniqueKey('c2');
 			});
-		$this->assertEquals(
+		$this->assertSame(
 			"ALTER TABLE `t1`\n ADD COLUMN `c1` int NOT NULL,\n ADD PRIMARY KEY (`c1`),\n ADD UNIQUE KEY `Foo` (`c2`)",
 			$sql->sql()
 		);
@@ -48,7 +48,7 @@ class AlterTableTest extends TestCase
 			->change(static function (TableDefinition $definition) {
 				$definition->column('c1', 'c5')->bigint();
 			});
-		$this->assertEquals(
+		$this->assertSame(
 			"ALTER TABLE `t1`\n CHANGE COLUMN `c1` `c5` bigint NOT NULL",
 			$sql->sql()
 		);
@@ -60,7 +60,7 @@ class AlterTableTest extends TestCase
 			->modify(static function (TableDefinition $definition) {
 				$definition->column('c1')->smallint()->notNull();
 			});
-		$this->assertEquals(
+		$this->assertSame(
 			"ALTER TABLE `t1`\n MODIFY COLUMN `c1` smallint NOT NULL",
 			$sql->sql()
 		);
@@ -68,7 +68,7 @@ class AlterTableTest extends TestCase
 
 	public function testWait()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"ALTER TABLE `t1`\n WAIT 10\n ADD COLUMN `c1` int NOT NULL",
 			$this->prepare()->wait(10)->sql()
 		);
@@ -83,7 +83,7 @@ class AlterTableTest extends TestCase
 
 	public function testOnline()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"ALTER ONLINE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
 			$this->prepare()->online()->sql()
 		);
@@ -91,7 +91,7 @@ class AlterTableTest extends TestCase
 
 	public function testIgnore()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"ALTER IGNORE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
 			$this->prepare()->ignore()->sql()
 		);
@@ -104,9 +104,9 @@ class AlterTableTest extends TestCase
 			->add(static function (TableDefinition $definition) {
 				$definition->column('c3')->varchar(100)->default('Foo Bar');
 			});
-		$this->assertEquals(0, $statement->run());
+		$this->assertSame(0, $statement->run());
 		static::$database->exec('INSERT INTO `t1` SET `c1` = 123, `c2` = "z"');
-		$this->assertEquals(
+		$this->assertSame(
 			'Foo Bar',
 			static::$database->query('SELECT * FROM `t1` WHERE `c1` = 123')->fetch()->c3
 		);

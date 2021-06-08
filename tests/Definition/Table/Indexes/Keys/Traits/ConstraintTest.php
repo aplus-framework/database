@@ -7,12 +7,12 @@ class ConstraintTest extends TestCase
 	public function testConstraint()
 	{
 		$index = new ConstraintMock(static::$database, null, 'id');
-		$this->assertEquals(
+		$this->assertSame(
 			' constraint_mock (`id`)',
 			$index->sql()
 		);
 		$index->constraint('foo');
-		$this->assertEquals(
+		$this->assertSame(
 			' CONSTRAINT `foo` constraint_mock (`id`)',
 			$index->sql()
 		);

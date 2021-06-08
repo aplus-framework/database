@@ -8,7 +8,7 @@ class SpatialKeyTest extends TestCase
 	public function testType()
 	{
 		$index = new SpatialKey(static::$database, null, 'id');
-		$this->assertEquals(
+		$this->assertSame(
 			' SPATIAL KEY (`id`)',
 			$index->sql()
 		);

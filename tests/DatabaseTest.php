@@ -79,7 +79,7 @@ class DatabaseTest extends TestCase
 	protected function cipherStatus(Database $database)
 	{
 		$status = $database->query("SHOW STATUS LIKE 'ssl_cipher'")->fetchArray();
-		$this->assertEquals([
+		$this->assertSame([
 			'Variable_name' => 'Ssl_cipher',
 			'Value' => 'TLS_AES_256_GCM_SHA384',
 		], $status);
@@ -169,33 +169,33 @@ class DatabaseTest extends TestCase
 
 	public function testProtectIdentifier()
 	{
-		$this->assertEquals('*', static::$database->protectIdentifier('*'));
-		$this->assertEquals('`foo`', static::$database->protectIdentifier('foo'));
-		$this->assertEquals('```foo```', static::$database->protectIdentifier('`foo`'));
-		$this->assertEquals('`foo ``bar`', static::$database->protectIdentifier('foo `bar'));
-		$this->assertEquals('`foo`.`bar`', static::$database->protectIdentifier('foo.bar'));
-		$this->assertEquals('`foo`.*', static::$database->protectIdentifier('foo.*'));
-		$this->assertEquals('```foo```.*', static::$database->protectIdentifier('`foo`.*'));
-		$this->assertEquals('`db`.`table`.*', static::$database->protectIdentifier('db.table.*'));
+		$this->assertSame('*', static::$database->protectIdentifier('*'));
+		$this->assertSame('`foo`', static::$database->protectIdentifier('foo'));
+		$this->assertSame('```foo```', static::$database->protectIdentifier('`foo`'));
+		$this->assertSame('`foo ``bar`', static::$database->protectIdentifier('foo `bar'));
+		$this->assertSame('`foo`.`bar`', static::$database->protectIdentifier('foo.bar'));
+		$this->assertSame('`foo`.*', static::$database->protectIdentifier('foo.*'));
+		$this->assertSame('```foo```.*', static::$database->protectIdentifier('`foo`.*'));
+		$this->assertSame('`db`.`table`.*', static::$database->protectIdentifier('db.table.*'));
 	}
 
 	public function testQuote()
 	{
-		$this->assertEquals(0, static::$database->quote(0));
-		$this->assertEquals(1, static::$database->quote(1));
-		$this->assertEquals(-1, static::$database->quote(-1));
-		$this->assertEquals(.0, static::$database->quote(.0));
-		$this->assertEquals(1.1, static::$database->quote(1.1));
-		$this->assertEquals(-1.1, static::$database->quote(-1.1));
-		$this->assertEquals("'0'", static::$database->quote('0'));
-		$this->assertEquals("'-1'", static::$database->quote('-1'));
-		$this->assertEquals("'abc'", static::$database->quote('abc'));
-		$this->assertEquals("'ab\\'c'", static::$database->quote("ab'c"));
-		$this->assertEquals("'ab\\'cd\\'\\''", static::$database->quote("ab'cd''"));
-		$this->assertEquals('\'ab\"cd\"\"\'', static::$database->quote('ab"cd""'));
-		$this->assertEquals('NULL', static::$database->quote(null));
-		$this->assertEquals('TRUE', static::$database->quote(true));
-		$this->assertEquals('FALSE', static::$database->quote(false));
+		$this->assertSame(0, static::$database->quote(0));
+		$this->assertSame(1, static::$database->quote(1));
+		$this->assertSame(-1, static::$database->quote(-1));
+		$this->assertSame(.0, static::$database->quote(.0));
+		$this->assertSame(1.1, static::$database->quote(1.1));
+		$this->assertSame(-1.1, static::$database->quote(-1.1));
+		$this->assertSame("'0'", static::$database->quote('0'));
+		$this->assertSame("'-1'", static::$database->quote('-1'));
+		$this->assertSame("'abc'", static::$database->quote('abc'));
+		$this->assertSame("'ab\\'c'", static::$database->quote("ab'c"));
+		$this->assertSame("'ab\\'cd\\'\\''", static::$database->quote("ab'cd''"));
+		$this->assertSame('\'ab\"cd\"\"\'', static::$database->quote('ab"cd""'));
+		$this->assertSame('NULL', static::$database->quote(null));
+		$this->assertSame('TRUE', static::$database->quote(true));
+		$this->assertSame('FALSE', static::$database->quote(false));
 		$this->expectException(\TypeError::class);
 		static::$database->quote([]);
 	}
@@ -245,13 +245,13 @@ class DatabaseTest extends TestCase
 	public function testExec()
 	{
 		$this->createDummyData();
-		$this->assertEquals(1, static::$database->exec(
+		$this->assertSame(1, static::$database->exec(
 			'INSERT INTO `t1` SET `c2` = "a"'
 		));
-		$this->assertEquals(3, static::$database->exec(
+		$this->assertSame(3, static::$database->exec(
 			'INSERT INTO `t1` (`c2`) VALUES ("a"),("a"),("a")'
 		));
-		$this->assertEquals(9, static::$database->exec('SELECT * FROM `t1`'));
+		$this->assertSame(9, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
 	public function testQuery()
@@ -281,19 +281,19 @@ class DatabaseTest extends TestCase
 	public function testInsertId()
 	{
 		$this->createDummyData();
-		$this->assertEquals(1, static::$database->insertId());
+		$this->assertSame(1, static::$database->insertId());
 		static::$database->exec(
 			'INSERT INTO `t1` SET `c2` = "a"'
 		);
-		$this->assertEquals(6, static::$database->insertId());
+		$this->assertSame(6, static::$database->insertId());
 		static::$database->exec(
 			'INSERT INTO `t1` (`c2`) VALUES ("a"),("a"),("a")'
 		);
-		$this->assertEquals(7, static::$database->insertId());
+		$this->assertSame(7, static::$database->insertId());
 		static::$database->exec(
 			'INSERT INTO `t1` SET `c2` = "a"'
 		);
-		$this->assertEquals(10, static::$database->insertId());
+		$this->assertSame(10, static::$database->insertId());
 	}
 
 	public function testTransaction()
@@ -302,7 +302,7 @@ class DatabaseTest extends TestCase
 		static::$database->transaction(static function (Database $db) {
 			$db->exec('INSERT INTO `t1` SET `c1` = 100, `c2` = "tr"');
 		});
-		$this->assertEquals(
+		$this->assertSame(
 			'tr',
 			static::$database->query('SELECT `c2` FROM `t1` WHERE `c1` = 100')->fetch()->c2
 		);
@@ -323,12 +323,12 @@ class DatabaseTest extends TestCase
 	public function testTransactionRollback()
 	{
 		$this->createDummyData();
-		$this->assertEquals(5, static::$database->exec('SELECT * FROM `t1`'));
+		$this->assertSame(5, static::$database->exec('SELECT * FROM `t1`'));
 		static::$database->transaction(static function (Database $db) {
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 		});
-		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
+		$this->assertSame(7, static::$database->exec('SELECT * FROM `t1`'));
 		try {
 			static::$database->transaction(static function (Database $db) {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
@@ -338,9 +338,9 @@ class DatabaseTest extends TestCase
 		} catch (\Exception $exception) {
 			$schema = \getenv('DB_SCHEMA');
 			$this->assertInstanceOf(\mysqli_sql_exception::class, $exception);
-			$this->assertEquals("Table '{$schema}.t1000' doesn't exist", $exception->getMessage());
+			$this->assertSame("Table '{$schema}.t1000' doesn't exist", $exception->getMessage());
 		}
-		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
+		$this->assertSame(7, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
 	public function testUse()
@@ -356,7 +356,7 @@ class DatabaseTest extends TestCase
 	 */
 	public function testErrors()
 	{
-		$this->assertEquals([], static::$database->errors());
+		$this->assertSame([], static::$database->errors());
 		$this->assertNull(static::$database->error());
 		try {
 			static::$database->use('Foo');
@@ -368,27 +368,27 @@ class DatabaseTest extends TestCase
 		} catch (\mysqli_sql_exception $e) {
 			//
 		}
-		$this->assertEquals([
+		$this->assertSame([
 			[
 				'errno' => 1049,
 				'sqlstate' => '42000',
 				'error' => "Unknown database 'Bar'",
 			],
 		], static::$database->errors());
-		$this->assertEquals("Unknown database 'Bar'", static::$database->error());
+		$this->assertSame("Unknown database 'Bar'", static::$database->error());
 	}
 
 	public function testWarnings()
 	{
-		$this->assertEquals(0, static::$database->warnings());
+		$this->assertSame(0, static::$database->warnings());
 	}
 
 	public function testLastQuery()
 	{
 		$sql = 'SELECT COUNT(*) FROM t1';
 		static::$database->query($sql);
-		$this->assertEquals($sql, static::$database->lastQuery());
+		$this->assertSame($sql, static::$database->lastQuery());
 		static::$database->exec($sql);
-		$this->assertEquals($sql, static::$database->lastQuery());
+		$this->assertSame($sql, static::$database->lastQuery());
 	}
 }

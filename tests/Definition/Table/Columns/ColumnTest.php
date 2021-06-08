@@ -14,12 +14,12 @@ class ColumnTest extends TestCase
 	public function testLength()
 	{
 		$column = new ColumnMock(static::$database, 25);
-		$this->assertEquals(
+		$this->assertSame(
 			' mock(25) NOT NULL',
 			$column->sql()
 		);
 		$column = new ColumnMock(static::$database, "'a'");
-		$this->assertEquals(
+		$this->assertSame(
 			" mock('\\'a\\'') NOT NULL",
 			$column->sql()
 		);
@@ -35,7 +35,7 @@ class ColumnTest extends TestCase
 
 	public function testType()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL',
 			$this->column->sql()
 		);
@@ -43,11 +43,11 @@ class ColumnTest extends TestCase
 
 	public function testNull()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NULL',
 			$this->column->null()->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL',
 			$this->column->notNull()->sql()
 		);
@@ -55,11 +55,11 @@ class ColumnTest extends TestCase
 
 	public function testDefault()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			" mock NOT NULL DEFAULT 'abc'",
 			$this->column->default('abc')->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL DEFAULT (now())',
 			$this->column->default(static function () {
 				return 'now()';
@@ -69,7 +69,7 @@ class ColumnTest extends TestCase
 
 	public function testComment()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			" mock NOT NULL COMMENT 'abc'",
 			$this->column->comment('abc')->sql()
 		);
@@ -77,7 +77,7 @@ class ColumnTest extends TestCase
 
 	public function testPrimaryKey()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL PRIMARY KEY',
 			$this->column->primaryKey()->sql()
 		);
@@ -85,7 +85,7 @@ class ColumnTest extends TestCase
 
 	public function testUniqueKey()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL UNIQUE KEY',
 			$this->column->uniqueKey()->sql()
 		);
@@ -93,7 +93,7 @@ class ColumnTest extends TestCase
 
 	public function testFirst()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL FIRST',
 			$this->column->first()->sql()
 		);
@@ -101,7 +101,7 @@ class ColumnTest extends TestCase
 
 	public function testAfter()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			' mock NOT NULL AFTER `c1`',
 			$this->column->after('c1')->sql()
 		);
@@ -121,7 +121,7 @@ class ColumnTest extends TestCase
 	{
 		$column = new ColumnMock(static::$database, 10);
 		$column->primaryKey()->null()->default(null)->comment('abc')->after('c1');
-		$this->assertEquals(
+		$this->assertSame(
 			" mock(10) NULL PRIMARY KEY COMMENT 'abc' AFTER `c1`",
 			$column->sql()
 		);

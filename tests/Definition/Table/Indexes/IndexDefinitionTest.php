@@ -32,7 +32,7 @@ class IndexDefinitionTest extends TestCase
 	{
 		$this->definition->primaryKey('id');
 		$this->definition->uniqueKey('email');
-		$this->assertEquals(
+		$this->assertSame(
 			' UNIQUE KEY (`email`)',
 			$this->definition->sql()
 		);

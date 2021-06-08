@@ -95,46 +95,46 @@ class ColumnDefinitionTest extends TestCase
 
 	public function testTypes()
 	{
-		$this->assertEquals(' bigint NOT NULL', $this->definition->bigint()->sql());
-		$this->assertEquals(' binary NOT NULL', $this->definition->binary()->sql());
-		$this->assertEquals(' bit NOT NULL', $this->definition->bit()->sql());
-		$this->assertEquals(' blob NOT NULL', $this->definition->blob()->sql());
-		$this->assertEquals(' boolean NOT NULL', $this->definition->boolean()->sql());
-		$this->assertEquals(' char NOT NULL', $this->definition->char()->sql());
-		$this->assertEquals(' date NOT NULL', $this->definition->date()->sql());
-		$this->assertEquals(' datetime NOT NULL', $this->definition->datetime()->sql());
-		$this->assertEquals(' decimal NOT NULL', $this->definition->decimal()->sql());
-		$this->assertEquals(" enum('a') NOT NULL", $this->definition->enum('a')->sql());
-		$this->assertEquals(' float NOT NULL', $this->definition->float()->sql());
-		$this->assertEquals(' geometry NOT NULL', $this->definition->geometry()->sql());
-		$this->assertEquals(
+		$this->assertSame(' bigint NOT NULL', $this->definition->bigint()->sql());
+		$this->assertSame(' binary NOT NULL', $this->definition->binary()->sql());
+		$this->assertSame(' bit NOT NULL', $this->definition->bit()->sql());
+		$this->assertSame(' blob NOT NULL', $this->definition->blob()->sql());
+		$this->assertSame(' boolean NOT NULL', $this->definition->boolean()->sql());
+		$this->assertSame(' char NOT NULL', $this->definition->char()->sql());
+		$this->assertSame(' date NOT NULL', $this->definition->date()->sql());
+		$this->assertSame(' datetime NOT NULL', $this->definition->datetime()->sql());
+		$this->assertSame(' decimal NOT NULL', $this->definition->decimal()->sql());
+		$this->assertSame(" enum('a') NOT NULL", $this->definition->enum('a')->sql());
+		$this->assertSame(' float NOT NULL', $this->definition->float()->sql());
+		$this->assertSame(' geometry NOT NULL', $this->definition->geometry()->sql());
+		$this->assertSame(
 			' geometrycollection NOT NULL',
 			$this->definition->geometrycollection()->sql()
 		);
-		$this->assertEquals(' int NOT NULL', $this->definition->int()->sql());
-		$this->assertEquals(' json NOT NULL', $this->definition->json()->sql());
-		$this->assertEquals(' linestring NOT NULL', $this->definition->linestring()->sql());
-		$this->assertEquals(' longblob NOT NULL', $this->definition->longblob()->sql());
-		$this->assertEquals(' longtext NOT NULL', $this->definition->longtext()->sql());
-		$this->assertEquals(' mediumblob NOT NULL', $this->definition->mediumblob()->sql());
-		$this->assertEquals(' mediumint NOT NULL', $this->definition->mediumint()->sql());
-		$this->assertEquals(' mediumtext NOT NULL', $this->definition->mediumtext()->sql());
-		$this->assertEquals(' multilinestring NOT NULL', $this->definition->multilinestring()->sql());
-		$this->assertEquals(' multipoint NOT NULL', $this->definition->multipoint()->sql());
-		$this->assertEquals(' multipolygon NOT NULL', $this->definition->multipolygon()->sql());
-		$this->assertEquals(' point NOT NULL', $this->definition->point()->sql());
-		$this->assertEquals(' polygon NOT NULL', $this->definition->polygon()->sql());
-		$this->assertEquals(" set('b') NOT NULL", $this->definition->set('b')->sql());
-		$this->assertEquals(' smallint NOT NULL', $this->definition->smallint()->sql());
-		$this->assertEquals(' text NOT NULL', $this->definition->text()->sql());
-		$this->assertEquals(' time NOT NULL', $this->definition->time()->sql());
-		$this->assertEquals(' timestamp NOT NULL', $this->definition->timestamp()->sql());
-		$this->assertEquals(' tinyblob NOT NULL', $this->definition->tinyblob()->sql());
-		$this->assertEquals(' tinyint NOT NULL', $this->definition->tinyint()->sql());
-		$this->assertEquals(' tinytext NOT NULL', $this->definition->tinytext()->sql());
-		$this->assertEquals(' varbinary NOT NULL', $this->definition->varbinary()->sql());
-		$this->assertEquals(' varchar NOT NULL', $this->definition->varchar()->sql());
-		$this->assertEquals(' year NOT NULL', $this->definition->year()->sql());
+		$this->assertSame(' int NOT NULL', $this->definition->int()->sql());
+		$this->assertSame(' json NOT NULL', $this->definition->json()->sql());
+		$this->assertSame(' linestring NOT NULL', $this->definition->linestring()->sql());
+		$this->assertSame(' longblob NOT NULL', $this->definition->longblob()->sql());
+		$this->assertSame(' longtext NOT NULL', $this->definition->longtext()->sql());
+		$this->assertSame(' mediumblob NOT NULL', $this->definition->mediumblob()->sql());
+		$this->assertSame(' mediumint NOT NULL', $this->definition->mediumint()->sql());
+		$this->assertSame(' mediumtext NOT NULL', $this->definition->mediumtext()->sql());
+		$this->assertSame(' multilinestring NOT NULL', $this->definition->multilinestring()->sql());
+		$this->assertSame(' multipoint NOT NULL', $this->definition->multipoint()->sql());
+		$this->assertSame(' multipolygon NOT NULL', $this->definition->multipolygon()->sql());
+		$this->assertSame(' point NOT NULL', $this->definition->point()->sql());
+		$this->assertSame(' polygon NOT NULL', $this->definition->polygon()->sql());
+		$this->assertSame(" set('b') NOT NULL", $this->definition->set('b')->sql());
+		$this->assertSame(' smallint NOT NULL', $this->definition->smallint()->sql());
+		$this->assertSame(' text NOT NULL', $this->definition->text()->sql());
+		$this->assertSame(' time NOT NULL', $this->definition->time()->sql());
+		$this->assertSame(' timestamp NOT NULL', $this->definition->timestamp()->sql());
+		$this->assertSame(' tinyblob NOT NULL', $this->definition->tinyblob()->sql());
+		$this->assertSame(' tinyint NOT NULL', $this->definition->tinyint()->sql());
+		$this->assertSame(' tinytext NOT NULL', $this->definition->tinytext()->sql());
+		$this->assertSame(' varbinary NOT NULL', $this->definition->varbinary()->sql());
+		$this->assertSame(' varchar NOT NULL', $this->definition->varchar()->sql());
+		$this->assertSame(' year NOT NULL', $this->definition->year()->sql());
 	}
 
 	public function testBadMethod()

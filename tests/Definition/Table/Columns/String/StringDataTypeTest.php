@@ -13,7 +13,7 @@ class StringDataTypeTest extends TestCase
 
 	public function testCharset()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			" mock CHARACTER SET 'utf8' NOT NULL",
 			$this->column->charset('utf8')->sql()
 		);
@@ -21,7 +21,7 @@ class StringDataTypeTest extends TestCase
 
 	public function testCollate()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			" mock COLLATE 'utf8_general_ci' NOT NULL",
 			$this->column->collate('utf8_general_ci')->sql()
 		);
@@ -29,7 +29,7 @@ class StringDataTypeTest extends TestCase
 
 	public function testFull()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			" mock CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL",
 			$this->column->collate('utf8_general_ci')->charset('utf8')->sql()
 		);

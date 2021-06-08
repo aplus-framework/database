@@ -21,15 +21,15 @@ class ResultTest extends TestCase
 
 	public function testNumRows()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			5,
 			static::$database->query('SELECT * FROM `t1`')->numRows()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			2,
 			static::$database->query('SELECT * FROM `t1` WHERE `c1` < 3')->numRows()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			0,
 			static::$database->query('SELECT * FROM `t1` WHERE `c1` > 100')->numRows()
 		);
@@ -43,12 +43,12 @@ class ResultTest extends TestCase
 	public function testMoveCursor()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
-		$this->assertEquals(1, $result->fetch()->c1);
-		$this->assertEquals(2, $result->fetch()->c1);
+		$this->assertSame(1, $result->fetch()->c1);
+		$this->assertSame(2, $result->fetch()->c1);
 		$result->moveCursor(1);
-		$this->assertEquals(2, $result->fetch()->c1);
+		$this->assertSame(2, $result->fetch()->c1);
 		$result->moveCursor(4);
-		$this->assertEquals(5, $result->fetch()->c1);
+		$this->assertSame(5, $result->fetch()->c1);
 		$this->expectException(\OutOfRangeException::class);
 		$this->expectExceptionMessage('Invalid cursor offset: 5');
 		$result->moveCursor(5);
@@ -83,8 +83,8 @@ class ResultTest extends TestCase
 	public function testFetchRow()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
-		$this->assertEquals(1, $result->fetchRow(0)->c1);
-		$this->assertEquals(4, $result->fetchRow(3)->c1);
+		$this->assertSame(1, $result->fetchRow(0)->c1);
+		$this->assertSame(4, $result->fetchRow(3)->c1);
 	}
 
 	public function testFetchRowFree()
@@ -95,8 +95,8 @@ class ResultTest extends TestCase
 	public function testFetchArrayRow()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
-		$this->assertEquals(1, $result->fetchArrayRow(0)['c1']);
-		$this->assertEquals(4, $result->fetchArrayRow(3)['c1']);
+		$this->assertSame(1, $result->fetchArrayRow(0)['c1']);
+		$this->assertSame(4, $result->fetchArrayRow(3)['c1']);
 	}
 
 	public function testFetchArrayRowFree()
@@ -110,8 +110,8 @@ class ResultTest extends TestCase
 		$result->setFetchClass(ResultEntity::class, 'a', 'b');
 		$row = $result->fetch();
 		$this->assertInstanceOf(ResultEntity::class, $row);
-		$this->assertEquals('a', $row->p1);
-		$this->assertEquals('b', $row->p2);
+		$this->assertSame('a', $row->p1);
+		$this->assertSame('b', $row->p2);
 		$rows = $result->fetchAll();
 		$this->assertInstanceOf(ResultEntity::class, $rows[0]);
 		$this->assertInstanceOf(ResultEntity::class, $rows[1]);
@@ -120,11 +120,11 @@ class ResultTest extends TestCase
 	public function testFetch()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
-		$this->assertEquals(1, $result->fetch()->c1);
-		$this->assertEquals(2, $result->fetch()->c1);
-		$this->assertEquals('c', $result->fetch()->c2);
-		$this->assertEquals('d', $result->fetch()->c2);
-		$this->assertEquals('e', $result->fetch()->c2);
+		$this->assertSame(1, $result->fetch()->c1);
+		$this->assertSame(2, $result->fetch()->c1);
+		$this->assertSame('c', $result->fetch()->c2);
+		$this->assertSame('d', $result->fetch()->c2);
+		$this->assertSame('e', $result->fetch()->c2);
 		$this->assertNull($result->fetch());
 	}
 
@@ -137,9 +137,9 @@ class ResultTest extends TestCase
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchAll();
 		$this->assertCount(5, $all);
-		$this->assertEquals(1, $all[0]->c1);
-		$this->assertEquals(2, $all[1]->c1);
-		$this->assertEquals('c', $all[2]->c2);
+		$this->assertSame(1, $all[0]->c1);
+		$this->assertSame(2, $all[1]->c1);
+		$this->assertSame('c', $all[2]->c2);
 	}
 
 	public function testFetchAllFree()
@@ -154,19 +154,19 @@ class ResultTest extends TestCase
 		$result->fetch();
 		$all = $result->fetchAll();
 		$this->assertCount(3, $all);
-		$this->assertEquals(3, $all[0]->c1);
-		$this->assertEquals(4, $all[1]->c1);
-		$this->assertEquals('e', $all[2]->c2);
+		$this->assertSame(3, $all[0]->c1);
+		$this->assertSame(4, $all[1]->c1);
+		$this->assertSame('e', $all[2]->c2);
 	}
 
 	public function testFetchArray()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
-		$this->assertEquals(1, $result->fetchArray()['c1']);
-		$this->assertEquals(2, $result->fetchArray()['c1']);
-		$this->assertEquals('c', $result->fetchArray()['c2']);
-		$this->assertEquals('d', $result->fetchArray()['c2']);
-		$this->assertEquals('e', $result->fetchArray()['c2']);
+		$this->assertSame(1, $result->fetchArray()['c1']);
+		$this->assertSame(2, $result->fetchArray()['c1']);
+		$this->assertSame('c', $result->fetchArray()['c2']);
+		$this->assertSame('d', $result->fetchArray()['c2']);
+		$this->assertSame('e', $result->fetchArray()['c2']);
 		$this->assertNull($result->fetchArray());
 	}
 
@@ -179,9 +179,9 @@ class ResultTest extends TestCase
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchArrayAll();
 		$this->assertCount(5, $all);
-		$this->assertEquals(1, $all[0]['c1']);
-		$this->assertEquals(2, $all[1]['c1']);
-		$this->assertEquals('c', $all[2]['c2']);
+		$this->assertSame(1, $all[0]['c1']);
+		$this->assertSame(2, $all[1]['c1']);
+		$this->assertSame('c', $all[2]['c2']);
 	}
 
 	public function testFetchArrayAllFree()
@@ -196,22 +196,22 @@ class ResultTest extends TestCase
 		$result->fetchArray();
 		$rest = $result->fetchArrayAll();
 		$this->assertCount(3, $rest);
-		$this->assertEquals(3, $rest[0]['c1']);
-		$this->assertEquals(4, $rest[1]['c1']);
-		$this->assertEquals('e', $rest[2]['c2']);
+		$this->assertSame(3, $rest[0]['c1']);
+		$this->assertSame(4, $rest[1]['c1']);
+		$this->assertSame('e', $rest[2]['c2']);
 	}
 
 	public function testFetchFields()
 	{
 		$fields = static::$database->query('SELECT * FROM `t1`')->fetchFields();
-		$this->assertEquals('c1', $fields[0]->name);
-		$this->assertEquals('long', $fields[0]->typeName);
-		$this->assertEquals(0, $fields[0]->maxLength);
+		$this->assertSame('c1', $fields[0]->name);
+		$this->assertSame('long', $fields[0]->typeName);
+		$this->assertSame(0, $fields[0]->maxLength);
 		$this->assertTrue($fields[0]->flagPriKey);
 		$this->assertTrue($fields[0]->flagAutoIncrement);
-		$this->assertEquals('c2', $fields[1]->name);
-		$this->assertEquals('var_string', $fields[1]->typeName);
-		$this->assertEquals(0, $fields[0]->maxLength);
+		$this->assertSame('c2', $fields[1]->name);
+		$this->assertSame('var_string', $fields[1]->typeName);
+		$this->assertSame(0, $fields[0]->maxLength);
 		$this->assertFalse($fields[1]->flagPriKey);
 		$this->assertFalse($fields[1]->flagAutoIncrement);
 	}

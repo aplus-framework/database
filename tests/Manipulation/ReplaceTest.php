@@ -39,7 +39,7 @@ class ReplaceTest extends TestCase
 	{
 		$this->replace->into('t1')->set(['id' => 1]);
 		$this->replace->options($this->replace::OPT_DELAYED);
-		$this->assertEquals(
+		$this->assertSame(
 			"REPLACE\n DELAYED\n INTO `t1`\n SET `id` = 1\n",
 			$this->replace->sql()
 		);
@@ -71,19 +71,19 @@ class ReplaceTest extends TestCase
 		$this->prepare();
 		$this->replace->columns('id', 'name', 'email');
 		$this->replace->values(1, 'Foo', 'foo@baz.com');
-		$this->assertEquals(
+		$this->assertSame(
 			"REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com')\n",
 			$this->replace->sql()
 		);
 		$this->replace->values(2, 'Bar', 'bar@baz.com');
-		$this->assertEquals(
+		$this->assertSame(
 			"REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com')\n",
 			$this->replace->sql()
 		);
 		$this->replace->values(10, 'Baz', static function () {
 			return 'select email from foo';
 		});
-		$this->assertEquals(
+		$this->assertSame(
 			"REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com'),\n (10, 'Baz', (select email from foo))\n",
 			$this->replace->sql()
 		);
@@ -99,7 +99,7 @@ class ReplaceTest extends TestCase
 				return "CONCAT('Foo', ' ', 1)";
 			},
 		]);
-		$this->assertEquals(
+		$this->assertSame(
 			"REPLACE\n INTO `t1`\n SET `id` = 1, `name` = 'Foo', `other` = (CONCAT('Foo', ' ', 1))\n",
 			$this->replace->sql()
 		);
@@ -131,7 +131,7 @@ class ReplaceTest extends TestCase
 		$this->replace->select(static function (Select $select) {
 			return $select->columns('*')->from('t2');
 		});
-		$this->assertEquals(
+		$this->assertSame(
 			"REPLACE\n INTO `t1`\n SELECT\n *\n FROM `t2`\n\n",
 			$this->replace->sql()
 		);
@@ -165,7 +165,7 @@ class ReplaceTest extends TestCase
 	{
 		$this->createDummyData();
 		$this->prepare();
-		$this->assertEquals(
+		$this->assertSame(
 			1,
 			$this->replace->set(['c2' => 'foo'])->run()
 		);

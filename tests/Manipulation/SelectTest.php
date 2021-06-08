@@ -26,17 +26,17 @@ class SelectTest extends TestCase
 	public function testOptions()
 	{
 		$this->select->options($this->select::OPT_ALL);
-		$this->assertEquals(
+		$this->assertSame(
 			"SELECT\nALL\n",
 			$this->select->sql()
 		);
 		$this->select->options($this->select::OPT_HIGH_PRIORITY);
-		$this->assertEquals(
+		$this->assertSame(
 			"SELECT\nHIGH_PRIORITY\n",
 			$this->select->sql()
 		);
 		$this->select->options($this->select::OPT_ALL, $this->select::OPT_HIGH_PRIORITY);
-		$this->assertEquals(
+		$this->assertSame(
 			"SELECT\nALL HIGH_PRIORITY\n",
 			$this->select->sql()
 		);
@@ -69,39 +69,39 @@ class SelectTest extends TestCase
 	public function testExpressions()
 	{
 		$this->select->expressions('1');
-		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
+		$this->assertSame("SELECT\n `1`\n", $this->select->sql());
 		$this->select->expressions(static function () {
 			return 'now()';
 		});
-		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
+		$this->assertSame("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
 	public function testColumns()
 	{
 		$this->select->columns('1');
-		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
+		$this->assertSame("SELECT\n `1`\n", $this->select->sql());
 		$this->select->columns(static function () {
 			return 'now()';
 		});
-		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
+		$this->assertSame("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
 	public function testEmptyExpressionsWithFrom()
 	{
 		$this->select->from('Users');
-		$this->assertEquals("SELECT\n *\n FROM `Users`\n", $this->select->sql());
+		$this->assertSame("SELECT\n *\n FROM `Users`\n", $this->select->sql());
 		$this->select->columns('id', 'name');
-		$this->assertEquals("SELECT\n `id`, `name`\n FROM `Users`\n", $this->select->sql());
+		$this->assertSame("SELECT\n `id`, `name`\n FROM `Users`\n", $this->select->sql());
 	}
 
 	public function testLimit()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " LIMIT 10\n",
 			$this->select->limit(10)->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " LIMIT 10 OFFSET 20\n",
 			$this->select->limit(10, 20)->sql()
 		);
@@ -110,11 +110,11 @@ class SelectTest extends TestCase
 	public function testProcedure()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " PROCEDURE count_foo()\n",
 			$this->select->procedure('count_foo')->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " PROCEDURE count_bar('a', 1)\n",
 			$this->select->procedure('count_bar', 'a', 1)->sql()
 		);
@@ -123,15 +123,15 @@ class SelectTest extends TestCase
 	public function testIntoOutfile()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " INTO OUTFILE '/tmp/foo-bar'\n",
 			$this->select->intoOutfile('/tmp/foo-bar')->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " INTO OUTFILE '/tmp/foo-bar' CHARACTER SET 'utf8'\n",
 			$this->select->intoOutfile('/tmp/foo-bar', 'utf8')->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " INTO OUTFILE '/tmp/foo-bar' CHARACTER SET 'utf8' FIELDS ENCLOSED BY '\\''\n",
 			$this->select->intoOutfile(
 				'/tmp/foo-bar',
@@ -141,7 +141,7 @@ class SelectTest extends TestCase
 				]
 			)->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " INTO OUTFILE '/tmp/foo-bar' LINES TERMINATED BY ' '\n",
 			$this->select->intoOutfile(
 				'/tmp/foo-bar',
@@ -183,11 +183,11 @@ class SelectTest extends TestCase
 	public function testIntoDumpfile()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " INTO DUMPFILE '/tmp/foo-bar'\n",
 			$this->select->intoDumpfile('/tmp/foo-bar')->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " INTO DUMPFILE '/tmp/foo-bar' INTO @var1, @Var2\n",
 			$this->select->intoDumpfile('/tmp/foo-bar', 'var1', 'Var2')->sql()
 		);
@@ -204,11 +204,11 @@ class SelectTest extends TestCase
 	public function testLockForUpdate()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " FOR UPDATE\n",
 			$this->select->lockForUpdate()->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " FOR UPDATE WAIT 120\n",
 			$this->select->lockForUpdate(120)->sql()
 		);
@@ -225,11 +225,11 @@ class SelectTest extends TestCase
 	public function testLockInShareMode()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " LOCK IN SHARE MODE\n",
 			$this->select->lockInShareMode()->sql()
 		);
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " LOCK IN SHARE MODE WAIT 1\n",
 			$this->select->lockInShareMode(1)->sql()
 		);
@@ -246,7 +246,7 @@ class SelectTest extends TestCase
 	public function testJoin()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " JOIN `t2` USING (`user_id`)\n",
 			$this->select->joinUsing('t2', 'user_id')->sql()
 		);
@@ -255,7 +255,7 @@ class SelectTest extends TestCase
 	public function testWhere()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " WHERE `id` = 10\n",
 			$this->select->whereEqual('id', 10)->sql()
 		);
@@ -264,7 +264,7 @@ class SelectTest extends TestCase
 	public function testHaving()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " HAVING `id` = 10\n",
 			$this->select->havingEqual('id', 10)->sql()
 		);
@@ -273,7 +273,7 @@ class SelectTest extends TestCase
 	public function testOrderBy()
 	{
 		$part = $this->selectAllFrom('t1');
-		$this->assertEquals(
+		$this->assertSame(
 			$part . " ORDER BY `name` ASC, `id`\n",
 			$this->select->orderByAsc('name')->orderBy('id')->sql()
 		);

@@ -22,7 +22,7 @@ class IndexTest extends TestCase
 	public function testMultiColumns()
 	{
 		$index = new IndexMock(static::$database, null, 'id', 'email', 'foo');
-		$this->assertEquals(
+		$this->assertSame(
 			' index_mock (`id`, `email`, `foo`)',
 			$index->sql()
 		);
@@ -31,7 +31,7 @@ class IndexTest extends TestCase
 	public function testName()
 	{
 		$index = new IndexMock(static::$database, 'foo', 'id');
-		$this->assertEquals(
+		$this->assertSame(
 			' index_mock `foo` (`id`)',
 			$index->sql()
 		);

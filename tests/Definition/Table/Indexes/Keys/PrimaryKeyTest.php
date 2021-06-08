@@ -8,7 +8,7 @@ class PrimaryKeyTest extends TestCase
 	public function testType()
 	{
 		$index = new PrimaryKey(static::$database, null, 'id');
-		$this->assertEquals(
+		$this->assertSame(
 			' PRIMARY KEY (`id`)',
 			$index->sql()
 		);

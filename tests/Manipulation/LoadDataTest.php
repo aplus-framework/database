@@ -14,7 +14,7 @@ class LoadDataTest extends TestCase
 
 	public function testOptions()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"LOAD DATA\nCONCURRENT INFILE '/tmp/foo'\n INTO TABLE `Users`",
 			$this->loadData->options($this->loadData::OPT_CONCURRENT)
 				->infile('/tmp/foo')
@@ -44,7 +44,7 @@ class LoadDataTest extends TestCase
 
 	public function testCharset()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n CHARACTER SET utf8",
 			$this->loadData->infile('/tmp/foo')
 				->intoTable('users')
@@ -55,7 +55,7 @@ class LoadDataTest extends TestCase
 
 	public function testColumns()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
 			. " COLUMNS\n  TERMINATED BY ','\n  OPTIONALLY ENCLOSED BY '\\\"'\n  ESCAPED BY '\\\\'",
 			$this->loadData->infile('/tmp/foo')
@@ -69,7 +69,7 @@ class LoadDataTest extends TestCase
 
 	public function testLines()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
 			. " LINES\n  STARTING BY '-'\n  TERMINATED BY '\\\\n'",
 			$this->loadData->infile('/tmp/foo')
@@ -96,7 +96,7 @@ class LoadDataTest extends TestCase
 
 	public function testIgnoreLines()
 	{
-		$this->assertEquals(
+		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n IGNORE 25 LINES",
 			$this->loadData->intoTable('users')
 				->infile('/tmp/foo')
