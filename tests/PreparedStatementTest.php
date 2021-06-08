@@ -53,6 +53,27 @@ class PreparedStatementTest extends TestCase
 		$this->assertEquals('b', $result->fetch()->c2);
 	}
 
+	public function testQueryResultMoveCursor()
+	{
+		$this->createDummyData();
+		$result = static::$database->prepare('SELECT * FROM `t1`')->query();
+		$this->assertEquals('a', $result->fetch()->c2);
+		$this->assertEquals('b', $result->fetch()->c2);
+		$this->assertTrue($result->moveCursor(0));
+		$this->assertEquals('a', $result->fetch()->c2);
+	}
+
+	public function todo_testQueryResultMoveCursorUnbuffered()
+	{
+		$this->createDummyData();
+		$result = static::$database->prepare('SELECT * FROM `t1`', false)->query();
+		$this->assertEquals('a', $result->fetch()->c2);
+		$this->assertEquals('b', $result->fetch()->c2);
+		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectExceptionMessage("Commands out of sync; you can't run this command now");
+		$this->assertTrue($result->moveCursor(0));
+	}
+
 	public function testQueryWithBinds()
 	{
 		$this->createDummyData();

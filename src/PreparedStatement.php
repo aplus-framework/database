@@ -23,7 +23,7 @@ class PreparedStatement
 	{
 		$this->bindParams($params);
 		$this->statement->execute();
-		return new Result($this->statement->get_result());
+		return new Result($this->statement->get_result(), true);
 	}
 
 	/**
