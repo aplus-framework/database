@@ -28,8 +28,22 @@ class Result
 		return $this->buffered;
 	}
 
+	/**
+	 * Adjusts the result pointer to an arbitrary row in the result.
+	 *
+	 * @param int $offset The field offset. Must be between zero and the total
+	 *                    number of rows minus one
+	 *
+	 * @throws \LogicException       if is an unbuffered result
+	 * @throws \OutOfBoundsException for invalid cursor offset
+	 *
+	 * @return bool
+	 */
 	public function moveCursor(int $offset) : bool
 	{
+		if ($this->isBuffered() === false) {
+			throw new \LogicException('Cursor cannot be moved on unbuffered results');
+		}
 		if ($offset < 0 || ($offset !== 0 && $offset >= $this->result->num_rows)) {
 			throw new OutOfRangeException(
 				"Invalid cursor offset: {$offset}"

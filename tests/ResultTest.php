@@ -159,4 +159,27 @@ class ResultTest extends TestCase
 			static::$database->query('SELECT * FROM `t1`', false)->isBuffered()
 		);
 	}
+
+	public function testBufferMoveCursor()
+	{
+		$result = static::$database->query('SELECT * FROM `t1`');
+		$result->fetch();
+		$this->assertCount(4, $result->fetchAll());
+		$this->assertCount(0, $result->fetchAll());
+		$result->moveCursor(0);
+		$this->assertCount(5, $result->fetchAll());
+	}
+
+	public function testUnbufferMoveCursor()
+	{
+		$result = static::$database->query('SELECT * FROM `t1`', false);
+		$result->fetch();
+		$this->assertCount(4, $result->fetchAll());
+		$this->assertCount(0, $result->fetchAll());
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage(
+			'Cursor cannot be moved on unbuffered results'
+		);
+		$result->moveCursor(0);
+	}
 }
