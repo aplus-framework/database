@@ -205,13 +205,15 @@ class ResultTest extends TestCase
 	{
 		$fields = static::$database->query('SELECT * FROM `t1`')->fetchFields();
 		$this->assertEquals('c1', $fields[0]->name);
-		$this->assertEquals('LONG', $fields[0]->type_name);
-		$this->assertTrue($fields[0]->pri_key_flag);
-		$this->assertTrue($fields[0]->auto_increment_flag);
+		$this->assertEquals('long', $fields[0]->typeName);
+		$this->assertEquals(0, $fields[0]->maxLength);
+		$this->assertTrue($fields[0]->flagPriKey);
+		$this->assertTrue($fields[0]->flagAutoIncrement);
 		$this->assertEquals('c2', $fields[1]->name);
-		$this->assertEquals('VAR_STRING', $fields[1]->type_name);
-		$this->assertFalse($fields[1]->pri_key_flag);
-		$this->assertFalse($fields[1]->auto_increment_flag);
+		$this->assertEquals('var_string', $fields[1]->typeName);
+		$this->assertEquals(0, $fields[0]->maxLength);
+		$this->assertFalse($fields[1]->flagPriKey);
+		$this->assertFalse($fields[1]->flagAutoIncrement);
 	}
 
 	public function testFetchFieldsFree()

@@ -1,5 +1,6 @@
 <?php namespace Framework\Database;
 
+use Framework\Database\Result\Field;
 use OutOfRangeException;
 
 /**
@@ -191,6 +192,13 @@ class Result
 		return $this->result->num_rows;
 	}
 
+	/**
+	 * Returns an array of objects representing the fields in a result set.
+	 *
+	 * @return array|false|Field[] an array of objects which contains field
+	 *                             definition information or false if no field
+	 *                             information is available
+	 */
 	public function fetchFields() : array | false
 	{
 		$this->checkIsFree();
@@ -198,107 +206,8 @@ class Result
 		if ($fields === false) {
 			return false;
 		}
-		foreach ($fields as $field) {
-			$field->type_name = match ($field->type) {
-				\MYSQLI_TYPE_BIT => 'BIT',
-				\MYSQLI_TYPE_BLOB => 'BLOB',
-				\MYSQLI_TYPE_CHAR => 'CHAR',
-				\MYSQLI_TYPE_DATE => 'DATE',
-				\MYSQLI_TYPE_DATETIME => 'DATETIME',
-				\MYSQLI_TYPE_DECIMAL => 'DECIMAL',
-				\MYSQLI_TYPE_DOUBLE => 'DOUBLE',
-				\MYSQLI_TYPE_ENUM => 'ENUM',
-				\MYSQLI_TYPE_FLOAT => 'FLOAT',
-				\MYSQLI_TYPE_GEOMETRY => 'GEOMETRY',
-				\MYSQLI_TYPE_INT24 => 'INT24',
-				\MYSQLI_TYPE_INTERVAL => 'INTERVAL',
-				\MYSQLI_TYPE_JSON => 'JSON',
-				\MYSQLI_TYPE_LONG => 'LONG',
-				\MYSQLI_TYPE_LONG_BLOB => 'LONG_BLOB',
-				\MYSQLI_TYPE_LONGLONG => 'LONGLONG',
-				\MYSQLI_TYPE_MEDIUM_BLOB => 'MEDIUM_BLOB',
-				\MYSQLI_TYPE_NEWDATE => 'NEWDATE',
-				\MYSQLI_TYPE_NEWDECIMAL => 'NEWDECIMAL',
-				\MYSQLI_TYPE_NULL => 'NULL',
-				\MYSQLI_TYPE_SET => 'SET',
-				\MYSQLI_TYPE_SHORT => 'SHORT',
-				\MYSQLI_TYPE_STRING => 'STRING',
-				\MYSQLI_TYPE_TIME => 'TIME',
-				\MYSQLI_TYPE_TIMESTAMP => 'TIMESTAMP',
-				\MYSQLI_TYPE_TINY => 'TINY',
-				\MYSQLI_TYPE_TINY_BLOB => 'TINY_BLOB',
-				\MYSQLI_TYPE_VAR_STRING => 'VAR_STRING',
-				\MYSQLI_TYPE_YEAR => 'YEAR',
-				default => null
-			};
-			$field->binary_flag = false;
-			if ($field->flags & \MYSQLI_BINARY_FLAG) {
-				$field->binary_flag = true;
-			}
-			$field->blob_flag = false;
-			if ($field->flags & \MYSQLI_BLOB_FLAG) {
-				$field->blob_flag = true;
-			}
-			$field->enum_flag = false;
-			if ($field->flags & \MYSQLI_ENUM_FLAG) {
-				$field->enum_flag = true;
-			}
-			$field->group_flag = false;
-			if ($field->flags & \MYSQLI_GROUP_FLAG) {
-				$field->group_flag = true;
-			}
-			$field->num_flag = false;
-			if ($field->flags & \MYSQLI_NUM_FLAG) {
-				$field->num_flag = true;
-			}
-			$field->set_flag = false;
-			if ($field->flags & \MYSQLI_SET_FLAG) {
-				$field->set_flag = true;
-			}
-			$field->timestamp_flag = false;
-			if ($field->flags & \MYSQLI_TIMESTAMP_FLAG) {
-				$field->timestamp_flag = true;
-			}
-			$field->unsigned_flag = false;
-			if ($field->flags & \MYSQLI_UNSIGNED_FLAG) {
-				$field->unsigned_flag = true;
-			}
-			$field->zerofill_flag = false;
-			if ($field->flags & \MYSQLI_ZEROFILL_FLAG) {
-				$field->zerofill_flag = true;
-			}
-			$field->auto_increment_flag = false;
-			if ($field->flags & \MYSQLI_AUTO_INCREMENT_FLAG) {
-				$field->auto_increment_flag = true;
-			}
-			$field->multiple_key_flag = false;
-			if ($field->flags & \MYSQLI_MULTIPLE_KEY_FLAG) {
-				$field->multiple_key_flag = true;
-			}
-			$field->not_null_flag = false;
-			if ($field->flags & \MYSQLI_NOT_NULL_FLAG) {
-				$field->not_null_flag = true;
-			}
-			$field->part_key_flag = false;
-			if ($field->flags & \MYSQLI_PART_KEY_FLAG) {
-				$field->part_key_flag = true;
-			}
-			$field->pri_key_flag = false;
-			if ($field->flags & \MYSQLI_PRI_KEY_FLAG) {
-				$field->pri_key_flag = true;
-			}
-			$field->unique_key_flag = false;
-			if ($field->flags & \MYSQLI_UNIQUE_KEY_FLAG) {
-				$field->unique_key_flag = true;
-			}
-			$field->no_default_value_flag = false;
-			if ($field->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG) {
-				$field->no_default_value_flag = true;
-			}
-			$field->on_update_now_flag = false;
-			if ($field->flags & \MYSQLI_ON_UPDATE_NOW_FLAG) {
-				$field->on_update_now_flag = true;
-			}
+		foreach ($fields as &$field) {
+			$field = new Field($field);
 		}
 		return $fields;
 	}
