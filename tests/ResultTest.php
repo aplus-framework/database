@@ -1,11 +1,22 @@
 <?php namespace Tests\Database;
 
+use Framework\Database\Result;
+
 class ResultTest extends TestCase
 {
 	protected function setUp() : void
 	{
 		parent::setUp();
 		$this->createDummyData();
+	}
+
+	protected function expectFreeResult() : Result
+	{
+		$result = static::$database->query('SELECT * FROM `t1`', false);
+		$result->free();
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage('Result is already free');
+		return $result;
 	}
 
 	public function testNumRows()
@@ -24,6 +35,11 @@ class ResultTest extends TestCase
 		);
 	}
 
+	public function testNumRowsFree()
+	{
+		$this->expectFreeResult()->numRows();
+	}
+
 	public function testMoveCursor()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
@@ -38,12 +54,30 @@ class ResultTest extends TestCase
 		$result->moveCursor(5);
 	}
 
+	public function testMoveCursorFree()
+	{
+		$this->expectFreeResult()->moveCursor(0);
+	}
+
 	public function testMoveCursorLessThanZero()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->expectException(\OutOfRangeException::class);
 		$this->expectExceptionMessage('Invalid cursor offset: -1');
 		$result->moveCursor(-1);
+	}
+
+	public function testUnbufferMoveCursor()
+	{
+		$result = static::$database->query('SELECT * FROM `t1`', false);
+		$result->fetch();
+		$this->assertCount(4, $result->fetchAll());
+		$this->assertCount(0, $result->fetchAll());
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage(
+			'Cursor cannot be moved on unbuffered results'
+		);
+		$result->moveCursor(0);
 	}
 
 	public function testFetchRow()
@@ -53,11 +87,21 @@ class ResultTest extends TestCase
 		$this->assertEquals(4, $result->fetchRow(3)->c1);
 	}
 
+	public function testFetchRowFree()
+	{
+		$this->expectFreeResult()->fetchRow(0);
+	}
+
 	public function testFetchArrayRow()
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchArrayRow(0)['c1']);
 		$this->assertEquals(4, $result->fetchArrayRow(3)['c1']);
+	}
+
+	public function testFetchArrayRowFree()
+	{
+		$this->expectFreeResult()->fetchArrayRow(0);
 	}
 
 	public function testFetchClass()
@@ -84,6 +128,11 @@ class ResultTest extends TestCase
 		$this->assertNull($result->fetch());
 	}
 
+	public function testFetchFree()
+	{
+		$this->expectFreeResult()->fetch();
+	}
+
 	public function testFetchAll()
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchAll();
@@ -91,6 +140,11 @@ class ResultTest extends TestCase
 		$this->assertEquals(1, $all[0]->c1);
 		$this->assertEquals(2, $all[1]->c1);
 		$this->assertEquals('c', $all[2]->c2);
+	}
+
+	public function testFetchAllFree()
+	{
+		$this->expectFreeResult()->fetchAll();
 	}
 
 	public function testFetchAllRest()
@@ -116,6 +170,11 @@ class ResultTest extends TestCase
 		$this->assertNull($result->fetchArray());
 	}
 
+	public function testFetchArrayFree()
+	{
+		$this->expectFreeResult()->fetchArray();
+	}
+
 	public function testFetchArrayAll()
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchArrayAll();
@@ -123,6 +182,11 @@ class ResultTest extends TestCase
 		$this->assertEquals(1, $all[0]['c1']);
 		$this->assertEquals(2, $all[1]['c1']);
 		$this->assertEquals('c', $all[2]['c2']);
+	}
+
+	public function testFetchArrayAllFree()
+	{
+		$this->expectFreeResult()->fetchArrayAll();
 	}
 
 	public function testFetchArrayAllRest()
@@ -150,6 +214,11 @@ class ResultTest extends TestCase
 		$this->assertFalse($fields[1]->auto_increment_flag);
 	}
 
+	public function testFetchFieldsFree()
+	{
+		$this->expectFreeResult()->fetchFields();
+	}
+
 	public function testBuffer()
 	{
 		$this->assertTrue(
@@ -158,28 +227,5 @@ class ResultTest extends TestCase
 		$this->assertFalse(
 			static::$database->query('SELECT * FROM `t1`', false)->isBuffered()
 		);
-	}
-
-	public function testBufferMoveCursor()
-	{
-		$result = static::$database->query('SELECT * FROM `t1`');
-		$result->fetch();
-		$this->assertCount(4, $result->fetchAll());
-		$this->assertCount(0, $result->fetchAll());
-		$result->moveCursor(0);
-		$this->assertCount(5, $result->fetchAll());
-	}
-
-	public function testUnbufferMoveCursor()
-	{
-		$result = static::$database->query('SELECT * FROM `t1`', false);
-		$result->fetch();
-		$this->assertCount(4, $result->fetchAll());
-		$this->assertCount(0, $result->fetchAll());
-		$this->expectException(\LogicException::class);
-		$this->expectExceptionMessage(
-			'Cursor cannot be moved on unbuffered results'
-		);
-		$result->moveCursor(0);
 	}
 }

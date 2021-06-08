@@ -9,6 +9,7 @@ class Result
 {
 	protected \mysqli_result $result;
 	protected bool $buffered;
+	protected bool $free = false;
 	protected string $fetchClass = \stdClass::class;
 	protected array $fetchConstructor = [];
 
@@ -20,7 +21,31 @@ class Result
 
 	public function __destruct()
 	{
+		if ( ! $this->isFree()) {
+			$this->free();
+		}
+	}
+
+	/**
+	 * Frees the memory associated with a result.
+	 */
+	public function free() : void
+	{
+		$this->checkIsFree();
+		$this->free = true;
 		$this->result->free();
+	}
+
+	public function isFree() : bool
+	{
+		return $this->free;
+	}
+
+	protected function checkIsFree() : void
+	{
+		if ($this->isFree()) {
+			throw new \LogicException('Result is already free');
+		}
 	}
 
 	public function isBuffered() : bool
@@ -41,7 +66,8 @@ class Result
 	 */
 	public function moveCursor(int $offset) : bool
 	{
-		if ($this->isBuffered() === false) {
+		$this->checkIsFree();
+		if ( ! $this->isBuffered()) {
 			throw new \LogicException('Cursor cannot be moved on unbuffered results');
 		}
 		if ($offset < 0 || ($offset !== 0 && $offset >= $this->result->num_rows)) {
@@ -75,6 +101,7 @@ class Result
 	 */
 	public function fetch(string $class = null, mixed ...$constructor)
 	{
+		$this->checkIsFree();
 		$class ??= $this->fetchClass;
 		$constructor = $constructor ?: $this->fetchConstructor;
 		if ($constructor) {
@@ -93,6 +120,7 @@ class Result
 	 */
 	public function fetchAll(string $class = null, mixed ...$constructor) : array
 	{
+		$this->checkIsFree();
 		$all = [];
 		while ($row = $this->fetch($class, ...$constructor)) {
 			$all[] = $row;
@@ -111,6 +139,7 @@ class Result
 	 */
 	public function fetchRow(int $offset, string $class = null, mixed ...$constructor)
 	{
+		$this->checkIsFree();
 		$this->moveCursor($offset);
 		return $this->fetch($class, ...$constructor);
 	}
@@ -122,6 +151,7 @@ class Result
 	 */
 	public function fetchArray() : ?array
 	{
+		$this->checkIsFree();
 		return $this->result->fetch_assoc();
 	}
 
@@ -132,6 +162,7 @@ class Result
 	 */
 	public function fetchArrayAll() : array
 	{
+		$this->checkIsFree();
 		return $this->result->fetch_all(\MYSQLI_ASSOC);
 	}
 
@@ -144,6 +175,7 @@ class Result
 	 */
 	public function fetchArrayRow(int $offset) : array
 	{
+		$this->checkIsFree();
 		$this->moveCursor($offset);
 		return $this->result->fetch_assoc();
 	}
@@ -155,11 +187,13 @@ class Result
 	 */
 	public function numRows() : int
 	{
+		$this->checkIsFree();
 		return $this->result->num_rows;
 	}
 
 	public function fetchFields() : array | false
 	{
+		$this->checkIsFree();
 		$fields = $this->result->fetch_fields();
 		if ($fields === false) {
 			return false;
