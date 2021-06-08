@@ -150,6 +150,23 @@ class DatabaseTest extends TestCase
 		]);
 	}
 
+	public function testOptions()
+	{
+		$this->createDummyData();
+		$config = [
+			'username' => \getenv('DB_USERNAME'),
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+		];
+		$database = new Database($config);
+		$this->assertSame(1, $database->query('SELECT `c1` FROM `t1` LIMIT 1')->fetch()->c1);
+		$config['options'][\MYSQLI_OPT_INT_AND_FLOAT_NATIVE] = false;
+		$database = new Database($config);
+		$this->assertSame('1', $database->query('SELECT `c1` FROM `t1` LIMIT 1')->fetch()->c1);
+	}
+
 	public function testProtectIdentifier()
 	{
 		$this->assertEquals('*', static::$database->protectIdentifier('*'));
