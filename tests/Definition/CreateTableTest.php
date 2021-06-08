@@ -78,6 +78,16 @@ class CreateTableTest extends TestCase
 		);
 	}
 
+	public function testOrReplaceConflictsWithIfNotExists()
+	{
+		$this->prepare()->ifNotExists()->orReplace();
+		$this->expectException(\LogicException::class);
+		$this->expectExceptionMessage(
+			'Clauses OR REPLACE and IF NOT EXISTS can not be used together'
+		);
+		$this->createTable->sql();
+	}
+
 	public function testIfNotExistsConflictsWithOrReplace()
 	{
 		$this->prepare()->orReplace()->ifNotExists();
