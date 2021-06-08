@@ -11,6 +11,13 @@ use LogicException;
  */
 class CreateTable extends Statement
 {
+	/**
+	 * Adds a OR REPLACE part.
+	 *
+	 * WARNING: This feature is MariaDB only. It is not compatible with MySQL.
+	 *
+	 * @return $this
+	 */
 	public function orReplace()
 	{
 		$this->sql['or_replace'] = true;
