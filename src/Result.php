@@ -8,17 +8,24 @@ use OutOfRangeException;
 class Result
 {
 	protected \mysqli_result $result;
+	protected bool $buffered;
 	protected string $fetchClass = \stdClass::class;
 	protected array $fetchConstructor = [];
 
-	public function __construct(\mysqli_result $result)
+	public function __construct(\mysqli_result $result, bool $buffered)
 	{
 		$this->result = $result;
+		$this->buffered = $buffered;
 	}
 
 	public function __destruct()
 	{
 		$this->result->free();
+	}
+
+	public function isBuffered() : bool
+	{
+		return $this->buffered;
 	}
 
 	public function moveCursor(int $offset) : bool

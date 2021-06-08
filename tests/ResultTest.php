@@ -149,4 +149,14 @@ class ResultTest extends TestCase
 		$this->assertFalse($fields[1]->pri_key_flag);
 		$this->assertFalse($fields[1]->auto_increment_flag);
 	}
+
+	public function testBuffer()
+	{
+		$this->assertTrue(
+			static::$database->query('SELECT * FROM `t1`')->isBuffered()
+		);
+		$this->assertFalse(
+			static::$database->query('SELECT * FROM `t1`', false)->isBuffered()
+		);
+	}
 }

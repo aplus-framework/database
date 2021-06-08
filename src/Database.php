@@ -498,7 +498,7 @@ class Database
 				"Statement does not return result: {$statement}"
 			);
 		}
-		return new Result($result);
+		return new Result($result, $buffered);
 	}
 
 	/**
