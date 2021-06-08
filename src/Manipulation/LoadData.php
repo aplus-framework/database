@@ -12,8 +12,17 @@ class LoadData extends Statement
 {
 	use Traits\Set;
 
+	/**
+	 * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+	 */
 	public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
+	/**
+	 * @see https://mariadb.com/kb/en/load-data-infile/#priority-and-concurrency
+	 */
 	public const OPT_CONCURRENT = 'CONCURRENT';
+	/**
+	 * @see https://mariadb.com/kb/en/load-data-infile/#load-data-local-infile
+	 */
 	public const OPT_LOCAL = 'LOCAL';
 
 	protected function renderOptions() : ?string
@@ -44,6 +53,11 @@ class LoadData extends Statement
 		return \implode(' ', $options);
 	}
 
+	/**
+	 * @param string $filename
+	 *
+	 * @return $this
+	 */
 	public function infile(string $filename)
 	{
 		$this->sql['infile'] = $filename;
@@ -56,23 +70,35 @@ class LoadData extends Statement
 			throw new LogicException('INFILE statement is required');
 		}
 		$filename = $this->database->quote($this->sql['infile']);
-		return " INFILE {$filename}" . \PHP_EOL;
+		return " INFILE {$filename}";
 	}
 
-	public function intoTable($table)
+	/**
+	 * @param string $table
+	 *
+	 * @return $this
+	 */
+	public function intoTable(string $table)
 	{
 		$this->sql['table'] = $table;
 		return $this;
 	}
 
-	protected function renderIntoTable()
+	protected function renderIntoTable() : string
 	{
 		if (empty($this->sql['table'])) {
 			throw new LogicException('Table is required');
 		}
-		return ' INTO TABLE ' . $this->database->protectIdentifier($this->sql['table']) . \PHP_EOL;
+		return ' INTO TABLE ' . $this->database->protectIdentifier($this->sql['table']);
 	}
 
+	/**
+	 * @param string $charset
+	 *
+	 * @see https://mariadb.com/kb/en/supported-character-sets-and-collations/
+	 *
+	 * @return $this
+	 */
 	public function charset(string $charset)
 	{
 		$this->sql['charset'] = $charset;
@@ -84,15 +110,26 @@ class LoadData extends Statement
 		if ( ! isset($this->sql['charset'])) {
 			return null;
 		}
-		return " CHARACTER SET {$this->sql['charset']}" . \PHP_EOL;
+		return " CHARACTER SET {$this->sql['charset']}";
 	}
 
+	/**
+	 * @param string $str
+	 *
+	 * @return $this
+	 */
 	public function columnsTerminatedBy(string $str)
 	{
 		$this->sql['columns_terminated_by'] = $this->database->quote($str);
 		return $this;
 	}
 
+	/**
+	 * @param string $char
+	 * @param bool   $optionally
+	 *
+	 * @return $this
+	 */
 	public function columnsEnclosedBy(string $char, bool $optionally = false)
 	{
 		$this->sql['columns_enclosed_by'] = $this->database->quote($char);
@@ -100,6 +137,11 @@ class LoadData extends Statement
 		return $this;
 	}
 
+	/**
+	 * @param string $char
+	 *
+	 * @return $this
+	 */
 	public function columnsEscapedBy(string $char)
 	{
 		$this->sql['columns_escaped_by'] = $this->database->quote($char);
@@ -135,12 +177,22 @@ class LoadData extends Statement
 			);
 	}
 
+	/**
+	 * @param string $str
+	 *
+	 * @return $this
+	 */
 	public function linesStartingBy(string $str)
 	{
 		$this->sql['lines_starting_by'] = $this->database->quote($str);
 		return $this;
 	}
 
+	/**
+	 * @param string $str
+	 *
+	 * @return $this
+	 */
 	public function linesTerminatedBy(string $str)
 	{
 		$this->sql['lines_terminated_by'] = $this->database->quote($str);
@@ -162,6 +214,11 @@ class LoadData extends Statement
 				: '');
 	}
 
+	/**
+	 * @param int $number
+	 *
+	 * @return $this
+	 */
 	public function ignoreLines(int $number)
 	{
 		$this->sql['ignore_lines'] = $number;
@@ -176,17 +233,29 @@ class LoadData extends Statement
 		return " IGNORE {$this->sql['ignore_lines']} LINES";
 	}
 
+	/**
+	 * @return string
+	 */
 	public function sql() : string
 	{
-		$sql = 'LOAD DATA' . \PHP_EOL
-			. $this->renderOptions()
-			. $this->renderInfile()
-			. $this->renderIntoTable()
-			. $this->renderCharset()
-			. $this->renderColumns()
-			. $this->renderLines()
-			. $this->renderIgnoreLines();
-		return \trim($sql);
+		$sql = 'LOAD DATA' . \PHP_EOL;
+		$part = $this->renderOptions();
+		if ($part) {
+			$sql .= $part . \PHP_EOL;
+		}
+		$sql .= $this->renderInfile() . \PHP_EOL;
+		$sql .= $this->renderIntoTable() . \PHP_EOL;
+		$part = $this->renderCharset();
+		if ($part) {
+			$sql .= $part . \PHP_EOL;
+		}
+		$sql .= $this->renderColumns();
+		$sql .= $this->renderLines();
+		$part = $this->renderIgnoreLines();
+		if ($part) {
+			$sql .= $part . \PHP_EOL;
+		}
+		return $sql;
 	}
 
 	public function run() : int
