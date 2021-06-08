@@ -284,6 +284,19 @@ class SelectTest extends TestCase
 		$this->createDummyData();
 		$this->selectAllFrom('t1');
 		$this->select->limit(1);
-		$this->assertInstanceOf(Result::class, $this->select->run());
+		$result = $this->select->run();
+		$this->assertInstanceOf(Result::class, $result);
+		$this->assertTrue($result->moveCursor(0));
+	}
+
+	public function testRunUnbuffered()
+	{
+		$this->createDummyData();
+		$this->selectAllFrom('t1');
+		$this->select->limit(1);
+		$result = $this->select->runUnbuffered();
+		$this->assertInstanceOf(Result::class, $result);
+		$this->expectException(\LogicException::class);
+		$result->moveCursor(0);
 	}
 }

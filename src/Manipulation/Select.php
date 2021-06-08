@@ -188,8 +188,10 @@ class Select extends Statement
 	 *
 	 * @return $this
 	 */
-	public function expressions(array | Closure | string $expression, array | Closure | string ...$expressions)
-	{
+	public function expressions(
+		array | Closure | string $expression,
+		array | Closure | string ...$expressions
+	) {
 		$expressions = $this->mergeExpressions($expression, $expressions);
 		foreach ($expressions as $expression) {
 			$this->sql['expressions'][] = $expression;
@@ -522,5 +524,15 @@ class Select extends Statement
 	public function run() : Result
 	{
 		return $this->database->query($this->sql());
+	}
+
+	/**
+	 * Runs the SELECT statement unbuffered.
+	 *
+	 * @return Result
+	 */
+	public function runUnbuffered() : Result
+	{
+		return $this->database->query($this->sql(), false);
 	}
 }
