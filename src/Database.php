@@ -74,8 +74,6 @@ class Database
 		Logger $logger = null
 	) {
 		$this->logger = $logger;
-		\mysqli_report(\MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX);
-		$this->mysqli = new mysqli();
 		$this->connect($username, $password, $schema, $host, $port);
 	}
 
@@ -126,6 +124,7 @@ class Database
 				\MYSQLI_OPT_INT_AND_FLOAT_NATIVE => true,
 				\MYSQLI_OPT_LOCAL_INFILE => 1,
 			],
+			'report' => \MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX,
 		], $config);
 	}
 
@@ -160,6 +159,8 @@ class Database
 		if ($this->failoverIndex === null) {
 			$this->config = $username;
 		}
+		\mysqli_report($username['report']);
+		$this->mysqli = new mysqli();
 		foreach ($username['options'] as $option => $value) {
 			$this->mysqli->options($option, $value);
 		}
