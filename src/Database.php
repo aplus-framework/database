@@ -155,57 +155,57 @@ class Database
 				'schema' => $schema,
 			];
 		}
-		$username = $this->makeConfig($username);
+		$config = $this->makeConfig($username);
 		if ($this->failoverIndex === null) {
-			$this->config = $username;
+			$this->config = $config;
 		}
-		\mysqli_report($username['report']);
+		\mysqli_report($config['report']);
 		$this->mysqli = new mysqli();
-		foreach ($username['options'] as $option => $value) {
+		foreach ($config['options'] as $option => $value) {
 			$this->mysqli->options($option, $value);
 		}
 		try {
 			$flags = null;
-			if ($username['ssl']['enabled'] === true) {
+			if ($config['ssl']['enabled'] === true) {
 				$this->mysqli->ssl_set(
-					$username['ssl']['key'],
-					$username['ssl']['cert'],
-					$username['ssl']['ca'],
-					$username['ssl']['capath'],
-					$username['ssl']['cipher']
+					$config['ssl']['key'],
+					$config['ssl']['cert'],
+					$config['ssl']['ca'],
+					$config['ssl']['capath'],
+					$config['ssl']['cipher']
 				);
 				$flags += \MYSQLI_CLIENT_SSL;
-				if ($username['ssl']['verify'] === false) {
+				if ($config['ssl']['verify'] === false) {
 					$flags += \MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
 				}
 			}
 			$this->mysqli->real_connect(
-				$username['host'],
-				$username['username'],
-				$username['password'],
-				$username['schema'],
-				$username['port'],
-				$username['socket'],
+				$config['host'],
+				$config['username'],
+				$config['password'],
+				$config['schema'],
+				$config['port'],
+				$config['socket'],
 				$flags
 			);
 		} catch (Exception $exception) {
-			$log = "Database: Connection failed for '{$username['username']}'@'{$username['host']}'";
+			$log = "Database: Connection failed for '{$config['username']}'@'{$config['host']}'";
 			$log .= $this->failoverIndex !== null ? " (failover: {$this->failoverIndex})" : '';
 			$this->log($log);
 			$this->failoverIndex = $this->failoverIndex === null
 				? 0
 				: $this->failoverIndex + 1;
-			if (empty($username['failover'][$this->failoverIndex])) {
+			if (empty($config['failover'][$this->failoverIndex])) {
 				throw $exception;
 			}
-			$username = \array_replace_recursive(
-				$username,
-				$username['failover'][$this->failoverIndex]
+			$config = \array_replace_recursive(
+				$config,
+				$config['failover'][$this->failoverIndex]
 			);
-			$this->connect($username);
+			$this->connect($config);
 		}
-		$this->setCollations($username['charset'], $username['collation']);
-		$this->setTimezone($username['timezone']);
+		$this->setCollations($config['charset'], $config['collation']);
+		$this->setTimezone($config['timezone']);
 		return $this;
 	}
 
