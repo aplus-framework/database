@@ -70,9 +70,9 @@ class CreateTable extends Statement
 		return ' IF NOT EXISTS';
 	}
 
-	public function table(string $table_name)
+	public function table(string $tableName)
 	{
-		$this->sql['table'] = $table_name;
+		$this->sql['table'] = $tableName;
 		return $this;
 	}
 

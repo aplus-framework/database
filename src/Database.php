@@ -260,15 +260,15 @@ class Database
 	/**
 	 * Call a CREATE SCHEMA statement.
 	 *
-	 * @param string|null $schema_name
+	 * @param string|null $schemaName
 	 *
 	 * @return CreateSchema
 	 */
-	public function createSchema(string $schema_name = null) : CreateSchema
+	public function createSchema(string $schemaName = null) : CreateSchema
 	{
 		$instance = new CreateSchema($this);
-		if ($schema_name !== null) {
-			$instance->schema($schema_name);
+		if ($schemaName !== null) {
+			$instance->schema($schemaName);
 		}
 		return $instance;
 	}
@@ -276,15 +276,15 @@ class Database
 	/**
 	 * Call a DROP SCHEMA statement.
 	 *
-	 * @param string|null $schema_name
+	 * @param string|null $schemaName
 	 *
 	 * @return DropSchema
 	 */
-	public function dropSchema(string $schema_name = null) : DropSchema
+	public function dropSchema(string $schemaName = null) : DropSchema
 	{
 		$instance = new DropSchema($this);
-		if ($schema_name !== null) {
-			$instance->schema($schema_name);
+		if ($schemaName !== null) {
+			$instance->schema($schemaName);
 		}
 		return $instance;
 	}
@@ -292,15 +292,15 @@ class Database
 	/**
 	 * Call a ALTER SCHEMA statement.
 	 *
-	 * @param string|null $schema_name
+	 * @param string|null $schemaName
 	 *
 	 * @return AlterSchema
 	 */
-	public function alterSchema(string $schema_name = null) : AlterSchema
+	public function alterSchema(string $schemaName = null) : AlterSchema
 	{
 		$instance = new AlterSchema($this);
-		if ($schema_name !== null) {
-			$instance->schema($schema_name);
+		if ($schemaName !== null) {
+			$instance->schema($schemaName);
 		}
 		return $instance;
 	}
@@ -308,15 +308,15 @@ class Database
 	/**
 	 * Call a CREATE TABLE statement.
 	 *
-	 * @param string|null $table_name
+	 * @param string|null $tableName
 	 *
 	 * @return CreateTable
 	 */
-	public function createTable(string $table_name = null) : CreateTable
+	public function createTable(string $tableName = null) : CreateTable
 	{
 		$instance = new CreateTable($this);
-		if ($table_name !== null) {
-			$instance->table($table_name);
+		if ($tableName !== null) {
+			$instance->table($tableName);
 		}
 		return $instance;
 	}
@@ -341,15 +341,15 @@ class Database
 	/**
 	 * Call a ALTER TABLE statement.
 	 *
-	 * @param string|null $table_name
+	 * @param string|null $tableName
 	 *
 	 * @return AlterTable
 	 */
-	public function alterTable(string $table_name = null) : AlterTable
+	public function alterTable(string $tableName = null) : AlterTable
 	{
 		$instance = new AlterTable($this);
-		if ($table_name !== null) {
-			$instance->table($table_name);
+		if ($tableName !== null) {
+			$instance->table($tableName);
 		}
 		return $instance;
 	}
@@ -376,15 +376,15 @@ class Database
 	/**
 	 * Call a INSERT statement.
 	 *
-	 * @param string|null $into_table
+	 * @param string|null $intoTable
 	 *
 	 * @return Insert
 	 */
-	public function insert(string $into_table = null) : Insert
+	public function insert(string $intoTable = null) : Insert
 	{
 		$instance = new Insert($this);
-		if ($into_table !== null) {
-			$instance->into($into_table);
+		if ($intoTable !== null) {
+			$instance->into($intoTable);
 		}
 		return $instance;
 	}
@@ -392,15 +392,15 @@ class Database
 	/**
 	 * Call a LOAD DATA statement.
 	 *
-	 * @param string|null $into_table
+	 * @param string|null $intoTable
 	 *
 	 * @return LoadData
 	 */
-	public function loadData(string $into_table = null) : LoadData
+	public function loadData(string $intoTable = null) : LoadData
 	{
 		$instance = new LoadData($this);
-		if ($into_table !== null) {
-			$instance->intoTable($into_table);
+		if ($intoTable !== null) {
+			$instance->intoTable($intoTable);
 		}
 		return $instance;
 	}
@@ -408,15 +408,15 @@ class Database
 	/**
 	 * Call a REPLACE statement.
 	 *
-	 * @param string|null $into_table
+	 * @param string|null $intoTable
 	 *
 	 * @return Replace
 	 */
-	public function replace(string $into_table = null) : Replace
+	public function replace(string $intoTable = null) : Replace
 	{
 		$instance = new Replace($this);
-		if ($into_table !== null) {
-			$instance->into($into_table);
+		if ($intoTable !== null) {
+			$instance->into($intoTable);
 		}
 		return $instance;
 	}

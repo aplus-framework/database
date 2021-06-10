@@ -18,7 +18,6 @@
 	</rule>
 
 	<rule ref="rulesets/controversial.xml">
-		<exclude name="CamelCaseParameterName"/>
 		<exclude name="CamelCaseVariableName"/>
 	</rule>
 

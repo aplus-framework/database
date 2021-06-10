@@ -40,9 +40,9 @@ class AlterTable extends Statement
 		return ' IGNORE';
 	}
 
-	public function table(string $table_name)
+	public function table(string $tableName)
 	{
-		$this->sql['table'] = $table_name;
+		$this->sql['table'] = $tableName;
 		return $this;
 	}
 

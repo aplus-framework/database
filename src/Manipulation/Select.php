@@ -277,8 +277,8 @@ class Select extends Statement
 	 *
 	 * @param string      $filename
 	 * @param string|null $charset
-	 * @param array       $fields_options Each key must be one of the EXP_FIELDS_* constants
-	 * @param array       $lines_options  Each key must be one of the EXP_LINESS_* constants
+	 * @param array       $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
+	 * @param array       $linesOptions  Each key must be one of the EXP_LINESS_* constants
 	 *
 	 * @see https://mariadb.com/kb/en/library/select-into-outfile/
 	 *
@@ -287,14 +287,14 @@ class Select extends Statement
 	public function intoOutfile(
 		string $filename,
 		string $charset = null,
-		array $fields_options = [],
-		array $lines_options = []
+		array $fieldsOptions = [],
+		array $linesOptions = []
 	) {
 		$this->sql['into_outfile'] = [
 			'filename' => $filename,
 			'charset' => $charset,
-			'fields_options' => $fields_options,
-			'lines_options' => $lines_options,
+			'fields_options' => $fieldsOptions,
+			'lines_options' => $linesOptions,
 		];
 		return $this;
 	}

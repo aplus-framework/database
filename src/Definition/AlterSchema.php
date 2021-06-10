@@ -10,9 +10,9 @@ use LogicException;
  */
 class AlterSchema extends Statement
 {
-	public function schema(string $schema_name)
+	public function schema(string $schemaName)
 	{
-		$this->sql['schema'] = $schema_name;
+		$this->sql['schema'] = $schemaName;
 		return $this;
 	}
 

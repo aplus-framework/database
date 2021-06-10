@@ -23,17 +23,17 @@ class TableDefinition extends DefinitionPart
 	/**
 	 * Adds a column to the Table Definition list.
 	 *
-	 * @param string      $name        Column name
-	 * @param string|null $change_name New column name. Used on ALTER TABLE CHANGE
+	 * @param string      $name       Column name
+	 * @param string|null $changeName New column name. Used on ALTER TABLE CHANGE
 	 *
 	 * @return ColumnDefinition
 	 */
-	public function column(string $name, string $change_name = null) : ColumnDefinition
+	public function column(string $name, string $changeName = null) : ColumnDefinition
 	{
 		$definition = new ColumnDefinition($this->database);
 		$this->columns[] = [
 			'name' => $name,
-			'change_name' => $change_name,
+			'change_name' => $changeName,
 			'definition' => $definition,
 		];
 		return $definition;
