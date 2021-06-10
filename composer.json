@@ -19,7 +19,8 @@
 	],
 	"require": {
 		"php": ">=8.0",
-		"ext-mysqli": "*"
+		"ext-mysqli": "*",
+		"natanfelles/log": "^2.0"
 	},
 	"require-dev": {
 		"ext-xdebug": "*",

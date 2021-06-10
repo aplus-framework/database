@@ -16,6 +16,7 @@ use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
 use Framework\Database\PreparedStatement;
 use Framework\Database\Result;
+use Framework\Log\Logger;
 
 class DatabaseTest extends TestCase
 {
@@ -53,6 +54,43 @@ class DatabaseTest extends TestCase
 			'host' => \getenv('DB_HOST'),
 			'port' => \getenv('DB_PORT'),
 		]);
+	}
+
+	public function testConnectionFailWithLogger()
+	{
+		$directory = '/tmp/logs';
+		if ( ! \is_dir($directory)) {
+			\mkdir($directory);
+		}
+		$logger = new Logger($directory);
+		$config = [
+			'username' => 'error-1',
+			'password' => \getenv('DB_PASSWORD'),
+			'schema' => \getenv('DB_SCHEMA'),
+			'host' => \getenv('DB_HOST'),
+			'port' => \getenv('DB_PORT'),
+		];
+		try {
+			new Database($config, logger: $logger);
+		} catch (\mysqli_sql_exception $e) {
+			$this->assertSame(
+				"Database: Connection failed for 'error-1'@'{$config['host']}'",
+				$logger->getLastLog()->message
+			);
+		}
+		$config['failover'] = [
+			[
+				'username' => 'error-2',
+			],
+		];
+		try {
+			new Database($config, logger: $logger);
+		} catch (\mysqli_sql_exception $e) {
+			$this->assertSame(
+				"Database: Connection failed for 'error-2'@'{$config['host']}' (failover: 0)",
+				$logger->getLastLog()->message
+			);
+		}
 	}
 
 	public function testConnectionWithSSL()

@@ -15,6 +15,7 @@ use Framework\Database\Manipulation\Replace;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
+use Framework\Log\Logger;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Language;
 use LogicException;
@@ -48,6 +49,7 @@ class Database
 	 */
 	protected bool $inTransaction = false;
 	protected string $lastQuery = '';
+	protected ?Logger $logger;
 
 	/**
 	 * Database constructor.
@@ -57,6 +59,7 @@ class Database
 	 * @param string|null          $schema
 	 * @param string               $host
 	 * @param int                  $port
+	 * @param Logger|null          $logger
 	 *
 	 * @see Database::makeConfig
 	 *
@@ -67,8 +70,10 @@ class Database
 		string $password = null,
 		string $schema = null,
 		string $host = 'localhost',
-		int $port = 3306
+		int $port = 3306,
+		Logger $logger = null
 	) {
+		$this->logger = $logger;
 		\mysqli_report(\MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX);
 		$this->mysqli = new mysqli();
 		$this->connect($username, $password, $schema, $host, $port);
@@ -77,6 +82,13 @@ class Database
 	public function __destruct()
 	{
 		$this->mysqli->close();
+	}
+
+	protected function log(string $message, int $level = Logger::ERROR) : void
+	{
+		if ($this->logger) {
+			$this->logger->log($level, $message);
+		}
 	}
 
 	/**
@@ -176,6 +188,9 @@ class Database
 				$flags
 			);
 		} catch (Exception $exception) {
+			$log = "Database: Connection failed for '{$username['username']}'@'{$username['host']}'";
+			$log .= $this->failoverIndex !== null ? " (failover: {$this->failoverIndex})" : '';
+			$this->log($log);
 			$this->failoverIndex = $this->failoverIndex === null
 				? 0
 				: $this->failoverIndex + 1;
@@ -186,7 +201,6 @@ class Database
 				$username,
 				$username['failover'][$this->failoverIndex]
 			);
-			// TODO: Log connection error
 			$this->connect($username);
 		}
 		$this->setCollations($username['charset'], $username['collation']);
