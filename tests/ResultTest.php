@@ -214,6 +214,11 @@ class ResultTest extends TestCase
 		$this->assertSame(0, $fields[0]->maxLength);
 		$this->assertFalse($fields[1]->flagPriKey);
 		$this->assertFalse($fields[1]->flagAutoIncrement);
+		$this->expectException(\Error::class);
+		$this->expectExceptionMessage(
+			'Undefined property: Framework\Database\Result\Field::$unknown'
+		);
+		$fields[1]->unknown;
 	}
 
 	public function testFetchFieldsFree()

@@ -83,7 +83,12 @@ class Field
 
 	public function __get(string $name)
 	{
-		return $this->{$name};
+		if (\property_exists($this, $name)) {
+			return $this->{$name};
+		}
+		throw new \Error(
+			'Undefined property: ' . static::class . '::$' . $name
+		);
 	}
 
 	protected function setTypeName() : void
