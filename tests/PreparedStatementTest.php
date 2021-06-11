@@ -66,7 +66,7 @@ class PreparedStatementTest extends TestCase
 	public function todo_testQueryResultMoveCursorUnbuffered() : void
 	{
 		$this->createDummyData();
-		$result = static::$database->prepare('SELECT * FROM `t1`', false)->query();
+		$result = static::$database->prepare('SELECT * FROM `t1`')->query();
 		$this->assertSame('a', $result->fetch()->c2);
 		$this->assertSame('b', $result->fetch()->c2);
 		$this->expectException(\mysqli_sql_exception::class);
@@ -97,7 +97,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertInstanceOf(Result::class, $prepared->query(true));
 		$this->assertInstanceOf(Result::class, $prepared->query(null));
 		$this->expectException(\TypeError::class);
-		$prepared->query([]);
+		$prepared->query([]); // @phpstan-ignore-line
 	}
 
 	public function testSendBlob() : void

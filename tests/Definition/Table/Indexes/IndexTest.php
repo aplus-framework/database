@@ -41,6 +41,6 @@ class IndexTest extends TestCase
 	{
 		$this->expectException(\BadMethodCallException::class);
 		$this->expectExceptionMessage('Method not found or not allowed: foo');
-		$this->index->foo();
+		$this->index->foo(); // @phpstan-ignore-line
 	}
 }

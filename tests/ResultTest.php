@@ -218,7 +218,7 @@ class ResultTest extends TestCase
 		$this->expectExceptionMessage(
 			'Undefined property: Framework\Database\Result\Field::$unknown'
 		);
-		$fields[1]->unknown;
+		$fields[1]->unknown; // @phpstan-ignore-line
 	}
 
 	public function testFetchFieldsFree() : void

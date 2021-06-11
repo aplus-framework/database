@@ -1,5 +1,6 @@
 <?php namespace Tests\Database\Manipulation;
 
+use Closure;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Result;
 use Tests\Database\TestCase;
@@ -13,7 +14,7 @@ class SelectTest extends TestCase
 		$this->select = new Select(static::$database);
 	}
 
-	protected function selectAllFrom(...$from) : string
+	protected function selectAllFrom(array | Closure | string ...$from) : string
 	{
 		return $this->select->columns('*')->from(...$from)->sql();
 	}

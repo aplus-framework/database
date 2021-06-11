@@ -1,10 +1,11 @@
 <?php namespace Tests\Database\Manipulation;
 
+use Closure;
 use Framework\Database\Manipulation\Statement;
 
 class StatementMock extends Statement
 {
-	public function subquery(\Closure $subquery) : string
+	public function subquery(Closure $subquery) : string
 	{
 		return parent::subquery($subquery);
 	}
@@ -19,12 +20,12 @@ class StatementMock extends Statement
 		return parent::renderLimit();
 	}
 
-	public function renderIdentifier($column) : string
+	public function renderIdentifier(Closure | string $column) : string
 	{
 		return parent::renderIdentifier($column);
 	}
 
-	public function renderAliasedIdentifier($column) : string
+	public function renderAliasedIdentifier(array | Closure | string $column) : string
 	{
 		return parent::renderAliasedIdentifier($column);
 	}

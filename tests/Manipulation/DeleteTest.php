@@ -49,7 +49,7 @@ class DeleteTest extends TestCase
 			"DELETE\n FROM `t1`\n LIMIT 1\n",
 			$this->delete->sql()
 		);
-		$this->delete->limit('235');
+		$this->delete->limit('235'); // @phpstan-ignore-line
 		$this->assertSame(
 			"DELETE\n FROM `t1`\n LIMIT 235\n",
 			$this->delete->sql()

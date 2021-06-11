@@ -141,6 +141,6 @@ class ColumnDefinitionTest extends TestCase
 	{
 		$this->expectException(\BadMethodCallException::class);
 		$this->expectExceptionMessage('Method not found or not allowed: foo');
-		$this->definition->foo();
+		$this->definition->foo(); // @phpstan-ignore-line
 	}
 }

@@ -70,6 +70,6 @@ class OrderByTest extends TestCase
 	public function testInvalidExpressionDataType() : void
 	{
 		$this->expectException(\TypeError::class);
-		$this->statement->orderBy([]);
+		$this->statement->orderBy([]); // @phpstan-ignore-line
 	}
 }

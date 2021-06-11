@@ -23,11 +23,11 @@ class DatabaseTest extends TestCase
 	public function testConnection() : void
 	{
 		$database = new Database(
-			\getenv('DB_USERNAME'),
-			\getenv('DB_PASSWORD'),
-			\getenv('DB_SCHEMA'),
-			\getenv('DB_HOST'),
-			\getenv('DB_PORT')
+			\getenv('DB_USERNAME'), // @phpstan-ignore-line
+			\getenv('DB_PASSWORD'), // @phpstan-ignore-line
+			\getenv('DB_SCHEMA'), // @phpstan-ignore-line
+			\getenv('DB_HOST'), // @phpstan-ignore-line
+			\getenv('DB_PORT') // @phpstan-ignore-line
 		);
 		$this->assertInstanceOf(Database::class, $database);
 	}
@@ -233,7 +233,7 @@ class DatabaseTest extends TestCase
 		$this->assertSame('TRUE', static::$database->quote(true));
 		$this->assertSame('FALSE', static::$database->quote(false));
 		$this->expectException(\TypeError::class);
-		static::$database->quote([]);
+		static::$database->quote([]); // @phpstan-ignore-line
 	}
 
 	public function testDefinitionInstances() : void
@@ -381,7 +381,7 @@ class DatabaseTest extends TestCase
 
 	public function testUse() : void
 	{
-		static::$database->use(\getenv('DB_SCHEMA'));
+		static::$database->use(\getenv('DB_SCHEMA')); // @phpstan-ignore-line
 		$this->expectException(\mysqli_sql_exception::class);
 		$this->expectExceptionMessage("Unknown database 'Foo'");
 		static::$database->use('Foo');

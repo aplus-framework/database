@@ -86,7 +86,7 @@ class UpdateTest extends TestCase
 			"UPDATE\n `t1`\n SET `id` = 1\n LIMIT 1\n",
 			$this->update->sql()
 		);
-		$this->update->limit('235');
+		$this->update->limit('235'); // @phpstan-ignore-line
 		$this->assertSame(
 			"UPDATE\n `t1`\n SET `id` = 1\n LIMIT 235\n",
 			$this->update->sql()
