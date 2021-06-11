@@ -18,7 +18,7 @@ class IndexDefinitionTest extends TestCase
 		$this->definition = new IndexDefinition(static::$database);
 	}
 
-	public function testInstances()
+	public function testInstances() : void
 	{
 		$this->assertInstanceOf(Key::class, $this->definition->key('id'));
 		$this->assertInstanceOf(PrimaryKey::class, $this->definition->primaryKey('id'));
@@ -28,7 +28,7 @@ class IndexDefinitionTest extends TestCase
 		$this->assertInstanceOf(SpatialKey::class, $this->definition->spatialKey('id'));
 	}
 
-	public function testSql()
+	public function testSql() : void
 	{
 		$this->definition->primaryKey('id');
 		$this->definition->uniqueKey('email');
@@ -38,14 +38,14 @@ class IndexDefinitionTest extends TestCase
 		);
 	}
 
-	public function testBadMethod()
+	public function testBadMethod() : void
 	{
 		$this->expectException(\BadMethodCallException::class);
 		$this->expectExceptionMessage('Method not found or not allowed: foo');
 		$this->definition->foo();
 	}
 
-	public function testEmptyKeyType()
+	public function testEmptyKeyType() : void
 	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('Key type not set in index');

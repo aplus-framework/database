@@ -26,19 +26,19 @@ class TestCase extends \PHPUnit\Framework\TestCase
 		return static::$database;
 	}
 
-	protected function resetDatabase()
+	protected function resetDatabase() : void
 	{
 		static::$database = null;
 		$this->setDatabase();
 	}
 
-	protected function dropDummyData()
+	protected function dropDummyData() : void
 	{
 		static::$database->exec('DROP TABLE IF EXISTS `t1`');
 		static::$database->exec('DROP TABLE IF EXISTS `t2`');
 	}
 
-	protected function createDummyData()
+	protected function createDummyData() : void
 	{
 		$this->dropDummyData();
 		static::$database->exec(

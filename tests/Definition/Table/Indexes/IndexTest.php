@@ -11,7 +11,7 @@ class IndexTest extends TestCase
 		$this->index = new IndexMock(static::$database, null, 'id');
 	}
 
-	public function testEmptyType()
+	public function testEmptyType() : void
 	{
 		$this->index->type = '';
 		$this->expectException(\LogicException::class);
@@ -19,7 +19,7 @@ class IndexTest extends TestCase
 		$this->index->sql();
 	}
 
-	public function testMultiColumns()
+	public function testMultiColumns() : void
 	{
 		$index = new IndexMock(static::$database, null, 'id', 'email', 'foo');
 		$this->assertSame(
@@ -28,7 +28,7 @@ class IndexTest extends TestCase
 		);
 	}
 
-	public function testName()
+	public function testName() : void
 	{
 		$index = new IndexMock(static::$database, 'foo', 'id');
 		$this->assertSame(
@@ -37,7 +37,7 @@ class IndexTest extends TestCase
 		);
 	}
 
-	public function testBadMethod()
+	public function testBadMethod() : void
 	{
 		$this->expectException(\BadMethodCallException::class);
 		$this->expectExceptionMessage('Method not found or not allowed: foo');

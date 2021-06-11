@@ -13,7 +13,7 @@ class CreateTableTest extends TestCase
 		$this->createTable = new CreateTable(static::$database);
 	}
 
-	protected function prepare()
+	protected function prepare() : CreateTable
 	{
 		return $this->createTable->table('t1')
 			->definition(static function (TableDefinition $definition) {
@@ -21,14 +21,14 @@ class CreateTableTest extends TestCase
 			});
 	}
 
-	public function testEmptyTable()
+	public function testEmptyTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('TABLE name must be set');
 		$this->createTable->sql();
 	}
 
-	public function testEmptyColumns()
+	public function testEmptyColumns() : void
 	{
 		$this->createTable->table('t1');
 		$this->expectException(\LogicException::class);
@@ -36,7 +36,7 @@ class CreateTableTest extends TestCase
 		$this->createTable->sql();
 	}
 
-	public function testColumns()
+	public function testColumns() : void
 	{
 		$sql = $this->createTable->table('t1')
 			->definition(static function (TableDefinition $definition) {
@@ -49,7 +49,7 @@ class CreateTableTest extends TestCase
 		);
 	}
 
-	public function testIndexes()
+	public function testIndexes() : void
 	{
 		$sql = $this->createTable->table('t1')
 			->definition(static function (TableDefinition $definition) {
@@ -62,7 +62,7 @@ class CreateTableTest extends TestCase
 		);
 	}
 
-	public function testIfNotExists()
+	public function testIfNotExists() : void
 	{
 		$this->assertSame(
 			"CREATE TABLE IF NOT EXISTS `t1` (\n  `c1` int NOT NULL\n)",
@@ -70,7 +70,7 @@ class CreateTableTest extends TestCase
 		);
 	}
 
-	public function testOrReplace()
+	public function testOrReplace() : void
 	{
 		$this->assertSame(
 			"CREATE OR REPLACE TABLE `t1` (\n  `c1` int NOT NULL\n)",
@@ -78,7 +78,7 @@ class CreateTableTest extends TestCase
 		);
 	}
 
-	public function testOrReplaceConflictsWithIfNotExists()
+	public function testOrReplaceConflictsWithIfNotExists() : void
 	{
 		$this->prepare()->ifNotExists()->orReplace();
 		$this->expectException(\LogicException::class);
@@ -88,7 +88,7 @@ class CreateTableTest extends TestCase
 		$this->createTable->sql();
 	}
 
-	public function testIfNotExistsConflictsWithOrReplace()
+	public function testIfNotExistsConflictsWithOrReplace() : void
 	{
 		$this->prepare()->orReplace()->ifNotExists();
 		$this->expectException(\LogicException::class);
@@ -98,7 +98,7 @@ class CreateTableTest extends TestCase
 		$this->createTable->sql();
 	}
 
-	public function testTemporary()
+	public function testTemporary() : void
 	{
 		$this->assertSame(
 			"CREATE TEMPORARY TABLE `t1` (\n  `c1` int NOT NULL\n)",
@@ -106,7 +106,7 @@ class CreateTableTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->dropDummyData();
 		$statement = $this->createTable->table('t1')

@@ -11,7 +11,7 @@ class ColumnTest extends TestCase
 		$this->column = new ColumnMock(static::$database);
 	}
 
-	public function testLength()
+	public function testLength() : void
 	{
 		$column = new ColumnMock(static::$database, 25);
 		$this->assertSame(
@@ -25,7 +25,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testEmptyType()
+	public function testEmptyType() : void
 	{
 		$this->column->type = '';
 		$this->expectException(\LogicException::class);
@@ -33,7 +33,7 @@ class ColumnTest extends TestCase
 		$this->column->sql();
 	}
 
-	public function testType()
+	public function testType() : void
 	{
 		$this->assertSame(
 			' mock NOT NULL',
@@ -41,7 +41,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testNull()
+	public function testNull() : void
 	{
 		$this->assertSame(
 			' mock NULL',
@@ -53,7 +53,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testDefault()
+	public function testDefault() : void
 	{
 		$this->assertSame(
 			" mock NOT NULL DEFAULT 'abc'",
@@ -67,7 +67,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testComment()
+	public function testComment() : void
 	{
 		$this->assertSame(
 			" mock NOT NULL COMMENT 'abc'",
@@ -75,7 +75,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testPrimaryKey()
+	public function testPrimaryKey() : void
 	{
 		$this->assertSame(
 			' mock NOT NULL PRIMARY KEY',
@@ -83,7 +83,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testUniqueKey()
+	public function testUniqueKey() : void
 	{
 		$this->assertSame(
 			' mock NOT NULL UNIQUE KEY',
@@ -91,7 +91,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testFirst()
+	public function testFirst() : void
 	{
 		$this->assertSame(
 			' mock NOT NULL FIRST',
@@ -99,7 +99,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testAfter()
+	public function testAfter() : void
 	{
 		$this->assertSame(
 			' mock NOT NULL AFTER `c1`',
@@ -107,7 +107,7 @@ class ColumnTest extends TestCase
 		);
 	}
 
-	public function testFirstConflictsWithAfter()
+	public function testFirstConflictsWithAfter() : void
 	{
 		$this->column->first()->after('c1');
 		$this->expectException(\LogicException::class);
@@ -117,7 +117,7 @@ class ColumnTest extends TestCase
 		$this->column->sql();
 	}
 
-	public function testFull()
+	public function testFull() : void
 	{
 		$column = new ColumnMock(static::$database, 10);
 		$column->primaryKey()->null()->default(null)->comment('abc')->after('c1');

@@ -12,14 +12,14 @@ class CreateSchemaTest extends TestCase
 		$this->createSchema = new CreateSchema(static::$database);
 	}
 
-	public function testEmptySchema()
+	public function testEmptySchema() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('SCHEMA name must be set');
 		$this->createSchema->sql();
 	}
 
-	public function testSchema()
+	public function testSchema() : void
 	{
 		$this->assertSame(
 			"CREATE SCHEMA `app`\n",
@@ -27,7 +27,7 @@ class CreateSchemaTest extends TestCase
 		);
 	}
 
-	public function testOrReplace()
+	public function testOrReplace() : void
 	{
 		$this->assertSame(
 			"CREATE OR REPLACE SCHEMA `app`\n",
@@ -35,7 +35,7 @@ class CreateSchemaTest extends TestCase
 		);
 	}
 
-	public function testIfNotExists()
+	public function testIfNotExists() : void
 	{
 		$this->assertSame(
 			"CREATE SCHEMA IF NOT EXISTS `app`\n",
@@ -43,14 +43,14 @@ class CreateSchemaTest extends TestCase
 		);
 	}
 
-	public function testOrReplaceWithIfNotExists()
+	public function testOrReplaceWithIfNotExists() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Clauses OR REPLACE and IF NOT EXISTS can not be used together');
 		$this->createSchema->orReplace()->ifNotExists()->schema('app')->sql();
 	}
 
-	public function testCharset()
+	public function testCharset() : void
 	{
 		$this->assertSame(
 			"CREATE SCHEMA `app`\n CHARACTER SET = 'utf8'\n",
@@ -58,7 +58,7 @@ class CreateSchemaTest extends TestCase
 		);
 	}
 
-	public function testCollate()
+	public function testCollate() : void
 	{
 		$this->assertSame(
 			"CREATE SCHEMA `app`\n COLLATE = 'utf8_general_ci'\n",
@@ -66,7 +66,7 @@ class CreateSchemaTest extends TestCase
 		);
 	}
 
-	public function testFullSql()
+	public function testFullSql() : void
 	{
 		$this->assertSame(
 			"CREATE SCHEMA IF NOT EXISTS `app`\n CHARACTER SET = 'utf8'\n COLLATE = 'utf8_general_ci'\n",
@@ -78,7 +78,7 @@ class CreateSchemaTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		static::$database->dropSchema('app')->ifExists()->run();
 		$this->assertSame(

@@ -19,7 +19,7 @@ class ResultTest extends TestCase
 		return $result;
 	}
 
-	public function testNumRows()
+	public function testNumRows() : void
 	{
 		$this->assertSame(
 			5,
@@ -35,12 +35,12 @@ class ResultTest extends TestCase
 		);
 	}
 
-	public function testNumRowsFree()
+	public function testNumRowsFree() : void
 	{
 		$this->expectFreeResult()->numRows();
 	}
 
-	public function testMoveCursor()
+	public function testMoveCursor() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertSame(1, $result->fetch()->c1);
@@ -54,12 +54,12 @@ class ResultTest extends TestCase
 		$result->moveCursor(5);
 	}
 
-	public function testMoveCursorFree()
+	public function testMoveCursorFree() : void
 	{
 		$this->expectFreeResult()->moveCursor(0);
 	}
 
-	public function testMoveCursorLessThanZero()
+	public function testMoveCursorLessThanZero() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->expectException(\OutOfRangeException::class);
@@ -67,7 +67,7 @@ class ResultTest extends TestCase
 		$result->moveCursor(-1);
 	}
 
-	public function testUnbufferMoveCursor()
+	public function testUnbufferMoveCursor() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`', false);
 		$result->fetch();
@@ -80,31 +80,31 @@ class ResultTest extends TestCase
 		$result->moveCursor(0);
 	}
 
-	public function testFetchRow()
+	public function testFetchRow() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertSame(1, $result->fetchRow(0)->c1);
 		$this->assertSame(4, $result->fetchRow(3)->c1);
 	}
 
-	public function testFetchRowFree()
+	public function testFetchRowFree() : void
 	{
 		$this->expectFreeResult()->fetchRow(0);
 	}
 
-	public function testFetchArrayRow()
+	public function testFetchArrayRow() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertSame(1, $result->fetchArrayRow(0)['c1']);
 		$this->assertSame(4, $result->fetchArrayRow(3)['c1']);
 	}
 
-	public function testFetchArrayRowFree()
+	public function testFetchArrayRowFree() : void
 	{
 		$this->expectFreeResult()->fetchArrayRow(0);
 	}
 
-	public function testFetchClass()
+	public function testFetchClass() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$result->setFetchClass(ResultEntity::class, 'a', 'b');
@@ -117,7 +117,7 @@ class ResultTest extends TestCase
 		$this->assertInstanceOf(ResultEntity::class, $rows[1]);
 	}
 
-	public function testFetch()
+	public function testFetch() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertSame(1, $result->fetch()->c1);
@@ -128,12 +128,12 @@ class ResultTest extends TestCase
 		$this->assertNull($result->fetch());
 	}
 
-	public function testFetchFree()
+	public function testFetchFree() : void
 	{
 		$this->expectFreeResult()->fetch();
 	}
 
-	public function testFetchAll()
+	public function testFetchAll() : void
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchAll();
 		$this->assertCount(5, $all);
@@ -142,12 +142,12 @@ class ResultTest extends TestCase
 		$this->assertSame('c', $all[2]->c2);
 	}
 
-	public function testFetchAllFree()
+	public function testFetchAllFree() : void
 	{
 		$this->expectFreeResult()->fetchAll();
 	}
 
-	public function testFetchAllRest()
+	public function testFetchAllRest() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$result->fetch();
@@ -159,7 +159,7 @@ class ResultTest extends TestCase
 		$this->assertSame('e', $all[2]->c2);
 	}
 
-	public function testFetchArray()
+	public function testFetchArray() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertSame(1, $result->fetchArray()['c1']);
@@ -170,12 +170,12 @@ class ResultTest extends TestCase
 		$this->assertNull($result->fetchArray());
 	}
 
-	public function testFetchArrayFree()
+	public function testFetchArrayFree() : void
 	{
 		$this->expectFreeResult()->fetchArray();
 	}
 
-	public function testFetchArrayAll()
+	public function testFetchArrayAll() : void
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchArrayAll();
 		$this->assertCount(5, $all);
@@ -184,12 +184,12 @@ class ResultTest extends TestCase
 		$this->assertSame('c', $all[2]['c2']);
 	}
 
-	public function testFetchArrayAllFree()
+	public function testFetchArrayAllFree() : void
 	{
 		$this->expectFreeResult()->fetchArrayAll();
 	}
 
-	public function testFetchArrayAllRest()
+	public function testFetchArrayAllRest() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$result->fetchArray();
@@ -201,7 +201,7 @@ class ResultTest extends TestCase
 		$this->assertSame('e', $rest[2]['c2']);
 	}
 
-	public function testFetchFields()
+	public function testFetchFields() : void
 	{
 		$fields = static::$database->query('SELECT * FROM `t1`')->fetchFields();
 		$this->assertSame('c1', $fields[0]->name);
@@ -221,12 +221,12 @@ class ResultTest extends TestCase
 		$fields[1]->unknown;
 	}
 
-	public function testFetchFieldsFree()
+	public function testFetchFieldsFree() : void
 	{
 		$this->expectFreeResult()->fetchFields();
 	}
 
-	public function testBuffer()
+	public function testBuffer() : void
 	{
 		$this->assertTrue(
 			static::$database->query('SELECT * FROM `t1`')->isBuffered()

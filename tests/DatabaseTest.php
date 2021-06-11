@@ -20,7 +20,7 @@ use Framework\Log\Logger;
 
 class DatabaseTest extends TestCase
 {
-	public function testConnection()
+	public function testConnection() : void
 	{
 		$database = new Database(
 			\getenv('DB_USERNAME'),
@@ -32,7 +32,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionWithArray()
+	public function testConnectionWithArray() : void
 	{
 		$database = new Database([
 			'username' => \getenv('DB_USERNAME'),
@@ -44,7 +44,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionFail()
+	public function testConnectionFail() : void
 	{
 		$this->expectException(\mysqli_sql_exception::class);
 		new Database([
@@ -56,7 +56,7 @@ class DatabaseTest extends TestCase
 		]);
 	}
 
-	public function testConnectionFailWithLogger()
+	public function testConnectionFailWithLogger() : void
 	{
 		$directory = '/tmp/logs';
 		if ( ! \is_dir($directory)) {
@@ -93,7 +93,7 @@ class DatabaseTest extends TestCase
 		}
 	}
 
-	public function testConnectionWithSSL()
+	public function testConnectionWithSSL() : void
 	{
 		if (\getenv('DB_HOST') === 'mariadb') {
 			$this->expectException(\mysqli_sql_exception::class);
@@ -113,7 +113,7 @@ class DatabaseTest extends TestCase
 		$this->cipherStatus($database);
 	}
 
-	protected function cipherStatus(Database $database)
+	protected function cipherStatus(Database $database) : void
 	{
 		$status = $database->query("SHOW STATUS LIKE 'ssl_cipher'")->fetchArray();
 		$this->assertSame([
@@ -122,7 +122,7 @@ class DatabaseTest extends TestCase
 		], $status);
 	}
 
-	public function testConnectionWithSSLNotVerified()
+	public function testConnectionWithSSLNotVerified() : void
 	{
 		if (\getenv('DB_HOST') === 'mariadb') {
 			$this->expectException(\mysqli_sql_exception::class);
@@ -143,7 +143,7 @@ class DatabaseTest extends TestCase
 		$this->cipherStatus($database);
 	}
 
-	public function testConnectionWithFailover()
+	public function testConnectionWithFailover() : void
 	{
 		$database = new Database([
 			'username' => 'error-1',
@@ -165,7 +165,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionFailWithfailover()
+	public function testConnectionFailWithfailover() : void
 	{
 		$this->expectException(\mysqli_sql_exception::class);
 		new Database([
@@ -186,7 +186,7 @@ class DatabaseTest extends TestCase
 		]);
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->createDummyData();
 		$config = [
@@ -203,7 +203,7 @@ class DatabaseTest extends TestCase
 		$this->assertSame('1', $database->query('SELECT `c1` FROM `t1` LIMIT 1')->fetch()->c1);
 	}
 
-	public function testProtectIdentifier()
+	public function testProtectIdentifier() : void
 	{
 		$this->assertSame('*', static::$database->protectIdentifier('*'));
 		$this->assertSame('`foo`', static::$database->protectIdentifier('foo'));
@@ -215,7 +215,7 @@ class DatabaseTest extends TestCase
 		$this->assertSame('`db`.`table`.*', static::$database->protectIdentifier('db.table.*'));
 	}
 
-	public function testQuote()
+	public function testQuote() : void
 	{
 		$this->assertSame(0, static::$database->quote(0));
 		$this->assertSame(1, static::$database->quote(1));
@@ -236,7 +236,7 @@ class DatabaseTest extends TestCase
 		static::$database->quote([]);
 	}
 
-	public function testDefinitionInstances()
+	public function testDefinitionInstances() : void
 	{
 		$this->assertInstanceOf(CreateSchema::class, static::$database->createSchema());
 		$this->assertInstanceOf(DropSchema::class, static::$database->dropSchema());
@@ -246,7 +246,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable());
 	}
 
-	public function testDefinitionInstancesWithParams()
+	public function testDefinitionInstancesWithParams() : void
 	{
 		$this->assertInstanceOf(CreateSchema::class, static::$database->createSchema('foo'));
 		$this->assertInstanceOf(DropSchema::class, static::$database->dropSchema('foo'));
@@ -256,7 +256,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable('foo'));
 	}
 
-	public function testManipulationInstances()
+	public function testManipulationInstances() : void
 	{
 		$this->assertInstanceOf(Delete::class, static::$database->delete());
 		$this->assertInstanceOf(Insert::class, static::$database->insert());
@@ -267,7 +267,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(With::class, static::$database->with());
 	}
 
-	public function testManipulationInstancesWithParams()
+	public function testManipulationInstancesWithParams() : void
 	{
 		$this->assertInstanceOf(Delete::class, static::$database->delete('foo'));
 		$this->assertInstanceOf(Insert::class, static::$database->insert('foo'));
@@ -278,7 +278,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(With::class, static::$database->with());
 	}
 
-	public function testExec()
+	public function testExec() : void
 	{
 		$this->createDummyData();
 		$this->assertSame(1, static::$database->exec(
@@ -290,13 +290,13 @@ class DatabaseTest extends TestCase
 		$this->assertSame(9, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
-	public function testQuery()
+	public function testQuery() : void
 	{
 		$this->createDummyData();
 		$this->assertInstanceOf(Result::class, static::$database->query('SELECT * FROM `t1`'));
 	}
 
-	public function testQueryNoResult()
+	public function testQueryNoResult() : void
 	{
 		$this->createDummyData();
 		$this->expectException(\InvalidArgumentException::class);
@@ -306,7 +306,7 @@ class DatabaseTest extends TestCase
 		static::$database->query('INSERT INTO `t1` SET `c2` = "a"');
 	}
 
-	public function testPrepare()
+	public function testPrepare() : void
 	{
 		$this->assertInstanceOf(
 			PreparedStatement::class,
@@ -314,7 +314,7 @@ class DatabaseTest extends TestCase
 		);
 	}
 
-	public function testInsertId()
+	public function testInsertId() : void
 	{
 		$this->createDummyData();
 		$this->assertSame(1, static::$database->insertId());
@@ -332,7 +332,7 @@ class DatabaseTest extends TestCase
 		$this->assertSame(10, static::$database->insertId());
 	}
 
-	public function testTransaction()
+	public function testTransaction() : void
 	{
 		$this->createDummyData();
 		static::$database->transaction(static function (Database $db) {
@@ -344,7 +344,7 @@ class DatabaseTest extends TestCase
 		);
 	}
 
-	public function testTransactionInTransaction()
+	public function testTransactionInTransaction() : void
 	{
 		$this->createDummyData();
 		$this->expectException(\LogicException::class);
@@ -356,7 +356,7 @@ class DatabaseTest extends TestCase
 		});
 	}
 
-	public function testTransactionRollback()
+	public function testTransactionRollback() : void
 	{
 		$this->createDummyData();
 		$this->assertSame(5, static::$database->exec('SELECT * FROM `t1`'));
@@ -379,7 +379,7 @@ class DatabaseTest extends TestCase
 		$this->assertSame(7, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
-	public function testUse()
+	public function testUse() : void
 	{
 		static::$database->use(\getenv('DB_SCHEMA'));
 		$this->expectException(\mysqli_sql_exception::class);
@@ -390,7 +390,7 @@ class DatabaseTest extends TestCase
 	/**
 	 * @runInSeparateProcess
 	 */
-	public function testErrors()
+	public function testErrors() : void
 	{
 		$this->assertSame([], static::$database->errors());
 		$this->assertNull(static::$database->error());
@@ -414,12 +414,12 @@ class DatabaseTest extends TestCase
 		$this->assertSame("Unknown database 'Bar'", static::$database->error());
 	}
 
-	public function testWarnings()
+	public function testWarnings() : void
 	{
 		$this->assertSame(0, static::$database->warnings());
 	}
 
-	public function testLastQuery()
+	public function testLastQuery() : void
 	{
 		$sql = 'SELECT COUNT(*) FROM t1';
 		static::$database->query($sql);

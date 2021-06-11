@@ -12,7 +12,7 @@ class HavingTest extends TestCase
 		$this->statement = new HavingMock(static::$database);
 	}
 
-	public function testHaving()
+	public function testHaving() : void
 	{
 		$this->assertNull($this->statement->renderHaving());
 		$this->statement->having('id', '=', 10);
@@ -38,7 +38,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testEqual()
+	public function testEqual() : void
 	{
 		$this->statement->havingEqual('email', 'user@mail.com');
 		$this->assertSame(" HAVING `email` = 'user@mail.com'", $this->statement->renderHaving());
@@ -58,7 +58,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testNotEqual()
+	public function testNotEqual() : void
 	{
 		$this->statement->havingNotEqual('email', 'user@mail.com');
 		$this->assertSame(" HAVING `email` != 'user@mail.com'", $this->statement->renderHaving());
@@ -78,7 +78,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testNullSafeEqual()
+	public function testNullSafeEqual() : void
 	{
 		$this->statement->havingNullSafeEqual('email', 'user@mail.com');
 		$this->assertSame(
@@ -101,7 +101,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testLessThan()
+	public function testLessThan() : void
 	{
 		$this->statement->havingLessThan('count', 5);
 		$this->assertSame(' HAVING `count` < 5', $this->statement->renderHaving());
@@ -121,7 +121,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testLessThanOrEqual()
+	public function testLessThanOrEqual() : void
 	{
 		$this->statement->havingLessThanOrEqual('count', 5);
 		$this->assertSame(' HAVING `count` <= 5', $this->statement->renderHaving());
@@ -141,7 +141,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testGreaterThan()
+	public function testGreaterThan() : void
 	{
 		$this->statement->havingGreaterThan('count', 5);
 		$this->assertSame(' HAVING `count` > 5', $this->statement->renderHaving());
@@ -161,7 +161,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testGreaterThanOrEqual()
+	public function testGreaterThanOrEqual() : void
 	{
 		$this->statement->havingGreaterThanOrEqual('count', 5);
 		$this->assertSame(' HAVING `count` >= 5', $this->statement->renderHaving());
@@ -181,7 +181,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testLike()
+	public function testLike() : void
 	{
 		$this->statement->havingLike('email', '%@mail.com');
 		$this->assertSame(" HAVING `email` LIKE '%@mail.com'", $this->statement->renderHaving());
@@ -201,7 +201,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testNotLike()
+	public function testNotLike() : void
 	{
 		$this->statement->havingNotLike('email', '%@mail.com');
 		$this->assertSame(
@@ -224,7 +224,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testIn()
+	public function testIn() : void
 	{
 		$this->statement->havingIn('id', 1, 2, 8);
 		$this->assertSame(' HAVING `id` IN (1, 2, 8)', $this->statement->renderHaving());
@@ -244,7 +244,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testNotIn()
+	public function testNotIn() : void
 	{
 		$this->statement->havingNotIn('id', 1, 2, 8);
 		$this->assertSame(' HAVING `id` NOT IN (1, 2, 8)', $this->statement->renderHaving());
@@ -264,7 +264,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testBetween()
+	public function testBetween() : void
 	{
 		$this->statement->havingBetween('id', 1, 10);
 		$this->assertSame(' HAVING `id` BETWEEN 1 AND 10', $this->statement->renderHaving());
@@ -286,7 +286,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testNotBetween()
+	public function testNotBetween() : void
 	{
 		$this->statement->havingNotBetween('id', 1, 10);
 		$this->assertSame(' HAVING `id` NOT BETWEEN 1 AND 10', $this->statement->renderHaving());
@@ -308,7 +308,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testIsNull()
+	public function testIsNull() : void
 	{
 		$this->statement->havingIsNull('email');
 		$this->assertSame(' HAVING `email` IS NULL', $this->statement->renderHaving());
@@ -326,7 +326,7 @@ class HavingTest extends TestCase
 		);
 	}
 
-	public function testIsNotNull()
+	public function testIsNotNull() : void
 	{
 		$this->statement->havingIsNotNull('email');
 		$this->assertSame(' HAVING `email` IS NOT NULL', $this->statement->renderHaving());

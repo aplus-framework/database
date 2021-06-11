@@ -13,7 +13,7 @@ class AlterTableTest extends TestCase
 		$this->alterTable = new AlterTable(static::$database);
 	}
 
-	protected function prepare()
+	protected function prepare() : AlterTable
 	{
 		return $this->alterTable->table('t1')
 			->add(static function (TableDefinition $definition) {
@@ -21,14 +21,14 @@ class AlterTableTest extends TestCase
 			});
 	}
 
-	public function testEmptyTable()
+	public function testEmptyTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('TABLE name must be set');
 		$this->alterTable->sql();
 	}
 
-	public function testAdd()
+	public function testAdd() : void
 	{
 		$sql = $this->alterTable->table('t1')
 			->add(static function (TableDefinition $definition) {
@@ -42,7 +42,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testChange()
+	public function testChange() : void
 	{
 		$sql = $this->alterTable->table('t1')
 			->change(static function (TableDefinition $definition) {
@@ -54,7 +54,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testModify()
+	public function testModify() : void
 	{
 		$sql = $this->alterTable->table('t1')
 			->modify(static function (TableDefinition $definition) {
@@ -66,7 +66,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testWait()
+	public function testWait() : void
 	{
 		$this->assertSame(
 			"ALTER TABLE `t1`\n WAIT 10\n ADD COLUMN `c1` int NOT NULL",
@@ -74,14 +74,14 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testInvalidWait()
+	public function testInvalidWait() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Invalid WAIT value: -1');
 		$this->prepare()->wait(-1)->sql();
 	}
 
-	public function testOnline()
+	public function testOnline() : void
 	{
 		$this->assertSame(
 			"ALTER ONLINE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
@@ -89,7 +89,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testIgnore()
+	public function testIgnore() : void
 	{
 		$this->assertSame(
 			"ALTER IGNORE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
@@ -97,7 +97,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$statement = $this->alterTable->table('t1')

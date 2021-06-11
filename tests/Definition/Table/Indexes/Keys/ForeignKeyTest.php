@@ -12,14 +12,14 @@ class ForeignKeyTest extends TestCase
 		$this->index = new ForeignKey(static::$database, null, 'user_id');
 	}
 
-	public function testEmptyReferences()
+	public function testEmptyReferences() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('REFERENCES clause was not set');
 		$this->index->sql();
 	}
 
-	public function testReferences()
+	public function testReferences() : void
 	{
 		$this->index->references('users', 'id');
 		$this->assertSame(
@@ -28,7 +28,7 @@ class ForeignKeyTest extends TestCase
 		);
 	}
 
-	public function testOnDelete()
+	public function testOnDelete() : void
 	{
 		$this->index->references('users', 'id')->onDelete('restrict');
 		$this->assertSame(
@@ -37,7 +37,7 @@ class ForeignKeyTest extends TestCase
 		);
 	}
 
-	public function testOnUpdate()
+	public function testOnUpdate() : void
 	{
 		$this->index->references('users', 'id')->onUpdate('cascade');
 		$this->assertSame(
@@ -46,7 +46,7 @@ class ForeignKeyTest extends TestCase
 		);
 	}
 
-	public function testInvalidReferenceOption()
+	public function testInvalidReferenceOption() : void
 	{
 		$this->index->references('users', 'id')->onUpdate('foo');
 		$this->expectException(\InvalidArgumentException::class);

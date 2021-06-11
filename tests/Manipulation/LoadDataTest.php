@@ -12,7 +12,7 @@ class LoadDataTest extends TestCase
 		$this->loadData = new LoadData(static::$database);
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->assertSame(
 			"LOAD DATA\nCONCURRENT\n INFILE '/tmp/foo'\n INTO TABLE `Users`\n",
@@ -23,14 +23,14 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid option: foo');
 		$this->loadData->options('foo')->sql();
 	}
 
-	public function testInvalidIntersection()
+	public function testInvalidIntersection() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage(
@@ -42,7 +42,7 @@ class LoadDataTest extends TestCase
 		)->sql();
 	}
 
-	public function testCharset()
+	public function testCharset() : void
 	{
 		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n CHARACTER SET utf8\n",
@@ -53,7 +53,7 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testColumns()
+	public function testColumns() : void
 	{
 		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
@@ -67,7 +67,7 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testLines()
+	public function testLines() : void
 	{
 		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
@@ -80,21 +80,21 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testWithoutInfile()
+	public function testWithoutInfile() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('INFILE statement is required');
 		$this->loadData->intoTable('users')->sql();
 	}
 
-	public function testWithoutIntoTable()
+	public function testWithoutIntoTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Table is required');
 		$this->loadData->infile('/tmp/foo')->sql();
 	}
 
-	public function testIgnoreLines()
+	public function testIgnoreLines() : void
 	{
 		$this->assertSame(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n IGNORE 25 LINES\n",
@@ -105,7 +105,7 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		static::$database->exec('DROP TABLE IF EXISTS `Users`');
 		static::$database->exec(

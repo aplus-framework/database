@@ -4,7 +4,7 @@ use Framework\Database\Result;
 
 class PreparedStatementTest extends TestCase
 {
-	public function testExec()
+	public function testExec() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('INSERT INTO `t1` SET `c2` = "f"');
@@ -15,7 +15,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertSame(2, $prepared->exec());
 	}
 
-	public function testExecWithBinds()
+	public function testExecWithBinds() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('INSERT INTO `t1` SET `c2` = ?');
@@ -30,7 +30,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertSame(5, $prepared->exec('a', 1, false, true, null));
 	}
 
-	public function testExecResult()
+	public function testExecResult() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1`');
@@ -41,7 +41,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertSame(-1, $prepared->exec(4));
 	}
 
-	public function testQuery()
+	public function testQuery() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1`');
@@ -53,7 +53,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertSame('b', $result->fetch()->c2);
 	}
 
-	public function testQueryResultMoveCursor()
+	public function testQueryResultMoveCursor() : void
 	{
 		$this->createDummyData();
 		$result = static::$database->prepare('SELECT * FROM `t1`')->query();
@@ -63,7 +63,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertSame('a', $result->fetch()->c2);
 	}
 
-	public function todo_testQueryResultMoveCursorUnbuffered()
+	public function todo_testQueryResultMoveCursorUnbuffered() : void
 	{
 		$this->createDummyData();
 		$result = static::$database->prepare('SELECT * FROM `t1`', false)->query();
@@ -74,7 +74,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertTrue($result->moveCursor(0));
 	}
 
-	public function testQueryWithBinds()
+	public function testQueryWithBinds() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?');
@@ -87,7 +87,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertSame(5, $prepared->query('e')->fetch()->c1);
 	}
 
-	public function testBindParams()
+	public function testBindParams() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?');
@@ -100,7 +100,7 @@ class PreparedStatementTest extends TestCase
 		$prepared->query([]);
 	}
 
-	public function testSendBlob()
+	public function testSendBlob() : void
 	{
 		$this->createDummyData();
 		$this->assertSame(
