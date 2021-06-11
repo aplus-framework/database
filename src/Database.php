@@ -34,6 +34,8 @@ class Database
 	 * Custom configs merged with the Base Connection configurations.
 	 *
 	 * @see makeConfig
+	 *
+	 * @var array<string,mixed>
 	 */
 	protected array $config = [];
 	/**
@@ -326,7 +328,7 @@ class Database
 	 * Call a DROP TABLE statement.
 	 *
 	 * @param string|null $table
-	 * @param mixed       $tables
+	 * @param string      ...$tables
 	 *
 	 * @return DropTable
 	 */
@@ -487,7 +489,10 @@ class Database
 		$this->lastQuery = $statement;
 		$this->mysqli->real_query($statement);
 		if ($this->mysqli->field_count) {
-			$this->mysqli->store_result()->free();
+			$result = $this->mysqli->store_result();
+			if ($result) {
+				$result->free();
+			}
 		}
 		return $this->mysqli->affected_rows;
 	}
@@ -620,7 +625,7 @@ class Database
 			return "'{$value}'";
 		}
 		if ($type === 'integer' || $type === 'double') {
-			return $value;
+			return $value; // @phpstan-ignore-line
 		}
 		if ($type === 'boolean') {
 			return $value ? 'TRUE' : 'FALSE';

@@ -7,6 +7,11 @@ abstract class StringDataType extends Column
 	protected string $charset;
 	protected string $collation;
 
+	/**
+	 * @param string $charset
+	 *
+	 * @return $this
+	 */
 	public function charset(string $charset)
 	{
 		$this->charset = $charset;
@@ -21,6 +26,11 @@ abstract class StringDataType extends Column
 		return ' CHARACTER SET ' . $this->database->quote($this->charset);
 	}
 
+	/**
+	 * @param string $collation
+	 *
+	 * @return $this
+	 */
 	public function collate(string $collation)
 	{
 		$this->collation = $collation;

@@ -12,6 +12,9 @@ use LogicException;
  */
 class AlterTable extends Statement
 {
+	/**
+	 * @return $this
+	 */
 	public function online()
 	{
 		$this->sql['online'] = true;
@@ -26,6 +29,9 @@ class AlterTable extends Statement
 		return ' ONLINE';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function ignore()
 	{
 		$this->sql['ignore'] = true;
@@ -40,6 +46,11 @@ class AlterTable extends Statement
 		return ' IGNORE';
 	}
 
+	/**
+	 * @param string $tableName
+	 *
+	 * @return $this
+	 */
 	public function table(string $tableName)
 	{
 		$this->sql['table'] = $tableName;
@@ -54,6 +65,11 @@ class AlterTable extends Statement
 		throw new LogicException('TABLE name must be set');
 	}
 
+	/**
+	 * @param int $seconds
+	 *
+	 * @return $this
+	 */
 	public function wait(int $seconds)
 	{
 		$this->sql['wait'] = $seconds;
@@ -73,6 +89,11 @@ class AlterTable extends Statement
 		return " WAIT {$this->sql['wait']}";
 	}
 
+	/**
+	 * @param callable $definition
+	 *
+	 * @return $this
+	 */
 	public function add(callable $definition)
 	{
 		$this->sql['add'] = $definition;
@@ -89,6 +110,11 @@ class AlterTable extends Statement
 		return $definition->sql('ADD');
 	}
 
+	/**
+	 * @param callable $definition
+	 *
+	 * @return $this
+	 */
 	public function change(callable $definition)
 	{
 		$this->sql['change'] = $definition;
@@ -105,6 +131,11 @@ class AlterTable extends Statement
 		return $definition->sql('CHANGE');
 	}
 
+	/**
+	 * @param callable $definition
+	 *
+	 * @return $this
+	 */
 	public function modify(callable $definition)
 	{
 		$this->sql['modify'] = $definition;
@@ -121,12 +152,22 @@ class AlterTable extends Statement
 		return $definition->sql('MODIFY');
 	}
 
+	/**
+	 * @param callable $definition
+	 *
+	 * @return $this
+	 */
 	public function dropColumns(callable $definition)
 	{
 		$this->sql['drop_columns'] = $definition;
 		return $this;
 	}
 
+	/**
+	 * @param callable $definition
+	 *
+	 * @return $this
+	 */
 	public function drop(callable $definition)
 	{
 		$this->sql['drop'] = $definition;

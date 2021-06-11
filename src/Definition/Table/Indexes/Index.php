@@ -12,6 +12,9 @@ use LogicException;
 abstract class Index extends DefinitionPart
 {
 	protected Database $database;
+	/**
+	 * @var array<int,string>
+	 */
 	protected array $columns;
 	protected string $type = '';
 	protected ?string $name;

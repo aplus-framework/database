@@ -1,5 +1,7 @@
 <?php namespace Framework\Database\Manipulation\Traits;
 
+use Closure;
+
 /**
  * Trait Set.
  */
@@ -8,7 +10,7 @@ trait Set
 	/**
 	 * Sets the SET clause.
 	 *
-	 * @param array $columns Array of columns => values
+	 * @param array<string,Closure|float|int|string|null> $columns Array of columns => values
 	 *
 	 * @return $this
 	 */

@@ -4,6 +4,11 @@ trait Constraint
 {
 	protected ?string $constraint = null;
 
+	/**
+	 * @param string $name
+	 *
+	 * @return $this
+	 */
 	public function constraint(string $name)
 	{
 		$this->constraint = $name;

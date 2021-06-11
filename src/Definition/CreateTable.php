@@ -37,6 +37,9 @@ class CreateTable extends Statement
 		return ' OR REPLACE';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function temporary()
 	{
 		$this->sql['temporary'] = true;
@@ -51,6 +54,9 @@ class CreateTable extends Statement
 		return ' TEMPORARY';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function ifNotExists()
 	{
 		$this->sql['if_not_exists'] = true;
@@ -70,6 +76,11 @@ class CreateTable extends Statement
 		return ' IF NOT EXISTS';
 	}
 
+	/**
+	 * @param string $tableName
+	 *
+	 * @return $this
+	 */
 	public function table(string $tableName)
 	{
 		$this->sql['table'] = $tableName;
@@ -84,6 +95,11 @@ class CreateTable extends Statement
 		throw new LogicException('TABLE name must be set');
 	}
 
+	/**
+	 * @param callable $definition
+	 *
+	 * @return $this
+	 */
 	public function definition(callable $definition)
 	{
 		$this->sql['definition'] = $definition;

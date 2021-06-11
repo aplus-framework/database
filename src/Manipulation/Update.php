@@ -51,8 +51,8 @@ class Update extends Statement
 	/**
 	 * Sets the table references.
 	 *
-	 * @param array|Closure|string $reference
-	 * @param array|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string $reference
+	 * @param array<string,Closure|string>|Closure|string ...$references
 	 *
 	 * @return $this
 	 */

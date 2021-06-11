@@ -567,6 +567,14 @@ trait Having
 		return $this->orHaving($column, 'IS NOT NULL');
 	}
 
+	/**
+	 * @param string                                         $glue
+	 * @param array<int,array|Closure|string>|Closure|string $column
+	 * @param string                                         $operator
+	 * @param array                                          $values
+	 *
+	 * @return $this
+	 */
 	private function addHaving(
 		string $glue,
 		array | Closure | string $column,

@@ -28,6 +28,9 @@ abstract class NumericDataType extends Column
 		return ' AUTO_INCREMENT';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function signed()
 	{
 		$this->signed = true;
@@ -42,6 +45,9 @@ abstract class NumericDataType extends Column
 		return ' signed';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function unsigned()
 	{
 		$this->unsigned = true;
@@ -56,6 +62,9 @@ abstract class NumericDataType extends Column
 		return ' unsigned';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function zerofill()
 	{
 		$this->zerofill = true;

@@ -48,6 +48,13 @@ trait OrderBy
 		return $this->addOrderBy($column, $columns, 'DESC');
 	}
 
+	/**
+	 * @param Closure|string            $column
+	 * @param array<int,Closure|string> $columns
+	 * @param string|null               $direction
+	 *
+	 * @return $this
+	 */
 	private function addOrderBy(Closure | string $column, array $columns, ?string $direction)
 	{
 		$columns = $this->mergeExpressions($column, $columns);

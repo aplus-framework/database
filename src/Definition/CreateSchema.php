@@ -10,6 +10,9 @@ use LogicException;
  */
 class CreateSchema extends Statement
 {
+	/**
+	 * @return $this
+	 */
 	public function orReplace()
 	{
 		$this->sql['or_replace'] = true;
@@ -24,6 +27,9 @@ class CreateSchema extends Statement
 		return ' OR REPLACE';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function ifNotExists()
 	{
 		$this->sql['if_not_exists'] = true;
@@ -43,6 +49,11 @@ class CreateSchema extends Statement
 		return ' IF NOT EXISTS';
 	}
 
+	/**
+	 * @param string $schemaName
+	 *
+	 * @return $this
+	 */
 	public function schema(string $schemaName)
 	{
 		$this->sql['schema'] = $schemaName;
@@ -57,6 +68,11 @@ class CreateSchema extends Statement
 		throw new LogicException('SCHEMA name must be set');
 	}
 
+	/**
+	 * @param string $charset
+	 *
+	 * @return $this
+	 */
 	public function charset(string $charset)
 	{
 		$this->sql['charset'] = $charset;
@@ -72,6 +88,11 @@ class CreateSchema extends Statement
 		return " CHARACTER SET = {$charset}";
 	}
 
+	/**
+	 * @param string $collation
+	 *
+	 * @return $this
+	 */
 	public function collate(string $collation)
 	{
 		$this->sql['collation'] = $collation;

@@ -11,11 +11,11 @@ trait Where
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array|Closure|string                $column    Closure for a subquery, a string with the
-	 *                                                       column name or and array with column names on
-	 *                                                       WHERE MATCH clause
-	 * @param string                              $operator
-	 * @param array|Closure|float|int|string|null ...$values
+	 * @param array<int,Closure|string>|Closure|string $column    Closure for a subquery, a string with the
+	 *                                                            column name or and array with column names on
+	 *                                                            WHERE MATCH clause
+	 * @param string                                   $operator
+	 * @param array|Closure|float|int|string|null      ...$values
 	 *
 	 * @return $this
 	 */
@@ -30,11 +30,11 @@ trait Where
 	/**
 	 * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array|Closure|string                $column    Closure for a subquery, a string with the
-	 *                                                       column name or and array with column
-	 *                                                       names on WHERE MATCH clause
-	 * @param string                              $operator
-	 * @param array|Closure|float|int|string|null ...$values
+	 * @param array<int,array|Closure|string>|Closure|string          $column    Closure for a subquery, a string with the
+	 *                                                                           column name or and array with column
+	 *                                                                           names on WHERE MATCH clause
+	 * @param string                                                  $operator
+	 * @param array<int,Closure|string>|Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
@@ -579,8 +579,8 @@ trait Where
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array|Closure|string $columns Columns to MATCH
-	 * @param array|Closure|string $against AGAINST expression
+	 * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string                           $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
@@ -596,8 +596,8 @@ trait Where
 	 * Appends a "OR MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array|Closure|string $columns Columns to MATCH
-	 * @param array|Closure|string $against AGAINST expression
+	 * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string                           $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
@@ -613,8 +613,8 @@ trait Where
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array|Closure|string $columns Columns to MATCH
-	 * @param array|Closure|string $against AGAINST expression
+	 * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string                           $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
@@ -632,8 +632,8 @@ trait Where
 	 * Appends a "OR MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
 	 * searching in the WHERE clause.
 	 *
-	 * @param array|Closure|string $columns Columns to MATCH
-	 * @param array|Closure|string $against AGAINST expression
+	 * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string                           $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
@@ -651,8 +651,8 @@ trait Where
 	 * Appends a "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
 	 * the WHERE clause.
 	 *
-	 * @param array|Closure|string $columns Columns to MATCH
-	 * @param array|Closure|string $against AGAINST expression
+	 * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
+	 * @param array|Closure|string                           $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
@@ -670,8 +670,8 @@ trait Where
 	 * Appends a "OR MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
 	 * the WHERE clause.
 	 *
-	 * @param array|Closure|string $columns Columns to MATCH
-	 * @param array|Closure|string $against AGAINST expression
+	 * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
+	 * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
 	 *
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
@@ -685,6 +685,15 @@ trait Where
 		return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
 
+	/**
+	 * @param string                                         $glue
+	 * @param array<int,array|Closure|string>|Closure|string $column
+	 * @param string                                         $operator
+	 * @param array                                          $values
+	 * @param string                                         $clause
+	 *
+	 * @return $this
+	 */
 	private function addWhere(
 		string $glue,
 		array | Closure | string $column,
@@ -789,6 +798,12 @@ trait Where
 		throw new InvalidArgumentException("Invalid comparison operator: {$operator}");
 	}
 
+	/**
+	 * @param string                                   $operator
+	 * @param array<int,Closure|float|int|string|null> $values
+	 *
+	 * @return string|null
+	 */
 	private function renderWhereValues(string $operator, array $values) : ?string
 	{
 		$values = \array_values($values);

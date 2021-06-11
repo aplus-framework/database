@@ -13,8 +13,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Sets the statement options.
 	 *
-	 * @param string $option  One of the OPT_* constants
-	 * @param mixed  $options Each option value must be one of the OPT_* constants
+	 * @param string $option     One of the OPT_* constants
+	 * @param string ...$options Each option value must be one of the OPT_* constants
 	 *
 	 * @return $this
 	 */
@@ -110,8 +110,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders a column part with an optional alias name, AS clause.
 	 *
-	 * @param array|Closure|string $column The column name, a subquery or an array where the index
-	 *                                     is the alias and the value is the column/subquery
+	 * @param array<string,Closure|string>|Closure|string $column The column name, a subquery or an array where the index
+	 *                                                            is the alias and the value is the column/subquery
 	 *
 	 * @return string
 	 */
@@ -133,9 +133,9 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @param Closure|float|int|string|null $value \Closure for subquery, other types to quote
 	 *
-	 * @return string
+	 * @return float|int|string
 	 */
-	protected function renderValue(Closure | float | int | string | null $value) : string
+	protected function renderValue(Closure | float | int | string | null $value) : float | int | string
 	{
 		return $value instanceof Closure
 			? $this->subquery($value)
@@ -153,8 +153,10 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @return string
 	 */
-	protected function renderAssignment(string $identifier, Closure | float | int | string | null $expression) : string
-	{
+	protected function renderAssignment(
+		string $identifier,
+		Closure | float | int | string | null $expression
+	) : string {
 		return $this->database->protectIdentifier($identifier)
 			. ' = ' . $this->renderValue($expression);
 	}

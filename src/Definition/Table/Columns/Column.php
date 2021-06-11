@@ -9,6 +9,9 @@ abstract class Column extends DefinitionPart
 {
 	protected Database $database;
 	protected string $type;
+	/**
+	 * @var array<int,bool|float|int|string|null>
+	 */
 	protected array $length;
 	protected bool $null = false;
 	protected bool $uniqueKey = false;
@@ -47,12 +50,18 @@ abstract class Column extends DefinitionPart
 		return "({$length})";
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function null()
 	{
 		$this->null = true;
 		return $this;
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function notNull()
 	{
 		$this->null = false;
@@ -86,6 +95,11 @@ abstract class Column extends DefinitionPart
 		return ' DEFAULT ' . $default;
 	}
 
+	/**
+	 * @param string $comment
+	 *
+	 * @return $this
+	 */
 	public function comment(string $comment)
 	{
 		$this->comment = $comment;
@@ -100,6 +114,9 @@ abstract class Column extends DefinitionPart
 		return ' COMMENT ' . $this->database->quote($this->comment);
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function primaryKey()
 	{
 		$this->primaryKey = true;
@@ -114,6 +131,9 @@ abstract class Column extends DefinitionPart
 		return ' PRIMARY KEY';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function uniqueKey()
 	{
 		$this->uniqueKey = true;
@@ -128,6 +148,9 @@ abstract class Column extends DefinitionPart
 		return ' UNIQUE KEY';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function first()
 	{
 		$this->first = true;
@@ -142,6 +165,11 @@ abstract class Column extends DefinitionPart
 		return ' FIRST';
 	}
 
+	/**
+	 * @param string $column
+	 *
+	 * @return $this
+	 */
 	public function after(string $column)
 	{
 		$this->after = $column;

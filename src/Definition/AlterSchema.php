@@ -10,6 +10,11 @@ use LogicException;
  */
 class AlterSchema extends Statement
 {
+	/**
+	 * @param string $schemaName
+	 *
+	 * @return $this
+	 */
 	public function schema(string $schemaName)
 	{
 		$this->sql['schema'] = $schemaName;
@@ -28,6 +33,11 @@ class AlterSchema extends Statement
 		return ' ' . $this->database->protectIdentifier($schema);
 	}
 
+	/**
+	 * @param string $charset
+	 *
+	 * @return $this
+	 */
 	public function charset(string $charset)
 	{
 		$this->sql['charset'] = $charset;
@@ -43,6 +53,11 @@ class AlterSchema extends Statement
 		return " CHARACTER SET = {$charset}";
 	}
 
+	/**
+	 * @param string $collation
+	 *
+	 * @return $this
+	 */
 	public function collate(string $collation)
 	{
 		$this->sql['collation'] = $collation;
@@ -58,6 +73,9 @@ class AlterSchema extends Statement
 		return " COLLATE = {$collation}";
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function upgrade()
 	{
 		$this->sql['upgrade'] = true;

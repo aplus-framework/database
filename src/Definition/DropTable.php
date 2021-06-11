@@ -11,6 +11,9 @@ use LogicException;
  */
 class DropTable extends Statement
 {
+	/**
+	 * @return $this
+	 */
 	public function temporary()
 	{
 		$this->sql['temporary'] = true;
@@ -25,6 +28,9 @@ class DropTable extends Statement
 		return ' TEMPORARY';
 	}
 
+	/**
+	 * @return $this
+	 */
 	public function ifExists()
 	{
 		$this->sql['if_exists'] = true;
@@ -39,6 +45,11 @@ class DropTable extends Statement
 		return ' IF EXISTS';
 	}
 
+	/**
+	 * @param string $comment
+	 *
+	 * @return $this
+	 */
 	public function commentToSave(string $comment)
 	{
 		$this->sql['comment'] = $comment;
@@ -54,6 +65,12 @@ class DropTable extends Statement
 		return " /* {$comment} */";
 	}
 
+	/**
+	 * @param string $table
+	 * @param string ...$tables
+	 *
+	 * @return $this
+	 */
 	public function table(string $table, string ...$tables)
 	{
 		$this->sql['tables'] = $tables ? \array_merge([$table], $tables) : [$table];
@@ -74,6 +91,11 @@ class DropTable extends Statement
 		return " {$tables}";
 	}
 
+	/**
+	 * @param int $seconds
+	 *
+	 * @return $this
+	 */
 	public function wait(int $seconds)
 	{
 		$this->sql['wait'] = $seconds;
