@@ -4,6 +4,7 @@ tests/ export-ignore
 .gitignore export-ignore
 .gitlab-ci.yml export-ignore
 .php-cs-fixer.dist.php export-ignore
+ci-test.sh export-ignore
 docker-compose.yml export-ignore
 phpdoc.dist.xml export-ignore
 phpmd.xml export-ignore
