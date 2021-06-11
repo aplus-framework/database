@@ -528,11 +528,15 @@ class Database
 	 *
 	 * @param string $statement
 	 *
-	 * @return PreparedStatement
+	 * @return false|PreparedStatement
 	 */
-	public function prepare(#[Language('SQL')] string $statement) : PreparedStatement
+	public function prepare(#[Language('SQL')] string $statement) : PreparedStatement | false
 	{
-		return new PreparedStatement($this->mysqli->prepare($statement));
+		$statement = $this->mysqli->prepare($statement);
+		if ($statement === false) {
+			return false;
+		}
+		return new PreparedStatement($statement);
 	}
 
 	/**
