@@ -1,6 +1,9 @@
 <?php namespace Framework\Database;
 
 use Framework\Database\Result\Field;
+use LogicException;
+use mysqli_result;
+use OutOfBoundsException;
 use OutOfRangeException;
 
 /**
@@ -8,13 +11,25 @@ use OutOfRangeException;
  */
 class Result
 {
-	protected \mysqli_result $result;
+	/**
+	 * @var mysqli_result<int,array|false|null>
+	 */
+	protected mysqli_result $result;
 	protected bool $buffered;
 	protected bool $free = false;
 	protected string $fetchClass = \stdClass::class;
+	/**
+	 * @var array<int,mixed>
+	 */
 	protected array $fetchConstructor = [];
 
-	public function __construct(\mysqli_result $result, bool $buffered)
+	/**
+	 * Result constructor.
+	 *
+	 * @param mysqli_result<int,array|false|null> $result
+	 * @param bool                                $buffered
+	 */
+	public function __construct(mysqli_result $result, bool $buffered)
 	{
 		$this->result = $result;
 		$this->buffered = $buffered;
@@ -45,7 +60,7 @@ class Result
 	protected function checkIsFree() : void
 	{
 		if ($this->isFree()) {
-			throw new \LogicException('Result is already free');
+			throw new LogicException('Result is already free');
 		}
 	}
 
@@ -60,8 +75,8 @@ class Result
 	 * @param int $offset The field offset. Must be between zero and the total
 	 *                    number of rows minus one
 	 *
-	 * @throws \LogicException       if is an unbuffered result
-	 * @throws \OutOfBoundsException for invalid cursor offset
+	 * @throws LogicException       if is an unbuffered result
+	 * @throws OutOfBoundsException for invalid cursor offset
 	 *
 	 * @return bool
 	 */
@@ -69,7 +84,7 @@ class Result
 	{
 		$this->checkIsFree();
 		if ( ! $this->isBuffered()) {
-			throw new \LogicException('Cursor cannot be moved on unbuffered results');
+			throw new LogicException('Cursor cannot be moved on unbuffered results');
 		}
 		if ($offset < 0 || ($offset !== 0 && $offset >= $this->result->num_rows)) {
 			throw new OutOfRangeException(
@@ -98,9 +113,9 @@ class Result
 	 * @param string|null $class
 	 * @param mixed       ...$constructor
 	 *
-	 * @return mixed|null
+	 * @return object|null
 	 */
-	public function fetch(string $class = null, mixed ...$constructor)
+	public function fetch(string $class = null, mixed ...$constructor) : object | null
 	{
 		$this->checkIsFree();
 		$class ??= $this->fetchClass;
@@ -117,7 +132,7 @@ class Result
 	 * @param string|null $class
 	 * @param mixed       ...$constructor
 	 *
-	 * @return array|mixed[]
+	 * @return array<int,object>
 	 */
 	public function fetchAll(string $class = null, mixed ...$constructor) : array
 	{
@@ -136,9 +151,9 @@ class Result
 	 * @param string|null $class
 	 * @param mixed       ...$constructor
 	 *
-	 * @return mixed|null
+	 * @return object|null
 	 */
-	public function fetchRow(int $offset, string $class = null, mixed ...$constructor)
+	public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object | null
 	{
 		$this->checkIsFree();
 		$this->moveCursor($offset);
@@ -148,7 +163,7 @@ class Result
 	/**
 	 * Fetches the current row as array and move the cursor to the next.
 	 *
-	 * @return array|mixed[]|null
+	 * @return array<string,int|string|null>|null
 	 */
 	public function fetchArray() : ?array
 	{
@@ -159,7 +174,7 @@ class Result
 	/**
 	 * Fetches all rows as arrays.
 	 *
-	 * @return array
+	 * @return array<int,array>
 	 */
 	public function fetchArrayAll() : array
 	{
@@ -172,7 +187,7 @@ class Result
 	 *
 	 * @param int $offset
 	 *
-	 * @return array
+	 * @return array<string,int|string|null>
 	 */
 	public function fetchArrayRow(int $offset) : array
 	{
@@ -195,9 +210,9 @@ class Result
 	/**
 	 * Returns an array of objects representing the fields in a result set.
 	 *
-	 * @return array|false|Field[] an array of objects which contains field
-	 *                             definition information or false if no field
-	 *                             information is available
+	 * @return array<int,Field>|false an array of objects which contains field
+	 *                                definition information or false if no field
+	 *                                information is available
 	 */
 	public function fetchFields() : array | false
 	{
