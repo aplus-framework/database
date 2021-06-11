@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/multilinestring/
  */
-class MultilinestringColumn extends Column
+final class MultilinestringColumn extends Column
 {
 	protected string $type = 'multilinestring';
 }

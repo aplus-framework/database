@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/point/
  */
-class PointColumn extends Column
+final class PointColumn extends Column
 {
 	protected string $type = 'point';
 }

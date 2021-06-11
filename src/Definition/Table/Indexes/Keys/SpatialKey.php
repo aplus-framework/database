@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Indexes\Index;
  *
  * @see https://mariadb.com/kb/en/library/spatial-index/
  */
-class SpatialKey extends Index
+final class SpatialKey extends Index
 {
 	protected string $type = 'SPATIAL KEY';
 }

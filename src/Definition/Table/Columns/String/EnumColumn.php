@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
  *
  * @see https://mariadb.com/kb/en/library/enum/
  */
-class EnumColumn extends StringDataType
+final class EnumColumn extends StringDataType
 {
 	use ListLength;
 	protected string $type = 'enum';

@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/binary/
  */
-class BinaryColumn extends Column
+final class BinaryColumn extends Column
 {
 	protected string $type = 'binary';
 	protected int $minLength = 0;

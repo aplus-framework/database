@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/json-data-type/
  */
-class JsonColumn extends StringDataType
+final class JsonColumn extends StringDataType
 {
 	protected string $type = 'json';
 }

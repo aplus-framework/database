@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/longtext/
  */
-class LongtextColumn extends StringDataType
+final class LongtextColumn extends StringDataType
 {
 	protected string $type = 'longtext';
 }

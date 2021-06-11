@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/geometrycollection/
  */
-class GeometryCollectionColumn extends Column
+final class GeometryCollectionColumn extends Column
 {
 	protected string $type = 'geometrycollection';
 }

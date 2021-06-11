@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/tinyblob/
  */
-class TinyblobColumn extends Column
+final class TinyblobColumn extends Column
 {
 	protected string $type = 'tinyblob';
 }

@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/mediumblob/
  */
-class MediumblobColumn extends Column
+final class MediumblobColumn extends Column
 {
 	protected string $type = 'mediumblob';
 }

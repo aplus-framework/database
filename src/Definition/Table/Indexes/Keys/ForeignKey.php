@@ -9,7 +9,7 @@ use LogicException;
  *
  * @see https://mariadb.com/kb/en/library/foreign-keys/
  */
-class ForeignKey extends Index
+final class ForeignKey extends Index
 {
 	use Traits\Constraint;
 	protected string $type = 'FOREIGN KEY';

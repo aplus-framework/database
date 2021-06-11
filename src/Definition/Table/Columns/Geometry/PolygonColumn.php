@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/polygon/
  */
-class PolygonColumn extends Column
+final class PolygonColumn extends Column
 {
 	protected string $type = 'polygon';
 }

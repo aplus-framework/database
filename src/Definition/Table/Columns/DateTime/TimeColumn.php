@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/time/
  */
-class TimeColumn extends Column
+final class TimeColumn extends Column
 {
 	protected string $type = 'time';
 }

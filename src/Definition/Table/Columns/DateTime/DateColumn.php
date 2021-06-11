@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/date/
  */
-class DateColumn extends Column
+final class DateColumn extends Column
 {
 	protected string $type = 'date';
 }

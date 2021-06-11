@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
  *
  * @see https://mariadb.com/kb/en/library/set-data-type/
  */
-class SetColumn extends StringDataType
+final class SetColumn extends StringDataType
 {
 	use ListLength;
 	protected string $type = 'set';

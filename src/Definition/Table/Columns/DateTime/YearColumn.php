@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/year-data-type/
  */
-class YearColumn extends Column
+final class YearColumn extends Column
 {
 	protected string $type = 'year';
 }

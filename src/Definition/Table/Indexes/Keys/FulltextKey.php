@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Indexes\Index;
  *
  * @see https://mariadb.com/kb/en/library/full-text-index-overview/
  */
-class FulltextKey extends Index
+final class FulltextKey extends Index
 {
 	protected string $type = 'FULLTEXT KEY';
 }

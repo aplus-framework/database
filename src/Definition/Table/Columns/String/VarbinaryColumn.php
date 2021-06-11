@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/varbinary/
  */
-class VarbinaryColumn extends Column
+final class VarbinaryColumn extends Column
 {
 	protected string $type = 'varbinary';
 	protected int $maxLength = 65535;

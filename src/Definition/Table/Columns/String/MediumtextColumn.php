@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/mediumtext/
  */
-class MediumtextColumn extends StringDataType
+final class MediumtextColumn extends StringDataType
 {
 	protected string $type = 'mediumtext';
 }

@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/text/
  */
-class TextColumn extends StringDataType
+final class TextColumn extends StringDataType
 {
 	protected string $type = 'text';
 	protected int $minLength = 0;

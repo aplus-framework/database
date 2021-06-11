@@ -2,7 +2,7 @@
 
 use Framework\Database\Definition\Table\Columns\Traits\DecimalLength;
 
-class FloatColumn extends NumericDataType
+final class FloatColumn extends NumericDataType
 {
 	use DecimalLength;
 	protected string $type = 'float';

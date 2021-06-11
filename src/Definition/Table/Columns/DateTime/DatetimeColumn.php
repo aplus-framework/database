@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/datetime/
  */
-class DatetimeColumn extends Column
+final class DatetimeColumn extends Column
 {
 	protected string $type = 'datetime';
 }

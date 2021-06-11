@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/varchar/
  */
-class VarcharColumn extends StringDataType
+final class VarcharColumn extends StringDataType
 {
 	protected string $type = 'varchar';
 	protected int $maxLength = 65535;

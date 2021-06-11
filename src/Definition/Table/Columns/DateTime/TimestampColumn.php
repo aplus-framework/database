@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/timestamp/
  */
-class TimestampColumn extends Column
+final class TimestampColumn extends Column
 {
 	protected string $type = 'timestamp';
 }

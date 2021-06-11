@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/boolean/
  */
-class BooleanColumn extends NumericDataType
+final class BooleanColumn extends NumericDataType
 {
 	protected string $type = 'boolean';
 }

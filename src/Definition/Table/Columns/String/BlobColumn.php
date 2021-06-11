@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/blob/
  */
-class BlobColumn extends Column
+final class BlobColumn extends Column
 {
 	protected string $type = 'blob';
 }

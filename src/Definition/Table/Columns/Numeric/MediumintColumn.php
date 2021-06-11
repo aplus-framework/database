@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/mediumint/
  */
-class MediumintColumn extends NumericDataType
+final class MediumintColumn extends NumericDataType
 {
 	protected string $type = 'mediumint';
 	protected int $maxLength = 127;

@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/multipoint/
  */
-class MultipointColumn extends Column
+final class MultipointColumn extends Column
 {
 	protected string $type = 'multipoint';
 }

@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/linestring/
  */
-class LinestringColumn extends Column
+final class LinestringColumn extends Column
 {
 	protected string $type = 'linestring';
 }

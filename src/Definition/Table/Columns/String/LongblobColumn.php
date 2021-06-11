@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/longblob/
  */
-class LongblobColumn extends Column
+final class LongblobColumn extends Column
 {
 	protected string $type = 'longblob';
 }

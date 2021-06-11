@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/multipolygon/
  */
-class MultipolygonColumn extends Column
+final class MultipolygonColumn extends Column
 {
 	protected string $type = 'multipolygon';
 }

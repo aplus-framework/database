@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  *
  * @see https://mariadb.com/kb/en/library/bit/
  */
-class BitColumn extends Column
+final class BitColumn extends Column
 {
 	protected string $type = 'bit';
 }

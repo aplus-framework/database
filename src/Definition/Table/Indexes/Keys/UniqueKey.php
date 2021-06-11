@@ -7,7 +7,7 @@ use Framework\Database\Definition\Table\Indexes\Index;
  *
  * @see https://mariadb.com/kb/en/library/getting-started-with-indexes/#unique-index
  */
-class UniqueKey extends Index
+final class UniqueKey extends Index
 {
 	use Traits\Constraint;
 	protected string $type = 'UNIQUE KEY';

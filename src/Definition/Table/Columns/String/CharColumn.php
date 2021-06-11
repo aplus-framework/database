@@ -5,7 +5,7 @@
  *
  * @see https://mariadb.com/kb/en/library/char/
  */
-class CharColumn extends StringDataType
+final class CharColumn extends StringDataType
 {
 	protected string $type = 'char';
 	protected int $minLength = 0;
