@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class ConstraintTest extends TestCase
+final class ConstraintTest extends TestCase
 {
 	public function testConstraint() : void
 	{

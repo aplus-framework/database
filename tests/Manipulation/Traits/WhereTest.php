@@ -3,7 +3,7 @@
 use Framework\Database\Database;
 use Tests\Database\TestCase;
 
-class WhereTest extends TestCase
+final class WhereTest extends TestCase
 {
 	protected WhereMock $statement;
 

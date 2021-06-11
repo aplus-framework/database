@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class DecimalLengthTest extends TestCase
+final class DecimalLengthTest extends TestCase
 {
 	public function testLength() : void
 	{

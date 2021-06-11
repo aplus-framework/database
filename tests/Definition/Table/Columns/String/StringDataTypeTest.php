@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class StringDataTypeTest extends TestCase
+final class StringDataTypeTest extends TestCase
 {
 	protected StringDataTypeMock $column;
 

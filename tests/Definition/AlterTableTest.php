@@ -4,7 +4,7 @@ use Framework\Database\Definition\AlterTable;
 use Framework\Database\Definition\Table\TableDefinition;
 use Tests\Database\TestCase;
 
-class AlterTableTest extends TestCase
+final class AlterTableTest extends TestCase
 {
 	protected AlterTable $alterTable;
 

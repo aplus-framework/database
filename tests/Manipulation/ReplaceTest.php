@@ -4,7 +4,7 @@ use Framework\Database\Manipulation\Replace;
 use Framework\Database\Manipulation\Select;
 use Tests\Database\TestCase;
 
-class ReplaceTest extends TestCase
+final class ReplaceTest extends TestCase
 {
 	protected Replace $replace;
 

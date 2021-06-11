@@ -3,7 +3,7 @@
 use Framework\Database\Database;
 use Tests\Database\TestCase;
 
-class StatementTest extends TestCase
+final class StatementTest extends TestCase
 {
 	protected StatementMock $statement;
 

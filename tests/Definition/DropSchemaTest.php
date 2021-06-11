@@ -3,7 +3,7 @@
 use Framework\Database\Definition\DropSchema;
 use Tests\Database\TestCase;
 
-class DropSchemaTest extends TestCase
+final class DropSchemaTest extends TestCase
 {
 	protected DropSchema $dropSchema;
 

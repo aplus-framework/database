@@ -3,7 +3,7 @@
 use Framework\Database\Definition\Table\Indexes\Keys\Key;
 use Tests\Database\TestCase;
 
-class KeyTest extends TestCase
+final class KeyTest extends TestCase
 {
 	public function testType() : void
 	{

@@ -18,7 +18,7 @@ use Framework\Database\PreparedStatement;
 use Framework\Database\Result;
 use Framework\Log\Logger;
 
-class DatabaseTest extends TestCase
+final class DatabaseTest extends TestCase
 {
 	public function testConnection() : void
 	{

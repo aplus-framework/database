@@ -9,7 +9,7 @@ use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
 use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
 use Tests\Database\TestCase;
 
-class IndexDefinitionTest extends TestCase
+final class IndexDefinitionTest extends TestCase
 {
 	protected IndexDefinition $definition;
 

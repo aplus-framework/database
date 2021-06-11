@@ -3,7 +3,7 @@
 use Framework\Database\Manipulation\LoadData;
 use Tests\Database\TestCase;
 
-class LoadDataTest extends TestCase
+final class LoadDataTest extends TestCase
 {
 	protected LoadData $loadData;
 

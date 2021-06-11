@@ -3,7 +3,7 @@
 use Framework\Database\Definition\AlterSchema;
 use Tests\Database\TestCase;
 
-class AlterSchemaTest extends TestCase
+final class AlterSchemaTest extends TestCase
 {
 	protected AlterSchema $alterSchema;
 

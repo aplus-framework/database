@@ -3,7 +3,7 @@
 use Framework\Database\Definition\Table\Indexes\Keys\ForeignKey;
 use Tests\Database\TestCase;
 
-class ForeignKeyTest extends TestCase
+final class ForeignKeyTest extends TestCase
 {
 	protected ForeignKey $index;
 

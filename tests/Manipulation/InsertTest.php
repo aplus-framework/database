@@ -4,7 +4,7 @@ use Framework\Database\Manipulation\Insert;
 use Framework\Database\Manipulation\Select;
 use Tests\Database\TestCase;
 
-class InsertTest extends TestCase
+final class InsertTest extends TestCase
 {
 	protected Insert $insert;
 

@@ -3,7 +3,7 @@
 use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
 use Tests\Database\TestCase;
 
-class SpatialKeyTest extends TestCase
+final class SpatialKeyTest extends TestCase
 {
 	public function testType() : void
 	{

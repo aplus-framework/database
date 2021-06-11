@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class OrderByTest extends TestCase
+final class OrderByTest extends TestCase
 {
 	protected OrderByMock $statement;
 
