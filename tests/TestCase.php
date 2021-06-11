@@ -42,20 +42,20 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 	{
 		$this->dropDummyData();
 		static::$database->exec(
-			<<<SQL
-			CREATE TABLE `t1` (
-			  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
-			  `c2` VARCHAR(255)
-			)
-		SQL
+			<<<'SQL'
+				CREATE TABLE `t1` (
+				  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
+				  `c2` VARCHAR(255)
+				)
+				SQL
 		);
 		static::$database->exec(
-			<<<SQL
-			CREATE TABLE `t2` (
-			  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
-			  `c2` VARCHAR(255)
-			)
-		SQL
+			<<<'SQL'
+				CREATE TABLE `t2` (
+				  `c1` INT(11) AUTO_INCREMENT PRIMARY KEY,
+				  `c2` VARCHAR(255)
+				)
+				SQL
 		);
 		static::$database->exec(
 			"INSERT INTO `t1` (`c2`) VALUES ('a'), ('b'), ('c'), ('d'), ('e')"

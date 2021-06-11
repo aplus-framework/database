@@ -109,13 +109,13 @@ final class LoadDataTest extends TestCase
 	{
 		static::$database->exec('DROP TABLE IF EXISTS `Users`');
 		static::$database->exec(
-			<<<SQL
-			CREATE TABLE `Users` (
-				`id` INT,
-				`name` VARCHAR(64),
-				`birthday` DATE
-			)
-			SQL
+			<<<'SQL'
+				CREATE TABLE `Users` (
+					`id` INT,
+					`name` VARCHAR(64),
+					`birthday` DATE
+				)
+				SQL
 		);
 		$inserted = $this->loadData
 			->options($this->loadData::OPT_LOCAL)
