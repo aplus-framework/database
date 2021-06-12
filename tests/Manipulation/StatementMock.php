@@ -53,7 +53,7 @@ class StatementMock extends Statement
 		return 'SQL';
 	}
 
-	public function run()
+	public function run() : void
 	{
 	}
 }
