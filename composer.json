@@ -25,7 +25,7 @@
 		"ext-xdebug": "*",
 		"ergebnis/composer-normalize": "^2.13",
 		"jetbrains/phpstorm-attributes": "^1.0",
-		"natanfelles/coding-standard": "^1.2",
+		"natanfelles/coding-standard": "^1.5",
 		"phpmd/phpmd": "^2.10",
 		"phpstan/phpstan": "^0.12",
 		"phpunit/phpunit": "^9.5"

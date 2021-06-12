@@ -16,7 +16,7 @@ final class CreateTableTest extends TestCase
 	protected function prepare() : CreateTable
 	{
 		return $this->createTable->table('t1')
-			->definition(static function (TableDefinition $definition) {
+			->definition(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int();
 			});
 	}
@@ -39,7 +39,7 @@ final class CreateTableTest extends TestCase
 	public function testColumns() : void
 	{
 		$sql = $this->createTable->table('t1')
-			->definition(static function (TableDefinition $definition) {
+			->definition(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int(11);
 				$definition->column('c2')->varchar(255);
 			});
@@ -52,7 +52,7 @@ final class CreateTableTest extends TestCase
 	public function testIndexes() : void
 	{
 		$sql = $this->createTable->table('t1')
-			->definition(static function (TableDefinition $definition) {
+			->definition(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int();
 				$definition->index()->primaryKey('c1');
 			});
@@ -110,7 +110,7 @@ final class CreateTableTest extends TestCase
 	{
 		$this->dropDummyData();
 		$statement = $this->createTable->table('t1')
-			->definition(static function (TableDefinition $definition) {
+			->definition(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int(11);
 			});
 		$this->assertSame(0, $statement->run());
