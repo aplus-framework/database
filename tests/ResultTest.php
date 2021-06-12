@@ -1,6 +1,6 @@
 <?php namespace Tests\Database;
 
-class ResultTest extends TestCase
+final class ResultTest extends TestCase
 {
 	protected function setUp() : void
 	{

@@ -3,7 +3,7 @@
 use Framework\Database\Definition\DropTable;
 use Tests\Database\TestCase;
 
-class DropTableTest extends TestCase
+final class DropTableTest extends TestCase
 {
 	protected DropTable $dropTable;
 

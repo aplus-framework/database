@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class IndexTest extends TestCase
+final class IndexTest extends TestCase
 {
 	protected IndexMock $index;
 

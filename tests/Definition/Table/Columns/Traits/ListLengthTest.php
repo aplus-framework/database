@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class ListLengthTest extends TestCase
+final class ListLengthTest extends TestCase
 {
 	public function testLength() : void
 	{

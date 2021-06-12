@@ -2,7 +2,7 @@
 
 use Framework\Database\Result;
 
-class PreparedStatementTest extends TestCase
+final class PreparedStatementTest extends TestCase
 {
 	public function testExec() : void
 	{

@@ -4,7 +4,7 @@ use Framework\Database\Manipulation\Select;
 use Framework\Database\Result;
 use Tests\Database\TestCase;
 
-class SelectTest extends TestCase
+final class SelectTest extends TestCase
 {
 	protected Select $select;
 

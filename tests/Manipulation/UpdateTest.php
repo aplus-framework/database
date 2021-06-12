@@ -3,7 +3,7 @@
 use Framework\Database\Manipulation\Update;
 use Tests\Database\TestCase;
 
-class UpdateTest extends TestCase
+final class UpdateTest extends TestCase
 {
 	protected Update $update;
 

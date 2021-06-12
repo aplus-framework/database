@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class ColumnTest extends TestCase
+final class ColumnTest extends TestCase
 {
 	protected ColumnMock $column;
 

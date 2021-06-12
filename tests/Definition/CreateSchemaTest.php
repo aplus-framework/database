@@ -3,7 +3,7 @@
 use Framework\Database\Definition\CreateSchema;
 use Tests\Database\TestCase;
 
-class CreateSchemaTest extends TestCase
+final class CreateSchemaTest extends TestCase
 {
 	protected CreateSchema $createSchema;
 

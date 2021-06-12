@@ -40,7 +40,7 @@ use Framework\Database\Definition\Table\Columns\String\VarbinaryColumn;
 use Framework\Database\Definition\Table\Columns\String\VarcharColumn;
 use Tests\Database\TestCase;
 
-class ColumnDefinitionTest extends TestCase
+final class ColumnDefinitionTest extends TestCase
 {
 	protected ColumnDefinition $definition;
 

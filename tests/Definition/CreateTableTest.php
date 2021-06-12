@@ -4,7 +4,7 @@ use Framework\Database\Definition\CreateTable;
 use Framework\Database\Definition\Table\TableDefinition;
 use Tests\Database\TestCase;
 
-class CreateTableTest extends TestCase
+final class CreateTableTest extends TestCase
 {
 	protected CreateTable $createTable;
 

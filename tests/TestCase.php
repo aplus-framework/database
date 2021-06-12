@@ -2,7 +2,7 @@
 
 use Framework\Database\Database;
 
-class TestCase extends \PHPUnit\Framework\TestCase
+abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
 	protected static ?Database $database = null;
 

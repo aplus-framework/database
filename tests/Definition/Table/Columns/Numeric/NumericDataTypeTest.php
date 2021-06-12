@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class NumericDataTypeTest extends TestCase
+final class NumericDataTypeTest extends TestCase
 {
 	protected NumericDataTypeMock $column;
 

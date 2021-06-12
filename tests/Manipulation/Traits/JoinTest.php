@@ -2,7 +2,7 @@
 
 use Tests\Database\TestCase;
 
-class JoinTest extends TestCase
+final class JoinTest extends TestCase
 {
 	protected JoinMock $statement;
 

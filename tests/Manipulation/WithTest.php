@@ -5,7 +5,7 @@ use Framework\Database\Manipulation\With;
 use Framework\Database\Result;
 use Tests\Database\TestCase;
 
-class WithTest extends TestCase
+final class WithTest extends TestCase
 {
 	protected With $with;
 

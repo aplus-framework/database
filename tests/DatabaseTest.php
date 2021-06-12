@@ -17,7 +17,7 @@ use Framework\Database\Manipulation\With;
 use Framework\Database\PreparedStatement;
 use Framework\Database\Result;
 
-class DatabaseTest extends TestCase
+final class DatabaseTest extends TestCase
 {
 	public function testConnection() : void
 	{

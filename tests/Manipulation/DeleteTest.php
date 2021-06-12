@@ -3,7 +3,7 @@
 use Framework\Database\Manipulation\Delete;
 use Tests\Database\TestCase;
 
-class DeleteTest extends TestCase
+final class DeleteTest extends TestCase
 {
 	protected Delete $delete;
 
