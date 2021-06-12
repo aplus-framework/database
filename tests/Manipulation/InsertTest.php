@@ -13,12 +13,12 @@ class InsertTest extends TestCase
 		$this->insert = new Insert(static::$database);
 	}
 
-	protected function prepare()
+	protected function prepare() : void
 	{
 		$this->insert->into('t1');
 	}
 
-	public function testIntoOnly()
+	public function testIntoOnly() : void
 	{
 		$this->insert->into('t1');
 		$this->expectException(\LogicException::class);
@@ -28,14 +28,14 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testRenderWithoutInto()
+	public function testRenderWithoutInto() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('INTO table must be set');
 		$this->insert->sql();
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->insert->into('t1')->set(['id' => 1]);
 		$this->insert->options($this->insert::OPT_DELAYED);
@@ -55,7 +55,7 @@ class InsertTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->prepare();
 		$this->insert->set(['id' => 1]);
@@ -65,7 +65,7 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testOptionsConflict()
+	public function testOptionsConflict() : void
 	{
 		$this->prepare();
 		$this->insert->options($this->insert::OPT_DELAYED, $this->insert::OPT_LOW_PRIORITY);
@@ -76,7 +76,7 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testValues()
+	public function testValues() : void
 	{
 		$this->prepare();
 		$this->insert->columns('id', 'name', 'email');
@@ -99,7 +99,7 @@ class InsertTest extends TestCase
 		);
 	}
 
-	public function testSet()
+	public function testSet() : void
 	{
 		$this->prepare();
 		$this->insert->set([
@@ -115,7 +115,7 @@ class InsertTest extends TestCase
 		);
 	}
 
-	public function testSetWithColumns()
+	public function testSetWithColumns() : void
 	{
 		$this->prepare();
 		$this->insert->columns('id');
@@ -125,7 +125,7 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testSetWithValues()
+	public function testSetWithValues() : void
 	{
 		$this->prepare();
 		$this->insert->values('id');
@@ -135,7 +135,7 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testSelect()
+	public function testSelect() : void
 	{
 		$this->prepare();
 		$this->insert->select(static function (Select $select) {
@@ -147,7 +147,7 @@ class InsertTest extends TestCase
 		);
 	}
 
-	public function testSelectWithValues()
+	public function testSelectWithValues() : void
 	{
 		$this->prepare();
 		$this->insert->values('id');
@@ -159,7 +159,7 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testSelectWithSet()
+	public function testSelectWithSet() : void
 	{
 		$this->prepare();
 		$this->insert->set(['id' => 1]);
@@ -171,7 +171,7 @@ class InsertTest extends TestCase
 		$this->insert->sql();
 	}
 
-	public function testOnDuplicateKeyUpdate()
+	public function testOnDuplicateKeyUpdate() : void
 	{
 		$this->prepare();
 		$this->insert->set(['id' => 1]);
@@ -188,7 +188,7 @@ class InsertTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$this->prepare();

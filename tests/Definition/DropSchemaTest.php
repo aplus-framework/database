@@ -12,14 +12,14 @@ class DropSchemaTest extends TestCase
 		$this->dropSchema = new DropSchema(static::$database);
 	}
 
-	public function testEmptySchema()
+	public function testEmptySchema() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('SCHEMA name must be set');
 		$this->dropSchema->sql();
 	}
 
-	public function testSchema()
+	public function testSchema() : void
 	{
 		$this->assertEquals(
 			"DROP SCHEMA `app`\n",
@@ -27,7 +27,7 @@ class DropSchemaTest extends TestCase
 		);
 	}
 
-	public function testIfExists()
+	public function testIfExists() : void
 	{
 		$this->assertEquals(
 			"DROP SCHEMA IF EXISTS `app`\n",
@@ -35,7 +35,7 @@ class DropSchemaTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		static::$database->createSchema('app')->ifNotExists()->run();
 		$this->assertEquals(

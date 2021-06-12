@@ -14,7 +14,7 @@ class WithTest extends TestCase
 		$this->with = new With(static::$database);
 	}
 
-	protected function prepareWith()
+	protected function prepareWith() : void
 	{
 		$this->with->reference('t1', static function (Select $select) {
 			return $select->columns('*')->from('folks')->sql();
@@ -23,7 +23,7 @@ class WithTest extends TestCase
 		});
 	}
 
-	public function testWith()
+	public function testWith() : void
 	{
 		$this->prepareWith();
 		$this->assertEquals(
@@ -32,7 +32,7 @@ class WithTest extends TestCase
 		);
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->prepareWith();
 		$this->with->options($this->with::OPT_RECURSIVE);
@@ -42,7 +42,7 @@ class WithTest extends TestCase
 		);
 	}
 
-	public function testManyReferences()
+	public function testManyReferences() : void
 	{
 		$this->prepareWith();
 		$this->with->reference('t2', static function () {
@@ -54,7 +54,7 @@ class WithTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->with->options('foo');
 		$this->expectException(\LogicException::class);
@@ -62,14 +62,14 @@ class WithTest extends TestCase
 		$this->with->sql();
 	}
 
-	public function testWithoutReference()
+	public function testWithoutReference() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('References must be set');
 		$this->with->sql();
 	}
 
-	public function testWithoutSelect()
+	public function testWithoutSelect() : void
 	{
 		$this->with->reference('t1', static function (Select $select) {
 			return $select->columns('*')->from('folks')->sql();
@@ -79,7 +79,7 @@ class WithTest extends TestCase
 		$this->with->sql();
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$this->with->reference('t1', static function (Select $select) {

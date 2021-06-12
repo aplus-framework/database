@@ -11,7 +11,7 @@ class StringDataTypeTest extends TestCase
 		$this->column = new StringDataTypeMock(static::$database);
 	}
 
-	public function testCharset()
+	public function testCharset() : void
 	{
 		$this->assertEquals(
 			" mock CHARACTER SET 'utf8' NOT NULL",
@@ -19,7 +19,7 @@ class StringDataTypeTest extends TestCase
 		);
 	}
 
-	public function testCollate()
+	public function testCollate() : void
 	{
 		$this->assertEquals(
 			" mock COLLATE 'utf8_general_ci' NOT NULL",
@@ -27,7 +27,7 @@ class StringDataTypeTest extends TestCase
 		);
 	}
 
-	public function testFull()
+	public function testFull() : void
 	{
 		$this->assertEquals(
 			" mock CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL",

@@ -5,7 +5,7 @@ use Tests\Database\TestCase;
 
 class PrimaryKeyTest extends TestCase
 {
-	public function testType()
+	public function testType() : void
 	{
 		$index = new PrimaryKey(static::$database, null, 'id');
 		$this->assertEquals(

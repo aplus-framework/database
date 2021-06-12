@@ -4,7 +4,7 @@ use Tests\Database\TestCase;
 
 class ConstraintTest extends TestCase
 {
-	public function testConstraint()
+	public function testConstraint() : void
 	{
 		$index = new ConstraintMock(static::$database, null, 'id');
 		$this->assertEquals(

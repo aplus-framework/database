@@ -12,7 +12,7 @@ class LoadDataTest extends TestCase
 		$this->loadData = new LoadData(static::$database);
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->assertEquals(
 			"LOAD DATA\nCONCURRENT INFILE '/tmp/foo'\n INTO TABLE `Users`",
@@ -23,14 +23,14 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Invalid option: foo');
 		$this->loadData->options('foo')->sql();
 	}
 
-	public function testInvalidIntersection()
+	public function testInvalidIntersection() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage(
@@ -42,7 +42,7 @@ class LoadDataTest extends TestCase
 		)->sql();
 	}
 
-	public function testCharset()
+	public function testCharset() : void
 	{
 		$this->assertEquals(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n CHARACTER SET utf8",
@@ -53,7 +53,7 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testColumns()
+	public function testColumns() : void
 	{
 		$this->assertEquals(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
@@ -67,7 +67,7 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testLines()
+	public function testLines() : void
 	{
 		$this->assertEquals(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n"
@@ -80,21 +80,21 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function testWithoutInfile()
+	public function testWithoutInfile() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('INFILE statement is required');
 		$this->loadData->intoTable('users')->sql();
 	}
 
-	public function testWithoutIntoTable()
+	public function testWithoutIntoTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Table is required');
 		$this->loadData->infile('/tmp/foo')->sql();
 	}
 
-	public function testIgnoreLines()
+	public function testIgnoreLines() : void
 	{
 		$this->assertEquals(
 			"LOAD DATA\n INFILE '/tmp/foo'\n INTO TABLE `users`\n IGNORE 25 LINES",
@@ -105,16 +105,16 @@ class LoadDataTest extends TestCase
 		);
 	}
 
-	public function todo_testRun()
+	public function todo_testRun() : void
 	{
 		static::$database->exec(
-			<<<SQL
-CREATE OR REPLACE TABLE `Users` (
-    `id` INT,
-    `name` VARCHAR(64),
-    `birthday` DATE
-)
-SQL
+			<<<'SQL'
+				CREATE OR REPLACE TABLE `Users` (
+				    `id` INT,
+				    `name` VARCHAR(64),
+				    `birthday` DATE
+				)
+				SQL
 		);
 		$this->loadData
 			->options($this->loadData::OPT_LOCAL)

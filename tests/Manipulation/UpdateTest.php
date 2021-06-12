@@ -12,19 +12,19 @@ class UpdateTest extends TestCase
 		$this->update = new Update(static::$database);
 	}
 
-	protected function prepare()
+	protected function prepare() : void
 	{
 		$this->update->table('t1');
 	}
 
-	public function testRenderWithoutTable()
+	public function testRenderWithoutTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Table references must be set');
 		$this->update->sql();
 	}
 
-	public function testRenderWithoutSet()
+	public function testRenderWithoutSet() : void
 	{
 		$this->prepare();
 		$this->expectException(\LogicException::class);
@@ -32,7 +32,7 @@ class UpdateTest extends TestCase
 		$this->update->sql();
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->update->table('t1')->set(['id' => 1]);
 		$this->update->options($this->update::OPT_LOW_PRIORITY);
@@ -52,7 +52,7 @@ class UpdateTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->prepare();
 		$this->update->set(['id' => 1]);
@@ -62,7 +62,7 @@ class UpdateTest extends TestCase
 		$this->update->sql();
 	}
 
-	public function testJoin()
+	public function testJoin() : void
 	{
 		$this->update->table('t1', 't2')
 			->innerJoinOn('t2', static function () {
@@ -78,7 +78,7 @@ class UpdateTest extends TestCase
 		);
 	}
 
-	public function testLimit()
+	public function testLimit() : void
 	{
 		$this->update->table('t1')->set(['id' => 1]);
 		$this->update->limit(1);
@@ -93,7 +93,7 @@ class UpdateTest extends TestCase
 		);
 	}
 
-	public function testWhere()
+	public function testWhere() : void
 	{
 		$this->update->table('t1')->set(['name' => 'Foo']);
 		$this->update->whereEqual('id', 1);
@@ -103,7 +103,7 @@ class UpdateTest extends TestCase
 		);
 	}
 
-	public function testOrderBy()
+	public function testOrderBy() : void
 	{
 		$this->update->table('t1')->set(['name' => 'Foo']);
 		$this->update->orderByAsc('id');
@@ -113,7 +113,7 @@ class UpdateTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$this->assertEquals(

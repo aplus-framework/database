@@ -49,7 +49,7 @@ class ColumnDefinitionTest extends TestCase
 		$this->definition = new ColumnDefinition(static::$database);
 	}
 
-	public function testInstances()
+	public function testInstances() : void
 	{
 		$this->assertInstanceOf(BigintColumn::class, $this->definition->bigint());
 		$this->assertInstanceOf(BinaryColumn::class, $this->definition->binary());
@@ -93,7 +93,7 @@ class ColumnDefinitionTest extends TestCase
 		$this->assertInstanceOf(YearColumn::class, $this->definition->year());
 	}
 
-	public function testTypes()
+	public function testTypes() : void
 	{
 		$this->assertEquals(' bigint NOT NULL', $this->definition->bigint()->sql());
 		$this->assertEquals(' binary NOT NULL', $this->definition->binary()->sql());
@@ -137,7 +137,7 @@ class ColumnDefinitionTest extends TestCase
 		$this->assertEquals(' year NOT NULL', $this->definition->year()->sql());
 	}
 
-	public function testBadMethod()
+	public function testBadMethod() : void
 	{
 		$this->expectException(\BadMethodCallException::class);
 		$this->expectExceptionMessage('Method not found or not allowed: foo');

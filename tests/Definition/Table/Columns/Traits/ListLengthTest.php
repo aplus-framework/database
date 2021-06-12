@@ -4,7 +4,7 @@ use Tests\Database\TestCase;
 
 class ListLengthTest extends TestCase
 {
-	public function testLength()
+	public function testLength() : void
 	{
 		$column = new ListLengthMock(static::$database);
 		$this->assertEquals(

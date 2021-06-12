@@ -13,12 +13,12 @@ class ReplaceTest extends TestCase
 		$this->replace = new Replace(static::$database);
 	}
 
-	protected function prepare()
+	protected function prepare() : void
 	{
 		$this->replace->into('t1');
 	}
 
-	public function testIntoOnly()
+	public function testIntoOnly() : void
 	{
 		$this->replace->into('t1');
 		$this->expectException(\LogicException::class);
@@ -28,14 +28,14 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testRenderWithoutInto()
+	public function testRenderWithoutInto() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('INTO table must be set');
 		$this->replace->sql();
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->replace->into('t1')->set(['id' => 1]);
 		$this->replace->options($this->replace::OPT_DELAYED);
@@ -45,7 +45,7 @@ class ReplaceTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->prepare();
 		$this->replace->set(['id' => 1]);
@@ -55,7 +55,7 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testOptionsConflict()
+	public function testOptionsConflict() : void
 	{
 		$this->prepare();
 		$this->replace->options($this->replace::OPT_DELAYED, $this->replace::OPT_LOW_PRIORITY);
@@ -66,7 +66,7 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testValues()
+	public function testValues() : void
 	{
 		$this->prepare();
 		$this->replace->columns('id', 'name', 'email');
@@ -89,7 +89,7 @@ class ReplaceTest extends TestCase
 		);
 	}
 
-	public function testSet()
+	public function testSet() : void
 	{
 		$this->prepare();
 		$this->replace->set([
@@ -105,7 +105,7 @@ class ReplaceTest extends TestCase
 		);
 	}
 
-	public function testSetWithColumns()
+	public function testSetWithColumns() : void
 	{
 		$this->prepare();
 		$this->replace->columns('id');
@@ -115,7 +115,7 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testSetWithValues()
+	public function testSetWithValues() : void
 	{
 		$this->prepare();
 		$this->replace->values('id');
@@ -125,7 +125,7 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testSelect()
+	public function testSelect() : void
 	{
 		$this->prepare();
 		$this->replace->select(static function (Select $select) {
@@ -137,7 +137,7 @@ class ReplaceTest extends TestCase
 		);
 	}
 
-	public function testSelectWithValues()
+	public function testSelectWithValues() : void
 	{
 		$this->prepare();
 		$this->replace->values('id');
@@ -149,7 +149,7 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testSelectWithSet()
+	public function testSelectWithSet() : void
 	{
 		$this->prepare();
 		$this->replace->set(['id' => 1]);
@@ -161,7 +161,7 @@ class ReplaceTest extends TestCase
 		$this->replace->sql();
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$this->prepare();

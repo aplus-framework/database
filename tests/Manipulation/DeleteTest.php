@@ -12,7 +12,7 @@ class DeleteTest extends TestCase
 		$this->delete = new Delete(static::$database);
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->delete->from('t1');
 		$this->delete->options($this->delete::OPT_LOW_PRIORITY);
@@ -32,7 +32,7 @@ class DeleteTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->delete->from('t1');
 		$this->delete->options('foo');
@@ -41,7 +41,7 @@ class DeleteTest extends TestCase
 		$this->delete->sql();
 	}
 
-	public function testLimit()
+	public function testLimit() : void
 	{
 		$this->delete->from('t1');
 		$this->delete->limit(1);
@@ -56,7 +56,7 @@ class DeleteTest extends TestCase
 		);
 	}
 
-	public function testWhere()
+	public function testWhere() : void
 	{
 		$this->delete->from('t1');
 		$this->delete->whereEqual('id', 1);
@@ -66,7 +66,7 @@ class DeleteTest extends TestCase
 		);
 	}
 
-	public function testOrderBy()
+	public function testOrderBy() : void
 	{
 		$this->delete->from('t1');
 		$this->delete->orderByAsc('id');
@@ -76,7 +76,7 @@ class DeleteTest extends TestCase
 		);
 	}
 
-	public function testJoin()
+	public function testJoin() : void
 	{
 		$this->delete->table('t1', 't2')
 			->from('t1')
@@ -89,7 +89,7 @@ class DeleteTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$this->assertEquals(

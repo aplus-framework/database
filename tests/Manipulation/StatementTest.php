@@ -12,7 +12,7 @@ class StatementTest extends TestCase
 		$this->statement = new StatementMock(static::$database);
 	}
 
-	public function testLimit()
+	public function testLimit() : void
 	{
 		$this->assertNull($this->statement->renderLimit());
 		$this->statement->limit(10);
@@ -21,7 +21,7 @@ class StatementTest extends TestCase
 		$this->assertEquals(' LIMIT 10 OFFSET 20', $this->statement->renderLimit());
 	}
 
-	public function testLimitLessThanOne()
+	public function testLimitLessThanOne() : void
 	{
 		$this->statement->limit(0);
 		$this->expectException(\InvalidArgumentException::class);
@@ -29,7 +29,7 @@ class StatementTest extends TestCase
 		$this->statement->renderLimit();
 	}
 
-	public function testLimitOffsetLessThanOne()
+	public function testLimitOffsetLessThanOne() : void
 	{
 		$this->statement->limit(10, 0);
 		$this->expectException(\InvalidArgumentException::class);
@@ -37,7 +37,7 @@ class StatementTest extends TestCase
 		$this->statement->renderLimit();
 	}
 
-	public function testSubquery()
+	public function testSubquery() : void
 	{
 		$this->assertEquals('(select database())', $this->statement->subquery(static function () {
 			return 'select database()';
@@ -57,7 +57,7 @@ class StatementTest extends TestCase
 		);
 	}
 
-	public function testRenderIdentifier()
+	public function testRenderIdentifier() : void
 	{
 		$this->assertEquals('`name```', $this->statement->renderIdentifier('name`'));
 		$this->assertEquals(
@@ -68,7 +68,7 @@ class StatementTest extends TestCase
 		);
 	}
 
-	public function testRenderAliasedidentifier()
+	public function testRenderAliasedidentifier() : void
 	{
 		$this->assertEquals('`name```', $this->statement->renderAliasedIdentifier('name`'));
 		$this->assertEquals(
@@ -95,12 +95,12 @@ class StatementTest extends TestCase
 		$this->statement->renderAliasedIdentifier(['foo' => 'name', 'bar']);
 	}
 
-	public function testToString()
+	public function testToString() : void
 	{
 		$this->assertEquals('SQL', (string) $this->statement);
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->assertNull($this->statement->renderOptions());
 		$this->statement->options('foo');
@@ -109,7 +109,7 @@ class StatementTest extends TestCase
 		$this->assertEquals('bar baz', $this->statement->renderOptions());
 	}
 
-	public function testReset()
+	public function testReset() : void
 	{
 		$this->assertNull($this->statement->renderOptions());
 		$this->statement->options('foo');
@@ -124,7 +124,7 @@ class StatementTest extends TestCase
 		$this->assertNull($this->statement->renderOptions());
 	}
 
-	public function testRenderAssignment()
+	public function testRenderAssignment() : void
 	{
 		$this->assertEquals('`id` = 1', $this->statement->renderAssignment('id', 1));
 		$this->assertEquals("`id` = '1'", $this->statement->renderAssignment('id', '1'));
@@ -136,7 +136,7 @@ class StatementTest extends TestCase
 		);
 	}
 
-	public function testMergeExpressions()
+	public function testMergeExpressions() : void
 	{
 		$this->assertEquals(['a'], $this->statement->mergeExpressions('a', []));
 		$this->assertEquals(['a', 'a'], $this->statement->mergeExpressions('a', ['a']));

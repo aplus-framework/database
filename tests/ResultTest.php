@@ -8,7 +8,7 @@ class ResultTest extends TestCase
 		$this->createDummyData();
 	}
 
-	public function testNumRows()
+	public function testNumRows() : void
 	{
 		$this->assertEquals(
 			5,
@@ -24,7 +24,7 @@ class ResultTest extends TestCase
 		);
 	}
 
-	public function testMoveCursor()
+	public function testMoveCursor() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetch()->c1);
@@ -38,7 +38,7 @@ class ResultTest extends TestCase
 		$result->moveCursor(5);
 	}
 
-	public function testMoveCursorLessThanZero()
+	public function testMoveCursorLessThanZero() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->expectException(\OutOfRangeException::class);
@@ -46,21 +46,21 @@ class ResultTest extends TestCase
 		$result->moveCursor(-1);
 	}
 
-	public function testFetchRow()
+	public function testFetchRow() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchRow(0)->c1);
 		$this->assertEquals(4, $result->fetchRow(3)->c1);
 	}
 
-	public function testFetchArrayRow()
+	public function testFetchArrayRow() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchArrayRow(0)['c1']);
 		$this->assertEquals(4, $result->fetchArrayRow(3)['c1']);
 	}
 
-	public function testFetchClass()
+	public function testFetchClass() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$result->setFetchClass(ResultEntity::class, 'a', 'b');
@@ -73,7 +73,7 @@ class ResultTest extends TestCase
 		$this->assertInstanceOf(ResultEntity::class, $rows[1]);
 	}
 
-	public function testFetch()
+	public function testFetch() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetch()->c1);
@@ -84,7 +84,7 @@ class ResultTest extends TestCase
 		$this->assertNull($result->fetch());
 	}
 
-	public function testFetchAll()
+	public function testFetchAll() : void
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchAll();
 		$this->assertCount(5, $all);
@@ -93,7 +93,7 @@ class ResultTest extends TestCase
 		$this->assertEquals('c', $all[2]->c2);
 	}
 
-	public function testFetchArray()
+	public function testFetchArray() : void
 	{
 		$result = static::$database->query('SELECT * FROM `t1`');
 		$this->assertEquals(1, $result->fetchArray()['c1']);
@@ -104,7 +104,7 @@ class ResultTest extends TestCase
 		$this->assertNull($result->fetchArray());
 	}
 
-	public function testFetchArrayAll()
+	public function testFetchArrayAll() : void
 	{
 		$all = static::$database->query('SELECT * FROM `t1`')->fetchArrayAll();
 		$this->assertCount(5, $all);
@@ -113,7 +113,7 @@ class ResultTest extends TestCase
 		$this->assertEquals('c', $all[2]['c2']);
 	}
 
-	public function testFetchFields()
+	public function testFetchFields() : void
 	{
 		$fields = static::$database->query('SELECT * FROM `t1`')->fetchFields();
 		$this->assertEquals('c1', $fields[0]->name);

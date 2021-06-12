@@ -12,14 +12,14 @@ class AlterSchemaTest extends TestCase
 		$this->alterSchema = new AlterSchema(static::$database);
 	}
 
-	public function testSchemaWithoutSpecification()
+	public function testSchemaWithoutSpecification() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('ALTER SCHEMA must have a specification');
 		$this->alterSchema->schema('app')->sql();
 	}
 
-	public function testEmptySchema()
+	public function testEmptySchema() : void
 	{
 		$this->assertEquals(
 			"ALTER SCHEMA\n CHARACTER SET = 'utf8'\n",
@@ -27,7 +27,7 @@ class AlterSchemaTest extends TestCase
 		);
 	}
 
-	public function testCharset()
+	public function testCharset() : void
 	{
 		$this->assertEquals(
 			"ALTER SCHEMA `app`\n CHARACTER SET = 'utf8'\n",
@@ -35,7 +35,7 @@ class AlterSchemaTest extends TestCase
 		);
 	}
 
-	public function testCollate()
+	public function testCollate() : void
 	{
 		$this->assertEquals(
 			"ALTER SCHEMA `app`\n COLLATE = 'utf8_general_ci'\n",
@@ -43,7 +43,7 @@ class AlterSchemaTest extends TestCase
 		);
 	}
 
-	public function testUpgrade()
+	public function testUpgrade() : void
 	{
 		$this->assertEquals(
 			"ALTER SCHEMA `#mysql50#app`\n UPGRADE DATA DIRECTORY NAME\n",
@@ -51,7 +51,7 @@ class AlterSchemaTest extends TestCase
 		);
 	}
 
-	public function testUpgradeConflict()
+	public function testUpgradeConflict() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage(
@@ -60,7 +60,7 @@ class AlterSchemaTest extends TestCase
 		$this->alterSchema->schema('app')->upgrade()->charset('utf8')->sql();
 	}
 
-	public function testFullSql()
+	public function testFullSql() : void
 	{
 		$this->assertEquals(
 			"ALTER SCHEMA `app`\n CHARACTER SET = 'utf8'\n COLLATE = 'utf8_general_ci'\n",
@@ -72,7 +72,7 @@ class AlterSchemaTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		static::$database->dropSchema()->schema('app')->ifExists()->run();
 		static::$database->createSchema()->schema('app')->charset('utf8')->run();

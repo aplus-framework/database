@@ -12,14 +12,14 @@ class DropTableTest extends TestCase
 		$this->dropTable = new DropTable(static::$database);
 	}
 
-	public function testEmptyTable()
+	public function testEmptyTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Table names can not be empty');
 		$this->dropTable->sql();
 	}
 
-	public function testSchema()
+	public function testSchema() : void
 	{
 		$this->assertEquals(
 			"DROP TABLE `t1`\n",
@@ -27,7 +27,7 @@ class DropTableTest extends TestCase
 		);
 	}
 
-	public function testIfExists()
+	public function testIfExists() : void
 	{
 		$this->assertEquals(
 			"DROP TABLE IF EXISTS `t1`\n",
@@ -35,7 +35,7 @@ class DropTableTest extends TestCase
 		);
 	}
 
-	public function testWait()
+	public function testWait() : void
 	{
 		$this->assertEquals(
 			"DROP TABLE `t1`\n WAIT 10\n",
@@ -43,14 +43,14 @@ class DropTableTest extends TestCase
 		);
 	}
 
-	public function testInvalidWait()
+	public function testInvalidWait() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Invalid WAIT value: -1');
 		$this->dropTable->table('t1')->wait(-1)->sql();
 	}
 
-	public function testCommentToSave()
+	public function testCommentToSave() : void
 	{
 		$this->assertEquals(
 			"DROP TABLE /* Oops! * /; */ `t1`\n",
@@ -58,7 +58,7 @@ class DropTableTest extends TestCase
 		);
 	}
 
-	public function testTemporary()
+	public function testTemporary() : void
 	{
 		$this->assertEquals(
 			"DROP TEMPORARY TABLE `t1`\n",
@@ -66,7 +66,7 @@ class DropTableTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$statement = $this->dropTable->table('t1');
 		$this->createDummyData();

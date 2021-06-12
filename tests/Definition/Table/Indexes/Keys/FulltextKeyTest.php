@@ -5,7 +5,7 @@ use Tests\Database\TestCase;
 
 class FulltextKeyTest extends TestCase
 {
-	public function testType()
+	public function testType() : void
 	{
 		$index = new FulltextKey(static::$database, null, 'id');
 		$this->assertEquals(

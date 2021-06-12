@@ -5,7 +5,7 @@ use Tests\Database\TestCase;
 
 class UniqueKeyTest extends TestCase
 {
-	public function testType()
+	public function testType() : void
 	{
 		$index = new UniqueKey(static::$database, null, 'id');
 		$this->assertEquals(

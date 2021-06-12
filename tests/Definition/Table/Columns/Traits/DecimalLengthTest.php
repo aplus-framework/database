@@ -4,7 +4,7 @@ use Tests\Database\TestCase;
 
 class DecimalLengthTest extends TestCase
 {
-	public function testLength()
+	public function testLength() : void
 	{
 		$column = new DecimalLengthMock(static::$database);
 		$this->assertEquals(

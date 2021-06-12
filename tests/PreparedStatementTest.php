@@ -4,7 +4,7 @@ use Framework\Database\Result;
 
 class PreparedStatementTest extends TestCase
 {
-	public function testExec()
+	public function testExec() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('INSERT INTO `t1` SET `c2` = "f"');
@@ -15,7 +15,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertEquals(2, $prepared->exec());
 	}
 
-	public function testExecWithBinds()
+	public function testExecWithBinds() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('INSERT INTO `t1` SET `c2` = ?');
@@ -30,7 +30,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertEquals(5, $prepared->exec('a', 1, false, true, null));
 	}
 
-	public function testExecResult()
+	public function testExecResult() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1`');
@@ -41,7 +41,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertEquals(-1, $prepared->exec(4));
 	}
 
-	public function testQuery()
+	public function testQuery() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1`');
@@ -53,7 +53,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertEquals('b', $result->fetch()->c2);
 	}
 
-	public function testQueryWithBinds()
+	public function testQueryWithBinds() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?');
@@ -66,7 +66,7 @@ class PreparedStatementTest extends TestCase
 		$this->assertEquals(5, $prepared->query('e')->fetch()->c1);
 	}
 
-	public function testBindParams()
+	public function testBindParams() : void
 	{
 		$this->createDummyData();
 		$prepared = static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?');
@@ -79,7 +79,7 @@ class PreparedStatementTest extends TestCase
 		$prepared->query([]);
 	}
 
-	public function testSendBlob()
+	public function testSendBlob() : void
 	{
 		$this->createDummyData();
 		$this->assertEquals(

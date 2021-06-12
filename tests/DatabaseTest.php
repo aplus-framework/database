@@ -19,7 +19,7 @@ use Framework\Database\Result;
 
 class DatabaseTest extends TestCase
 {
-	public function testConnection()
+	public function testConnection() : void
 	{
 		$database = new Database(
 			\getenv('DB_USERNAME'),
@@ -31,7 +31,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionWithArray()
+	public function testConnectionWithArray() : void
 	{
 		$database = new Database([
 			'username' => \getenv('DB_USERNAME'),
@@ -43,7 +43,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionFail()
+	public function testConnectionFail() : void
 	{
 		$this->expectException(\mysqli_sql_exception::class);
 		//$this->expectExceptionMessageRegExp("#^Access denied for user 'error-1'@'#");
@@ -56,7 +56,7 @@ class DatabaseTest extends TestCase
 		]);
 	}
 
-	public function testConnectionWithSSL()
+	public function testConnectionWithSSL() : void
 	{
 		if (\getenv('DB_HOST') === 'mariadb') {
 			$this->expectException(\mysqli_sql_exception::class);
@@ -76,7 +76,7 @@ class DatabaseTest extends TestCase
 		$this->cipherStatus($database);
 	}
 
-	protected function cipherStatus(Database $database)
+	protected function cipherStatus(Database $database) : void
 	{
 		$status = $database->query("SHOW STATUS LIKE 'ssl_cipher'")->fetchArray();
 		$this->assertEquals([
@@ -85,7 +85,7 @@ class DatabaseTest extends TestCase
 		], $status);
 	}
 
-	public function testConnectionWithSSLNotVerified()
+	public function testConnectionWithSSLNotVerified() : void
 	{
 		if (\getenv('DB_HOST') === 'mariadb') {
 			$this->expectException(\mysqli_sql_exception::class);
@@ -106,7 +106,7 @@ class DatabaseTest extends TestCase
 		$this->cipherStatus($database);
 	}
 
-	public function testConnectionWithFailover()
+	public function testConnectionWithFailover() : void
 	{
 		$database = new Database([
 			'username' => 'error-1',
@@ -128,7 +128,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionFailWithfailover()
+	public function testConnectionFailWithfailover() : void
 	{
 		$this->expectException(\mysqli_sql_exception::class);
 		//$this->expectExceptionMessageRegExp("#^Access denied for user 'error-3'@'#");
@@ -150,7 +150,7 @@ class DatabaseTest extends TestCase
 		]);
 	}
 
-	public function testProtectIdentifier()
+	public function testProtectIdentifier() : void
 	{
 		$this->assertEquals('*', static::$database->protectIdentifier('*'));
 		$this->assertEquals('`foo`', static::$database->protectIdentifier('foo'));
@@ -162,7 +162,7 @@ class DatabaseTest extends TestCase
 		$this->assertEquals('`db`.`table`.*', static::$database->protectIdentifier('db.table.*'));
 	}
 
-	public function testQuote()
+	public function testQuote() : void
 	{
 		$this->assertEquals(0, static::$database->quote(0));
 		$this->assertEquals(1, static::$database->quote(1));
@@ -183,7 +183,7 @@ class DatabaseTest extends TestCase
 		static::$database->quote([]);
 	}
 
-	public function testDefinitionInstances()
+	public function testDefinitionInstances() : void
 	{
 		$this->assertInstanceOf(CreateSchema::class, static::$database->createSchema());
 		$this->assertInstanceOf(DropSchema::class, static::$database->dropSchema());
@@ -193,7 +193,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable());
 	}
 
-	public function testDefinitionInstancesWithParams()
+	public function testDefinitionInstancesWithParams() : void
 	{
 		$this->assertInstanceOf(CreateSchema::class, static::$database->createSchema('foo'));
 		$this->assertInstanceOf(DropSchema::class, static::$database->dropSchema('foo'));
@@ -203,7 +203,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(AlterTable::class, static::$database->alterTable('foo'));
 	}
 
-	public function testManipulationInstances()
+	public function testManipulationInstances() : void
 	{
 		$this->assertInstanceOf(Delete::class, static::$database->delete());
 		$this->assertInstanceOf(Insert::class, static::$database->insert());
@@ -214,7 +214,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(With::class, static::$database->with());
 	}
 
-	public function testManipulationInstancesWithParams()
+	public function testManipulationInstancesWithParams() : void
 	{
 		$this->assertInstanceOf(Delete::class, static::$database->delete('foo'));
 		$this->assertInstanceOf(Insert::class, static::$database->insert('foo'));
@@ -225,7 +225,7 @@ class DatabaseTest extends TestCase
 		$this->assertInstanceOf(With::class, static::$database->with());
 	}
 
-	public function testExec()
+	public function testExec() : void
 	{
 		$this->createDummyData();
 		$this->assertEquals(1, static::$database->exec(
@@ -237,13 +237,13 @@ class DatabaseTest extends TestCase
 		$this->assertEquals(9, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
-	public function testQuery()
+	public function testQuery() : void
 	{
 		$this->createDummyData();
 		$this->assertInstanceOf(Result::class, static::$database->query('SELECT * FROM `t1`'));
 	}
 
-	public function testQueryNoResult()
+	public function testQueryNoResult() : void
 	{
 		$this->createDummyData();
 		$this->expectException(\InvalidArgumentException::class);
@@ -253,7 +253,7 @@ class DatabaseTest extends TestCase
 		static::$database->query('INSERT INTO `t1` SET `c2` = "a"');
 	}
 
-	public function testPrepare()
+	public function testPrepare() : void
 	{
 		$this->assertInstanceOf(
 			PreparedStatement::class,
@@ -261,7 +261,7 @@ class DatabaseTest extends TestCase
 		);
 	}
 
-	public function testInsertId()
+	public function testInsertId() : void
 	{
 		$this->createDummyData();
 		$this->assertEquals(1, static::$database->insertId());
@@ -279,10 +279,10 @@ class DatabaseTest extends TestCase
 		$this->assertEquals(10, static::$database->insertId());
 	}
 
-	public function testTransaction()
+	public function testTransaction() : void
 	{
 		$this->createDummyData();
-		static::$database->transaction(static function (Database $db) {
+		static::$database->transaction(static function (Database $db) : void {
 			$db->exec('INSERT INTO `t1` SET `c1` = 100, `c2` = "tr"');
 		});
 		$this->assertEquals(
@@ -291,29 +291,29 @@ class DatabaseTest extends TestCase
 		);
 	}
 
-	public function testTransactionInTransaction()
+	public function testTransactionInTransaction() : void
 	{
 		$this->createDummyData();
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Transaction already is active');
-		static::$database->transaction(static function (Database $db) {
-			$db->transaction(static function (Database $db) {
+		static::$database->transaction(static function (Database $db) : void {
+			$db->transaction(static function (Database $db) : void {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			});
 		});
 	}
 
-	public function testTransactionRollback()
+	public function testTransactionRollback() : void
 	{
 		$this->createDummyData();
 		$this->assertEquals(5, static::$database->exec('SELECT * FROM `t1`'));
-		static::$database->transaction(static function (Database $db) {
+		static::$database->transaction(static function (Database $db) : void {
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 			$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 		});
 		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
 		try {
-			static::$database->transaction(static function (Database $db) {
+			static::$database->transaction(static function (Database $db) : void {
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 				$db->exec('INSERT INTO `t1` SET `c2` = "a"');
 				$db->exec('INSERT INTO `t1000` SET `c2` = "a"');
@@ -326,7 +326,7 @@ class DatabaseTest extends TestCase
 		$this->assertEquals(7, static::$database->exec('SELECT * FROM `t1`'));
 	}
 
-	public function testUse()
+	public function testUse() : void
 	{
 		static::$database->use(\getenv('DB_SCHEMA'));
 		$this->expectException(\mysqli_sql_exception::class);
@@ -337,7 +337,7 @@ class DatabaseTest extends TestCase
 	/**
 	 * @runInSeparateProcess
 	 */
-	public function testErrors()
+	public function testErrors() : void
 	{
 		$this->assertEquals([], static::$database->errors());
 		$this->assertNull(static::$database->error());
@@ -361,12 +361,12 @@ class DatabaseTest extends TestCase
 		$this->assertEquals("Unknown database 'Bar'", static::$database->error());
 	}
 
-	public function testWarnings()
+	public function testWarnings() : void
 	{
 		$this->assertEquals(0, static::$database->warnings());
 	}
 
-	public function testLastQuery()
+	public function testLastQuery() : void
 	{
 		$sql = 'SELECT COUNT(*) FROM t1';
 		static::$database->query($sql);

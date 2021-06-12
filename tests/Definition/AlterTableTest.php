@@ -16,22 +16,22 @@ class AlterTableTest extends TestCase
 	protected function prepare()
 	{
 		return $this->alterTable->table('t1')
-			->add(static function (TableDefinition $definition) {
+			->add(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int();
 			});
 	}
 
-	public function testEmptyTable()
+	public function testEmptyTable() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('TABLE name must be set');
 		$this->alterTable->sql();
 	}
 
-	public function testAdd()
+	public function testAdd() : void
 	{
 		$sql = $this->alterTable->table('t1')
-			->add(static function (TableDefinition $definition) {
+			->add(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int();
 				$definition->index()->primaryKey('c1');
 				$definition->index('Foo')->uniqueKey('c2');
@@ -42,10 +42,10 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testChange()
+	public function testChange() : void
 	{
 		$sql = $this->alterTable->table('t1')
-			->change(static function (TableDefinition $definition) {
+			->change(static function (TableDefinition $definition) : void {
 				$definition->column('c1', 'c5')->bigint();
 			});
 		$this->assertEquals(
@@ -54,10 +54,10 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testModify()
+	public function testModify() : void
 	{
 		$sql = $this->alterTable->table('t1')
-			->modify(static function (TableDefinition $definition) {
+			->modify(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->smallint()->notNull();
 			});
 		$this->assertEquals(
@@ -66,7 +66,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testWait()
+	public function testWait() : void
 	{
 		$this->assertEquals(
 			"ALTER TABLE `t1`\n WAIT 10\n ADD COLUMN `c1` int NOT NULL",
@@ -74,14 +74,14 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testInvalidWait()
+	public function testInvalidWait() : void
 	{
 		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Invalid WAIT value: -1');
 		$this->prepare()->wait(-1)->sql();
 	}
 
-	public function testOnline()
+	public function testOnline() : void
 	{
 		$this->assertEquals(
 			"ALTER ONLINE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
@@ -89,7 +89,7 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testIgnore()
+	public function testIgnore() : void
 	{
 		$this->assertEquals(
 			"ALTER IGNORE TABLE `t1`\n ADD COLUMN `c1` int NOT NULL",
@@ -97,11 +97,11 @@ class AlterTableTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$statement = $this->alterTable->table('t1')
-			->add(static function (TableDefinition $definition) {
+			->add(static function (TableDefinition $definition) : void {
 				$definition->column('c3')->varchar(100)->default('Foo Bar');
 			});
 		$this->assertEquals(0, $statement->run());

@@ -11,7 +11,7 @@ class OrderByTest extends TestCase
 		$this->statement = new OrderByMock(static::$database);
 	}
 
-	public function testOrderBy()
+	public function testOrderBy() : void
 	{
 		$this->assertNull($this->statement->renderOrderBy());
 		$this->statement->orderBy('c1');
@@ -29,7 +29,7 @@ class OrderByTest extends TestCase
 		);
 	}
 
-	public function testOrderByAsc()
+	public function testOrderByAsc() : void
 	{
 		$this->statement->orderByAsc('c1');
 		$this->assertEquals(' ORDER BY `c1` ASC', $this->statement->renderOrderBy());
@@ -40,7 +40,7 @@ class OrderByTest extends TestCase
 		);
 	}
 
-	public function testOrderByDesc()
+	public function testOrderByDesc() : void
 	{
 		$this->statement->orderByDesc('c1');
 		$this->assertEquals(' ORDER BY `c1` DESC', $this->statement->renderOrderBy());
@@ -51,7 +51,7 @@ class OrderByTest extends TestCase
 		);
 	}
 
-	public function testOrderByMixed()
+	public function testOrderByMixed() : void
 	{
 		$this->statement->orderBy('c1');
 		$this->statement->orderByAsc('c2');
@@ -67,7 +67,7 @@ class OrderByTest extends TestCase
 		);
 	}
 
-	public function testInvalidExpressionDataType()
+	public function testInvalidExpressionDataType() : void
 	{
 		$this->expectException(\TypeError::class);
 		$this->statement->orderBy([]);

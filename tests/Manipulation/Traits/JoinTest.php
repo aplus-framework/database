@@ -11,7 +11,7 @@ class JoinTest extends TestCase
 		$this->statement = new JoinMock(static::$database);
 	}
 
-	public function testFrom()
+	public function testFrom() : void
 	{
 		$this->assertNull($this->statement->renderFrom());
 		$this->statement->from('t1', 't2');
@@ -62,21 +62,21 @@ class JoinTest extends TestCase
 		);
 	}
 
-	public function testHasFrom()
+	public function testHasFrom() : void
 	{
 		$this->assertFalse($this->statement->hasFrom());
 		$this->statement->from('t1');
 		$this->assertTrue($this->statement->hasFrom());
 	}
 
-	public function testHasFromException()
+	public function testHasFromException() : void
 	{
 		$this->expectException(\RuntimeException::class);
 		$this->expectExceptionMessage('Clause WHERe only works with FROM');
 		$this->statement->hasFrom('WHERe');
 	}
 
-	public function testJoin()
+	public function testJoin() : void
 	{
 		$this->assertNull($this->statement->renderJoin());
 		$this->statement->join('users');
@@ -97,7 +97,7 @@ class JoinTest extends TestCase
 		);
 	}
 
-	public function testInvalidJoinType()
+	public function testInvalidJoinType() : void
 	{
 		$this->statement->join('t1', 'innes');
 		$this->expectException(\InvalidArgumentException::class);
@@ -105,7 +105,7 @@ class JoinTest extends TestCase
 		$this->statement->renderJoin();
 	}
 
-	public function testInvalidJoinConditionClause()
+	public function testInvalidJoinConditionClause() : void
 	{
 		$this->statement->join('t1', 'inner', 'oi');
 		$this->expectException(\InvalidArgumentException::class);
@@ -113,7 +113,7 @@ class JoinTest extends TestCase
 		$this->statement->renderJoin();
 	}
 
-	public function testNaturalJoinWithCondition()
+	public function testNaturalJoinWithCondition() : void
 	{
 		$this->statement->join('t1', 'natural left', 'on');
 		$this->expectException(\InvalidArgumentException::class);
@@ -121,7 +121,7 @@ class JoinTest extends TestCase
 		$this->statement->renderJoin();
 	}
 
-	public function testJoinOn()
+	public function testJoinOn() : void
 	{
 		$this->statement->joinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -129,13 +129,13 @@ class JoinTest extends TestCase
 		$this->assertEquals(' JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
 	}
 
-	public function testJoinUsing()
+	public function testJoinUsing() : void
 	{
 		$this->statement->joinUsing('t1', 'user_id');
 		$this->assertEquals(' JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
-	public function testInnerJoinOn()
+	public function testInnerJoinOn() : void
 	{
 		$this->statement->innerJoinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -143,13 +143,13 @@ class JoinTest extends TestCase
 		$this->assertEquals(' INNER JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
 	}
 
-	public function testInnerJoinUsing()
+	public function testInnerJoinUsing() : void
 	{
 		$this->statement->innerJoinUsing('t1', 'user_id');
 		$this->assertEquals(' INNER JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
-	public function testCrossJoinOn()
+	public function testCrossJoinOn() : void
 	{
 		$this->statement->crossJoinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -157,13 +157,13 @@ class JoinTest extends TestCase
 		$this->assertEquals(' CROSS JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
 	}
 
-	public function testCrossJoinUsing()
+	public function testCrossJoinUsing() : void
 	{
 		$this->statement->crossJoinUsing('t1', 'user_id');
 		$this->assertEquals(' CROSS JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
-	public function testLeftJoinOn()
+	public function testLeftJoinOn() : void
 	{
 		$this->statement->leftJoinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -171,13 +171,13 @@ class JoinTest extends TestCase
 		$this->assertEquals(' LEFT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
 	}
 
-	public function testLeftJoinUsing()
+	public function testLeftJoinUsing() : void
 	{
 		$this->statement->leftJoinUsing('t1', 'user_id');
 		$this->assertEquals(' LEFT JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
-	public function testLeftOuterJoinOn()
+	public function testLeftOuterJoinOn() : void
 	{
 		$this->statement->leftOuterJoinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -188,7 +188,7 @@ class JoinTest extends TestCase
 		);
 	}
 
-	public function testLeftOuterJoinUsing()
+	public function testLeftOuterJoinUsing() : void
 	{
 		$this->statement->leftOuterJoinUsing('t1', 'user_id');
 		$this->assertEquals(
@@ -197,7 +197,7 @@ class JoinTest extends TestCase
 		);
 	}
 
-	public function testRightJoinOn()
+	public function testRightJoinOn() : void
 	{
 		$this->statement->rightJoinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -205,13 +205,13 @@ class JoinTest extends TestCase
 		$this->assertEquals(' RIGHT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
 	}
 
-	public function testRightJoinUsing()
+	public function testRightJoinUsing() : void
 	{
 		$this->statement->rightJoinUsing('t1', 'user_id');
 		$this->assertEquals(' RIGHT JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
 	}
 
-	public function testRightOuterJoinOn()
+	public function testRightOuterJoinOn() : void
 	{
 		$this->statement->rightOuterJoinOn('t1', static function () {
 			return 't1.id = t2.id';
@@ -222,7 +222,7 @@ class JoinTest extends TestCase
 		);
 	}
 
-	public function testRightOuterJoinUsing()
+	public function testRightOuterJoinUsing() : void
 	{
 		$this->statement->rightOuterJoinUsing('t1', 'user_id');
 		$this->assertEquals(
@@ -231,31 +231,31 @@ class JoinTest extends TestCase
 		);
 	}
 
-	public function testNaturalJoin()
+	public function testNaturalJoin() : void
 	{
 		$this->statement->naturalJoin('t1');
 		$this->assertEquals(' NATURAL JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testNaturalLeftJoin()
+	public function testNaturalLeftJoin() : void
 	{
 		$this->statement->naturalLeftJoin('t1');
 		$this->assertEquals(' NATURAL LEFT JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testNaturalLeftOuterJoin()
+	public function testNaturalLeftOuterJoin() : void
 	{
 		$this->statement->naturalLeftOuterJoin('t1');
 		$this->assertEquals(' NATURAL LEFT OUTER JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testNaturalRightJoin()
+	public function testNaturalRightJoin() : void
 	{
 		$this->statement->naturalRightJoin('t1');
 		$this->assertEquals(' NATURAL RIGHT JOIN `t1`', $this->statement->renderJoin());
 	}
 
-	public function testNaturalRightOuterJoin()
+	public function testNaturalRightOuterJoin() : void
 	{
 		$this->statement->naturalRightOuterJoin('t1');
 		$this->assertEquals(' NATURAL RIGHT OUTER JOIN `t1`', $this->statement->renderJoin());

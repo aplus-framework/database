@@ -12,7 +12,7 @@ class WhereTest extends TestCase
 		$this->statement = new WhereMock(static::$database);
 	}
 
-	public function testWhere()
+	public function testWhere() : void
 	{
 		$this->assertNull($this->statement->renderWhere());
 		$this->statement->where('id', '=', 10);
@@ -38,49 +38,49 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testOperatorWithoutRequiredArgument()
+	public function testOperatorWithoutRequiredArgument() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Operator = must receive exactly 1 parameter');
 		$this->statement->where('email', '=')->renderWhere();
 	}
 
-	public function testOperatorWithTooManyArguments()
+	public function testOperatorWithTooManyArguments() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Operator = must receive exactly 1 parameter');
 		$this->statement->where('email', '=', 1, 2)->renderWhere();
 	}
 
-	public function testOperatorInWithoutRequiredArgument()
+	public function testOperatorInWithoutRequiredArgument() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Operator NOT IN must receive at least 1 parameter');
 		$this->statement->where('email', 'not in')->renderWhere();
 	}
 
-	public function testOperatorBetweenWithoutRequiredArguments()
+	public function testOperatorBetweenWithoutRequiredArguments() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Operator BETWEEN must receive exactly 2 parameters');
 		$this->statement->where('email', 'between', 1)->renderWhere();
 	}
 
-	public function testOperatorBetweenWithTooManyArguments()
+	public function testOperatorBetweenWithTooManyArguments() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Operator BETWEEN must receive exactly 2 parameters');
 		$this->statement->where('email', 'between', 1, 5, 15)->renderWhere();
 	}
 
-	public function testOperatorIsNullWithArguments()
+	public function testOperatorIsNullWithArguments() : void
 	{
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Operator IS NULL must not receive parameters');
 		$this->statement->where('email', 'is null', 1)->renderWhere();
 	}
 
-	public function testMatch()
+	public function testMatch() : void
 	{
 		$this->statement->whereMatch(['title'], 'foo');
 		$this->assertEquals(
@@ -94,7 +94,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testMatchWithStringParams()
+	public function testMatchWithStringParams() : void
 	{
 		$this->statement->whereMatch('title', 'foo');
 		$this->assertEquals(
@@ -103,7 +103,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testMatchWithClosureParams()
+	public function testMatchWithClosureParams() : void
 	{
 		$this->statement->whereMatch(static function () {
 			return 'title';
@@ -116,7 +116,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testMatchWithQueryExpansion()
+	public function testMatchWithQueryExpansion() : void
 	{
 		$this->statement->whereMatchWithQueryExpansion(['title'], 'foo');
 		$this->assertEquals(
@@ -133,7 +133,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testWhereMatchInBooleanMode()
+	public function testWhereMatchInBooleanMode() : void
 	{
 		$this->statement->whereMatchInBooleanMode(['title'], 'foo');
 		$this->assertEquals(
@@ -147,7 +147,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testEqual()
+	public function testEqual() : void
 	{
 		$this->statement->whereEqual('email', 'user@mail.com');
 		$this->assertEquals(" WHERE `email` = 'user@mail.com'", $this->statement->renderWhere());
@@ -167,7 +167,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testNotEqual()
+	public function testNotEqual() : void
 	{
 		$this->statement->whereNotEqual('email', 'user@mail.com');
 		$this->assertEquals(" WHERE `email` != 'user@mail.com'", $this->statement->renderWhere());
@@ -187,7 +187,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testNullSafeEqual()
+	public function testNullSafeEqual() : void
 	{
 		$this->statement->whereNullSafeEqual('email', 'user@mail.com');
 		$this->assertEquals(" WHERE `email` <=> 'user@mail.com'", $this->statement->renderWhere());
@@ -207,7 +207,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testLessThan()
+	public function testLessThan() : void
 	{
 		$this->statement->whereLessThan('count', 5);
 		$this->assertEquals(' WHERE `count` < 5', $this->statement->renderWhere());
@@ -227,7 +227,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testLessThanOrEqual()
+	public function testLessThanOrEqual() : void
 	{
 		$this->statement->whereLessThanOrEqual('count', 5);
 		$this->assertEquals(' WHERE `count` <= 5', $this->statement->renderWhere());
@@ -247,7 +247,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testGreaterThan()
+	public function testGreaterThan() : void
 	{
 		$this->statement->whereGreaterThan('count', 5);
 		$this->assertEquals(' WHERE `count` > 5', $this->statement->renderWhere());
@@ -267,7 +267,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testGreaterThanOrEqual()
+	public function testGreaterThanOrEqual() : void
 	{
 		$this->statement->whereGreaterThanOrEqual('count', 5);
 		$this->assertEquals(' WHERE `count` >= 5', $this->statement->renderWhere());
@@ -287,7 +287,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testLike()
+	public function testLike() : void
 	{
 		$this->statement->whereLike('email', '%@mail.com');
 		$this->assertEquals(" WHERE `email` LIKE '%@mail.com'", $this->statement->renderWhere());
@@ -307,7 +307,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testNotLike()
+	public function testNotLike() : void
 	{
 		$this->statement->whereNotLike('email', '%@mail.com');
 		$this->assertEquals(
@@ -330,7 +330,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testIn()
+	public function testIn() : void
 	{
 		$this->statement->whereIn('id', 1, 2, 8);
 		$this->assertEquals(' WHERE `id` IN (1, 2, 8)', $this->statement->renderWhere());
@@ -350,7 +350,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testNotIn()
+	public function testNotIn() : void
 	{
 		$this->statement->whereNotIn('id', 1, 2, 8);
 		$this->assertEquals(' WHERE `id` NOT IN (1, 2, 8)', $this->statement->renderWhere());
@@ -370,7 +370,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testBetween()
+	public function testBetween() : void
 	{
 		$this->statement->whereBetween('id', 1, 10);
 		$this->assertEquals(' WHERE `id` BETWEEN 1 AND 10', $this->statement->renderWhere());
@@ -392,7 +392,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testNotBetween()
+	public function testNotBetween() : void
 	{
 		$this->statement->whereNotBetween('id', 1, 10);
 		$this->assertEquals(' WHERE `id` NOT BETWEEN 1 AND 10', $this->statement->renderWhere());
@@ -414,7 +414,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testIsNull()
+	public function testIsNull() : void
 	{
 		$this->statement->whereIsNull('email');
 		$this->assertEquals(' WHERE `email` IS NULL', $this->statement->renderWhere());
@@ -432,7 +432,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testIsNotNull()
+	public function testIsNotNull() : void
 	{
 		$this->statement->whereIsNotNull('email');
 		$this->assertEquals(' WHERE `email` IS NOT NULL', $this->statement->renderWhere());
@@ -450,7 +450,7 @@ class WhereTest extends TestCase
 		);
 	}
 
-	public function testOperators()
+	public function testOperators() : void
 	{
 		$this->statement
 			->where('=', '=', 1)
@@ -494,7 +494,7 @@ class WhereTest extends TestCase
 		$this->statement->renderWhere();
 	}
 
-	public function testInvalidValueType()
+	public function testInvalidValueType() : void
 	{
 		$this->statement->where('id', '=', []);
 		$this->expectException(\TypeError::class);

@@ -23,7 +23,7 @@ class SelectTest extends TestCase
 		return $this->select->sql();
 	}
 
-	public function testOptions()
+	public function testOptions() : void
 	{
 		$this->select->options($this->select::OPT_ALL);
 		$this->assertEquals(
@@ -42,7 +42,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testInvalidOption()
+	public function testInvalidOption() : void
 	{
 		$this->select->options('al');
 		$this->expectException(\InvalidArgumentException::class);
@@ -50,7 +50,7 @@ class SelectTest extends TestCase
 		$this->select->sql();
 	}
 
-	public function testIOptionsConflictAllAndDistinct()
+	public function testIOptionsConflictAllAndDistinct() : void
 	{
 		$this->select->options($this->select::OPT_ALL, $this->select::OPT_DISTINCT);
 		$this->expectException(\LogicException::class);
@@ -58,7 +58,7 @@ class SelectTest extends TestCase
 		$this->select->sql();
 	}
 
-	public function testIOptionsConflictSqlCacheAndSqlNoCache()
+	public function testIOptionsConflictSqlCacheAndSqlNoCache() : void
 	{
 		$this->select->options($this->select::OPT_SQL_CACHE, $this->select::OPT_SQL_NO_CACHE);
 		$this->expectException(\LogicException::class);
@@ -66,7 +66,7 @@ class SelectTest extends TestCase
 		$this->select->sql();
 	}
 
-	public function testExpressions()
+	public function testExpressions() : void
 	{
 		$this->select->expressions('1');
 		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
@@ -76,7 +76,7 @@ class SelectTest extends TestCase
 		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
-	public function testColumns()
+	public function testColumns() : void
 	{
 		$this->select->columns('1');
 		$this->assertEquals("SELECT\n `1`\n", $this->select->sql());
@@ -86,7 +86,7 @@ class SelectTest extends TestCase
 		$this->assertEquals("SELECT\n `1`, (now())\n", $this->select->sql());
 	}
 
-	public function testEmptyExpressionsWithFrom()
+	public function testEmptyExpressionsWithFrom() : void
 	{
 		$this->select->from('Users');
 		$this->assertEquals("SELECT\n *\n FROM `Users`\n", $this->select->sql());
@@ -94,7 +94,7 @@ class SelectTest extends TestCase
 		$this->assertEquals("SELECT\n `id`, `name`\n FROM `Users`\n", $this->select->sql());
 	}
 
-	public function testLimit()
+	public function testLimit() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -107,7 +107,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testProcedure()
+	public function testProcedure() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -120,7 +120,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testIntoOutfile()
+	public function testIntoOutfile() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -154,7 +154,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testIntoOutfileFileExists()
+	public function testIntoOutfileFileExists() : void
 	{
 		$this->selectAllFrom('t1');
 		$this->expectException(\LogicException::class);
@@ -162,7 +162,7 @@ class SelectTest extends TestCase
 		$this->select->intoOutfile(__FILE__)->sql();
 	}
 
-	public function testInvalidIntoOutfileFieldOption()
+	public function testInvalidIntoOutfileFieldOption() : void
 	{
 		$this->selectAllFrom('t1');
 		$this->select->intoOutfile('/tmp/foo-bar', null, ['foo' => 'bar']);
@@ -171,7 +171,7 @@ class SelectTest extends TestCase
 		$this->select->sql();
 	}
 
-	public function testInvalidIntoOutfileLineOption()
+	public function testInvalidIntoOutfileLineOption() : void
 	{
 		$this->selectAllFrom('t1');
 		$this->select->intoOutfile('/tmp/foo-bar', null, [], ['foo' => 'bar']);
@@ -180,7 +180,7 @@ class SelectTest extends TestCase
 		$this->select->sql();
 	}
 
-	public function testIntoDumpfile()
+	public function testIntoDumpfile() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -193,7 +193,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testIntoDumpfileFileExists()
+	public function testIntoDumpfileFileExists() : void
 	{
 		$this->selectAllFrom('t1');
 		$this->expectException(\LogicException::class);
@@ -201,7 +201,7 @@ class SelectTest extends TestCase
 		$this->select->intoDumpfile(__FILE__)->sql();
 	}
 
-	public function testLockForUpdate()
+	public function testLockForUpdate() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -214,7 +214,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testInvalidLockForUpdateWait()
+	public function testInvalidLockForUpdateWait() : void
 	{
 		$this->selectAllFrom('t1');
 		$this->expectException(\LogicException::class);
@@ -222,7 +222,7 @@ class SelectTest extends TestCase
 		$this->select->lockForUpdate(-1)->sql();
 	}
 
-	public function testLockInShareMode()
+	public function testLockInShareMode() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -235,7 +235,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testInvalidLockInShareModeWait()
+	public function testInvalidLockInShareModeWait() : void
 	{
 		$this->selectAllFrom('t1');
 		$this->expectException(\LogicException::class);
@@ -243,7 +243,7 @@ class SelectTest extends TestCase
 		$this->select->lockInShareMode(-10)->sql();
 	}
 
-	public function testJoin()
+	public function testJoin() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -252,7 +252,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testWhere()
+	public function testWhere() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -261,7 +261,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testHaving()
+	public function testHaving() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -270,7 +270,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testOrderBy()
+	public function testOrderBy() : void
 	{
 		$part = $this->selectAllFrom('t1');
 		$this->assertEquals(
@@ -279,7 +279,7 @@ class SelectTest extends TestCase
 		);
 	}
 
-	public function testRun()
+	public function testRun() : void
 	{
 		$this->createDummyData();
 		$this->selectAllFrom('t1');
