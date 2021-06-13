@@ -11,7 +11,7 @@ class StatementMock extends Statement
 	}
 
 	/**
-	 * @param int      $limit
+	 * @param int $limit
 	 * @param int|null $offset
 	 *
 	 * @return $this

@@ -126,7 +126,7 @@ class LoadData extends Statement
 
 	/**
 	 * @param string $char
-	 * @param bool   $optionally
+	 * @param bool $optionally
 	 *
 	 * @return $this
 	 */

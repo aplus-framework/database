@@ -13,7 +13,7 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Sets the statement options.
 	 *
-	 * @param string $option     One of the OPT_* constants
+	 * @param string $option One of the OPT_* constants
 	 * @param string ...$options Each option value must be one of the OPT_* constants
 	 *
 	 * @return $this
@@ -54,7 +54,7 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Sets the LIMIT clause.
 	 *
-	 * @param int      $limit
+	 * @param int $limit
 	 * @param int|null $offset
 	 *
 	 * @see https://mariadb.com/kb/en/library/limit/
@@ -145,7 +145,7 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders an assignment part.
 	 *
-	 * @param string                        $identifier Identifier/column name
+	 * @param string $identifier Identifier/column name
 	 * @param Closure|float|int|string|null $expression Expression/value
 	 *
 	 * @see renderValue
@@ -164,7 +164,7 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Used when a function requires at least one expression (identifier or value).
 	 *
-	 * @param mixed         $expression
+	 * @param mixed $expression
 	 * @param array|mixed[] $expressions
 	 *
 	 * @return array|mixed[]

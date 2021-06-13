@@ -27,7 +27,7 @@ class Result
 	 * Result constructor.
 	 *
 	 * @param mysqli_result<int,array|false|null> $result
-	 * @param bool                                $buffered
+	 * @param bool $buffered
 	 */
 	public function __construct(mysqli_result $result, bool $buffered)
 	{
@@ -75,7 +75,7 @@ class Result
 	 * @param int $offset The field offset. Must be between zero and the total
 	 *                    number of rows minus one
 	 *
-	 * @throws LogicException       if is an unbuffered result
+	 * @throws LogicException if is an unbuffered result
 	 * @throws OutOfBoundsException for invalid cursor offset
 	 *
 	 * @return bool
@@ -96,7 +96,7 @@ class Result
 
 	/**
 	 * @param string $class
-	 * @param mixed  ...$constructor
+	 * @param mixed ...$constructor
 	 *
 	 * @return $this
 	 */
@@ -111,7 +111,7 @@ class Result
 	 * Fetches the current row as object and move the cursor to the next.
 	 *
 	 * @param string|null $class
-	 * @param mixed       ...$constructor
+	 * @param mixed ...$constructor
 	 *
 	 * @return object|null
 	 */
@@ -130,7 +130,7 @@ class Result
 	 * Fetches all rows as objects.
 	 *
 	 * @param string|null $class
-	 * @param mixed       ...$constructor
+	 * @param mixed ...$constructor
 	 *
 	 * @return array<int,object>
 	 */
@@ -147,9 +147,9 @@ class Result
 	/**
 	 * Fetches a specific row as object and move the cursor to the next.
 	 *
-	 * @param int         $offset
+	 * @param int $offset
 	 * @param string|null $class
-	 * @param mixed       ...$constructor
+	 * @param mixed ...$constructor
 	 *
 	 * @return object|null
 	 */

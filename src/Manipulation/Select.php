@@ -230,7 +230,7 @@ class Select extends Statement
 	/**
 	 * Sets the LIMIT clause.
 	 *
-	 * @param int      $limit
+	 * @param int $limit
 	 * @param int|null $offset
 	 *
 	 * @see https://mariadb.com/kb/en/library/limit/
@@ -243,7 +243,7 @@ class Select extends Statement
 	}
 
 	/**
-	 * @param string                     $name
+	 * @param string $name
 	 * @param bool|float|int|string|null ...$arguments
 	 *
 	 * @see https://mariadb.com/kb/en/library/procedure/
@@ -275,10 +275,10 @@ class Select extends Statement
 	/**
 	 * Exports the result to an external file.
 	 *
-	 * @param string      $filename
+	 * @param string $filename
 	 * @param string|null $charset
-	 * @param array       $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
-	 * @param array       $linesOptions  Each key must be one of the EXP_LINESS_* constants
+	 * @param array $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
+	 * @param array $linesOptions Each key must be one of the EXP_LINESS_* constants
 	 *
 	 * @see https://mariadb.com/kb/en/library/select-into-outfile/
 	 *

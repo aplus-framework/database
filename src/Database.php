@@ -58,11 +58,11 @@ class Database
 	 * Database constructor.
 	 *
 	 * @param array|mixed[]|string $username
-	 * @param string|null          $password
-	 * @param string|null          $schema
-	 * @param string               $host
-	 * @param int                  $port
-	 * @param Logger|null          $logger
+	 * @param string|null $password
+	 * @param string|null $schema
+	 * @param string $host
+	 * @param int $port
+	 * @param Logger|null $logger
 	 *
 	 * @see Database::makeConfig
 	 *
@@ -133,10 +133,10 @@ class Database
 
 	/**
 	 * @param mixed[]|string $username
-	 * @param string|null    $password
-	 * @param string|null    $schema
-	 * @param string         $host
-	 * @param int            $port
+	 * @param string|null $password
+	 * @param string|null $schema
+	 * @param string $host
+	 * @param int $port
 	 *
 	 * @throws Exception
 	 *
@@ -329,7 +329,7 @@ class Database
 	 * Call a DROP TABLE statement.
 	 *
 	 * @param string|null $table
-	 * @param string      ...$tables
+	 * @param string ...$tables
 	 *
 	 * @return DropTable
 	 */
@@ -362,7 +362,7 @@ class Database
 	 * Call a DELETE statement.
 	 *
 	 * @param array|Closure|string|null $reference
-	 * @param array|Closure|string      ...$references
+	 * @param array|Closure|string ...$references
 	 *
 	 * @return Delete
 	 */
@@ -429,7 +429,7 @@ class Database
 	 * Call a SELECT statement.
 	 *
 	 * @param array|Closure|string|null $reference
-	 * @param array|Closure|string      ...$references
+	 * @param array|Closure|string ...$references
 	 *
 	 * @return Select
 	 */
@@ -448,7 +448,7 @@ class Database
 	 * Call a UPDATE statement.
 	 *
 	 * @param array|Closure|string|null $reference
-	 * @param array|Closure|string      ...$references
+	 * @param array|Closure|string ...$references
 	 *
 	 * @return Update
 	 */
@@ -504,7 +504,7 @@ class Database
 	 * Must be: SELECT, SHOW, DESCRIBE or EXPLAIN
 	 *
 	 * @param string $statement
-	 * @param bool   $buffered
+	 * @param bool $buffered
 	 *
 	 * @see https://www.php.net/manual/en/mysqlinfo.concepts.buffering.php
 	 *
@@ -552,7 +552,7 @@ class Database
 	 *
 	 * @param callable $statements
 	 *
-	 * @throws Exception      if statements fail
+	 * @throws Exception if statements fail
 	 * @throws LogicException if transaction already is active
 	 */
 	public function transaction(callable $statements) : void

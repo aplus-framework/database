@@ -23,7 +23,7 @@ class TableDefinition extends DefinitionPart
 	/**
 	 * Adds a column to the Table Definition list.
 	 *
-	 * @param string      $name       Column name
+	 * @param string $name Column name
 	 * @param string|null $changeName New column name. Used on ALTER TABLE CHANGE
 	 *
 	 * @return ColumnDefinition

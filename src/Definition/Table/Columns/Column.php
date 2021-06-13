@@ -24,7 +24,7 @@ abstract class Column extends DefinitionPart
 	/**
 	 * Column constructor.
 	 *
-	 * @param Database                   $database
+	 * @param Database $database
 	 * @param bool|float|int|string|null ...$length
 	 */
 	public function __construct(Database $database, bool | float | int | string | null ...$length)

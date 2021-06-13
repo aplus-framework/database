@@ -12,9 +12,9 @@ trait Having
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column    Closure for a subquery or a string with the
-	 *                                                 column name
-	 * @param string                        $operator
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
+	 * @param string $operator
 	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
@@ -30,9 +30,9 @@ trait Having
 	/**
 	 * Appends a "OR $column $operator ...$values" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column    Closure for a subquery or a string with the
-	 *                                                 column name
-	 * @param string                        $operator
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
+	 * @param string $operator
 	 * @param Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
@@ -48,8 +48,8 @@ trait Having
 	/**
 	 * Appends a "AND $column = $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/equal/
@@ -64,8 +64,8 @@ trait Having
 	/**
 	 * Appends a "OR $column = $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/equal/
@@ -80,8 +80,8 @@ trait Having
 	/**
 	 * Appends a "AND $column != $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-equal/
@@ -96,8 +96,8 @@ trait Having
 	/**
 	 * Appends a "OR $column != $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-equal/
@@ -112,8 +112,8 @@ trait Having
 	/**
 	 * Appends a "AND $column <=> $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/null-safe-equal/
@@ -130,8 +130,8 @@ trait Having
 	/**
 	 * Appends a "OR $column <=> $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/null-safe-equal/
@@ -148,8 +148,8 @@ trait Having
 	/**
 	 * Appends a "AND $column < $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than/
@@ -164,8 +164,8 @@ trait Having
 	/**
 	 * Appends a "OR $column < $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than/
@@ -180,8 +180,8 @@ trait Having
 	/**
 	 * Appends a "AND $column <= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than-or-equal/
@@ -198,8 +198,8 @@ trait Having
 	/**
 	 * Appends a "OR $column <= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than-or-equal/
@@ -216,8 +216,8 @@ trait Having
 	/**
 	 * Appends a "AND $column > $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than/
@@ -232,8 +232,8 @@ trait Having
 	/**
 	 * Appends a "OR $column > $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than/
@@ -250,8 +250,8 @@ trait Having
 	/**
 	 * Appends a "AND $column >= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
@@ -268,8 +268,8 @@ trait Having
 	/**
 	 * Appends a "OR $column >= $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
@@ -286,8 +286,8 @@ trait Having
 	/**
 	 * Appends a "AND $column LIKE $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/like/
@@ -302,8 +302,8 @@ trait Having
 	/**
 	 * Appends a "OR $column LIKE $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/like/
@@ -318,8 +318,8 @@ trait Having
 	/**
 	 * Appends a "AND $column NOT LIKE" $value condition.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-like/
@@ -334,8 +334,8 @@ trait Having
 	/**
 	 * Appends a "OR $column NOT LIKE $value" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-like/
@@ -350,8 +350,8 @@ trait Having
 	/**
 	 * Appends a "AND $column IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column    Closure for a subquery or a string with the
-	 *                                                 column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
 	 *
@@ -371,8 +371,8 @@ trait Having
 	/**
 	 * Appends a "OR $column IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column    Closure for a subquery or a string with the
-	 *                                                 column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
 	 *
@@ -392,8 +392,8 @@ trait Having
 	/**
 	 * Appends a "AND $column NOT IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column    Closure for a subquery or a string with the
-	 *                                                 column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
 	 *
@@ -413,8 +413,8 @@ trait Having
 	/**
 	 * Appends a "OR $column NOT IN (...$values)" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column    Closure for a subquery or a string with the
-	 *                                                 column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
 	 *
@@ -434,8 +434,8 @@ trait Having
 	/**
 	 * Appends a "AND $column BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
 	 *
@@ -454,8 +454,8 @@ trait Having
 	/**
 	 * Appends a "OR $column BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
 	 *
@@ -474,8 +474,8 @@ trait Having
 	/**
 	 * Appends a "AND $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
 	 *
@@ -494,8 +494,8 @@ trait Having
 	/**
 	 * Appends a "OR $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
 	 *
-	 * @param Closure|string                $column Closure for a subquery or a string with the
-	 *                                              column name
+	 * @param Closure|string $column Closure for a subquery or a string with the
+	 *                               column name
 	 * @param Closure|float|int|string|null $min
 	 * @param Closure|float|int|string|null $max
 	 *
@@ -568,10 +568,10 @@ trait Having
 	}
 
 	/**
-	 * @param string                                         $glue
+	 * @param string $glue
 	 * @param array<int,array|Closure|string>|Closure|string $column
-	 * @param string                                         $operator
-	 * @param array                                          $values
+	 * @param string $operator
+	 * @param array $values
 	 *
 	 * @return $this
 	 */

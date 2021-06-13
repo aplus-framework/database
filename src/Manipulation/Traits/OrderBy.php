@@ -49,9 +49,9 @@ trait OrderBy
 	}
 
 	/**
-	 * @param Closure|string            $column
+	 * @param Closure|string $column
 	 * @param array<int,Closure|string> $columns
-	 * @param string|null               $direction
+	 * @param string|null $direction
 	 *
 	 * @return $this
 	 */

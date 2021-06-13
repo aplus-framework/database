@@ -15,7 +15,7 @@ trait Join
 	/**
 	 * Sets the FROM clause.
 	 *
-	 * @param array<string,Closure|string>|Closure|string $reference     Table reference
+	 * @param array<string,Closure|string>|Closure|string $reference Table reference
 	 * @param array<string,Closure|string>|Closure|string ...$references
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
@@ -58,14 +58,14 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "$type JOIN $table $clause $conditional".
 	 *
-	 * @param Closure|string     $table       Table factor
-	 * @param string             $type        JOIN type. One of: CROSS, INNER, LEFT, LEFT OUTER,
-	 *                                        RIGHT, RIGHT OUTER, NATURAL, NATURAL LEFT, NATURAL
-	 *                                        LEFT OUTER, NATURAL RIGHT, NATURAL RIGHT OUTE or
-	 *                                        empty (same as INNER)
-	 * @param string|null        $clause      Condition clause. NULL if has a NATURAL type
-	 *                                        otherwise
-	 *                                        ON or USING
+	 * @param Closure|string $table Table factor
+	 * @param string $type JOIN type. One of: CROSS, INNER, LEFT, LEFT OUTER,
+	 *                     RIGHT, RIGHT OUTER, NATURAL, NATURAL LEFT, NATURAL
+	 *                     LEFT OUTER, NATURAL RIGHT, NATURAL RIGHT OUTE or
+	 *                     empty (same as INNER)
+	 * @param string|null $clause Condition clause. NULL if has a NATURAL type
+	 *                            otherwise
+	 *                            ON or USING
 	 * @param array|Closure|null $conditional A conditional expression as Closure or the columns
 	 *                                        list as array
 	 *
@@ -83,8 +83,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -96,7 +96,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
@@ -109,8 +109,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "INNER JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -122,7 +122,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "INNER JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
@@ -135,8 +135,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "CROSS JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -148,7 +148,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "CROSS JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
@@ -161,8 +161,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -174,7 +174,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
@@ -187,8 +187,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT OUTER JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -200,7 +200,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "LEFT OUTER JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
@@ -213,8 +213,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -226,7 +226,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
@@ -239,8 +239,8 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT OUTER JOIN $table ON $conditional".
 	 *
-	 * @param Closure|string $table       Table factor
-	 * @param Closure        $conditional Conditional expression
+	 * @param Closure|string $table Table factor
+	 * @param Closure $conditional Conditional expression
 	 *
 	 * @return $this
 	 */
@@ -252,7 +252,7 @@ trait Join
 	/**
 	 * Sets the JOIN clause as "RIGHT OUTER JOIN $table USING ...$columns".
 	 *
-	 * @param Closure|string $table      Table factor
+	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
 	 * @return $this
