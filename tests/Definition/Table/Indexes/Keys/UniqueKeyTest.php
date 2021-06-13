@@ -8,7 +8,7 @@ final class UniqueKeyTest extends TestCase
 	public function testType() : void
 	{
 		$index = new UniqueKey(static::$database, null, 'id');
-		$this->assertSame(
+		self::assertSame(
 			' UNIQUE KEY (`id`)',
 			$index->sql()
 		);

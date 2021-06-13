@@ -26,7 +26,7 @@ final class WithTest extends TestCase
 	public function testWith() : void
 	{
 		$this->prepareWith();
-		$this->assertSame(
+		self::assertSame(
 			"WITH\n`t1` AS (SELECT\n *\n FROM `folks`\n)\nSELECT\n *\n FROM `ancestors`\n",
 			$this->with->sql()
 		);
@@ -36,7 +36,7 @@ final class WithTest extends TestCase
 	{
 		$this->prepareWith();
 		$this->with->options($this->with::OPT_RECURSIVE);
-		$this->assertSame(
+		self::assertSame(
 			"WITH\nRECURSIVE\n`t1` AS (SELECT\n *\n FROM `folks`\n)\nSELECT\n *\n FROM `ancestors`\n",
 			$this->with->sql()
 		);
@@ -48,7 +48,7 @@ final class WithTest extends TestCase
 		$this->with->reference('t2', static function () {
 			return 'select * from foo';
 		});
-		$this->assertSame(
+		self::assertSame(
 			"WITH\n`t1` AS (SELECT\n *\n FROM `folks`\n), `t2` AS (select * from foo)\nSELECT\n *\n FROM `ancestors`\n",
 			$this->with->sql()
 		);
@@ -87,7 +87,7 @@ final class WithTest extends TestCase
 		})->select(static function (Select $select) {
 			return $select->columns('*')->from('t2')->sql();
 		});
-		$this->assertInstanceOf(
+		self::assertInstanceOf(
 			Result::class,
 			$this->with->run()
 		);

@@ -43,7 +43,7 @@ final class CreateTableTest extends TestCase
 				$definition->column('c1')->int(11);
 				$definition->column('c2')->varchar(255);
 			});
-		$this->assertSame(
+		self::assertSame(
 			"CREATE TABLE `t1` (\n  `c1` int(11) NOT NULL,\n  `c2` varchar(255) NOT NULL\n)",
 			$sql->sql()
 		);
@@ -56,7 +56,7 @@ final class CreateTableTest extends TestCase
 				$definition->column('c1')->int();
 				$definition->index()->primaryKey('c1');
 			});
-		$this->assertSame(
+		self::assertSame(
 			"CREATE TABLE `t1` (\n  `c1` int NOT NULL,\n  PRIMARY KEY (`c1`)\n)",
 			$sql->sql()
 		);
@@ -64,7 +64,7 @@ final class CreateTableTest extends TestCase
 
 	public function testIfNotExists() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE TABLE IF NOT EXISTS `t1` (\n  `c1` int NOT NULL\n)",
 			$this->prepare()->ifNotExists()->sql()
 		);
@@ -72,7 +72,7 @@ final class CreateTableTest extends TestCase
 
 	public function testOrReplace() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE OR REPLACE TABLE `t1` (\n  `c1` int NOT NULL\n)",
 			$this->prepare()->orReplace()->sql()
 		);
@@ -100,7 +100,7 @@ final class CreateTableTest extends TestCase
 
 	public function testTemporary() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE TEMPORARY TABLE `t1` (\n  `c1` int NOT NULL\n)",
 			$this->prepare()->temporary()->sql()
 		);
@@ -113,7 +113,7 @@ final class CreateTableTest extends TestCase
 			->definition(static function (TableDefinition $definition) : void {
 				$definition->column('c1')->int(11);
 			});
-		$this->assertSame(0, $statement->run());
+		self::assertSame(0, $statement->run());
 		$this->resetDatabase();
 		$this->expectException(\mysqli_sql_exception::class);
 		$this->expectExceptionMessage("Table 't1' already exists");

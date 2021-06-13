@@ -21,7 +21,7 @@ final class DropTableTest extends TestCase
 
 	public function testSchema() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"DROP TABLE `t1`\n",
 			$this->dropTable->table('t1')->sql()
 		);
@@ -29,7 +29,7 @@ final class DropTableTest extends TestCase
 
 	public function testIfExists() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"DROP TABLE IF EXISTS `t1`\n",
 			$this->dropTable->ifExists()->table('t1')->sql()
 		);
@@ -37,7 +37,7 @@ final class DropTableTest extends TestCase
 
 	public function testWait() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"DROP TABLE `t1`\n WAIT 10\n",
 			$this->dropTable->table('t1')->wait(10)->sql()
 		);
@@ -52,7 +52,7 @@ final class DropTableTest extends TestCase
 
 	public function testCommentToSave() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"DROP TABLE /* Oops! * /; */ `t1`\n",
 			$this->dropTable->table('t1')->commentToSave('Oops! */;')->sql()
 		);
@@ -60,7 +60,7 @@ final class DropTableTest extends TestCase
 
 	public function testTemporary() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"DROP TEMPORARY TABLE `t1`\n",
 			$this->dropTable->table('t1')->temporary()->sql()
 		);
@@ -70,7 +70,7 @@ final class DropTableTest extends TestCase
 	{
 		$statement = $this->dropTable->table('t1');
 		$this->createDummyData();
-		$this->assertSame(0, $statement->run());
+		self::assertSame(0, $statement->run());
 		$this->resetDatabase();
 		$this->expectException(\mysqli_sql_exception::class);
 		$schema = \getenv('DB_SCHEMA');

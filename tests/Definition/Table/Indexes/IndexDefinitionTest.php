@@ -20,19 +20,19 @@ final class IndexDefinitionTest extends TestCase
 
 	public function testInstances() : void
 	{
-		$this->assertInstanceOf(Key::class, $this->definition->key('id'));
-		$this->assertInstanceOf(PrimaryKey::class, $this->definition->primaryKey('id'));
-		$this->assertInstanceOf(UniqueKey::class, $this->definition->uniqueKey('id'));
-		$this->assertInstanceOf(FulltextKey::class, $this->definition->fulltextKey('id'));
-		$this->assertInstanceOf(ForeignKey::class, $this->definition->foreignKey('id'));
-		$this->assertInstanceOf(SpatialKey::class, $this->definition->spatialKey('id'));
+		self::assertInstanceOf(Key::class, $this->definition->key('id'));
+		self::assertInstanceOf(PrimaryKey::class, $this->definition->primaryKey('id'));
+		self::assertInstanceOf(UniqueKey::class, $this->definition->uniqueKey('id'));
+		self::assertInstanceOf(FulltextKey::class, $this->definition->fulltextKey('id'));
+		self::assertInstanceOf(ForeignKey::class, $this->definition->foreignKey('id'));
+		self::assertInstanceOf(SpatialKey::class, $this->definition->spatialKey('id'));
 	}
 
 	public function testSql() : void
 	{
 		$this->definition->primaryKey('id');
 		$this->definition->uniqueKey('email');
-		$this->assertSame(
+		self::assertSame(
 			' UNIQUE KEY (`email`)',
 			$this->definition->sql()
 		);

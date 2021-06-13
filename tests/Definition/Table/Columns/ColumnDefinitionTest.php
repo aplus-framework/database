@@ -51,90 +51,90 @@ final class ColumnDefinitionTest extends TestCase
 
 	public function testInstances() : void
 	{
-		$this->assertInstanceOf(BigintColumn::class, $this->definition->bigint());
-		$this->assertInstanceOf(BinaryColumn::class, $this->definition->binary());
-		$this->assertInstanceOf(BitColumn::class, $this->definition->bit());
-		$this->assertInstanceOf(BlobColumn::class, $this->definition->blob());
-		$this->assertInstanceOf(BooleanColumn::class, $this->definition->boolean());
-		$this->assertInstanceOf(CharColumn::class, $this->definition->char());
-		$this->assertInstanceOf(DateColumn::class, $this->definition->date());
-		$this->assertInstanceOf(DatetimeColumn::class, $this->definition->datetime());
-		$this->assertInstanceOf(DecimalColumn::class, $this->definition->decimal());
-		$this->assertInstanceOf(EnumColumn::class, $this->definition->enum('a'));
-		$this->assertInstanceOf(FloatColumn::class, $this->definition->float());
-		$this->assertInstanceOf(GeometryColumn::class, $this->definition->geometry());
-		$this->assertInstanceOf(
+		self::assertInstanceOf(BigintColumn::class, $this->definition->bigint());
+		self::assertInstanceOf(BinaryColumn::class, $this->definition->binary());
+		self::assertInstanceOf(BitColumn::class, $this->definition->bit());
+		self::assertInstanceOf(BlobColumn::class, $this->definition->blob());
+		self::assertInstanceOf(BooleanColumn::class, $this->definition->boolean());
+		self::assertInstanceOf(CharColumn::class, $this->definition->char());
+		self::assertInstanceOf(DateColumn::class, $this->definition->date());
+		self::assertInstanceOf(DatetimeColumn::class, $this->definition->datetime());
+		self::assertInstanceOf(DecimalColumn::class, $this->definition->decimal());
+		self::assertInstanceOf(EnumColumn::class, $this->definition->enum('a'));
+		self::assertInstanceOf(FloatColumn::class, $this->definition->float());
+		self::assertInstanceOf(GeometryColumn::class, $this->definition->geometry());
+		self::assertInstanceOf(
 			GeometryCollectionColumn::class,
 			$this->definition->geometrycollection()
 		);
-		$this->assertInstanceOf(IntColumn::class, $this->definition->int());
-		$this->assertInstanceOf(JsonColumn::class, $this->definition->json());
-		$this->assertInstanceOf(LinestringColumn::class, $this->definition->linestring());
-		$this->assertInstanceOf(LongblobColumn::class, $this->definition->longblob());
-		$this->assertInstanceOf(LongtextColumn::class, $this->definition->longtext());
-		$this->assertInstanceOf(MediumblobColumn::class, $this->definition->mediumblob());
-		$this->assertInstanceOf(MediumintColumn::class, $this->definition->mediumint());
-		$this->assertInstanceOf(MediumtextColumn::class, $this->definition->mediumtext());
-		$this->assertInstanceOf(MultilinestringColumn::class, $this->definition->multilinestring());
-		$this->assertInstanceOf(MultipointColumn::class, $this->definition->multipoint());
-		$this->assertInstanceOf(MultipolygonColumn::class, $this->definition->multipolygon());
-		$this->assertInstanceOf(PointColumn::class, $this->definition->point());
-		$this->assertInstanceOf(PolygonColumn::class, $this->definition->polygon());
-		$this->assertInstanceOf(SetColumn::class, $this->definition->set('b'));
-		$this->assertInstanceOf(SmallintColumn::class, $this->definition->smallint());
-		$this->assertInstanceOf(TextColumn::class, $this->definition->text());
-		$this->assertInstanceOf(TimeColumn::class, $this->definition->time());
-		$this->assertInstanceOf(TimestampColumn::class, $this->definition->timestamp());
-		$this->assertInstanceOf(TinyblobColumn::class, $this->definition->tinyblob());
-		$this->assertInstanceOf(TinyintColumn::class, $this->definition->tinyint());
-		$this->assertInstanceOf(TinytextColumn::class, $this->definition->tinytext());
-		$this->assertInstanceOf(VarbinaryColumn::class, $this->definition->varbinary());
-		$this->assertInstanceOf(VarcharColumn::class, $this->definition->varchar());
-		$this->assertInstanceOf(YearColumn::class, $this->definition->year());
+		self::assertInstanceOf(IntColumn::class, $this->definition->int());
+		self::assertInstanceOf(JsonColumn::class, $this->definition->json());
+		self::assertInstanceOf(LinestringColumn::class, $this->definition->linestring());
+		self::assertInstanceOf(LongblobColumn::class, $this->definition->longblob());
+		self::assertInstanceOf(LongtextColumn::class, $this->definition->longtext());
+		self::assertInstanceOf(MediumblobColumn::class, $this->definition->mediumblob());
+		self::assertInstanceOf(MediumintColumn::class, $this->definition->mediumint());
+		self::assertInstanceOf(MediumtextColumn::class, $this->definition->mediumtext());
+		self::assertInstanceOf(MultilinestringColumn::class, $this->definition->multilinestring());
+		self::assertInstanceOf(MultipointColumn::class, $this->definition->multipoint());
+		self::assertInstanceOf(MultipolygonColumn::class, $this->definition->multipolygon());
+		self::assertInstanceOf(PointColumn::class, $this->definition->point());
+		self::assertInstanceOf(PolygonColumn::class, $this->definition->polygon());
+		self::assertInstanceOf(SetColumn::class, $this->definition->set('b'));
+		self::assertInstanceOf(SmallintColumn::class, $this->definition->smallint());
+		self::assertInstanceOf(TextColumn::class, $this->definition->text());
+		self::assertInstanceOf(TimeColumn::class, $this->definition->time());
+		self::assertInstanceOf(TimestampColumn::class, $this->definition->timestamp());
+		self::assertInstanceOf(TinyblobColumn::class, $this->definition->tinyblob());
+		self::assertInstanceOf(TinyintColumn::class, $this->definition->tinyint());
+		self::assertInstanceOf(TinytextColumn::class, $this->definition->tinytext());
+		self::assertInstanceOf(VarbinaryColumn::class, $this->definition->varbinary());
+		self::assertInstanceOf(VarcharColumn::class, $this->definition->varchar());
+		self::assertInstanceOf(YearColumn::class, $this->definition->year());
 	}
 
 	public function testTypes() : void
 	{
-		$this->assertSame(' bigint NOT NULL', $this->definition->bigint()->sql());
-		$this->assertSame(' binary NOT NULL', $this->definition->binary()->sql());
-		$this->assertSame(' bit NOT NULL', $this->definition->bit()->sql());
-		$this->assertSame(' blob NOT NULL', $this->definition->blob()->sql());
-		$this->assertSame(' boolean NOT NULL', $this->definition->boolean()->sql());
-		$this->assertSame(' char NOT NULL', $this->definition->char()->sql());
-		$this->assertSame(' date NOT NULL', $this->definition->date()->sql());
-		$this->assertSame(' datetime NOT NULL', $this->definition->datetime()->sql());
-		$this->assertSame(' decimal NOT NULL', $this->definition->decimal()->sql());
-		$this->assertSame(" enum('a') NOT NULL", $this->definition->enum('a')->sql());
-		$this->assertSame(' float NOT NULL', $this->definition->float()->sql());
-		$this->assertSame(' geometry NOT NULL', $this->definition->geometry()->sql());
-		$this->assertSame(
+		self::assertSame(' bigint NOT NULL', $this->definition->bigint()->sql());
+		self::assertSame(' binary NOT NULL', $this->definition->binary()->sql());
+		self::assertSame(' bit NOT NULL', $this->definition->bit()->sql());
+		self::assertSame(' blob NOT NULL', $this->definition->blob()->sql());
+		self::assertSame(' boolean NOT NULL', $this->definition->boolean()->sql());
+		self::assertSame(' char NOT NULL', $this->definition->char()->sql());
+		self::assertSame(' date NOT NULL', $this->definition->date()->sql());
+		self::assertSame(' datetime NOT NULL', $this->definition->datetime()->sql());
+		self::assertSame(' decimal NOT NULL', $this->definition->decimal()->sql());
+		self::assertSame(" enum('a') NOT NULL", $this->definition->enum('a')->sql());
+		self::assertSame(' float NOT NULL', $this->definition->float()->sql());
+		self::assertSame(' geometry NOT NULL', $this->definition->geometry()->sql());
+		self::assertSame(
 			' geometrycollection NOT NULL',
 			$this->definition->geometrycollection()->sql()
 		);
-		$this->assertSame(' int NOT NULL', $this->definition->int()->sql());
-		$this->assertSame(' json NOT NULL', $this->definition->json()->sql());
-		$this->assertSame(' linestring NOT NULL', $this->definition->linestring()->sql());
-		$this->assertSame(' longblob NOT NULL', $this->definition->longblob()->sql());
-		$this->assertSame(' longtext NOT NULL', $this->definition->longtext()->sql());
-		$this->assertSame(' mediumblob NOT NULL', $this->definition->mediumblob()->sql());
-		$this->assertSame(' mediumint NOT NULL', $this->definition->mediumint()->sql());
-		$this->assertSame(' mediumtext NOT NULL', $this->definition->mediumtext()->sql());
-		$this->assertSame(' multilinestring NOT NULL', $this->definition->multilinestring()->sql());
-		$this->assertSame(' multipoint NOT NULL', $this->definition->multipoint()->sql());
-		$this->assertSame(' multipolygon NOT NULL', $this->definition->multipolygon()->sql());
-		$this->assertSame(' point NOT NULL', $this->definition->point()->sql());
-		$this->assertSame(' polygon NOT NULL', $this->definition->polygon()->sql());
-		$this->assertSame(" set('b') NOT NULL", $this->definition->set('b')->sql());
-		$this->assertSame(' smallint NOT NULL', $this->definition->smallint()->sql());
-		$this->assertSame(' text NOT NULL', $this->definition->text()->sql());
-		$this->assertSame(' time NOT NULL', $this->definition->time()->sql());
-		$this->assertSame(' timestamp NOT NULL', $this->definition->timestamp()->sql());
-		$this->assertSame(' tinyblob NOT NULL', $this->definition->tinyblob()->sql());
-		$this->assertSame(' tinyint NOT NULL', $this->definition->tinyint()->sql());
-		$this->assertSame(' tinytext NOT NULL', $this->definition->tinytext()->sql());
-		$this->assertSame(' varbinary NOT NULL', $this->definition->varbinary()->sql());
-		$this->assertSame(' varchar NOT NULL', $this->definition->varchar()->sql());
-		$this->assertSame(' year NOT NULL', $this->definition->year()->sql());
+		self::assertSame(' int NOT NULL', $this->definition->int()->sql());
+		self::assertSame(' json NOT NULL', $this->definition->json()->sql());
+		self::assertSame(' linestring NOT NULL', $this->definition->linestring()->sql());
+		self::assertSame(' longblob NOT NULL', $this->definition->longblob()->sql());
+		self::assertSame(' longtext NOT NULL', $this->definition->longtext()->sql());
+		self::assertSame(' mediumblob NOT NULL', $this->definition->mediumblob()->sql());
+		self::assertSame(' mediumint NOT NULL', $this->definition->mediumint()->sql());
+		self::assertSame(' mediumtext NOT NULL', $this->definition->mediumtext()->sql());
+		self::assertSame(' multilinestring NOT NULL', $this->definition->multilinestring()->sql());
+		self::assertSame(' multipoint NOT NULL', $this->definition->multipoint()->sql());
+		self::assertSame(' multipolygon NOT NULL', $this->definition->multipolygon()->sql());
+		self::assertSame(' point NOT NULL', $this->definition->point()->sql());
+		self::assertSame(' polygon NOT NULL', $this->definition->polygon()->sql());
+		self::assertSame(" set('b') NOT NULL", $this->definition->set('b')->sql());
+		self::assertSame(' smallint NOT NULL', $this->definition->smallint()->sql());
+		self::assertSame(' text NOT NULL', $this->definition->text()->sql());
+		self::assertSame(' time NOT NULL', $this->definition->time()->sql());
+		self::assertSame(' timestamp NOT NULL', $this->definition->timestamp()->sql());
+		self::assertSame(' tinyblob NOT NULL', $this->definition->tinyblob()->sql());
+		self::assertSame(' tinyint NOT NULL', $this->definition->tinyint()->sql());
+		self::assertSame(' tinytext NOT NULL', $this->definition->tinytext()->sql());
+		self::assertSame(' varbinary NOT NULL', $this->definition->varbinary()->sql());
+		self::assertSame(' varchar NOT NULL', $this->definition->varchar()->sql());
+		self::assertSame(' year NOT NULL', $this->definition->year()->sql());
 	}
 
 	public function testBadMethod() : void

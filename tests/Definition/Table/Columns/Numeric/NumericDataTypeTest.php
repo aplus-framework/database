@@ -13,7 +13,7 @@ final class NumericDataTypeTest extends TestCase
 
 	public function testAutoIncrement() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			' mock AUTO_INCREMENT NOT NULL',
 			$this->column->autoIncrement()->sql()
 		);
@@ -21,7 +21,7 @@ final class NumericDataTypeTest extends TestCase
 
 	public function testSigned() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			' mock signed NOT NULL',
 			$this->column->signed()->sql()
 		);
@@ -29,7 +29,7 @@ final class NumericDataTypeTest extends TestCase
 
 	public function testUnsigned() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			' mock unsigned NOT NULL',
 			$this->column->unsigned()->sql()
 		);
@@ -37,7 +37,7 @@ final class NumericDataTypeTest extends TestCase
 
 	public function testZerofill() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			' mock zerofill NOT NULL',
 			$this->column->zerofill()->sql()
 		);
@@ -45,7 +45,7 @@ final class NumericDataTypeTest extends TestCase
 
 	public function testFull() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			' mock unsigned zerofill AUTO_INCREMENT NOT NULL',
 			$this->column->unsigned()->zerofill()->autoIncrement()->sql()
 		);

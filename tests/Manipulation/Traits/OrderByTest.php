@@ -13,17 +13,17 @@ final class OrderByTest extends TestCase
 
 	public function testOrderBy() : void
 	{
-		$this->assertNull($this->statement->renderOrderBy());
+		self::assertNull($this->statement->renderOrderBy());
 		$this->statement->orderBy('c1');
-		$this->assertSame(' ORDER BY `c1`', $this->statement->renderOrderBy());
+		self::assertSame(' ORDER BY `c1`', $this->statement->renderOrderBy());
 		$this->statement->orderBy(static function () {
 			return 'select c2';
 		});
-		$this->assertSame(' ORDER BY `c1`, (select c2)', $this->statement->renderOrderBy());
+		self::assertSame(' ORDER BY `c1`, (select c2)', $this->statement->renderOrderBy());
 		$this->statement->orderBy(static function () {
 			return 'select c3';
 		}, 'c4');
-		$this->assertSame(
+		self::assertSame(
 			' ORDER BY `c1`, (select c2), (select c3), `c4`',
 			$this->statement->renderOrderBy()
 		);
@@ -32,9 +32,9 @@ final class OrderByTest extends TestCase
 	public function testOrderByAsc() : void
 	{
 		$this->statement->orderByAsc('c1');
-		$this->assertSame(' ORDER BY `c1` ASC', $this->statement->renderOrderBy());
+		self::assertSame(' ORDER BY `c1` ASC', $this->statement->renderOrderBy());
 		$this->statement->orderByAsc('c2', 'c3');
-		$this->assertSame(
+		self::assertSame(
 			' ORDER BY `c1` ASC, `c2` ASC, `c3` ASC',
 			$this->statement->renderOrderBy()
 		);
@@ -43,9 +43,9 @@ final class OrderByTest extends TestCase
 	public function testOrderByDesc() : void
 	{
 		$this->statement->orderByDesc('c1');
-		$this->assertSame(' ORDER BY `c1` DESC', $this->statement->renderOrderBy());
+		self::assertSame(' ORDER BY `c1` DESC', $this->statement->renderOrderBy());
 		$this->statement->orderByDesc('c2', 'c3');
-		$this->assertSame(
+		self::assertSame(
 			' ORDER BY `c1` DESC, `c2` DESC, `c3` DESC',
 			$this->statement->renderOrderBy()
 		);
@@ -61,7 +61,7 @@ final class OrderByTest extends TestCase
 		$this->statement->orderByDesc('e', static function () {
 			return 'select "f"';
 		});
-		$this->assertSame(
+		self::assertSame(
 			' ORDER BY `c1`, `c2` ASC, `c3` DESC, `a`, `b`, `c` ASC, `D` ASC, `e` DESC, (select "f") DESC',
 			$this->statement->renderOrderBy()
 		);

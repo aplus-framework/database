@@ -14,25 +14,25 @@ final class HavingTest extends TestCase
 
 	public function testHaving() : void
 	{
-		$this->assertNull($this->statement->renderHaving());
+		self::assertNull($this->statement->renderHaving());
 		$this->statement->having('id', '=', 10);
-		$this->assertSame(' HAVING `id` = 10', $this->statement->renderHaving());
+		self::assertSame(' HAVING `id` = 10', $this->statement->renderHaving());
 		$this->statement->having('name', '=', "'foo");
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` = 10 AND `name` = '\\'foo'",
 			$this->statement->renderHaving()
 		);
 		$this->statement->orHaving('created_at', '>', static function () {
 			return 'NOW() - 60';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->renderHaving()
 		);
 		$this->statement->having(static function (Database $database) {
 			return $database->protectIdentifier('random_table');
 		}, '!=', 'bar');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",
 			$this->statement->renderHaving()
 		);
@@ -41,9 +41,9 @@ final class HavingTest extends TestCase
 	public function testEqual() : void
 	{
 		$this->statement->havingEqual('email', 'user@mail.com');
-		$this->assertSame(" HAVING `email` = 'user@mail.com'", $this->statement->renderHaving());
+		self::assertSame(" HAVING `email` = 'user@mail.com'", $this->statement->renderHaving());
 		$this->statement->orHavingEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` = 'user@mail.com' OR `name` = 'foo'",
 			$this->statement->renderHaving()
 		);
@@ -52,7 +52,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` = 'user@mail.com' OR `name` = 'foo' AND (id) = (10)",
 			$this->statement->renderHaving()
 		);
@@ -61,9 +61,9 @@ final class HavingTest extends TestCase
 	public function testNotEqual() : void
 	{
 		$this->statement->havingNotEqual('email', 'user@mail.com');
-		$this->assertSame(" HAVING `email` != 'user@mail.com'", $this->statement->renderHaving());
+		self::assertSame(" HAVING `email` != 'user@mail.com'", $this->statement->renderHaving());
 		$this->statement->orHavingNotEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` != 'user@mail.com' OR `name` != 'foo'",
 			$this->statement->renderHaving()
 		);
@@ -72,7 +72,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` != 'user@mail.com' OR `name` != 'foo' AND (id) != (10)",
 			$this->statement->renderHaving()
 		);
@@ -81,12 +81,12 @@ final class HavingTest extends TestCase
 	public function testNullSafeEqual() : void
 	{
 		$this->statement->havingNullSafeEqual('email', 'user@mail.com');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` <=> 'user@mail.com'",
 			$this->statement->renderHaving()
 		);
 		$this->statement->orHavingNullSafeEqual('name', null);
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` <=> 'user@mail.com' OR `name` <=> NULL",
 			$this->statement->renderHaving()
 		);
@@ -95,7 +95,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` <=> 'user@mail.com' OR `name` <=> NULL AND (id) <=> (10)",
 			$this->statement->renderHaving()
 		);
@@ -104,9 +104,9 @@ final class HavingTest extends TestCase
 	public function testLessThan() : void
 	{
 		$this->statement->havingLessThan('count', 5);
-		$this->assertSame(' HAVING `count` < 5', $this->statement->renderHaving());
+		self::assertSame(' HAVING `count` < 5', $this->statement->renderHaving());
 		$this->statement->orHavingLessThan('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` < 5 OR `name` < 'foo'",
 			$this->statement->renderHaving()
 		);
@@ -115,7 +115,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` < 5 OR `name` < 'foo' AND (id) < (10)",
 			$this->statement->renderHaving()
 		);
@@ -124,9 +124,9 @@ final class HavingTest extends TestCase
 	public function testLessThanOrEqual() : void
 	{
 		$this->statement->havingLessThanOrEqual('count', 5);
-		$this->assertSame(' HAVING `count` <= 5', $this->statement->renderHaving());
+		self::assertSame(' HAVING `count` <= 5', $this->statement->renderHaving());
 		$this->statement->orHavingLessThanOrEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` <= 5 OR `name` <= 'foo'",
 			$this->statement->renderHaving()
 		);
@@ -135,7 +135,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` <= 5 OR `name` <= 'foo' AND (id) <= (10)",
 			$this->statement->renderHaving()
 		);
@@ -144,9 +144,9 @@ final class HavingTest extends TestCase
 	public function testGreaterThan() : void
 	{
 		$this->statement->havingGreaterThan('count', 5);
-		$this->assertSame(' HAVING `count` > 5', $this->statement->renderHaving());
+		self::assertSame(' HAVING `count` > 5', $this->statement->renderHaving());
 		$this->statement->orHavingGreaterThan('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` > 5 OR `name` > 'foo'",
 			$this->statement->renderHaving()
 		);
@@ -155,7 +155,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` > 5 OR `name` > 'foo' AND (id) > (10)",
 			$this->statement->renderHaving()
 		);
@@ -164,9 +164,9 @@ final class HavingTest extends TestCase
 	public function testGreaterThanOrEqual() : void
 	{
 		$this->statement->havingGreaterThanOrEqual('count', 5);
-		$this->assertSame(' HAVING `count` >= 5', $this->statement->renderHaving());
+		self::assertSame(' HAVING `count` >= 5', $this->statement->renderHaving());
 		$this->statement->orHavingGreaterThanOrEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` >= 5 OR `name` >= 'foo'",
 			$this->statement->renderHaving()
 		);
@@ -175,7 +175,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `count` >= 5 OR `name` >= 'foo' AND (id) >= (10)",
 			$this->statement->renderHaving()
 		);
@@ -184,9 +184,9 @@ final class HavingTest extends TestCase
 	public function testLike() : void
 	{
 		$this->statement->havingLike('email', '%@mail.com');
-		$this->assertSame(" HAVING `email` LIKE '%@mail.com'", $this->statement->renderHaving());
+		self::assertSame(" HAVING `email` LIKE '%@mail.com'", $this->statement->renderHaving());
 		$this->statement->orHavingLike('name', 'foo%');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` LIKE '%@mail.com' OR `name` LIKE 'foo%'",
 			$this->statement->renderHaving()
 		);
@@ -195,7 +195,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` LIKE '%@mail.com' OR `name` LIKE 'foo%' AND (id) LIKE (10)",
 			$this->statement->renderHaving()
 		);
@@ -204,12 +204,12 @@ final class HavingTest extends TestCase
 	public function testNotLike() : void
 	{
 		$this->statement->havingNotLike('email', '%@mail.com');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` NOT LIKE '%@mail.com'",
 			$this->statement->renderHaving()
 		);
 		$this->statement->orHavingNotLike('name', 'foo%');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%'",
 			$this->statement->renderHaving()
 		);
@@ -218,7 +218,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%' AND (id) NOT LIKE (10)",
 			$this->statement->renderHaving()
 		);
@@ -227,9 +227,9 @@ final class HavingTest extends TestCase
 	public function testIn() : void
 	{
 		$this->statement->havingIn('id', 1, 2, 8);
-		$this->assertSame(' HAVING `id` IN (1, 2, 8)', $this->statement->renderHaving());
+		self::assertSame(' HAVING `id` IN (1, 2, 8)', $this->statement->renderHaving());
 		$this->statement->orHavingIn('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` IN (1, 2, 8) OR `code` IN ('abc', 'def')",
 			$this->statement->renderHaving()
 		);
@@ -238,7 +238,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM foo';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` IN (1, 2, 8) OR `code` IN ('abc', 'def') AND (id) IN ((SELECT * FROM foo))",
 			$this->statement->renderHaving()
 		);
@@ -247,9 +247,9 @@ final class HavingTest extends TestCase
 	public function testNotIn() : void
 	{
 		$this->statement->havingNotIn('id', 1, 2, 8);
-		$this->assertSame(' HAVING `id` NOT IN (1, 2, 8)', $this->statement->renderHaving());
+		self::assertSame(' HAVING `id` NOT IN (1, 2, 8)', $this->statement->renderHaving());
 		$this->statement->orHavingNotIn('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def')",
 			$this->statement->renderHaving()
 		);
@@ -258,7 +258,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM foo';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def') AND (id) NOT IN ((SELECT * FROM foo))",
 			$this->statement->renderHaving()
 		);
@@ -267,9 +267,9 @@ final class HavingTest extends TestCase
 	public function testBetween() : void
 	{
 		$this->statement->havingBetween('id', 1, 10);
-		$this->assertSame(' HAVING `id` BETWEEN 1 AND 10', $this->statement->renderHaving());
+		self::assertSame(' HAVING `id` BETWEEN 1 AND 10', $this->statement->renderHaving());
 		$this->statement->orHavingBetween('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def'",
 			$this->statement->renderHaving()
 		);
@@ -280,7 +280,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM bar';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def' AND (id) BETWEEN (SELECT * FROM foo) AND (SELECT * FROM bar)",
 			$this->statement->renderHaving()
 		);
@@ -289,9 +289,9 @@ final class HavingTest extends TestCase
 	public function testNotBetween() : void
 	{
 		$this->statement->havingNotBetween('id', 1, 10);
-		$this->assertSame(' HAVING `id` NOT BETWEEN 1 AND 10', $this->statement->renderHaving());
+		self::assertSame(' HAVING `id` NOT BETWEEN 1 AND 10', $this->statement->renderHaving());
 		$this->statement->orHavingNotBetween('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def'",
 			$this->statement->renderHaving()
 		);
@@ -302,7 +302,7 @@ final class HavingTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM bar';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" HAVING `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def' AND (id) NOT BETWEEN (SELECT * FROM foo) AND (SELECT * FROM bar)",
 			$this->statement->renderHaving()
 		);
@@ -311,16 +311,16 @@ final class HavingTest extends TestCase
 	public function testIsNull() : void
 	{
 		$this->statement->havingIsNull('email');
-		$this->assertSame(' HAVING `email` IS NULL', $this->statement->renderHaving());
+		self::assertSame(' HAVING `email` IS NULL', $this->statement->renderHaving());
 		$this->statement->orHavingIsNull('name');
-		$this->assertSame(
+		self::assertSame(
 			' HAVING `email` IS NULL OR `name` IS NULL',
 			$this->statement->renderHaving()
 		);
 		$this->statement->havingIsNull(static function () {
 			return 'id';
 		});
-		$this->assertSame(
+		self::assertSame(
 			' HAVING `email` IS NULL OR `name` IS NULL AND (id) IS NULL',
 			$this->statement->renderHaving()
 		);
@@ -329,16 +329,16 @@ final class HavingTest extends TestCase
 	public function testIsNotNull() : void
 	{
 		$this->statement->havingIsNotNull('email');
-		$this->assertSame(' HAVING `email` IS NOT NULL', $this->statement->renderHaving());
+		self::assertSame(' HAVING `email` IS NOT NULL', $this->statement->renderHaving());
 		$this->statement->orHavingIsNotNull('name');
-		$this->assertSame(
+		self::assertSame(
 			' HAVING `email` IS NOT NULL OR `name` IS NOT NULL',
 			$this->statement->renderHaving()
 		);
 		$this->statement->havingIsNotNull(static function () {
 			return 'id';
 		});
-		$this->assertSame(
+		self::assertSame(
 			' HAVING `email` IS NOT NULL OR `name` IS NOT NULL AND (id) IS NOT NULL',
 			$this->statement->renderHaving()
 		);

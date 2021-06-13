@@ -14,25 +14,25 @@ final class WhereTest extends TestCase
 
 	public function testWhere() : void
 	{
-		$this->assertNull($this->statement->renderWhere());
+		self::assertNull($this->statement->renderWhere());
 		$this->statement->where('id', '=', 10);
-		$this->assertSame(' WHERE `id` = 10', $this->statement->renderWhere());
+		self::assertSame(' WHERE `id` = 10', $this->statement->renderWhere());
 		$this->statement->where('name', '=', "'foo");
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` = 10 AND `name` = '\\'foo'",
 			$this->statement->renderWhere()
 		);
 		$this->statement->orWhere('created_at', '>', static function () {
 			return 'NOW() - 60';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60)",
 			$this->statement->renderWhere()
 		);
 		$this->statement->where(static function (Database $database) {
 			return $database->protectIdentifier('random_table');
 		}, '!=', 'bar');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` = 10 AND `name` = '\\'foo' OR `created_at` > (NOW() - 60) AND (`random_table`) != 'bar'",
 			$this->statement->renderWhere()
 		);
@@ -83,12 +83,12 @@ final class WhereTest extends TestCase
 	public function testMatch() : void
 	{
 		$this->statement->whereMatch(['title'], 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo')",
 			$this->statement->renderWhere()
 		);
 		$this->statement->orWhereMatch(['content', 'description'], ['bar', "ba'z"]);
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo') OR MATCH (`content`, `description`) AGAINST ('bar, ba\\'z')",
 			$this->statement->renderWhere()
 		);
@@ -97,7 +97,7 @@ final class WhereTest extends TestCase
 	public function testMatchWithStringParams() : void
 	{
 		$this->statement->whereMatch('title', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo')",
 			$this->statement->renderWhere()
 		);
@@ -110,7 +110,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return "'foo'";
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH ((title)) AGAINST (('foo'))",
 			$this->statement->renderWhere()
 		);
@@ -119,7 +119,7 @@ final class WhereTest extends TestCase
 	public function testMatchWithQueryExpansion() : void
 	{
 		$this->statement->whereMatchWithQueryExpansion(['title'], 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo' WITH QUERY EXPANSION)",
 			$this->statement->renderWhere()
 		);
@@ -127,7 +127,7 @@ final class WhereTest extends TestCase
 			['content', 'description'],
 			['bar', "ba'z"]
 		);
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo' WITH QUERY EXPANSION) OR MATCH (`content`, `description`) AGAINST ('bar, ba\\'z' WITH QUERY EXPANSION)",
 			$this->statement->renderWhere()
 		);
@@ -136,12 +136,12 @@ final class WhereTest extends TestCase
 	public function testWhereMatchInBooleanMode() : void
 	{
 		$this->statement->whereMatchInBooleanMode(['title'], 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo' IN BOOLEAN MODE)",
 			$this->statement->renderWhere()
 		);
 		$this->statement->orWhereMatchInBooleanMode(['content', 'description'], ['+bar', "-ba'z"]);
-		$this->assertSame(
+		self::assertSame(
 			" WHERE MATCH (`title`) AGAINST ('foo' IN BOOLEAN MODE) OR MATCH (`content`, `description`) AGAINST ('+bar, -ba\\'z' IN BOOLEAN MODE)",
 			$this->statement->renderWhere()
 		);
@@ -150,9 +150,9 @@ final class WhereTest extends TestCase
 	public function testEqual() : void
 	{
 		$this->statement->whereEqual('email', 'user@mail.com');
-		$this->assertSame(" WHERE `email` = 'user@mail.com'", $this->statement->renderWhere());
+		self::assertSame(" WHERE `email` = 'user@mail.com'", $this->statement->renderWhere());
 		$this->statement->orWhereEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` = 'user@mail.com' OR `name` = 'foo'",
 			$this->statement->renderWhere()
 		);
@@ -161,7 +161,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` = 'user@mail.com' OR `name` = 'foo' AND (id) = (10)",
 			$this->statement->renderWhere()
 		);
@@ -170,9 +170,9 @@ final class WhereTest extends TestCase
 	public function testNotEqual() : void
 	{
 		$this->statement->whereNotEqual('email', 'user@mail.com');
-		$this->assertSame(" WHERE `email` != 'user@mail.com'", $this->statement->renderWhere());
+		self::assertSame(" WHERE `email` != 'user@mail.com'", $this->statement->renderWhere());
 		$this->statement->orWhereNotEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` != 'user@mail.com' OR `name` != 'foo'",
 			$this->statement->renderWhere()
 		);
@@ -181,7 +181,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` != 'user@mail.com' OR `name` != 'foo' AND (id) != (10)",
 			$this->statement->renderWhere()
 		);
@@ -190,9 +190,9 @@ final class WhereTest extends TestCase
 	public function testNullSafeEqual() : void
 	{
 		$this->statement->whereNullSafeEqual('email', 'user@mail.com');
-		$this->assertSame(" WHERE `email` <=> 'user@mail.com'", $this->statement->renderWhere());
+		self::assertSame(" WHERE `email` <=> 'user@mail.com'", $this->statement->renderWhere());
 		$this->statement->orWhereNullSafeEqual('name', null);
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` <=> 'user@mail.com' OR `name` <=> NULL",
 			$this->statement->renderWhere()
 		);
@@ -201,7 +201,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` <=> 'user@mail.com' OR `name` <=> NULL AND (id) <=> (10)",
 			$this->statement->renderWhere()
 		);
@@ -210,9 +210,9 @@ final class WhereTest extends TestCase
 	public function testLessThan() : void
 	{
 		$this->statement->whereLessThan('count', 5);
-		$this->assertSame(' WHERE `count` < 5', $this->statement->renderWhere());
+		self::assertSame(' WHERE `count` < 5', $this->statement->renderWhere());
 		$this->statement->orWhereLessThan('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` < 5 OR `name` < 'foo'",
 			$this->statement->renderWhere()
 		);
@@ -221,7 +221,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` < 5 OR `name` < 'foo' AND (id) < (10)",
 			$this->statement->renderWhere()
 		);
@@ -230,9 +230,9 @@ final class WhereTest extends TestCase
 	public function testLessThanOrEqual() : void
 	{
 		$this->statement->whereLessThanOrEqual('count', 5);
-		$this->assertSame(' WHERE `count` <= 5', $this->statement->renderWhere());
+		self::assertSame(' WHERE `count` <= 5', $this->statement->renderWhere());
 		$this->statement->orWhereLessThanOrEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` <= 5 OR `name` <= 'foo'",
 			$this->statement->renderWhere()
 		);
@@ -241,7 +241,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` <= 5 OR `name` <= 'foo' AND (id) <= (10)",
 			$this->statement->renderWhere()
 		);
@@ -250,9 +250,9 @@ final class WhereTest extends TestCase
 	public function testGreaterThan() : void
 	{
 		$this->statement->whereGreaterThan('count', 5);
-		$this->assertSame(' WHERE `count` > 5', $this->statement->renderWhere());
+		self::assertSame(' WHERE `count` > 5', $this->statement->renderWhere());
 		$this->statement->orWhereGreaterThan('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` > 5 OR `name` > 'foo'",
 			$this->statement->renderWhere()
 		);
@@ -261,7 +261,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` > 5 OR `name` > 'foo' AND (id) > (10)",
 			$this->statement->renderWhere()
 		);
@@ -270,9 +270,9 @@ final class WhereTest extends TestCase
 	public function testGreaterThanOrEqual() : void
 	{
 		$this->statement->whereGreaterThanOrEqual('count', 5);
-		$this->assertSame(' WHERE `count` >= 5', $this->statement->renderWhere());
+		self::assertSame(' WHERE `count` >= 5', $this->statement->renderWhere());
 		$this->statement->orWhereGreaterThanOrEqual('name', 'foo');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` >= 5 OR `name` >= 'foo'",
 			$this->statement->renderWhere()
 		);
@@ -281,7 +281,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `count` >= 5 OR `name` >= 'foo' AND (id) >= (10)",
 			$this->statement->renderWhere()
 		);
@@ -290,9 +290,9 @@ final class WhereTest extends TestCase
 	public function testLike() : void
 	{
 		$this->statement->whereLike('email', '%@mail.com');
-		$this->assertSame(" WHERE `email` LIKE '%@mail.com'", $this->statement->renderWhere());
+		self::assertSame(" WHERE `email` LIKE '%@mail.com'", $this->statement->renderWhere());
 		$this->statement->orWhereLike('name', 'foo%');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` LIKE '%@mail.com' OR `name` LIKE 'foo%'",
 			$this->statement->renderWhere()
 		);
@@ -301,7 +301,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` LIKE '%@mail.com' OR `name` LIKE 'foo%' AND (id) LIKE (10)",
 			$this->statement->renderWhere()
 		);
@@ -310,12 +310,12 @@ final class WhereTest extends TestCase
 	public function testNotLike() : void
 	{
 		$this->statement->whereNotLike('email', '%@mail.com');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` NOT LIKE '%@mail.com'",
 			$this->statement->renderWhere()
 		);
 		$this->statement->orWhereNotLike('name', 'foo%');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%'",
 			$this->statement->renderWhere()
 		);
@@ -324,7 +324,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 10;
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `email` NOT LIKE '%@mail.com' OR `name` NOT LIKE 'foo%' AND (id) NOT LIKE (10)",
 			$this->statement->renderWhere()
 		);
@@ -333,9 +333,9 @@ final class WhereTest extends TestCase
 	public function testIn() : void
 	{
 		$this->statement->whereIn('id', 1, 2, 8);
-		$this->assertSame(' WHERE `id` IN (1, 2, 8)', $this->statement->renderWhere());
+		self::assertSame(' WHERE `id` IN (1, 2, 8)', $this->statement->renderWhere());
 		$this->statement->orWhereIn('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` IN (1, 2, 8) OR `code` IN ('abc', 'def')",
 			$this->statement->renderWhere()
 		);
@@ -344,7 +344,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM foo';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` IN (1, 2, 8) OR `code` IN ('abc', 'def') AND (id) IN ((SELECT * FROM foo))",
 			$this->statement->renderWhere()
 		);
@@ -353,9 +353,9 @@ final class WhereTest extends TestCase
 	public function testNotIn() : void
 	{
 		$this->statement->whereNotIn('id', 1, 2, 8);
-		$this->assertSame(' WHERE `id` NOT IN (1, 2, 8)', $this->statement->renderWhere());
+		self::assertSame(' WHERE `id` NOT IN (1, 2, 8)', $this->statement->renderWhere());
 		$this->statement->orWhereNotIn('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def')",
 			$this->statement->renderWhere()
 		);
@@ -364,7 +364,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM foo';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` NOT IN (1, 2, 8) OR `code` NOT IN ('abc', 'def') AND (id) NOT IN ((SELECT * FROM foo))",
 			$this->statement->renderWhere()
 		);
@@ -373,9 +373,9 @@ final class WhereTest extends TestCase
 	public function testBetween() : void
 	{
 		$this->statement->whereBetween('id', 1, 10);
-		$this->assertSame(' WHERE `id` BETWEEN 1 AND 10', $this->statement->renderWhere());
+		self::assertSame(' WHERE `id` BETWEEN 1 AND 10', $this->statement->renderWhere());
 		$this->statement->orWhereBetween('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def'",
 			$this->statement->renderWhere()
 		);
@@ -386,7 +386,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM bar';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` BETWEEN 1 AND 10 OR `code` BETWEEN 'abc' AND 'def' AND (id) BETWEEN (SELECT * FROM foo) AND (SELECT * FROM bar)",
 			$this->statement->renderWhere()
 		);
@@ -395,9 +395,9 @@ final class WhereTest extends TestCase
 	public function testNotBetween() : void
 	{
 		$this->statement->whereNotBetween('id', 1, 10);
-		$this->assertSame(' WHERE `id` NOT BETWEEN 1 AND 10', $this->statement->renderWhere());
+		self::assertSame(' WHERE `id` NOT BETWEEN 1 AND 10', $this->statement->renderWhere());
 		$this->statement->orWhereNotBetween('code', 'abc', 'def');
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def'",
 			$this->statement->renderWhere()
 		);
@@ -408,7 +408,7 @@ final class WhereTest extends TestCase
 		}, static function () {
 			return 'SELECT * FROM bar';
 		});
-		$this->assertSame(
+		self::assertSame(
 			" WHERE `id` NOT BETWEEN 1 AND 10 OR `code` NOT BETWEEN 'abc' AND 'def' AND (id) NOT BETWEEN (SELECT * FROM foo) AND (SELECT * FROM bar)",
 			$this->statement->renderWhere()
 		);
@@ -417,16 +417,16 @@ final class WhereTest extends TestCase
 	public function testIsNull() : void
 	{
 		$this->statement->whereIsNull('email');
-		$this->assertSame(' WHERE `email` IS NULL', $this->statement->renderWhere());
+		self::assertSame(' WHERE `email` IS NULL', $this->statement->renderWhere());
 		$this->statement->orWhereIsNull('name');
-		$this->assertSame(
+		self::assertSame(
 			' WHERE `email` IS NULL OR `name` IS NULL',
 			$this->statement->renderWhere()
 		);
 		$this->statement->whereIsNull(static function () {
 			return 'id';
 		});
-		$this->assertSame(
+		self::assertSame(
 			' WHERE `email` IS NULL OR `name` IS NULL AND (id) IS NULL',
 			$this->statement->renderWhere()
 		);
@@ -435,16 +435,16 @@ final class WhereTest extends TestCase
 	public function testIsNotNull() : void
 	{
 		$this->statement->whereIsNotNull('email');
-		$this->assertSame(' WHERE `email` IS NOT NULL', $this->statement->renderWhere());
+		self::assertSame(' WHERE `email` IS NOT NULL', $this->statement->renderWhere());
 		$this->statement->orWhereIsNotNull('name');
-		$this->assertSame(
+		self::assertSame(
 			' WHERE `email` IS NOT NULL OR `name` IS NOT NULL',
 			$this->statement->renderWhere()
 		);
 		$this->statement->whereIsNotNull(static function () {
 			return 'id';
 		});
-		$this->assertSame(
+		self::assertSame(
 			' WHERE `email` IS NOT NULL OR `name` IS NOT NULL AND (id) IS NOT NULL',
 			$this->statement->renderWhere()
 		);
@@ -469,7 +469,7 @@ final class WhereTest extends TestCase
 			->orWhere('not between', 'Not Between', 1, 5)
 			->where('is null', 'Is Null')
 			->orWhere('is not null', 'Is Not Null');
-		$this->assertSame(
+		self::assertSame(
 			' WHERE `=` = 1'
 			. ' OR `<=>` <=> 1'
 			. ' AND `!=` != 1'

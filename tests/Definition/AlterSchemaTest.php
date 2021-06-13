@@ -21,7 +21,7 @@ final class AlterSchemaTest extends TestCase
 
 	public function testEmptySchema() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"ALTER SCHEMA\n CHARACTER SET = 'utf8'\n",
 			$this->alterSchema->charset('utf8')->sql()
 		);
@@ -29,7 +29,7 @@ final class AlterSchemaTest extends TestCase
 
 	public function testCharset() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"ALTER SCHEMA `app`\n CHARACTER SET = 'utf8'\n",
 			$this->alterSchema->schema('app')->charset('utf8')->sql()
 		);
@@ -37,7 +37,7 @@ final class AlterSchemaTest extends TestCase
 
 	public function testCollate() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"ALTER SCHEMA `app`\n COLLATE = 'utf8_general_ci'\n",
 			$this->alterSchema->schema('app')->collate('utf8_general_ci')->sql()
 		);
@@ -45,7 +45,7 @@ final class AlterSchemaTest extends TestCase
 
 	public function testUpgrade() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"ALTER SCHEMA `#mysql50#app`\n UPGRADE DATA DIRECTORY NAME\n",
 			$this->alterSchema->schema('app')->upgrade()->sql()
 		);
@@ -62,7 +62,7 @@ final class AlterSchemaTest extends TestCase
 
 	public function testFullSql() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"ALTER SCHEMA `app`\n CHARACTER SET = 'utf8'\n COLLATE = 'utf8_general_ci'\n",
 			$this->alterSchema
 				->schema('app')
@@ -76,7 +76,7 @@ final class AlterSchemaTest extends TestCase
 	{
 		static::$database->dropSchema()->schema('app')->ifExists()->run();
 		static::$database->createSchema()->schema('app')->charset('utf8')->run();
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->alterSchema->schema('app')->charset('utf8mb4')->run()
 		);

@@ -8,7 +8,7 @@ final class KeyTest extends TestCase
 	public function testType() : void
 	{
 		$index = new Key(static::$database, null, 'id');
-		$this->assertSame(
+		self::assertSame(
 			' KEY (`id`)',
 			$index->sql()
 		);

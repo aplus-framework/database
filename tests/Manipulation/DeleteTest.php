@@ -16,17 +16,17 @@ final class DeleteTest extends TestCase
 	{
 		$this->delete->from('t1');
 		$this->delete->options($this->delete::OPT_LOW_PRIORITY);
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n LOW_PRIORITY\n FROM `t1`\n",
 			$this->delete->sql()
 		);
 		$this->delete->options($this->delete::OPT_IGNORE);
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n IGNORE\n FROM `t1`\n",
 			$this->delete->sql()
 		);
 		$this->delete->options($this->delete::OPT_LOW_PRIORITY, $this->delete::OPT_IGNORE);
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n LOW_PRIORITY IGNORE\n FROM `t1`\n",
 			$this->delete->sql()
 		);
@@ -45,12 +45,12 @@ final class DeleteTest extends TestCase
 	{
 		$this->delete->from('t1');
 		$this->delete->limit(1);
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n FROM `t1`\n LIMIT 1\n",
 			$this->delete->sql()
 		);
 		$this->delete->limit('235'); // @phpstan-ignore-line
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n FROM `t1`\n LIMIT 235\n",
 			$this->delete->sql()
 		);
@@ -60,7 +60,7 @@ final class DeleteTest extends TestCase
 	{
 		$this->delete->from('t1');
 		$this->delete->whereEqual('id', 1);
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n FROM `t1`\n WHERE `id` = 1\n",
 			$this->delete->sql()
 		);
@@ -70,7 +70,7 @@ final class DeleteTest extends TestCase
 	{
 		$this->delete->from('t1');
 		$this->delete->orderByAsc('id');
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n FROM `t1`\n ORDER BY `id` ASC\n",
 			$this->delete->sql()
 		);
@@ -83,7 +83,7 @@ final class DeleteTest extends TestCase
 			->innerJoinOn('t2', static function () {
 				return 't2.ref = t1.id';
 			});
-		$this->assertSame(
+		self::assertSame(
 			"DELETE\n `t1`, `t2`\n FROM `t1`\n INNER JOIN `t2` ON (t2.ref = t1.id)\n",
 			$this->delete->sql()
 		);
@@ -92,7 +92,7 @@ final class DeleteTest extends TestCase
 	public function testRun() : void
 	{
 		$this->createDummyData();
-		$this->assertSame(
+		self::assertSame(
 			3,
 			$this->delete->from('t1')->whereIn('c1', 1, 2, 3)->run()
 		);

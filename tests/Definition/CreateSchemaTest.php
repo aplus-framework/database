@@ -21,7 +21,7 @@ final class CreateSchemaTest extends TestCase
 
 	public function testSchema() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE SCHEMA `app`\n",
 			$this->createSchema->schema('app')->sql()
 		);
@@ -29,7 +29,7 @@ final class CreateSchemaTest extends TestCase
 
 	public function testOrReplace() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE OR REPLACE SCHEMA `app`\n",
 			$this->createSchema->orReplace()->schema('app')->sql()
 		);
@@ -37,7 +37,7 @@ final class CreateSchemaTest extends TestCase
 
 	public function testIfNotExists() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE SCHEMA IF NOT EXISTS `app`\n",
 			$this->createSchema->ifNotExists()->schema('app')->sql()
 		);
@@ -52,7 +52,7 @@ final class CreateSchemaTest extends TestCase
 
 	public function testCharset() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE SCHEMA `app`\n CHARACTER SET = 'utf8'\n",
 			$this->createSchema->schema('app')->charset('utf8')->sql()
 		);
@@ -60,7 +60,7 @@ final class CreateSchemaTest extends TestCase
 
 	public function testCollate() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE SCHEMA `app`\n COLLATE = 'utf8_general_ci'\n",
 			$this->createSchema->schema('app')->collate('utf8_general_ci')->sql()
 		);
@@ -68,7 +68,7 @@ final class CreateSchemaTest extends TestCase
 
 	public function testFullSql() : void
 	{
-		$this->assertSame(
+		self::assertSame(
 			"CREATE SCHEMA IF NOT EXISTS `app`\n CHARACTER SET = 'utf8'\n COLLATE = 'utf8_general_ci'\n",
 			$this->createSchema->ifNotExists()
 				->schema('app')
@@ -81,7 +81,7 @@ final class CreateSchemaTest extends TestCase
 	public function testRun() : void
 	{
 		static::$database->dropSchema('app')->ifExists()->run();
-		$this->assertSame(
+		self::assertSame(
 			1,
 			$this->createSchema->schema('app')->run()
 		);

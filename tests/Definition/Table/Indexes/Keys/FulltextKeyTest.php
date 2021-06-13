@@ -8,7 +8,7 @@ final class FulltextKeyTest extends TestCase
 	public function testType() : void
 	{
 		$index = new FulltextKey(static::$database, null, 'id');
-		$this->assertSame(
+		self::assertSame(
 			' FULLTEXT KEY (`id`)',
 			$index->sql()
 		);
