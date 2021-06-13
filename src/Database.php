@@ -21,6 +21,7 @@ use JetBrains\PhpStorm\Language;
 use LogicException;
 use mysqli;
 use mysqli_sql_exception;
+use RuntimeException;
 
 /**
  * Class Database.
@@ -533,15 +534,17 @@ class Database
 	 *
 	 * @param string $statement
 	 *
-	 * @return false|PreparedStatement
+	 * @throws RuntimeException if prepared statement fail
+	 *
+	 * @return PreparedStatement
 	 */
-	public function prepare(#[Language('SQL')] string $statement) : PreparedStatement | false
+	public function prepare(#[Language('SQL')] string $statement) : PreparedStatement
 	{
-		$statement = $this->mysqli->prepare($statement);
-		if ($statement === false) {
-			return false;
+		$prepared = $this->mysqli->prepare($statement);
+		if ($prepared === false) {
+			throw new RuntimeException('Prepared statement failed: ' . $statement);
 		}
-		return new PreparedStatement($statement);
+		return new PreparedStatement($prepared);
 	}
 
 	/**
