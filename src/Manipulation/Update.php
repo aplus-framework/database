@@ -100,6 +100,11 @@ class Update extends Statement
 		return $this->renderSet();
 	}
 
+	/**
+	 * Renders the UPDATE statement.
+	 *
+	 * @return string
+	 */
 	public function sql() : string
 	{
 		$sql = 'UPDATE' . \PHP_EOL;

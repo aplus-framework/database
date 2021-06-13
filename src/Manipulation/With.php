@@ -92,6 +92,11 @@ class With extends Statement
 		return $this->sql['select'];
 	}
 
+	/**
+	 * Renders the WITH statement.
+	 *
+	 * @return string
+	 */
 	public function sql() : string
 	{
 		$sql = 'WITH' . \PHP_EOL;

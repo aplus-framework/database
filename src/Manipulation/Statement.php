@@ -28,6 +28,11 @@ abstract class Statement extends \Framework\Database\Statement
 		return $this;
 	}
 
+	/**
+	 * Tells if the statement has options set.
+	 *
+	 * @return bool
+	 */
 	protected function hasOptions() : bool
 	{
 		return isset($this->sql['options']);

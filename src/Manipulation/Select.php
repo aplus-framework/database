@@ -452,6 +452,11 @@ class Select extends Statement
 		return " {$this->sql['lock']['type']}{$wait}";
 	}
 
+	/**
+	 * Renders the SELECT statement.
+	 *
+	 * @return string
+	 */
 	public function sql() : string
 	{
 		$sql = 'SELECT' . \PHP_EOL;

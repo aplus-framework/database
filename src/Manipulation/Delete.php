@@ -43,8 +43,11 @@ class Delete extends Statement
 	/**
 	 * Sets the table references.
 	 *
-	 * @param array|Closure|string $reference
-	 * @param array|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string $reference The table name as string, a subquery as Closure
+	 *                                                               or an array for aliased table where the key is
+	 *                                                               the alias name and the value is the table name
+	 *                                                               or a subquery
+	 * @param array<string,Closure|string>|Closure|string ...$references Extra references. Same values as $reference
 	 *
 	 * @return $this
 	 */
@@ -58,6 +61,11 @@ class Delete extends Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the table references.
+	 *
+	 * @return string|null The table references or null if none was set
+	 */
 	protected function renderTable() : ?string
 	{
 		if ( ! isset($this->sql['table'])) {
@@ -84,6 +92,11 @@ class Delete extends Statement
 		return $this->setLimit($limit);
 	}
 
+	/**
+	 * Renders de DELETE statement.
+	 *
+	 * @return string
+	 */
 	public function sql() : string
 	{
 		$sql = 'DELETE' . \PHP_EOL;

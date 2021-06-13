@@ -180,6 +180,11 @@ class Replace extends Statement
 		return $part;
 	}
 
+	/**
+	 * Renders the REPLACE statement.
+	 *
+	 * @return string
+	 */
 	public function sql() : string
 	{
 		$sql = 'REPLACE' . \PHP_EOL;

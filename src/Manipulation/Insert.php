@@ -77,6 +77,13 @@ class Insert extends Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the "INTO $table" clause.
+	 *
+	 * @throws LogicException if INTO was not set
+	 *
+	 * @return string
+	 */
 	protected function renderInto() : string
 	{
 		if ( ! isset($this->sql['into'])) {
@@ -88,8 +95,8 @@ class Insert extends Statement
 	/**
 	 * Sets the INTO columns.
 	 *
-	 * @param string $column
-	 * @param string ...$columns
+	 * @param string $column Column name
+	 * @param string ...$columns Extra column names
 	 *
 	 * @return $this
 	 */
@@ -99,6 +106,11 @@ class Insert extends Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the INTO $table "(...$columns)" part.
+	 *
+	 * @return string|null The imploded columns or null if none was set
+	 */
 	protected function renderColumns() : ?string
 	{
 		if ( ! isset($this->sql['columns'])) {
@@ -113,7 +125,7 @@ class Insert extends Statement
 	}
 
 	/**
-	 * Adds a row values to the VALUES clause.
+	 * Adds a row of values to the VALUES clause.
 	 *
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
@@ -128,6 +140,11 @@ class Insert extends Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the VALUES clause.
+	 *
+	 * @return string|null The VALUES part or null if none was set
+	 */
 	protected function renderValues() : ?string
 	{
 		if ( ! isset($this->sql['values'])) {
@@ -148,7 +165,7 @@ class Insert extends Statement
 	/**
 	 * Sets the SELECT statement part.
 	 *
-	 * @param Closure $select
+	 * @param Closure $select A Closure for a subquery with a {@see \Framework\Database\Manipulation\Select} instance as param
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-select/
 	 *
@@ -160,6 +177,13 @@ class Insert extends Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the SELECT statement.
+	 *
+	 * @throws LogicException if SELECT was set with the VALUES or SET clauses
+	 *
+	 * @return string|null The SELECT statement or null if it was not set
+	 */
 	protected function renderSelect() : ?string
 	{
 		if ( ! isset($this->sql['select'])) {
@@ -177,7 +201,7 @@ class Insert extends Statement
 	/**
 	 * Sets the ON DUPLICATE KEY UPDATE part.
 	 *
-	 * @param array $columns Column name as index, column value/expression as array value
+	 * @param array<string,Closure,float,int,string,null> $columns Column name as key, column value/expression as array value
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-on-duplicate-key-update/
 	 *
@@ -189,6 +213,11 @@ class Insert extends Statement
 		return $this;
 	}
 
+	/**
+	 * Renders the ON DUPLICATE KEY UPDATE part.
+	 *
+	 * @return string|null The part or null if it was not set
+	 */
 	protected function renderOnDuplicateKeyUpdate() : ?string
 	{
 		if ( ! isset($this->sql['on_duplicate'])) {
@@ -202,6 +231,13 @@ class Insert extends Statement
 		return " ON DUPLICATE KEY UPDATE {$on_duplicate}";
 	}
 
+	/**
+	 * Renders the SET clause.
+	 *
+	 * @throws LogicException if SET was set with columns or with the VALUES clause
+	 *
+	 * @return string|null The SET part or null if it was not set
+	 */
 	protected function renderSetPart() : ?string
 	{
 		$part = $this->renderSet();
@@ -216,6 +252,11 @@ class Insert extends Statement
 		return $part;
 	}
 
+	/**
+	 * Check for conflicts in the INSERT statement.
+	 *
+	 * @throws LogicException if has conflicts
+	 */
 	protected function checkRowStatementsConflict() : void
 	{
 		if ( ! isset($this->sql['values'])
@@ -228,6 +269,11 @@ class Insert extends Statement
 		}
 	}
 
+	/**
+	 * Renders the INSERT statement.
+	 *
+	 * @return string
+	 */
 	public function sql() : string
 	{
 		$sql = 'INSERT' . \PHP_EOL;
