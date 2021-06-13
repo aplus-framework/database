@@ -14,6 +14,11 @@ final class SelectTest extends TestCase
 		$this->select = new Select(static::$database);
 	}
 
+	/**
+	 * @param array<string,Closure|string>|Closure|string ...$from
+	 *
+	 * @return string
+	 */
 	protected function selectAllFrom(array | Closure | string ...$from) : string
 	{
 		return $this->select->columns('*')->from(...$from)->sql();

@@ -35,7 +35,7 @@ final class JoinTest extends TestCase
 			'time' => static function () {
 				return 'SELECT NOW()';
 			},
-		], ['noindex']);
+		], ['noindex']); // @phpstan-ignore-line
 		self::assertSame(
 			' FROM (SELECT NOW()) AS `time`, `noindex` AS `0`',
 			$this->statement->renderFrom()
@@ -52,7 +52,7 @@ final class JoinTest extends TestCase
 					return 'SELECT NOW()';
 				},
 			],
-			[
+			[ // @phpstan-ignore-line
 				'noindex',
 			]
 		);

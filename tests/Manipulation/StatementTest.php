@@ -92,6 +92,7 @@ final class StatementTest extends TestCase
 		);
 		$this->expectException(\InvalidArgumentException::class);
 		$this->expectExceptionMessage('Aliased column must have only 1 key');
+		// @phpstan-ignore-next-line
 		$this->statement->renderAliasedIdentifier(['foo' => 'name', 'bar']);
 	}
 

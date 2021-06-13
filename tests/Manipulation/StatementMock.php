@@ -10,6 +10,12 @@ class StatementMock extends Statement
 		return parent::subquery($subquery);
 	}
 
+	/**
+	 * @param int      $limit
+	 * @param int|null $offset
+	 *
+	 * @return $this
+	 */
 	public function limit(int $limit, int $offset = null)
 	{
 		return $this->setLimit($limit, $offset);

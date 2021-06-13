@@ -15,8 +15,8 @@ trait Join
 	/**
 	 * Sets the FROM clause.
 	 *
-	 * @param array|Closure|string $reference     Table reference
-	 * @param array|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string $reference     Table reference
+	 * @param array<string,Closure|string>|Closure|string ...$references
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *

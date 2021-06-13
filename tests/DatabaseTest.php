@@ -27,7 +27,8 @@ final class DatabaseTest extends TestCase
 			\getenv('DB_PASSWORD'), // @phpstan-ignore-line
 			\getenv('DB_SCHEMA'), // @phpstan-ignore-line
 			\getenv('DB_HOST'), // @phpstan-ignore-line
-			\getenv('DB_PORT') // @phpstan-ignore-line
+			// @phpstan-ignore-next-line
+			\getenv('DB_PORT')
 		);
 		self::assertInstanceOf(Database::class, $database);
 	}
