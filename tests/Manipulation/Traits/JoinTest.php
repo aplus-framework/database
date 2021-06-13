@@ -71,7 +71,7 @@ final class JoinTest extends TestCase
 
 	public function testHasFromException() : void
 	{
-		$this->expectException(\RuntimeException::class);
+		$this->expectException(\LogicException::class);
 		$this->expectExceptionMessage('Clause WHERe only works with FROM');
 		$this->statement->hasFrom('WHERe');
 	}

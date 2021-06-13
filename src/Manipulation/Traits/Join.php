@@ -2,6 +2,7 @@
 
 use Closure;
 use InvalidArgumentException;
+use LogicException;
 
 /**
  * Trait Join.
@@ -16,7 +17,7 @@ trait Join
 	 * Sets the FROM clause.
 	 *
 	 * @param array<string,Closure|string>|Closure|string $reference Table reference
-	 * @param array<string,Closure|string>|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string ...$references Table references
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *
@@ -32,6 +33,11 @@ trait Join
 		return $this;
 	}
 
+	/**
+	 * Renders the FROM clause.
+	 *
+	 * @return string|null The FROM clause or null if it was not set
+	 */
 	protected function renderFrom() : ?string
 	{
 		if ( ! isset($this->sql['from'])) {
@@ -44,30 +50,38 @@ trait Join
 		return ' FROM ' . \implode(', ', $tables);
 	}
 
+	/**
+	 * Tells if the FROM clause was set.
+	 *
+	 * @param string|null $clause A clause where FROM is required
+	 *
+	 * @throws LogicException if FROM is not set, but is required for some other clause
+	 *
+	 * @return bool True if has FROM, otherwise false
+	 */
 	protected function hasFrom(string $clause = null) : bool
 	{
-		if ( ! isset($this->sql['from'])) {
-			if ($clause === null) {
-				return false;
-			}
-			throw new \RuntimeException("Clause {$clause} only works with FROM");
+		if (isset($this->sql['from'])) {
+			return true;
 		}
-		return true;
+		if ($clause === null) {
+			return false;
+		}
+		throw new LogicException("Clause {$clause} only works with FROM");
 	}
 
 	/**
 	 * Sets the JOIN clause as "$type JOIN $table $clause $conditional".
 	 *
 	 * @param Closure|string $table Table factor
-	 * @param string $type JOIN type. One of: CROSS, INNER, LEFT, LEFT OUTER,
-	 *                     RIGHT, RIGHT OUTER, NATURAL, NATURAL LEFT, NATURAL
-	 *                     LEFT OUTER, NATURAL RIGHT, NATURAL RIGHT OUTE or
-	 *                     empty (same as INNER)
-	 * @param string|null $clause Condition clause. NULL if has a NATURAL type
-	 *                            otherwise
-	 *                            ON or USING
-	 * @param array|Closure|null $conditional A conditional expression as Closure or the columns
-	 *                                        list as array
+	 * @param string $type JOIN type. One of: `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`,
+	 *                     `RIGHT`, `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL
+	 *                     LEFT OUTER`, `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or
+	 *                     empty (same as `INNER`)
+	 * @param string|null $clause Condition clause. Null if has a NATURAL type,
+	 *                            otherwise `ON` or `USING`
+	 * @param array<int,Closure|string>|Closure|null $conditional A conditional expression as
+	 *                                                            Closure or the columns list as array
 	 *
 	 * @return $this
 	 */
@@ -322,6 +336,18 @@ trait Join
 		return $this->setJoin($table, 'NATURAL RIGHT OUTER');
 	}
 
+	/**
+	 * Sets the JOIN clause.
+	 *
+	 * @param Closure|string $table The table factor
+	 * @param string $type ``, `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`, `RIGHT`, `RIGHT OUTER`,
+	 *                     `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`
+	 *                     or `NATURAL RIGHT OUTER`
+	 * @param string|null $clause `ON`, `USING` or null for none
+	 * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
+	 *
+	 * @return $this
+	 */
 	private function setJoin(
 		Closure | string $table,
 		string $type,
@@ -337,6 +363,11 @@ trait Join
 		return $this;
 	}
 
+	/**
+	 * Renders the JOIN clause.
+	 *
+	 * @return string|null The JOIN clause or null if it was not set
+	 */
 	protected function renderJoin() : ?string
 	{
 		if ( ! isset($this->sql['join'])) {
@@ -355,6 +386,18 @@ trait Join
 		return " {$type}JOIN {$conditional}";
 	}
 
+	/**
+	 * Renders the JOIN conditional part.
+	 *
+	 * @param string $type ``, `CROSS`,`INNER`, `LEFT`, `LEFT OUTER`, `RIGHT`,
+	 *                     `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
+	 *                     `NATURAL RIGHT` or `NATURAL RIGHT OUTER`
+	 * @param string $table The table name
+	 * @param string|null $clause `ON`, `USING` or null for none
+	 * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
+	 *
+	 * @return string The JOIN conditional part
+	 */
 	private function renderJoinConditional(
 		string $type,
 		string $table,
@@ -378,6 +421,17 @@ trait Join
 		return $table . $conditional;
 	}
 
+	/**
+	 * Validates and renders the JOIN type.
+	 *
+	 * @param string $type ``, `CROSS`,`INNER`, `LEFT`, `LEFT OUTER`,
+	 *                     `RIGHT`, `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`,
+	 *                     `NATURAL LEFT OUTER`, `NATURAL RIGHT` or `NATURAL RIGHT OUTER`
+	 *
+	 * @throws InvalidArgumentException for invalid type
+	 *
+	 * @return string The input ype
+	 */
 	private function renderJoinType(string $type) : string
 	{
 		$result = \strtoupper($type);
@@ -400,6 +454,18 @@ trait Join
 		throw new InvalidArgumentException("Invalid JOIN type: {$type}");
 	}
 
+	/**
+	 * Check if a JOIN type belongs to the NATURAL group.
+	 *
+	 * @param string $type `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`,
+	 *                     `NATURAL RIGHT OUTER` or any other non-natural
+	 * @param string|null $clause Must be null if type is natural
+	 * @param array|Closure|null $expression Must be null if type is natural
+	 *
+	 * @throws InvalidArgumentException if $type is natural and has clause or expression
+	 *
+	 * @return bool True if the type is natural, otherwise false
+	 */
 	private function checkNaturalJoinType(
 		string $type,
 		?string $clause,
@@ -422,6 +488,15 @@ trait Join
 		return false;
 	}
 
+	/**
+	 * Validates and renders the JOIN condition clause.
+	 *
+	 * @param string|null $clause `ON`, `USING` or null for none
+	 *
+	 * @throws InvalidArgumentException for invalid condition clause
+	 *
+	 * @return string|null The condition clause or none
+	 */
 	private function renderJoinConditionClause(?string $clause) : ?string
 	{
 		if ($clause === null) {
@@ -437,6 +512,14 @@ trait Join
 		throw new InvalidArgumentException("Invalid JOIN condition clause: {$clause}");
 	}
 
+	/**
+	 * Renders the JOIN condition expression.
+	 *
+	 * @param string|null $clause `ON`or null
+	 * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
+	 *
+	 * @return string|null The condition or null if $clause is null
+	 */
 	private function renderJoinConditionExpression(
 		?string $clause,
 		Closure | array | null $expression
