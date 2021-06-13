@@ -20,6 +20,11 @@ trait Set
 		return $this;
 	}
 
+	/**
+	 * Renders the SET clause.
+	 *
+	 * @return string|null The SET clause null if it was not set
+	 */
 	protected function renderSet() : ?string
 	{
 		if ( ! $this->hasSet()) {
@@ -33,6 +38,11 @@ trait Set
 		return " SET {$set}";
 	}
 
+	/**
+	 * Tells if the SET clause was set.
+	 *
+	 * @return bool True if was set, otherwise false
+	 */
 	protected function hasSet() : bool
 	{
 		return isset($this->sql['set']);

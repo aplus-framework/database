@@ -568,10 +568,14 @@ trait Having
 	}
 
 	/**
-	 * @param string $glue
+	 * Adds a HAVING part.
+	 *
+	 * @param string $glue `AND` or `OR`
 	 * @param array<int,array|Closure|string>|Closure|string $column
-	 * @param string $operator
-	 * @param array $values
+	 * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`,
+	 *                         `<`, `<=`, `LIKE`, `NOT LIKE`, `IN`, `NOT IN`,
+	 *                         `BETWEEN`, `NOT BETWEEN`, `IS NULL`, `IS NOT NULL` or `MATCH`
+	 * @param array<int,Closure|float|int|string|null> $values Values used by the operator
 	 *
 	 * @return $this
 	 */
@@ -584,6 +588,11 @@ trait Having
 		return $this->addWhere($glue, $column, $operator, $values, 'having');
 	}
 
+	/**
+	 * Renders the full HAVING clause.
+	 *
+	 * @return string|null The full clause or null if has not a clause
+	 */
 	protected function renderHaving() : ?string
 	{
 		return $this->renderWhere('having');
