@@ -1,6 +1,7 @@
 <?php namespace Framework\Database;
 
 use InvalidArgumentException;
+use RuntimeException;
 
 class PreparedStatement
 {
@@ -17,13 +18,19 @@ class PreparedStatement
 	 *
 	 * @param bool|float|int|string|null ...$params Parameters sent to the prepared statement
 	 *
+	 * @throws RuntimeException if can not obtain a result set from the prepared statement
+	 *
 	 * @return Result
 	 */
 	public function query(bool | float | int | string | null ...$params) : Result
 	{
 		$this->bindParams($params);
 		$this->statement->execute();
-		return new Result($this->statement->get_result(), true);
+		$result = $this->statement->get_result();
+		if ($result === false) {
+			throw new RuntimeException('Failed while trying to obtain a result set from the prepared statement');
+		}
+		return new Result($result, true);
 	}
 
 	/**
