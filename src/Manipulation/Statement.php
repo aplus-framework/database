@@ -44,7 +44,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 * Returns a SQL part between parentheses.
 	 *
 	 * @param Closure $subquery A \Closure having the current Manipulation instance as first
-	 *                          argument. The returned value must be scalar
+	 * argument. The returned value must be scalar
 	 *
 	 * @see https://mariadb.com/kb/en/library/subqueries/
 	 * @see https://mariadb.com/kb/en/library/built-in-functions/
@@ -115,8 +115,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders a column part with an optional alias name, AS clause.
 	 *
-	 * @param array<string,Closure|string>|Closure|string $column The column name, a subquery or an array where the index
-	 *                                                            is the alias and the value is the column/subquery
+	 * @param array<string,Closure|string>|Closure|string $column The column name,
+	 * a subquery or an array where the index is the alias and the value is the column/subquery
 	 *
 	 * @return string
 	 */

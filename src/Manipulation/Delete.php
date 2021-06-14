@@ -43,11 +43,11 @@ class Delete extends Statement
 	/**
 	 * Sets the table references.
 	 *
-	 * @param array<string,Closure|string>|Closure|string $reference The table name as string, a subquery as Closure
-	 *                                                               or an array for aliased table where the key is
-	 *                                                               the alias name and the value is the table name
-	 *                                                               or a subquery
-	 * @param array<string,Closure|string>|Closure|string ...$references Extra references. Same values as $reference
+	 * @param array<string,Closure|string>|Closure|string $reference The table
+	 * name as string, a subquery as Closure or an array for aliased table where
+	 * the key is the alias name and the value is the table name or a subquery
+	 * @param array<string,Closure|string>|Closure|string ...$references Extra
+	 * references. Same values as $reference
 	 *
 	 * @return $this
 	 */

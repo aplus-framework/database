@@ -615,10 +615,9 @@ class Database
 	 *
 	 * @throws InvalidArgumentException For invalid value type
 	 *
-	 * @return float|int|string If the value is null, returns a string containing the word
-	 *                          "NULL". If is false, "FALSE". If is true, "TRUE". If is a
-	 *                          string, returns the quoted string. The types int or float
-	 *                          returns the same input value.
+	 * @return float|int|string If the value is null, returns a string containing
+	 * the word "NULL". If is false, "FALSE". If is true, "TRUE". If is a string,
+	 * returns the quoted string. The types int or float returns the same input value.
 	 */
 	public function quote(float | bool | int | string | null $value) : float | int | string
 	{

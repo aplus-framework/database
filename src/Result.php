@@ -73,7 +73,7 @@ class Result
 	 * Adjusts the result pointer to an arbitrary row in the result.
 	 *
 	 * @param int $offset The field offset. Must be between zero and the total
-	 *                    number of rows minus one
+	 * number of rows minus one
 	 *
 	 * @throws LogicException if is an unbuffered result
 	 * @throws OutOfBoundsException for invalid cursor offset
@@ -211,8 +211,7 @@ class Result
 	 * Returns an array of objects representing the fields in a result set.
 	 *
 	 * @return array<int,Field>|false an array of objects which contains field
-	 *                                definition information or false if no field
-	 *                                information is available
+	 * definition information or false if no field information is available
 	 */
 	public function fetchFields() : array | false
 	{

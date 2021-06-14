@@ -75,13 +75,12 @@ trait Join
 	 *
 	 * @param Closure|string $table Table factor
 	 * @param string $type JOIN type. One of: `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`,
-	 *                     `RIGHT`, `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL
-	 *                     LEFT OUTER`, `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or
-	 *                     empty (same as `INNER`)
+	 * `RIGHT`, `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
+	 * `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or empty (same as `INNER`)
 	 * @param string|null $clause Condition clause. Null if has a NATURAL type,
-	 *                            otherwise `ON` or `USING`
-	 * @param array<int,Closure|string>|Closure|null $conditional A conditional expression as
-	 *                                                            Closure or the columns list as array
+	 * otherwise `ON` or `USING`
+	 * @param array<int,Closure|string>|Closure|null $conditional A conditional
+	 * expression as Closure or the columns list as array
 	 *
 	 * @return $this
 	 */
@@ -340,9 +339,9 @@ trait Join
 	 * Sets the JOIN clause.
 	 *
 	 * @param Closure|string $table The table factor
-	 * @param string $type ``, `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`, `RIGHT`, `RIGHT OUTER`,
-	 *                     `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`
-	 *                     or `NATURAL RIGHT OUTER`
+	 * @param string $type ``, `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`, `RIGHT`,
+	 * `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`
+	 * or `NATURAL RIGHT OUTER`
 	 * @param string|null $clause `ON`, `USING` or null for none
 	 * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
 	 *
@@ -390,8 +389,8 @@ trait Join
 	 * Renders the JOIN conditional part.
 	 *
 	 * @param string $type ``, `CROSS`,`INNER`, `LEFT`, `LEFT OUTER`, `RIGHT`,
-	 *                     `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
-	 *                     `NATURAL RIGHT` or `NATURAL RIGHT OUTER`
+	 * `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`
+	 * or `NATURAL RIGHT OUTER`
 	 * @param string $table The table name
 	 * @param string|null $clause `ON`, `USING` or null for none
 	 * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
@@ -424,9 +423,9 @@ trait Join
 	/**
 	 * Validates and renders the JOIN type.
 	 *
-	 * @param string $type ``, `CROSS`,`INNER`, `LEFT`, `LEFT OUTER`,
-	 *                     `RIGHT`, `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`,
-	 *                     `NATURAL LEFT OUTER`, `NATURAL RIGHT` or `NATURAL RIGHT OUTER`
+	 * @param string $type ``, `CROSS`,`INNER`, `LEFT`, `LEFT OUTER`, `RIGHT`,
+	 * `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`
+	 * or `NATURAL RIGHT OUTER`
 	 *
 	 * @throws InvalidArgumentException for invalid type
 	 *
@@ -457,8 +456,8 @@ trait Join
 	/**
 	 * Check if a JOIN type belongs to the NATURAL group.
 	 *
-	 * @param string $type `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`,
-	 *                     `NATURAL RIGHT OUTER` or any other non-natural
+	 * @param string $type `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
+	 * `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or any other non-natural
 	 * @param string|null $clause Must be null if type is natural
 	 * @param array|Closure|null $expression Must be null if type is natural
 	 *
