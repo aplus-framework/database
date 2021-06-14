@@ -121,7 +121,7 @@ final class InsertTest extends TestCase
 		$this->insert->columns('id');
 		$this->insert->set(['id' => 1]);
 		$this->expectException(\LogicException::class);
-		$this->expectExceptionMessage('SET statement is not allowed when columns are set');
+		$this->expectExceptionMessage('SET clause is not allowed when columns are set');
 		$this->insert->sql();
 	}
 
@@ -131,7 +131,7 @@ final class InsertTest extends TestCase
 		$this->insert->values('id');
 		$this->insert->set(['id' => 1]);
 		$this->expectException(\LogicException::class);
-		$this->expectExceptionMessage('SET statement is not allowed when VALUES is set');
+		$this->expectExceptionMessage('SET clause is not allowed when VALUES is set');
 		$this->insert->sql();
 	}
 

@@ -165,7 +165,8 @@ class Insert extends Statement
 	/**
 	 * Sets the SELECT statement part.
 	 *
-	 * @param Closure $select A Closure for a subquery with a {@see \Framework\Database\Manipulation\Select} instance as param
+	 * @param Closure $select A Closure for a subquery with a
+	 *                        {@see \Framework\Database\Manipulation\Select} instance as param
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-select/
 	 *
@@ -201,7 +202,8 @@ class Insert extends Statement
 	/**
 	 * Sets the ON DUPLICATE KEY UPDATE part.
 	 *
-	 * @param array<string,Closure,float,int,string,null> $columns Column name as key, column value/expression as array value
+	 * @param array<string,Closure|float|int|string|null> $columns Column name as key, column
+	 *                                                             value/expression as array value
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-on-duplicate-key-update/
 	 *
@@ -241,13 +243,14 @@ class Insert extends Statement
 	protected function renderSetPart() : ?string
 	{
 		$part = $this->renderSet();
-		if ($part) {
-			if (isset($this->sql['columns'])) {
-				throw new LogicException('SET statement is not allowed when columns are set');
-			}
-			if (isset($this->sql['values'])) {
-				throw new LogicException('SET statement is not allowed when VALUES is set');
-			}
+		if ($part === null) {
+			return null;
+		}
+		if (isset($this->sql['columns'])) {
+			throw new LogicException('SET clause is not allowed when columns are set');
+		}
+		if (isset($this->sql['values'])) {
+			throw new LogicException('SET clause is not allowed when VALUES is set');
 		}
 		return $part;
 	}
