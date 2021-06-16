@@ -14,23 +14,18 @@ test:php:
     MYSQL_DATABASE: framework-tests
     MYSQL_ROOT_PASSWORD: password
   before_script:
-    - mkdir -p build
     - composer install
   script:
     - composer normalize --dry-run --indent-size=1 --indent-style=tab
     - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
+    - vendor/bin/phpmd src xml phpmd.xml
     - vendor/bin/phpstan analyse -vvv
-    - vendor/bin/phpstan analyse --no-progress --error-format=gitlab > build/codequality.json
     - vendor/bin/phpunit --colors=never
     - phpdoc
   artifacts:
     paths:
       - build/coverage/
       - build/docs/
-      - build/codequality.json
-    reports:
-      codequality: build/codequality.json
-    when: always
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 test:php:mysql:
@@ -56,7 +51,6 @@ pages:
     - mkdir public/
     - mv build/coverage/ public/
     - mv build/docs/ public/
-    - mv build/codequality.json public/
     - curl -sS https://the-framework.gitlab.io/redirect.php | php
   artifacts:
     paths:
