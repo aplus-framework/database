@@ -11,10 +11,10 @@ trait Where
 	/**
 	 * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
 	 *
-	 * @param array<int,Closure|string>|Closure|string $column Closure for a subquery,
+	 * @param array<int,array|Closure|string>|Closure|string $column Closure for a subquery,
 	 * a string with the column name or an array with column names on WHERE MATCH clause
 	 * @param string $operator
-	 * @param array<int,Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+	 * @param array<int,array|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
@@ -33,7 +33,7 @@ trait Where
 	 * @param array<int,array|Closure|string>|Closure|string $column Closure for a subquery,
 	 * a string with the column name or an array with column names on WHERE MATCH clause
 	 * @param string $operator
-	 * @param array<int,Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+	 * @param array<int,array|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
 	 *
 	 * @return $this
 	 */
@@ -751,8 +751,7 @@ trait Where
 	/**
 	 * Renders a WHERE part. Like: `AND column IN('value1', 'value2')`.
 	 *
-	 * @param array<string,Closure|float|int|string|null> $part Keys: `glue`,
-	 * `operator`, `column` and `values`
+	 * @param array<string,mixed> $part Keys: `glue`, `operator`, `column` and `values`
 	 * @param bool $first Is the first part? Prepends the operator (`AND` or `OR`)
 	 *
 	 * @return string
@@ -881,7 +880,7 @@ trait Where
 				? $this->subquery($value)
 				: $this->database->quote($value);
 		}
-		return $values;
+		return $values; // @phpstan-ignore-line
 	}
 
 	/**
@@ -951,6 +950,8 @@ trait Where
 	 * @param array<int,float|int|string> $values Must be an empty array
 	 *
 	 * @throws InvalidArgumentException if $values is not empty
+	 *
+	 * @return null
 	 */
 	private function renderWhereValuesPartIsNull(string $operator, array $values)
 	{

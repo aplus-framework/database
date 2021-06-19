@@ -9,7 +9,7 @@ abstract class Statement
 	/**
 	 * SQL clauses and parts.
 	 *
-	 * @var mixed[]
+	 * @var array<string,mixed>
 	 */
 	protected array $sql = [];
 

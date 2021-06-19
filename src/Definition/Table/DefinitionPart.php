@@ -4,7 +4,13 @@ use BadMethodCallException;
 
 abstract class DefinitionPart
 {
-	public function __call($method, $arguments)
+	/**
+	 * @param string $method
+	 * @param array<int,mixed> $arguments
+	 *
+	 * @return mixed
+	 */
+	public function __call(string $method, array $arguments) : mixed
 	{
 		if ($method === 'sql') {
 			return $this->sql(...$arguments);

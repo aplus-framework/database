@@ -14,10 +14,20 @@ final class ForeignKey extends Index
 	use Traits\Constraint;
 	protected string $type = 'FOREIGN KEY';
 	protected ?string $referenceTable = null;
+	/**
+	 * @var array<int,string>
+	 */
 	protected array $referenceColumns = [];
 	protected ?string $onDelete = null;
 	protected ?string $onUpdate = null;
 
+	/**
+	 * @param string $table
+	 * @param string $column
+	 * @param string ...$columns
+	 *
+	 * @return $this
+	 */
 	public function references(string $table, string $column, string ...$columns)
 	{
 		$this->referenceTable = $table;
@@ -39,6 +49,11 @@ final class ForeignKey extends Index
 		return " REFERENCES {$table} ({$columns})";
 	}
 
+	/**
+	 * @param string $option
+	 *
+	 * @return $this
+	 */
 	public function onDelete(string $option)
 	{
 		$this->onDelete = $option;
@@ -54,6 +69,11 @@ final class ForeignKey extends Index
 		return " ON DELETE {$reference}";
 	}
 
+	/**
+	 * @param string $option
+	 *
+	 * @return $this
+	 */
 	public function onUpdate(string $option)
 	{
 		$this->onUpdate = $option;

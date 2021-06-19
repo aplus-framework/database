@@ -181,8 +181,8 @@ class Select extends Statement
 	 *
 	 * Generally used with the FROM clause as column names.
 	 *
-	 * @param array|Closure|string $expression
-	 * @param array|Closure|string ...$expressions
+	 * @param array<string,Closure|string>|Closure|string $expression
+	 * @param array<string,Closure|string>|Closure|string ...$expressions
 	 *
 	 * @see https://mariadb.com/kb/en/library/select/#select-expressions
 	 *
@@ -202,8 +202,8 @@ class Select extends Statement
 	/**
 	 * Alias of the expressions method.
 	 *
-	 * @param array|Closure|string $expression
-	 * @param array|Closure|string ...$expressions
+	 * @param array<string,Closure|string>|Closure|string $expression
+	 * @param array<string,Closure|string>|Closure|string ...$expressions
 	 *
 	 * @return $this
 	 */
@@ -277,8 +277,8 @@ class Select extends Statement
 	 *
 	 * @param string $filename
 	 * @param string|null $charset
-	 * @param array $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
-	 * @param array $linesOptions Each key must be one of the EXP_LINESS_* constants
+	 * @param array<string,string> $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
+	 * @param array<string,string> $linesOptions Each key must be one of the EXP_LINESS_* constants
 	 *
 	 * @see https://mariadb.com/kb/en/library/select-into-outfile/
 	 *

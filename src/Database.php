@@ -361,8 +361,8 @@ class Database
 	/**
 	 * Call a DELETE statement.
 	 *
-	 * @param array|Closure|string|null $reference
-	 * @param array|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string|null $reference
+	 * @param array<string,Closure|string>|Closure|string ...$references
 	 *
 	 * @return Delete
 	 */
@@ -428,8 +428,8 @@ class Database
 	/**
 	 * Call a SELECT statement.
 	 *
-	 * @param array|Closure|string|null $reference
-	 * @param array|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string|null $reference
+	 * @param array<string,Closure|string>|Closure|string ...$references
 	 *
 	 * @return Select
 	 */
@@ -447,8 +447,8 @@ class Database
 	/**
 	 * Call a UPDATE statement.
 	 *
-	 * @param array|Closure|string|null $reference
-	 * @param array|Closure|string ...$references
+	 * @param array<string,Closure|string>|Closure|string|null $reference
+	 * @param array<string,Closure|string>|Closure|string ...$references
 	 *
 	 * @return Update
 	 */
@@ -623,6 +623,7 @@ class Database
 	{
 		$type = \gettype($value);
 		if ($type === 'string') {
+			// @phpstan-ignore-next-line
 			$value = $this->mysqli->real_escape_string($value);
 			return "'{$value}'";
 		}

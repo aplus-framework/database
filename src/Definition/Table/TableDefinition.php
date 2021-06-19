@@ -7,7 +7,13 @@ use Framework\Database\Definition\Table\Indexes\IndexDefinition;
 class TableDefinition extends DefinitionPart
 {
 	protected Database $database;
+	/**
+	 * @var array<int,array>
+	 */
 	protected array $columns = [];
+	/**
+	 * @var array<int,array>
+	 */
 	protected array $indexes = [];
 
 	/**

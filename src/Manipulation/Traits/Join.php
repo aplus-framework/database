@@ -459,7 +459,7 @@ trait Join
 	 * @param string $type `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
 	 * `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or any other non-natural
 	 * @param string|null $clause Must be null if type is natural
-	 * @param array|Closure|null $expression Must be null if type is natural
+	 * @param array<int,Closure|string>|Closure|null $expression Must be null if type is natural
 	 *
 	 * @throws InvalidArgumentException if $type is natural and has clause or expression
 	 *
@@ -527,11 +527,12 @@ trait Join
 			return null;
 		}
 		if ($clause === 'ON') {
-			return $this->subquery($expression);
+			return $this->subquery($expression); // @phpstan-ignore-line
 		}
+		// @phpstan-ignore-next-line
 		foreach ($expression as &$column) {
 			$column = $this->renderIdentifier($column);
 		}
-		return '(' . \implode(', ', $expression) . ')';
+		return '(' . \implode(', ', $expression) . ')'; // @phpstan-ignore-line
 	}
 }
