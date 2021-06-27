@@ -1,8 +1,8 @@
 parameters:
 	level: 7
 	paths:
-		- %currentWorkingDirectory%/src
-		- %currentWorkingDirectory%/tests
+		- src
+		- tests
 	ignoreErrors:
 		- '#Access to an undefined property object::\$[a-zA-Z0-9_]+\.#'
 		- '#Call to protected method hasFrom\(\) of class Tests\\Database\\Manipulation\\Traits\\JoinMock\.#'
