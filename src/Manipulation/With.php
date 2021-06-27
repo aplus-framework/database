@@ -51,9 +51,9 @@ class With extends Statement
 	 * @see https://mariadb.com/kb/en/library/non-recursive-common-table-expressions-overview/
 	 * @see https://mariadb.com/kb/en/library/recursive-common-table-expressions-overview/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function reference(Closure | string $table, Closure $alias)
+	public function reference(Closure | string $table, Closure $alias) : static
 	{
 		$this->sql['references'][] = [
 			'table' => $table,
@@ -85,9 +85,9 @@ class With extends Statement
 	 *
 	 * @param Closure $select
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function select(Closure $select)
+	public function select(Closure $select) : static
 	{
 		$this->sql['select'] = $select(new Select($this->database));
 		return $this;

@@ -22,9 +22,9 @@ class AlterSchema extends Statement
 	/**
 	 * @param string $schemaName
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function schema(string $schemaName)
+	public function schema(string $schemaName) : static
 	{
 		$this->sql['schema'] = $schemaName;
 		return $this;
@@ -45,9 +45,9 @@ class AlterSchema extends Statement
 	/**
 	 * @param string $charset
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function charset(string $charset)
+	public function charset(string $charset) : static
 	{
 		$this->sql['charset'] = $charset;
 		return $this;
@@ -65,9 +65,9 @@ class AlterSchema extends Statement
 	/**
 	 * @param string $collation
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function collate(string $collation)
+	public function collate(string $collation) : static
 	{
 		$this->sql['collation'] = $collation;
 		return $this;
@@ -83,9 +83,9 @@ class AlterSchema extends Statement
 	}
 
 	/**
-	 * @return $this
+	 * @return static
 	 */
-	public function upgrade()
+	public function upgrade() : static
 	{
 		$this->sql['upgrade'] = true;
 		return $this;

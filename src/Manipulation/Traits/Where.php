@@ -25,13 +25,13 @@ trait Where
 	 * @param string $operator
 	 * @param array<int,array|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function where(
 		array | Closure | string $column,
 		string $operator,
 		array | Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		// @phpstan-ignore-next-line
 		return $this->addWhere('AND', $column, $operator, $values);
 	}
@@ -44,13 +44,13 @@ trait Where
 	 * @param string $operator
 	 * @param array<int,array|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhere(
 		array | Closure | string $column,
 		string $operator,
 		array | Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		// @phpstan-ignore-next-line
 		return $this->addWhere('OR', $column, $operator, $values);
 	}
@@ -63,10 +63,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function whereEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->where($column, '=', $value);
 	}
 
@@ -78,10 +80,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orWhereEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orWhere($column, '=', $value);
 	}
 
@@ -93,10 +97,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereNotEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function whereNotEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->where($column, '!=', $value);
 	}
 
@@ -108,10 +114,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereNotEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orWhereNotEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orWhere($column, '!=', $value);
 	}
 
@@ -123,10 +131,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/null-safe-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereNullSafeEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function whereNullSafeEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->where($column, '<=>', $value);
 	}
 
@@ -138,12 +148,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/null-safe-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereNullSafeEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orWhere($column, '<=>', $value);
 	}
 
@@ -155,10 +165,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereLessThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function whereLessThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->where($column, '<', $value);
 	}
 
@@ -170,10 +182,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereLessThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orWhereLessThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orWhere($column, '<', $value);
 	}
 
@@ -185,12 +199,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereLessThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->where($column, '<=', $value);
 	}
 
@@ -202,12 +216,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereLessThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orWhere($column, '<=', $value);
 	}
 
@@ -219,10 +233,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereGreaterThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function whereGreaterThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->where($column, '>', $value);
 	}
 
@@ -234,10 +250,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereGreaterThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orWhereGreaterThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orWhere($column, '>', $value);
 	}
 
@@ -249,12 +267,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereGreaterThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->where($column, '>=', $value);
 	}
 
@@ -266,12 +284,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereGreaterThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orWhere($column, '>=', $value);
 	}
 
@@ -283,9 +301,9 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereLike(Closure | string $column, Closure | float | int | string | null $value)
+	public function whereLike(Closure | string $column, Closure | float | int | string | null $value) : static
 	{
 		return $this->where($column, 'LIKE', $value);
 	}
@@ -298,10 +316,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orWhereLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orWhere($column, 'LIKE', $value);
 	}
 
@@ -313,10 +333,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereNotLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function whereNotLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->where($column, 'NOT LIKE', $value);
 	}
 
@@ -328,10 +350,12 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereNotLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orWhereNotLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orWhere($column, 'NOT LIKE', $value);
 	}
 
@@ -344,13 +368,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->where($column, 'IN', ...$values);
 	}
@@ -364,13 +388,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orWhere($column, 'IN', ...$values);
 	}
@@ -384,13 +408,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereNotIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->where($column, 'NOT IN', ...$values);
 	}
@@ -404,13 +428,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereNotIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orWhere($column, 'NOT IN', ...$values);
 	}
@@ -424,13 +448,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/between-and/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->where($column, 'BETWEEN', $min, $max);
 	}
 
@@ -443,13 +467,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/between-and/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->orWhere($column, 'BETWEEN', $min, $max);
 	}
 
@@ -462,13 +486,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-between/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereNotBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->where($column, 'NOT BETWEEN', $min, $max);
 	}
 
@@ -481,13 +505,13 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-between/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereNotBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->orWhere($column, 'NOT BETWEEN', $min, $max);
 	}
 
@@ -498,9 +522,9 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereIsNull(Closure | string $column)
+	public function whereIsNull(Closure | string $column) : static
 	{
 		return $this->where($column, 'IS NULL');
 	}
@@ -512,9 +536,9 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereIsNull(Closure | string $column)
+	public function orWhereIsNull(Closure | string $column) : static
 	{
 		return $this->orWhere($column, 'IS NULL');
 	}
@@ -526,9 +550,9 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereIsNotNull(Closure | string $column)
+	public function whereIsNotNull(Closure | string $column) : static
 	{
 		return $this->where($column, 'IS NOT NULL');
 	}
@@ -540,9 +564,9 @@ trait Where
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereIsNotNull(Closure | string $column)
+	public function orWhereIsNotNull(Closure | string $column) : static
 	{
 		return $this->orWhere($column, 'IS NOT NULL');
 	}
@@ -568,10 +592,12 @@ trait Where
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function whereMatch(array | Closure | string $columns, array | Closure | string $against)
-	{
+	public function whereMatch(
+		array | Closure | string $columns,
+		array | Closure | string $against
+	) : static {
 		return $this->where($columns, 'MATCH', $against);
 	}
 
@@ -585,10 +611,12 @@ trait Where
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orWhereMatch(array | Closure | string $columns, array | Closure | string $against)
-	{
+	public function orWhereMatch(
+		array | Closure | string $columns,
+		array | Closure | string $against
+	) : static {
 		return $this->orWhere($columns, 'MATCH', $against);
 	}
 
@@ -602,12 +630,12 @@ trait Where
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereMatchWithQueryExpansion(
 		array | Closure | string $columns,
 		array | Closure | string $against
-	) {
+	) : static {
 		return $this->where($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
 	}
 
@@ -621,12 +649,12 @@ trait Where
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereMatchWithQueryExpansion(
 		array | Closure | string $columns,
 		array | Closure | string $against
-	) {
+	) : static {
 		return $this->orWhere($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
 	}
 
@@ -640,12 +668,12 @@ trait Where
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function whereMatchInBooleanMode(
 		array | Closure | string $columns,
 		array | Closure | string $against
-	) {
+	) : static {
 		return $this->where($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
 
@@ -659,12 +687,12 @@ trait Where
 	 * @see https://mariadb.com/kb/en/library/full-text-index-overview/
 	 * @see https://mariadb.com/kb/en/library/match-against/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orWhereMatchInBooleanMode(
 		array | Closure | string $columns,
 		array | Closure | string $against
-	) {
+	) : static {
 		return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
 	}
 
@@ -678,7 +706,7 @@ trait Where
 	 * @param array<int,Closure|float|int|string|null> $values Values used by the operator
 	 * @param string $clause `where` or `having`
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	private function addWhere(
 		string $glue,
@@ -686,7 +714,7 @@ trait Where
 		string $operator,
 		array $values,
 		string $clause = 'where'
-	) {
+	) : static {
 		$this->sql[$clause][] = [
 			'glue' => $glue,
 			'column' => $column,

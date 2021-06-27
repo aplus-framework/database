@@ -34,9 +34,9 @@ class Replace extends Statement
 	/**
 	 * @param string $table
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function into(string $table)
+	public function into(string $table) : static
 	{
 		$this->sql['into'] = $table;
 		return $this;
@@ -54,9 +54,9 @@ class Replace extends Statement
 	 * @param string $column
 	 * @param string ...$columns
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function columns(string $column, string ...$columns)
+	public function columns(string $column, string ...$columns) : static
 	{
 		$this->sql['columns'] = $this->mergeExpressions($column, $columns);
 		return $this;
@@ -109,10 +109,12 @@ class Replace extends Statement
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function values(Closure | float | int | string | null $value, Closure | float | int | string | null ...$values)
-	{
+	public function values(
+		Closure | float | int | string | null $value,
+		Closure | float | int | string | null ...$values
+	) : static {
 		$this->sql['values'][] = $this->mergeExpressions($value, $values);
 		return $this;
 	}
@@ -153,9 +155,9 @@ class Replace extends Statement
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-select/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function select(Closure $select)
+	public function select(Closure $select) : static
 	{
 		$this->sql['select'] = $select(new Select($this->database));
 		return $this;

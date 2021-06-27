@@ -25,13 +25,13 @@ trait Having
 	 * @param string $operator
 	 * @param Closure|float|int|string|null ...$values
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function having(
 		Closure | string $column,
 		string $operator,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		return $this->addHaving('AND', $column, $operator, $values);
 	}
 
@@ -42,13 +42,13 @@ trait Having
 	 * @param string $operator
 	 * @param Closure|float|int|string|null ...$values
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHaving(
 		Closure | string $column,
 		string $operator,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		return $this->addHaving('OR', $column, $operator, $values);
 	}
 
@@ -60,10 +60,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function havingEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->having($column, '=', $value);
 	}
 
@@ -75,10 +77,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orHavingEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orHaving($column, '=', $value);
 	}
 
@@ -90,10 +94,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingNotEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function havingNotEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->having($column, '!=', $value);
 	}
 
@@ -105,10 +111,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingNotEqual(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orHavingNotEqual(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orHaving($column, '!=', $value);
 	}
 
@@ -120,12 +128,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/null-safe-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingNullSafeEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->having($column, '<=>', $value);
 	}
 
@@ -137,12 +145,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/null-safe-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingNullSafeEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orHaving($column, '<=>', $value);
 	}
 
@@ -154,10 +162,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingLessThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function havingLessThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->having($column, '<', $value);
 	}
 
@@ -169,10 +179,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingLessThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orHavingLessThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orHaving($column, '<', $value);
 	}
 
@@ -184,12 +196,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingLessThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->having($column, '<=', $value);
 	}
 
@@ -201,12 +213,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/less-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingLessThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orHaving($column, '<=', $value);
 	}
 
@@ -218,10 +230,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingGreaterThan(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function havingGreaterThan(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->having($column, '>', $value);
 	}
 
@@ -233,12 +247,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingGreaterThan(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orHaving($column, '>', $value);
 	}
 
@@ -250,12 +264,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingGreaterThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->having($column, '>=', $value);
 	}
 
@@ -267,12 +281,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingGreaterThanOrEqual(
 		Closure | string $column,
 		Closure | float | int | string | null $value
-	) {
+	) : static {
 		return $this->orHaving($column, '>=', $value);
 	}
 
@@ -284,10 +298,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function havingLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->having($column, 'LIKE', $value);
 	}
 
@@ -299,10 +315,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orHavingLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orHaving($column, 'LIKE', $value);
 	}
 
@@ -314,10 +332,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingNotLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function havingNotLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->having($column, 'NOT LIKE', $value);
 	}
 
@@ -329,10 +349,12 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-like/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingNotLike(Closure | string $column, Closure | float | int | string | null $value)
-	{
+	public function orHavingNotLike(
+		Closure | string $column,
+		Closure | float | int | string | null $value
+	) : static {
 		return $this->orHaving($column, 'NOT LIKE', $value);
 	}
 
@@ -345,13 +367,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->having($column, 'IN', ...$values);
 	}
@@ -365,13 +387,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orHaving($column, 'IN', ...$values);
 	}
@@ -385,13 +407,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingNotIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->having($column, 'NOT IN', ...$values);
 	}
@@ -405,13 +427,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-in/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingNotIn(
 		Closure | string $column,
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$values = $this->mergeExpressions($value, $values);
 		return $this->orHaving($column, 'NOT IN', ...$values);
 	}
@@ -425,13 +447,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/between-and/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->having($column, 'BETWEEN', $min, $max);
 	}
 
@@ -444,13 +466,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/between-and/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->orHaving($column, 'BETWEEN', $min, $max);
 	}
 
@@ -463,13 +485,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-between/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function havingNotBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->having($column, 'NOT BETWEEN', $min, $max);
 	}
 
@@ -482,13 +504,13 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/not-between/
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function orHavingNotBetween(
 		Closure | string $column,
 		Closure | float | int | string | null $min,
 		Closure | float | int | string | null $max
-	) {
+	) : static {
 		return $this->orHaving($column, 'NOT BETWEEN', $min, $max);
 	}
 
@@ -499,9 +521,9 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingIsNull(Closure | string $column)
+	public function havingIsNull(Closure | string $column) : static
 	{
 		return $this->having($column, 'IS NULL');
 	}
@@ -513,9 +535,9 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingIsNull(Closure | string $column)
+	public function orHavingIsNull(Closure | string $column) : static
 	{
 		return $this->orHaving($column, 'IS NULL');
 	}
@@ -527,9 +549,9 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function havingIsNotNull(Closure | string $column)
+	public function havingIsNotNull(Closure | string $column) : static
 	{
 		return $this->having($column, 'IS NOT NULL');
 	}
@@ -541,9 +563,9 @@ trait Having
 	 *
 	 * @see https://mariadb.com/kb/en/library/is-not-null/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orHavingIsNotNull(Closure | string $column)
+	public function orHavingIsNotNull(Closure | string $column) : static
 	{
 		return $this->orHaving($column, 'IS NOT NULL');
 	}
@@ -558,14 +580,14 @@ trait Having
 	 * `IS NOT NULL` or `MATCH`
 	 * @param array<int,Closure|float|int|string|null> $values Values used by the operator
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	private function addHaving(
 		string $glue,
 		array | Closure | string $column,
 		string $operator,
 		array $values
-	) {
+	) : static {
 		return $this->addWhere($glue, $column, $operator, $values, 'having');
 	}
 

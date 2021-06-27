@@ -58,10 +58,12 @@ class Delete extends Statement
 	 * @param array<string,Closure|string>|Closure|string ...$references Extra
 	 * references. Same values as $reference
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function table(array | Closure | string $reference, array | Closure | string ...$references)
-	{
+	public function table(
+		array | Closure | string $reference,
+		array | Closure | string ...$references
+	) : static {
 		$this->sql['table'] = [];
 		$references = $this->mergeExpressions($reference, $references);
 		foreach ($references as $reference) {
@@ -94,9 +96,9 @@ class Delete extends Statement
 	 *
 	 * @see https://mariadb.com/kb/en/library/limit/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function limit(int $limit)
+	public function limit(int $limit) : static
 	{
 		return $this->setLimit($limit);
 	}

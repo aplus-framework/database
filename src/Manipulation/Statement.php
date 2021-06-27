@@ -25,9 +25,9 @@ abstract class Statement extends \Framework\Database\Statement
 	 * @param string $option One of the OPT_* constants
 	 * @param string ...$options Each option value must be one of the OPT_* constants
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function options(string $option, string ...$options)
+	public function options(string $option, string ...$options) : static
 	{
 		$this->sql['options'] = [];
 		$options = $this->mergeExpressions($option, $options);
@@ -73,9 +73,9 @@ abstract class Statement extends \Framework\Database\Statement
 	 *
 	 * @see https://mariadb.com/kb/en/library/limit/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	protected function setLimit(int $limit, int $offset = null)
+	protected function setLimit(int $limit, int $offset = null) : static
 	{
 		$this->sql['limit'] = [
 			'limit' => $limit,

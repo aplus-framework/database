@@ -65,9 +65,9 @@ class LoadData extends Statement
 	/**
 	 * @param string $filename
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function infile(string $filename)
+	public function infile(string $filename) : static
 	{
 		$this->sql['infile'] = $filename;
 		return $this;
@@ -85,9 +85,9 @@ class LoadData extends Statement
 	/**
 	 * @param string $table
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function intoTable(string $table)
+	public function intoTable(string $table) : static
 	{
 		$this->sql['table'] = $table;
 		return $this;
@@ -106,9 +106,9 @@ class LoadData extends Statement
 	 *
 	 * @see https://mariadb.com/kb/en/supported-character-sets-and-collations/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function charset(string $charset)
+	public function charset(string $charset) : static
 	{
 		$this->sql['charset'] = $charset;
 		return $this;
@@ -125,9 +125,9 @@ class LoadData extends Statement
 	/**
 	 * @param string $str
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function columnsTerminatedBy(string $str)
+	public function columnsTerminatedBy(string $str) : static
 	{
 		$this->sql['columns_terminated_by'] = $this->database->quote($str);
 		return $this;
@@ -137,9 +137,9 @@ class LoadData extends Statement
 	 * @param string $char
 	 * @param bool $optionally
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function columnsEnclosedBy(string $char, bool $optionally = false)
+	public function columnsEnclosedBy(string $char, bool $optionally = false) : static
 	{
 		$this->sql['columns_enclosed_by'] = $this->database->quote($char);
 		$this->sql['columns_enclosed_by_opt'] = $optionally;
@@ -149,9 +149,9 @@ class LoadData extends Statement
 	/**
 	 * @param string $char
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function columnsEscapedBy(string $char)
+	public function columnsEscapedBy(string $char) : static
 	{
 		$this->sql['columns_escaped_by'] = $this->database->quote($char);
 		return $this;
@@ -189,9 +189,9 @@ class LoadData extends Statement
 	/**
 	 * @param string $str
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function linesStartingBy(string $str)
+	public function linesStartingBy(string $str) : static
 	{
 		$this->sql['lines_starting_by'] = $this->database->quote($str);
 		return $this;
@@ -200,9 +200,9 @@ class LoadData extends Statement
 	/**
 	 * @param string $str
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function linesTerminatedBy(string $str)
+	public function linesTerminatedBy(string $str) : static
 	{
 		$this->sql['lines_terminated_by'] = $this->database->quote($str);
 		return $this;
@@ -226,9 +226,9 @@ class LoadData extends Statement
 	/**
 	 * @param int $number
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function ignoreLines(int $number)
+	public function ignoreLines(int $number) : static
 	{
 		$this->sql['ignore_lines'] = $number;
 		return $this;

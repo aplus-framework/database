@@ -44,9 +44,9 @@ abstract class Statement
 	 *
 	 * @see Statement::$sql
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function reset(string $sql = null)
+	public function reset(string $sql = null) : static
 	{
 		if ($sql === null) {
 			unset($this->sql);
@@ -68,5 +68,5 @@ abstract class Statement
 	 *
 	 * @return mixed
 	 */
-	abstract public function run();
+	abstract public function run() : mixed;
 }

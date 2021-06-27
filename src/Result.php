@@ -107,9 +107,9 @@ class Result
 	 * @param string $class
 	 * @param mixed ...$constructor
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function setFetchClass(string $class, mixed ...$constructor)
+	public function setFetchClass(string $class, mixed ...$constructor) : static
 	{
 		$this->fetchClass = $class;
 		$this->fetchConstructor = $constructor;

@@ -21,6 +21,7 @@ use LogicException;
 final class ForeignKey extends Index
 {
 	use Traits\Constraint;
+
 	protected string $type = 'FOREIGN KEY';
 	protected ?string $referenceTable = null;
 	/**
@@ -35,9 +36,9 @@ final class ForeignKey extends Index
 	 * @param string $column
 	 * @param string ...$columns
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function references(string $table, string $column, string ...$columns)
+	public function references(string $table, string $column, string ...$columns) : static
 	{
 		$this->referenceTable = $table;
 		$this->referenceColumns = $columns ? \array_merge([$column], $columns) : [$column];
@@ -61,9 +62,9 @@ final class ForeignKey extends Index
 	/**
 	 * @param string $option
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function onDelete(string $option)
+	public function onDelete(string $option) : static
 	{
 		$this->onDelete = $option;
 		return $this;
@@ -81,9 +82,9 @@ final class ForeignKey extends Index
 	/**
 	 * @param string $option
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function onUpdate(string $option)
+	public function onUpdate(string $option) : static
 	{
 		$this->onUpdate = $option;
 		return $this;

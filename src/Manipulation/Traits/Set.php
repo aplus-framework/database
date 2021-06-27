@@ -21,9 +21,9 @@ trait Set
 	 *
 	 * @param array<string,Closure|float|int|string|null> $columns Array of columns => values
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function set(array $columns)
+	public function set(array $columns) : static
 	{
 		$this->sql['set'] = $columns;
 		return $this;

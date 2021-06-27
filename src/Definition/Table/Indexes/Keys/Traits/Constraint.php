@@ -16,9 +16,9 @@ trait Constraint
 	/**
 	 * @param string $name
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function constraint(string $name)
+	public function constraint(string $name) : static
 	{
 		$this->constraint = $name;
 		return $this;

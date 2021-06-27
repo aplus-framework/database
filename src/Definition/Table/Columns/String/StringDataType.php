@@ -19,9 +19,9 @@ abstract class StringDataType extends Column
 	/**
 	 * @param string $charset
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function charset(string $charset)
+	public function charset(string $charset) : static
 	{
 		$this->charset = $charset;
 		return $this;
@@ -38,9 +38,9 @@ abstract class StringDataType extends Column
 	/**
 	 * @param string $collation
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function collate(string $collation)
+	public function collate(string $collation) : static
 	{
 		$this->collation = $collation;
 		return $this;

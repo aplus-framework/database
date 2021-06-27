@@ -30,10 +30,12 @@ trait Join
 	 *
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function from(array | Closure | string $reference, array | Closure | string ...$references)
-	{
+	public function from(
+		array | Closure | string $reference,
+		array | Closure | string ...$references
+	) : static {
 		$this->sql['from'] = [];
 		$references = $this->mergeExpressions($reference, $references);
 		foreach ($references as $reference) {
@@ -91,14 +93,14 @@ trait Join
 	 * @param array<int,Closure|string>|Closure|null $conditional A conditional
 	 * expression as Closure or the columns list as array
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function join(
 		Closure | string $table,
 		string $type = '',
 		string $clause = null,
 		array | Closure $conditional = null
-	) {
+	) : static {
 		return $this->setJoin($table, $type, $clause, $conditional);
 	}
 
@@ -108,9 +110,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function joinOn(Closure | string $table, Closure $conditional)
+	public function joinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, '', 'ON', $conditional);
 	}
@@ -121,9 +123,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function joinUsing(Closure | string $table, Closure | string ...$columns)
+	public function joinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, '', 'USING', $columns);
 	}
@@ -134,9 +136,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function innerJoinOn(Closure | string $table, Closure $conditional)
+	public function innerJoinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, 'INNER', 'ON', $conditional);
 	}
@@ -147,9 +149,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function innerJoinUsing(Closure | string $table, Closure | string ...$columns)
+	public function innerJoinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, 'INNER', 'USING', $columns);
 	}
@@ -160,9 +162,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function crossJoinOn(Closure | string $table, Closure $conditional)
+	public function crossJoinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, 'CROSS', 'ON', $conditional);
 	}
@@ -173,9 +175,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function crossJoinUsing(Closure | string $table, Closure | string ...$columns)
+	public function crossJoinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, 'CROSS', 'USING', $columns);
 	}
@@ -186,9 +188,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function leftJoinOn(Closure | string $table, Closure $conditional)
+	public function leftJoinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, 'LEFT', 'ON', $conditional);
 	}
@@ -199,9 +201,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function leftJoinUsing(Closure | string $table, Closure | string ...$columns)
+	public function leftJoinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, 'LEFT', 'USING', $columns);
 	}
@@ -212,9 +214,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function leftOuterJoinOn(Closure | string $table, Closure $conditional)
+	public function leftOuterJoinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, 'LEFT OUTER', 'ON', $conditional);
 	}
@@ -225,9 +227,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function leftOuterJoinUsing(Closure | string $table, Closure | string ...$columns)
+	public function leftOuterJoinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, 'LEFT OUTER', 'USING', $columns);
 	}
@@ -238,9 +240,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function rightJoinOn(Closure | string $table, Closure $conditional)
+	public function rightJoinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, 'RIGHT', 'ON', $conditional);
 	}
@@ -251,9 +253,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function rightJoinUsing(Closure | string $table, Closure | string ...$columns)
+	public function rightJoinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, 'RIGHT', 'USING', $columns);
 	}
@@ -264,9 +266,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure $conditional Conditional expression
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function rightOuterJoinOn(Closure | string $table, Closure $conditional)
+	public function rightOuterJoinOn(Closure | string $table, Closure $conditional) : static
 	{
 		return $this->setJoin($table, 'RIGHT OUTER', 'ON', $conditional);
 	}
@@ -277,9 +279,9 @@ trait Join
 	 * @param Closure|string $table Table factor
 	 * @param Closure|string ...$columns Columns list
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function rightOuterJoinUsing(Closure | string $table, Closure | string ...$columns)
+	public function rightOuterJoinUsing(Closure | string $table, Closure | string ...$columns) : static
 	{
 		return $this->setJoin($table, 'RIGHT OUTER', 'USING', $columns);
 	}
@@ -289,9 +291,9 @@ trait Join
 	 *
 	 * @param Closure|string $table Table factor
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function naturalJoin(Closure | string $table)
+	public function naturalJoin(Closure | string $table) : static
 	{
 		return $this->setJoin($table, 'NATURAL');
 	}
@@ -301,9 +303,9 @@ trait Join
 	 *
 	 * @param Closure|string $table Table factor
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function naturalLeftJoin(Closure | string $table)
+	public function naturalLeftJoin(Closure | string $table) : static
 	{
 		return $this->setJoin($table, 'NATURAL LEFT');
 	}
@@ -313,9 +315,9 @@ trait Join
 	 *
 	 * @param Closure|string $table Table factor
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function naturalLeftOuterJoin(Closure | string $table)
+	public function naturalLeftOuterJoin(Closure | string $table) : static
 	{
 		return $this->setJoin($table, 'NATURAL LEFT OUTER');
 	}
@@ -325,9 +327,9 @@ trait Join
 	 *
 	 * @param Closure|string $table Table factor
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function naturalRightJoin(Closure | string $table)
+	public function naturalRightJoin(Closure | string $table) : static
 	{
 		return $this->setJoin($table, 'NATURAL RIGHT');
 	}
@@ -337,9 +339,9 @@ trait Join
 	 *
 	 * @param Closure|string $table Table factor
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function naturalRightOuterJoin(Closure | string $table)
+	public function naturalRightOuterJoin(Closure | string $table) : static
 	{
 		return $this->setJoin($table, 'NATURAL RIGHT OUTER');
 	}
@@ -354,14 +356,14 @@ trait Join
 	 * @param string|null $clause `ON`, `USING` or null for none
 	 * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	private function setJoin(
 		Closure | string $table,
 		string $type,
 		string $clause = null,
 		Closure | array $expression = null
-	) {
+	) : static {
 		$this->sql['join'] = [
 			'type' => $type,
 			'table' => $table,

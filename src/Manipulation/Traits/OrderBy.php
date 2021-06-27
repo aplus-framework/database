@@ -24,9 +24,9 @@ trait OrderBy
 	 * @param Closure|string $column The column name or a subquery
 	 * @param Closure|string ...$columns Extra column names and/or subqueries
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orderBy(Closure | string $column, Closure | string ...$columns)
+	public function orderBy(Closure | string $column, Closure | string ...$columns) : static
 	{
 		return $this->addOrderBy($column, $columns, null);
 	}
@@ -37,9 +37,9 @@ trait OrderBy
 	 * @param Closure|string $column The column name or a subquery
 	 * @param Closure|string ...$columns Extra column names and/or subqueries
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orderByAsc(Closure | string $column, Closure | string ...$columns)
+	public function orderByAsc(Closure | string $column, Closure | string ...$columns) : static
 	{
 		return $this->addOrderBy($column, $columns, 'ASC');
 	}
@@ -50,9 +50,9 @@ trait OrderBy
 	 * @param Closure|string $column The column name or a subquery
 	 * @param Closure|string ...$columns Extra column names and/or subqueries
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function orderByDesc(Closure | string $column, Closure | string ...$columns)
+	public function orderByDesc(Closure | string $column, Closure | string ...$columns) : static
 	{
 		return $this->addOrderBy($column, $columns, 'DESC');
 	}
@@ -64,9 +64,9 @@ trait OrderBy
 	 * @param array<int,Closure|string> $columns Extra column names and/or subqueries
 	 * @param string|null $direction `ASC`, `DESC` or null for none
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	private function addOrderBy(Closure | string $column, array $columns, ?string $direction)
+	private function addOrderBy(Closure | string $column, array $columns, ?string $direction) : static
 	{
 		$columns = $this->mergeExpressions($column, $columns);
 		foreach ($columns as $column) {

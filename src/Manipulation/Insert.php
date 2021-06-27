@@ -78,9 +78,9 @@ class Insert extends Statement
 	 *
 	 * @param string $table Table name
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function into(string $table)
+	public function into(string $table) : static
 	{
 		$this->sql['into'] = $table;
 		return $this;
@@ -107,9 +107,9 @@ class Insert extends Statement
 	 * @param string $column Column name
 	 * @param string ...$columns Extra column names
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function columns(string $column, string ...$columns)
+	public function columns(string $column, string ...$columns) : static
 	{
 		$this->sql['columns'] = $this->mergeExpressions($column, $columns);
 		return $this;
@@ -139,12 +139,12 @@ class Insert extends Statement
 	 * @param Closure|float|int|string|null $value
 	 * @param Closure|float|int|string|null ...$values
 	 *
-	 * @return $this
+	 * @return static
 	 */
 	public function values(
 		Closure | float | int | string | null $value,
 		Closure | float | int | string | null ...$values
-	) {
+	) : static {
 		$this->sql['values'][] = $this->mergeExpressions($value, $values);
 		return $this;
 	}
@@ -179,9 +179,9 @@ class Insert extends Statement
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-select/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function select(Closure $select)
+	public function select(Closure $select) : static
 	{
 		$this->sql['select'] = $select(new Select($this->database));
 		return $this;
@@ -216,9 +216,9 @@ class Insert extends Statement
 	 *
 	 * @see https://mariadb.com/kb/en/library/insert-on-duplicate-key-update/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function onDuplicateKeyUpdate(array $columns)
+	public function onDuplicateKeyUpdate(array $columns) : static
 	{
 		$this->sql['on_duplicate'] = $columns;
 		return $this;

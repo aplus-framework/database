@@ -21,9 +21,9 @@ abstract class NumericDataType extends Column
 	/**
 	 * @see https://mariadb.com/kb/en/library/auto_increment/
 	 *
-	 * @return $this
+	 * @return static
 	 */
-	public function autoIncrement()
+	public function autoIncrement() : static
 	{
 		$this->autoIncrement = true;
 		return $this;
@@ -38,9 +38,9 @@ abstract class NumericDataType extends Column
 	}
 
 	/**
-	 * @return $this
+	 * @return static
 	 */
-	public function signed()
+	public function signed() : static
 	{
 		$this->signed = true;
 		return $this;
@@ -55,9 +55,9 @@ abstract class NumericDataType extends Column
 	}
 
 	/**
-	 * @return $this
+	 * @return static
 	 */
-	public function unsigned()
+	public function unsigned() : static
 	{
 		$this->unsigned = true;
 		return $this;
@@ -72,9 +72,9 @@ abstract class NumericDataType extends Column
 	}
 
 	/**
-	 * @return $this
+	 * @return static
 	 */
-	public function zerofill()
+	public function zerofill() : static
 	{
 		$this->zerofill = true;
 		return $this;
