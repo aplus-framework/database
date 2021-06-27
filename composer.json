@@ -14,7 +14,8 @@
 	"authors": [
 		{
 			"name": "Natan Felles",
-			"email": "natanfelles@gmail.com"
+			"email": "natanfelles@gmail.com",
+			"homepage": "https://natanfelles.github.io"
 		}
 	],
 	"require": {
@@ -24,9 +25,9 @@
 	},
 	"require-dev": {
 		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.13",
+		"ergebnis/composer-normalize": "^2.15",
 		"jetbrains/phpstorm-attributes": "^1.0",
-		"natanfelles/coding-standard": "^1.5",
+		"natanfelles/coding-standard": "^1.7",
 		"phpmd/phpmd": "^2.10",
 		"phpstan/phpstan": "^0.12",
 		"phpunit/phpunit": "^9.5"
