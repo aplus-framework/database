@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of The Framework Database Library.
  *
@@ -177,7 +177,7 @@ class Database
 			$this->mysqli->options($option, $value);
 		}
 		try {
-			$flags = null;
+			$flags = 0;
 			if ($config['ssl']['enabled'] === true) {
 				$this->mysqli->ssl_set(
 					$config['ssl']['key'],
@@ -196,7 +196,7 @@ class Database
 				$config['username'],
 				$config['password'],
 				$config['schema'],
-				$config['port'],
+				$config['port'] === null ? null : (int) $config['port'],
 				$config['socket'],
 				$flags
 			);

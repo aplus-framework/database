@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of The Framework Database Library.
  *
@@ -909,7 +909,7 @@ trait Where
 				"Operator {$operator} must receive exactly 1 parameter"
 			);
 		}
-		return $values[0]; // @phpstan-ignore-line
+		return (string) $values[0];
 	}
 
 	/**

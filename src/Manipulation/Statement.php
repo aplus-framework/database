@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * This file is part of The Framework Database Library.
  *
@@ -135,7 +135,7 @@ abstract class Statement extends \Framework\Database\Statement
 			if (\count($column) !== 1) {
 				throw new InvalidArgumentException('Aliased column must have only 1 key');
 			}
-			$alias = \array_key_first($column);
+			$alias = (string) \array_key_first($column);
 			return $this->renderIdentifier($column[$alias]) . ' AS '
 				. $this->database->protectIdentifier($alias);
 		}
