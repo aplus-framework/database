@@ -26,6 +26,7 @@ use Framework\Database\Manipulation\With;
 use Framework\Database\PreparedStatement;
 use Framework\Database\Result;
 use Framework\Log\Logger;
+use mysqli_sql_exception;
 
 final class DatabaseTest extends TestCase
 {
@@ -56,7 +57,7 @@ final class DatabaseTest extends TestCase
 
 	public function testConnectionFail() : void
 	{
-		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectException(mysqli_sql_exception::class);
 		new Database([
 			'username' => 'error-1',
 			'password' => \getenv('DB_PASSWORD'),
@@ -82,7 +83,7 @@ final class DatabaseTest extends TestCase
 		];
 		try {
 			new Database($config, logger: $logger);
-		} catch (\mysqli_sql_exception $e) {
+		} catch (mysqli_sql_exception) {
 			self::assertSame(
 				"Database: Connection failed for 'error-1'@'{$config['host']}'",
 				$logger->getLastLog()->message
@@ -95,7 +96,7 @@ final class DatabaseTest extends TestCase
 		];
 		try {
 			new Database($config, logger: $logger);
-		} catch (\mysqli_sql_exception $e) {
+		} catch (mysqli_sql_exception) {
 			self::assertSame(
 				"Database: Connection failed for 'error-2'@'{$config['host']}' (failover: 0)",
 				$logger->getLastLog()->message
@@ -106,7 +107,7 @@ final class DatabaseTest extends TestCase
 	public function testConnectionWithSSL() : void
 	{
 		if (\getenv('DB_HOST') === 'mariadb') {
-			$this->expectException(\mysqli_sql_exception::class);
+			$this->expectException(mysqli_sql_exception::class);
 			$this->expectExceptionMessage('MySQL server has gone away');
 		}
 		$database = new Database([
@@ -135,7 +136,7 @@ final class DatabaseTest extends TestCase
 	public function testConnectionWithSSLNotVerified() : void
 	{
 		if (\getenv('DB_HOST') === 'mariadb') {
-			$this->expectException(\mysqli_sql_exception::class);
+			$this->expectException(mysqli_sql_exception::class);
 			$this->expectExceptionMessage('MySQL server has gone away');
 		}
 		$database = new Database([
@@ -175,9 +176,9 @@ final class DatabaseTest extends TestCase
 		self::assertInstanceOf(Database::class, $database);
 	}
 
-	public function testConnectionFailWithfailover() : void
+	public function testConnectionFailWithFailover() : void
 	{
-		$this->expectException(\mysqli_sql_exception::class);
+		$this->expectException(mysqli_sql_exception::class);
 		new Database([
 			'username' => 'error-1',
 			'password' => \getenv('DB_PASSWORD'),

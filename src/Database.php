@@ -75,7 +75,7 @@ class Database
 	 *
 	 * @see Database::makeConfig
 	 *
-	 * @throws Exception if connections fail
+	 * @throws mysqli_sql_exception if connections fail
 	 */
 	public function __construct(
 		array | string $username,
@@ -147,7 +147,7 @@ class Database
 	 * @param string $host
 	 * @param int $port
 	 *
-	 * @throws Exception
+	 * @throws mysqli_sql_exception if connection fail
 	 *
 	 * @return static
 	 */
@@ -200,7 +200,7 @@ class Database
 				$config['socket'],
 				$flags
 			);
-		} catch (Exception $exception) {
+		} catch (mysqli_sql_exception $exception) {
 			$log = "Database: Connection failed for '{$config['username']}'@'{$config['host']}'";
 			$log .= $this->failoverIndex !== null ? " (failover: {$this->failoverIndex})" : '';
 			$this->log($log);
