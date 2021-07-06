@@ -196,6 +196,12 @@ final class DatabaseTest extends TestCase
 		]);
 	}
 
+	public function testConfig() : void
+	{
+		self::assertSame(\getenv('DB_USERNAME'), static::$database->getConfig()['username']);
+		self::assertSame('+00:00', static::$database->getConfig()['timezone']);
+	}
+
 	public function testOptions() : void
 	{
 		$this->createDummyData();

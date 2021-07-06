@@ -66,7 +66,7 @@ class Database
 	/**
 	 * Database constructor.
 	 *
-	 * @param array|mixed[]|string $username
+	 * @param array<string,mixed>|string $username
 	 * @param string|null $password
 	 * @param string|null $schema
 	 * @param string $host
@@ -104,9 +104,9 @@ class Database
 	/**
 	 * Make Base Connection configurations.
 	 *
-	 * @param array|mixed[] $config
+	 * @param array<string,mixed> $config
 	 *
-	 * @return array|mixed[]
+	 * @return array<string,mixed>
 	 */
 	protected function makeConfig(array $config) : array
 	{
@@ -141,7 +141,7 @@ class Database
 	}
 
 	/**
-	 * @param mixed[]|string $username
+	 * @param array<string,mixed>|string $username
 	 * @param string|null $password
 	 * @param string|null $schema
 	 * @param string $host
@@ -233,6 +233,14 @@ class Database
 	{
 		$timezone = $this->quote($timezone);
 		return $this->mysqli->real_query("SET time_zone = {$timezone}");
+	}
+
+	/**
+	 * @return array<string,mixed>
+	 */
+	public function getConfig() : array
+	{
+		return $this->config;
 	}
 
 	public function warnings() : int
