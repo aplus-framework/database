@@ -13,5 +13,5 @@ use Framework\Database\Definition\Table\Indexes\Index;
 
 class IndexMock extends Index
 {
-	public string $type = 'index_mock';
+    public string $type = 'index_mock';
 }

@@ -16,6 +16,6 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
  */
 final class MediumintColumn extends NumericDataType
 {
-	protected string $type = 'mediumint';
-	protected int $maxLength = 127;
+    protected string $type = 'mediumint';
+    protected int $maxLength = 127;
 }

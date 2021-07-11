@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class YearColumn extends Column
 {
-	protected string $type = 'year';
+    protected string $type = 'year';
 }

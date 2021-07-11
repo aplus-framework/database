@@ -11,30 +11,30 @@ namespace Framework\Database\Definition\Table\Indexes\Keys\Traits;
 
 trait Constraint
 {
-	protected ?string $constraint = null;
+    protected ?string $constraint = null;
 
-	/**
-	 * @param string $name
-	 *
-	 * @return static
-	 */
-	public function constraint(string $name) : static
-	{
-		$this->constraint = $name;
-		return $this;
-	}
+    /**
+     * @param string $name
+     *
+     * @return static
+     */
+    public function constraint(string $name) : static
+    {
+        $this->constraint = $name;
+        return $this;
+    }
 
-	protected function renderConstraint() : ?string
-	{
-		if ($this->constraint === null) {
-			return null;
-		}
-		$constraint = $this->database->protectIdentifier($this->constraint);
-		return " CONSTRAINT {$constraint}";
-	}
+    protected function renderConstraint() : ?string
+    {
+        if ($this->constraint === null) {
+            return null;
+        }
+        $constraint = $this->database->protectIdentifier($this->constraint);
+        return " CONSTRAINT {$constraint}";
+    }
 
-	protected function renderType() : string
-	{
-		return $this->renderConstraint() . parent::renderType();
-	}
+    protected function renderType() : string
+    {
+        return $this->renderConstraint() . parent::renderType();
+    }
 }

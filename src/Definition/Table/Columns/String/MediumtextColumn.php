@@ -16,5 +16,5 @@ namespace Framework\Database\Definition\Table\Columns\String;
  */
 final class MediumtextColumn extends StringDataType
 {
-	protected string $type = 'mediumtext';
+    protected string $type = 'mediumtext';
 }

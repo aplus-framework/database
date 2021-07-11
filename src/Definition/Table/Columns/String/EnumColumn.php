@@ -18,6 +18,6 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
  */
 final class EnumColumn extends StringDataType
 {
-	use ListLength;
-	protected string $type = 'enum';
+    use ListLength;
+    protected string $type = 'enum';
 }

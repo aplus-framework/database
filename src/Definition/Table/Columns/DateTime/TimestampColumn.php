@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class TimestampColumn extends Column
 {
-	protected string $type = 'timestamp';
+    protected string $type = 'timestamp';
 }

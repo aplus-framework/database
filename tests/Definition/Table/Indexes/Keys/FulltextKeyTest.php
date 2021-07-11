@@ -14,12 +14,12 @@ use Tests\Database\TestCase;
 
 final class FulltextKeyTest extends TestCase
 {
-	public function testType() : void
-	{
-		$index = new FulltextKey(static::$database, null, 'id');
-		self::assertSame(
-			' FULLTEXT KEY (`id`)',
-			$index->sql()
-		);
-	}
+    public function testType() : void
+    {
+        $index = new FulltextKey(static::$database, null, 'id');
+        self::assertSame(
+            ' FULLTEXT KEY (`id`)',
+            $index->sql()
+        );
+    }
 }

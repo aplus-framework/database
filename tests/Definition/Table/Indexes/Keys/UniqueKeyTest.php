@@ -14,12 +14,12 @@ use Tests\Database\TestCase;
 
 final class UniqueKeyTest extends TestCase
 {
-	public function testType() : void
-	{
-		$index = new UniqueKey(static::$database, null, 'id');
-		self::assertSame(
-			' UNIQUE KEY (`id`)',
-			$index->sql()
-		);
-	}
+    public function testType() : void
+    {
+        $index = new UniqueKey(static::$database, null, 'id');
+        self::assertSame(
+            ' UNIQUE KEY (`id`)',
+            $index->sql()
+        );
+    }
 }

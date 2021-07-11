@@ -19,127 +19,127 @@ use LogicException;
  */
 class AlterSchema extends Statement
 {
-	/**
-	 * @param string $schemaName
-	 *
-	 * @return static
-	 */
-	public function schema(string $schemaName) : static
-	{
-		$this->sql['schema'] = $schemaName;
-		return $this;
-	}
+    /**
+     * @param string $schemaName
+     *
+     * @return static
+     */
+    public function schema(string $schemaName) : static
+    {
+        $this->sql['schema'] = $schemaName;
+        return $this;
+    }
 
-	protected function renderSchema() : ?string
-	{
-		if ( ! isset($this->sql['schema'])) {
-			return null;
-		}
-		$schema = $this->sql['schema'];
-		if (isset($this->sql['upgrade'])) {
-			$schema = "#mysql50#{$schema}";
-		}
-		return ' ' . $this->database->protectIdentifier($schema);
-	}
+    protected function renderSchema() : ?string
+    {
+        if ( ! isset($this->sql['schema'])) {
+            return null;
+        }
+        $schema = $this->sql['schema'];
+        if (isset($this->sql['upgrade'])) {
+            $schema = "#mysql50#{$schema}";
+        }
+        return ' ' . $this->database->protectIdentifier($schema);
+    }
 
-	/**
-	 * @param string $charset
-	 *
-	 * @return static
-	 */
-	public function charset(string $charset) : static
-	{
-		$this->sql['charset'] = $charset;
-		return $this;
-	}
+    /**
+     * @param string $charset
+     *
+     * @return static
+     */
+    public function charset(string $charset) : static
+    {
+        $this->sql['charset'] = $charset;
+        return $this;
+    }
 
-	protected function renderCharset() : ?string
-	{
-		if ( ! isset($this->sql['charset'])) {
-			return null;
-		}
-		$charset = $this->database->quote($this->sql['charset']);
-		return " CHARACTER SET = {$charset}";
-	}
+    protected function renderCharset() : ?string
+    {
+        if ( ! isset($this->sql['charset'])) {
+            return null;
+        }
+        $charset = $this->database->quote($this->sql['charset']);
+        return " CHARACTER SET = {$charset}";
+    }
 
-	/**
-	 * @param string $collation
-	 *
-	 * @return static
-	 */
-	public function collate(string $collation) : static
-	{
-		$this->sql['collation'] = $collation;
-		return $this;
-	}
+    /**
+     * @param string $collation
+     *
+     * @return static
+     */
+    public function collate(string $collation) : static
+    {
+        $this->sql['collation'] = $collation;
+        return $this;
+    }
 
-	protected function renderCollate() : ?string
-	{
-		if ( ! isset($this->sql['collation'])) {
-			return null;
-		}
-		$collation = $this->database->quote($this->sql['collation']);
-		return " COLLATE = {$collation}";
-	}
+    protected function renderCollate() : ?string
+    {
+        if ( ! isset($this->sql['collation'])) {
+            return null;
+        }
+        $collation = $this->database->quote($this->sql['collation']);
+        return " COLLATE = {$collation}";
+    }
 
-	/**
-	 * @return static
-	 */
-	public function upgrade() : static
-	{
-		$this->sql['upgrade'] = true;
-		return $this;
-	}
+    /**
+     * @return static
+     */
+    public function upgrade() : static
+    {
+        $this->sql['upgrade'] = true;
+        return $this;
+    }
 
-	protected function renderUpgrade() : ?string
-	{
-		if ( ! isset($this->sql['upgrade'])) {
-			return null;
-		}
-		if (isset($this->sql['charset']) || isset($this->sql['collation'])) {
-			throw new LogicException(
-				'UPGRADE DATA DIRECTORY NAME can not be used with CHARACTER SET or COLLATE'
-			);
-		}
-		return ' UPGRADE DATA DIRECTORY NAME';
-	}
+    protected function renderUpgrade() : ?string
+    {
+        if ( ! isset($this->sql['upgrade'])) {
+            return null;
+        }
+        if (isset($this->sql['charset']) || isset($this->sql['collation'])) {
+            throw new LogicException(
+                'UPGRADE DATA DIRECTORY NAME can not be used with CHARACTER SET or COLLATE'
+            );
+        }
+        return ' UPGRADE DATA DIRECTORY NAME';
+    }
 
-	protected function checkSpecifications() : void
-	{
-		if ( ! isset($this->sql['charset'])
-			&& ! isset($this->sql['collation'])
-			&& ! isset($this->sql['upgrade'])
-		) {
-			throw new LogicException(
-				'ALTER SCHEMA must have a specification'
-			);
-		}
-	}
+    protected function checkSpecifications() : void
+    {
+        if ( ! isset($this->sql['charset'])
+            && ! isset($this->sql['collation'])
+            && ! isset($this->sql['upgrade'])
+        ) {
+            throw new LogicException(
+                'ALTER SCHEMA must have a specification'
+            );
+        }
+    }
 
-	public function sql() : string
-	{
-		$sql = 'ALTER SCHEMA';
-		$sql .= $this->renderSchema() . \PHP_EOL;
-		if ($part = $this->renderCharset()) {
-			$sql .= $part . \PHP_EOL;
-		}
-		if ($part = $this->renderCollate()) {
-			$sql .= $part . \PHP_EOL;
-		}
-		if ($part = $this->renderUpgrade()) {
-			$sql .= $part . \PHP_EOL;
-		}
-		$this->checkSpecifications();
-		return $sql;
-	}
+    public function sql() : string
+    {
+        $sql = 'ALTER SCHEMA';
+        $sql .= $this->renderSchema() . \PHP_EOL;
+        if ($part = $this->renderCharset()) {
+            $sql .= $part . \PHP_EOL;
+        }
+        if ($part = $this->renderCollate()) {
+            $sql .= $part . \PHP_EOL;
+        }
+        if ($part = $this->renderUpgrade()) {
+            $sql .= $part . \PHP_EOL;
+        }
+        $this->checkSpecifications();
+        return $sql;
+    }
 
-	/**
-	 * Runs the ALTER SCHEMA statement.
-	 *
-	 * @return int The number of affected rows
-	 */
-	public function run() : int
-	{
-		return $this->database->exec($this->sql());
-	}
+    /**
+     * Runs the ALTER SCHEMA statement.
+     *
+     * @return int The number of affected rows
+     */
+    public function run() : int
+    {
+        return $this->database->exec($this->sql());
+    }
 }

@@ -16,5 +16,5 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
  */
 final class BooleanColumn extends NumericDataType
 {
-	protected string $type = 'boolean';
+    protected string $type = 'boolean';
 }

@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Indexes\Index;
  */
 final class SpatialKey extends Index
 {
-	protected string $type = 'SPATIAL KEY';
+    protected string $type = 'SPATIAL KEY';
 }

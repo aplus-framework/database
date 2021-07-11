@@ -16,5 +16,5 @@ namespace Framework\Database\Definition\Table\Columns\String;
  */
 final class LongtextColumn extends StringDataType
 {
-	protected string $type = 'longtext';
+    protected string $type = 'longtext';
 }

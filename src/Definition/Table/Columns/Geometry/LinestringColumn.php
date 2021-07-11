@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class LinestringColumn extends Column
 {
-	protected string $type = 'linestring';
+    protected string $type = 'linestring';
 }

@@ -16,44 +16,44 @@ use Closure;
  */
 trait Set
 {
-	/**
-	 * Sets the SET clause.
-	 *
-	 * @param array<string,Closure|float|int|string|null> $columns Array of columns => values
-	 *
-	 * @return static
-	 */
-	public function set(array $columns) : static
-	{
-		$this->sql['set'] = $columns;
-		return $this;
-	}
+    /**
+     * Sets the SET clause.
+     *
+     * @param array<string,Closure|float|int|string|null> $columns Array of columns => values
+     *
+     * @return static
+     */
+    public function set(array $columns) : static
+    {
+        $this->sql['set'] = $columns;
+        return $this;
+    }
 
-	/**
-	 * Renders the SET clause.
-	 *
-	 * @return string|null The SET clause null if it was not set
-	 */
-	protected function renderSet() : ?string
-	{
-		if ( ! $this->hasSet()) {
-			return null;
-		}
-		$set = [];
-		foreach ($this->sql['set'] as $column => $value) {
-			$set[] = $this->renderAssignment($column, $value);
-		}
-		$set = \implode(', ', $set);
-		return " SET {$set}";
-	}
+    /**
+     * Renders the SET clause.
+     *
+     * @return string|null The SET clause null if it was not set
+     */
+    protected function renderSet() : ?string
+    {
+        if ( ! $this->hasSet()) {
+            return null;
+        }
+        $set = [];
+        foreach ($this->sql['set'] as $column => $value) {
+            $set[] = $this->renderAssignment($column, $value);
+        }
+        $set = \implode(', ', $set);
+        return " SET {$set}";
+    }
 
-	/**
-	 * Tells if the SET clause was set.
-	 *
-	 * @return bool True if was set, otherwise false
-	 */
-	protected function hasSet() : bool
-	{
-		return isset($this->sql['set']);
-	}
+    /**
+     * Tells if the SET clause was set.
+     *
+     * @return bool True if was set, otherwise false
+     */
+    protected function hasSet() : bool
+    {
+        return isset($this->sql['set']);
+    }
 }

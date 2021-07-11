@@ -16,7 +16,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
  */
 final class TextColumn extends StringDataType
 {
-	protected string $type = 'text';
-	protected int $minLength = 0;
-	protected int $maxLength = 65535;
+    protected string $type = 'text';
+    protected int $minLength = 0;
+    protected int $maxLength = 65535;
 }

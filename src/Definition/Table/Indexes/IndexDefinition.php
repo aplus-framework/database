@@ -27,51 +27,51 @@ use RuntimeException;
  */
 class IndexDefinition extends DefinitionPart
 {
-	protected Database $database;
-	protected ?string $name;
-	protected ?Index $index = null;
+    protected Database $database;
+    protected ?string $name;
+    protected ?Index $index = null;
 
-	public function __construct(Database $database, string $name = null)
-	{
-		$this->database = $database;
-		$this->name = $name;
-	}
+    public function __construct(Database $database, string $name = null)
+    {
+        $this->database = $database;
+        $this->name = $name;
+    }
 
-	public function key(string $column, string ...$columns) : Key
-	{
-		return $this->index = new Key($this->database, $this->name, $column, ...$columns);
-	}
+    public function key(string $column, string ...$columns) : Key
+    {
+        return $this->index = new Key($this->database, $this->name, $column, ...$columns);
+    }
 
-	public function primaryKey(string $column, string ...$columns) : PrimaryKey
-	{
-		return $this->index = new PrimaryKey($this->database, $this->name, $column, ...$columns);
-	}
+    public function primaryKey(string $column, string ...$columns) : PrimaryKey
+    {
+        return $this->index = new PrimaryKey($this->database, $this->name, $column, ...$columns);
+    }
 
-	public function uniqueKey(string $column, string ...$columns) : UniqueKey
-	{
-		return $this->index = new UniqueKey($this->database, $this->name, $column, ...$columns);
-	}
+    public function uniqueKey(string $column, string ...$columns) : UniqueKey
+    {
+        return $this->index = new UniqueKey($this->database, $this->name, $column, ...$columns);
+    }
 
-	public function fulltextKey(string $column, string ...$columns) : FulltextKey
-	{
-		return $this->index = new FulltextKey($this->database, $this->name, $column, ...$columns);
-	}
+    public function fulltextKey(string $column, string ...$columns) : FulltextKey
+    {
+        return $this->index = new FulltextKey($this->database, $this->name, $column, ...$columns);
+    }
 
-	public function foreignKey(string $column, string ...$columns) : ForeignKey
-	{
-		return $this->index = new ForeignKey($this->database, $this->name, $column, ...$columns);
-	}
+    public function foreignKey(string $column, string ...$columns) : ForeignKey
+    {
+        return $this->index = new ForeignKey($this->database, $this->name, $column, ...$columns);
+    }
 
-	public function spatialKey(string $column, string ...$columns) : SpatialKey
-	{
-		return $this->index = new SpatialKey($this->database, $this->name, $column, ...$columns);
-	}
+    public function spatialKey(string $column, string ...$columns) : SpatialKey
+    {
+        return $this->index = new SpatialKey($this->database, $this->name, $column, ...$columns);
+    }
 
-	protected function sql() : string
-	{
-		if ( ! $this->index) {
-			throw new RuntimeException("Key type not set in index {$this->name}");
-		}
-		return $this->index->sql();
-	}
+    protected function sql() : string
+    {
+        if ( ! $this->index) {
+            throw new RuntimeException("Key type not set in index {$this->name}");
+        }
+        return $this->index->sql();
+    }
 }

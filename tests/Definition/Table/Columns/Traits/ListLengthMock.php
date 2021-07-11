@@ -14,5 +14,5 @@ use Tests\Database\Definition\Table\Columns\ColumnMock;
 
 class ListLengthMock extends ColumnMock
 {
-	use ListLength;
+    use ListLength;
 }

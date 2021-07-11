@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class TimeColumn extends Column
 {
-	protected string $type = 'time';
+    protected string $type = 'time';
 }

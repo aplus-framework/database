@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class MultipolygonColumn extends Column
 {
-	protected string $type = 'multipolygon';
+    protected string $type = 'multipolygon';
 }

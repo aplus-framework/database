@@ -14,12 +14,12 @@ use Tests\Database\TestCase;
 
 final class KeyTest extends TestCase
 {
-	public function testType() : void
-	{
-		$index = new Key(static::$database, null, 'id');
-		self::assertSame(
-			' KEY (`id`)',
-			$index->sql()
-		);
-	}
+    public function testType() : void
+    {
+        $index = new Key(static::$database, null, 'id');
+        self::assertSame(
+            ' KEY (`id`)',
+            $index->sql()
+        );
+    }
 }

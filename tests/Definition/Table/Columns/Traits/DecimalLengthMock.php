@@ -14,5 +14,5 @@ use Tests\Database\Definition\Table\Columns\ColumnMock;
 
 class DecimalLengthMock extends ColumnMock
 {
-	use DecimalLength;
+    use DecimalLength;
 }

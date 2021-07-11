@@ -13,6 +13,6 @@ use Framework\Database\Definition\Table\Indexes\Index;
 
 final class PrimaryKey extends Index
 {
-	use Traits\Constraint;
-	protected string $type = 'PRIMARY KEY';
+    use Traits\Constraint;
+    protected string $type = 'PRIMARY KEY';
 }

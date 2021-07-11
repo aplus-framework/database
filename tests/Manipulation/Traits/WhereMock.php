@@ -14,7 +14,7 @@ use Tests\Database\Manipulation\StatementMock;
 
 class WhereMock extends StatementMock
 {
-	use Where {
-		renderWhere as public;
-	}
+    use Where {
+        renderWhere as public;
+    }
 }

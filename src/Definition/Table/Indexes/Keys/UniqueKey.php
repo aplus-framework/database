@@ -18,6 +18,6 @@ use Framework\Database\Definition\Table\Indexes\Index;
  */
 final class UniqueKey extends Index
 {
-	use Traits\Constraint;
-	protected string $type = 'UNIQUE KEY';
+    use Traits\Constraint;
+    protected string $type = 'UNIQUE KEY';
 }

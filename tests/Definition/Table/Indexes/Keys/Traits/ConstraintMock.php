@@ -14,6 +14,6 @@ use Tests\Database\Definition\Table\Indexes\IndexMock;
 
 class ConstraintMock extends IndexMock
 {
-	use Constraint;
-	public string $type = 'constraint_mock';
+    use Constraint;
+    public string $type = 'constraint_mock';
 }

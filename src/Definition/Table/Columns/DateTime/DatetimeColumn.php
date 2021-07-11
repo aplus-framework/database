@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class DatetimeColumn extends Column
 {
-	protected string $type = 'datetime';
+    protected string $type = 'datetime';
 }

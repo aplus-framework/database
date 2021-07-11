@@ -20,44 +20,44 @@ use Tests\Database\TestCase;
 
 final class IndexDefinitionTest extends TestCase
 {
-	protected IndexDefinition $definition;
+    protected IndexDefinition $definition;
 
-	protected function setUp() : void
-	{
-		$this->definition = new IndexDefinition(static::$database);
-	}
+    protected function setUp() : void
+    {
+        $this->definition = new IndexDefinition(static::$database);
+    }
 
-	public function testInstances() : void
-	{
-		self::assertInstanceOf(Key::class, $this->definition->key('id'));
-		self::assertInstanceOf(PrimaryKey::class, $this->definition->primaryKey('id'));
-		self::assertInstanceOf(UniqueKey::class, $this->definition->uniqueKey('id'));
-		self::assertInstanceOf(FulltextKey::class, $this->definition->fulltextKey('id'));
-		self::assertInstanceOf(ForeignKey::class, $this->definition->foreignKey('id'));
-		self::assertInstanceOf(SpatialKey::class, $this->definition->spatialKey('id'));
-	}
+    public function testInstances() : void
+    {
+        self::assertInstanceOf(Key::class, $this->definition->key('id'));
+        self::assertInstanceOf(PrimaryKey::class, $this->definition->primaryKey('id'));
+        self::assertInstanceOf(UniqueKey::class, $this->definition->uniqueKey('id'));
+        self::assertInstanceOf(FulltextKey::class, $this->definition->fulltextKey('id'));
+        self::assertInstanceOf(ForeignKey::class, $this->definition->foreignKey('id'));
+        self::assertInstanceOf(SpatialKey::class, $this->definition->spatialKey('id'));
+    }
 
-	public function testSql() : void
-	{
-		$this->definition->primaryKey('id');
-		$this->definition->uniqueKey('email');
-		self::assertSame(
-			' UNIQUE KEY (`email`)',
-			$this->definition->sql()
-		);
-	}
+    public function testSql() : void
+    {
+        $this->definition->primaryKey('id');
+        $this->definition->uniqueKey('email');
+        self::assertSame(
+            ' UNIQUE KEY (`email`)',
+            $this->definition->sql()
+        );
+    }
 
-	public function testBadMethod() : void
-	{
-		$this->expectException(\BadMethodCallException::class);
-		$this->expectExceptionMessage('Method not found or not allowed: foo');
-		$this->definition->foo(); // @phpstan-ignore-line
-	}
+    public function testBadMethod() : void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Method not found or not allowed: foo');
+        $this->definition->foo(); // @phpstan-ignore-line
+    }
 
-	public function testEmptyKeyType() : void
-	{
-		$this->expectException(\RuntimeException::class);
-		$this->expectExceptionMessage('Key type not set in index');
-		$this->definition->sql();
-	}
+    public function testEmptyKeyType() : void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Key type not set in index');
+        $this->definition->sql();
+    }
 }

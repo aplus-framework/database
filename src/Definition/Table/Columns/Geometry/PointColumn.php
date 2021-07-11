@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class PointColumn extends Column
 {
-	protected string $type = 'point';
+    protected string $type = 'point';
 }

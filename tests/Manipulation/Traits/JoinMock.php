@@ -14,9 +14,9 @@ use Tests\Database\Manipulation\StatementMock;
 
 class JoinMock extends StatementMock
 {
-	use Join {
-		hasFrom as public;
-		renderFrom as public;
-		renderJoin as public;
-	}
+    use Join {
+        hasFrom as public;
+        renderFrom as public;
+        renderJoin as public;
+    }
 }

@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class MultilinestringColumn extends Column
 {
-	protected string $type = 'multilinestring';
+    protected string $type = 'multilinestring';
 }

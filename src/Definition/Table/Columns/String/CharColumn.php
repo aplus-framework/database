@@ -16,7 +16,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
  */
 final class CharColumn extends StringDataType
 {
-	protected string $type = 'char';
-	protected int $minLength = 0;
-	protected int $maxLength = 255;
+    protected string $type = 'char';
+    protected int $minLength = 0;
+    protected int $maxLength = 255;
 }

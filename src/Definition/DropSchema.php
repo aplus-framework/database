@@ -19,56 +19,56 @@ use LogicException;
  */
 class DropSchema extends Statement
 {
-	/**
-	 * @return static
-	 */
-	public function ifExists() : static
-	{
-		$this->sql['if_exists'] = true;
-		return $this;
-	}
+    /**
+     * @return static
+     */
+    public function ifExists() : static
+    {
+        $this->sql['if_exists'] = true;
+        return $this;
+    }
 
-	protected function renderIfExists() : ?string
-	{
-		if ( ! isset($this->sql['if_exists'])) {
-			return null;
-		}
-		return ' IF EXISTS';
-	}
+    protected function renderIfExists() : ?string
+    {
+        if ( ! isset($this->sql['if_exists'])) {
+            return null;
+        }
+        return ' IF EXISTS';
+    }
 
-	/**
-	 * @param string $schemaName
-	 *
-	 * @return static
-	 */
-	public function schema(string $schemaName) : static
-	{
-		$this->sql['schema'] = $schemaName;
-		return $this;
-	}
+    /**
+     * @param string $schemaName
+     *
+     * @return static
+     */
+    public function schema(string $schemaName) : static
+    {
+        $this->sql['schema'] = $schemaName;
+        return $this;
+    }
 
-	protected function renderSchema() : string
-	{
-		if (isset($this->sql['schema'])) {
-			return ' ' . $this->database->protectIdentifier($this->sql['schema']);
-		}
-		throw new LogicException('SCHEMA name must be set');
-	}
+    protected function renderSchema() : string
+    {
+        if (isset($this->sql['schema'])) {
+            return ' ' . $this->database->protectIdentifier($this->sql['schema']);
+        }
+        throw new LogicException('SCHEMA name must be set');
+    }
 
-	public function sql() : string
-	{
-		$sql = 'DROP SCHEMA' . $this->renderIfExists();
-		$sql .= $this->renderSchema() . \PHP_EOL;
-		return $sql;
-	}
+    public function sql() : string
+    {
+        $sql = 'DROP SCHEMA' . $this->renderIfExists();
+        $sql .= $this->renderSchema() . \PHP_EOL;
+        return $sql;
+    }
 
-	/**
-	 * Runs the CREATE SCHEMA statement.
-	 *
-	 * @return int The number of affected rows
-	 */
-	public function run() : int
-	{
-		return $this->database->exec($this->sql());
-	}
+    /**
+     * Runs the CREATE SCHEMA statement.
+     *
+     * @return int The number of affected rows
+     */
+    public function run() : int
+    {
+        return $this->database->exec($this->sql());
+    }
 }

@@ -16,6 +16,6 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
  */
 final class SmallintColumn extends NumericDataType
 {
-	protected string $type = 'smallint';
-	protected int $maxLength = 127;
+    protected string $type = 'smallint';
+    protected int $maxLength = 127;
 }

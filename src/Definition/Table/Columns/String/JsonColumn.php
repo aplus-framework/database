@@ -16,5 +16,5 @@ namespace Framework\Database\Definition\Table\Columns\String;
  */
 final class JsonColumn extends StringDataType
 {
-	protected string $type = 'json';
+    protected string $type = 'json';
 }

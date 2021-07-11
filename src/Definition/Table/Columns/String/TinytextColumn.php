@@ -16,5 +16,5 @@ namespace Framework\Database\Definition\Table\Columns\String;
  */
 final class TinytextColumn extends StringDataType
 {
-	protected string $type = 'tinytext';
+    protected string $type = 'tinytext';
 }

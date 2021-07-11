@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class MultipointColumn extends Column
 {
-	protected string $type = 'multipoint';
+    protected string $type = 'multipoint';
 }

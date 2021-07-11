@@ -14,12 +14,12 @@ use Tests\Database\TestCase;
 
 final class SpatialKeyTest extends TestCase
 {
-	public function testType() : void
-	{
-		$index = new SpatialKey(static::$database, null, 'id');
-		self::assertSame(
-			' SPATIAL KEY (`id`)',
-			$index->sql()
-		);
-	}
+    public function testType() : void
+    {
+        $index = new SpatialKey(static::$database, null, 'id');
+        self::assertSame(
+            ' SPATIAL KEY (`id`)',
+            $index->sql()
+        );
+    }
 }

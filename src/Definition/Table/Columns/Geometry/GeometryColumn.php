@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class GeometryColumn extends Column
 {
-	protected string $type = 'geometry';
+    protected string $type = 'geometry';
 }

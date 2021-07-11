@@ -18,5 +18,5 @@ use Framework\Database\Definition\Table\Indexes\Index;
  */
 final class FulltextKey extends Index
 {
-	protected string $type = 'FULLTEXT KEY';
+    protected string $type = 'FULLTEXT KEY';
 }

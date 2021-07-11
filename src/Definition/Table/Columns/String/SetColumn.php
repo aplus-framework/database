@@ -18,6 +18,6 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
  */
 final class SetColumn extends StringDataType
 {
-	use ListLength;
-	protected string $type = 'set';
+    use ListLength;
+    protected string $type = 'set';
 }

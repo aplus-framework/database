@@ -14,7 +14,7 @@ use Tests\Database\Manipulation\StatementMock;
 
 class HavingMock extends StatementMock
 {
-	use Having {
-		renderHaving as public;
-	}
+    use Having {
+        renderHaving as public;
+    }
 }

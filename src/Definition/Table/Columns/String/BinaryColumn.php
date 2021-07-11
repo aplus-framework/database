@@ -18,7 +18,7 @@ use Framework\Database\Definition\Table\Columns\Column;
  */
 final class BinaryColumn extends Column
 {
-	protected string $type = 'binary';
-	protected int $minLength = 0;
-	protected int $maxLength = 255;
+    protected string $type = 'binary';
+    protected int $minLength = 0;
+    protected int $maxLength = 255;
 }
