@@ -28,20 +28,20 @@ class Select extends Statement
 	/**
 	 * Option to retrieve identical rows.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 */
 	public const OPT_ALL = 'ALL';
 	/**
 	 * Option to not retrieve identical rows. Remove duplicates from the resultset.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/select/#distinct
 	 */
 	public const OPT_DISTINCT = 'DISTINCT';
 	/**
 	 * Alias of OPT_DISTINCT.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 */
 	public const OPT_DISTINCTROW = 'DISTINCTROW';
 	/**
@@ -49,7 +49,7 @@ class Select extends Statement
 	 * even if other statements are queued.
 	 * Only supports table-level locking (MyISAM, MEMORY, MERGE).
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
 	 */
 	public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
@@ -58,7 +58,7 @@ class Select extends Statement
 	 * the tables must be read in the order they appear.
 	 * For const and system table this option is sometimes ignored.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/join-syntax/
 	 * @see https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/#forcing-join-order
 	 */
@@ -72,7 +72,7 @@ class Select extends Statement
 	/**
 	 * Forces the optimizer to avoid usage of a temporary table.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
 	 */
 	public const OPT_SQL_BIG_RESULT = 'SQL_BIG_RESULT';
@@ -80,7 +80,7 @@ class Select extends Statement
 	 * Forces the optimizer to use a temporary table to process the result.
 	 * This is useful to free locks as soon as possible.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_buffer_result
 	 */
 	public const OPT_SQL_BUFFER_RESULT = 'SQL_BUFFER_RESULT';
@@ -88,7 +88,7 @@ class Select extends Statement
 	 * If the query_cache_type system variable is set to 2 or DEMAND, and the current statement is
 	 * cacheable, SQL_CACHE causes the query to be cached.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
 	 * @see https://mariadb.com/kb/en/library/query-cache/
 	 */
@@ -97,7 +97,7 @@ class Select extends Statement
 	 * If the query_cache_type system variable is set to 2 or DEMAND, and the current statement is
 	 * cacheable, SQL_NO_CACHE causes the query not to be cached.
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
 	 * @see https://mariadb.com/kb/en/library/query-cache/
 	 */
@@ -107,38 +107,38 @@ class Select extends Statement
 	 * MariaDB will count how many rows would match the query, without the LIMIT clause.
 	 * That number can be retrieved in the next query, using FOUND_ROWS().
 	 *
-	 * @see options
+	 * @see Select::renderOptions()
 	 * @see https://mariadb.com/kb/en/library/found_rows/
 	 */
 	public const OPT_SQL_CALC_FOUND_ROWS = 'SQL_CALC_FOUND_ROWS';
 	/**
 	 * Clause to set the character of separation between fields. Default is \t.
 	 *
-	 * @see intoOutfile
+	 * @see Select::intoOutfile()
 	 */
 	public const EXP_FIELDS_TERMINATED_BY = 'TERMINATED BY';
 	/**
 	 * Clause to set the enclosure character of the fields. Default is ".
 	 *
-	 * @see intoOutfile
+	 * @see Select::intoOutfile()
 	 */
 	public const EXP_FIELDS_ENCLOSED_BY = 'ENCLOSED BY';
 	/**
-	 * @see intoOutfile
+	 * @see Select::intoOutfile()
 	 */
 	public const EXP_FIELDS_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
 	/**
-	 * @see intoOutfile
+	 * @see Select::intoOutfile()
 	 */
 	public const EXP_FIELDS_ESCAPED_BY = 'ESCAPED BY';
 	/**
-	 * @see intoOutfile
+	 * @see Select::intoOutfile()
 	 */
 	public const EXP_LINES_STARTING_BY = 'STARTING BY';
 	/**
 	 * Clause to set the file End-Of-Line character. Default is \n.
 	 *
-	 * @see intoOutfile
+	 * @see Select::intoOutfile()
 	 */
 	public const EXP_LINES_TERMINATED_BY = 'TERMINATED BY';
 

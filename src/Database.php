@@ -43,7 +43,7 @@ class Database
 	 *
 	 * Custom configs merged with the Base Connection configurations.
 	 *
-	 * @see makeConfig
+	 * @see Database::makeConfig()
 	 *
 	 * @var array<string,mixed>
 	 */
@@ -51,13 +51,13 @@ class Database
 	/**
 	 * The current $config failover index to be used in a connection.
 	 *
-	 * @see connect
+	 * @see Database::connect()
 	 *
 	 * @var int|null Integer representing the array index or null for none
 	 */
 	protected ?int $failoverIndex = null;
 	/**
-	 * @see transaction
+	 * @see Database::transaction()
 	 */
 	protected bool $inTransaction = false;
 	protected string $lastQuery = '';
@@ -73,7 +73,7 @@ class Database
 	 * @param int $port
 	 * @param Logger|null $logger
 	 *
-	 * @see Database::makeConfig
+	 * @see Database::makeConfig()
 	 *
 	 * @throws mysqli_sql_exception if connections fail
 	 */

@@ -52,8 +52,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Returns a SQL part between parentheses.
 	 *
-	 * @param Closure $subquery A \Closure having the current Manipulation instance as first
-	 * argument. The returned value must be scalar
+	 * @param Closure $subquery A {@see Closure} having the current Manipulation
+	 * instance as first argument. The returned value must be scalar
 	 *
 	 * @see https://mariadb.com/kb/en/library/subqueries/
 	 * @see https://mariadb.com/kb/en/library/built-in-functions/
@@ -145,7 +145,8 @@ abstract class Statement extends \Framework\Database\Statement
 	/**
 	 * Renders a subquery or quote a value.
 	 *
-	 * @param Closure|float|int|string|null $value \Closure for subquery, other types to quote
+	 * @param Closure|float|int|string|null $value A {@see Closure} for
+	 * subquery, other types to quote
 	 *
 	 * @return float|int|string
 	 */
@@ -162,7 +163,7 @@ abstract class Statement extends \Framework\Database\Statement
 	 * @param string $identifier Identifier/column name
 	 * @param Closure|float|int|string|null $expression Expression/value
 	 *
-	 * @see renderValue
+	 * @see Statement::renderValue()
 	 * @see https://mariadb.com/kb/en/library/assignment-operators-assignment-operator/
 	 *
 	 * @return string
