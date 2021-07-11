@@ -1,59 +1,59 @@
 {
-	"name": "natanfelles/database",
-	"type": "library",
-	"description": "The Framework Database Library",
-	"keywords": [
-		"database",
-		"mariadb",
-		"mysql",
-		"data-definition",
-		"data-manipulation"
-	],
-	"homepage": "https://the-framework.gitlab.io/libraries/database.html",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Natan Felles",
-			"email": "natanfelles@gmail.com",
-			"homepage": "https://natanfelles.github.io"
-		}
-	],
-	"require": {
-		"php": ">=8.0",
-		"ext-mysqli": "*",
-		"natanfelles/log": "^2.0"
-	},
-	"require-dev": {
-		"ext-xdebug": "*",
-		"ergebnis/composer-normalize": "^2.15",
-		"jetbrains/phpstorm-attributes": "^1.0",
-		"natanfelles/coding-standard": "^1.7",
-		"phpmd/phpmd": "^2.10",
-		"phpstan/phpstan": "^0.12",
-		"phpunit/phpunit": "^9.5"
-	},
-	"config": {
-		"optimize-autoloader": true,
-		"preferred-install": "dist",
-		"sort-packages": true
-	},
-	"autoload": {
-		"psr-4": {
-			"Framework\\Database\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Database\\": "tests/"
-		}
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"support": {
-		"email": "natanfelles@gmail.com",
-		"issues": "https://gitlab.com/the-framework/libraries/database/issues",
-		"wiki": "https://gitlab.com/the-framework/libraries/database/wikis/home",
-		"source": "https://gitlab.com/the-framework/libraries/database",
-		"docs": "https://the-framework.gitlab.io/libraries/database/docs/"
-	}
+    "name": "natanfelles/database",
+    "type": "library",
+    "description": "The Framework Database Library",
+    "keywords": [
+        "database",
+        "mariadb",
+        "mysql",
+        "data-definition",
+        "data-manipulation"
+    ],
+    "homepage": "https://the-framework.gitlab.io/libraries/database.html",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Natan Felles",
+            "email": "natanfelles@gmail.com",
+            "homepage": "https://natanfelles.github.io"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "ext-mysqli": "*",
+        "natanfelles/log": "^2.0"
+    },
+    "require-dev": {
+        "ext-xdebug": "*",
+        "ergebnis/composer-normalize": "^2.15",
+        "jetbrains/phpstorm-attributes": "^1.0",
+        "natanfelles/coding-standard": "^1.7",
+        "phpmd/phpmd": "^2.10",
+        "phpstan/phpstan": "^0.12",
+        "phpunit/phpunit": "^9.5"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Framework\\Database\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Database\\": "tests/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "support": {
+        "email": "natanfelles@gmail.com",
+        "issues": "https://gitlab.com/the-framework/libraries/database/issues",
+        "wiki": "https://gitlab.com/the-framework/libraries/database/wikis/home",
+        "source": "https://gitlab.com/the-framework/libraries/database",
+        "docs": "https://the-framework.gitlab.io/libraries/database/docs/"
+    }
 }
