@@ -5,7 +5,7 @@
         xmlns="https://www.phpdoc.org"
         xsi:noNamespaceSchemaLocation="https://docs.phpdoc.org/latest/phpdoc.xsd"
 >
-    <title>The Framework Database Library</title>
+    <title>Aplus Framework Database Library</title>
     <paths>
         <output>build/docs</output>
         <cache>build/docs-cache</cache>

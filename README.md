@@ -1,4 +1,4 @@
-# The Framework Database Library
+# Aplus Framework Database Library
 
 - [Homepage](https://the-framework.gitlab.io/libraries/database.html)
 - [API Documentation](https://the-framework.gitlab.io/libraries/database/docs/)
