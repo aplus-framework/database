@@ -1,7 +1,7 @@
 {
-    "name": "natanfelles/database",
+    "name": "aplus/database",
     "type": "library",
-    "description": "The Framework Database Library",
+    "description": "Aplus Framework Database Library",
     "keywords": [
         "database",
         "mariadb",
@@ -10,7 +10,7 @@
         "data-definition",
         "data-manipulation"
     ],
-    "homepage": "https://the-framework.gitlab.io/libraries/database.html",
+    "homepage": "https://aplus-framework.com/docs/database",
     "license": "MIT",
     "authors": [
         {
@@ -52,9 +52,9 @@
     "prefer-stable": true,
     "support": {
         "email": "natanfelles@gmail.com",
-        "issues": "https://gitlab.com/the-framework/libraries/database/issues",
-        "wiki": "https://gitlab.com/the-framework/libraries/database/wikis/home",
-        "source": "https://gitlab.com/the-framework/libraries/database",
-        "docs": "https://the-framework.gitlab.io/libraries/database/docs/"
+        "issues": "https://gitlab.com/aplus-framework/libraries/database/issues",
+        "wiki": "https://gitlab.com/aplus-framework/libraries/database/wikis/home",
+        "source": "https://gitlab.com/aplus-framework/libraries/database",
+        "docs": "https://aplus-framework.gitlab.io/libraries/database/docs/"
     }
 }
