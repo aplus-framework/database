@@ -6,6 +6,7 @@
         "database",
         "mariadb",
         "mysql",
+        "mysqli",
         "data-definition",
         "data-manipulation"
     ],
