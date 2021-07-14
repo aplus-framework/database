@@ -1,3 +1,4 @@
+.github/ export-ignore
 guide/ export-ignore
 tests/ export-ignore
 .editorconfig export-ignore
