@@ -130,7 +130,8 @@ class DropTable extends Statement
         $sql .= ' TABLE' . $this->renderIfExists();
         $sql .= $this->renderCommentToSave();
         $sql .= $this->renderTables() . \PHP_EOL;
-        if ($part = $this->renderWait()) {
+        $part = $this->renderWait();
+        if ($part) {
             $sql .= $part . \PHP_EOL;
         }
         return $sql;

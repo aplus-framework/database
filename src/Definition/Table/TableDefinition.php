@@ -101,7 +101,8 @@ class TableDefinition extends DefinitionPart
     protected function sql(string $prefix = null) : string
     {
         $sql = $this->renderColumns($prefix);
-        if ($part = $this->renderIndexes($prefix)) {
+        $part = $this->renderIndexes($prefix);
+        if ($part) {
             $sql .= ',' . \PHP_EOL . $part;
         }
         return $sql;

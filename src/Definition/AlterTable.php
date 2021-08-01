@@ -188,7 +188,8 @@ class AlterTable extends Statement
         $sql = 'ALTER' . $this->renderOnline() . $this->renderIgnore();
         $sql .= ' TABLE';
         $sql .= $this->renderTable() . \PHP_EOL;
-        if ($part = $this->renderWait()) {
+        $part = $this->renderWait();
+        if ($part) {
             $sql .= $part . \PHP_EOL;
         }
         $sql .= $this->renderAdd();

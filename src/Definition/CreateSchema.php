@@ -122,10 +122,12 @@ class CreateSchema extends Statement
         $sql = 'CREATE' . $this->renderOrReplace();
         $sql .= ' SCHEMA' . $this->renderIfNotExists();
         $sql .= $this->renderSchema() . \PHP_EOL;
-        if ($part = $this->renderCharset()) {
+        $part = $this->renderCharset();
+        if ($part) {
             $sql .= $part . \PHP_EOL;
         }
-        if ($part = $this->renderCollate()) {
+        $part = $this->renderCollate();
+        if ($part) {
             $sql .= $part . \PHP_EOL;
         }
         return $sql;
