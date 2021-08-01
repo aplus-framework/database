@@ -3,25 +3,27 @@
     <!-- cleancode -->
     <rule ref="rulesets/cleancode.xml">
         <exclude name="BooleanArgumentFlag"/>
-        <exclude name="StaticAccess"/>
+        <exclude name="ElseExpression"/>
     </rule>
     <!-- codesize -->
-    <rule ref="rulesets/codesize.xml/ExcessiveParameterList">
-        <properties>
-            <property name="minimum" value="7"/>
-        </properties>
-    </rule>
     <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
         <properties>
-            <property name="maxmethods" value="20"/>
+            <property name="maxmethods" value="40"/>
         </properties>
     </rule>
     <!-- controversial -->
-    <rule ref="rulesets/controversial.xml">
-        <exclude name="CamelCaseVariableName"/>
-    </rule>
+    <rule ref="rulesets/controversial.xml"/>
     <!-- design -->
-    <rule ref="rulesets/design.xml"/>
+    <rule ref="rulesets/design.xml/CouplingBetweenObjects">
+        <properties>
+            <property name="maximum" value="40"/>
+        </properties>
+    </rule>
+    <rule ref="rulesets/design.xml/NumberOfChildren">
+        <properties>
+            <property name="minimum" value="25"/>
+        </properties>
+    </rule>
     <!-- naming -->
     <rule ref="rulesets/naming.xml/ShortVariable">
         <properties>
