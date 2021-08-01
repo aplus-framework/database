@@ -24,7 +24,7 @@ test:php:
   script:
     - composer normalize --dry-run --indent-size=4 --indent-style=space
     - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
-    # - vendor/bin/phpmd src xml phpmd.xml
+    - vendor/bin/phpmd src xml phpmd.xml
     - vendor/bin/phpstan analyse -vvv
     - vendor/bin/phpunit --colors=never
     - phpdoc
@@ -57,7 +57,6 @@ pages:
     - mkdir public/
     - mv build/coverage/ public/
     - mv build/docs/ public/
-    - curl -sS https://aplus-framework.gitlab.io/redirect.php | php
   artifacts:
     paths:
       - public/
