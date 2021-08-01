@@ -9,6 +9,8 @@
  */
 namespace Framework\Database\Result;
 
+use Error;
+
 /**
  * Class Field.
  *
@@ -95,7 +97,7 @@ class Field
         if (\property_exists($this, $name)) {
             return $this->{$name};
         }
-        throw new \Error(
+        throw new Error(
             'Undefined property: ' . static::class . '::$' . $name
         );
     }
