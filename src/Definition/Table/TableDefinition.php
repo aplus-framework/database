@@ -79,11 +79,11 @@ class TableDefinition extends DefinitionPart
         $sql = [];
         foreach ($this->columns as $column) {
             $name = $this->database->protectIdentifier($column['name']);
-            $change_name = $column['change_name']
+            $changeName = $column['change_name']
                 ? ' ' . $this->database->protectIdentifier($column['change_name'])
                 : null;
             $definition = $column['definition']->sql();
-            $sql[] = " {$prefix} {$name}{$change_name}{$definition}";
+            $sql[] = " {$prefix} {$name}{$changeName}{$definition}";
         }
         return \implode(',' . \PHP_EOL, $sql);
     }

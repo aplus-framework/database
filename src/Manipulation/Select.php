@@ -338,8 +338,8 @@ class Select extends Statement
         if ($this->sql['into_outfile']['fields_options']) {
             $definition .= ' FIELDS';
             foreach ($this->sql['into_outfile']['fields_options'] as $option => $value) {
-                $fields_option = \strtoupper($option);
-                if ( ! \in_array($fields_option, [
+                $fieldsOption = \strtoupper($option);
+                if ( ! \in_array($fieldsOption, [
                     static::EXP_FIELDS_TERMINATED_BY,
                     static::EXP_FIELDS_ENCLOSED_BY,
                     static::EXP_FIELDS_OPTIONALLY_ENCLOSED_BY,
@@ -349,7 +349,7 @@ class Select extends Statement
                         "Invalid INTO OUTFILE fields option: {$option}"
                     );
                 }
-                $definition .= " {$fields_option} " . $this->database->quote($value);
+                $definition .= " {$fieldsOption} " . $this->database->quote($value);
             }
         }
         return $definition;
@@ -361,8 +361,8 @@ class Select extends Statement
         if ($this->sql['into_outfile']['lines_options']) {
             $definition .= ' LINES';
             foreach ($this->sql['into_outfile']['lines_options'] as $option => $value) {
-                $lines_option = \strtoupper($option);
-                if ( ! \in_array($lines_option, [
+                $linesOption = \strtoupper($option);
+                if ( ! \in_array($linesOption, [
                     static::EXP_LINES_STARTING_BY,
                     static::EXP_LINES_TERMINATED_BY,
                 ], true)) {
@@ -370,7 +370,7 @@ class Select extends Statement
                         "Invalid INTO OUTFILE lines option: {$option}"
                     );
                 }
-                $definition .= " {$lines_option} " . $this->database->quote($value);
+                $definition .= " {$linesOption} " . $this->database->quote($value);
             }
         }
         return $definition;
@@ -519,12 +519,12 @@ class Select extends Statement
         }
         $part = $this->renderIntoDumpfile();
         if ($part) {
-            $into_dump = true;
+            $intoDump = true;
             $sql .= $part . \PHP_EOL;
         }
         $part = $this->renderLock();
         if ($part) {
-            if (empty($into_dump)) {
+            if (empty($intoDump)) {
                 $this->hasFrom($this->sql['lock']['type']);
             }
             $sql .= $part . \PHP_EOL;

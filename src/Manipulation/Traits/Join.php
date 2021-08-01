@@ -415,8 +415,8 @@ trait Join
         Closure | array | null $expression
     ) : string {
         $table = $this->renderAliasedIdentifier($table);
-        $is_natural = $this->checkNaturalJoinType($type, $clause, $expression);
-        if ($is_natural) {
+        $isNatural = $this->checkNaturalJoinType($type, $clause, $expression);
+        if ($isNatural) {
             return $table;
         }
         $conditional = '';

@@ -234,12 +234,12 @@ class Insert extends Statement
         if ( ! isset($this->sql['on_duplicate'])) {
             return null;
         }
-        $on_duplicate = [];
+        $onDuplicate = [];
         foreach ($this->sql['on_duplicate'] as $column => $value) {
-            $on_duplicate[] = $this->renderAssignment($column, $value);
+            $onDuplicate[] = $this->renderAssignment($column, $value);
         }
-        $on_duplicate = \implode(', ', $on_duplicate);
-        return " ON DUPLICATE KEY UPDATE {$on_duplicate}";
+        $onDuplicate = \implode(', ', $onDuplicate);
+        return " ON DUPLICATE KEY UPDATE {$onDuplicate}";
     }
 
     /**
