@@ -738,29 +738,50 @@ trait Where
         array | Closure | string $expression,
         string $modifier = ''
     ) {
+        $columns = $this->renderMatchColumns($columns);
+        $expression = $this->renderMatchExpression($expression);
+        if ($modifier) {
+            $modifier = ' ' . $modifier;
+        }
+        return "MATCH ({$columns}) AGAINST ({$expression}{$modifier})";
+    }
+
+    /**
+     * @param array<int,Closure|string>|Closure|string $columns
+     *
+     * @return string
+     */
+    private function renderMatchColumns(array | Closure | string $columns) : string
+    {
         if (\is_array($columns)) {
             foreach ($columns as &$column) {
                 $column = $this->renderIdentifier($column);
             }
             unset($column);
-            $columns = \implode(', ', $columns);
-        } elseif (\is_string($columns)) {
-            $columns = $this->renderIdentifier($columns);
-        } else {
-            $columns = $this->subquery($columns);
+            return \implode(', ', $columns);
         }
+        if (\is_string($columns)) {
+            return $this->renderIdentifier($columns);
+        }
+        return $this->subquery($columns);
+    }
+
+    /**
+     * @param array<int,string>|Closure|string $expression
+     *
+     * @return float|int|string
+     */
+    private function renderMatchExpression(
+        array | Closure | string $expression
+    ) : float | int | string {
         if (\is_array($expression)) {
             $expression = \implode(', ', $expression);
-            $expression = $this->database->quote($expression);
-        } elseif (\is_string($expression)) {
-            $expression = $this->database->quote($expression);
-        } else {
-            $expression = $this->subquery($expression);
+            return $this->database->quote($expression);
         }
-        if ($modifier) {
-            $modifier = ' ' . $modifier;
+        if (\is_string($expression)) {
+            return $this->database->quote($expression);
         }
-        return "MATCH ({$columns}) AGAINST ({$expression}{$modifier})";
+        return $this->subquery($expression);
     }
 
     /**
