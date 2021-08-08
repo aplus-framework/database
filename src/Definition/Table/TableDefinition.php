@@ -13,6 +13,11 @@ use Framework\Database\Database;
 use Framework\Database\Definition\Table\Columns\ColumnDefinition;
 use Framework\Database\Definition\Table\Indexes\IndexDefinition;
 
+/**
+ * Class TableDefinition.
+ *
+ * @package database
+ */
 class TableDefinition extends DefinitionPart
 {
     protected Database $database;

@@ -14,6 +14,11 @@ use Framework\Database\Database;
 use Framework\Database\Definition\Table\DefinitionPart;
 use LogicException;
 
+/**
+ * Class Column.
+ *
+ * @package database
+ */
 abstract class Column extends DefinitionPart
 {
     protected Database $database;

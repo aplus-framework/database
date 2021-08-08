@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Indexes\Index;
  * Class UniqueKey.
  *
  * @see https://mariadb.com/kb/en/library/getting-started-with-indexes/#unique-index
+ *
+ * @package database
  */
 final class UniqueKey extends Index
 {

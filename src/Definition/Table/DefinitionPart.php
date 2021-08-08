@@ -11,6 +11,11 @@ namespace Framework\Database\Definition\Table;
 
 use BadMethodCallException;
 
+/**
+ * Class DefinitionPart.
+ *
+ * @package database
+ */
 abstract class DefinitionPart
 {
     /**

@@ -45,6 +45,8 @@ use Error;
  * @property-read bool $flagUniqueKey Tell if has the MYSQLI_UNIQUE_KEY_FLAG bit-flag
  * @property-read bool $flagNoDefaultValue Tell if has the MYSQLI_NO_DEFAULT_VALUE_FLAG bit-flag
  * @property-read bool $flagOnUpdateNow Tell if has the MYSQLI_ON_UPDATE_NOW_FLAG bit-flag
+ *
+ * @package database
  */
 class Field
 {

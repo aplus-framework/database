@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class GeometryCollectionColumn.
  *
  * @see https://mariadb.com/kb/en/geometrycollection/
+ *
+ * @package database
  */
 final class GeometryCollectionColumn extends Column
 {

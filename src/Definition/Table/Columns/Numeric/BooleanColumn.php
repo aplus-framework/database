@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
  * Class BooleanColumn.
  *
  * @see https://mariadb.com/kb/en/library/boolean/
+ *
+ * @package database
  */
 final class BooleanColumn extends NumericDataType
 {

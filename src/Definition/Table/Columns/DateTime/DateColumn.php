@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class EnumColumn.
  *
  * @see https://mariadb.com/kb/en/library/date/
+ *
+ * @package database
  */
 final class DateColumn extends Column
 {

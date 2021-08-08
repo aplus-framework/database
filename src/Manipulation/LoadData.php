@@ -16,6 +16,8 @@ use LogicException;
  * Class LoadData.
  *
  * @see https://mariadb.com/kb/en/library/load-data-infile/
+ *
+ * @package database
  */
 class LoadData extends Statement
 {

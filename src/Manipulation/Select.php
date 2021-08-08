@@ -18,6 +18,8 @@ use LogicException;
  * Class Select.
  *
  * @see https://mariadb.com/kb/en/library/select/
+ *
+ * @package database
  */
 class Select extends Statement
 {

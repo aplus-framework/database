@@ -9,6 +9,11 @@
  */
 namespace Framework\Database\Definition\Table\Indexes\Keys\Traits;
 
+/**
+ * Trait Constraint.
+ *
+ * @package database
+ */
 trait Constraint
 {
     protected ?string $constraint = null;

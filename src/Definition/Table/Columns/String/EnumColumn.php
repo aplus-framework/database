@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
  * Class EnumColumn.
  *
  * @see https://mariadb.com/kb/en/library/enum/
+ *
+ * @package database
  */
 final class EnumColumn extends StringDataType
 {

@@ -13,6 +13,8 @@ use Closure;
 
 /**
  * Trait Set.
+ *
+ * @package database
  */
 trait Set
 {

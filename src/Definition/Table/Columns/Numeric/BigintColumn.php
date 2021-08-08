@@ -9,6 +9,11 @@
  */
 namespace Framework\Database\Definition\Table\Columns\Numeric;
 
+/**
+ * Class BigintColumn.
+ *
+ * @package database
+ */
 final class BigintColumn extends NumericDataType
 {
     protected string $type = 'bigint';

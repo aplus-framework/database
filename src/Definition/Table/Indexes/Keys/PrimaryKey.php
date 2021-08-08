@@ -11,6 +11,11 @@ namespace Framework\Database\Definition\Table\Indexes\Keys;
 
 use Framework\Database\Definition\Table\Indexes\Index;
 
+/**
+ * Class PrimaryKey.
+ *
+ * @package database
+ */
 final class PrimaryKey extends Index
 {
     use Traits\Constraint;

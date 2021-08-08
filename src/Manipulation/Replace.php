@@ -17,6 +17,8 @@ use LogicException;
  * Class Replace.
  *
  * @see https://mariadb.com/kb/en/library/replace/
+ *
+ * @package database
  */
 class Replace extends Statement
 {

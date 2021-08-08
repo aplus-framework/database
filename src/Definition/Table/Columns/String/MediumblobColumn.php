@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class MediumblobColumn.
  *
  * @see https://mariadb.com/kb/en/library/mediumblob/
+ *
+ * @package database
  */
 final class MediumblobColumn extends Column
 {

@@ -12,6 +12,11 @@ namespace Framework\Database;
 use InvalidArgumentException;
 use RuntimeException;
 
+/**
+ * Class PreparedStatement.
+ *
+ * @package database
+ */
 class PreparedStatement
 {
     protected \mysqli_stmt $statement;

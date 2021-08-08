@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class PolygonColumn.
  *
  * @see https://mariadb.com/kb/en/polygon/
+ *
+ * @package database
  */
 final class PolygonColumn extends Column
 {

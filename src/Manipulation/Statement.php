@@ -16,6 +16,8 @@ use InvalidArgumentException;
  * Class Statement.
  *
  * @see https://mariadb.com/kb/en/library/data-manipulation/
+ *
+ * @package database
  */
 abstract class Statement extends \Framework\Database\Statement
 {

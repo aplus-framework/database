@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class LinestringColumn.
  *
  * @see https://mariadb.com/kb/en/linestring/
+ *
+ * @package database
  */
 final class LinestringColumn extends Column
 {

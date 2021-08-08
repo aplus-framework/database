@@ -9,6 +9,11 @@
  */
 namespace Framework\Database\Definition\Table\Columns\Traits;
 
+/**
+ * Trait ListLength.
+ *
+ * @package database
+ */
 trait ListLength
 {
     protected function renderLength() : ?string

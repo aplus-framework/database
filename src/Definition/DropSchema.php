@@ -16,6 +16,8 @@ use LogicException;
  * Class DropSchema.
  *
  * @see https://mariadb.com/kb/en/library/drop-database/
+ *
+ * @package database
  */
 class DropSchema extends Statement
 {

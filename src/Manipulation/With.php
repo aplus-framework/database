@@ -18,6 +18,8 @@ use LogicException;
  * Class With.
  *
  * @see https://mariadb.com/kb/en/library/with/
+ *
+ * @package database
  */
 class With extends Statement
 {

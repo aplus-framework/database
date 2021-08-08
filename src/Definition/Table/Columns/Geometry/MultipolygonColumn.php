@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class MultipolygonColumn.
  *
  * @see https://mariadb.com/kb/en/multipolygon/
+ *
+ * @package database
  */
 final class MultipolygonColumn extends Column
 {

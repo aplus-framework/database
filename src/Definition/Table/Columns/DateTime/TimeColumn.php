@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class TimeColumn.
  *
  * @see https://mariadb.com/kb/en/library/time/
+ *
+ * @package database
  */
 final class TimeColumn extends Column
 {

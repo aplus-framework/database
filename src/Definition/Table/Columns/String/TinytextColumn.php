@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\String;
  * Class TinytextColumn.
  *
  * @see https://mariadb.com/kb/en/library/tinytext/
+ *
+ * @package database
  */
 final class TinytextColumn extends StringDataType
 {

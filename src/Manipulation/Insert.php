@@ -17,6 +17,8 @@ use LogicException;
  * Class Insert.
  *
  * @see https://mariadb.com/kb/en/library/insert/
+ *
+ * @package database
  */
 class Insert extends Statement
 {

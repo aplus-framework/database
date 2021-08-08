@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class BinaryColumn.
  *
  * @see https://mariadb.com/kb/en/library/binary/
+ *
+ * @package database
  */
 final class BinaryColumn extends Column
 {

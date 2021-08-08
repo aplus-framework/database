@@ -11,6 +11,11 @@ namespace Framework\Database\Definition\Table\Columns\String;
 
 use Framework\Database\Definition\Table\Columns\Column;
 
+/**
+ * Class StringDataType.
+ *
+ * @package database
+ */
 abstract class StringDataType extends Column
 {
     protected string $charset;

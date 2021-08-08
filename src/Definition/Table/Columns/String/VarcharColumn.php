@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\String;
  * Class VarcharColumn.
  *
  * @see https://mariadb.com/kb/en/library/varchar/
+ *
+ * @package database
  */
 final class VarcharColumn extends StringDataType
 {

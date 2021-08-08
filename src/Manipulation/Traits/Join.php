@@ -18,6 +18,8 @@ use LogicException;
  *
  * @see  https://mariadb.com/kb/en/library/joins/
  *
+ * @package database
+ *
  * @todo STRAIGHT_JOIN - https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/
  */
 trait Join

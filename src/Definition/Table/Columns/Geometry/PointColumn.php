@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class PointColumn.
  *
  * @see https://mariadb.com/kb/en/point/
+ *
+ * @package database
  */
 final class PointColumn extends Column
 {

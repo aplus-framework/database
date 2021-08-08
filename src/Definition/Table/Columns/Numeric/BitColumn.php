@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class BitColumn.
  *
  * @see https://mariadb.com/kb/en/library/bit/
+ *
+ * @package database
  */
 final class BitColumn extends Column
 {

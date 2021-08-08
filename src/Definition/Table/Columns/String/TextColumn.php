@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\String;
  * Class TextColumn.
  *
  * @see https://mariadb.com/kb/en/library/text/
+ *
+ * @package database
  */
 final class TextColumn extends StringDataType
 {

@@ -17,6 +17,8 @@ use LogicException;
  * Class Update.
  *
  * @see https://mariadb.com/kb/en/library/update/
+ *
+ * @package database
  */
 class Update extends Statement
 {

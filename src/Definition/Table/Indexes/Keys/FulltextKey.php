@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Indexes\Index;
  * Class FulltextKey.
  *
  * @see https://mariadb.com/kb/en/library/full-text-index-overview/
+ *
+ * @package database
  */
 final class FulltextKey extends Index
 {

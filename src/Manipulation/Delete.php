@@ -16,6 +16,8 @@ use InvalidArgumentException;
  * Class Delete.
  *
  * @see https://mariadb.com/kb/en/library/delete/
+ *
+ * @package database
  */
 class Delete extends Statement
 {

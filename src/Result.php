@@ -17,6 +17,8 @@ use OutOfRangeException;
 
 /**
  * Class Result.
+ *
+ * @package database
  */
 class Result
 {

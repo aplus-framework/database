@@ -13,6 +13,8 @@ use Closure;
 
 /**
  * Trait Having.
+ *
+ * @package database
  */
 trait Having
 {

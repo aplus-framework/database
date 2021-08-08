@@ -34,6 +34,8 @@ use RuntimeException;
 
 /**
  * Class Database.
+ *
+ * @package database
  */
 class Database
 {

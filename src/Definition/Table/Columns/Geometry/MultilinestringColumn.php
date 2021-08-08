@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class MultilinestringColumn.
  *
  * @see https://mariadb.com/kb/en/multilinestring/
+ *
+ * @package database
  */
 final class MultilinestringColumn extends Column
 {

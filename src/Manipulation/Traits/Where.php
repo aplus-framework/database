@@ -14,6 +14,8 @@ use InvalidArgumentException;
 
 /**
  * Trait Where.
+ *
+ * @package database
  */
 trait Where
 {

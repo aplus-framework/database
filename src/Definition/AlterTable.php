@@ -18,6 +18,8 @@ use LogicException;
  * Class AlterTable.
  *
  * @see https://mariadb.com/kb/en/library/alter-table/
+ *
+ * @package database
  */
 class AlterTable extends Statement
 {

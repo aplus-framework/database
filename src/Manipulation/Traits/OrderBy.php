@@ -15,6 +15,8 @@ use Closure;
  * Trait OrderBy.
  *
  * @see https://mariadb.com/kb/en/library/order-by/
+ *
+ * @package database
  */
 trait OrderBy
 {

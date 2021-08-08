@@ -9,6 +9,11 @@
  */
 namespace Framework\Database\Definition\Table\Columns\Numeric;
 
+/**
+ * Class IntColumn.
+ *
+ * @package database
+ */
 final class IntColumn extends NumericDataType
 {
     protected string $type = 'int';

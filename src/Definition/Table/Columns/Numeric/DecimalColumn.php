@@ -11,6 +11,11 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
 
 use Framework\Database\Definition\Table\Columns\Traits\DecimalLength;
 
+/**
+ * Class DecimalColumn.
+ *
+ * @package database
+ */
 final class DecimalColumn extends NumericDataType
 {
     use DecimalLength;

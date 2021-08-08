@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
  * Class MediumintColumn.
  *
  * @see https://mariadb.com/kb/en/library/mediumint/
+ *
+ * @package database
  */
 final class MediumintColumn extends NumericDataType
 {

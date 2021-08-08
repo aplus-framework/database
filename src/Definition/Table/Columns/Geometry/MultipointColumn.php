@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class MultipointColumn.
  *
  * @see https://mariadb.com/kb/en/multipoint/
+ *
+ * @package database
  */
 final class MultipointColumn extends Column
 {

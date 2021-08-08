@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\String;
  * Class MediumtextColumn.
  *
  * @see https://mariadb.com/kb/en/library/mediumtext/
+ *
+ * @package database
  */
 final class MediumtextColumn extends StringDataType
 {

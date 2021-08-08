@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Column;
  * Class DatetimeColumn.
  *
  * @see https://mariadb.com/kb/en/library/datetime/
+ *
+ * @package database
  */
 final class DatetimeColumn extends Column
 {

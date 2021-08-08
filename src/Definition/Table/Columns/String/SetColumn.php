@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Columns\Traits\ListLength;
  * Class SetColumn.
  *
  * @see https://mariadb.com/kb/en/library/set-data-type/
+ *
+ * @package database
  */
 final class SetColumn extends StringDataType
 {

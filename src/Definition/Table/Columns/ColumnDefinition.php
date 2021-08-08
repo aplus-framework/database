@@ -53,6 +53,8 @@ use Framework\Database\Definition\Table\DefinitionPart;
  * Class ColumnDefinition.
  *
  * @see https://mariadb.com/kb/en/library/create-table/#column-and-index-definitions
+ *
+ * @package database
  */
 class ColumnDefinition extends DefinitionPart
 {

@@ -12,9 +12,11 @@ namespace Framework\Database\Definition\Table\Columns\DateTime;
 use Framework\Database\Definition\Table\Columns\Column;
 
 /**
- * Class TimestampColumn.
+ * Class YearColumn.
  *
  * @see https://mariadb.com/kb/en/library/year-data-type/
+ *
+ * @package database
  */
 final class YearColumn extends Column
 {

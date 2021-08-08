@@ -9,6 +9,11 @@
  */
 namespace Framework\Database\Definition\Table\Columns\Numeric;
 
+/**
+ * Class TinyintColumn.
+ *
+ * @package database
+ */
 final class TinyintColumn extends NumericDataType
 {
     protected string $type = 'tinyint';

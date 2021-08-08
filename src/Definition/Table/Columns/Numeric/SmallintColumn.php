@@ -13,6 +13,8 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
  * Class SmallintColumn.
  *
  * @see https://mariadb.com/kb/en/library/smallint/
+ *
+ * @package database
  */
 final class SmallintColumn extends NumericDataType
 {

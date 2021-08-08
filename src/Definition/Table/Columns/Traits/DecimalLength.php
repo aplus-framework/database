@@ -9,6 +9,11 @@
  */
 namespace Framework\Database\Definition\Table\Columns\Traits;
 
+/**
+ * Trait DecimalLength.
+ *
+ * @package database
+ */
 trait DecimalLength
 {
     protected function renderLength() : ?string

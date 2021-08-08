@@ -11,6 +11,8 @@ namespace Framework\Database;
 
 /**
  * Class Statement.
+ *
+ * @package database
  */
 abstract class Statement
 {

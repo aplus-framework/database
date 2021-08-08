@@ -11,6 +11,11 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
 
 use Framework\Database\Definition\Table\Columns\Column;
 
+/**
+ * Class NumericDataType.
+ *
+ * @package database
+ */
 abstract class NumericDataType extends Column
 {
     protected bool $signed = false;

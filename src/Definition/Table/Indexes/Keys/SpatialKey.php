@@ -15,6 +15,8 @@ use Framework\Database\Definition\Table\Indexes\Index;
  * Class SpatialKey.
  *
  * @see https://mariadb.com/kb/en/library/spatial-index/
+ *
+ * @package database
  */
 final class SpatialKey extends Index
 {

@@ -17,6 +17,8 @@ use LogicException;
  * Class ForeignKey.
  *
  * @see https://mariadb.com/kb/en/library/foreign-keys/
+ *
+ * @package database
  */
 final class ForeignKey extends Index
 {
