@@ -16,7 +16,7 @@
             <source dsn=".">
                 <path>src</path>
             </source>
-            <default-package-name>Database</default-package-name>
+            <default-package-name>database</default-package-name>
             <include-source>true</include-source>
         </api>
         <guide>
