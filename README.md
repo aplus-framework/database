@@ -1,7 +1,6 @@
 # Aplus Framework Database Library
 
-- [Homepage](https://aplus-framework.com/docs/database)
-- [API Documentation](https://aplus-framework.gitlab.io/libraries/database/docs/)
+- [Documentation](https://docs.aplus-framework.com/guides/libraries/database/)
 
 [![Pipeline](https://gitlab.com/aplus-framework/libraries/database/badges/master/pipeline.svg)](https://gitlab.com/aplus-framework/libraries/database/-/pipelines?scope=branches)
 [![Coverage](https://gitlab.com/aplus-framework/libraries/database/badges/master/coverage.svg?job=test:php)](https://aplus-framework.gitlab.io/libraries/database/coverage/)
