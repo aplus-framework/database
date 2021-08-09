@@ -10,7 +10,7 @@
         "data-definition",
         "data-manipulation"
     ],
-    "homepage": "https://aplus-framework.com/docs/database",
+    "homepage": "https://docs.aplus-framework.com/guides/libraries/database/",
     "license": "MIT",
     "authors": [
         {
@@ -55,6 +55,6 @@
         "issues": "https://gitlab.com/aplus-framework/libraries/database/issues",
         "wiki": "https://gitlab.com/aplus-framework/libraries/database/wikis/home",
         "source": "https://gitlab.com/aplus-framework/libraries/database",
-        "docs": "https://aplus-framework.gitlab.io/libraries/database/docs/"
+        "docs": "https://docs.aplus-framework.com/guides/libraries/database/"
     }
 }
