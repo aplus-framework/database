@@ -108,6 +108,33 @@ final class InsertTest extends TestCase
         );
     }
 
+    public function testValuesWithArrayAsFirstArgument() : void
+    {
+        $this->prepare();
+        $this->insert->columns('id', 'name', 'email');
+        $this->insert->values([[1, 'Foo', 'foo@baz.com']]);
+        self::assertSame(
+            "INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com')\n",
+            $this->insert->sql()
+        );
+        $this->insert->values([
+            [2, 'Bar', 'bar@baz.com'],
+            [10, 'Baz', static function () {
+                return 'select email from foo';
+            }],
+        ]);
+        self::assertSame(
+            "INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com'),\n (10, 'Baz', (select email from foo))\n",
+            $this->insert->sql()
+        );
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage(
+            'The method ' . $this->insert::class . '::values'
+            . ' must have only one argument when the first parameter is passed as array'
+        );
+        $this->insert->values([], null);
+    }
+
     public function testSet() : void
     {
         $this->prepare();

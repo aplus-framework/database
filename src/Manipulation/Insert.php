@@ -138,16 +138,28 @@ class Insert extends Statement
     /**
      * Adds a row of values to the VALUES clause.
      *
-     * @param Closure|float|int|string|null $value
+     * @param array<int,array>|Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
      * @return static
      */
     public function values(
-        Closure | float | int | string | null $value,
+        array | Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $this->sql['values'][] = $this->mergeExpressions($value, $values);
+        if ( ! \is_array($value)) {
+            $this->sql['values'][] = $this->mergeExpressions($value, $values);
+            return $this;
+        }
+        if ($values) {
+            throw new LogicException(
+                'The method ' . __METHOD__
+                . ' must have only one argument when the first parameter is passed as array'
+            );
+        }
+        foreach ($value as $row) {
+            $this->sql['values'][] = $row;
+        }
         return $this;
     }
 
