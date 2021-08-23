@@ -31,6 +31,8 @@ class Select extends Statement
      * Option to retrieve identical rows.
      *
      * @see Select::renderOptions()
+     *
+     * @var string
      */
     public const OPT_ALL = 'ALL';
     /**
@@ -38,12 +40,16 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/select/#distinct
+     *
+     * @var string
      */
     public const OPT_DISTINCT = 'DISTINCT';
     /**
      * Alias of OPT_DISTINCT.
      *
      * @see Select::renderOptions()
+     *
+     * @var string
      */
     public const OPT_DISTINCTROW = 'DISTINCTROW';
     /**
@@ -53,6 +59,8 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     *
+     * @var string
      */
     public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
     /**
@@ -63,12 +71,16 @@ class Select extends Statement
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/join-syntax/
      * @see https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/#forcing-join-order
+     *
+     * @var string
      */
     public const OPT_STRAIGHT_JOIN = 'STRAIGHT_JOIN';
     /**
      * Forces the optimizer to use a temporary table.
      *
      * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
+     *
+     * @var string
      */
     public const OPT_SQL_SMALL_RESULT = 'SQL_SMALL_RESULT';
     /**
@@ -76,6 +88,8 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
+     *
+     * @var string
      */
     public const OPT_SQL_BIG_RESULT = 'SQL_BIG_RESULT';
     /**
@@ -84,6 +98,8 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_buffer_result
+     *
+     * @var string
      */
     public const OPT_SQL_BUFFER_RESULT = 'SQL_BUFFER_RESULT';
     /**
@@ -93,6 +109,8 @@ class Select extends Statement
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
      * @see https://mariadb.com/kb/en/library/query-cache/
+     *
+     * @var string
      */
     public const OPT_SQL_CACHE = 'SQL_CACHE';
     /**
@@ -102,6 +120,8 @@ class Select extends Statement
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
      * @see https://mariadb.com/kb/en/library/query-cache/
+     *
+     * @var string
      */
     public const OPT_SQL_NO_CACHE = 'SQL_NO_CACHE';
     /**
@@ -111,36 +131,50 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/library/found_rows/
+     *
+     * @var string
      */
     public const OPT_SQL_CALC_FOUND_ROWS = 'SQL_CALC_FOUND_ROWS';
     /**
      * Clause to set the character of separation between fields. Default is \t.
      *
      * @see Select::intoOutfile()
+     *
+     * @var string
      */
     public const EXP_FIELDS_TERMINATED_BY = 'TERMINATED BY';
     /**
      * Clause to set the enclosure character of the fields. Default is ".
      *
      * @see Select::intoOutfile()
+     *
+     * @var string
      */
     public const EXP_FIELDS_ENCLOSED_BY = 'ENCLOSED BY';
     /**
      * @see Select::intoOutfile()
+     *
+     * @var string
      */
     public const EXP_FIELDS_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
     /**
      * @see Select::intoOutfile()
+     *
+     * @var string
      */
     public const EXP_FIELDS_ESCAPED_BY = 'ESCAPED BY';
     /**
      * @see Select::intoOutfile()
+     *
+     * @var string
      */
     public const EXP_LINES_STARTING_BY = 'STARTING BY';
     /**
      * Clause to set the file End-Of-Line character. Default is \n.
      *
      * @see Select::intoOutfile()
+     *
+     * @var string
      */
     public const EXP_LINES_TERMINATED_BY = 'TERMINATED BY';
 

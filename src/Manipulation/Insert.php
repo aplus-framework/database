@@ -26,20 +26,28 @@ class Insert extends Statement
 
     /**
      * @see https://mariadb.com/kb/en/library/insert-delayed/
+     *
+     * @var string
      */
     public const OPT_DELAYED = 'DELAYED';
     /**
      * Convert errors to warnings, which will not stop inserts of additional rows.
      *
      * @see https://mariadb.com/kb/en/library/insert-ignore/
+     *
+     * @var string
      */
     public const OPT_IGNORE = 'IGNORE';
     /**
      * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     *
+     * @var string
      */
     public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
     /**
      * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     *
+     * @var string
      */
     public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
