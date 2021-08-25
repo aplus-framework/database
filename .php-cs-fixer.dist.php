@@ -10,6 +10,9 @@
 use Framework\CodingStandard\Config;
 use Framework\CodingStandard\Finder;
 
-return (new Config())->setFinder(
+return (new Config())->setDefaultHeaderComment(
+    'Aplus Framework Database Library',
+    'Natan Felles <natanfelles@gmail.com>'
+)->setFinder(
     Finder::create()->in(__DIR__)
-)->setDefaultHeaderComment('Aplus Framework Database Library');
+);
