@@ -70,5 +70,6 @@ class StatementMock extends Statement
 
     public function run() : mixed
     {
+        return null;
     }
 }
