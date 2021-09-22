@@ -1,5 +1,5 @@
 ---
-image: registry.gitlab.com/aplus-framework/images/php
+image: registry.gitlab.com/aplus-framework/images/base
 
 include:
   - template: Security/SAST.gitlab-ci.yml
