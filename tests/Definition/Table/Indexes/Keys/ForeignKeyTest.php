@@ -39,7 +39,7 @@ final class ForeignKeyTest extends TestCase
 
     public function testOnDelete() : void
     {
-        $this->index->references('users', 'id')->onDelete('restrict');
+        $this->index->references('users', 'id')->onDelete(ForeignKey::OPT_RESTRICT);
         self::assertSame(
             ' FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT',
             $this->index->sql()

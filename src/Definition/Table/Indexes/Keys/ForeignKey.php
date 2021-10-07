@@ -24,6 +24,37 @@ final class ForeignKey extends Index
 {
     use Traits\Constraint;
 
+    /**
+     * The change is allowed and propagates on the child table.
+     * For example, if a parent row is deleted, the child row is also deleted;
+     * if a parent row's ID changes, the child row's ID will also change.
+     *
+     * @var string
+     */
+    public const OPT_CASCADE = 'CASCADE';
+    /**
+     * Synonym for RESTRICT.
+     *
+     * @see ForeignKey::OPT_RESTRICT
+     *
+     * @var string
+     */
+    public const OPT_NO_ACTION = 'NO ACTION';
+    /**
+     * The change on the parent table is prevented.
+     * The statement terminates with a 1451 error (SQLSTATE '2300').
+     * This is the default behavior for both ON DELETE and ON UPDATE.
+     *
+     * @var string
+     */
+    public const OPT_RESTRICT = 'RESTRICT';
+    /**
+     * The change is allowed, and the child row's foreign key columns are set
+     * to NULL.
+     *
+     * @var string
+     */
+    public const OPT_SET_NULL = 'SET NULL';
     protected string $type = 'FOREIGN KEY';
     protected ?string $referenceTable = null;
     /**

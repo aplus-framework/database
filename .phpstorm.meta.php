@@ -91,3 +91,20 @@ expectedArguments(
     0,
     argumentsSet('manipulation_with_opt')
 );
+registerArgumentsSet(
+    'foreign_key_opt',
+    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_CASCADE,
+    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_NO_ACTION,
+    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_RESTRICT,
+    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_SET_NULL,
+);
+expectedArguments(
+    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::onDelete(),
+    0,
+    argumentsSet('foreign_key_opt')
+);
+expectedArguments(
+    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::onUpdate(),
+    0,
+    argumentsSet('foreign_key_opt')
+);
