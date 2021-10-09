@@ -1,3 +1,5 @@
+<a href="https://gitlab.com/aplus-framework/libraries/database"><img src="https://gitlab.com/aplus-framework/libraries/database/-/raw/master/guide/image.png" alt="Aplus Framework Database Library" align="right" width="100"></a>
+
 # Aplus Framework Database Library
 
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/database/index.html)
