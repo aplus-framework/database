@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class Replace.
  *
- * @see https://mariadb.com/kb/en/library/replace/
+ * @see https://mariadb.com/kb/en/replace/
  *
  * @package database
  */
@@ -25,13 +25,13 @@ class Replace extends Statement
     use Traits\Set;
 
     /**
-     * @see https://mariadb.com/kb/en/library/insert-delayed/
+     * @see https://mariadb.com/kb/en/insert-delayed/
      *
      * @var string
      */
     public const OPT_DELAYED = 'DELAYED';
     /**
-     * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
      *
      * @var string
      */
@@ -159,7 +159,7 @@ class Replace extends Statement
      *
      * @param Closure $select
      *
-     * @see https://mariadb.com/kb/en/library/insert-select/
+     * @see https://mariadb.com/kb/en/insert-select/
      *
      * @return static
      */

@@ -24,7 +24,7 @@ abstract class NumericDataType extends Column
     protected bool $autoIncrement = false;
 
     /**
-     * @see https://mariadb.com/kb/en/library/auto_increment/
+     * @see https://mariadb.com/kb/en/auto_increment/
      *
      * @return static
      */

@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class DatetimeColumn.
  *
- * @see https://mariadb.com/kb/en/library/datetime/
+ * @see https://mariadb.com/kb/en/datetime/
  *
  * @package database
  */

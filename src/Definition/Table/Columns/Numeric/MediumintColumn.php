@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
 /**
  * Class MediumintColumn.
  *
- * @see https://mariadb.com/kb/en/library/mediumint/
+ * @see https://mariadb.com/kb/en/mediumint/
  *
  * @package database
  */

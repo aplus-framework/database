@@ -17,7 +17,7 @@ use LogicException;
 /**
  * Class Select.
  *
- * @see https://mariadb.com/kb/en/library/select/
+ * @see https://mariadb.com/kb/en/select/
  *
  * @package database
  */
@@ -39,7 +39,7 @@ class Select extends Statement
      * Option to not retrieve identical rows. Remove duplicates from the resultset.
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/select/#distinct
+     * @see https://mariadb.com/kb/en/select/#distinct
      *
      * @var string
      */
@@ -58,7 +58,7 @@ class Select extends Statement
      * Only supports table-level locking (MyISAM, MEMORY, MERGE).
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
      *
      * @var string
      */
@@ -69,8 +69,8 @@ class Select extends Statement
      * For const and system table this option is sometimes ignored.
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/join-syntax/
-     * @see https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/#forcing-join-order
+     * @see https://mariadb.com/kb/en/join-syntax/
+     * @see https://mariadb.com/kb/en/index-hints-how-to-force-query-plans/#forcing-join-order
      *
      * @var string
      */
@@ -78,7 +78,7 @@ class Select extends Statement
     /**
      * Forces the optimizer to use a temporary table.
      *
-     * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
+     * @see https://mariadb.com/kb/en/optimizer-hints/#sql_small_result-sql_big_result
      *
      * @var string
      */
@@ -87,7 +87,7 @@ class Select extends Statement
      * Forces the optimizer to avoid usage of a temporary table.
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_small_result-sql_big_result
+     * @see https://mariadb.com/kb/en/optimizer-hints/#sql_small_result-sql_big_result
      *
      * @var string
      */
@@ -97,7 +97,7 @@ class Select extends Statement
      * This is useful to free locks as soon as possible.
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/optimizer-hints/#sql_buffer_result
+     * @see https://mariadb.com/kb/en/optimizer-hints/#sql_buffer_result
      *
      * @var string
      */
@@ -107,8 +107,8 @@ class Select extends Statement
      * cacheable, SQL_CACHE causes the query to be cached.
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
-     * @see https://mariadb.com/kb/en/library/query-cache/
+     * @see https://mariadb.com/kb/en/server-system-variables/#query_cache_type
+     * @see https://mariadb.com/kb/en/query-cache/
      *
      * @var string
      */
@@ -118,8 +118,8 @@ class Select extends Statement
      * cacheable, SQL_NO_CACHE causes the query not to be cached.
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/server-system-variables/#query_cache_type
-     * @see https://mariadb.com/kb/en/library/query-cache/
+     * @see https://mariadb.com/kb/en/server-system-variables/#query_cache_type
+     * @see https://mariadb.com/kb/en/query-cache/
      *
      * @var string
      */
@@ -130,7 +130,7 @@ class Select extends Statement
      * That number can be retrieved in the next query, using FOUND_ROWS().
      *
      * @see Select::renderOptions()
-     * @see https://mariadb.com/kb/en/library/found_rows/
+     * @see https://mariadb.com/kb/en/found_rows/
      *
      * @var string
      */
@@ -229,7 +229,7 @@ class Select extends Statement
      * @param array<string,Closure|string>|Closure|string $expression
      * @param array<string,Closure|string>|Closure|string ...$expressions
      *
-     * @see https://mariadb.com/kb/en/library/select/#select-expressions
+     * @see https://mariadb.com/kb/en/select/#select-expressions
      *
      * @return static
      */
@@ -280,7 +280,7 @@ class Select extends Statement
      * @param int $limit
      * @param int|null $offset
      *
-     * @see https://mariadb.com/kb/en/library/limit/
+     * @see https://mariadb.com/kb/en/limit/
      *
      * @return static
      */
@@ -293,7 +293,7 @@ class Select extends Statement
      * @param string $name
      * @param bool|float|int|string|null ...$arguments
      *
-     * @see https://mariadb.com/kb/en/library/procedure/
+     * @see https://mariadb.com/kb/en/procedure/
      *
      * @return static
      */
@@ -327,7 +327,7 @@ class Select extends Statement
      * @param array<string,string> $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
      * @param array<string,string> $linesOptions Each key must be one of the EXP_LINESS_* constants
      *
-     * @see https://mariadb.com/kb/en/library/select-into-outfile/
+     * @see https://mariadb.com/kb/en/select-into-outfile/
      *
      * @return static
      */
@@ -416,7 +416,7 @@ class Select extends Statement
      * @param string $filepath
      * @param string ...$variables
      *
-     * @see https://mariadb.com/kb/en/library/select-into-dumpfile/
+     * @see https://mariadb.com/kb/en/select-into-dumpfile/
      *
      * @return static
      */
@@ -453,7 +453,7 @@ class Select extends Statement
     /**
      * @param int|null $wait
      *
-     * @see https://mariadb.com/kb/en/library/for-update/
+     * @see https://mariadb.com/kb/en/for-update/
      *
      * @return static
      */
@@ -469,7 +469,7 @@ class Select extends Statement
     /**
      * @param int|null $wait
      *
-     * @see https://mariadb.com/kb/en/library/lock-in-share-mode/
+     * @see https://mariadb.com/kb/en/lock-in-share-mode/
      *
      * @return static
      */

@@ -22,8 +22,8 @@ use RuntimeException;
 /**
  * Class IndexDefinition.
  *
- * @see https://mariadb.com/kb/en/library/create-table/#indexes
- * @see https://mariadb.com/kb/en/library/optimization-and-indexes/
+ * @see https://mariadb.com/kb/en/create-table/#index-definitions
+ * @see https://mariadb.com/kb/en/optimization-and-indexes/
  *
  * @package database
  */

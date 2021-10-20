@@ -17,14 +17,14 @@ use LogicException;
 /**
  * Class With.
  *
- * @see https://mariadb.com/kb/en/library/with/
+ * @see https://mariadb.com/kb/en/with/
  *
  * @package database
  */
 class With extends Statement
 {
     /**
-     * @see https://mariadb.com/kb/en/library/recursive-common-table-expressions-overview/
+     * @see https://mariadb.com/kb/en/recursive-common-table-expressions-overview/
      *
      * @var string
      */
@@ -52,8 +52,8 @@ class With extends Statement
      * @param Closure|string $table
      * @param Closure $alias
      *
-     * @see https://mariadb.com/kb/en/library/non-recursive-common-table-expressions-overview/
-     * @see https://mariadb.com/kb/en/library/recursive-common-table-expressions-overview/
+     * @see https://mariadb.com/kb/en/non-recursive-common-table-expressions-overview/
+     * @see https://mariadb.com/kb/en/recursive-common-table-expressions-overview/
      *
      * @return static
      */

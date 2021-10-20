@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class TimeColumn.
  *
- * @see https://mariadb.com/kb/en/library/time/
+ * @see https://mariadb.com/kb/en/time/
  *
  * @package database
  */

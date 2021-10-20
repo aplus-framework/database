@@ -63,7 +63,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/equal/
+     * @see https://mariadb.com/kb/en/equal/
      *
      * @return static
      */
@@ -80,7 +80,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/equal/
+     * @see https://mariadb.com/kb/en/equal/
      *
      * @return static
      */
@@ -97,7 +97,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/not-equal/
+     * @see https://mariadb.com/kb/en/not-equal/
      *
      * @return static
      */
@@ -114,7 +114,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/not-equal/
+     * @see https://mariadb.com/kb/en/not-equal/
      *
      * @return static
      */
@@ -131,7 +131,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/null-safe-equal/
+     * @see https://mariadb.com/kb/en/null-safe-equal/
      *
      * @return static
      */
@@ -148,7 +148,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/null-safe-equal/
+     * @see https://mariadb.com/kb/en/null-safe-equal/
      *
      * @return static
      */
@@ -165,7 +165,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/less-than/
+     * @see https://mariadb.com/kb/en/less-than/
      *
      * @return static
      */
@@ -182,7 +182,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/less-than/
+     * @see https://mariadb.com/kb/en/less-than/
      *
      * @return static
      */
@@ -199,7 +199,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/less-than-or-equal/
+     * @see https://mariadb.com/kb/en/less-than-or-equal/
      *
      * @return static
      */
@@ -216,7 +216,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/less-than-or-equal/
+     * @see https://mariadb.com/kb/en/less-than-or-equal/
      *
      * @return static
      */
@@ -233,7 +233,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/greater-than/
+     * @see https://mariadb.com/kb/en/greater-than/
      *
      * @return static
      */
@@ -250,7 +250,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/greater-than/
+     * @see https://mariadb.com/kb/en/greater-than/
      *
      * @return static
      */
@@ -267,7 +267,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
+     * @see https://mariadb.com/kb/en/greater-than-or-equal/
      *
      * @return static
      */
@@ -284,7 +284,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/greater-than-or-equal/
+     * @see https://mariadb.com/kb/en/greater-than-or-equal/
      *
      * @return static
      */
@@ -301,7 +301,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/like/
+     * @see https://mariadb.com/kb/en/like/
      *
      * @return static
      */
@@ -316,7 +316,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/like/
+     * @see https://mariadb.com/kb/en/like/
      *
      * @return static
      */
@@ -333,7 +333,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/not-like/
+     * @see https://mariadb.com/kb/en/not-like/
      *
      * @return static
      */
@@ -350,7 +350,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/library/not-like/
+     * @see https://mariadb.com/kb/en/not-like/
      *
      * @return static
      */
@@ -368,7 +368,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/library/in/
+     * @see https://mariadb.com/kb/en/in/
      *
      * @return static
      */
@@ -388,7 +388,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/library/in/
+     * @see https://mariadb.com/kb/en/in/
      *
      * @return static
      */
@@ -408,7 +408,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/library/not-in/
+     * @see https://mariadb.com/kb/en/not-in/
      *
      * @return static
      */
@@ -428,7 +428,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/library/not-in/
+     * @see https://mariadb.com/kb/en/not-in/
      *
      * @return static
      */
@@ -448,7 +448,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/library/between-and/
+     * @see https://mariadb.com/kb/en/between-and/
      *
      * @return static
      */
@@ -467,7 +467,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/library/between-and/
+     * @see https://mariadb.com/kb/en/between-and/
      *
      * @return static
      */
@@ -486,7 +486,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/library/not-between/
+     * @see https://mariadb.com/kb/en/not-between/
      *
      * @return static
      */
@@ -505,7 +505,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/library/not-between/
+     * @see https://mariadb.com/kb/en/not-between/
      *
      * @return static
      */
@@ -522,7 +522,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/library/is-null/
+     * @see https://mariadb.com/kb/en/is-null/
      *
      * @return static
      */
@@ -536,7 +536,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/library/is-null/
+     * @see https://mariadb.com/kb/en/is-null/
      *
      * @return static
      */
@@ -550,7 +550,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/library/is-not-null/
+     * @see https://mariadb.com/kb/en/is-not-null/
      *
      * @return static
      */
@@ -564,7 +564,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/library/is-not-null/
+     * @see https://mariadb.com/kb/en/is-not-null/
      *
      * @return static
      */
@@ -591,8 +591,8 @@ trait Where
      * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
      * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/library/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/library/match-against/
+     * @see https://mariadb.com/kb/en/full-text-index-overview/
+     * @see https://mariadb.com/kb/en/match-against/
      *
      * @return static
      */
@@ -610,8 +610,8 @@ trait Where
      * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
      * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/library/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/library/match-against/
+     * @see https://mariadb.com/kb/en/full-text-index-overview/
+     * @see https://mariadb.com/kb/en/match-against/
      *
      * @return static
      */
@@ -629,8 +629,8 @@ trait Where
      * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
      * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/library/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/library/match-against/
+     * @see https://mariadb.com/kb/en/full-text-index-overview/
+     * @see https://mariadb.com/kb/en/match-against/
      *
      * @return static
      */
@@ -648,8 +648,8 @@ trait Where
      * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
      * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/library/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/library/match-against/
+     * @see https://mariadb.com/kb/en/full-text-index-overview/
+     * @see https://mariadb.com/kb/en/match-against/
      *
      * @return static
      */
@@ -667,8 +667,8 @@ trait Where
      * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
      * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/library/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/library/match-against/
+     * @see https://mariadb.com/kb/en/full-text-index-overview/
+     * @see https://mariadb.com/kb/en/match-against/
      *
      * @return static
      */
@@ -686,8 +686,8 @@ trait Where
      * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
      * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/library/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/library/match-against/
+     * @see https://mariadb.com/kb/en/full-text-index-overview/
+     * @see https://mariadb.com/kb/en/match-against/
      *
      * @return static
      */

@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class Index.
  *
- * @see https://mariadb.com/kb/en/library/getting-started-with-indexes/
+ * @see https://mariadb.com/kb/en/getting-started-with-indexes/
  *
  * @package database
  */

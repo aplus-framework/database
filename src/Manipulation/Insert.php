@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class Insert.
  *
- * @see https://mariadb.com/kb/en/library/insert/
+ * @see https://mariadb.com/kb/en/insert/
  *
  * @package database
  */
@@ -25,7 +25,7 @@ class Insert extends Statement
     use Traits\Set;
 
     /**
-     * @see https://mariadb.com/kb/en/library/insert-delayed/
+     * @see https://mariadb.com/kb/en/insert-delayed/
      *
      * @var string
      */
@@ -33,19 +33,19 @@ class Insert extends Statement
     /**
      * Convert errors to warnings, which will not stop inserts of additional rows.
      *
-     * @see https://mariadb.com/kb/en/library/insert-ignore/
+     * @see https://mariadb.com/kb/en/insert-ignore/
      *
      * @var string
      */
     public const OPT_IGNORE = 'IGNORE';
     /**
-     * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
      *
      * @var string
      */
     public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
     /**
-     * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
      *
      * @var string
      */
@@ -199,7 +199,7 @@ class Insert extends Statement
      * @param Closure $select A Closure for a subquery with a
      * {@see \Framework\Database\Manipulation\Select} instance as param
      *
-     * @see https://mariadb.com/kb/en/library/insert-select/
+     * @see https://mariadb.com/kb/en/insert-select/
      *
      * @return static
      */
@@ -236,7 +236,7 @@ class Insert extends Statement
      * @param array<string,Closure|float|int|string|null> $columns Column name
      * as key, column value/expression as array value
      *
-     * @see https://mariadb.com/kb/en/library/insert-on-duplicate-key-update/
+     * @see https://mariadb.com/kb/en/insert-on-duplicate-key-update/
      *
      * @return static
      */

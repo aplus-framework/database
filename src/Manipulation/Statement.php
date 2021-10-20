@@ -15,7 +15,7 @@ use InvalidArgumentException;
 /**
  * Class Statement.
  *
- * @see https://mariadb.com/kb/en/library/data-manipulation/
+ * @see https://mariadb.com/kb/en/data-manipulation/
  *
  * @package database
  */
@@ -57,8 +57,8 @@ abstract class Statement extends \Framework\Database\Statement
      * @param Closure $subquery A {@see Closure} having the current Manipulation
      * instance as first argument. The returned value must be scalar
      *
-     * @see https://mariadb.com/kb/en/library/subqueries/
-     * @see https://mariadb.com/kb/en/library/built-in-functions/
+     * @see https://mariadb.com/kb/en/subqueries/
+     * @see https://mariadb.com/kb/en/built-in-functions/
      *
      * @return string
      */
@@ -73,7 +73,7 @@ abstract class Statement extends \Framework\Database\Statement
      * @param int $limit
      * @param int|null $offset
      *
-     * @see https://mariadb.com/kb/en/library/limit/
+     * @see https://mariadb.com/kb/en/limit/
      *
      * @return static
      */
@@ -166,7 +166,7 @@ abstract class Statement extends \Framework\Database\Statement
      * @param Closure|float|int|string|null $expression Expression/value
      *
      * @see Statement::renderValue()
-     * @see https://mariadb.com/kb/en/library/assignment-operators-assignment-operator/
+     * @see https://mariadb.com/kb/en/assignment-operators-assignment-operator/
      *
      * @return string
      */

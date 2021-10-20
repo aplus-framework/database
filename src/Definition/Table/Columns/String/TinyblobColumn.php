@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class TinyblobColumn.
  *
- * @see https://mariadb.com/kb/en/library/tinyblob/
+ * @see https://mariadb.com/kb/en/tinyblob/
  *
  * @package database
  */

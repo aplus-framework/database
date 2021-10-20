@@ -15,7 +15,7 @@ use LogicException;
 /**
  * Class LoadData.
  *
- * @see https://mariadb.com/kb/en/library/load-data-infile/
+ * @see https://mariadb.com/kb/en/load-data-infile/
  *
  * @package database
  */
@@ -24,7 +24,7 @@ class LoadData extends Statement
     use Traits\Set;
 
     /**
-     * @see https://mariadb.com/kb/en/library/high_priority-and-low_priority/
+     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
      *
      * @var string
      */

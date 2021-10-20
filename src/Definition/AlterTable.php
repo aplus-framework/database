@@ -17,7 +17,7 @@ use LogicException;
 /**
  * Class AlterTable.
  *
- * @see https://mariadb.com/kb/en/library/alter-table/
+ * @see https://mariadb.com/kb/en/alter-table/
  *
  * @package database
  */

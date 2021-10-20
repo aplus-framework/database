@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class BlobColumn.
  *
- * @see https://mariadb.com/kb/en/library/blob/
+ * @see https://mariadb.com/kb/en/blob/
  *
  * @package database
  */

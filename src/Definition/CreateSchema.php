@@ -15,7 +15,7 @@ use LogicException;
 /**
  * Class CreateSchema.
  *
- * @see https://mariadb.com/kb/en/library/create-database/
+ * @see https://mariadb.com/kb/en/create-database/
  *
  * @package database
  */

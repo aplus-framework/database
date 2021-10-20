@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class BinaryColumn.
  *
- * @see https://mariadb.com/kb/en/library/binary/
+ * @see https://mariadb.com/kb/en/binary/
  *
  * @package database
  */

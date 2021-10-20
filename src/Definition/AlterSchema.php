@@ -15,7 +15,7 @@ use LogicException;
 /**
  * Class AlterSchema.
  *
- * @see https://mariadb.com/kb/en/library/alter-database/
+ * @see https://mariadb.com/kb/en/alter-database/
  *
  * @package database
  */

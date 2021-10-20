@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class VarcharColumn.
  *
- * @see https://mariadb.com/kb/en/library/varchar/
+ * @see https://mariadb.com/kb/en/varchar/
  *
  * @package database
  */

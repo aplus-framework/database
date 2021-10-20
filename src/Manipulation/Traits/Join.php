@@ -16,11 +16,11 @@ use LogicException;
 /**
  * Trait Join.
  *
- * @see  https://mariadb.com/kb/en/library/joins/
+ * @see  https://mariadb.com/kb/en/joins/
  *
  * @package database
  *
- * @todo STRAIGHT_JOIN - https://mariadb.com/kb/en/library/index-hints-how-to-force-query-plans/
+ * @todo STRAIGHT_JOIN - https://mariadb.com/kb/en/index-hints-how-to-force-query-plans/
  */
 trait Join
 {
@@ -30,7 +30,7 @@ trait Join
      * @param array<string,Closure|string>|Closure|string $reference Table reference
      * @param array<string,Closure|string>|Closure|string ...$references Table references
      *
-     * @see https://mariadb.com/kb/en/library/join-syntax/
+     * @see https://mariadb.com/kb/en/join-syntax/
      *
      * @return static
      */
