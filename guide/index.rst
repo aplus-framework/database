@@ -1,6 +1,9 @@
 Database
 ========
 
+.. image:: image.png
+   :alt: Aplus Framework Database Library
+
 Aplus Framework Database Library.
 
 - `Installation`_
@@ -21,13 +24,17 @@ Basic Usage
 -----------
 
 Connection
-^^^^^^^^^
+^^^^^^^^^^
 
 .. code-block:: php
+
+    use Framework\Database\Database;
 
     $database = new Database($username, $password, $schema, $host, $port, $logger);
 
 .. code-block:: php
+
+    use Framework\Database\Database;
 
     $database = new Database($config);
 
@@ -55,15 +62,15 @@ Connection
         ],
         'failover' => [],
         'options' => [
-            \MYSQLI_OPT_CONNECT_TIMEOUT => 10,
-            \MYSQLI_OPT_INT_AND_FLOAT_NATIVE => true,
-            \MYSQLI_OPT_LOCAL_INFILE => 1,
+            MYSQLI_OPT_CONNECT_TIMEOUT => 10,
+            MYSQLI_OPT_INT_AND_FLOAT_NATIVE => true,
+            MYSQLI_OPT_LOCAL_INFILE => 1,
         ],
-        'report' => \MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX,
+        'report' => MYSQLI_REPORT_ALL & ~MYSQLI_REPORT_INDEX,
     ];
 
 Executing Queries
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 query
 
