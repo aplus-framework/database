@@ -216,7 +216,7 @@ class Database
                 $config,
                 $config['failover'][$this->failoverIndex]
             );
-            $this->connect($config);
+            return $this->connect($config);
         }
         $this->setCollations($config['charset'], $config['collation']);
         $this->setTimezone($config['timezone']);
