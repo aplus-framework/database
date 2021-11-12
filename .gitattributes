@@ -12,3 +12,4 @@ phpdoc.dist.xml export-ignore
 phpmd.xml export-ignore
 phpstan.neon.dist export-ignore
 phpunit.xml.dist export-ignore
+SECURITY.md export-ignore
