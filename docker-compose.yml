@@ -1,7 +1,7 @@
 version: "3"
 services:
   package:
-    image: registry.gitlab.com/aplus-framework/images/package
+    image: registry.gitlab.com/aplus-framework/images/package:1
     container_name: package-database
     working_dir: /package
     volumes:
