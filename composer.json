@@ -10,7 +10,7 @@
         "data-definition",
         "data-manipulation"
     ],
-    "homepage": "https://docs.aplus-framework.com/guides/libraries/database/",
+    "homepage": "https://aplus-framework.com/packages/database",
     "license": "MIT",
     "authors": [
         {
@@ -53,13 +53,13 @@
     "support": {
         "email": "support@aplus-framework.com",
         "issues": "https://gitlab.com/aplus-framework/libraries/database/issues",
-        "wiki": "https://gitlab.com/aplus-framework/libraries/database/wikis/home",
+        "forum": "https://aplus-framework.com/forum",
         "source": "https://gitlab.com/aplus-framework/libraries/database",
         "docs": "https://docs.aplus-framework.com/guides/libraries/database/"
     },
     "funding": [
         {
-            "type": "other",
+            "type": "Aplus Sponsor",
             "url": "https://aplus-framework.com/sponsor"
         }
     ]
