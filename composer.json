@@ -1,7 +1,8 @@
 {
     "name": "aplus/database",
-    "type": "library",
     "description": "Aplus Framework Database Library",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "database",
         "mariadb",
@@ -10,13 +11,25 @@
         "data-definition",
         "data-manipulation"
     ],
-    "homepage": "https://aplus-framework.com/packages/database",
-    "license": "MIT",
     "authors": [
         {
             "name": "Natan Felles",
             "email": "natanfelles@gmail.com",
             "homepage": "https://natanfelles.github.io"
+        }
+    ],
+    "homepage": "https://aplus-framework.com/packages/database",
+    "support": {
+        "email": "support@aplus-framework.com",
+        "issues": "https://gitlab.com/aplus-framework/libraries/database/issues",
+        "forum": "https://aplus-framework.com/forum",
+        "source": "https://gitlab.com/aplus-framework/libraries/database",
+        "docs": "https://docs.aplus-framework.com/guides/libraries/database/"
+    },
+    "funding": [
+        {
+            "type": "Aplus Sponsor",
+            "url": "https://aplus-framework.com/sponsor"
         }
     ],
     "require": {
@@ -33,11 +46,8 @@
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "^9.5"
     },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Framework\\Database\\": "src/"
@@ -48,19 +58,9 @@
             "Tests\\Database\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "support": {
-        "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/database/issues",
-        "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/database",
-        "docs": "https://docs.aplus-framework.com/guides/libraries/database/"
-    },
-    "funding": [
-        {
-            "type": "Aplus Sponsor",
-            "url": "https://aplus-framework.com/sponsor"
-        }
-    ]
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
 }
