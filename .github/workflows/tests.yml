@@ -113,4 +113,5 @@ jobs:
       - name: PHPUnit
         env:
           DB_HOST: 127.0.0.1
+          DB_IMAGE: mysql
         run: vendor/bin/phpunit --verbose

@@ -19,6 +19,7 @@
     </testsuite>
     <logging/>
     <php>
+        <env name="DB_IMAGE" value="mariadb"/>
         <env name="DB_HOST" value="mariadb"/>
         <env name="DB_PORT" value="3306"/>
         <env name="DB_USERNAME" value="root"/>

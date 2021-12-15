@@ -106,7 +106,7 @@ final class DatabaseTest extends TestCase
 
     public function testConnectionWithSSL() : void
     {
-        if (\getenv('DB_HOST') === 'mariadb') {
+        if (\getenv('DB_IMAGE') === 'mariadb') {
             $this->expectException(mysqli_sql_exception::class);
             $this->expectExceptionMessage('MySQL server has gone away');
         }
@@ -135,7 +135,7 @@ final class DatabaseTest extends TestCase
 
     public function testConnectionWithSSLNotVerified() : void
     {
-        if (\getenv('DB_HOST') === 'mariadb') {
+        if (\getenv('DB_IMAGE') === 'mariadb') {
             $this->expectException(mysqli_sql_exception::class);
             $this->expectExceptionMessage('MySQL server has gone away');
         }
