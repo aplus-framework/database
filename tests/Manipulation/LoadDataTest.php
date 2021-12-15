@@ -18,6 +18,9 @@ final class LoadDataTest extends TestCase
 
     protected function setUp() : void
     {
+        if (\getenv('DB_IMAGE') === 'mysql' && \getenv('GITHUB_JOB')) {
+            $this->markTestIncomplete();
+        }
         $this->loadData = new LoadData(static::$database);
     }
 
