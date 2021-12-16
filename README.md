@@ -2,10 +2,11 @@
 
 # Aplus Framework Database Library
 
-- [Homepage](https://aplus-framework.com/packages/database)
+- [Home](https://aplus-framework.com/packages/database)
 - [User Guide](https://docs.aplus-framework.com/guides/libraries/database/index.html)
 - [API Documentation](https://docs.aplus-framework.com/packages/database.html)
 
+[![tests](https://github.com/aplus-framework/database/actions/workflows/tests.yml/badge.svg)](https://github.com/aplus-framework/database/actions/workflows/tests.yml)
 [![pipeline](https://gitlab.com/aplus-framework/libraries/database/badges/master/pipeline.svg)](https://gitlab.com/aplus-framework/libraries/database/-/pipelines?scope=branches)
 [![coverage](https://gitlab.com/aplus-framework/libraries/database/badges/master/coverage.svg?job=test:php)](https://aplus-framework.gitlab.io/libraries/database/coverage/)
 [![packagist](https://img.shields.io/packagist/v/aplus/database)](https://packagist.org/packages/aplus/database)
