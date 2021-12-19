@@ -9,6 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Columns;
 
+use Framework\Database\Database;
 use Tests\Database\TestCase;
 
 final class ColumnTest extends TestCase
@@ -73,6 +74,20 @@ final class ColumnTest extends TestCase
             $this->column->default(static function () {
                 return 'now()';
             })->sql()
+        );
+    }
+
+    public function testCheck() : void
+    {
+        self::assertSame(
+            ' mock NOT NULL CHECK (LENGTH(name) > 4)',
+            $this->column->check(static fn () => 'LENGTH(name) > 4')->sql()
+        );
+        self::assertSame(
+            ' mock NOT NULL CHECK (LENGTH(`name`) > 4)',
+            $this->column->check(
+                static fn (Database $db) => 'LENGTH(' . $db->protectIdentifier('name') . ') > 4'
+            )->sql()
         );
     }
 

@@ -31,6 +31,7 @@ abstract class Column extends DefinitionPart
     protected bool $uniqueKey = false;
     protected bool $primaryKey = false;
     protected bool | Closure | float | int | string | null $default;
+    protected Closure $check;
     protected ?string $comment;
     protected bool $first = false;
     protected ?string $after;
@@ -62,6 +63,25 @@ abstract class Column extends DefinitionPart
         }
         $length = $this->database->quote($this->length[0]);
         return "({$length})";
+    }
+
+    /**
+     * @param Closure $expression
+     *
+     * @return static
+     */
+    public function check(Closure $expression) : static
+    {
+        $this->check = $expression;
+        return $this;
+    }
+
+    protected function renderCheck() : ?string
+    {
+        if ( ! isset($this->check)) {
+            return null;
+        }
+        return ' CHECK (' . ($this->check)($this->database) . ')';
     }
 
     /**
@@ -218,6 +238,7 @@ abstract class Column extends DefinitionPart
         $sql .= $this->renderComment();
         $sql .= $this->renderFirst();
         $sql .= $this->renderAfter();
+        $sql .= $this->renderCheck();
         return $sql;
     }
 }

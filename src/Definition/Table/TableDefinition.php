@@ -29,6 +29,10 @@ class TableDefinition extends DefinitionPart
      * @var array<int,array>
      */
     protected array $indexes = [];
+    /**
+     * @var array<int,array>
+     */
+    protected array $constraints = [];
 
     /**
      * TableDefinition constructor.
