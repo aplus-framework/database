@@ -9,7 +9,6 @@
  */
 namespace Framework\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Index;
 use InvalidArgumentException;
 use LogicException;
 
@@ -20,10 +19,8 @@ use LogicException;
  *
  * @package database
  */
-final class ForeignKey extends Index
+final class ForeignKey extends ConstraintKey
 {
-    use Traits\Constraint;
-
     /**
      * The change is allowed and propagates on the child table.
      * For example, if a parent row is deleted, the child row is also deleted;

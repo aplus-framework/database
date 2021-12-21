@@ -7,13 +7,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\Database\Definition\Table\Indexes\Keys\Traits;
+namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\Traits\Constraint;
-use Tests\Database\Definition\Table\Indexes\IndexMock;
+use Framework\Database\Definition\Table\Indexes\Keys\ConstraintKey;
 
-class ConstraintMock extends IndexMock
+class ConstraintKeyMock extends ConstraintKey
 {
-    use Constraint;
     public string $type = 'constraint_mock';
 }

@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Definition\Table\Indexes\Keys\Traits;
+namespace Framework\Database\Definition\Table;
 
 /**
  * Trait Constraint.
@@ -36,10 +36,5 @@ trait Constraint
         }
         $constraint = $this->database->protectIdentifier($this->constraint);
         return " CONSTRAINT {$constraint}";
-    }
-
-    protected function renderType() : string
-    {
-        return $this->renderConstraint() . parent::renderType();
     }
 }

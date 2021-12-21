@@ -9,15 +9,12 @@
  */
 namespace Framework\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Index;
-
 /**
  * Class PrimaryKey.
  *
  * @package database
  */
-final class PrimaryKey extends Index
+final class PrimaryKey extends ConstraintKey
 {
-    use Traits\Constraint;
     protected string $type = 'PRIMARY KEY';
 }

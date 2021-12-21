@@ -9,14 +9,20 @@
  */
 namespace Framework\Database\Definition\Table\Indexes\Keys;
 
+use Framework\Database\Definition\Table\Constraint;
+use Framework\Database\Definition\Table\Indexes\Index;
+
 /**
- * Class UniqueKey.
- *
- * @see https://mariadb.com/kb/en/getting-started-with-indexes/#unique-index
+ * Class ConstraintKey.
  *
  * @package database
  */
-final class UniqueKey extends ConstraintKey
+abstract class ConstraintKey extends Index
 {
-    protected string $type = 'UNIQUE KEY';
+    use Constraint;
+
+    protected function renderType() : string
+    {
+        return $this->renderConstraint() . parent::renderType();
+    }
 }
