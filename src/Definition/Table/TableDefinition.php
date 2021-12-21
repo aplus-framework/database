@@ -9,6 +9,7 @@
  */
 namespace Framework\Database\Definition\Table;
 
+use Closure;
 use Framework\Database\Database;
 use Framework\Database\Definition\Table\Columns\ColumnDefinition;
 use Framework\Database\Definition\Table\Indexes\IndexDefinition;
@@ -30,9 +31,9 @@ class TableDefinition extends DefinitionPart
      */
     protected array $indexes = [];
     /**
-     * @var array<int,array>
+     * @var array<int,Check>
      */
-    protected array $constraints = [];
+    protected array $checks = [];
 
     /**
      * TableDefinition constructor.
@@ -80,6 +81,19 @@ class TableDefinition extends DefinitionPart
         return $definition;
     }
 
+    /**
+     * Adds a check constraint to the Table Definition list.
+     *
+     * @param Closure $expression Must return a string with the check expression.
+     * The function receives a Database instance in the first parameter.
+     *
+     * @return Check
+     */
+    public function check(Closure $expression) : Check
+    {
+        return $this->checks[] = new Check($this->database, $expression);
+    }
+
     protected function renderColumns(string $prefix = null) : string
     {
         if ($prefix) {
@@ -107,10 +121,23 @@ class TableDefinition extends DefinitionPart
         return \implode(',' . \PHP_EOL, $sql);
     }
 
+    protected function renderChecks() : string
+    {
+        $sql = [];
+        foreach ($this->checks as $check) {
+            $sql[] = ' ' . $check->sql();
+        }
+        return \implode(',' . \PHP_EOL, $sql);
+    }
+
     protected function sql(string $prefix = null) : string
     {
         $sql = $this->renderColumns($prefix);
         $part = $this->renderIndexes($prefix);
+        if ($part) {
+            $sql .= ',' . \PHP_EOL . $part;
+        }
+        $part = $this->renderChecks();
         if ($part) {
             $sql .= ',' . \PHP_EOL . $part;
         }

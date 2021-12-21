@@ -9,6 +9,7 @@
  */
 namespace Tests\Database\Definition;
 
+use Framework\Database\Database;
 use Framework\Database\Definition\CreateTable;
 use Framework\Database\Definition\Table\TableDefinition;
 use Tests\Database\TestCase;
@@ -67,6 +68,22 @@ final class CreateTableTest extends TestCase
             });
         self::assertSame(
             "CREATE TABLE `t1` (\n  `c1` int NOT NULL,\n  PRIMARY KEY (`c1`)\n)",
+            $sql->sql()
+        );
+    }
+
+    public function testChecks() : void
+    {
+        $sql = $this->createTable->table('t1')
+            ->definition(static function (TableDefinition $definition) : void {
+                $definition->column('c1')->int();
+                $definition->check(static fn () => 'c1 > 10');
+                $definition->check(
+                    static fn (Database $db) => $db->protectIdentifier('c1') . ' < 20'
+                )->constraint('foo');
+            });
+        self::assertSame(
+            "CREATE TABLE `t1` (\n  `c1` int NOT NULL,\n  CHECK (c1 > 10),\n  CONSTRAINT `foo` CHECK (`c1` < 20)\n)",
             $sql->sql()
         );
     }
