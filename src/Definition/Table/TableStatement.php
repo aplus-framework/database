@@ -196,35 +196,35 @@ abstract class TableStatement extends Statement
             $value = match ($nameUpper) {
                 static::OPT_ENGINE => $this->makeEngine($value),
                 static::OPT_AUTO_INCREMENT => $this->makeAutoIncrement($value),
-                static::OPT_AVG_ROW_LENGTH => '',
+                static::OPT_AVG_ROW_LENGTH => $this->makeAvgRowLength($value),
                 static::OPT_CHARSET => $this->makeCharset($value),
                 static::OPT_CHECKSUM => $this->makeChecksum($value),
-                static::OPT_COLLATE => '',
+                static::OPT_COLLATE => $this->makeCollate($value),
                 static::OPT_COMMENT => $this->makeComment($value),
                 static::OPT_CONNECTION => $this->makeConnection($value),
                 static::OPT_DATA_DIRECTORY => $this->makeDataDirectory($value),
                 static::OPT_DELAY_KEY_WRITE => $this->makeDelayKeyWrite($value),
                 static::OPT_ENCRYPTED => $this->makeEncrypted($value),
-                static::OPT_ENCRYPTION_KEY_ID => '',
+                static::OPT_ENCRYPTION_KEY_ID => $this->makeEncryptionKeyId($value),
                 static::OPT_IETF_QUOTES => $this->makeIetfQuotes($value),
                 static::OPT_INDEX_DIRECTORY => $this->makeIndexDirectory($value),
                 static::OPT_INSERT_METHOD => $this->makeInsertMethod($value),
-                static::OPT_KEY_BLOCK_SIZE => '',
+                static::OPT_KEY_BLOCK_SIZE => $this->makeKeyBlockSize($value),
                 static::OPT_MAX_ROWS => $this->makeMaxRows($value),
                 static::OPT_MIN_ROWS => $this->makeMinRows($value),
-                static::OPT_PACK_KEYS => '',
+                static::OPT_PACK_KEYS => $this->makePackKeys($value),
                 static::OPT_PAGE_CHECKSUM => $this->makePageChecksum($value),
                 static::OPT_PAGE_COMPRESSED => $this->makePageCompressed($value),
                 static::OPT_PAGE_COMPRESSION_LEVEL => $this->makePageCompressionLevel($value),
                 static::OPT_PASSWORD => $this->makePassword($value),
                 static::OPT_ROW_FORMAT => $this->makeRowFormat($value),
-                static::OPT_SEQUENCE => '',
+                static::OPT_SEQUENCE => $this->makeSequence($value),
                 static::OPT_STATS_AUTO_RECALC => $this->makeStatsAutoRecalc($value),
                 static::OPT_STATS_PERSISTENT => $this->makeStatsPersistent($value),
-                static::OPT_STATS_SAMPLE_PAGES => '',
-                static::OPT_TABLESPACE => '',
+                static::OPT_STATS_SAMPLE_PAGES => $this->makeStatsSamplePages($value),
+                static::OPT_TABLESPACE => $this->makeTablespace($value),
                 static::OPT_TRANSACTIONAL => $this->makeTransactional($value),
-                static::OPT_UNION => '',
+                static::OPT_UNION => $this->makeUnion($value),
                 static::OPT_WITH_SYSTEM_VERSIONING => '',
                 default => throw new InvalidArgumentException('Invalid option: ' . $name)
             };
@@ -255,6 +255,14 @@ abstract class TableStatement extends Statement
         return \is_numeric($value)
             ? $value
             : throw $this->invalidValue(static::OPT_AUTO_INCREMENT, $value);
+    }
+
+    private function makeAvgRowLength(string $value) : string
+    {
+        if (\is_numeric($value) && $value >= 0) {
+            return $value;
+        }
+        throw $this->invalidValue(static::OPT_AVG_ROW_LENGTH, $value);
     }
 
     private function makeCharset(string $value) : string
@@ -312,6 +320,11 @@ abstract class TableStatement extends Statement
         ]);
     }
 
+    private function makeCollate(string $value) : string
+    {
+        return $this->quote($value);
+    }
+
     private function makeComment(string $value) : string
     {
         return $this->quote($value);
@@ -332,7 +345,7 @@ abstract class TableStatement extends Statement
         return $this->getValue(static::OPT_DELAY_KEY_WRITE, $value, [
             '0',
             '1',
-        ], \strtoupper($value));
+        ]);
     }
 
     private function makeIetfQuotes(string $value) : string
@@ -357,6 +370,14 @@ abstract class TableStatement extends Statement
         ], \strtoupper($value));
     }
 
+    private function makeKeyBlockSize(string $value) : string
+    {
+        if (\is_numeric($value) && $value >= 0) {
+            return $value;
+        }
+        throw $this->invalidValue(static::OPT_KEY_BLOCK_SIZE, $value);
+    }
+
     private function makeEncrypted(string $value) : string
     {
         return $this->getValue(static::OPT_ENCRYPTED, $value, [
@@ -365,9 +386,17 @@ abstract class TableStatement extends Statement
         ], \strtoupper($value));
     }
 
+    private function makeEncryptionKeyId(string $value) : string
+    {
+        if (\is_numeric($value) && $value >= 1) {
+            return $value;
+        }
+        throw $this->invalidValue(static::OPT_ENCRYPTION_KEY_ID, $value);
+    }
+
     private function makeMaxRows(string $value) : string
     {
-        if (\is_numeric($value) && $value > 0) {
+        if (\is_numeric($value) && $value >= 0) {
             return $value;
         }
         throw $this->invalidValue(static::OPT_MAX_ROWS, $value);
@@ -379,6 +408,14 @@ abstract class TableStatement extends Statement
             return $value;
         }
         throw $this->invalidValue(static::OPT_MIN_ROWS, $value);
+    }
+
+    private function makePackKeys(string $value) : string
+    {
+        return $this->getValue(static::OPT_PACK_KEYS, $value, [
+            '0',
+            '1',
+        ]);
     }
 
     private function makePageChecksum(string $value) : string
@@ -429,6 +466,22 @@ abstract class TableStatement extends Statement
         ], \strtoupper($value));
     }
 
+    private function makeStatsSamplePages(string $value) : string
+    {
+        if (\strtoupper($value) === 'DEFAULT') {
+            return 'DEFAULT';
+        }
+        if (\is_numeric($value) && $value > 0) {
+            return $value;
+        }
+        throw $this->invalidValue(static::OPT_STATS_SAMPLE_PAGES, $value);
+    }
+
+    private function makeTablespace(string $value) : string
+    {
+        return $this->quote($value);
+    }
+
     private function makeRowFormat(string $value) : string
     {
         return $this->getValue(static::OPT_ROW_FORMAT, $value, [
@@ -442,12 +495,34 @@ abstract class TableStatement extends Statement
         ], \strtoupper($value));
     }
 
+    private function makeSequence(string $value) : string
+    {
+        if (\is_numeric($value) && $value >= 0) {
+            return $value;
+        }
+        throw $this->invalidValue(static::OPT_SEQUENCE, $value);
+    }
+
     private function makeTransactional(string $value) : string
     {
         return $this->getValue(static::OPT_TRANSACTIONAL, $value, [
             '0',
             '1',
         ]);
+    }
+
+    private function makeUnion(string $value) : string
+    {
+        if ($value === '') {
+            throw $this->invalidValue(static::OPT_UNION, $value);
+        }
+        $tables = \array_map('trim', \explode(',', $value));
+        foreach ($tables as &$table) {
+            $table = $this->database->protectIdentifier($table);
+        }
+        unset($table);
+        $tables = \implode(', ', $tables);
+        return '(' . $tables . ')';
     }
 
     /**

@@ -71,6 +71,16 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->sql();
     }
 
+    public function testAvgRowLengthOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_AVG_ROW_LENGTH, 1000);
+        self::assertSame(' AVG_ROW_LENGTH = 1000', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_AVG_ROW_LENGTH, 'Foo');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid AVG_ROW_LENGTH option value: Foo');
+        $this->statement->sql();
+    }
+
     public function testCharsetOption() : void
     {
         $this->statement->option(TableStatement::OPT_CHARSET, 'UTF8MB4');
@@ -89,6 +99,12 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid CHECKSUM option value: 2');
         $this->statement->sql();
+    }
+
+    public function testCollateOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_COLLATE, 'latin2_general_ci');
+        self::assertSame(" COLLATE = 'latin2_general_ci'", $this->statement->sql());
     }
 
     public function testCommentOption() : void
@@ -145,6 +161,16 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->sql();
     }
 
+    public function testKeyBlockSizeOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_KEY_BLOCK_SIZE, 100);
+        self::assertSame(' KEY_BLOCK_SIZE = 100', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_KEY_BLOCK_SIZE, 'Foo');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid KEY_BLOCK_SIZE option value: Foo');
+        $this->statement->sql();
+    }
+
     public function testEncryptedOption() : void
     {
         $this->statement->option(TableStatement::OPT_ENCRYPTED, 'yes');
@@ -152,6 +178,16 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->option(TableStatement::OPT_ENCRYPTED, 'Foo');
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid ENCRYPTED option value: Foo');
+        $this->statement->sql();
+    }
+
+    public function testEncryptionKeyIdOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_ENCRYPTION_KEY_ID, 1);
+        self::assertSame(' ENCRYPTION_KEY_ID = 1', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_ENCRYPTION_KEY_ID, 'Foo');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid ENCRYPTION_KEY_ID option value: Foo');
         $this->statement->sql();
     }
 
@@ -172,6 +208,16 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->option(TableStatement::OPT_MIN_ROWS, 'Foo');
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid MIN_ROWS option value: Foo');
+        $this->statement->sql();
+    }
+
+    public function testPackKeysOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_PACK_KEYS, 0);
+        self::assertSame(' PACK_KEYS = 0', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_PACK_KEYS, 2);
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid PACK_KEYS option value: 2');
         $this->statement->sql();
     }
 
@@ -231,6 +277,24 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->sql();
     }
 
+    public function testStatsSamplePagesOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_STATS_SAMPLE_PAGES, 'default');
+        self::assertSame(' STATS_SAMPLE_PAGES = DEFAULT', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_STATS_SAMPLE_PAGES, 1);
+        self::assertSame(' STATS_SAMPLE_PAGES = 1', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_STATS_SAMPLE_PAGES, 'Foo');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid STATS_SAMPLE_PAGES option value: Foo');
+        $this->statement->sql();
+    }
+
+    public function testTablespaceOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_TABLESPACE, 'foo');
+        self::assertSame(" TABLESPACE = 'foo'", $this->statement->sql());
+    }
+
     public function testRowFormatOption() : void
     {
         $this->statement->option(TableStatement::OPT_ROW_FORMAT, 'default');
@@ -241,6 +305,16 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->sql();
     }
 
+    public function testSequenceOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_SEQUENCE, 0);
+        self::assertSame(' SEQUENCE = 0', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_SEQUENCE, 'Foo');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid SEQUENCE option value: Foo');
+        $this->statement->sql();
+    }
+
     public function testTransactionOption() : void
     {
         $this->statement->option(TableStatement::OPT_TRANSACTIONAL, 0);
@@ -248,6 +322,18 @@ final class TableStatementTest extends \Tests\Database\TestCase
         $this->statement->option(TableStatement::OPT_TRANSACTIONAL, 2);
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid TRANSACTIONAL option value: 2');
+        $this->statement->sql();
+    }
+
+    public function testUnionOption() : void
+    {
+        $this->statement->option(TableStatement::OPT_UNION, 't1');
+        self::assertSame(' UNION = (`t1`)', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_UNION, 't1,t2 ,  t3 ');
+        self::assertSame(' UNION = (`t1`, `t2`, `t3`)', $this->statement->sql());
+        $this->statement->option(TableStatement::OPT_UNION, '');
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid UNION option value: ');
         $this->statement->sql();
     }
 }
