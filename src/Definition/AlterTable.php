@@ -195,22 +195,30 @@ class AlterTable extends TableStatement
             $sql .= $part . \PHP_EOL;
         }
         $part = $this->renderOptions();
+        $before = $part;
         if ($part) {
             $sql .= $part;
         }
         $part = $this->renderAdd();
         if ($part) {
-            $sql .= ',' . \PHP_EOL . $part;
+            $sql .= $this->beforePart($before) . $part;
+            $before = $part;
         }
         $part = $this->renderChange();
         if ($part) {
-            $sql .= ',' . \PHP_EOL . $part;
+            $sql .= $this->beforePart($before) . $part;
+            $before = $part;
         }
         $part = $this->renderModify();
         if ($part) {
-            $sql .= ',' . \PHP_EOL . $part;
+            $sql .= $this->beforePart($before) . $part;
         }
         return $sql;
+    }
+
+    protected function beforePart(?string $before) : string
+    {
+        return $before ? ',' . \PHP_EOL : '';
     }
 
     /**
