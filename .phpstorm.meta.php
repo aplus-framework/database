@@ -182,3 +182,43 @@ expectedArguments(
     0,
     argumentsSet('foreign_key_opt')
 );
+registerArgumentsSet(
+    'table_options',
+    \Framework\Database\Definition\Table\TableStatement::OPT_AUTO_INCREMENT,
+    \Framework\Database\Definition\Table\TableStatement::OPT_AVG_ROW_LENGTH,
+    \Framework\Database\Definition\Table\TableStatement::OPT_CHARSET,
+    \Framework\Database\Definition\Table\TableStatement::OPT_CHECKSUM,
+    \Framework\Database\Definition\Table\TableStatement::OPT_COLLATE,
+    \Framework\Database\Definition\Table\TableStatement::OPT_COMMENT,
+    \Framework\Database\Definition\Table\TableStatement::OPT_CONNECTION,
+    \Framework\Database\Definition\Table\TableStatement::OPT_DATA_DIRECTORY,
+    \Framework\Database\Definition\Table\TableStatement::OPT_DELAY_KEY_WRITE,
+    \Framework\Database\Definition\Table\TableStatement::OPT_ENCRYPTED,
+    \Framework\Database\Definition\Table\TableStatement::OPT_ENCRYPTION_KEY_ID,
+    \Framework\Database\Definition\Table\TableStatement::OPT_ENGINE,
+    \Framework\Database\Definition\Table\TableStatement::OPT_IETF_QUOTES,
+    \Framework\Database\Definition\Table\TableStatement::OPT_INDEX_DIRECTORY,
+    \Framework\Database\Definition\Table\TableStatement::OPT_INSERT_METHOD,
+    \Framework\Database\Definition\Table\TableStatement::OPT_KEY_BLOCK_SIZE,
+    \Framework\Database\Definition\Table\TableStatement::OPT_MAX_ROWS,
+    \Framework\Database\Definition\Table\TableStatement::OPT_MIN_ROWS,
+    \Framework\Database\Definition\Table\TableStatement::OPT_PACK_KEYS,
+    \Framework\Database\Definition\Table\TableStatement::OPT_PAGE_CHECKSUM,
+    \Framework\Database\Definition\Table\TableStatement::OPT_PAGE_COMPRESSED,
+    \Framework\Database\Definition\Table\TableStatement::OPT_PAGE_COMPRESSION_LEVEL,
+    \Framework\Database\Definition\Table\TableStatement::OPT_PASSWORD,
+    \Framework\Database\Definition\Table\TableStatement::OPT_ROW_FORMAT,
+    \Framework\Database\Definition\Table\TableStatement::OPT_SEQUENCE,
+    \Framework\Database\Definition\Table\TableStatement::OPT_STATS_AUTO_RECALC,
+    \Framework\Database\Definition\Table\TableStatement::OPT_STATS_PERSISTENT,
+    \Framework\Database\Definition\Table\TableStatement::OPT_STATS_SAMPLE_PAGES,
+    \Framework\Database\Definition\Table\TableStatement::OPT_TABLESPACE,
+    \Framework\Database\Definition\Table\TableStatement::OPT_TRANSACTIONAL,
+    \Framework\Database\Definition\Table\TableStatement::OPT_UNION,
+    \Framework\Database\Definition\Table\TableStatement::OPT_WITH_SYSTEM_VERSIONING,
+);
+expectedArguments(
+    \Framework\Database\Definition\Table\TableStatement::option(),
+    0,
+    argumentsSet('table_options')
+);

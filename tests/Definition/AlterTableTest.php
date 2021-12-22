@@ -37,6 +37,14 @@ final class AlterTableTest extends TestCase
         $this->alterTable->sql();
     }
 
+    public function testOptions() : void
+    {
+        self::assertSame(
+            "ALTER TABLE `t1`\n ENGINE = MyISAM,\n ADD COLUMN `c1` int NOT NULL",
+            $this->prepare()->option('engine', 'myisam')->sql()
+        );
+    }
+
     public function testAdd() : void
     {
         $sql = $this->alterTable->table('t1')

@@ -10,7 +10,7 @@
 namespace Framework\Database\Definition;
 
 use Framework\Database\Definition\Table\TableDefinition;
-use Framework\Database\Statement;
+use Framework\Database\Definition\Table\TableStatement;
 use InvalidArgumentException;
 use LogicException;
 
@@ -21,7 +21,7 @@ use LogicException;
  *
  * @package database
  */
-class AlterTable extends Statement
+class AlterTable extends TableStatement
 {
     /**
      * @return static
@@ -194,10 +194,31 @@ class AlterTable extends Statement
         if ($part) {
             $sql .= $part . \PHP_EOL;
         }
-        $sql .= $this->renderAdd();
-        $sql .= $this->renderChange();
-        $sql .= $this->renderModify();
+        $part = $this->renderOptions();
+        $before = $part;
+        if ($part) {
+            $sql .= $part;
+        }
+        $part = $this->renderAdd();
+        if ($part) {
+            $sql .= $this->beforePart($before) . $part;
+            $before = $part;
+        }
+        $part = $this->renderChange();
+        if ($part) {
+            $sql .= $this->beforePart($before) . $part;
+            $before = $part;
+        }
+        $part = $this->renderModify();
+        if ($part) {
+            $sql .= $this->beforePart($before) . $part;
+        }
         return $sql;
+    }
+
+    protected function beforePart(?string $before) : string
+    {
+        return $before ? ',' . \PHP_EOL : '';
     }
 
     /**

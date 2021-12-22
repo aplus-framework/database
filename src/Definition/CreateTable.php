@@ -10,7 +10,7 @@
 namespace Framework\Database\Definition;
 
 use Framework\Database\Definition\Table\TableDefinition;
-use Framework\Database\Statement;
+use Framework\Database\Definition\Table\TableStatement;
 use LogicException;
 
 /**
@@ -20,7 +20,7 @@ use LogicException;
  *
  * @package database
  */
-class CreateTable extends Statement
+class CreateTable extends TableStatement
 {
     /**
      * Adds a OR REPLACE part.
@@ -133,7 +133,7 @@ class CreateTable extends Statement
         $sql .= ' TABLE' . $this->renderIfNotExists();
         $sql .= $this->renderTable() . ' (' . \PHP_EOL;
         $sql .= $this->renderDefinition() . \PHP_EOL;
-        $sql .= ')';
+        $sql .= ')' . $this->renderOptions();
         return $sql;
     }
 
