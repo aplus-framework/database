@@ -171,6 +171,11 @@ abstract class TableStatement extends Statement
         return $this;
     }
 
+    /**
+     * @param array<string,int|string> $options
+     *
+     * @return static
+     */
     public function options(array $options) : static
     {
         foreach ($options as $name => $value) {
@@ -234,7 +239,7 @@ abstract class TableStatement extends Statement
 
     private function makeEngine(string $value) : string
     {
-        return $this->getValue(\strtolower($value), [
+        return $this->getValue(static::OPT_ENGINE, $value, [
             'aria' => 'Aria',
             'csv' => 'CSV',
             'innodb' => 'InnoDB',
@@ -242,17 +247,19 @@ abstract class TableStatement extends Statement
             'mrg_myisam' => 'MRG_MyISAM',
             'myisam' => 'MyISAM',
             'sequence' => 'SEQUENCE',
-        ], true) ?? $this->invalidValue(static::OPT_ENGINE, $value);
+        ], \strtolower($value), true);
     }
 
     private function makeAutoIncrement(string $value) : string
     {
-        return \is_numeric($value) ? $value : $this->invalidValue(static::OPT_AUTO_INCREMENT, $value);
+        return \is_numeric($value)
+            ? $value
+            : throw $this->invalidValue(static::OPT_AUTO_INCREMENT, $value);
     }
 
     private function makeCharset(string $value) : string
     {
-        return $this->getValue(\strtolower($value), [
+        return $this->getValue(static::OPT_CHARSET, $value, [
             'armscii8',
             'ascii',
             'big5',
@@ -294,68 +301,68 @@ abstract class TableStatement extends Statement
             'utf8',
             'utf8mb3',
             'utf8mb4',
-        ]) ?? $this->invalidValue(static::OPT_CHARSET, $value);
+        ], \strtolower($value));
     }
 
     private function makeChecksum(string $value) : string
     {
-        return $this->getValue($value, [
+        return $this->getValue(static::OPT_CHECKSUM, $value, [
             '0',
             '1',
-        ]) ?? $this->invalidValue(static::OPT_CHECKSUM, $value);
+        ]);
     }
 
     private function makeComment(string $value) : string
     {
-        return $this->database->quote($value);
+        return $this->quote($value);
     }
 
     private function makeConnection(string $value) : string
     {
-        return $this->database->quote($value);
+        return $this->quote($value);
     }
 
     private function makeDataDirectory(string $value) : string
     {
-        return $this->database->quote($value);
+        return $this->quote($value);
     }
 
     private function makeDelayKeyWrite(string $value) : string
     {
-        return $this->getValue($value, [
+        return $this->getValue(static::OPT_DELAY_KEY_WRITE, $value, [
             '0',
             '1',
-        ]) ?? $this->invalidValue(static::OPT_DELAY_KEY_WRITE, $value);
+        ], \strtoupper($value));
     }
 
     private function makeIetfQuotes(string $value) : string
     {
-        return $this->getValue(\strtoupper($value), [
+        return $this->getValue(static::OPT_IETF_QUOTES, $value, [
             'NO',
             'YES',
-        ]) ?? $this->invalidValue(static::OPT_IETF_QUOTES, $value);
+        ], \strtoupper($value));
     }
 
     private function makeIndexDirectory(string $value) : string
     {
-        return $this->database->quote($value);
+        return $this->quote($value);
     }
 
     private function makeInsertMethod(string $value) : string
     {
-        return $this->getValue(\strtoupper($value), [
+        return $this->getValue(static::OPT_INSERT_METHOD, $value, [
             'FIRST',
             'LAST',
             'NO',
-        ]) ?? $this->invalidValue(static::OPT_INSERT_METHOD, $value);
+        ], \strtoupper($value));
     }
 
     private function makeEncrypted(string $value) : string
     {
-        return $this->getValue(\strtoupper($value), [
+        return $this->getValue(static::OPT_ENCRYPTED, $value, [
             'NO',
             'YES',
-        ]) ?? $this->invalidValue(static::OPT_ENCRYPTED, $value);
+        ], \strtoupper($value));
     }
 
     private function makeMaxRows(string $value) : string
@@ -363,7 +370,7 @@ abstract class TableStatement extends Statement
         if (\is_numeric($value) && $value > 0) {
             return $value;
         }
-        $this->invalidValue(static::OPT_MAX_ROWS, $value);
+        throw $this->invalidValue(static::OPT_MAX_ROWS, $value);
     }
 
     private function makeMinRows(string $value) : string
@@ -371,57 +378,60 @@ abstract class TableStatement extends Statement
         if (\is_numeric($value) && $value >= 0) {
             return $value;
         }
-        $this->invalidValue(static::OPT_MIN_ROWS, $value);
+        throw $this->invalidValue(static::OPT_MIN_ROWS, $value);
     }
 
     private function makePageChecksum(string $value) : string
     {
-        return $this->getValue($value, [
+        return $this->getValue(static::OPT_PAGE_CHECKSUM, $value, [
             '0',
             '1',
-        ]) ?? $this->invalidValue(static::OPT_PAGE_CHECKSUM, $value);
+        ]);
     }
 
     private function makePageCompressed(string $value) : string
     {
-        return $this->getValue($value, \array_map('strval', \range('0', '9')))
-        ?? $this->invalidValue(static::OPT_PAGE_COMPRESSED, $value);
+        return $this->getValue(
+            static::OPT_PAGE_COMPRESSED,
+            $value,
+            \array_map('strval', \range(0, 9))
+        );
     }
 
     private function makePageCompressionLevel(string $value) : string
     {
-        return $this->getValue($value, [
+        return $this->getValue(static::OPT_PAGE_COMPRESSION_LEVEL, $value, [
             '0',
             '1',
-        ]) ?? $this->invalidValue(static::OPT_PAGE_COMPRESSION_LEVEL, $value);
+        ]);
     }
 
     private function makePassword(string $value) : string
     {
-        return $this->database->quote($value);
+        return $this->quote($value);
     }
 
     private function makeStatsAutoRecalc(string $value) : string
     {
-        return $this->getValue(\strtoupper($value), [
+        return $this->getValue(static::OPT_STATS_AUTO_RECALC, $value, [
             '0',
             '1',
             'DEFAULT',
-        ]) ?? $this->invalidValue(static::OPT_STATS_AUTO_RECALC, $value);
+        ], \strtoupper($value));
     }
 
     private function makeStatsPersistent(string $value) : string
     {
-        return $this->getValue(\strtoupper($value), [
+        return $this->getValue(static::OPT_STATS_PERSISTENT, $value, [
             '0',
             '1',
             'DEFAULT',
-        ]) ?? $this->invalidValue(static::OPT_STATS_PERSISTENT, $value);
+        ], \strtoupper($value));
     }
 
     private function makeRowFormat(string $value) : string
     {
-        return $this->getValue(\strtoupper($value), [
+        return $this->getValue(static::OPT_ROW_FORMAT, $value, [
             'COMPACT',
             'COMPRESSED',
             'DEFAULT',
@@ -429,30 +439,51 @@ abstract class TableStatement extends Statement
             'FIXED',
             'PAGE',
             'REDUNDANT',
-        ]) ?? $this->invalidValue(static::OPT_ROW_FORMAT, $value);
+        ], \strtoupper($value));
     }
 
     private function makeTransactional(string $value) : string
     {
-        return $this->getValue($value, [
+        return $this->getValue(static::OPT_TRANSACTIONAL, $value, [
             '0',
             '1',
-        ]) ?? $this->invalidValue(static::OPT_TRANSACTIONAL, $value);
+        ]);
     }
 
-    private function getValue(string $value, array $options, bool $getByKey = false) : ?string
-    {
+    /**
+     * @param string $optionName
+     * @param string $originalValue
+     * @param array<string> $options
+     * @param string|null $value
+     * @param bool $getByKey
+     *
+     * @return string
+     */
+    private function getValue(
+        string $optionName,
+        string $originalValue,
+        array $options,
+        string $value = null,
+        bool $getByKey = false
+    ) : string {
+        $value ??= $originalValue;
         if ($getByKey) {
-            return $options[$value] ?? null;
-        }
-        if (\in_array($value, $options, true)) {
+            if (isset($options[$value])) {
+                return $options[$value];
+            }
+        } elseif (\in_array($value, $options, true)) {
             return $value;
         }
-        return null;
+        throw $this->invalidValue($optionName, $originalValue);
     }
 
-    private function invalidValue(string $option, $value) : void
+    private function invalidValue(string $option, string $value) : InvalidArgumentException
     {
-        throw new InvalidArgumentException("Invalid {$option} option value: {$value}");
+        return new InvalidArgumentException("Invalid {$option} option value: {$value}");
+    }
+
+    private function quote(string $value) : string
+    {
+        return (string) $this->database->quote($value);
     }
 }
