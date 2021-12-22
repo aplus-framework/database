@@ -115,6 +115,15 @@ final class CreateTableTest extends TestCase
         );
     }
 
+    public function testOptions() : void
+    {
+        self::assertSame(
+            "CREATE TABLE `t1` (\n  `c1` int NOT NULL\n) ENGINE = MyISAM, CHARSET = utf8",
+            $this->prepare()->option(CreateTable::OPT_ENGINE, 'myisam')
+                ->options([CreateTable::OPT_CHARSET => 'utf8'])->sql()
+        );
+    }
+
     public function testRun() : void
     {
         $this->dropDummyData();
