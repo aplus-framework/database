@@ -22,149 +22,206 @@ use InvalidArgumentException;
 abstract class TableStatement extends Statement
 {
     /**
-     * [STORAGE] ENGINE specifies a storage engine for the table.
-     * If this option is not used, the default storage engine is used instead.
-     *
      * @see https://mariadb.com/kb/en/create-table/#storage-engine
      *
      * @var string
      */
     public const OPT_ENGINE = 'ENGINE';
     /**
-     * AUTO_INCREMENT specifies the initial value for the AUTO_INCREMENT primary
-     * key. This works for MyISAM, Aria, InnoDB/XtraDB, MEMORY, and ARCHIVE tables.
-     * You can change this option with ALTER TABLE, but in that case the new
-     * value must be higher than the highest value which is present in the
-     * AUTO_INCREMENT column. If the storage engine does not support this option,
-     * you can insert (and then delete) a row having the wanted value - 1 in the
-     * AUTO_INCREMENT column.
-     *
      * @see https://mariadb.com/kb/en/create-table/#auto_increment
      *
      * @var string
      */
     public const OPT_AUTO_INCREMENT = 'AUTO_INCREMENT';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#avg_row_length
+     *
      * @var string
      */
     public const OPT_AVG_ROW_LENGTH = 'AVG_ROW_LENGTH';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#default-character-setcharset
+     *
      * @var string
      */
     public const OPT_CHARSET = 'CHARSET';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#checksumtable_checksum
+     *
      * @var string
      */
     public const OPT_CHECKSUM = 'CHECKSUM';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#default-collate
+     *
      * @var string
      */
     public const OPT_COLLATE = 'COLLATE';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#comment
+     *
      * @var string
      */
     public const OPT_COMMENT = 'COMMENT';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#connection
+     *
      * @var string
      */
     public const OPT_CONNECTION = 'CONNECTION';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#data-directoryindex-directory
+     *
      * @var string
      */
     public const OPT_DATA_DIRECTORY = 'DATA DIRECTORY';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#delay_key_write
+     *
      * @var string
      */
     public const OPT_DELAY_KEY_WRITE = 'DELAY_KEY_WRITE';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#encrypted
+     *
      * @var string
      */
     public const OPT_ENCRYPTED = 'ENCRYPTED';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#encryption_key_id
+     *
      * @var string
      */
     public const OPT_ENCRYPTION_KEY_ID = 'ENCRYPTION_KEY_ID';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#ietf_quotes
+     *
      * @var string
      */
     public const OPT_IETF_QUOTES = 'IETF_QUOTES';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#data-directoryindex-directory
+     *
      * @var string
      */
     public const OPT_INDEX_DIRECTORY = 'INDEX DIRECTORY';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#insert_method
+     *
      * @var string
      */
     public const OPT_INSERT_METHOD = 'INSERT_METHOD';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#key_block_size
+     *
      * @var string
      */
     public const OPT_KEY_BLOCK_SIZE = 'KEY_BLOCK_SIZE';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#min_rowsmax_rows
+     *
      * @var string
      */
     public const OPT_MAX_ROWS = 'MAX_ROWS';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#min_rowsmax_rows
+     *
      * @var string
      */
     public const OPT_MIN_ROWS = 'MIN_ROWS';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#pack_keys
+     *
      * @var string
      */
     public const OPT_PACK_KEYS = 'PACK_KEYS';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#page_checksum
+     *
      * @var string
      */
     public const OPT_PAGE_CHECKSUM = 'PAGE_CHECKSUM';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#page_compressed
+     *
      * @var string
      */
     public const OPT_PAGE_COMPRESSED = 'PAGE_COMPRESSED';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#page_compression_level
+     *
      * @var string
      */
     public const OPT_PAGE_COMPRESSION_LEVEL = 'PAGE_COMPRESSION_LEVEL';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#password
+     *
      * @var string
      */
     public const OPT_PASSWORD = 'PASSWORD';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#row_format
+     *
      * @var string
      */
     public const OPT_ROW_FORMAT = 'ROW_FORMAT';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#sequence
+     *
      * @var string
      */
     public const OPT_SEQUENCE = 'SEQUENCE';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#stats_auto_recalc
+     *
      * @var string
      */
     public const OPT_STATS_AUTO_RECALC = 'STATS_AUTO_RECALC';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#stats_persistent
+     *
      * @var string
      */
     public const OPT_STATS_PERSISTENT = 'STATS_PERSISTENT';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#stats_sample_pages
+     *
      * @var string
      */
     public const OPT_STATS_SAMPLE_PAGES = 'STATS_SAMPLE_PAGES';
     /**
+     * @see https://mariadb.com/kb/en/create-tablespace/
+     *
      * @var string
      */
     public const OPT_TABLESPACE = 'TABLESPACE';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#transactional
+     *
      * @var string
      */
     public const OPT_TRANSACTIONAL = 'TRANSACTIONAL';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#union
+     *
      * @var string
      */
     public const OPT_UNION = 'UNION';
     /**
+     * @see https://mariadb.com/kb/en/create-table/#with-system-versioning
+     *
      * @var string
      */
     public const OPT_WITH_SYSTEM_VERSIONING = 'WITH SYSTEM VERSIONING';
 
+    /**
+     * Adds a table option.
+     *
+     * @param string $name
+     * @param int|string|null $value
+     *
+     * @return static
+     */
     public function option(string $name, int | string $value = null) : static
     {
         $this->sql['options'][$name] = $value;
@@ -172,6 +229,8 @@ abstract class TableStatement extends Statement
     }
 
     /**
+     * Adds table options.
+     *
      * @param array<string,int|string> $options
      *
      * @return static
