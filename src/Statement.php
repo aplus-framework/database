@@ -14,7 +14,7 @@ namespace Framework\Database;
  *
  * @package database
  */
-abstract class Statement
+abstract class Statement implements \Stringable
 {
     protected Database $database;
     /**
