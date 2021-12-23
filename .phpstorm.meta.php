@@ -64,6 +64,16 @@ expectedArguments(
     argumentsSet('charsets')
 );
 expectedArguments(
+    \Framework\Database\Definition\AlterTable::charset(),
+    0,
+    argumentsSet('charsets')
+);
+expectedArguments(
+    \Framework\Database\Definition\AlterTable::convertToCharset(),
+    0,
+    argumentsSet('charsets')
+);
+expectedArguments(
     \Framework\Database\Definition\CreateSchema::charset(),
     0,
     argumentsSet('charsets')
@@ -82,6 +92,31 @@ expectedArguments(
     \Framework\Database\Manipulation\Select::intoOutfile(),
     1,
     argumentsSet('charsets')
+);
+registerArgumentsSet(
+    'definition_alter_table_algo',
+    \Framework\Database\Definition\AlterTable::ALGO_COPY,
+    \Framework\Database\Definition\AlterTable::ALGO_DEFAULT,
+    \Framework\Database\Definition\AlterTable::ALGO_INPLACE,
+    \Framework\Database\Definition\AlterTable::ALGO_INSTANT,
+    \Framework\Database\Definition\AlterTable::ALGO_NOCOPY,
+);
+expectedArguments(
+    \Framework\Database\Definition\AlterTable::algorithm(),
+    0,
+    argumentsSet('definition_alter_table_algo')
+);
+registerArgumentsSet(
+    'definition_alter_table_lock',
+    \Framework\Database\Definition\AlterTable::LOCK_DEFAULT,
+    \Framework\Database\Definition\AlterTable::LOCK_EXCLUSIVE,
+    \Framework\Database\Definition\AlterTable::LOCK_NONE,
+    \Framework\Database\Definition\AlterTable::LOCK_SHARED,
+);
+expectedArguments(
+    \Framework\Database\Definition\AlterTable::lock(),
+    0,
+    argumentsSet('definition_alter_table_lock')
 );
 registerArgumentsSet(
     'manipulation_delete_opt',
