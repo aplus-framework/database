@@ -404,21 +404,14 @@ final class DatabaseTest extends TestCase
         static::$database->use('Foo');
     }
 
-    /**
-     * @runInSeparateProcess
-     */
     public function testErrors() : void
     {
+        $this->resetDatabase();
         self::assertSame([], static::$database->errors());
         self::assertNull(static::$database->error());
         try {
-            static::$database->use('Foo');
-        } catch (\mysqli_sql_exception $e) {
-            //
-        }
-        try {
             static::$database->use('Bar');
-        } catch (\mysqli_sql_exception $e) {
+        } catch (\mysqli_sql_exception) {
             //
         }
         self::assertSame([
