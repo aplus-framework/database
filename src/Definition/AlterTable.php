@@ -367,6 +367,26 @@ class AlterTable extends TableStatement
         return ' RENAME TO ' . $this->database->protectIdentifier($this->sql['rename_to']);
     }
 
+    public function orderBy(string $column, string ...$columns) : static
+    {
+        foreach ([$column, ...$columns] as $col) {
+            $this->sql['order_by'][] = $col;
+        }
+        return $this;
+    }
+
+    protected function renderOrderBy() : ?string
+    {
+        if ( ! isset($this->sql['order_by'])) {
+            return null;
+        }
+        $columns = [];
+        foreach ($this->sql['order_by'] as $column) {
+            $columns[] = $this->database->protectIdentifier($column);
+        }
+        return ' ORDER BY ' . \implode(', ', $columns);
+    }
+
     public function renameColumn(string $name, string $newName) : static
     {
         $this->sql['rename_columns'][$name] = $newName;
@@ -571,6 +591,7 @@ class AlterTable extends TableStatement
             $this->renderDisableKeys(),
             $this->renderEnableKeys(),
             $this->renderRenameTo(),
+            $this->renderOrderBy(),
             $this->renderRenameColumns(),
             $this->renderRenameKeys(),
             $this->renderConvertToCharset(),

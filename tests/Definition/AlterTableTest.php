@@ -183,6 +183,20 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testOrderBy() : void
+    {
+        $alterTable = $this->alterTable->table('t1')->orderBy('c1');
+        self::assertSame(
+            "ALTER TABLE `t1`\n ORDER BY `c1`",
+            $alterTable->sql()
+        );
+        $alterTable->orderBy('c2', 'c3');
+        self::assertSame(
+            "ALTER TABLE `t1`\n ORDER BY `c1`, `c2`, `c3`",
+            $alterTable->sql()
+        );
+    }
+
     public function testRenameColumns() : void
     {
         $alterTable = $this->alterTable->table('t1')->renameColumn('c1', 'foo');
