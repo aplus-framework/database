@@ -74,12 +74,9 @@ final class UpdateTest extends TestCase
     public function testJoin() : void
     {
         $this->update->table('t1', 't2')
-            ->innerJoinOn('t2', static function () {
-                return 't1.c1 = t2.c1';
-            })->set([
-                't1.c1' => static function () {
-                    return 't2.c2';
-                },
+            ->innerJoinOn('t2', static fn () => 't1.c1 = t2.c1')
+            ->set([
+                't1.c1' => static fn () => 't2.c2',
             ]);
         self::assertSame(
             "UPDATE\n `t1`, `t2`\n INNER JOIN `t2` ON (t1.c1 = t2.c1)\n SET `t1`.`c1` = (t2.c2)\n",

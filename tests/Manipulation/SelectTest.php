@@ -85,9 +85,7 @@ final class SelectTest extends TestCase
     {
         $this->select->expressions('1');
         self::assertSame("SELECT\n `1`\n", $this->select->sql());
-        $this->select->expressions(static function () {
-            return 'now()';
-        });
+        $this->select->expressions(static fn () => 'now()');
         self::assertSame("SELECT\n `1`, (now())\n", $this->select->sql());
     }
 
@@ -95,9 +93,7 @@ final class SelectTest extends TestCase
     {
         $this->select->columns('1');
         self::assertSame("SELECT\n `1`\n", $this->select->sql());
-        $this->select->columns(static function () {
-            return 'now()';
-        });
+        $this->select->columns(static fn () => 'now()');
         self::assertSame("SELECT\n `1`, (now())\n", $this->select->sql());
     }
 

@@ -25,13 +25,9 @@ final class OrderByTest extends TestCase
         self::assertNull($this->statement->renderOrderBy());
         $this->statement->orderBy('c1');
         self::assertSame(' ORDER BY `c1`', $this->statement->renderOrderBy());
-        $this->statement->orderBy(static function () {
-            return 'select c2';
-        });
+        $this->statement->orderBy(static fn () => 'select c2');
         self::assertSame(' ORDER BY `c1`, (select c2)', $this->statement->renderOrderBy());
-        $this->statement->orderBy(static function () {
-            return 'select c3';
-        }, 'c4');
+        $this->statement->orderBy(static fn () => 'select c3', 'c4');
         self::assertSame(
             ' ORDER BY `c1`, (select c2), (select c3), `c4`',
             $this->statement->renderOrderBy()
@@ -67,9 +63,7 @@ final class OrderByTest extends TestCase
         $this->statement->orderByDesc('c3');
         $this->statement->orderBy('a', 'b');
         $this->statement->orderByAsc('c', 'D');
-        $this->statement->orderByDesc('e', static function () {
-            return 'select "f"';
-        });
+        $this->statement->orderByDesc('e', static fn () => 'select "f"');
         self::assertSame(
             ' ORDER BY `c1`, `c2` ASC, `c3` DESC, `a`, `b`, `c` ASC, `D` ASC, `e` DESC, (select "f") DESC',
             $this->statement->renderOrderBy()

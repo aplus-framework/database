@@ -89,9 +89,7 @@ final class DeleteTest extends TestCase
     {
         $this->delete->table('t1', 't2')
             ->from('t1')
-            ->innerJoinOn('t2', static function () {
-                return 't2.ref = t1.id';
-            });
+            ->innerJoinOn('t2', static fn () => 't2.ref = t1.id');
         self::assertSame(
             "DELETE\n `t1`, `t2`\n FROM `t1`\n INNER JOIN `t2` ON (t2.ref = t1.id)\n",
             $this->delete->sql()

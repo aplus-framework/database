@@ -89,9 +89,7 @@ final class ReplaceTest extends TestCase
             "REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com')\n",
             $this->replace->sql()
         );
-        $this->replace->values(10, 'Baz', static function () {
-            return 'select email from foo';
-        });
+        $this->replace->values(10, 'Baz', static fn () => 'select email from foo');
         self::assertSame(
             "REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com'),\n (10, 'Baz', (select email from foo))\n",
             $this->replace->sql()
@@ -104,9 +102,7 @@ final class ReplaceTest extends TestCase
         $this->replace->set([
             'id' => 1,
             'name' => 'Foo',
-            'other' => static function () {
-                return "CONCAT('Foo', ' ', 1)";
-            },
+            'other' => static fn () => "CONCAT('Foo', ' ', 1)",
         ]);
         self::assertSame(
             "REPLACE\n INTO `t1`\n SET `id` = 1, `name` = 'Foo', `other` = (CONCAT('Foo', ' ', 1))\n",
@@ -137,9 +133,7 @@ final class ReplaceTest extends TestCase
     public function testSelect() : void
     {
         $this->prepare();
-        $this->replace->select(static function (Select $select) {
-            return $select->columns('*')->from('t2');
-        });
+        $this->replace->select(static fn (Select $s) => $s->columns('*')->from('t2'));
         self::assertSame(
             "REPLACE\n INTO `t1`\n SELECT\n *\n FROM `t2`\n\n",
             $this->replace->sql()
@@ -150,9 +144,7 @@ final class ReplaceTest extends TestCase
     {
         $this->prepare();
         $this->replace->values('id');
-        $this->replace->select(static function (Select $select) {
-            return $select->columns('*')->from('t2');
-        });
+        $this->replace->select(static fn (Select $s) => $s->columns('*')->from('t2'));
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('SELECT statement is not allowed when VALUES is set');
         $this->replace->sql();
@@ -162,9 +154,7 @@ final class ReplaceTest extends TestCase
     {
         $this->prepare();
         $this->replace->set(['id' => 1]);
-        $this->replace->select(static function (Select $select) {
-            return $select->columns('*')->from('t2');
-        });
+        $this->replace->select(static fn (Select $s) => $s->columns('*')->from('t2'));
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('SELECT statement is not allowed when SET is set');
         $this->replace->sql();

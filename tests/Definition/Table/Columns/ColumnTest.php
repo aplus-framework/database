@@ -71,9 +71,7 @@ final class ColumnTest extends TestCase
         );
         self::assertSame(
             ' mock NOT NULL DEFAULT (now())',
-            $this->column->default(static function () {
-                return 'now()';
-            })->sql()
+            $this->column->default(static fn () => 'now()')->sql()
         );
     }
 

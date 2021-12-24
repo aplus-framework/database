@@ -99,9 +99,7 @@ final class InsertTest extends TestCase
             "INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com')\n",
             $this->insert->sql()
         );
-        $this->insert->values(10, 'Baz', static function () {
-            return 'select email from foo';
-        });
+        $this->insert->values(10, 'Baz', static fn () => 'select email from foo');
         self::assertSame(
             "INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com'),\n (10, 'Baz', (select email from foo))\n",
             $this->insert->sql()
@@ -119,9 +117,7 @@ final class InsertTest extends TestCase
         );
         $this->insert->values([
             [2, 'Bar', 'bar@baz.com'],
-            [10, 'Baz', static function () {
-                return 'select email from foo';
-            }],
+            [10, 'Baz', static fn () => 'select email from foo'],
         ]);
         self::assertSame(
             "INSERT\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com'),\n (10, 'Baz', (select email from foo))\n",
@@ -141,9 +137,7 @@ final class InsertTest extends TestCase
         $this->insert->set([
             'id' => 1,
             'name' => 'Foo',
-            'other' => static function () {
-                return "CONCAT('Foo', ' ', 1)";
-            },
+            'other' => static fn () => "CONCAT('Foo', ' ', 1)",
         ]);
         self::assertSame(
             "INSERT\n INTO `t1`\n SET `id` = 1, `name` = 'Foo', `other` = (CONCAT('Foo', ' ', 1))\n",
@@ -174,9 +168,9 @@ final class InsertTest extends TestCase
     public function testSelect() : void
     {
         $this->prepare();
-        $this->insert->select(static function (Select $select) {
-            return $select->columns('*')->from('t2');
-        });
+        $this->insert->select(
+            static fn (Select $s) => $s->columns('*')->from('t2')
+        );
         self::assertSame(
             "INSERT\n INTO `t1`\n SELECT\n *\n FROM `t2`\n\n",
             $this->insert->sql()
@@ -187,9 +181,9 @@ final class InsertTest extends TestCase
     {
         $this->prepare();
         $this->insert->values('id');
-        $this->insert->select(static function (Select $select) {
-            return $select->columns('*')->from('t2');
-        });
+        $this->insert->select(
+            static fn (Select $s) => $s->columns('*')->from('t2')
+        );
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('SELECT statement is not allowed when VALUES is set');
         $this->insert->sql();
@@ -199,9 +193,9 @@ final class InsertTest extends TestCase
     {
         $this->prepare();
         $this->insert->set(['id' => 1]);
-        $this->insert->select(static function (Select $select) {
-            return $select->columns('*')->from('t2');
-        });
+        $this->insert->select(
+            static fn (Select $s) => $s->columns('*')->from('t2')
+        );
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('SELECT statement is not allowed when SET is set');
         $this->insert->sql();
@@ -214,9 +208,7 @@ final class InsertTest extends TestCase
         $this->insert->onDuplicateKeyUpdate([
             'id' => null,
             'name' => 'Foo',
-            'other' => static function () {
-                return "CONCAT('Foo', 'id')";
-            },
+            'other' => static fn () => "CONCAT('Foo', 'id')",
         ]);
         self::assertSame(
             "INSERT\n INTO `t1`\n SET `id` = 1\n ON DUPLICATE KEY UPDATE `id` = NULL, `name` = 'Foo', `other` = (CONCAT('Foo', 'id'))\n",

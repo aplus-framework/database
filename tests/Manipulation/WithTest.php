@@ -25,11 +25,12 @@ final class WithTest extends TestCase
 
     protected function prepareWith() : void
     {
-        $this->with->reference('t1', static function (Select $select) {
-            return $select->columns('*')->from('folks')->sql();
-        })->select(static function (Select $select) {
-            return $select->columns('*')->from('ancestors')->sql();
-        });
+        $this->with->reference(
+            't1',
+            static fn (Select $s) => $s->columns('*')->from('folks')->sql()
+        )->select(
+            static fn (Select $s) => $s->columns('*')->from('ancestors')->sql()
+        );
     }
 
     public function testWith() : void
@@ -54,9 +55,7 @@ final class WithTest extends TestCase
     public function testManyReferences() : void
     {
         $this->prepareWith();
-        $this->with->reference('t2', static function () {
-            return 'select * from foo';
-        });
+        $this->with->reference('t2', static fn () => 'select * from foo');
         self::assertSame(
             "WITH\n`t1` AS (SELECT\n *\n FROM `folks`\n), `t2` AS (select * from foo)\nSELECT\n *\n FROM `ancestors`\n",
             $this->with->sql()
@@ -80,9 +79,10 @@ final class WithTest extends TestCase
 
     public function testWithoutSelect() : void
     {
-        $this->with->reference('t1', static function (Select $select) {
-            return $select->columns('*')->from('folks')->sql();
-        });
+        $this->with->reference(
+            't1',
+            static fn (Select $s) => $s->columns('*')->from('folks')->sql()
+        );
         $this->expectException(\LogicException::class);
         $this->expectExceptionMessage('SELECT must be set');
         $this->with->sql();
@@ -91,11 +91,12 @@ final class WithTest extends TestCase
     public function testRun() : void
     {
         $this->createDummyData();
-        $this->with->reference('t1', static function (Select $select) {
-            return $select->columns('*')->from('t1')->sql();
-        })->select(static function (Select $select) {
-            return $select->columns('*')->from('t2')->sql();
-        });
+        $this->with->reference(
+            't1',
+            static fn (Select $s) => $s->columns('*')->from('t1')->sql()
+        )->select(
+            static fn (Select $s) => $s->columns('*')->from('t2')->sql()
+        );
         self::assertInstanceOf(
             Result::class,
             $this->with->run()

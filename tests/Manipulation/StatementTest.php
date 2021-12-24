@@ -48,14 +48,13 @@ final class StatementTest extends TestCase
 
     public function testSubquery() : void
     {
-        self::assertSame('(select database())', $this->statement->subquery(static function () {
-            return 'select database()';
-        }));
+        self::assertSame(
+            '(select database())',
+            $this->statement->subquery(static fn () => 'select database()')
+        );
         self::assertSame(
             '(select * from posts)',
-            $this->statement->subquery(static function () {
-                return 'select * from posts';
-            })
+            $this->statement->subquery(static fn () => 'select * from posts')
         );
         self::assertSame(
             '(select * from `posts`)',
@@ -71,9 +70,9 @@ final class StatementTest extends TestCase
         self::assertSame('`name```', $this->statement->renderIdentifier('name`'));
         self::assertSame(
             '(SELECT * from `foo`)',
-            $this->statement->renderIdentifier(static function ($database) {
-                return 'SELECT * from ' . $database->protectIdentifier('foo');
-            })
+            $this->statement->renderIdentifier(
+                static fn ($db) => 'SELECT * from ' . $db->protectIdentifier('foo')
+            )
         );
     }
 
@@ -82,9 +81,9 @@ final class StatementTest extends TestCase
         self::assertSame('`name```', $this->statement->renderAliasedIdentifier('name`'));
         self::assertSame(
             '(SELECT * from `foo`)',
-            $this->statement->renderAliasedIdentifier(static function ($database) {
-                return 'SELECT * from ' . $database->protectIdentifier('foo');
-            })
+            $this->statement->renderAliasedIdentifier(
+                static fn ($db) => 'SELECT * from ' . $db->protectIdentifier('foo')
+            )
         );
         self::assertSame(
             '`name``` AS `foo`',
@@ -93,10 +92,8 @@ final class StatementTest extends TestCase
         self::assertSame(
             "(SELECT id from table where username = '\\'hack') AS `foo`",
             $this->statement->renderAliasedIdentifier([
-                'foo' => static function ($database) {
-                    return 'SELECT id from table where username = '
-                        . $database->quote("'hack");
-                },
+                'foo' => static fn ($db) => 'SELECT id from table where username = '
+                    . $db->quote("'hack"),
             ])
         );
         $this->expectException(\InvalidArgumentException::class);
@@ -140,9 +137,7 @@ final class StatementTest extends TestCase
         self::assertSame("`id` = '1'", $this->statement->renderAssignment('id', '1'));
         self::assertSame(
             '`id` = (select 1)',
-            $this->statement->renderAssignment('id', static function () {
-                return 'select 1';
-            })
+            $this->statement->renderAssignment('id', static fn () => 'select 1')
         );
     }
 

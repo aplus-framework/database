@@ -33,17 +33,13 @@ final class JoinTest extends TestCase
             ' FROM `t3` AS `aliasname`',
             $this->statement->renderFrom()
         );
-        $this->statement->from(static function () {
-            return 'NOW()';
-        });
+        $this->statement->from(static fn () => 'NOW()');
         self::assertSame(
             ' FROM (NOW())',
             $this->statement->renderFrom()
         );
         $this->statement->from([
-            'time' => static function () {
-                return 'SELECT NOW()';
-            },
+            'time' => static fn () => 'SELECT NOW()',
         ], ['noindex']); // @phpstan-ignore-line
         self::assertSame(
             ' FROM (SELECT NOW()) AS `time`, `noindex` AS `0`',
@@ -53,13 +49,9 @@ final class JoinTest extends TestCase
             't1',
             't2',
             ['aliasname' => 't3'],
-            static function () {
-                return 'NOW()';
-            },
+            static fn () => 'NOW()',
             [
-                'time' => static function () {
-                    return 'SELECT NOW()';
-                },
+                'time' => static fn () => 'SELECT NOW()',
             ],
             [ // @phpstan-ignore-line
                 'noindex',
@@ -97,9 +89,7 @@ final class JoinTest extends TestCase
             ' CROSS JOIN `users` USING (`user_id`)',
             $this->statement->renderJoin()
         );
-        $this->statement->join('users', 'left', 'on', static function () {
-            return 'profiles.user_id = users.id';
-        });
+        $this->statement->join('users', 'left', 'on', static fn () => 'profiles.user_id = users.id');
         self::assertSame(
             ' LEFT JOIN `users` ON (profiles.user_id = users.id)',
             $this->statement->renderJoin()
@@ -132,9 +122,7 @@ final class JoinTest extends TestCase
 
     public function testJoinOn() : void
     {
-        $this->statement->joinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->joinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(' JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
     }
 
@@ -146,9 +134,7 @@ final class JoinTest extends TestCase
 
     public function testInnerJoinOn() : void
     {
-        $this->statement->innerJoinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->innerJoinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(' INNER JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
     }
 
@@ -160,9 +146,7 @@ final class JoinTest extends TestCase
 
     public function testCrossJoinOn() : void
     {
-        $this->statement->crossJoinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->crossJoinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(' CROSS JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
     }
 
@@ -174,9 +158,7 @@ final class JoinTest extends TestCase
 
     public function testLeftJoinOn() : void
     {
-        $this->statement->leftJoinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->leftJoinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(' LEFT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
     }
 
@@ -188,9 +170,7 @@ final class JoinTest extends TestCase
 
     public function testLeftOuterJoinOn() : void
     {
-        $this->statement->leftOuterJoinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->leftOuterJoinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(
             ' LEFT OUTER JOIN `t1` ON (t1.id = t2.id)',
             $this->statement->renderJoin()
@@ -208,9 +188,7 @@ final class JoinTest extends TestCase
 
     public function testRightJoinOn() : void
     {
-        $this->statement->rightJoinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->rightJoinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(' RIGHT JOIN `t1` ON (t1.id = t2.id)', $this->statement->renderJoin());
     }
 
@@ -222,9 +200,7 @@ final class JoinTest extends TestCase
 
     public function testRightOuterJoinOn() : void
     {
-        $this->statement->rightOuterJoinOn('t1', static function () {
-            return 't1.id = t2.id';
-        });
+        $this->statement->rightOuterJoinOn('t1', static fn () => 't1.id = t2.id');
         self::assertSame(
             ' RIGHT OUTER JOIN `t1` ON (t1.id = t2.id)',
             $this->statement->renderJoin()
