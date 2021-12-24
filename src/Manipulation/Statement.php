@@ -32,8 +32,7 @@ abstract class Statement extends \Framework\Database\Statement
     public function options(string $option, string ...$options) : static
     {
         $this->sql['options'] = [];
-        $options = $this->mergeExpressions($option, $options);
-        foreach ($options as $option) {
+        foreach ([$option, ...$options] as $option) {
             $this->sql['options'][] = $option;
         }
         return $this;
@@ -184,10 +183,17 @@ abstract class Statement extends \Framework\Database\Statement
      * @param mixed $expression
      * @param array|mixed[] $expressions
      *
+     * @deprecated Unpack arrays with the spread operator
+     * @codeCoverageIgnore
+     *
      * @return array|mixed[]
      */
     protected function mergeExpressions(mixed $expression, array $expressions) : array
     {
+        \trigger_error(
+            'Method ' . __METHOD__ . ' is deprecated',
+            \E_USER_DEPRECATED
+        );
         return $expressions
             ? \array_merge([$expression], $expressions)
             : [$expression];

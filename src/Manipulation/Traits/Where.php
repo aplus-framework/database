@@ -377,8 +377,7 @@ trait Where
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->where($column, 'IN', ...$values);
+        return $this->where($column, 'IN', ...[$value, ...$values]);
     }
 
     /**
@@ -397,8 +396,7 @@ trait Where
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->orWhere($column, 'IN', ...$values);
+        return $this->orWhere($column, 'IN', ...[$value, ...$values]);
     }
 
     /**
@@ -417,8 +415,7 @@ trait Where
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->where($column, 'NOT IN', ...$values);
+        return $this->where($column, 'NOT IN', ...[$value, ...$values]);
     }
 
     /**
@@ -437,8 +434,7 @@ trait Where
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->orWhere($column, 'NOT IN', ...$values);
+        return $this->orWhere($column, 'NOT IN', ...[$value, ...$values]);
     }
 
     /**

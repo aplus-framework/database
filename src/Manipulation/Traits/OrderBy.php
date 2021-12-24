@@ -70,8 +70,7 @@ trait OrderBy
      */
     private function addOrderBy(Closure | string $column, array $columns, ?string $direction) : static
     {
-        $columns = $this->mergeExpressions($column, $columns);
-        foreach ($columns as $column) {
+        foreach ([$column, ...$columns] as $column) {
             $this->sql['order_by'][] = [
                 'column' => $column,
                 'direction' => $direction,

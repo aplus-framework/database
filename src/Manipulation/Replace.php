@@ -64,7 +64,7 @@ class Replace extends Statement
      */
     public function columns(string $column, string ...$columns) : static
     {
-        $this->sql['columns'] = $this->mergeExpressions($column, $columns);
+        $this->sql['columns'] = [$column, ...$columns];
         return $this;
     }
 
@@ -121,7 +121,7 @@ class Replace extends Statement
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $this->sql['values'][] = $this->mergeExpressions($value, $values);
+        $this->sql['values'][] = [$value, ...$values];
         return $this;
     }
 

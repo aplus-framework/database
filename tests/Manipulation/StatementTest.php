@@ -140,10 +140,4 @@ final class StatementTest extends TestCase
             $this->statement->renderAssignment('id', static fn () => 'select 1')
         );
     }
-
-    public function testMergeExpressions() : void
-    {
-        self::assertSame(['a'], $this->statement->mergeExpressions('a', []));
-        self::assertSame(['a', 'a'], $this->statement->mergeExpressions('a', ['a']));
-    }
 }

@@ -76,8 +76,7 @@ class Update extends Statement
         array | Closure | string ...$references
     ) : static {
         $this->sql['table'] = [];
-        $references = $this->mergeExpressions($reference, $references);
-        foreach ($references as $reference) {
+        foreach ([$reference, ...$references] as $reference) {
             $this->sql['table'][] = $reference;
         }
         return $this;

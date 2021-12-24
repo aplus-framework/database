@@ -121,7 +121,7 @@ class Insert extends Statement
      */
     public function columns(string $column, string ...$columns) : static
     {
-        $this->sql['columns'] = $this->mergeExpressions($column, $columns);
+        $this->sql['columns'] = [$column, ...$columns];
         return $this;
     }
 
@@ -156,7 +156,7 @@ class Insert extends Statement
         Closure | float | int | string | null ...$values
     ) : static {
         if ( ! \is_array($value)) {
-            $this->sql['values'][] = $this->mergeExpressions($value, $values);
+            $this->sql['values'][] = [$value, ...$values];
             return $this;
         }
         if ($values) {

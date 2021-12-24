@@ -39,8 +39,7 @@ trait Join
         array | Closure | string ...$references
     ) : static {
         $this->sql['from'] = [];
-        $references = $this->mergeExpressions($reference, $references);
-        foreach ($references as $reference) {
+        foreach ([$reference, ...$references] as $reference) {
             $this->sql['from'][] = $reference;
         }
         return $this;

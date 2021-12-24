@@ -237,8 +237,7 @@ class Select extends Statement
         array | Closure | string $expression,
         array | Closure | string ...$expressions
     ) : static {
-        $expressions = $this->mergeExpressions($expression, $expressions);
-        foreach ($expressions as $expression) {
+        foreach ([$expression, ...$expressions] as $expression) {
             $this->sql['expressions'][] = $expression;
         }
         return $this;

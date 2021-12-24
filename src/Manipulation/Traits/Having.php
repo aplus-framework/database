@@ -376,8 +376,7 @@ trait Having
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->having($column, 'IN', ...$values);
+        return $this->having($column, 'IN', ...[$value, ...$values]);
     }
 
     /**
@@ -396,8 +395,7 @@ trait Having
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->orHaving($column, 'IN', ...$values);
+        return $this->orHaving($column, 'IN', ...[$value, ...$values]);
     }
 
     /**
@@ -416,8 +414,7 @@ trait Having
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->having($column, 'NOT IN', ...$values);
+        return $this->having($column, 'NOT IN', ...[$value, ...$values]);
     }
 
     /**
@@ -436,8 +433,7 @@ trait Having
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $values = $this->mergeExpressions($value, $values);
-        return $this->orHaving($column, 'NOT IN', ...$values);
+        return $this->orHaving($column, 'NOT IN', ...[$value, ...$values]);
     }
 
     /**
