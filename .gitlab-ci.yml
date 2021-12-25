@@ -9,6 +9,7 @@ variables:
 
 test:php:
   stage: test
+  timeout: 10 minutes
   cache:
     paths:
       - build/
@@ -48,6 +49,7 @@ test:php:mysql:
 
 pages:
   stage: deploy
+  timeout: 10 minutes
   dependencies:
     - test:php
     - test:php:mysql
