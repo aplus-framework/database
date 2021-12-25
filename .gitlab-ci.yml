@@ -20,7 +20,7 @@ test:php:
     MYSQL_DATABASE: framework-tests
     MYSQL_ROOT_PASSWORD: password
   before_script:
-    - composer install
+    - composer update
   script:
     - composer normalize --dry-run --indent-size=4 --indent-style=space
     - vendor/bin/php-cs-fixer fix --diff --dry-run --verbose
