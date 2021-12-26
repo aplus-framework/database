@@ -197,6 +197,25 @@ final class DatabaseTest extends TestCase
         ]);
     }
 
+    /**
+     * @runInSeparateProcess
+     */
+    public function testClose() : void
+    {
+        self::assertTrue(static::$database->close());
+        self::assertTrue(static::$database->close());
+    }
+
+    public function testPing() : void
+    {
+        self::assertTrue(static::$database->ping());
+    }
+
+    public function testReconnect() : void
+    {
+        self::assertInstanceOf(Database::class, static::$database->reconnect());
+    }
+
     public function testConfig() : void
     {
         self::assertSame(\getenv('DB_USERNAME'), static::$database->getConfig()['username']);
@@ -431,7 +450,7 @@ final class DatabaseTest extends TestCase
 
     public function testLastQuery() : void
     {
-        $sql = 'SELECT COUNT(*) FROM t1';
+        $sql = 'SELECT COUNT(*) FROM `t1`';
         static::$database->query($sql);
         self::assertSame($sql, static::$database->lastQuery());
         static::$database->exec($sql);

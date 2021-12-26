@@ -39,7 +39,7 @@ use RuntimeException;
  */
 class Database
 {
-    protected mysqli $mysqli;
+    protected ?mysqli $mysqli;
     /**
      * Connection configurations.
      *
@@ -93,7 +93,7 @@ class Database
 
     public function __destruct()
     {
-        $this->mysqli->close();
+        $this->close();
     }
 
     protected function log(string $message, int $level = Logger::ERROR) : void
@@ -235,6 +235,54 @@ class Database
     {
         $timezone = $this->quote($timezone);
         return $this->mysqli->real_query("SET time_zone = {$timezone}");
+    }
+
+    /**
+     * Tells if the connection is open.
+     *
+     * @return bool
+     */
+    public function isOpen() : bool
+    {
+        return isset($this->mysqli);
+    }
+
+    /**
+     * Closes the connection if it is open.
+     *
+     * @return bool
+     */
+    public function close() : bool
+    {
+        if ( ! $this->isOpen()) {
+            return true;
+        }
+        $closed = $this->mysqli->close();
+        if ($closed) {
+            $this->mysqli = null;
+        }
+        return $closed;
+    }
+
+    /**
+     * Pings the server, or tries to reconnect if the connection has gone down.
+     *
+     * @return bool
+     */
+    public function ping() : bool
+    {
+        return $this->mysqli->ping();
+    }
+
+    /**
+     * Closes the current and opens a new connection with the last config.
+     *
+     * @return static
+     */
+    public function reconnect() : static
+    {
+        $this->close();
+        return $this->connect($this->getConfig());
     }
 
     /**
