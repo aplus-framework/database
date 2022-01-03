@@ -233,16 +233,16 @@ class Insert extends Statement
     /**
      * Sets the ON DUPLICATE KEY UPDATE part.
      *
-     * @param array<string,Closure|float|int|string|null> $columns Column name
-     * as key, column value/expression as array value
+     * @param array<string,Closure|float|int|string|null>|object $columns Column name
+     * as key/property, column value/expression as value
      *
      * @see https://mariadb.com/kb/en/insert-on-duplicate-key-update/
      *
      * @return static
      */
-    public function onDuplicateKeyUpdate(array $columns) : static
+    public function onDuplicateKeyUpdate(array | object $columns) : static
     {
-        $this->sql['on_duplicate'] = $columns;
+        $this->sql['on_duplicate'] = (array) $columns;
         return $this;
     }
 

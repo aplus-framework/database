@@ -204,8 +204,8 @@ final class InsertTest extends TestCase
     public function testOnDuplicateKeyUpdate() : void
     {
         $this->prepare();
-        $this->insert->set(['id' => 1]);
-        $this->insert->onDuplicateKeyUpdate([
+        $this->insert->set((object) ['id' => 1]);
+        $this->insert->onDuplicateKeyUpdate((object) [
             'id' => null,
             'name' => 'Foo',
             'other' => static fn () => "CONCAT('Foo', 'id')",

@@ -21,13 +21,14 @@ trait Set
     /**
      * Sets the SET clause.
      *
-     * @param array<string,Closure|float|int|string|null> $columns Array of columns => values
+     * @param array<string,Closure|float|int|string|null>|object $columns Array
+     * of columns => values or an object to be cast to array
      *
      * @return static
      */
-    public function set(array $columns) : static
+    public function set(array | object $columns) : static
     {
-        $this->sql['set'] = $columns;
+        $this->sql['set'] = (array) $columns;
         return $this;
     }
 
