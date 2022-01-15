@@ -35,6 +35,7 @@
     "require": {
         "php": ">=8.0",
         "ext-mysqli": "*",
+        "aplus/debug": "^2.3",
         "aplus/log": "^2.2"
     },
     "require-dev": {

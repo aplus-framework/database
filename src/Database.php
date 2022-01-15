@@ -9,8 +9,10 @@
  */
 namespace Framework\Database;
 
+use BadMethodCallException;
 use Closure;
 use Exception;
+use Framework\Database\Debug\DatabaseCollector;
 use Framework\Database\Definition\AlterSchema;
 use Framework\Database\Definition\AlterTable;
 use Framework\Database\Definition\CreateSchema;
@@ -64,6 +66,7 @@ class Database
     protected bool $inTransaction = false;
     protected string $lastQuery = '';
     protected ?Logger $logger;
+    protected DatabaseCollector $debugCollector;
 
     /**
      * Database constructor.
@@ -94,6 +97,26 @@ class Database
     public function __destruct()
     {
         $this->close();
+    }
+
+    /**
+     * @param string $method
+     * @param array<int,mixed> $arguments
+     *
+     * @return mixed
+     */
+    public function __call(string $method, array $arguments) : mixed
+    {
+        if ($method === 'addToDebug') {
+            return $this->addToDebug(...$arguments);
+        }
+        $class = static::class;
+        if (\method_exists($this, $method)) {
+            throw new BadMethodCallException(
+                "Method not allowed: {$class}::{$method}"
+            );
+        }
+        throw new BadMethodCallException("Method not found: {$class}::{$method}");
     }
 
     protected function log(string $message, int $level = Logger::ERROR) : void
@@ -555,7 +578,9 @@ class Database
     public function exec(#[Language('SQL')] string $statement) : int
     {
         $this->lastQuery = $statement;
-        $this->mysqli->real_query($statement);
+        isset($this->debugCollector)
+            ? $this->addToDebug(fn () => $this->mysqli->real_query($statement))
+            : $this->mysqli->real_query($statement);
         if ($this->mysqli->field_count) {
             $result = $this->mysqli->store_result();
             if ($result) {
@@ -584,10 +609,10 @@ class Database
         bool $buffered = true
     ) : Result {
         $this->lastQuery = $statement;
-        $result = $this->mysqli->query(
-            $statement,
-            $buffered ? \MYSQLI_STORE_RESULT : \MYSQLI_USE_RESULT
-        );
+        $resultMode = $buffered ? \MYSQLI_STORE_RESULT : \MYSQLI_USE_RESULT;
+        $result = isset($this->debugCollector)
+            ? $this->addToDebug(fn () => $this->mysqli->query($statement, $resultMode))
+            : $this->mysqli->query($statement, $resultMode);
         if (\is_bool($result)) {
             throw new InvalidArgumentException(
                 "Statement does not return result: {$statement}"
@@ -707,5 +732,26 @@ class Database
         // Should never throw - all accepted types have been verified
         throw new InvalidArgumentException("Invalid value type: {$type}");
         // @codeCoverageIgnoreEnd
+    }
+
+    public function setDebugCollector(DatabaseCollector $collector) : static
+    {
+        $collector->setServerInfo($this->mysqli->server_info);
+        $this->debugCollector = $collector;
+        return $this;
+    }
+
+    protected function addToDebug(Closure $function) : mixed
+    {
+        $start = \microtime(true);
+        $result = $function();
+        $end = \microtime(true);
+        $this->debugCollector->addData([
+            'start' => $start,
+            'end' => $end,
+            'statement' => $this->lastQuery(),
+            'rows' => $this->mysqli->affected_rows,
+        ]);
+        return $result;
     }
 }
