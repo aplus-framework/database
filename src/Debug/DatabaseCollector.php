@@ -60,7 +60,9 @@ class DatabaseCollector extends Collector
                     <td><?= $index + 1 ?></td>
                     <td><?= \round($item['end'] - $item['start'], 3) ?></td>
                     <td>
-                        <pre><?= \htmlentities($item['statement']) ?></pre>
+                        <pre><code class="language-sql"><?=
+                                \htmlentities($item['statement'])
+                                ?></code></pre>
                     </td>
                     <td><?= $item['rows'] ?></td>
                 </tr>
