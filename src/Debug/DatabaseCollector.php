@@ -58,7 +58,7 @@ class DatabaseCollector extends Collector
             <?php foreach ($this->data as $index => $item): ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <td><?= \round($item['end'] - $item['start'], 3) ?></td>
+                    <td><?= \round($item['end'] - $item['start'], 6) ?></td>
                     <td>
                         <pre><code class="language-sql"><?=
                                 \htmlentities($item['statement'])
