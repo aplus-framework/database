@@ -48,7 +48,7 @@ class DatabaseCollector extends Collector
         <table>
             <thead>
             <tr>
-                <th>Order</th>
+                <th>#</th>
                 <th title="Seconds">Time</th>
                 <th>Statement</th>
                 <th title="Affected rows or Rows in set">Rows</th>
