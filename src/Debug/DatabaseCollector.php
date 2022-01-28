@@ -30,6 +30,21 @@ class DatabaseCollector extends Collector
         return $this->serverInfo;
     }
 
+    public function getActivities() : array
+    {
+        $activities = [];
+        foreach ($this->getData() as $index => $data) {
+            $activities[] = [
+                'collector' => $this->getName(),
+                'class' => static::class,
+                'description' => 'Run statement ' . $index + 1,
+                'start' => $data['start'],
+                'end' => $data['end'],
+            ];
+        }
+        return $activities;
+    }
+
     public function getContents() : string
     {
         \ob_start();
