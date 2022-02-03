@@ -9,7 +9,6 @@
  */
 namespace Framework\Database;
 
-use BadMethodCallException;
 use Closure;
 use Exception;
 use Framework\Database\Debug\DatabaseCollector;
@@ -97,26 +96,6 @@ class Database
     public function __destruct()
     {
         $this->close();
-    }
-
-    /**
-     * @param string $method
-     * @param array<int,mixed> $arguments
-     *
-     * @return mixed
-     */
-    public function __call(string $method, array $arguments) : mixed
-    {
-        if ($method === 'addToDebug') {
-            return $this->addToDebug(...$arguments);
-        }
-        $class = static::class;
-        if (\method_exists($this, $method)) {
-            throw new BadMethodCallException(
-                "Method not allowed: {$class}::{$method}"
-            );
-        }
-        throw new BadMethodCallException("Method not found: {$class}::{$method}");
     }
 
     protected function log(string $message, int $level = Logger::ERROR) : void
