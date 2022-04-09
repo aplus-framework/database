@@ -37,7 +37,7 @@ class DatabaseCollector extends Collector
             $activities[] = [
                 'collector' => $this->getName(),
                 'class' => static::class,
-                'description' => 'Run statement ' . $index + 1,
+                'description' => 'Run statement ' . ($index + 1),
                 'start' => $data['start'],
                 'end' => $data['end'],
             ];
