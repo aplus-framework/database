@@ -302,7 +302,7 @@ class Database
     /**
      * Get a list of latest errors.
      *
-     * @return array|array[]
+     * @return array<int,array<string,mixed>>
      */
     public function errors() : array
     {

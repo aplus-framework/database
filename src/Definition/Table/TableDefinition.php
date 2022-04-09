@@ -23,11 +23,11 @@ class TableDefinition extends DefinitionPart
 {
     protected Database $database;
     /**
-     * @var array<int,array>
+     * @var array<int,array<string,mixed>>
      */
     protected array $columns = [];
     /**
-     * @var array<int,array>
+     * @var array<int,array<string,mixed>>
      */
     protected array $indexes = [];
     /**

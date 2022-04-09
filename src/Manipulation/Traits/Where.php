@@ -22,10 +22,10 @@ trait Where
     /**
      * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $column Closure for a subquery,
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param array<int,array|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+     * @param array<int,array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
      *
      * @return static
      */
@@ -41,10 +41,10 @@ trait Where
     /**
      * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $column Closure for a subquery,
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param array<int,array|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+     * @param array<int,array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
      *
      * @return static
      */
@@ -584,8 +584,8 @@ trait Where
      * Appends a "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -603,8 +603,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -622,8 +622,8 @@ trait Where
      * Appends a "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -641,8 +641,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -660,8 +660,8 @@ trait Where
      * Appends a "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
      * the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -679,8 +679,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
      * the WHERE clause.
      *
-     * @param array<int,array|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -698,7 +698,7 @@ trait Where
      * Adds a WHERE (or HAVING) part.
      *
      * @param string $glue `AND` or `OR`
-     * @param array<int,array|Closure|string>|Closure|string $column
+     * @param array<int,array<mixed>|Closure|string>|Closure|string $column
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE`,
      * `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`, `IS NOT NULL` or `MATCH`
      * @param array<int,Closure|float|int|string|null> $values Values used by the operator
@@ -756,7 +756,7 @@ trait Where
                 $column = $this->renderIdentifier($column);
             }
             unset($column);
-            return \implode(', ', $columns);
+            return \implode(', ', $columns); // @phpstan-ignore-line
         }
         if (\is_string($columns)) {
             return $this->renderIdentifier($columns);

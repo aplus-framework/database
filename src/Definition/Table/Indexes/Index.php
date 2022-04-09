@@ -24,7 +24,7 @@ abstract class Index extends DefinitionPart
 {
     protected Database $database;
     /**
-     * @var array<int,string>
+     * @var array<string>
      */
     protected array $columns;
     protected string $type = '';

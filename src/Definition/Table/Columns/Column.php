@@ -24,7 +24,7 @@ abstract class Column extends DefinitionPart
     protected Database $database;
     protected string $type;
     /**
-     * @var array<int,bool|float|int|string|null>
+     * @var array<scalar|null>
      */
     protected array $length;
     protected bool $null = false;

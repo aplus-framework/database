@@ -572,11 +572,11 @@ trait Having
      * Adds a HAVING part.
      *
      * @param string $glue `AND` or `OR`
-     * @param array<int,array|Closure|string>|Closure|string $column
+     * @param array<array<mixed>|Closure|string>|Closure|string $column
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`,
      * `LIKE`, `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`,
      * `IS NOT NULL` or `MATCH`
-     * @param array<int,Closure|float|int|string|null> $values Values used by the operator
+     * @param array<Closure|float|int|string|null> $values Values used by the operator
      *
      * @return static
      */

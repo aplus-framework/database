@@ -55,7 +55,7 @@ final class ForeignKey extends ConstraintKey
     protected string $type = 'FOREIGN KEY';
     protected ?string $referenceTable = null;
     /**
-     * @var array<int,string>
+     * @var array<string>
      */
     protected array $referenceColumns = [];
     protected ?string $onDelete = null;

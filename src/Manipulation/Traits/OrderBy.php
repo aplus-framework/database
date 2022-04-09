@@ -63,7 +63,7 @@ trait OrderBy
      * Adds a ORDER BY expression.
      *
      * @param Closure|string $column The column name or a subquery
-     * @param array<int,Closure|string> $columns Extra column names and/or subqueries
+     * @param array<Closure|string> $columns Extra column names and/or subqueries
      * @param string|null $direction `ASC`, `DESC` or null for none
      *
      * @return static

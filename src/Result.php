@@ -30,7 +30,7 @@ class Result
     protected bool $free = false;
     protected string $fetchClass = \stdClass::class;
     /**
-     * @var array<int,mixed>
+     * @var array<mixed>
      */
     protected array $fetchConstructor = [];
 
@@ -185,7 +185,7 @@ class Result
     /**
      * Fetches all rows as arrays.
      *
-     * @return array<int,array>
+     * @return array<int,array<mixed>>
      */
     public function fetchArrayAll() : array
     {
@@ -210,7 +210,7 @@ class Result
     /**
      * Gets the number of rows in the result set.
      *
-     * @return int
+     * @return int|string
      */
     public function numRows() : int
     {
@@ -228,7 +228,7 @@ class Result
     {
         $this->checkIsFree();
         $fields = $this->result->fetch_fields();
-        if ($fields === false) {
+        if ($fields === false) { // @phpstan-ignore-line
             return false;
         }
         foreach ($fields as &$field) {
