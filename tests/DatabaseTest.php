@@ -25,7 +25,7 @@ use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
 use Framework\Database\PreparedStatement;
 use Framework\Database\Result;
-use Framework\Log\Logger;
+use Framework\Log\Loggers\FileLogger;
 use mysqli_sql_exception;
 
 final class DatabaseTest extends TestCase
@@ -69,11 +69,9 @@ final class DatabaseTest extends TestCase
 
     public function testConnectionFailWithLogger() : void
     {
-        $directory = '/tmp/logs';
-        if ( ! \is_dir($directory)) {
-            \mkdir($directory);
-        }
-        $logger = new Logger($directory);
+        $file = \sys_get_temp_dir() . '/database.log';
+        \touch($file);
+        $logger = new FileLogger($file);
         $config = [
             'username' => 'error-1',
             'password' => \getenv('DB_PASSWORD'),

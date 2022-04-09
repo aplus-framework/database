@@ -26,6 +26,7 @@ use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
 use Framework\Log\Logger;
+use Framework\Log\LogLevel;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\Language;
 use LogicException;
@@ -98,11 +99,9 @@ class Database
         $this->close();
     }
 
-    protected function log(string $message, int $level = Logger::ERROR) : void
+    protected function log(string $message, LogLevel $level = LogLevel::ERROR) : void
     {
-        if ($this->logger) {
-            $this->logger->log($level, $message);
-        }
+        $this->logger?->log($level, $message);
     }
 
     /**
