@@ -52,9 +52,9 @@ class PreparedStatement
      *
      * @param bool|float|int|string|null ...$params Parameters sent to the prepared statement
      *
-     * @return int
+     * @return int|string
      */
-    public function exec(bool | float | int | string | null ...$params) : int
+    public function exec(bool | float | int | string | null ...$params) : int|string
     {
         $this->bindParams($params);
         $this->statement->execute();

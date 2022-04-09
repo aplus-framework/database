@@ -233,9 +233,9 @@ class Replace extends Statement
     /**
      * Runs the REPLACE statement.
      *
-     * @return int The number of affected rows
+     * @return int|string The number of affected rows
      */
-    public function run() : int
+    public function run() : int|string
     {
         return $this->database->exec($this->sql());
     }

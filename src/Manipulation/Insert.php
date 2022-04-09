@@ -146,7 +146,7 @@ class Insert extends Statement
     /**
      * Adds a row of values to the VALUES clause.
      *
-     * @param array<int,array>|Closure|float|int|string|null $value
+     * @param array<array<mixed>>|Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
      * @return static
@@ -343,9 +343,9 @@ class Insert extends Statement
     /**
      * Runs the INSERT statement.
      *
-     * @return int The number of affected rows
+     * @return int|string The number of affected rows
      */
-    public function run() : int
+    public function run() : int|string
     {
         return $this->database->exec($this->sql());
     }

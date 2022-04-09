@@ -275,7 +275,7 @@ class LoadData extends Statement
         return $sql;
     }
 
-    public function run() : int
+    public function run() : int|string
     {
         return $this->database->exec($this->sql());
     }

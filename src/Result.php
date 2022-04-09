@@ -212,7 +212,7 @@ class Result
      *
      * @return int|string
      */
-    public function numRows() : int
+    public function numRows() : int | string
     {
         $this->checkIsFree();
         return $this->result->num_rows;
