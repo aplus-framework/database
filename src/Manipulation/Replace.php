@@ -112,16 +112,28 @@ class Replace extends Statement
     }
 
     /**
-     * @param Closure|float|int|string|null $value
+     * @param array<array<mixed>>|Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
      * @return static
      */
     public function values(
-        Closure | float | int | string | null $value,
+        array | Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        $this->sql['values'][] = [$value, ...$values];
+        if ( ! \is_array($value)) {
+            $this->sql['values'][] = [$value, ...$values];
+            return $this;
+        }
+        if ($values) {
+            throw new LogicException(
+                'The method ' . __METHOD__
+                . ' must have only one argument when the first parameter is passed as array'
+            );
+        }
+        foreach ($value as $row) {
+            $this->sql['values'][] = $row;
+        }
         return $this;
     }
 
@@ -235,7 +247,7 @@ class Replace extends Statement
      *
      * @return int|string The number of affected rows
      */
-    public function run() : int|string
+    public function run() : int | string
     {
         return $this->database->exec($this->sql());
     }

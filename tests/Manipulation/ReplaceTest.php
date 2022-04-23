@@ -96,6 +96,31 @@ final class ReplaceTest extends TestCase
         );
     }
 
+    public function testValuesWithArrayAsFirstArgument() : void
+    {
+        $this->prepare();
+        $this->replace->columns('id', 'name', 'email');
+        $this->replace->values([[1, 'Foo', 'foo@baz.com']]);
+        self::assertSame(
+            "REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com')\n",
+            $this->replace->sql()
+        );
+        $this->replace->values([
+            [2, 'Bar', 'bar@baz.com'],
+            [10, 'Baz', static fn () => 'select email from foo'],
+        ]);
+        self::assertSame(
+            "REPLACE\n INTO `t1`\n (`id`, `name`, `email`)\n VALUES (1, 'Foo', 'foo@baz.com'),\n (2, 'Bar', 'bar@baz.com'),\n (10, 'Baz', (select email from foo))\n",
+            $this->replace->sql()
+        );
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage(
+            'The method ' . $this->replace::class . '::values'
+            . ' must have only one argument when the first parameter is passed as array'
+        );
+        $this->replace->values([], null);
+    }
+
     public function testSet() : void
     {
         $this->prepare();
