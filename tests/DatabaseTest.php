@@ -346,6 +346,19 @@ final class DatabaseTest extends TestCase
             PreparedStatement::class,
             static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?')
         );
+        $this->expectException(\mysqli_sql_exception::class);
+        static::$database->prepare('FOO');
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testPrepareRuntimeException() : void
+    {
+        \mysqli_report(\MYSQLI_REPORT_OFF);
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Prepared statement failed: FOO');
+        static::$database->prepare('FOO');
     }
 
     public function testInsertId() : void
