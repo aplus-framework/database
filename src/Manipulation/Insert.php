@@ -265,28 +265,6 @@ class Insert extends Statement
     }
 
     /**
-     * Renders the SET clause.
-     *
-     * @throws LogicException if SET was set with columns or with the VALUES clause
-     *
-     * @return string|null The SET part or null if it was not set
-     */
-    protected function renderSetPart() : ?string
-    {
-        $part = $this->renderSet();
-        if ($part === null) {
-            return null;
-        }
-        if (isset($this->sql['columns'])) {
-            throw new LogicException('SET clause is not allowed when columns are set');
-        }
-        if (isset($this->sql['values'])) {
-            throw new LogicException('SET clause is not allowed when VALUES is set');
-        }
-        return $part;
-    }
-
-    /**
      * Check for conflicts in the INSERT statement.
      *
      * @throws LogicException if has conflicts
@@ -325,7 +303,7 @@ class Insert extends Statement
         if ($part) {
             $sql .= $part . \PHP_EOL;
         }
-        $part = $this->renderSetPart();
+        $part = $this->renderSetCheckingConflicts();
         if ($part) {
             $sql .= $part . \PHP_EOL;
         }

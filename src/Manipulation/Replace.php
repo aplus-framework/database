@@ -195,20 +195,6 @@ class Replace extends Statement
         return " {$this->sql['select']}";
     }
 
-    protected function renderSetPart() : ?string
-    {
-        $part = $this->renderSet();
-        if ($part) {
-            if (isset($this->sql['columns'])) {
-                throw new LogicException('SET statement is not allowed when columns are set');
-            }
-            if (isset($this->sql['values'])) {
-                throw new LogicException('SET statement is not allowed when VALUES is set');
-            }
-        }
-        return $part;
-    }
-
     /**
      * Renders the REPLACE statement.
      *
@@ -231,7 +217,7 @@ class Replace extends Statement
         if ($part) {
             $sql .= $part . \PHP_EOL;
         }
-        $part = $this->renderSetPart();
+        $part = $this->renderSetCheckingConflicts();
         if ($part) {
             $sql .= $part . \PHP_EOL;
         }

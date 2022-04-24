@@ -141,7 +141,7 @@ final class ReplaceTest extends TestCase
         $this->replace->columns('id');
         $this->replace->set(['id' => 1]);
         $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('SET statement is not allowed when columns are set');
+        $this->expectExceptionMessage('SET clause is not allowed when columns are set');
         $this->replace->sql();
     }
 
@@ -151,7 +151,7 @@ final class ReplaceTest extends TestCase
         $this->replace->values('id');
         $this->replace->set(['id' => 1]);
         $this->expectException(\LogicException::class);
-        $this->expectExceptionMessage('SET statement is not allowed when VALUES is set');
+        $this->expectExceptionMessage('SET clause is not allowed when VALUES is set');
         $this->replace->sql();
     }
 

@@ -10,6 +10,7 @@
 namespace Framework\Database\Manipulation\Traits;
 
 use Closure;
+use LogicException;
 
 /**
  * Trait Set.
@@ -48,6 +49,28 @@ trait Set
         }
         $set = \implode(', ', $set);
         return " SET {$set}";
+    }
+
+    /**
+     * Renders the SET clause checking conflicts.
+     *
+     * @throws LogicException if SET was set with columns or with the VALUES clause
+     *
+     * @return string|null The SET part or null if it was not set
+     */
+    protected function renderSetCheckingConflicts() : ?string
+    {
+        $part = $this->renderSet();
+        if ($part === null) {
+            return null;
+        }
+        if (isset($this->sql['columns'])) {
+            throw new LogicException('SET clause is not allowed when columns are set');
+        }
+        if (isset($this->sql['values'])) {
+            throw new LogicException('SET clause is not allowed when VALUES is set');
+        }
+        return $part;
     }
 
     /**
