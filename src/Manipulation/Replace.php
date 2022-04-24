@@ -9,7 +9,6 @@
  */
 namespace Framework\Database\Manipulation;
 
-use Closure;
 use InvalidArgumentException;
 use LogicException;
 
@@ -24,6 +23,7 @@ class Replace extends Statement
 {
     use Traits\Select;
     use Traits\Set;
+    use Traits\Values;
 
     /**
      * @see https://mariadb.com/kb/en/insert-delayed/
@@ -110,49 +110,6 @@ class Replace extends Statement
         }
         $options = \implode(' ', $options);
         return " {$options}";
-    }
-
-    /**
-     * @param array<array<mixed>>|Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
-     *
-     * @return static
-     */
-    public function values(
-        array | Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
-    ) : static {
-        if ( ! \is_array($value)) {
-            $this->sql['values'][] = [$value, ...$values];
-            return $this;
-        }
-        if ($values) {
-            throw new LogicException(
-                'The method ' . __METHOD__
-                . ' must have only one argument when the first parameter is passed as array'
-            );
-        }
-        foreach ($value as $row) {
-            $this->sql['values'][] = $row;
-        }
-        return $this;
-    }
-
-    protected function renderValues() : ?string
-    {
-        if ( ! isset($this->sql['values'])) {
-            return null;
-        }
-        $values = [];
-        foreach ($this->sql['values'] as $value) {
-            foreach ($value as &$item) {
-                $item = $this->renderValue($item);
-            }
-            unset($item);
-            $values[] = ' (' . \implode(', ', $value) . ')';
-        }
-        $values = \implode(',' . \PHP_EOL, $values);
-        return " VALUES{$values}";
     }
 
     protected function checkRowStatementsConflict() : void
