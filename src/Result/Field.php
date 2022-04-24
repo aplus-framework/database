@@ -118,7 +118,7 @@ class Field
             \MYSQLI_TYPE_FLOAT => 'float',
             \MYSQLI_TYPE_GEOMETRY => 'geometry',
             \MYSQLI_TYPE_INT24 => 'int24',
-            \MYSQLI_TYPE_INTERVAL => 'interval', // @phpstan-ignore-line
+            //\MYSQLI_TYPE_INTERVAL => 'interval',
             \MYSQLI_TYPE_JSON => 'json',
             \MYSQLI_TYPE_LONG => 'long',
             \MYSQLI_TYPE_LONG_BLOB => 'long_blob',
@@ -132,7 +132,7 @@ class Field
             \MYSQLI_TYPE_STRING => 'string',
             \MYSQLI_TYPE_TIME => 'time',
             \MYSQLI_TYPE_TIMESTAMP => 'timestamp',
-            \MYSQLI_TYPE_TINY => 'tiny', // @phpstan-ignore-line
+            //\MYSQLI_TYPE_TINY => 'tiny',
             \MYSQLI_TYPE_TINY_BLOB => 'tiny_blob',
             \MYSQLI_TYPE_VAR_STRING => 'var_string',
             \MYSQLI_TYPE_YEAR => 'year',
