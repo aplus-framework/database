@@ -10,6 +10,7 @@
 namespace Framework\Database\Manipulation\Traits;
 
 use Closure;
+use Framework\Database\Manipulation\Select as SelectStatement;
 use LogicException;
 
 /**
@@ -30,7 +31,7 @@ trait Select
      */
     public function select(Closure $select) : static
     {
-        $this->sql['select'] = $select(new \Framework\Database\Manipulation\Select($this->database));
+        $this->sql['select'] = $select(new SelectStatement($this->database));
         return $this;
     }
 
