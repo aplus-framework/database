@@ -40,11 +40,6 @@ class CreateTable extends TableStatement
         if ( ! isset($this->sql['or_replace'])) {
             return null;
         }
-        if (isset($this->sql['if_not_exists'])) {
-            throw new LogicException(
-                'Clauses OR REPLACE and IF NOT EXISTS can not be used together'
-            );
-        }
         return ' OR REPLACE';
     }
 
