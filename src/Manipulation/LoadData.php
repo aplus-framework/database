@@ -172,26 +172,20 @@ class LoadData extends Statement
             && ! isset($this->sql['columns_escaped_by'])) {
             return null;
         }
-        return ' COLUMNS' . \PHP_EOL
-            . (
-                isset($this->sql['columns_terminated_by'])
-                ? "  TERMINATED BY {$this->sql['columns_terminated_by']}" . \PHP_EOL
-                : ''
-            )
-            . (
-                isset($this->sql['columns_enclosed_by'])
-                ? (
-                    isset($this->sql['columns_enclosed_by_opt'])
-                    ? '  OPTIONALLY'
-                    : ' '
-                ) . " ENCLOSED BY {$this->sql['columns_enclosed_by']}" . \PHP_EOL
-                : ''
-            )
-            . (
-                isset($this->sql['columns_escaped_by'])
-                ? "  ESCAPED BY {$this->sql['columns_escaped_by']}" . \PHP_EOL
-                : ''
-            );
+        $part = ' COLUMNS' . \PHP_EOL;
+        if (isset($this->sql['columns_terminated_by'])) {
+            $part .= '  TERMINATED BY ' . $this->sql['columns_terminated_by'] . \PHP_EOL;
+        }
+        if (isset($this->sql['columns_enclosed_by'])) {
+            if (isset($this->sql['columns_enclosed_by_opt'])) {
+                $part .= '  OPTIONALLY';
+            }
+            $part .= ' ENCLOSED BY ' . $this->sql['columns_enclosed_by'] . \PHP_EOL;
+        }
+        if (isset($this->sql['columns_escaped_by'])) {
+            $part .= '  ESCAPED BY ' . $this->sql['columns_escaped_by'] . \PHP_EOL;
+        }
+        return $part;
     }
 
     /**
@@ -222,13 +216,14 @@ class LoadData extends Statement
             && ! isset($this->sql['lines_terminated_by'])) {
             return null;
         }
-        return ' LINES' . \PHP_EOL
-            . (isset($this->sql['lines_starting_by'])
-                ? "  STARTING BY {$this->sql['lines_starting_by']}" . \PHP_EOL
-                : '')
-            . (isset($this->sql['lines_terminated_by'])
-                ? "  TERMINATED BY {$this->sql['lines_terminated_by']}" . \PHP_EOL
-                : '');
+        $part = ' LINES' . \PHP_EOL;
+        if (isset($this->sql['lines_starting_by'])) {
+            $part .= '  STARTING BY ' . $this->sql['lines_starting_by'] . \PHP_EOL;
+        }
+        if (isset($this->sql['lines_terminated_by'])) {
+            $part .= '  TERMINATED BY ' . $this->sql['lines_terminated_by'] . \PHP_EOL;
+        }
+        return $part;
     }
 
     /**
