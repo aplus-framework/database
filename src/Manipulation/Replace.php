@@ -22,6 +22,7 @@ use LogicException;
  */
 class Replace extends Statement
 {
+    use Traits\Select;
     use Traits\Set;
 
     /**
@@ -164,35 +165,6 @@ class Replace extends Statement
                 'The REPLACE INTO must be followed by VALUES, SET or SELECT statement'
             );
         }
-    }
-
-    /**
-     * Sets the SELECT statement part.
-     *
-     * @param Closure $select
-     *
-     * @see https://mariadb.com/kb/en/insert-select/
-     *
-     * @return static
-     */
-    public function select(Closure $select) : static
-    {
-        $this->sql['select'] = $select(new Select($this->database));
-        return $this;
-    }
-
-    protected function renderSelect() : ?string
-    {
-        if ( ! isset($this->sql['select'])) {
-            return null;
-        }
-        if (isset($this->sql['values'])) {
-            throw new LogicException('SELECT statement is not allowed when VALUES is set');
-        }
-        if (isset($this->sql['set'])) {
-            throw new LogicException('SELECT statement is not allowed when SET is set');
-        }
-        return " {$this->sql['select']}";
     }
 
     /**

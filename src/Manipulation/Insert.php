@@ -22,6 +22,7 @@ use LogicException;
  */
 class Insert extends Statement
 {
+    use Traits\Select;
     use Traits\Set;
 
     /**
@@ -191,43 +192,6 @@ class Insert extends Statement
         }
         $values = \implode(',' . \PHP_EOL, $values);
         return " VALUES{$values}";
-    }
-
-    /**
-     * Sets the SELECT statement part.
-     *
-     * @param Closure $select A Closure for a subquery with a
-     * {@see \Framework\Database\Manipulation\Select} instance as param
-     *
-     * @see https://mariadb.com/kb/en/insert-select/
-     *
-     * @return static
-     */
-    public function select(Closure $select) : static
-    {
-        $this->sql['select'] = $select(new Select($this->database));
-        return $this;
-    }
-
-    /**
-     * Renders the SELECT statement.
-     *
-     * @throws LogicException if SELECT was set with the VALUES or SET clauses
-     *
-     * @return string|null The SELECT statement or null if it was not set
-     */
-    protected function renderSelect() : ?string
-    {
-        if ( ! isset($this->sql['select'])) {
-            return null;
-        }
-        if (isset($this->sql['values'])) {
-            throw new LogicException('SELECT statement is not allowed when VALUES is set');
-        }
-        if (isset($this->sql['set'])) {
-            throw new LogicException('SELECT statement is not allowed when SET is set');
-        }
-        return " {$this->sql['select']}";
     }
 
     /**
