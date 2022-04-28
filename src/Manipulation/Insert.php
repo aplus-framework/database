@@ -182,7 +182,7 @@ class Insert extends Statement
     /**
      * Check for conflicts in the INSERT statement.
      *
-     * @throws LogicException if has conflicts
+     * @throws LogicException if it has conflicts
      */
     protected function checkRowStatementsConflict() : void
     {

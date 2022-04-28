@@ -28,23 +28,23 @@ use Error;
  * @property-read int $type The data type used for this field
  * @property-read int $decimals The number of decimals used (for integer fields)
  * @property-read string|null $typeName The data type name
- * @property-read bool $flagBinary Tell if has the MYSQLI_BINARY_FLAG bit-flag
- * @property-read bool $flagBlob Tell if has the MYSQLI_BLOB_FLAG bit-flag
- * @property-read bool $flagEnum Tell if has the MYSQLI_ENUM_FLAG bit-flag
- * @property-read bool $flagGroup Tell if has the MYSQLI_GROUP_FLAG bit-flag
- * @property-read bool $flagNum Tell if has the MYSQLI_NUM_FLAG bit-flag
- * @property-read bool $flagSet Tell if has the MYSQLI_SET_FLAG bit-flag
- * @property-read bool $flagTimestamp Tell if has the MYSQLI_TIMESTAMP_FLAG bit-flag
- * @property-read bool $flagUnsigned Tell if has the MYSQLI_UNSIGNED_FLAG bit-flag
- * @property-read bool $flagZerofill Tell if has the MYSQLI_ZEROFILL_FLAG bit-flag
- * @property-read bool $flagAutoIncrement Tell if has the MYSQLI_AUTO_INCREMENT_FLAG bit-flag
- * @property-read bool $flagMultipleKey Tell if has the MYSQLI_MULTIPLE_KEY_FLAG bit-flag
- * @property-read bool $flagNotNull Tell if has the MYSQLI_NOT_NULL_FLAG bit-flag
- * @property-read bool $flagPartKey Tell if has the MYSQLI_PART_KEY_FLAG bit-flag
- * @property-read bool $flagPriKey Tell if has the MYSQLI_PRI_KEY_FLAG bit-flag
- * @property-read bool $flagUniqueKey Tell if has the MYSQLI_UNIQUE_KEY_FLAG bit-flag
- * @property-read bool $flagNoDefaultValue Tell if has the MYSQLI_NO_DEFAULT_VALUE_FLAG bit-flag
- * @property-read bool $flagOnUpdateNow Tell if has the MYSQLI_ON_UPDATE_NOW_FLAG bit-flag
+ * @property-read bool $flagBinary Tell if it has the MYSQLI_BINARY_FLAG bit-flag
+ * @property-read bool $flagBlob Tell if it has the MYSQLI_BLOB_FLAG bit-flag
+ * @property-read bool $flagEnum Tell if it has the MYSQLI_ENUM_FLAG bit-flag
+ * @property-read bool $flagGroup Tell if it has the MYSQLI_GROUP_FLAG bit-flag
+ * @property-read bool $flagNum Tell if it has the MYSQLI_NUM_FLAG bit-flag
+ * @property-read bool $flagSet Tell if it has the MYSQLI_SET_FLAG bit-flag
+ * @property-read bool $flagTimestamp Tell if it has the MYSQLI_TIMESTAMP_FLAG bit-flag
+ * @property-read bool $flagUnsigned Tell if it has the MYSQLI_UNSIGNED_FLAG bit-flag
+ * @property-read bool $flagZerofill Tell if it has the MYSQLI_ZEROFILL_FLAG bit-flag
+ * @property-read bool $flagAutoIncrement Tell if it has the MYSQLI_AUTO_INCREMENT_FLAG bit-flag
+ * @property-read bool $flagMultipleKey Tell if it has the MYSQLI_MULTIPLE_KEY_FLAG bit-flag
+ * @property-read bool $flagNotNull Tell if it has the MYSQLI_NOT_NULL_FLAG bit-flag
+ * @property-read bool $flagPartKey Tell if it has the MYSQLI_PART_KEY_FLAG bit-flag
+ * @property-read bool $flagPriKey Tell if it has the MYSQLI_PRI_KEY_FLAG bit-flag
+ * @property-read bool $flagUniqueKey Tell if it has the MYSQLI_UNIQUE_KEY_FLAG bit-flag
+ * @property-read bool $flagNoDefaultValue Tell if it has the MYSQLI_NO_DEFAULT_VALUE_FLAG bit-flag
+ * @property-read bool $flagOnUpdateNow Tell if it has the MYSQLI_ON_UPDATE_NOW_FLAG bit-flag
  *
  * @package database
  */

@@ -69,7 +69,7 @@ trait Join
      *
      * @throws LogicException if FROM is not set, but is required for some other clause
      *
-     * @return bool True if has FROM, otherwise false
+     * @return bool True if it has FROM, otherwise false
      */
     protected function hasFrom(string $clause = null) : bool
     {
@@ -89,7 +89,7 @@ trait Join
      * @param string $type JOIN type. One of: `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`,
      * `RIGHT`, `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
      * `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or empty (same as `INNER`)
-     * @param string|null $clause Condition clause. Null if has a NATURAL type,
+     * @param string|null $clause Condition clause. Null if it has a NATURAL type,
      * otherwise `ON` or `USING`
      * @param array<int,Closure|string>|Closure|null $conditional A conditional
      * expression as Closure or the columns list as array
@@ -355,7 +355,7 @@ trait Join
      * `RIGHT OUTER`, `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`, `NATURAL RIGHT`
      * or `NATURAL RIGHT OUTER`
      * @param string|null $clause `ON`, `USING` or null for none
-     * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
+     * @param array<Closure|string>|Closure|null $expression Column(s) or subquery(ies)
      *
      * @return static
      */
@@ -405,7 +405,7 @@ trait Join
      * or `NATURAL RIGHT OUTER`
      * @param string $table The table name
      * @param string|null $clause `ON`, `USING` or null for none
-     * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
+     * @param array<Closure|string>|Closure|null $expression Column(s) or subquery(ies)
      *
      * @return string The JOIN conditional part
      */
@@ -471,7 +471,7 @@ trait Join
      * @param string $type `NATURAL`, `NATURAL LEFT`, `NATURAL LEFT OUTER`,
      * `NATURAL RIGHT`, `NATURAL RIGHT OUTER` or any other non-natural
      * @param string|null $clause Must be null if type is natural
-     * @param array<int,Closure|string>|Closure|null $expression Must be null if type is natural
+     * @param array<Closure|string>|Closure|null $expression Must be null if type is natural
      *
      * @throws InvalidArgumentException if $type is natural and has clause or expression
      *
@@ -527,7 +527,7 @@ trait Join
      * Renders the JOIN condition expression.
      *
      * @param string|null $clause `ON`or null
-     * @param array<int,Closure|string>|Closure|null $expression Column(s) or subquery(ies)
+     * @param array<Closure|string>|Closure|null $expression Column(s) or subquery(ies)
      *
      * @return string|null The condition or null if $clause is null
      */

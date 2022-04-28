@@ -36,7 +36,7 @@ class Select extends Statement
      */
     public const OPT_ALL = 'ALL';
     /**
-     * Option to not retrieve identical rows. Remove duplicates from the resultset.
+     * Option to not retrieve identical rows. Remove duplicates from the result set.
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/select/#distinct
@@ -324,7 +324,7 @@ class Select extends Statement
      * @param string $filename
      * @param string|null $charset
      * @param array<string,string> $fieldsOptions Each key must be one of the EXP_FIELDS_* constants
-     * @param array<string,string> $linesOptions Each key must be one of the EXP_LINESS_* constants
+     * @param array<string,string> $linesOptions Each key must be one of the EXP_LINES_* constants
      *
      * @see https://mariadb.com/kb/en/select-into-outfile/
      *

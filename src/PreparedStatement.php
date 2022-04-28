@@ -32,7 +32,7 @@ class PreparedStatement
      *
      * @param bool|float|int|string|null ...$params Parameters sent to the prepared statement
      *
-     * @throws RuntimeException if can not obtain a result set from the prepared statement
+     * @throws RuntimeException if it cannot obtain a result set from the prepared statement
      *
      * @return Result
      */

@@ -20,12 +20,12 @@ use InvalidArgumentException;
 trait Where
 {
     /**
-     * Appends a "AND $column $operator ...$values" condition in the WHERE clause.
+     * Appends an "AND $column $operator ...$values" condition in the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
+     * @param array<array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param array<int,array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+     * @param array<array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
      *
      * @return static
      */
@@ -41,10 +41,10 @@ trait Where
     /**
      * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
+     * @param array<array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param array<int,array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+     * @param array<array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
      *
      * @return static
      */
@@ -58,7 +58,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column = $value" condition in the WHERE clause.
+     * Appends an "AND $column = $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -92,7 +92,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column != $value" condition in the WHERE clause.
+     * Appends an "AND $column != $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -126,7 +126,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column <=> $value" condition in the WHERE clause.
+     * Appends an "AND $column <=> $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -160,7 +160,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column < $value" condition in the WHERE clause.
+     * Appends an "AND $column < $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -194,7 +194,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column <= $value" condition in the WHERE clause.
+     * Appends an "AND $column <= $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -228,7 +228,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column > $value" condition in the WHERE clause.
+     * Appends an "AND $column > $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -262,7 +262,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column >= $value" condition in the WHERE clause.
+     * Appends an "AND $column >= $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -296,7 +296,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column LIKE $value" condition in the WHERE clause.
+     * Appends an "AND $column LIKE $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -328,7 +328,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column NOT LIKE $value" condition.
+     * Appends an "AND $column NOT LIKE $value" condition.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -362,7 +362,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column IN (...$values)" condition in the WHERE clause.
+     * Appends an "AND $column IN (...$values)" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -400,7 +400,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column NOT IN (...$values)" condition in the WHERE clause.
+     * Appends an "AND $column NOT IN (...$values)" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -438,7 +438,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column BETWEEN $min AND $max" condition in the WHERE clause.
+     * Appends an "AND $column BETWEEN $min AND $max" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $min
@@ -476,7 +476,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column NOT BETWEEN $min AND $max" condition in the WHERE clause.
+     * Appends an "AND $column NOT BETWEEN $min AND $max" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $min
@@ -514,7 +514,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column IS NULL" condition in the WHERE clause.
+     * Appends an "AND $column IS NULL" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
@@ -542,7 +542,7 @@ trait Where
     }
 
     /**
-     * Appends a "AND $column IS NOT NULL" condition in the WHERE clause.
+     * Appends an "AND $column IS NOT NULL" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
@@ -581,11 +581,11 @@ trait Where
     }*/
 
     /**
-     * Appends a "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
+     * Appends an "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -603,8 +603,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -619,11 +619,11 @@ trait Where
     }
 
     /**
-     * Appends a "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
+     * Appends an "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -641,8 +641,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -657,11 +657,11 @@ trait Where
     }
 
     /**
-     * Appends a "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
+     * Appends an "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
      * the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -679,8 +679,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
      * the WHERE clause.
      *
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
+     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -698,10 +698,10 @@ trait Where
      * Adds a WHERE (or HAVING) part.
      *
      * @param string $glue `AND` or `OR`
-     * @param array<int,array<mixed>|Closure|string>|Closure|string $column
+     * @param array<array<mixed>|Closure|string>|Closure|string $column
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE`,
      * `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`, `IS NOT NULL` or `MATCH`
-     * @param array<int,Closure|float|int|string|null> $values Values used by the operator
+     * @param array<Closure|float|int|string|null> $values Values used by the operator
      * @param string $clause `where` or `having`
      *
      * @return static
@@ -725,8 +725,8 @@ trait Where
     /**
      * Renders a MATCH AGAINST clause.
      *
-     * @param array<int,Closure|string>|Closure|string $columns
-     * @param array<int,string>|Closure|string $expression
+     * @param array<Closure|string>|Closure|string $columns
+     * @param array<string>|Closure|string $expression
      * @param string $modifier
      *
      * @return string
@@ -745,7 +745,7 @@ trait Where
     }
 
     /**
-     * @param array<int,Closure|string>|Closure|string $columns
+     * @param array<Closure|string>|Closure|string $columns
      *
      * @return string
      */
@@ -765,7 +765,7 @@ trait Where
     }
 
     /**
-     * @param array<int,string>|Closure|string $expression
+     * @param array<string>|Closure|string $expression
      *
      * @return float|int|string
      */
@@ -874,7 +874,7 @@ trait Where
      *
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE`,
      * `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL` or `IS NOT NULL`
-     * @param array<int,Closure|float|int|string|null> $values
+     * @param array<Closure|float|int|string|null> $values
      *
      * @throws InvalidArgumentException for invalid comparison operator
      *
@@ -925,9 +925,9 @@ trait Where
     /**
      * Quote the input values or transform it in subqueries.
      *
-     * @param array<int,bool|Closure|float|int|string|null> $values
+     * @param array<bool|Closure|float|int|string|null> $values
      *
-     * @return array<int,float|int|string> Each input value quoted or transformed in subquery
+     * @return array<float|int|string> Each input value quoted or transformed in subquery
      */
     private function prepareWhereValues(array $values) : array
     {
@@ -943,7 +943,7 @@ trait Where
      * Renders the values of operators that receive exactly one value.
      *
      * @param string $operator `=`, `<=>`,    `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE` or `NOT LIKE`
-     * @param array<int,float|int|string> $values Must receive exactly 1 value, index 0
+     * @param array<float|int|string> $values Must receive exactly 1 value, index 0
      *
      * @throws InvalidArgumentException if $values has more than one value
      *
@@ -963,7 +963,7 @@ trait Where
      * Implode values for `IN` or `NOT IN`.
      *
      * @param string $operator `IN` or `NOT IN`
-     * @param array<int,float|int|string> $values Must receive at least 1 value
+     * @param array<float|int|string> $values Must receive at least 1 value
      *
      * @throws InvalidArgumentException if $values does not receive any value
      *
@@ -983,7 +983,7 @@ trait Where
      * Renders values for `BETWEEN` or `NOT BETWEEN`.
      *
      * @param string $operator `BETWEEN` or `NOT BETWEEN`
-     * @param array<int,float|int|string> $values Two values, indexes 0 and 1
+     * @param array<float|int|string> $values Two values, indexes 0 and 1
      *
      * @throws InvalidArgumentException if $values not receive exactly two values
      *
@@ -1003,7 +1003,7 @@ trait Where
      * Renders the lonely operators, `IS NULL` or `IS NOT NULL`.
      *
      * @param string $operator `IS NULL` or `IS NOT NULL`
-     * @param array<int,float|int|string> $values Must be an empty array
+     * @param array<float|int|string> $values Must be an empty array
      *
      * @throws InvalidArgumentException if $values is not empty
      *

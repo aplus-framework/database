@@ -21,7 +21,7 @@ trait Having
     use Where;
 
     /**
-     * Appends a "AND $column $operator ...$values" condition in the HAVING clause.
+     * Appends an "AND $column $operator ...$values" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param string $operator
@@ -55,7 +55,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column = $value" condition in the HAVING clause.
+     * Appends an "AND $column = $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -89,7 +89,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column != $value" condition in the HAVING clause.
+     * Appends an "AND $column != $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -123,7 +123,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column <=> $value" condition in the HAVING clause.
+     * Appends an "AND $column <=> $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -157,7 +157,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column < $value" condition in the HAVING clause.
+     * Appends an "AND $column < $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -191,7 +191,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column <= $value" condition in the HAVING clause.
+     * Appends an "AND $column <= $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -225,7 +225,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column > $value" condition in the HAVING clause.
+     * Appends an "AND $column > $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -259,7 +259,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column >= $value" condition in the HAVING clause.
+     * Appends an "AND $column >= $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -293,7 +293,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column LIKE $value" condition in the HAVING clause.
+     * Appends an "AND $column LIKE $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -327,7 +327,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column NOT LIKE" $value condition.
+     * Appends an "AND $column NOT LIKE" $value condition.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -361,7 +361,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column IN (...$values)" condition in the HAVING clause.
+     * Appends an "AND $column IN (...$values)" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -399,7 +399,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column NOT IN (...$values)" condition in the HAVING clause.
+     * Appends an "AND $column NOT IN (...$values)" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
@@ -437,7 +437,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column BETWEEN $min AND $max" condition in the HAVING clause.
+     * Appends an "AND $column BETWEEN $min AND $max" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $min
@@ -475,7 +475,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
+     * Appends an "AND $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $min
@@ -513,7 +513,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column IS NULL" condition in the HAVING clause.
+     * Appends an "AND $column IS NULL" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
@@ -541,7 +541,7 @@ trait Having
     }
 
     /**
-     * Appends a "AND $column IS NOT NULL" condition in the HAVING clause.
+     * Appends an "AND $column IS NOT NULL" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *

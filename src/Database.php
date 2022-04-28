@@ -300,7 +300,7 @@ class Database
     }
 
     /**
-     * Get a list of latest errors.
+     * Get a list of the latest errors.
      *
      * @return array<int,array<string,mixed>>
      */
@@ -647,7 +647,8 @@ class Database
     /**
      * Gets the LAST_INSERT_ID().
      *
-     * Note: When a insert has many rows, this function returns the id of the first row inserted!
+     * Note: When an insert has many rows, this function returns the id of the
+     * first row inserted!
      * That is default on MySQL.
      *
      * @return int|string

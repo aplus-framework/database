@@ -51,7 +51,7 @@ abstract class Statement extends \Framework\Database\Statement
     abstract protected function renderOptions() : ?string;
 
     /**
-     * Returns a SQL part between parentheses.
+     * Returns an SQL part between parentheses.
      *
      * @param Closure $subquery A {@see Closure} having the current Manipulation
      * instance as first argument. The returned value must be scalar
