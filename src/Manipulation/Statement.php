@@ -176,26 +176,4 @@ abstract class Statement extends \Framework\Database\Statement
         return $this->database->protectIdentifier($identifier)
             . ' = ' . $this->renderValue($expression);
     }
-
-    /**
-     * Used when a function requires at least one expression (identifier or value).
-     *
-     * @param mixed $expression
-     * @param array|mixed[] $expressions
-     *
-     * @deprecated Unpack arrays with the spread operator
-     * @codeCoverageIgnore
-     *
-     * @return array|mixed[]
-     */
-    protected function mergeExpressions(mixed $expression, array $expressions) : array
-    {
-        \trigger_error(
-            'Method ' . __METHOD__ . ' is deprecated',
-            \E_USER_DEPRECATED
-        );
-        return $expressions
-            ? \array_merge([$expression], $expressions)
-            : [$expression];
-    }
 }

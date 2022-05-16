@@ -50,11 +50,6 @@ class StatementMock extends Statement
         return parent::renderAssignment($identifier, $expression);
     }
 
-    public function mergeExpressions($expression, array $expressions) : array
-    {
-        return parent::mergeExpressions($expression, $expressions);
-    }
-
     public function renderOptions() : ?string
     {
         if ( ! $this->hasOptions()) {
