@@ -237,6 +237,12 @@ class AlterTable extends TableStatement
         return $this;
     }
 
+    public function dropColumnIfExists(string $name) : static
+    {
+        $this->sql['drop_columns'][$name] = true;
+        return $this;
+    }
+
     protected function renderDropColumns() : ?string
     {
         if ( ! isset($this->sql['drop_columns'])) {
@@ -271,6 +277,12 @@ class AlterTable extends TableStatement
         return $this;
     }
 
+    public function dropKeyIfExists(string $name) : static
+    {
+        $this->sql['drop_keys'][$name] = true;
+        return $this;
+    }
+
     protected function renderDropKeys() : ?string
     {
         if ( ! isset($this->sql['drop_keys'])) {
@@ -291,6 +303,12 @@ class AlterTable extends TableStatement
         return $this;
     }
 
+    public function dropForeignKeyIfExists(string $name) : static
+    {
+        $this->sql['drop_foreign_keys'][$name] = true;
+        return $this;
+    }
+
     protected function renderDropForeignKeys() : ?string
     {
         if ( ! isset($this->sql['drop_foreign_keys'])) {
@@ -308,6 +326,12 @@ class AlterTable extends TableStatement
     public function dropConstraint(string $name, bool $ifExists = false) : static
     {
         $this->sql['drop_constraints'][$name] = $ifExists;
+        return $this;
+    }
+
+    public function dropConstraintIfExists(string $name) : static
+    {
+        $this->sql['drop_constraints'][$name] = true;
         return $this;
     }
 

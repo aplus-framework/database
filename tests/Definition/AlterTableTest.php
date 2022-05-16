@@ -91,6 +91,15 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testDropColumnIfExists() : void
+    {
+        $alterTable = $this->alterTable->table('t1')->dropColumnIfExists('foo');
+        self::assertSame(
+            "ALTER TABLE `t1`\n DROP COLUMN IF EXISTS `foo`",
+            $alterTable->sql()
+        );
+    }
+
     public function testDropColumns() : void
     {
         $alterTable = $this->alterTable->table('t1')->dropColumn('foo');
@@ -114,6 +123,15 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testDropKeyIfExists() : void
+    {
+        $alterTable = $this->alterTable->table('t1')->dropKeyIfExists('foo');
+        self::assertSame(
+            "ALTER TABLE `t1`\n DROP KEY IF EXISTS `foo`",
+            $alterTable->sql()
+        );
+    }
+
     public function testDropKeys() : void
     {
         $alterTable = $this->alterTable->table('t1')->dropKey('foo');
@@ -128,6 +146,15 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testDropForeignKeyIfExists() : void
+    {
+        $alterTable = $this->alterTable->table('t1')->dropForeignKeyIfExists('foo');
+        self::assertSame(
+            "ALTER TABLE `t1`\n DROP FOREIGN KEY IF EXISTS `foo`",
+            $alterTable->sql()
+        );
+    }
+
     public function testDropForeignKeys() : void
     {
         $alterTable = $this->alterTable->table('t1')->dropForeignKey('foo');
@@ -138,6 +165,15 @@ final class AlterTableTest extends TestCase
         $alterTable->dropForeignKey('bar', true);
         self::assertSame(
             "ALTER TABLE `t1`\n DROP FOREIGN KEY `foo`,\n DROP FOREIGN KEY IF EXISTS `bar`",
+            $alterTable->sql()
+        );
+    }
+
+    public function testDropConstraintIfExists() : void
+    {
+        $alterTable = $this->alterTable->table('t1')->dropConstraintIfExists('foo');
+        self::assertSame(
+            "ALTER TABLE `t1`\n DROP CONSTRAINT IF EXISTS `foo`",
             $alterTable->sql()
         );
     }
