@@ -67,6 +67,17 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testAddEmpty() : void
+    {
+        $sql = $this->alterTable->table('t1')
+            ->add(static function (TableDefinition $definition) : void {
+            });
+        self::assertSame(
+            "ALTER TABLE `t1`\n",
+            $sql->sql()
+        );
+    }
+
     public function testChange() : void
     {
         $sql = $this->alterTable->table('t1')
@@ -79,6 +90,17 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testChangeEmpty() : void
+    {
+        $sql = $this->alterTable->table('t1')
+            ->change(static function (TableDefinition $definition) : void {
+            });
+        self::assertSame(
+            "ALTER TABLE `t1`\n",
+            $sql->sql()
+        );
+    }
+
     public function testModify() : void
     {
         $sql = $this->alterTable->table('t1')
@@ -87,6 +109,17 @@ final class AlterTableTest extends TestCase
             });
         self::assertSame(
             "ALTER TABLE `t1`\n MODIFY COLUMN `c1` smallint NOT NULL",
+            $sql->sql()
+        );
+    }
+
+    public function testModifyEmpty() : void
+    {
+        $sql = $this->alterTable->table('t1')
+            ->modify(static function (TableDefinition $definition) : void {
+            });
+        self::assertSame(
+            "ALTER TABLE `t1`\n",
             $sql->sql()
         );
     }

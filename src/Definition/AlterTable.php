@@ -186,7 +186,7 @@ class AlterTable extends TableStatement
         }
         $definition = new TableDefinition($this->database);
         $this->sql['add']($definition);
-        return $definition->sql('ADD');
+        return $definition->sql('ADD') ?: null;
     }
 
     /**
@@ -207,7 +207,7 @@ class AlterTable extends TableStatement
         }
         $definition = new TableDefinition($this->database);
         $this->sql['change']($definition);
-        return $definition->sql('CHANGE');
+        return $definition->sql('CHANGE') ?: null;
     }
 
     /**
@@ -228,7 +228,7 @@ class AlterTable extends TableStatement
         }
         $definition = new TableDefinition($this->database);
         $this->sql['modify']($definition);
-        return $definition->sql('MODIFY');
+        return $definition->sql('MODIFY') ?: null;
     }
 
     public function dropColumn(string $name, bool $ifExists = false) : static
