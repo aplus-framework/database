@@ -78,6 +78,25 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testAddIfNotExists() : void
+    {
+        $sql = $this->alterTable->table('t1')
+            ->addIfNotExists(static function (TableDefinition $definition) : void {
+                $definition->column('c1')->varchar(255);
+                $definition->column('c5')->int()->null();
+                $definition->index()->key('c1');
+            })->add(static function (TableDefinition $definition) : void {
+                $definition->column('c2')->int();
+            });
+        self::assertSame(
+            "ALTER TABLE `t1`\n ADD COLUMN IF NOT EXISTS `c1` varchar(255) NOT NULL,\n"
+            . " ADD COLUMN IF NOT EXISTS `c5` int NULL,\n"
+            . " ADD KEY IF NOT EXISTS (`c1`),\n"
+            . ' ADD COLUMN `c2` int NOT NULL',
+            $sql->sql()
+        );
+    }
+
     public function testChange() : void
     {
         $sql = $this->alterTable->table('t1')
@@ -101,6 +120,24 @@ final class AlterTableTest extends TestCase
         );
     }
 
+    public function testChangeIfExists() : void
+    {
+        $sql = $this->alterTable->table('t1')
+            ->change(static function (TableDefinition $definition) : void {
+                $definition->column('c2')->int();
+            })
+            ->changeIfExists(static function (TableDefinition $definition) : void {
+                $definition->column('c1')->varchar(255);
+                $definition->column('c5')->int()->null();
+            });
+        self::assertSame(
+            "ALTER TABLE `t1`\n CHANGE COLUMN `c2` int NOT NULL,\n"
+            . " CHANGE COLUMN IF EXISTS `c1` varchar(255) NOT NULL,\n"
+            . ' CHANGE COLUMN IF EXISTS `c5` int NULL',
+            $sql->sql()
+        );
+    }
+
     public function testModify() : void
     {
         $sql = $this->alterTable->table('t1')
@@ -120,6 +157,24 @@ final class AlterTableTest extends TestCase
             });
         self::assertSame(
             "ALTER TABLE `t1`\n",
+            $sql->sql()
+        );
+    }
+
+    public function testModifyIfExists() : void
+    {
+        $sql = $this->alterTable->table('t1')
+            ->modify(static function (TableDefinition $definition) : void {
+                $definition->column('c2')->int();
+            })
+            ->modifyIfExists(static function (TableDefinition $definition) : void {
+                $definition->column('c1')->varchar(255);
+                $definition->column('c5')->int()->null();
+            });
+        self::assertSame(
+            "ALTER TABLE `t1`\n MODIFY COLUMN `c2` int NOT NULL,\n"
+            . " MODIFY COLUMN IF EXISTS `c1` varchar(255) NOT NULL,\n"
+            . ' MODIFY COLUMN IF EXISTS `c5` int NULL',
             $sql->sql()
         );
     }

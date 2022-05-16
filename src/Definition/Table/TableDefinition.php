@@ -34,15 +34,18 @@ class TableDefinition extends DefinitionPart
      * @var array<int,Check>
      */
     protected array $checks = [];
+    protected ?string $condition = null;
 
     /**
      * TableDefinition constructor.
      *
      * @param Database $database
+     * @param string|null $condition
      */
-    public function __construct(Database $database)
+    public function __construct(Database $database, string $condition = null)
     {
         $this->database = $database;
+        $this->condition = $condition;
     }
 
     /**
@@ -99,6 +102,9 @@ class TableDefinition extends DefinitionPart
         if ($prefix) {
             $prefix .= ' COLUMN';
         }
+        if ($this->condition) {
+            $prefix .= ' ' . $this->condition;
+        }
         $sql = [];
         foreach ($this->columns as $column) {
             $name = $this->database->protectIdentifier($column['name']);
@@ -116,6 +122,10 @@ class TableDefinition extends DefinitionPart
         $sql = [];
         foreach ($this->indexes as $index) {
             $definition = $index['definition']->sql();
+            if ($this->condition) {
+                $definition = \explode('(', $definition, 2);
+                $definition = $definition[0] . $this->condition . ' (' . $definition[1];
+            }
             $sql[] = " {$prefix}{$definition}";
         }
         return \implode(',' . \PHP_EOL, $sql);

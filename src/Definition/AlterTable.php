@@ -170,12 +170,30 @@ class AlterTable extends TableStatement
 
     /**
      * @param callable $definition
+     * @param bool $ifNotExists
      *
      * @return static
      */
-    public function add(callable $definition) : static
+    public function add(callable $definition, bool $ifNotExists = false) : static
     {
-        $this->sql['add'] = $definition;
+        $this->sql['add'][] = [
+            'definition' => $definition,
+            'if_not_exists' => $ifNotExists,
+        ];
+        return $this;
+    }
+
+    /**
+     * @param callable $definition
+     *
+     * @return static
+     */
+    public function addIfNotExists(callable $definition) : static
+    {
+        $this->sql['add'][] = [
+            'definition' => $definition,
+            'if_not_exists' => true,
+        ];
         return $this;
     }
 
@@ -184,19 +202,42 @@ class AlterTable extends TableStatement
         if ( ! isset($this->sql['add'])) {
             return null;
         }
-        $definition = new TableDefinition($this->database);
-        $this->sql['add']($definition);
-        return $definition->sql('ADD') ?: null;
+        $parts = [];
+        foreach ($this->sql['add'] as $add) {
+            $definition = new TableDefinition(
+                $this->database,
+                $add['if_not_exists'] ? 'IF NOT EXISTS' : null
+            );
+            $add['definition']($definition);
+            $part = $definition->sql('ADD');
+            if ($part) {
+                $parts[] = $part;
+            }
+        }
+        return $parts ? \implode(',' . \PHP_EOL, $parts) : null;
     }
 
     /**
      * @param callable $definition
+     * @param bool $ifExists
      *
      * @return static
      */
-    public function change(callable $definition) : static
+    public function change(callable $definition, bool $ifExists = false) : static
     {
-        $this->sql['change'] = $definition;
+        $this->sql['change'][] = [
+            'definition' => $definition,
+            'if_exists' => $ifExists,
+        ];
+        return $this;
+    }
+
+    public function changeIfExists(callable $definition) : static
+    {
+        $this->sql['change'][] = [
+            'definition' => $definition,
+            'if_exists' => true,
+        ];
         return $this;
     }
 
@@ -205,19 +246,42 @@ class AlterTable extends TableStatement
         if ( ! isset($this->sql['change'])) {
             return null;
         }
-        $definition = new TableDefinition($this->database);
-        $this->sql['change']($definition);
-        return $definition->sql('CHANGE') ?: null;
+        $parts = [];
+        foreach ($this->sql['change'] as $change) {
+            $definition = new TableDefinition(
+                $this->database,
+                $change['if_exists'] ? 'IF EXISTS' : null
+            );
+            $change['definition']($definition);
+            $part = $definition->sql('CHANGE');
+            if ($part) {
+                $parts[] = $part;
+            }
+        }
+        return $parts ? \implode(',' . \PHP_EOL, $parts) : null;
     }
 
     /**
      * @param callable $definition
+     * @param bool $ifExists
      *
      * @return static
      */
-    public function modify(callable $definition) : static
+    public function modify(callable $definition, bool $ifExists = false) : static
     {
-        $this->sql['modify'] = $definition;
+        $this->sql['modify'][] = [
+            'definition' => $definition,
+            'if_exists' => $ifExists,
+        ];
+        return $this;
+    }
+
+    public function modifyIfExists(callable $definition) : static
+    {
+        $this->sql['modify'][] = [
+            'definition' => $definition,
+            'if_exists' => true,
+        ];
         return $this;
     }
 
@@ -226,9 +290,19 @@ class AlterTable extends TableStatement
         if ( ! isset($this->sql['modify'])) {
             return null;
         }
-        $definition = new TableDefinition($this->database);
-        $this->sql['modify']($definition);
-        return $definition->sql('MODIFY') ?: null;
+        $parts = [];
+        foreach ($this->sql['modify'] as $modify) {
+            $definition = new TableDefinition(
+                $this->database,
+                $modify['if_exists'] ? 'IF EXISTS' : null
+            );
+            $modify['definition']($definition);
+            $part = $definition->sql('MODIFY');
+            if ($part) {
+                $parts[] = $part;
+            }
+        }
+        return $parts ? \implode(',' . \PHP_EOL, $parts) : null;
     }
 
     public function dropColumn(string $name, bool $ifExists = false) : static
@@ -652,7 +726,7 @@ class AlterTable extends TableStatement
      *
      * @return int|string The number of affected rows
      */
-    public function run() : int|string
+    public function run() : int | string
     {
         return $this->database->exec($this->sql());
     }
