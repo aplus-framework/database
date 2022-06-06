@@ -257,3 +257,42 @@ expectedArguments(
     0,
     argumentsSet('table_options')
 );
+registerArgumentsSet(
+    'operators',
+    '=',
+    '<=>',
+    '!=',
+    '<>',
+    '>',
+    '>=',
+    '<',
+    '<=',
+    'LIKE',
+    'NOT LIKE',
+    'IN',
+    'NOT IN',
+    'BETWEEN',
+    'NOT BETWEEN',
+    'IS NULL',
+    'IS NOT NULL',
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Traits\Having::having(),
+    1,
+    argumentsSet('operators')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Traits\Having::orHaving(),
+    1,
+    argumentsSet('operators')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Traits\Where::where(),
+    1,
+    argumentsSet('operators')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Traits\Where::orWhere(),
+    1,
+    argumentsSet('operators')
+);
