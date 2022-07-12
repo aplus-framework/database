@@ -33,7 +33,8 @@ trait Where
         array | Closure | string $column,
         string $operator,
         array | Closure | float | int | string | null ...$values
-    ) : static {
+    ) : static
+    {
         // @phpstan-ignore-next-line
         return $this->addWhere('AND', $column, $operator, $values);
     }
@@ -52,7 +53,8 @@ trait Where
         array | Closure | string $column,
         string $operator,
         array | Closure | float | int | string | null ...$values
-    ) : static {
+    ) : static
+    {
         // @phpstan-ignore-next-line
         return $this->addWhere('OR', $column, $operator, $values);
     }
@@ -70,7 +72,8 @@ trait Where
     public function whereEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '=', $value);
     }
 
@@ -87,7 +90,8 @@ trait Where
     public function orWhereEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '=', $value);
     }
 
@@ -104,7 +108,8 @@ trait Where
     public function whereNotEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '!=', $value);
     }
 
@@ -121,7 +126,8 @@ trait Where
     public function orWhereNotEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '!=', $value);
     }
 
@@ -138,7 +144,8 @@ trait Where
     public function whereNullSafeEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '<=>', $value);
     }
 
@@ -155,7 +162,8 @@ trait Where
     public function orWhereNullSafeEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '<=>', $value);
     }
 
@@ -172,7 +180,8 @@ trait Where
     public function whereLessThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '<', $value);
     }
 
@@ -189,7 +198,8 @@ trait Where
     public function orWhereLessThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '<', $value);
     }
 
@@ -206,7 +216,8 @@ trait Where
     public function whereLessThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '<=', $value);
     }
 
@@ -223,7 +234,8 @@ trait Where
     public function orWhereLessThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '<=', $value);
     }
 
@@ -240,7 +252,8 @@ trait Where
     public function whereGreaterThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '>', $value);
     }
 
@@ -257,7 +270,8 @@ trait Where
     public function orWhereGreaterThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '>', $value);
     }
 
@@ -274,7 +288,8 @@ trait Where
     public function whereGreaterThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, '>=', $value);
     }
 
@@ -291,7 +306,8 @@ trait Where
     public function orWhereGreaterThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, '>=', $value);
     }
 
@@ -323,7 +339,8 @@ trait Where
     public function orWhereLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, 'LIKE', $value);
     }
 
@@ -340,7 +357,8 @@ trait Where
     public function whereNotLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->where($column, 'NOT LIKE', $value);
     }
 
@@ -357,7 +375,8 @@ trait Where
     public function orWhereNotLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, 'NOT LIKE', $value);
     }
 
@@ -376,7 +395,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static {
+    ) : static
+    {
         return $this->where($column, 'IN', ...[$value, ...$values]);
     }
 
@@ -395,7 +415,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, 'IN', ...[$value, ...$values]);
     }
 
@@ -414,7 +435,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static {
+    ) : static
+    {
         return $this->where($column, 'NOT IN', ...[$value, ...$values]);
     }
 
@@ -433,7 +455,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, 'NOT IN', ...[$value, ...$values]);
     }
 
@@ -452,7 +475,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static {
+    ) : static
+    {
         return $this->where($column, 'BETWEEN', $min, $max);
     }
 
@@ -471,7 +495,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, 'BETWEEN', $min, $max);
     }
 
@@ -490,7 +515,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static {
+    ) : static
+    {
         return $this->where($column, 'NOT BETWEEN', $min, $max);
     }
 
@@ -509,7 +535,8 @@ trait Where
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($column, 'NOT BETWEEN', $min, $max);
     }
 
@@ -595,7 +622,8 @@ trait Where
     public function whereMatch(
         array | Closure | string $columns,
         array | Closure | string $against
-    ) : static {
+    ) : static
+    {
         return $this->where($columns, 'MATCH', $against);
     }
 
@@ -614,7 +642,8 @@ trait Where
     public function orWhereMatch(
         array | Closure | string $columns,
         array | Closure | string $against
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($columns, 'MATCH', $against);
     }
 
@@ -633,7 +662,8 @@ trait Where
     public function whereMatchWithQueryExpansion(
         array | Closure | string $columns,
         array | Closure | string $against
-    ) : static {
+    ) : static
+    {
         return $this->where($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
     }
 
@@ -652,7 +682,8 @@ trait Where
     public function orWhereMatchWithQueryExpansion(
         array | Closure | string $columns,
         array | Closure | string $against
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
     }
 
@@ -671,7 +702,8 @@ trait Where
     public function whereMatchInBooleanMode(
         array | Closure | string $columns,
         array | Closure | string $against
-    ) : static {
+    ) : static
+    {
         return $this->where($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
     }
 
@@ -690,7 +722,8 @@ trait Where
     public function orWhereMatchInBooleanMode(
         array | Closure | string $columns,
         array | Closure | string $against
-    ) : static {
+    ) : static
+    {
         return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
     }
 
@@ -712,7 +745,8 @@ trait Where
         string $operator,
         array $values,
         string $clause = 'where'
-    ) : static {
+    ) : static
+    {
         $this->sql[$clause][] = [
             'glue' => $glue,
             'column' => $column,

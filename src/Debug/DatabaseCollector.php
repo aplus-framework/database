@@ -77,7 +77,7 @@ class DatabaseCollector extends Collector
                     <td>
                         <pre><code class="language-sql"><?=
                                 \htmlentities($item['statement'])
-                                ?></code></pre>
+                ?></code></pre>
                     </td>
                     <td><?= $item['rows'] ?></td>
                 </tr>
