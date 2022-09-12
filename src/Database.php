@@ -160,8 +160,7 @@ class Database
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306
-    ) : static
-    {
+    ) : static {
         if ( ! \is_array($username)) {
             $username = [
                 'host' => $host,

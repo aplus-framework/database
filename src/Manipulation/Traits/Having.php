@@ -33,8 +33,7 @@ trait Having
         Closure | string $column,
         string $operator,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         return $this->addHaving('AND', $column, $operator, $values);
     }
 
@@ -51,8 +50,7 @@ trait Having
         Closure | string $column,
         string $operator,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         return $this->addHaving('OR', $column, $operator, $values);
     }
 
@@ -69,8 +67,7 @@ trait Having
     public function havingEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '=', $value);
     }
 
@@ -87,8 +84,7 @@ trait Having
     public function orHavingEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '=', $value);
     }
 
@@ -105,8 +101,7 @@ trait Having
     public function havingNotEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '!=', $value);
     }
 
@@ -123,8 +118,7 @@ trait Having
     public function orHavingNotEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '!=', $value);
     }
 
@@ -141,8 +135,7 @@ trait Having
     public function havingNullSafeEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '<=>', $value);
     }
 
@@ -159,8 +152,7 @@ trait Having
     public function orHavingNullSafeEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '<=>', $value);
     }
 
@@ -177,8 +169,7 @@ trait Having
     public function havingLessThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '<', $value);
     }
 
@@ -195,8 +186,7 @@ trait Having
     public function orHavingLessThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '<', $value);
     }
 
@@ -213,8 +203,7 @@ trait Having
     public function havingLessThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '<=', $value);
     }
 
@@ -231,8 +220,7 @@ trait Having
     public function orHavingLessThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '<=', $value);
     }
 
@@ -249,8 +237,7 @@ trait Having
     public function havingGreaterThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '>', $value);
     }
 
@@ -267,8 +254,7 @@ trait Having
     public function orHavingGreaterThan(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '>', $value);
     }
 
@@ -285,8 +271,7 @@ trait Having
     public function havingGreaterThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, '>=', $value);
     }
 
@@ -303,8 +288,7 @@ trait Having
     public function orHavingGreaterThanOrEqual(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, '>=', $value);
     }
 
@@ -321,8 +305,7 @@ trait Having
     public function havingLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, 'LIKE', $value);
     }
 
@@ -339,8 +322,7 @@ trait Having
     public function orHavingLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, 'LIKE', $value);
     }
 
@@ -357,8 +339,7 @@ trait Having
     public function havingNotLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->having($column, 'NOT LIKE', $value);
     }
 
@@ -375,8 +356,7 @@ trait Having
     public function orHavingNotLike(
         Closure | string $column,
         Closure | float | int | string | null $value
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, 'NOT LIKE', $value);
     }
 
@@ -395,8 +375,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         return $this->having($column, 'IN', ...[$value, ...$values]);
     }
 
@@ -415,8 +394,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, 'IN', ...[$value, ...$values]);
     }
 
@@ -435,8 +413,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         return $this->having($column, 'NOT IN', ...[$value, ...$values]);
     }
 
@@ -455,8 +432,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, 'NOT IN', ...[$value, ...$values]);
     }
 
@@ -475,8 +451,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static
-    {
+    ) : static {
         return $this->having($column, 'BETWEEN', $min, $max);
     }
 
@@ -495,8 +470,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, 'BETWEEN', $min, $max);
     }
 
@@ -515,8 +489,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static
-    {
+    ) : static {
         return $this->having($column, 'NOT BETWEEN', $min, $max);
     }
 
@@ -535,8 +508,7 @@ trait Having
         Closure | string $column,
         Closure | float | int | string | null $min,
         Closure | float | int | string | null $max
-    ) : static
-    {
+    ) : static {
         return $this->orHaving($column, 'NOT BETWEEN', $min, $max);
     }
 
@@ -613,8 +585,7 @@ trait Having
         array | Closure | string $column,
         string $operator,
         array $values
-    ) : static
-    {
+    ) : static {
         return $this->addWhere($glue, $column, $operator, $values, 'having');
     }
 

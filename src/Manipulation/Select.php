@@ -236,8 +236,7 @@ class Select extends Statement
     public function expressions(
         array | Closure | string $expression,
         array | Closure | string ...$expressions
-    ) : static
-    {
+    ) : static {
         foreach ([$expression, ...$expressions] as $expression) {
             $this->sql['expressions'][] = $expression;
         }
@@ -255,8 +254,7 @@ class Select extends Statement
     public function columns(
         array | Closure | string $expression,
         array | Closure | string ...$expressions
-    ) : static
-    {
+    ) : static {
         return $this->expressions($expression, ...$expressions);
     }
 
@@ -337,8 +335,7 @@ class Select extends Statement
         string $charset = null,
         array $fieldsOptions = [],
         array $linesOptions = []
-    ) : static
-    {
+    ) : static {
         $this->sql['into_outfile'] = [
             'filename' => $filename,
             'charset' => $charset,

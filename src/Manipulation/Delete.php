@@ -74,8 +74,7 @@ class Delete extends Statement
     public function table(
         array | Closure | string $reference,
         array | Closure | string ...$references
-    ) : static
-    {
+    ) : static {
         $this->sql['table'] = [];
         foreach ([$reference, ...$references] as $reference) {
             $this->sql['table'][] = $reference;

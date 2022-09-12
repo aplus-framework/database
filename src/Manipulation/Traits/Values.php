@@ -30,8 +30,7 @@ trait Values
     public function values(
         array | Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
-    ) : static
-    {
+    ) : static {
         if ( ! \is_array($value)) {
             $this->sql['values'][] = [$value, ...$values];
             return $this;

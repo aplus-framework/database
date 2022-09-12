@@ -37,8 +37,7 @@ trait Join
     public function from(
         array | Closure | string $reference,
         array | Closure | string ...$references
-    ) : static
-    {
+    ) : static {
         $this->sql['from'] = [];
         foreach ([$reference, ...$references] as $reference) {
             $this->sql['from'][] = $reference;
@@ -102,8 +101,7 @@ trait Join
         string $type = '',
         string $clause = null,
         array | Closure $conditional = null
-    ) : static
-    {
+    ) : static {
         return $this->setJoin($table, $type, $clause, $conditional);
     }
 
@@ -366,8 +364,7 @@ trait Join
         string $type,
         string $clause = null,
         Closure | array $expression = null
-    ) : static
-    {
+    ) : static {
         $this->sql['join'] = [
             'type' => $type,
             'table' => $table,
