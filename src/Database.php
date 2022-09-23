@@ -28,6 +28,7 @@ use Framework\Database\Manipulation\With;
 use Framework\Log\Logger;
 use Framework\Log\LogLevel;
 use InvalidArgumentException;
+use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Language;
 use LogicException;
 use mysqli;
@@ -289,6 +290,22 @@ class Database
     /**
      * @return array<string,mixed>
      */
+    #[ArrayShape([
+        'host' => 'string',
+        'port' => 'int',
+        'username' => 'string|null',
+        'password' => 'string|null',
+        'schema' => 'string|null',
+        'socket' => 'string|null',
+        'engine' => 'string',
+        'charset' => 'string',
+        'collation' => 'string',
+        'timezone' => 'string',
+        'ssl' => 'array',
+        'failover' => 'array',
+        'options' => 'array',
+        'report' => 'int',
+    ])]
     public function getConfig() : array
     {
         return $this->config;
