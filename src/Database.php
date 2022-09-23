@@ -340,10 +340,13 @@ class Database
      * @param string $schema
      *
      * @throws mysqli_sql_exception if schema is unknown
+     *
+     * @return static
      */
-    public function use(string $schema) : void
+    public function use(string $schema) : static
     {
         $this->mysqli->select_db($schema);
+        return $this;
     }
 
     /**
@@ -641,8 +644,10 @@ class Database
      *
      * @throws Exception if statements fail
      * @throws LogicException if transaction already is active
+     *
+     * @return static
      */
-    public function transaction(callable $statements) : void
+    public function transaction(callable $statements) : static
     {
         if ($this->inTransaction) {
             throw new LogicException('Transaction already is active');
@@ -659,6 +664,7 @@ class Database
         } finally {
             $this->inTransaction = false;
         }
+        return $this;
     }
 
     /**
