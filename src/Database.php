@@ -573,7 +573,7 @@ class Database
      *
      * @return int|string
      */
-    public function exec(#[Language('SQL')] string $statement) : int|string
+    public function exec(#[Language('SQL')] string $statement) : int | string
     {
         $this->lastQuery = $statement;
         isset($this->debugCollector)
