@@ -9,6 +9,7 @@
  */
 namespace Framework\Database\Debug;
 
+use Framework\Database\Database;
 use Framework\Debug\Collector;
 
 /**
@@ -18,15 +19,42 @@ use Framework\Debug\Collector;
  */
 class DatabaseCollector extends Collector
 {
+    /**
+     * @var string
+     *
+     * @deprecated Use {@see Database::getConnection()}
+     */
     protected string $serverInfo;
 
+    /**
+     * @param string $serverInfo
+     *
+     * @deprecated Use {@see Database::getConnection()}
+     *
+     * @codeCoverageIgnore
+     */
     public function setServerInfo(string $serverInfo) : void
     {
+        \trigger_error(
+            'Method ' . __METHOD__ . ' is deprecated',
+            \E_USER_DEPRECATED
+        );
         $this->serverInfo = $serverInfo;
     }
 
+    /**
+     * @return string
+     *
+     * @deprecated Use {@see Database::getConnection()}
+     *
+     * @codeCoverageIgnore
+     */
     public function getServerInfo() : string
     {
+        \trigger_error(
+            'Method ' . __METHOD__ . ' is deprecated',
+            \E_USER_DEPRECATED
+        );
         return $this->serverInfo;
     }
 
