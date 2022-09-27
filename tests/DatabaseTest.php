@@ -55,6 +55,19 @@ final class DatabaseTest extends TestCase
         self::assertInstanceOf(Database::class, $database);
     }
 
+    public function testPersistentConnection() : void
+    {
+        $database = new Database([
+            'username' => \getenv('DB_USERNAME'),
+            'password' => \getenv('DB_PASSWORD'),
+            'schema' => \getenv('DB_SCHEMA'),
+            'host' => \getenv('DB_HOST'),
+            'port' => \getenv('DB_PORT'),
+            'persistent' => true,
+        ]);
+        self::assertInstanceOf(Database::class, $database);
+    }
+
     public function testConnectionFail() : void
     {
         $this->expectException(mysqli_sql_exception::class);

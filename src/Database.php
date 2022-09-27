@@ -121,6 +121,7 @@ class Database
             'password' => null,
             'schema' => null,
             'socket' => null,
+            'persistent' => false,
             'engine' => 'InnoDB',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci',
@@ -196,7 +197,7 @@ class Database
                 }
             }
             $this->mysqli->real_connect(
-                $config['host'],
+                ($config['persistent'] ? 'p:' : '') . $config['host'],
                 $config['username'],
                 $config['password'],
                 $config['schema'],
