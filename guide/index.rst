@@ -82,6 +82,7 @@ Below is the default class configuration. Normally, only the ``username``, the
         'password' => null,
         'schema' => null,
         'socket' => null,
+        'persistent' => false,
         'engine' => 'InnoDB',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_general_ci',
