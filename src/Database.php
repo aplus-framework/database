@@ -112,6 +112,23 @@ class Database
      *
      * @return array<string,mixed>
      */
+    #[ArrayShape([
+        'host' => 'string',
+        'port' => 'int',
+        'username' => 'string|null',
+        'password' => 'string|null',
+        'schema' => 'string|null',
+        'socket' => 'string|null',
+        'persistent' => 'bool',
+        'engine' => 'string',
+        'charset' => 'string',
+        'collation' => 'string',
+        'timezone' => 'string',
+        'ssl' => 'array',
+        'failover' => 'array',
+        'options' => 'array',
+        'report' => 'int',
+    ])]
     protected function makeConfig(array $config) : array
     {
         return \array_replace_recursive([
@@ -308,6 +325,7 @@ class Database
         'password' => 'string|null',
         'schema' => 'string|null',
         'socket' => 'string|null',
+        'persistent' => 'bool',
         'engine' => 'string',
         'charset' => 'string',
         'collation' => 'string',
