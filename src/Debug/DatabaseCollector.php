@@ -19,12 +19,19 @@ use Framework\Debug\Collector;
  */
 class DatabaseCollector extends Collector
 {
+    protected Database $database;
     /**
      * @var string
      *
      * @deprecated Use {@see Database::getConnection()}
      */
     protected string $serverInfo;
+
+    public function setDatabase(Database $database) : static
+    {
+        $this->database = $database;
+        return $this;
+    }
 
     /**
      * @param string $serverInfo

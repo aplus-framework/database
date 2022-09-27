@@ -748,7 +748,7 @@ class Database
 
     public function setDebugCollector(DatabaseCollector $collector) : static
     {
-        $collector->setServerInfo($this->mysqli->server_info);
+        $collector->setDatabase($this);
         $this->debugCollector = $collector;
         return $this;
     }
