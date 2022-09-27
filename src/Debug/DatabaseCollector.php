@@ -49,20 +49,9 @@ class DatabaseCollector extends Collector
         $this->serverInfo = $serverInfo;
     }
 
-    /**
-     * @return string
-     *
-     * @deprecated Use {@see Database::getConnection()}
-     *
-     * @codeCoverageIgnore
-     */
     public function getServerInfo() : string
     {
-        \trigger_error(
-            'Method ' . __METHOD__ . ' is deprecated',
-            \E_USER_DEPRECATED
-        );
-        return $this->serverInfo;
+        return $this->database->getConnection()->server_info;
     }
 
     public function getActivities() : array
