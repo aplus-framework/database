@@ -72,12 +72,11 @@ class DatabaseCollector extends Collector
     public function getContents() : string
     {
         \ob_start();
-        if ( ! isset($this->serverInfo)) {
+        if ( ! isset($this->database)) {
             echo '<p>This collector has not been added to a Database instance.</p>';
             return \ob_get_clean(); // @phpstan-ignore-line
-        } ?>
-        <p><strong>Server Info:</strong> <?= $this->getServerInfo() ?></p>
-        <?php
+        }
+        echo $this->showHeader();
         if ( ! $this->hasData()) {
             echo '<p>Did not run statements.</p>';
             return \ob_get_clean(); // @phpstan-ignore-line
@@ -110,5 +109,35 @@ class DatabaseCollector extends Collector
         </table>
         <?php
         return \ob_get_clean(); // @phpstan-ignore-line
+    }
+
+    protected function showHeader() : string
+    {
+        $config = $this->database->getConfig();
+        \ob_start();
+        ?>
+        <p title="<?= 'Connected to ' . \htmlentities($this->getHostInfo()) ?>">
+            <strong>Host:</strong> <?= $config['host'] ?? 'localhost' ?>
+        </p>
+        <?php
+        if (\str_contains($this->getHostInfo(), 'TCP/IP')) {
+            if (isset($config['port'])) {
+                ?>
+                <p><strong>Port:</strong> <?= \htmlentities((string) $config['port']) ?></p>
+                <?php
+            }
+        } elseif (isset($config['socket'])) { ?>
+            <p><strong>Socket:</strong> <?= \htmlentities($config['socket']) ?></p>
+            <?php
+        }
+        ?>
+        <p><strong>Server Info:</strong> <?= \htmlentities($this->getServerInfo()) ?></p>
+        <?php
+        return \ob_get_clean(); // @phpstan-ignore-line
+    }
+
+    protected function getHostInfo() : string
+    {
+        return $this->database->getConnection()->host_info;
     }
 }

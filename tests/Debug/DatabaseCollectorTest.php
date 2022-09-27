@@ -80,4 +80,44 @@ final class DatabaseCollectorTest extends TestCase
             \array_keys($this->collector->getActivities()[0])
         );
     }
+
+    protected function makeDatabaseWithSocket() : Database
+    {
+        return new Database([
+            'username' => \getenv('DB_USERNAME'),
+            'password' => \getenv('DB_PASSWORD'),
+            'schema' => \getenv('DB_SCHEMA'),
+            'host' => \getenv('DB_HOST'),
+            'port' => \getenv('DB_PORT'),
+            'socket' => '/var/run/mysqld/mysqld.sock',
+        ]);
+    }
+
+    public function testPort() : void
+    {
+        $collector = new class() extends DatabaseCollector {
+            protected function getHostInfo() : string
+            {
+                return '127.0.0.1 via TCP/IP';
+            }
+        };
+        $database = $this->makeDatabaseWithSocket();
+        $database->setDebugCollector($collector);
+        self::assertStringNotContainsString('Socket:', $collector->getContents());
+        self::assertStringContainsString('Port:', $collector->getContents());
+    }
+
+    public function testSocket() : void
+    {
+        $collector = new class() extends DatabaseCollector {
+            protected function getHostInfo() : string
+            {
+                return 'Localhost via UNIX socket';
+            }
+        };
+        $database = $this->makeDatabaseWithSocket();
+        $database->setDebugCollector($collector);
+        self::assertStringContainsString('Socket:', $collector->getContents());
+        self::assertStringNotContainsString('Port:', $collector->getContents());
+    }
 }
