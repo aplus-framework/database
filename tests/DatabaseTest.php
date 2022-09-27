@@ -195,6 +195,14 @@ final class DatabaseTest extends TestCase
         ]);
     }
 
+    public function testGetConnection() : void
+    {
+        self::assertInstanceOf(
+            \mysqli::class,
+            static::$database->getConnection()
+        );
+    }
+
     /**
      * @runInSeparateProcess
      */

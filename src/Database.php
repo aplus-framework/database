@@ -240,6 +240,16 @@ class Database
     }
 
     /**
+     * Gets the MySQLi connection.
+     *
+     * @return mysqli
+     */
+    public function getConnection() : mysqli
+    {
+        return $this->mysqli;
+    }
+
+    /**
      * Tells if the connection is open.
      *
      * @return bool
