@@ -396,6 +396,39 @@ The SQL statement below is the one executed in the example above:
 WITH
 ####
 
+WITH allows you to refer to a subquery expression many times in a query, as if
+having a temporary table that only exists for the duration of a query.
+
+.. code-block:: php
+
+    $result = $database->with()->reference('t', function (Select $select) {
+        return $select->expressions('a')
+            ->from('t1')
+            ->whereGreaterThanOrEqual('b', 'c')
+            ->sql();
+    })->select(function (Select $select) {
+        return $select->from('t2', 't')
+            ->whereEqual(
+                't2.c',
+                fn (Database $db) => $db->protectIdentifier('t.a')
+            )->sql();
+    })->run();
+
+The code above will build and execute the following statement:
+
+.. code-block:: sql
+
+    WITH
+    `t` AS (SELECT
+     `a`
+     FROM `t1`
+     WHERE `b` >= 'c'
+    )
+    SELECT
+     *
+     FROM `t2`, `t`
+     WHERE `t2`.`c` = (`t`.`a`)
+
 LOAD DATA
 #########
 
