@@ -44,7 +44,7 @@
         "ergebnis/composer-normalize": "^2.25",
         "jetbrains/phpstorm-attributes": "^1.0",
         "phpmd/phpmd": "^2.13",
-        "phpstan/phpstan": "^1.5",
+        "phpstan/phpstan": "^1.9",
         "phpunit/phpunit": "^9.5"
     },
     "minimum-stability": "dev",
