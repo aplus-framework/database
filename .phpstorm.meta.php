@@ -100,6 +100,11 @@ registerArgumentsSet(
     \Framework\Database\Definition\AlterTable::ALGO_INPLACE,
     \Framework\Database\Definition\AlterTable::ALGO_INSTANT,
     \Framework\Database\Definition\AlterTable::ALGO_NOCOPY,
+    'COPY',
+    'DEFAULT',
+    'INPLACE',
+    'INSTANT',
+    'NOCOPY',
 );
 expectedArguments(
     \Framework\Database\Definition\AlterTable::algorithm(),
@@ -112,6 +117,10 @@ registerArgumentsSet(
     \Framework\Database\Definition\AlterTable::LOCK_EXCLUSIVE,
     \Framework\Database\Definition\AlterTable::LOCK_NONE,
     \Framework\Database\Definition\AlterTable::LOCK_SHARED,
+    'DEFAULT',
+    'EXCLUSIVE',
+    'NONE',
+    'SHARED',
 );
 expectedArguments(
     \Framework\Database\Definition\AlterTable::lock(),
@@ -123,10 +132,23 @@ registerArgumentsSet(
     \Framework\Database\Manipulation\Delete::OPT_IGNORE,
     \Framework\Database\Manipulation\Delete::OPT_LOW_PRIORITY,
     \Framework\Database\Manipulation\Delete::OPT_QUICK,
+    'IGNORE',
+    'LOW_PRIORITY',
+    'QUICK',
 );
 expectedArguments(
     \Framework\Database\Manipulation\Delete::options(),
     0,
+    argumentsSet('manipulation_delete_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Delete::options(),
+    1,
+    argumentsSet('manipulation_delete_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Delete::options(),
+    2,
     argumentsSet('manipulation_delete_opt')
 );
 registerArgumentsSet(
@@ -135,10 +157,24 @@ registerArgumentsSet(
     \Framework\Database\Manipulation\Insert::OPT_HIGH_PRIORITY,
     \Framework\Database\Manipulation\Insert::OPT_IGNORE,
     \Framework\Database\Manipulation\Insert::OPT_LOW_PRIORITY,
+    'DELAYED',
+    'HIGH_PRIORITY',
+    'IGNORE',
+    'LOW_PRIORITY',
 );
 expectedArguments(
     \Framework\Database\Manipulation\Insert::options(),
     0,
+    argumentsSet('manipulation_insert_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Insert::options(),
+    1,
+    argumentsSet('manipulation_insert_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Insert::options(),
+    2,
     argumentsSet('manipulation_insert_opt')
 );
 registerArgumentsSet(
@@ -146,20 +182,40 @@ registerArgumentsSet(
     \Framework\Database\Manipulation\LoadData::OPT_CONCURRENT,
     \Framework\Database\Manipulation\LoadData::OPT_LOCAL,
     \Framework\Database\Manipulation\LoadData::OPT_LOW_PRIORITY,
+    'CONCURRENT',
+    'LOCAL',
+    'LOW_PRIORITY',
 );
 expectedArguments(
     \Framework\Database\Manipulation\LoadData::options(),
     0,
     argumentsSet('manipulation_load_data_opt')
 );
+expectedArguments(
+    \Framework\Database\Manipulation\LoadData::options(),
+    1,
+    argumentsSet('manipulation_load_data_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\LoadData::options(),
+    2,
+    argumentsSet('manipulation_load_data_opt')
+);
 registerArgumentsSet(
     'manipulation_replace_opt',
     \Framework\Database\Manipulation\Replace::OPT_DELAYED,
     \Framework\Database\Manipulation\Replace::OPT_LOW_PRIORITY,
+    'DELAYED',
+    'LOW_PRIORITY',
 );
 expectedArguments(
     \Framework\Database\Manipulation\Replace::options(),
     0,
+    argumentsSet('manipulation_replace_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Replace::options(),
+    1,
     argumentsSet('manipulation_replace_opt')
 );
 registerArgumentsSet(
@@ -175,25 +231,54 @@ registerArgumentsSet(
     \Framework\Database\Manipulation\Select::OPT_SQL_NO_CACHE,
     \Framework\Database\Manipulation\Select::OPT_SQL_SMALL_RESULT,
     \Framework\Database\Manipulation\Select::OPT_STRAIGHT_JOIN,
+    'ALL',
+    'DISTINCT',
+    'DISTINCTROW',
+    'HIGH_PRIORITY',
+    'SQL_BIG_RESULT',
+    'SQL_BUFFER_RESULT',
+    'SQL_CACHE',
+    'SQL_CALC_FOUND_ROWS',
+    'SQL_NO_CACHE',
+    'SQL_SMALL_RESULT',
+    'STRAIGHT_JOIN',
 );
 expectedArguments(
     \Framework\Database\Manipulation\Select::options(),
     0,
     argumentsSet('manipulation_select_opt')
 );
+expectedArguments(
+    \Framework\Database\Manipulation\Select::options(),
+    1,
+    argumentsSet('manipulation_select_opt')
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Select::options(),
+    2,
+    argumentsSet('manipulation_select_opt')
+);
 registerArgumentsSet(
     'manipulation_update_opt',
     \Framework\Database\Manipulation\Update::OPT_IGNORE,
     \Framework\Database\Manipulation\Update::OPT_LOW_PRIORITY,
+    'IGNORE',
+    'LOW_PRIORITY',
 );
 expectedArguments(
     \Framework\Database\Manipulation\Update::options(),
     0,
     argumentsSet('manipulation_update_opt')
 );
+expectedArguments(
+    \Framework\Database\Manipulation\Update::options(),
+    1,
+    argumentsSet('manipulation_update_opt')
+);
 registerArgumentsSet(
     'manipulation_with_opt',
-    \Framework\Database\Manipulation\With::OPT_RECURSIVE
+    \Framework\Database\Manipulation\With::OPT_RECURSIVE,
+    'RECURSIVE',
 );
 expectedArguments(
     \Framework\Database\Manipulation\With::options(),
@@ -206,6 +291,10 @@ registerArgumentsSet(
     \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_NO_ACTION,
     \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_RESTRICT,
     \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_SET_NULL,
+    'CASCADE',
+    'NO ACTION',
+    'RESTRICT',
+    'SET NULL',
 );
 expectedArguments(
     \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::onDelete(),
@@ -251,6 +340,38 @@ registerArgumentsSet(
     \Framework\Database\Definition\Table\TableStatement::OPT_TRANSACTIONAL,
     \Framework\Database\Definition\Table\TableStatement::OPT_UNION,
     \Framework\Database\Definition\Table\TableStatement::OPT_WITH_SYSTEM_VERSIONING,
+    'AUTO_INCREMENT',
+    'AVG_ROW_LENGTH',
+    'CHARSET',
+    'CHECKSUM',
+    'COLLATE',
+    'COMMENT',
+    'CONNECTION',
+    'DATA DIRECTORY',
+    'DELAY_KEY_WRITE',
+    'ENCRYPTED',
+    'ENCRYPTION_KEY_ID',
+    'ENGINE',
+    'IETF_QUOTES',
+    'INDEX DIRECTORY',
+    'INSERT_METHOD',
+    'KEY_BLOCK_SIZE',
+    'MAX_ROWS',
+    'MIN_ROWS',
+    'PACK_KEYS',
+    'PAGE_CHECKSUM',
+    'PAGE_COMPRESSED',
+    'PAGE_COMPRESSION_LEVEL',
+    'PASSWORD',
+    'ROW_FORMAT',
+    'SEQUENCE',
+    'STATS_AUTO_RECALC',
+    'STATS_PERSISTENT',
+    'STATS_SAMPLE_PAGES',
+    'TABLESPACE',
+    'TRANSACTIONAL',
+    'UNION',
+    'WITH SYSTEM VERSIONING',
 );
 expectedArguments(
     \Framework\Database\Definition\Table\TableStatement::option(),
