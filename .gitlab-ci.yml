@@ -36,6 +36,26 @@ test:php:
       - build/docs/
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
+test:php-last:
+  image: registry.gitlab.com/aplus-framework/images/base:3
+  stage: test
+  timeout: 10 minutes
+  cache:
+    paths:
+      - vendor/
+  services:
+    - mariadb
+  variables:
+    MYSQL_HOST: mariadb
+    MYSQL_DATABASE: framework-tests
+    MYSQL_ROOT_PASSWORD: password
+  before_script:
+    - php -v
+    - composer update
+  script:
+    - vendor/bin/phpunit --colors=never
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+
 test:php:mysql:
   stage: test
   timeout: 10 minutes
@@ -60,6 +80,30 @@ test:php:mysql:
     - vendor/bin/phpunit --colors=never
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
+test:php:mysql-last:
+  image: registry.gitlab.com/aplus-framework/images/base:3
+  stage: test
+  timeout: 10 minutes
+  cache:
+    paths:
+      - vendor/
+  services:
+    - name: mysql
+      command:
+        - --default-authentication-plugin=mysql_native_password
+        - --local-infile=true
+  variables:
+    MYSQL_HOST: mysql
+    MYSQL_DATABASE: framework-tests
+    MYSQL_ROOT_PASSWORD: password
+    DB_HOST: mysql
+    DB_IMAGE: mysql
+  before_script:
+    - php -v
+    - composer update
+  script:
+    - vendor/bin/phpunit --colors=never
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 pages:
   stage: deploy
