@@ -21,6 +21,7 @@ test:php:
     MYSQL_DATABASE: framework-tests
     MYSQL_ROOT_PASSWORD: password
   before_script:
+    - php -v
     - composer update
   script:
     - composer normalize --dry-run --indent-size=4 --indent-style=space
