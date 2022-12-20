@@ -10,6 +10,16 @@ services:
       - mariadb
       - mysql
     tty: true
+  package-last:
+    image: registry.gitlab.com/aplus-framework/images/package:3
+    container_name: package-database-last
+    working_dir: /package
+    volumes:
+      - .:/package
+    depends_on:
+      - mariadb
+      - mysql
+    tty: true
   mariadb:
     image: mariadb
     restart: always
