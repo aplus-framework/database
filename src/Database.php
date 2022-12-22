@@ -34,6 +34,7 @@ use LogicException;
 use mysqli;
 use mysqli_sql_exception;
 use RuntimeException;
+use SensitiveParameter;
 
 /**
  * Class Database.
@@ -84,8 +85,8 @@ class Database
      * @throws mysqli_sql_exception if connections fail
      */
     public function __construct(
-        array | string $username,
-        string $password = null,
+        #[SensitiveParameter] array | string $username,
+        #[SensitiveParameter] string $password = null,
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306,
@@ -174,8 +175,8 @@ class Database
      * @return static
      */
     protected function connect(
-        array | string $username,
-        string $password = null,
+        #[SensitiveParameter] array | string $username,
+        #[SensitiveParameter] string $password = null,
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306
