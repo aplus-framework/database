@@ -120,4 +120,16 @@ final class DatabaseCollectorTest extends TestCase
         self::assertStringContainsString('Socket:', $collector->getContents());
         self::assertStringNotContainsString('Port:', $collector->getContents());
     }
+
+    public function testFinalizeAddToDebug() : void
+    {
+        try {
+            $this->makeDatabase()->query('Foo Bar');
+        } catch (\Exception) {
+        }
+        $data = $this->collector->getData();
+        $data = $data[\array_key_last($data)];
+        self::assertSame('Foo Bar', $data['statement']);
+        self::assertSame('-1 (failed)', $data['rows']);
+    }
 }

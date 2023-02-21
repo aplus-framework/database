@@ -776,14 +776,26 @@ class Database
     protected function addToDebug(Closure $function) : mixed
     {
         $start = \microtime(true);
-        $result = $function();
+        try {
+            $result = $function();
+        } catch (Exception $exception) {
+            $this->finalizeAddToDebug($start);
+            throw $exception;
+        }
+        $this->finalizeAddToDebug($start);
+        return $result;
+    }
+
+    protected function finalizeAddToDebug(float $start) : void
+    {
         $end = \microtime(true);
+        $rows = $this->mysqli->affected_rows;
+        $rows = $rows < 0 ? $rows . ' (failed)' : $rows;
         $this->debugCollector->addData([
             'start' => $start,
             'end' => $end,
             'statement' => $this->lastQuery(),
-            'rows' => $this->mysqli->affected_rows,
+            'rows' => $rows,
         ]);
-        return $result;
     }
 }
