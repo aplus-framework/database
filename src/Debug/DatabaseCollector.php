@@ -102,7 +102,9 @@ class DatabaseCollector extends Collector
                                 \htmlentities($item['statement'])
                 ?></code></pre>
                     </td>
-                    <td><?= $item['rows'] ?></td>
+                    <td<?= isset($item['description'])
+                        ? ' title="' . \htmlentities($item['description']) . '"'
+                        : ''?>><?= \htmlentities((string) $item['rows']) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>

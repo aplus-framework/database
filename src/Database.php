@@ -779,15 +779,17 @@ class Database
         try {
             $result = $function();
         } catch (Exception $exception) {
-            $this->finalizeAddToDebug($start);
+            $this->finalizeAddToDebug($start, $exception->getMessage());
             throw $exception;
         }
         $this->finalizeAddToDebug($start);
         return $result;
     }
 
-    protected function finalizeAddToDebug(float $start) : void
-    {
+    protected function finalizeAddToDebug(
+        float $start,
+        string|null $description = null
+    ) : void {
         $end = \microtime(true);
         $rows = $this->mysqli->affected_rows;
         $rows = $rows < 0 ? $rows . ' (failed)' : $rows;
@@ -796,6 +798,7 @@ class Database
             'end' => $end,
             'statement' => $this->lastQuery(),
             'rows' => $rows,
+            'description' => $description,
         ]);
     }
 }
