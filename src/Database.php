@@ -792,7 +792,7 @@ class Database
     ) : void {
         $end = \microtime(true);
         $rows = $this->mysqli->affected_rows;
-        $rows = $rows < 0 ? $rows . ' (failed)' : $rows;
+        $rows = $rows < 0 ? 'error' : $rows;
         $this->debugCollector->addData([
             'start' => $start,
             'end' => $end,

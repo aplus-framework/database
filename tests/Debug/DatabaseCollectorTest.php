@@ -130,6 +130,12 @@ final class DatabaseCollectorTest extends TestCase
         $data = $this->collector->getData();
         $data = $data[\array_key_last($data)];
         self::assertSame('Foo Bar', $data['statement']);
-        self::assertSame('-1 (failed)', $data['rows']);
+        self::assertSame('error', $data['rows']);
+        $contents = $this->collector->getContents();
+        self::assertStringContainsString('error', $contents);
+        self::assertStringContainsString(
+            \htmlentities($data['description']),
+            $contents
+        );
     }
 }
