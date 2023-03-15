@@ -756,7 +756,8 @@ trait Where
                 $column = $this->renderIdentifier($column);
             }
             unset($column);
-            return \implode(', ', $columns); // @phpstan-ignore-line
+            // @phpstan-ignore-next-line
+            return \implode(', ', $columns);
         }
         if (\is_string($columns)) {
             return $this->renderIdentifier($columns);
@@ -936,7 +937,8 @@ trait Where
                 ? $this->subquery($value)
                 : $this->database->quote($value);
         }
-        return $values; // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        return $values;
     }
 
     /**

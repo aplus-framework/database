@@ -539,12 +539,14 @@ trait Join
             return null;
         }
         if ($clause === 'ON') {
-            return $this->subquery($expression); // @phpstan-ignore-line
+            // @phpstan-ignore-next-line
+            return $this->subquery($expression);
         }
         // @phpstan-ignore-next-line
         foreach ($expression as &$column) {
             $column = $this->renderIdentifier($column);
         }
-        return '(' . \implode(', ', $expression) . ')'; // @phpstan-ignore-line
+        // @phpstan-ignore-next-line
+        return '(' . \implode(', ', $expression) . ')';
     }
 }
