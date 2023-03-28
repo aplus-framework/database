@@ -146,7 +146,9 @@ the SQL statement:
 .. code-block:: php
 
     $name = $database->quote($_POST['name']);
-    $affectedRows = $database->exec('INSERT INTO Users SET name = ' $name); // int
+    $affectedRows = $database->exec(
+        'INSERT INTO Users SET name = ' . $name
+    ); // int or string
 
 Prepared Statement
 ##################
@@ -183,7 +185,7 @@ class, passing the values in order in the same way as in the ``query`` method:
 .. code-block:: php
 
     $affectedRows = $database->prepare('INSERT INTO Users SET name = ?')
-                             ->exec($_POST['name']); // int
+                             ->exec($_POST['name']); // int or string
 
 Result
 ######
@@ -275,7 +277,7 @@ You can insert a row only using the SET clause:
                              ->set([
                                 'name' => 'John',
                                 'email' => 'foo@baz.com',
-                             ])->run();
+                             ])->run(); // int or string
 
 .. code-block:: sql
 
@@ -293,7 +295,7 @@ Or several at once using the ``columns`` and ``values`` methods:
                              ->values([
                                  ['John', 'foo@baz.com'],
                                  ['Mary', 'bar@baz.com'],
-                             ])->run();
+                             ])->run(); // int or string
 
 SQL executed:
 
@@ -314,7 +316,7 @@ Database class.
 
 .. code-block:: php
 
-    $id = $database->insertId();
+    $id = $database->insertId(); // int or string
 
 When several rows are inserted in the same statement, the id returned is that of
 the first inserted row.
@@ -333,7 +335,7 @@ is equal to one.
                              ->table('Users')
                              ->set(['name' => 'Johnny']);
                              ->whereEqual('id', 1)
-                             ->run();
+                             ->run(); // int or string
 
 The SQL statement executed above is the same as below:
 
@@ -357,7 +359,7 @@ equal to 88:
     $affectedRows = $database->delete()
                              ->from('Users')
                              ->whereEqual('id', 88)
-                             ->run();
+                             ->run(); // int or string
 
 The example above builds and executes the following SQL statement:
 
@@ -382,7 +384,7 @@ Let's see an example replacing a row in the Users table:
                              ->into('Users')
                              ->columns('id', 'name', 'email')
                              ->values(1, 'John Doe', 'johndoe@ecorp.tld')
-                             ->run();
+                             ->run(); // int or string
 
 The SQL statement below is the one executed in the example above:
 
@@ -405,14 +407,14 @@ having a temporary table that only exists for the duration of a query.
         return $select->expressions('a')
             ->from('t1')
             ->whereGreaterThanOrEqual('b', 'c')
-            ->sql();
+            ->sql(); // string
     })->select(function (Select $select) {
         return $select->from('t2', 't')
             ->whereEqual(
                 't2.c',
                 fn (Database $db) => $db->protectIdentifier('t.a')
-            )->sql();
-    })->run();
+            )->sql(); // string
+    })->run(); // Result
 
 The code above will build and execute the following statement:
 
@@ -446,7 +448,7 @@ Let's see an example below:
              ->intoTable('Users')
              ->charset('utf8')
              ->columnsTerminatedBy(',')
-             ->run();
+             ->run(); // int or string
 
 Will run the following statement:
 
@@ -490,7 +492,7 @@ Let's look at an example creating the ``app`` schema:
 
 .. code-block:: php
 
-    $database->createSchema('app')->run();
+    $database->createSchema('app')->run(); // int or string
 
 The statement executed above is the same as the example below:
 
@@ -507,7 +509,7 @@ Let's see, in the example below, how to change the charset of the app schema:
 
 .. code-block:: php
 
-    $database->alterSchema('app')->charset('utf8')->run();
+    $database->alterSchema('app')->charset('utf8')->run(); // int or string
 
 .. code-block:: sql
 
@@ -523,7 +525,7 @@ Let's see how to remove the app schema:
 
 .. code-block:: php
 
-    $database->dropSchema('app')->run();
+    $database->dropSchema('app')->run(); // int or string
 
 .. code-block:: sql
 
@@ -551,7 +553,7 @@ columns and indexes in it:
                     ->default('basic')
                     ->comment('User type used in the authorization system');
                 $def->index()->uniqueKey('email');
-            })->run();
+            })->run(); // int or string
 
 The PHP example above will build and execute the following SQL:
 
@@ -582,7 +584,7 @@ Users table:
              ->add(function (TableDefinition $def) {
                 $def->column('configs')->json()->default('{}');
                 $def->column('birthday')->date()->null()->after('name');
-             })->run();
+             })->run(); // int or string
 
 The code above will build and execute the following statement:
 
@@ -599,7 +601,7 @@ DROP TABLE removes one or more tables from a database schema:
 
 .. code-block:: php
 
-    $database->dropTable('Users')->run();
+    $database->dropTable('Users')->run(); // int or string
 
 .. code-block:: sql
 
