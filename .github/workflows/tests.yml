@@ -56,7 +56,7 @@ jobs:
 
       - name: PHPStan
         run:
-          vendor/bin/phpstan analyse --xdebug -vvv
+          vendor/bin/phpstan analyse -vvv
 
       - name: PHPUnit
         env:
