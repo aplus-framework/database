@@ -18,11 +18,13 @@ jobs:
       mariadb:
         image: mariadb
         env:
+          MARIADB_MYSQL_LOCALHOST_USER: 1
+          MARIADB_MYSQL_LOCALHOST_GRANTS: USAGE
           MYSQL_DATABASE: framework-tests
           MYSQL_ROOT_PASSWORD: password
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="healthcheck.sh --su-mysql --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
 
     name: PHP 8.1 - MariaDB
 
@@ -83,11 +85,13 @@ jobs:
       mariadb:
         image: mariadb
         env:
+          MARIADB_MYSQL_LOCALHOST_USER: 1
+          MARIADB_MYSQL_LOCALHOST_GRANTS: USAGE
           MYSQL_DATABASE: framework-tests
           MYSQL_ROOT_PASSWORD: password
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="healthcheck.sh --su-mysql --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
 
     name: PHP 8.2 - MariaDB - Last
 
