@@ -83,7 +83,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "$type JOIN $table $clause $conditional".
+     * Adds a JOIN clause with "$type JOIN $table $clause $conditional".
      *
      * @param Closure|string $table Table factor
      * @param string $type JOIN type. One of: `CROSS`, `INNER`, `LEFT`, `LEFT OUTER`,
@@ -106,7 +106,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "JOIN $table ON $conditional".
+     * Adds a JOIN clause with "JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -119,7 +119,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -132,7 +132,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "INNER JOIN $table ON $conditional".
+     * Adds a JOIN clause with "INNER JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -145,7 +145,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "INNER JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "INNER JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -158,7 +158,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "CROSS JOIN $table".
+     * Adds a JOIN clause with "CROSS JOIN $table".
      *
      * @param Closure|string $table Table factor
      *
@@ -170,7 +170,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "CROSS JOIN $table ON $conditional".
+     * Adds a JOIN clause with "CROSS JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -183,7 +183,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "CROSS JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "CROSS JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -196,7 +196,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "LEFT JOIN $table ON $conditional".
+     * Adds a JOIN clause with "LEFT JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -209,7 +209,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "LEFT JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "LEFT JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -222,7 +222,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "LEFT OUTER JOIN $table ON $conditional".
+     * Adds a JOIN clause with "LEFT OUTER JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -235,7 +235,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "LEFT OUTER JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "LEFT OUTER JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -248,7 +248,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "RIGHT JOIN $table ON $conditional".
+     * Adds a JOIN clause with "RIGHT JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -261,7 +261,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "RIGHT JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "RIGHT JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -274,7 +274,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "RIGHT OUTER JOIN $table ON $conditional".
+     * Adds a JOIN clause with "RIGHT OUTER JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor
      * @param Closure $conditional Conditional expression
@@ -287,7 +287,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "RIGHT OUTER JOIN $table USING ...$columns".
+     * Adds a JOIN clause with "RIGHT OUTER JOIN $table USING ...$columns".
      *
      * @param Closure|string $table Table factor
      * @param Closure|string ...$columns Columns list
@@ -300,7 +300,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "NATURAL JOIN $table".
+     * Adds a JOIN clause with "NATURAL JOIN $table".
      *
      * @param Closure|string $table Table factor
      *
@@ -312,7 +312,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "NATURAL LEFT JOIN $table".
+     * Adds a JOIN clause with "NATURAL LEFT JOIN $table".
      *
      * @param Closure|string $table Table factor
      *
@@ -324,7 +324,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "NATURAL LEFT OUTER JOIN $table".
+     * Adds a JOIN clause with "NATURAL LEFT OUTER JOIN $table".
      *
      * @param Closure|string $table Table factor
      *
@@ -336,7 +336,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "NATURAL RIGHT JOIN $table".
+     * Adds a JOIN clause with "NATURAL RIGHT JOIN $table".
      *
      * @param Closure|string $table Table factor
      *
@@ -348,7 +348,7 @@ trait Join
     }
 
     /**
-     * Sets the JOIN clause as "NATURAL RIGHT OUTER JOIN $table".
+     * Adds a JOIN clause with "NATURAL RIGHT OUTER JOIN $table".
      *
      * @param Closure|string $table Table factor
      *
