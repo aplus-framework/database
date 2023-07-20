@@ -24,6 +24,7 @@ use LogicException;
 class Select extends Statement
 {
     use Traits\Join;
+    use Traits\GroupBy;
     use Traits\Having;
     use Traits\OrderBy;
 
@@ -525,6 +526,11 @@ class Select extends Statement
         $part = $this->renderWhere();
         if ($part) {
             $this->hasFrom('WHERE');
+            $sql .= $part . \PHP_EOL;
+        }
+        $part = $this->renderGroupBy();
+        if ($part) {
+            $this->hasFrom('GROUP BY');
             $sql .= $part . \PHP_EOL;
         }
         $part = $this->renderHaving();

@@ -272,6 +272,15 @@ final class SelectTest extends TestCase
         );
     }
 
+    public function testGroupBy() : void
+    {
+        $part = $this->selectAllFrom('t1');
+        self::assertSame(
+            $part . " GROUP BY `name` ASC, `id`\n",
+            $this->select->groupByAsc('name')->groupBy('id')->sql()
+        );
+    }
+
     public function testHaving() : void
     {
         $part = $this->selectAllFrom('t1');
