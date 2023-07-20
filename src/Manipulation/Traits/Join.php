@@ -158,6 +158,18 @@ trait Join
     }
 
     /**
+     * Sets the JOIN clause as "CROSS JOIN $table".
+     *
+     * @param Closure|string $table Table factor
+     *
+     * @return static
+     */
+    public function crossJoin(Closure | string $table) : static
+    {
+        return $this->setJoin($table, 'CROSS');
+    }
+
+    /**
      * Sets the JOIN clause as "CROSS JOIN $table ON $conditional".
      *
      * @param Closure|string $table Table factor

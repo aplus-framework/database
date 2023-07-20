@@ -157,6 +157,12 @@ final class JoinTest extends TestCase
         self::assertSame(' INNER JOIN `t1` USING (`user_id`)', $this->statement->renderJoin());
     }
 
+    public function testCrossJoin() : void
+    {
+        $this->statement->crossJoin('t1');
+        self::assertSame(' CROSS JOIN `t1`', $this->statement->renderJoin());
+    }
+
     public function testCrossJoinOn() : void
     {
         $this->statement->crossJoinOn('t1', static fn () => 't1.id = t2.id');
