@@ -81,17 +81,30 @@ final class JoinTest extends TestCase
     {
         self::assertNull($this->statement->renderJoin());
         $this->statement->join('users');
-        self::assertSame(' JOIN `users`', $this->statement->renderJoin());
-        $this->statement->join('users', 'natural');
-        self::assertSame(' NATURAL JOIN `users`', $this->statement->renderJoin());
-        $this->statement->join('users', 'cross', 'using', ['user_id']);
         self::assertSame(
-            ' CROSS JOIN `users` USING (`user_id`)',
+            ' JOIN `users`',
             $this->statement->renderJoin()
         );
-        $this->statement->join('users', 'left', 'on', static fn () => 'profiles.user_id = users.id');
+    }
+
+    public function testMultipleJoins() : void
+    {
+        self::assertNull($this->statement->renderJoin());
+        $this->statement->join('users');
         self::assertSame(
-            ' LEFT JOIN `users` ON (profiles.user_id = users.id)',
+            ' JOIN `users`',
+            $this->statement->renderJoin()
+        );
+        $this->statement->join('users', 'natural');
+        self::assertSame(
+            ' JOIN `users`' . \PHP_EOL . ' NATURAL JOIN `users`',
+            $this->statement->renderJoin()
+        );
+        $this->statement->join('foo', 'inner');
+        self::assertSame(
+            ' JOIN `users`' . \PHP_EOL .
+            ' NATURAL JOIN `users`' . \PHP_EOL .
+            ' INNER JOIN `foo`',
             $this->statement->renderJoin()
         );
     }

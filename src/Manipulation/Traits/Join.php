@@ -365,7 +365,7 @@ trait Join
         string $clause = null,
         Closure | array $expression = null
     ) : static {
-        $this->sql['join'] = [
+        $this->sql['join'][] = [
             'type' => $type,
             'table' => $table,
             'clause' => $clause,
@@ -384,17 +384,24 @@ trait Join
         if ( ! isset($this->sql['join'])) {
             return null;
         }
-        $type = $this->renderJoinType($this->sql['join']['type']);
-        $conditional = $this->renderJoinConditional(
-            $type,
-            $this->sql['join']['table'],
-            $this->sql['join']['clause'],
-            $this->sql['join']['expression']
-        );
-        if ($type) {
-            $type .= ' ';
+        $result = '';
+        foreach ($this->sql['join'] as $index => $join) {
+            $type = $this->renderJoinType($join['type']);
+            $conditional = $this->renderJoinConditional(
+                $type,
+                $join['table'],
+                $join['clause'],
+                $join['expression']
+            );
+            if ($type) {
+                $type .= ' ';
+            }
+            if ($index > 0) {
+                $result .= \PHP_EOL;
+            }
+            $result .= " {$type}JOIN {$conditional}";
         }
-        return " {$type}JOIN {$conditional}";
+        return $result;
     }
 
     /**
