@@ -109,6 +109,15 @@ final class JoinTest extends TestCase
         );
     }
 
+    public function testTableAlias() : void
+    {
+        $this->statement->join(['u' => 'users']);
+        self::assertSame(
+            ' JOIN `users` AS `u`',
+            $this->statement->renderJoin()
+        );
+    }
+
     public function testInvalidJoinType() : void
     {
         $this->statement->join('t1', 'innes');
