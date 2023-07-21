@@ -17,6 +17,8 @@ use Closure;
  * @see https://mariadb.com/kb/en/group-by/
  *
  * @package database
+ *
+ * @since 3.4
  */
 trait GroupBy
 {
