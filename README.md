@@ -1,4 +1,4 @@
-<a href="https://gitlab.com/aplus-framework/libraries/database"><img src="https://gitlab.com/aplus-framework/libraries/database/-/raw/master/guide/image.png" alt="Aplus Framework Database Library" align="right" width="100"></a>
+<a href="https://github.com/aplus-framework/database"><img src="https://raw.githubusercontent.com/aplus-framework/database/master/guide/image.png" alt="Aplus Framework Database Library" align="right" width="100"></a>
 
 # Aplus Framework Database Library
 
@@ -7,7 +7,6 @@
 - [API Documentation](https://docs.aplus-framework.com/packages/database.html)
 
 [![tests](https://github.com/aplus-framework/database/actions/workflows/tests.yml/badge.svg)](https://github.com/aplus-framework/database/actions/workflows/tests.yml)
-[![pipeline](https://gitlab.com/aplus-framework/libraries/database/badges/master/pipeline.svg)](https://gitlab.com/aplus-framework/libraries/database/-/pipelines?scope=branches)
-[![coverage](https://gitlab.com/aplus-framework/libraries/database/badges/master/coverage.svg?job=test:php)](https://aplus-framework.gitlab.io/libraries/database/coverage/)
+[![coverage](https://coveralls.io/repos/github/aplus-framework/database/badge.svg?branch=master)](https://coveralls.io/github/aplus-framework/database?branch=master)
 [![packagist](https://img.shields.io/packagist/v/aplus/database)](https://packagist.org/packages/aplus/database)
 [![open-source](https://img.shields.io/badge/open--source-sponsor-magenta)](https://aplus-framework.com/sponsor)

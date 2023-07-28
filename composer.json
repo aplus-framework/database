@@ -21,9 +21,9 @@
     "homepage": "https://aplus-framework.com/packages/database",
     "support": {
         "email": "support@aplus-framework.com",
-        "issues": "https://gitlab.com/aplus-framework/libraries/database/issues",
+        "issues": "https://github.com/aplus-framework/database/issues",
         "forum": "https://aplus-framework.com/forum",
-        "source": "https://gitlab.com/aplus-framework/libraries/database",
+        "source": "https://github.com/aplus-framework/database",
         "docs": "https://docs.aplus-framework.com/guides/libraries/database/"
     },
     "funding": [
