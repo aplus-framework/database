@@ -37,7 +37,7 @@ trait Select
 
     protected function renderSelect() : ?string
     {
-        if ( ! isset($this->sql['select'])) {
+        if (!isset($this->sql['select'])) {
             return null;
         }
         if (isset($this->sql['values'])) {

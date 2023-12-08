@@ -52,7 +52,7 @@ class StatementMock extends Statement
 
     public function renderOptions() : ?string
     {
-        if ( ! $this->hasOptions()) {
+        if (!$this->hasOptions()) {
             return null;
         }
         return \implode(' ', $this->sql['options']);

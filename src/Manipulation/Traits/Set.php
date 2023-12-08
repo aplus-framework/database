@@ -40,7 +40,7 @@ trait Set
      */
     protected function renderSet() : ?string
     {
-        if ( ! $this->hasSet()) {
+        if (!$this->hasSet()) {
             return null;
         }
         $set = [];

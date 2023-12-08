@@ -71,7 +71,7 @@ class IndexDefinition extends DefinitionPart
 
     protected function sql() : string
     {
-        if ( ! $this->index) {
+        if (!$this->index) {
             throw new RuntimeException("Key type not set in index {$this->name}");
         }
         return $this->index->sql();

@@ -72,12 +72,12 @@ class DatabaseCollector extends Collector
     public function getContents() : string
     {
         \ob_start();
-        if ( ! isset($this->database)) {
+        if (!isset($this->database)) {
             echo '<p>This collector has not been added to a Database instance.</p>';
             return \ob_get_clean(); // @phpstan-ignore-line
         }
         echo $this->showHeader();
-        if ( ! $this->hasData()) {
+        if (!$this->hasData()) {
             echo '<p>Did not run statements.</p>';
             return \ob_get_clean(); // @phpstan-ignore-line
         }

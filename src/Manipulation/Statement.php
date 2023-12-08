@@ -92,7 +92,7 @@ abstract class Statement extends \Framework\Database\Statement
      */
     protected function renderLimit() : ?string
     {
-        if ( ! isset($this->sql['limit'])) {
+        if (!isset($this->sql['limit'])) {
             return null;
         }
         if ($this->sql['limit']['limit'] < 1) {
