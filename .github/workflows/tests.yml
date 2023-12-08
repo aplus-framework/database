@@ -63,7 +63,7 @@ jobs:
       - name: PHPUnit
         env:
           DB_HOST: 127.0.0.1
-        run: vendor/bin/phpunit --verbose
+        run: vendor/bin/phpunit
 
       - name: Upload coverage results to Coveralls
         env:
@@ -114,7 +114,7 @@ jobs:
       - name: PHPUnit
         env:
           DB_HOST: 127.0.0.1
-        run: vendor/bin/phpunit --verbose
+        run: vendor/bin/phpunit
 
   mysql:
     runs-on: ubuntu-20.04
@@ -155,7 +155,7 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_IMAGE: mysql
-        run: vendor/bin/phpunit --verbose
+        run: vendor/bin/phpunit
 
   mysql-last:
     runs-on: ubuntu-20.04
@@ -196,4 +196,4 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_IMAGE: mysql
-        run: vendor/bin/phpunit --verbose
+        run: vendor/bin/phpunit
