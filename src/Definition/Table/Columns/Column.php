@@ -58,7 +58,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderLength() : ?string
     {
-        if ( ! isset($this->length[0])) {
+        if (!isset($this->length[0])) {
             return null;
         }
         $length = $this->database->quote($this->length[0]);
@@ -78,7 +78,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderCheck() : ?string
     {
-        if ( ! isset($this->check)) {
+        if (!isset($this->check)) {
             return null;
         }
         return ' CHECK (' . ($this->check)($this->database) . ')';
@@ -120,7 +120,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderDefault() : ?string
     {
-        if ( ! isset($this->default)) {
+        if (!isset($this->default)) {
             return null;
         }
         $default = $this->default instanceof Closure
@@ -142,7 +142,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderComment() : ?string
     {
-        if ( ! isset($this->comment)) {
+        if (!isset($this->comment)) {
             return null;
         }
         return ' COMMENT ' . $this->database->quote($this->comment);
@@ -159,7 +159,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderPrimaryKey() : ?string
     {
-        if ( ! $this->primaryKey) {
+        if (!$this->primaryKey) {
             return null;
         }
         return ' PRIMARY KEY';
@@ -176,7 +176,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderUniqueKey() : ?string
     {
-        if ( ! $this->uniqueKey) {
+        if (!$this->uniqueKey) {
             return null;
         }
         return ' UNIQUE KEY';
@@ -193,7 +193,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderFirst() : ?string
     {
-        if ( ! $this->first) {
+        if (!$this->first) {
             return null;
         }
         return ' FIRST';
@@ -212,7 +212,7 @@ abstract class Column extends DefinitionPart
 
     protected function renderAfter() : ?string
     {
-        if ( ! isset($this->after)) {
+        if (!isset($this->after)) {
             return null;
         }
         if ($this->first) {

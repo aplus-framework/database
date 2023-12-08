@@ -34,7 +34,7 @@ abstract class StringDataType extends Column
 
     protected function renderCharset() : ?string
     {
-        if ( ! isset($this->charset)) {
+        if (!isset($this->charset)) {
             return null;
         }
         return ' CHARACTER SET ' . $this->database->quote($this->charset);
@@ -53,7 +53,7 @@ abstract class StringDataType extends Column
 
     protected function renderCollate() : ?string
     {
-        if ( ! isset($this->collation)) {
+        if (!isset($this->collation)) {
             return null;
         }
         return ' COLLATE ' . $this->database->quote($this->collation);

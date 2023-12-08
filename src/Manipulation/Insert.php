@@ -55,14 +55,14 @@ class Insert extends Statement
 
     protected function renderOptions() : ?string
     {
-        if ( ! $this->hasOptions()) {
+        if (!$this->hasOptions()) {
             return null;
         }
         $options = $this->sql['options'];
         foreach ($options as &$option) {
             $input = $option;
             $option = \strtoupper($option);
-            if ( ! \in_array($option, [
+            if (!\in_array($option, [
                 static::OPT_DELAYED,
                 static::OPT_IGNORE,
                 static::OPT_LOW_PRIORITY,
@@ -107,7 +107,7 @@ class Insert extends Statement
      */
     protected function renderInto() : string
     {
-        if ( ! isset($this->sql['into'])) {
+        if (!isset($this->sql['into'])) {
             throw new LogicException('INTO table must be set');
         }
         return ' INTO ' . $this->renderIdentifier($this->sql['into']);
@@ -134,7 +134,7 @@ class Insert extends Statement
      */
     protected function renderColumns() : ?string
     {
-        if ( ! isset($this->sql['columns'])) {
+        if (!isset($this->sql['columns'])) {
             return null;
         }
         $columns = [];
@@ -168,7 +168,7 @@ class Insert extends Statement
      */
     protected function renderOnDuplicateKeyUpdate() : ?string
     {
-        if ( ! isset($this->sql['on_duplicate'])) {
+        if (!isset($this->sql['on_duplicate'])) {
             return null;
         }
         $onDuplicate = [];
@@ -186,9 +186,9 @@ class Insert extends Statement
      */
     protected function checkRowStatementsConflict() : void
     {
-        if ( ! isset($this->sql['values'])
-            && ! isset($this->sql['select'])
-            && ! $this->hasSet()
+        if (!isset($this->sql['values'])
+            && !isset($this->sql['select'])
+            && !$this->hasSet()
         ) {
             throw new LogicException(
                 'The INSERT INTO must be followed by VALUES, SET or SELECT statement'

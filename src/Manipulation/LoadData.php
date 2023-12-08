@@ -44,14 +44,14 @@ class LoadData extends Statement
 
     protected function renderOptions() : ?string
     {
-        if ( ! $this->hasOptions()) {
+        if (!$this->hasOptions()) {
             return null;
         }
         $options = $this->sql['options'];
         foreach ($options as &$option) {
             $input = $option;
             $option = \strtoupper($option);
-            if ( ! \in_array($option, [
+            if (!\in_array($option, [
                 static::OPT_LOW_PRIORITY,
                 static::OPT_CONCURRENT,
                 static::OPT_LOCAL,
@@ -124,7 +124,7 @@ class LoadData extends Statement
 
     protected function renderCharset() : ?string
     {
-        if ( ! isset($this->sql['charset'])) {
+        if (!isset($this->sql['charset'])) {
             return null;
         }
         return " CHARACTER SET {$this->sql['charset']}";
@@ -167,9 +167,9 @@ class LoadData extends Statement
 
     protected function renderColumns() : ?string
     {
-        if ( ! isset($this->sql['columns_terminated_by'])
-            && ! isset($this->sql['columns_enclosed_by'])
-            && ! isset($this->sql['columns_escaped_by'])) {
+        if (!isset($this->sql['columns_terminated_by'])
+            && !isset($this->sql['columns_enclosed_by'])
+            && !isset($this->sql['columns_escaped_by'])) {
             return null;
         }
         $part = ' COLUMNS' . \PHP_EOL;
@@ -212,8 +212,8 @@ class LoadData extends Statement
 
     protected function renderLines() : ?string
     {
-        if ( ! isset($this->sql['lines_starting_by'])
-            && ! isset($this->sql['lines_terminated_by'])) {
+        if (!isset($this->sql['lines_starting_by'])
+            && !isset($this->sql['lines_terminated_by'])) {
             return null;
         }
         $part = ' LINES' . \PHP_EOL;
@@ -239,7 +239,7 @@ class LoadData extends Statement
 
     protected function renderIgnoreLines() : ?string
     {
-        if ( ! isset($this->sql['ignore_lines'])) {
+        if (!isset($this->sql['ignore_lines'])) {
             return null;
         }
         return " IGNORE {$this->sql['ignore_lines']} LINES";

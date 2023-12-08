@@ -245,7 +245,7 @@ abstract class TableStatement extends Statement
 
     protected function renderOptions() : ?string
     {
-        if ( ! isset($this->sql['options'])) {
+        if (!isset($this->sql['options'])) {
             return null;
         }
         $options = [];

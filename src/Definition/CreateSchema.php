@@ -32,7 +32,7 @@ class CreateSchema extends Statement
 
     protected function renderOrReplace() : ?string
     {
-        if ( ! isset($this->sql['or_replace'])) {
+        if (!isset($this->sql['or_replace'])) {
             return null;
         }
         return ' OR REPLACE';
@@ -49,7 +49,7 @@ class CreateSchema extends Statement
 
     protected function renderIfNotExists() : ?string
     {
-        if ( ! isset($this->sql['if_not_exists'])) {
+        if (!isset($this->sql['if_not_exists'])) {
             return null;
         }
         if (isset($this->sql['or_replace'])) {
@@ -92,7 +92,7 @@ class CreateSchema extends Statement
 
     protected function renderCharset() : ?string
     {
-        if ( ! isset($this->sql['charset'])) {
+        if (!isset($this->sql['charset'])) {
             return null;
         }
         $charset = $this->database->quote($this->sql['charset']);
@@ -112,7 +112,7 @@ class CreateSchema extends Statement
 
     protected function renderCollate() : ?string
     {
-        if ( ! isset($this->sql['collation'])) {
+        if (!isset($this->sql['collation'])) {
             return null;
         }
         $collation = $this->database->quote($this->sql['collation']);

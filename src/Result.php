@@ -48,7 +48,7 @@ class Result
 
     public function __destruct()
     {
-        if ( ! $this->isFree()) {
+        if (!$this->isFree()) {
             $this->free();
         }
     }
@@ -94,7 +94,7 @@ class Result
     public function moveCursor(int $offset) : bool
     {
         $this->checkIsFree();
-        if ( ! $this->isBuffered()) {
+        if (!$this->isBuffered()) {
             throw new LogicException('Cursor cannot be moved on unbuffered results');
         }
         if ($offset < 0 || ($offset !== 0 && $offset >= $this->result->num_rows)) {
