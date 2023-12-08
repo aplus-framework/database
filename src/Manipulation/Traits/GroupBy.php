@@ -88,7 +88,7 @@ trait GroupBy
      */
     protected function renderGroupBy() : ?string
     {
-        if ( ! isset($this->sql['group_by'])) {
+        if (!isset($this->sql['group_by'])) {
             return null;
         }
         $expressions = [];
