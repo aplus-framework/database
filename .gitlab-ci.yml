@@ -36,8 +36,8 @@ test:php:
       - build/docs/
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
-test:php-last:
-  image: registry.gitlab.com/aplus-framework/images/base:3
+test:php-latest:
+  image: registry.gitlab.com/aplus-framework/images/base:latest
   stage: test
   timeout: 10 minutes
   cache:
@@ -80,8 +80,8 @@ test:php:mysql:
     - vendor/bin/phpunit --colors=never
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
-test:php:mysql-last:
-  image: registry.gitlab.com/aplus-framework/images/base:3
+test:php:mysql-latest:
+  image: registry.gitlab.com/aplus-framework/images/base:latest
   stage: test
   timeout: 10 minutes
   cache:
