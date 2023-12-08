@@ -34,7 +34,7 @@ class AlterSchema extends Statement
 
     protected function renderSchema() : ?string
     {
-        if ( ! isset($this->sql['schema'])) {
+        if (!isset($this->sql['schema'])) {
             return null;
         }
         $schema = $this->sql['schema'];
@@ -57,7 +57,7 @@ class AlterSchema extends Statement
 
     protected function renderCharset() : ?string
     {
-        if ( ! isset($this->sql['charset'])) {
+        if (!isset($this->sql['charset'])) {
             return null;
         }
         $charset = $this->database->quote($this->sql['charset']);
@@ -77,7 +77,7 @@ class AlterSchema extends Statement
 
     protected function renderCollate() : ?string
     {
-        if ( ! isset($this->sql['collation'])) {
+        if (!isset($this->sql['collation'])) {
             return null;
         }
         $collation = $this->database->quote($this->sql['collation']);
@@ -95,7 +95,7 @@ class AlterSchema extends Statement
 
     protected function renderUpgrade() : ?string
     {
-        if ( ! isset($this->sql['upgrade'])) {
+        if (!isset($this->sql['upgrade'])) {
             return null;
         }
         if (isset($this->sql['charset']) || isset($this->sql['collation'])) {
@@ -108,9 +108,9 @@ class AlterSchema extends Statement
 
     protected function checkSpecifications() : void
     {
-        if ( ! isset($this->sql['charset'])
-            && ! isset($this->sql['collation'])
-            && ! isset($this->sql['upgrade'])
+        if (!isset($this->sql['charset'])
+            && !isset($this->sql['collation'])
+            && !isset($this->sql['upgrade'])
         ) {
             throw new LogicException(
                 'ALTER SCHEMA must have a specification'

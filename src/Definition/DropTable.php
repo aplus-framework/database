@@ -33,7 +33,7 @@ class DropTable extends Statement
 
     protected function renderTemporary() : ?string
     {
-        if ( ! isset($this->sql['temporary'])) {
+        if (!isset($this->sql['temporary'])) {
             return null;
         }
         return ' TEMPORARY';
@@ -50,7 +50,7 @@ class DropTable extends Statement
 
     protected function renderIfExists() : ?string
     {
-        if ( ! isset($this->sql['if_exists'])) {
+        if (!isset($this->sql['if_exists'])) {
             return null;
         }
         return ' IF EXISTS';
@@ -69,7 +69,7 @@ class DropTable extends Statement
 
     protected function renderCommentToSave() : ?string
     {
-        if ( ! isset($this->sql['comment'])) {
+        if (!isset($this->sql['comment'])) {
             return null;
         }
         $comment = \strtr($this->sql['comment'], ['*/' => '* /']);
@@ -90,7 +90,7 @@ class DropTable extends Statement
 
     protected function renderTables() : string
     {
-        if ( ! isset($this->sql['tables'])) {
+        if (!isset($this->sql['tables'])) {
             throw new LogicException('Table names can not be empty');
         }
         $tables = $this->sql['tables'];
@@ -115,7 +115,7 @@ class DropTable extends Statement
 
     public function renderWait() : ?string
     {
-        if ( ! isset($this->sql['wait'])) {
+        if (!isset($this->sql['wait'])) {
             return null;
         }
         if ($this->sql['wait'] < 0) {

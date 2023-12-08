@@ -31,7 +31,7 @@ trait Values
         array | Closure | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
-        if ( ! \is_array($value)) {
+        if (!\is_array($value)) {
             $this->sql['values'][] = [$value, ...$values];
             return $this;
         }
@@ -54,7 +54,7 @@ trait Values
      */
     protected function renderValues() : ?string
     {
-        if ( ! isset($this->sql['values'])) {
+        if (!isset($this->sql['values'])) {
             return null;
         }
         $values = [];

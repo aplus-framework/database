@@ -37,7 +37,7 @@ class CreateTable extends TableStatement
 
     protected function renderOrReplace() : ?string
     {
-        if ( ! isset($this->sql['or_replace'])) {
+        if (!isset($this->sql['or_replace'])) {
             return null;
         }
         return ' OR REPLACE';
@@ -54,7 +54,7 @@ class CreateTable extends TableStatement
 
     protected function renderTemporary() : ?string
     {
-        if ( ! isset($this->sql['temporary'])) {
+        if (!isset($this->sql['temporary'])) {
             return null;
         }
         return ' TEMPORARY';
@@ -71,7 +71,7 @@ class CreateTable extends TableStatement
 
     protected function renderIfNotExists() : ?string
     {
-        if ( ! isset($this->sql['if_not_exists'])) {
+        if (!isset($this->sql['if_not_exists'])) {
             return null;
         }
         if (isset($this->sql['or_replace'])) {
@@ -114,7 +114,7 @@ class CreateTable extends TableStatement
 
     protected function renderDefinition() : string
     {
-        if ( ! isset($this->sql['definition'])) {
+        if (!isset($this->sql['definition'])) {
             throw new LogicException('Table definition must be set');
         }
         $definition = new TableDefinition($this->database);

@@ -71,7 +71,7 @@ class AlterTable extends TableStatement
 
     protected function renderOnline() : ?string
     {
-        if ( ! isset($this->sql['online'])) {
+        if (!isset($this->sql['online'])) {
             return null;
         }
         return ' ONLINE';
@@ -88,7 +88,7 @@ class AlterTable extends TableStatement
 
     protected function renderIgnore() : ?string
     {
-        if ( ! isset($this->sql['ignore'])) {
+        if (!isset($this->sql['ignore'])) {
             return null;
         }
         return ' IGNORE';
@@ -102,7 +102,7 @@ class AlterTable extends TableStatement
 
     protected function renderIfExists() : ?string
     {
-        if ( ! isset($this->sql['if_exists'])) {
+        if (!isset($this->sql['if_exists'])) {
             return null;
         }
         return ' IF EXISTS';
@@ -140,7 +140,7 @@ class AlterTable extends TableStatement
 
     protected function renderWait() : ?string
     {
-        if ( ! isset($this->sql['wait'])) {
+        if (!isset($this->sql['wait'])) {
             return null;
         }
         if ($this->sql['wait'] < 0) {
@@ -159,7 +159,7 @@ class AlterTable extends TableStatement
 
     protected function renderNoWait() : ?string
     {
-        if ( ! isset($this->sql['no_wait'])) {
+        if (!isset($this->sql['no_wait'])) {
             return null;
         }
         if (isset($this->sql['wait'])) {
@@ -199,7 +199,7 @@ class AlterTable extends TableStatement
 
     protected function renderAdd() : ?string
     {
-        if ( ! isset($this->sql['add'])) {
+        if (!isset($this->sql['add'])) {
             return null;
         }
         $parts = [];
@@ -243,7 +243,7 @@ class AlterTable extends TableStatement
 
     protected function renderChange() : ?string
     {
-        if ( ! isset($this->sql['change'])) {
+        if (!isset($this->sql['change'])) {
             return null;
         }
         $parts = [];
@@ -287,7 +287,7 @@ class AlterTable extends TableStatement
 
     protected function renderModify() : ?string
     {
-        if ( ! isset($this->sql['modify'])) {
+        if (!isset($this->sql['modify'])) {
             return null;
         }
         $parts = [];
@@ -319,7 +319,7 @@ class AlterTable extends TableStatement
 
     protected function renderDropColumns() : ?string
     {
-        if ( ! isset($this->sql['drop_columns'])) {
+        if (!isset($this->sql['drop_columns'])) {
             return null;
         }
         $drops = [];
@@ -339,7 +339,7 @@ class AlterTable extends TableStatement
 
     protected function renderDropPrimaryKey() : ?string
     {
-        if ( ! isset($this->sql['drop_primary_key'])) {
+        if (!isset($this->sql['drop_primary_key'])) {
             return null;
         }
         return ' DROP PRIMARY KEY';
@@ -359,7 +359,7 @@ class AlterTable extends TableStatement
 
     protected function renderDropKeys() : ?string
     {
-        if ( ! isset($this->sql['drop_keys'])) {
+        if (!isset($this->sql['drop_keys'])) {
             return null;
         }
         $drops = [];
@@ -385,7 +385,7 @@ class AlterTable extends TableStatement
 
     protected function renderDropForeignKeys() : ?string
     {
-        if ( ! isset($this->sql['drop_foreign_keys'])) {
+        if (!isset($this->sql['drop_foreign_keys'])) {
             return null;
         }
         $drops = [];
@@ -411,7 +411,7 @@ class AlterTable extends TableStatement
 
     protected function renderDropConstraints() : ?string
     {
-        if ( ! isset($this->sql['drop_constraints'])) {
+        if (!isset($this->sql['drop_constraints'])) {
             return null;
         }
         $drops = [];
@@ -431,7 +431,7 @@ class AlterTable extends TableStatement
 
     protected function renderDisableKeys() : ?string
     {
-        if ( ! isset($this->sql['disable_keys'])) {
+        if (!isset($this->sql['disable_keys'])) {
             return null;
         }
         return ' DISABLE KEYS';
@@ -445,7 +445,7 @@ class AlterTable extends TableStatement
 
     protected function renderEnableKeys() : ?string
     {
-        if ( ! isset($this->sql['enable_keys'])) {
+        if (!isset($this->sql['enable_keys'])) {
             return null;
         }
         return ' ENABLE KEYS';
@@ -459,7 +459,7 @@ class AlterTable extends TableStatement
 
     protected function renderRenameTo() : ?string
     {
-        if ( ! isset($this->sql['rename_to'])) {
+        if (!isset($this->sql['rename_to'])) {
             return null;
         }
         return ' RENAME TO ' . $this->database->protectIdentifier($this->sql['rename_to']);
@@ -475,7 +475,7 @@ class AlterTable extends TableStatement
 
     protected function renderOrderBy() : ?string
     {
-        if ( ! isset($this->sql['order_by'])) {
+        if (!isset($this->sql['order_by'])) {
             return null;
         }
         $columns = [];
@@ -493,7 +493,7 @@ class AlterTable extends TableStatement
 
     protected function renderRenameColumns() : ?string
     {
-        if ( ! isset($this->sql['rename_columns'])) {
+        if (!isset($this->sql['rename_columns'])) {
             return null;
         }
         $renames = [];
@@ -513,7 +513,7 @@ class AlterTable extends TableStatement
 
     protected function renderRenameKeys() : ?string
     {
-        if ( ! isset($this->sql['rename_keys'])) {
+        if (!isset($this->sql['rename_keys'])) {
             return null;
         }
         $renames = [];
@@ -536,7 +536,7 @@ class AlterTable extends TableStatement
 
     protected function renderConvertToCharset() : ?string
     {
-        if ( ! isset($this->sql['convert_to_charset'])) {
+        if (!isset($this->sql['convert_to_charset'])) {
             return null;
         }
         $charset = $this->database->quote($this->sql['convert_to_charset']['charset']);
@@ -555,7 +555,7 @@ class AlterTable extends TableStatement
 
     protected function renderCharset() : ?string
     {
-        if ( ! isset($this->sql['charset'])) {
+        if (!isset($this->sql['charset'])) {
             return null;
         }
         $charset = \strtolower($this->sql['charset']);
@@ -573,7 +573,7 @@ class AlterTable extends TableStatement
 
     protected function renderCollate() : ?string
     {
-        if ( ! isset($this->sql['collate'])) {
+        if (!isset($this->sql['collate'])) {
             return null;
         }
         $collate = \strtolower($this->sql['collate']);
@@ -602,11 +602,11 @@ class AlterTable extends TableStatement
 
     protected function renderLock() : ?string
     {
-        if ( ! isset($this->sql['lock'])) {
+        if (!isset($this->sql['lock'])) {
             return null;
         }
         $lock = \strtoupper($this->sql['lock']);
-        if ( ! \in_array($lock, [
+        if (!\in_array($lock, [
             static::LOCK_DEFAULT,
             static::LOCK_EXCLUSIVE,
             static::LOCK_NONE,
@@ -625,7 +625,7 @@ class AlterTable extends TableStatement
 
     protected function renderForce() : ?string
     {
-        if ( ! isset($this->sql['force'])) {
+        if (!isset($this->sql['force'])) {
             return null;
         }
         return ' FORCE';
@@ -651,11 +651,11 @@ class AlterTable extends TableStatement
 
     protected function renderAlgorithm() : ?string
     {
-        if ( ! isset($this->sql['algorithm'])) {
+        if (!isset($this->sql['algorithm'])) {
             return null;
         }
         $algo = \strtoupper($this->sql['algorithm']);
-        if ( ! \in_array($algo, [
+        if (!\in_array($algo, [
             static::ALGO_COPY,
             static::ALGO_DEFAULT,
             static::ALGO_INPLACE,

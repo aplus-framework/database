@@ -792,7 +792,7 @@ trait Where
      */
     protected function renderWhere(string $clause = 'where') : ?string
     {
-        if ( ! isset($this->sql[$clause])) {
+        if (!isset($this->sql[$clause])) {
             return null;
         }
         $parts = $this->sql[$clause];
@@ -953,7 +953,7 @@ trait Where
      */
     private function renderWhereValuesPartComparator(string $operator, array $values) : string
     {
-        if (isset($values[1]) || ! isset($values[0])) {
+        if (isset($values[1]) || !isset($values[0])) {
             throw new InvalidArgumentException(
                 "Operator {$operator} must receive exactly 1 parameter"
             );
@@ -993,7 +993,7 @@ trait Where
      */
     private function renderWhereValuesPartBetween(string $operator, array $values) : string
     {
-        if (isset($values[2]) || ! isset($values[0], $values[1])) {
+        if (isset($values[2]) || !isset($values[0], $values[1])) {
             throw new InvalidArgumentException(
                 "Operator {$operator} must receive exactly 2 parameters"
             );
@@ -1013,7 +1013,7 @@ trait Where
      */
     private function renderWhereValuesPartIsNull(string $operator, array $values)
     {
-        if ( ! empty($values)) {
+        if (!empty($values)) {
             throw new InvalidArgumentException(
                 "Operator {$operator} must not receive parameters"
             );

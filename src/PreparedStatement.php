@@ -103,7 +103,7 @@ class PreparedStatement
 
     public function sendBlob(string $chunk) : bool
     {
-        if ( ! $this->sendingBlob) {
+        if (!$this->sendingBlob) {
             $this->sendingBlob = true;
             $null = null;
             $this->statement->bind_param('b', $null);
