@@ -52,7 +52,7 @@ trait Join
      */
     protected function renderFrom() : ?string
     {
-        if ( ! isset($this->sql['from'])) {
+        if (!isset($this->sql['from'])) {
             return null;
         }
         $tables = [];
@@ -423,7 +423,7 @@ trait Join
      */
     protected function renderJoin() : ?string
     {
-        if ( ! isset($this->sql['join'])) {
+        if (!isset($this->sql['join'])) {
             return null;
         }
         $result = '';

@@ -85,8 +85,10 @@ class Database
      * @throws mysqli_sql_exception if connections fail
      */
     public function __construct(
-        #[SensitiveParameter] array | string $username,
-        #[SensitiveParameter] string $password = null,
+        #[SensitiveParameter]
+        array | string $username,
+        #[SensitiveParameter]
+        string $password = null,
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306,
@@ -175,13 +177,15 @@ class Database
      * @return static
      */
     protected function connect(
-        #[SensitiveParameter] array | string $username,
-        #[SensitiveParameter] string $password = null,
+        #[SensitiveParameter]
+        array | string $username,
+        #[SensitiveParameter]
+        string $password = null,
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306
     ) : static {
-        if ( ! \is_array($username)) {
+        if (!\is_array($username)) {
             $username = [
                 'host' => $host,
                 'port' => $port,
@@ -285,7 +289,7 @@ class Database
      */
     public function close() : bool
     {
-        if ( ! $this->isOpen()) {
+        if (!$this->isOpen()) {
             return true;
         }
         $closed = $this->mysqli->close();
@@ -633,7 +637,8 @@ class Database
      * @return Result
      */
     public function query(
-        #[Language('SQL')] string $statement,
+        #[Language('SQL')]
+        string $statement,
         bool $buffered = true
     ) : Result {
         $this->lastQuery = $statement;

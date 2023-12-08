@@ -10,9 +10,9 @@ services:
       - mariadb
       - mysql
     tty: true
-  package-last:
-    image: registry.gitlab.com/aplus-framework/images/package:3
-    container_name: package-database-last
+  package-latest:
+    image: registry.gitlab.com/aplus-framework/images/package:latest
+    container_name: package-database-latest
     working_dir: /package
     volumes:
       - .:/package

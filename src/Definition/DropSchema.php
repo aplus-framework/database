@@ -32,7 +32,7 @@ class DropSchema extends Statement
 
     protected function renderIfExists() : ?string
     {
-        if ( ! isset($this->sql['if_exists'])) {
+        if (!isset($this->sql['if_exists'])) {
             return null;
         }
         return ' IF EXISTS';

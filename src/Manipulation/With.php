@@ -32,7 +32,7 @@ class With extends Statement
 
     protected function renderOptions() : ?string
     {
-        if ( ! $this->hasOptions()) {
+        if (!$this->hasOptions()) {
             return null;
         }
         $options = $this->sql['options'];
@@ -68,7 +68,7 @@ class With extends Statement
 
     protected function renderReference() : string
     {
-        if ( ! isset($this->sql['references'])) {
+        if (!isset($this->sql['references'])) {
             throw new LogicException('References must be set');
         }
         $references = [];
@@ -99,7 +99,7 @@ class With extends Statement
 
     protected function renderSelect() : string
     {
-        if ( ! isset($this->sql['select'])) {
+        if (!isset($this->sql['select'])) {
             throw new LogicException('SELECT must be set');
         }
         return $this->sql['select'];

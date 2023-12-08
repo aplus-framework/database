@@ -181,14 +181,14 @@ class Select extends Statement
 
     protected function renderOptions() : ?string
     {
-        if ( ! $this->hasOptions()) {
+        if (!$this->hasOptions()) {
             return null;
         }
         $options = $this->sql['options'];
         foreach ($options as &$option) {
             $input = $option;
             $option = \strtoupper($option);
-            if ( ! \in_array($option, [
+            if (!\in_array($option, [
                 static::OPT_ALL,
                 static::OPT_DISTINCT,
                 static::OPT_DISTINCTROW,
@@ -261,7 +261,7 @@ class Select extends Statement
 
     protected function renderExpressions() : ?string
     {
-        if ( ! isset($this->sql['expressions'])) {
+        if (!isset($this->sql['expressions'])) {
             if ($this->hasFrom()) {
                 return ' *';
             }
@@ -308,7 +308,7 @@ class Select extends Statement
 
     protected function renderProcedure() : ?string
     {
-        if ( ! isset($this->sql['procedure'])) {
+        if (!isset($this->sql['procedure'])) {
             return null;
         }
         $arguments = [];
@@ -348,7 +348,7 @@ class Select extends Statement
 
     protected function renderIntoOutfile() : ?string
     {
-        if ( ! isset($this->sql['into_outfile'])) {
+        if (!isset($this->sql['into_outfile'])) {
             return null;
         }
         if (\is_file($this->sql['into_outfile']['filename'])) {
@@ -375,7 +375,7 @@ class Select extends Statement
             $definition .= ' FIELDS';
             foreach ($this->sql['into_outfile']['fields_options'] as $option => $value) {
                 $fieldsOption = \strtoupper($option);
-                if ( ! \in_array($fieldsOption, [
+                if (!\in_array($fieldsOption, [
                     static::EXP_FIELDS_TERMINATED_BY,
                     static::EXP_FIELDS_ENCLOSED_BY,
                     static::EXP_FIELDS_OPTIONALLY_ENCLOSED_BY,
@@ -398,7 +398,7 @@ class Select extends Statement
             $definition .= ' LINES';
             foreach ($this->sql['into_outfile']['lines_options'] as $option => $value) {
                 $linesOption = \strtoupper($option);
-                if ( ! \in_array($linesOption, [
+                if (!\in_array($linesOption, [
                     static::EXP_LINES_STARTING_BY,
                     static::EXP_LINES_TERMINATED_BY,
                 ], true)) {
@@ -431,7 +431,7 @@ class Select extends Statement
 
     protected function renderIntoDumpfile() : ?string
     {
-        if ( ! isset($this->sql['into_dumpfile'])) {
+        if (!isset($this->sql['into_dumpfile'])) {
             return null;
         }
         if (\is_file($this->sql['into_dumpfile']['filepath'])) {
@@ -484,7 +484,7 @@ class Select extends Statement
 
     protected function renderLock() : ?string
     {
-        if ( ! isset($this->sql['lock'])) {
+        if (!isset($this->sql['lock'])) {
             return null;
         }
         $wait = '';

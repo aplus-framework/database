@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" backupGlobals="false"
-         bootstrap="vendor/autoload.php" colors="true" convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true" convertWarningsToExceptions="true" stopOnError="false"
+         bootstrap="vendor/autoload.php" colors="true" stopOnError="false"
          stopOnFailure="false" stopOnIncomplete="false" stopOnSkipped="false"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-    <coverage processUncoveredFiles="true">
-        <include>
-            <directory suffix=".php">src</directory>
-        </include>
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.5/phpunit.xsd"
+         cacheDirectory=".phpunit.cache">
+    <coverage>
         <report>
             <clover outputFile="build/coverage/clover.xml"/>
             <html outputDirectory="build/coverage"/>
@@ -27,4 +24,9 @@
         <env name="DB_SCHEMA" value="framework-tests"/>
         <env name="XDEBUG_MODE" value="coverage"/>
     </php>
+    <source>
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </source>
 </phpunit>

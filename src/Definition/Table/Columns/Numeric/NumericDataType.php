@@ -36,7 +36,7 @@ abstract class NumericDataType extends Column
 
     protected function renderAutoIncrement() : ?string
     {
-        if ( ! $this->autoIncrement) {
+        if (!$this->autoIncrement) {
             return null;
         }
         return ' AUTO_INCREMENT';
@@ -53,7 +53,7 @@ abstract class NumericDataType extends Column
 
     protected function renderSigned() : ?string
     {
-        if ( ! $this->signed) {
+        if (!$this->signed) {
             return null;
         }
         return ' signed';
@@ -70,7 +70,7 @@ abstract class NumericDataType extends Column
 
     protected function renderUnsigned() : ?string
     {
-        if ( ! $this->unsigned) {
+        if (!$this->unsigned) {
             return null;
         }
         return ' unsigned';
@@ -87,7 +87,7 @@ abstract class NumericDataType extends Column
 
     protected function renderZerofill() : ?string
     {
-        if ( ! $this->zerofill) {
+        if (!$this->zerofill) {
             return null;
         }
         return ' zerofill';

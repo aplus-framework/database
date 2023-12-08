@@ -44,14 +44,14 @@ class Update extends Statement
 
     protected function renderOptions() : ?string
     {
-        if ( ! $this->hasOptions()) {
+        if (!$this->hasOptions()) {
             return null;
         }
         $options = $this->sql['options'];
         foreach ($options as &$option) {
             $input = $option;
             $option = \strtoupper($option);
-            if ( ! \in_array($option, [
+            if (!\in_array($option, [
                 static::OPT_IGNORE,
                 static::OPT_LOW_PRIORITY,
             ], true)) {
@@ -84,7 +84,7 @@ class Update extends Statement
 
     protected function renderTable() : string
     {
-        if ( ! isset($this->sql['table'])) {
+        if (!isset($this->sql['table'])) {
             throw new LogicException('Table references must be set');
         }
         $tables = [];
@@ -110,7 +110,7 @@ class Update extends Statement
 
     protected function renderSetPart() : string
     {
-        if ( ! $this->hasSet()) {
+        if (!$this->hasSet()) {
             throw new LogicException('SET statement must be set');
         }
         return $this->renderSet();

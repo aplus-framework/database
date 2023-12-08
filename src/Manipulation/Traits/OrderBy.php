@@ -86,7 +86,7 @@ trait OrderBy
      */
     protected function renderOrderBy() : ?string
     {
-        if ( ! isset($this->sql['order_by'])) {
+        if (!isset($this->sql['order_by'])) {
             return null;
         }
         $expressions = [];
