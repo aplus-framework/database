@@ -15,9 +15,25 @@ use PHPUnit\Framework\TestCase;
 final class FieldTest extends TestCase
 {
     /**
+     * @param int $type
+     * @param string|null $typeName
+     *
+     * @dataProvider typeProvider
+     */
+    public function testType(int $type, ?string $typeName) : void
+    {
+        $object = new \stdClass();
+        $object->flags = $type;
+        $object->type = $type;
+        $field = new Field($object);
+        self::assertSame($type, $field->type);
+        self::assertSame($typeName, $field->typeName);
+    }
+
+    /**
      * @return array<array<mixed>>
      */
-    public function typeProvider() : array
+    public static function typeProvider() : array
     {
         return [
             [\MYSQLI_TYPE_BIT, 'bit'],
@@ -51,21 +67,5 @@ final class FieldTest extends TestCase
             [\MYSQLI_TYPE_YEAR, 'year'],
             [-1, null],
         ];
-    }
-
-    /**
-     * @param int $type
-     * @param string|null $typeName
-     *
-     * @dataProvider typeProvider
-     */
-    public function testType(int $type, ?string $typeName) : void
-    {
-        $object = new \stdClass();
-        $object->flags = $type;
-        $object->type = $type;
-        $field = new Field($object);
-        self::assertSame($type, $field->type);
-        self::assertSame($typeName, $field->typeName);
     }
 }
