@@ -25,18 +25,9 @@ class Delete extends Statement
     use Traits\OrderBy;
     use Traits\Where;
 
-    /**
-     * @var string
-     */
-    public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
-    /**
-     * @var string
-     */
-    public const OPT_QUICK = 'QUICK';
-    /**
-     * @var string
-     */
-    public const OPT_IGNORE = 'IGNORE';
+    public const string OPT_LOW_PRIORITY = 'LOW_PRIORITY';
+    public const string OPT_QUICK = 'QUICK';
+    public const string OPT_IGNORE = 'IGNORE';
 
     protected function renderOptions() : ?string
     {

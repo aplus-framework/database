@@ -31,16 +31,12 @@ class Update extends Statement
      * Convert errors to warnings, which will not stop inserts of additional rows.
      *
      * @see https://mariadb.com/kb/en/insert-ignore/
-     *
-     * @var string
      */
-    public const OPT_IGNORE = 'IGNORE';
+    public const string OPT_IGNORE = 'IGNORE';
     /**
      * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
-     *
-     * @var string
      */
-    public const OPT_LOW_PRIORITY = 'LOW_PRIORITY';
+    public const string OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
     protected function renderOptions() : ?string
     {

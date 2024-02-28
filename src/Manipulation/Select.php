@@ -32,27 +32,21 @@ class Select extends Statement
      * Option to retrieve identical rows.
      *
      * @see Select::renderOptions()
-     *
-     * @var string
      */
-    public const OPT_ALL = 'ALL';
+    public const string OPT_ALL = 'ALL';
     /**
      * Option to not retrieve identical rows. Remove duplicates from the result set.
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/select/#distinct
-     *
-     * @var string
      */
-    public const OPT_DISTINCT = 'DISTINCT';
+    public const string OPT_DISTINCT = 'DISTINCT';
     /**
      * Alias of OPT_DISTINCT.
      *
      * @see Select::renderOptions()
-     *
-     * @var string
      */
-    public const OPT_DISTINCTROW = 'DISTINCTROW';
+    public const string OPT_DISTINCTROW = 'DISTINCTROW';
     /**
      * If the table is locked, HIGH_PRIORITY will be executed as soon as the lock is released,
      * even if other statements are queued.
@@ -60,10 +54,8 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
-     *
-     * @var string
      */
-    public const OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
+    public const string OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
     /**
      * Applicable to the JOIN queries. Tells the optimizer that
      * the tables must be read in the order they appear.
@@ -72,27 +64,21 @@ class Select extends Statement
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/join-syntax/
      * @see https://mariadb.com/kb/en/index-hints-how-to-force-query-plans/#forcing-join-order
-     *
-     * @var string
      */
-    public const OPT_STRAIGHT_JOIN = 'STRAIGHT_JOIN';
+    public const string OPT_STRAIGHT_JOIN = 'STRAIGHT_JOIN';
     /**
      * Forces the optimizer to use a temporary table.
      *
      * @see https://mariadb.com/kb/en/optimizer-hints/#sql_small_result-sql_big_result
-     *
-     * @var string
      */
-    public const OPT_SQL_SMALL_RESULT = 'SQL_SMALL_RESULT';
+    public const string OPT_SQL_SMALL_RESULT = 'SQL_SMALL_RESULT';
     /**
      * Forces the optimizer to avoid usage of a temporary table.
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/optimizer-hints/#sql_small_result-sql_big_result
-     *
-     * @var string
      */
-    public const OPT_SQL_BIG_RESULT = 'SQL_BIG_RESULT';
+    public const string OPT_SQL_BIG_RESULT = 'SQL_BIG_RESULT';
     /**
      * Forces the optimizer to use a temporary table to process the result.
      * This is useful to free locks as soon as possible.
@@ -102,7 +88,7 @@ class Select extends Statement
      *
      * @var string
      */
-    public const OPT_SQL_BUFFER_RESULT = 'SQL_BUFFER_RESULT';
+    public const string OPT_SQL_BUFFER_RESULT = 'SQL_BUFFER_RESULT';
     /**
      * If the query_cache_type system variable is set to 2 or DEMAND, and the current statement is
      * cacheable, SQL_CACHE causes the query to be cached.
@@ -110,10 +96,8 @@ class Select extends Statement
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/server-system-variables/#query_cache_type
      * @see https://mariadb.com/kb/en/query-cache/
-     *
-     * @var string
      */
-    public const OPT_SQL_CACHE = 'SQL_CACHE';
+    public const string OPT_SQL_CACHE = 'SQL_CACHE';
     /**
      * If the query_cache_type system variable is set to 2 or DEMAND, and the current statement is
      * cacheable, SQL_NO_CACHE causes the query not to be cached.
@@ -121,10 +105,8 @@ class Select extends Statement
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/server-system-variables/#query_cache_type
      * @see https://mariadb.com/kb/en/query-cache/
-     *
-     * @var string
      */
-    public const OPT_SQL_NO_CACHE = 'SQL_NO_CACHE';
+    public const string OPT_SQL_NO_CACHE = 'SQL_NO_CACHE';
     /**
      * SQL_CALC_FOUND_ROWS is only applied when using the LIMIT clause. If this option is used,
      * MariaDB will count how many rows would match the query, without the LIMIT clause.
@@ -132,52 +114,38 @@ class Select extends Statement
      *
      * @see Select::renderOptions()
      * @see https://mariadb.com/kb/en/found_rows/
-     *
-     * @var string
      */
-    public const OPT_SQL_CALC_FOUND_ROWS = 'SQL_CALC_FOUND_ROWS';
+    public const string OPT_SQL_CALC_FOUND_ROWS = 'SQL_CALC_FOUND_ROWS';
     /**
      * Clause to set the character of separation between fields. Default is \t.
      *
      * @see Select::intoOutfile()
-     *
-     * @var string
      */
-    public const EXP_FIELDS_TERMINATED_BY = 'TERMINATED BY';
+    public const string EXP_FIELDS_TERMINATED_BY = 'TERMINATED BY';
     /**
      * Clause to set the enclosure character of the fields. Default is ".
      *
      * @see Select::intoOutfile()
-     *
-     * @var string
      */
-    public const EXP_FIELDS_ENCLOSED_BY = 'ENCLOSED BY';
+    public const string EXP_FIELDS_ENCLOSED_BY = 'ENCLOSED BY';
     /**
      * @see Select::intoOutfile()
-     *
-     * @var string
      */
-    public const EXP_FIELDS_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
+    public const string EXP_FIELDS_OPTIONALLY_ENCLOSED_BY = 'OPTIONALLY ENCLOSED BY';
     /**
      * @see Select::intoOutfile()
-     *
-     * @var string
      */
-    public const EXP_FIELDS_ESCAPED_BY = 'ESCAPED BY';
+    public const string EXP_FIELDS_ESCAPED_BY = 'ESCAPED BY';
     /**
      * @see Select::intoOutfile()
-     *
-     * @var string
      */
-    public const EXP_LINES_STARTING_BY = 'STARTING BY';
+    public const string EXP_LINES_STARTING_BY = 'STARTING BY';
     /**
      * Clause to set the file End-Of-Line character. Default is \n.
      *
      * @see Select::intoOutfile()
-     *
-     * @var string
      */
-    public const EXP_LINES_TERMINATED_BY = 'TERMINATED BY';
+    public const string EXP_LINES_TERMINATED_BY = 'TERMINATED BY';
 
     protected function renderOptions() : ?string
     {
