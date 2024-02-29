@@ -9,8 +9,6 @@
  */
 namespace Framework\Database\Result;
 
-use Error;
-
 /**
  * Class Field.
  *
@@ -48,39 +46,39 @@ use Error;
  *
  * @package database
  */
-class Field
+readonly class Field
 {
-    protected string $name;
-    protected string $orgname;
-    protected string $table;
-    protected string $orgtable;
-    protected string $def;
-    protected string $db;
-    protected string $catalog;
-    protected int $maxLength;
-    protected int $length;
-    protected int $charsetnr;
-    protected int $flags;
-    protected int $type;
-    protected int $decimals;
-    protected ?string $typeName;
-    protected bool $flagBinary = false;
-    protected bool $flagBlob = false;
-    protected bool $flagEnum = false;
-    protected bool $flagGroup = false;
-    protected bool $flagNum = false;
-    protected bool $flagSet = false;
-    protected bool $flagTimestamp = false;
-    protected bool $flagUnsigned = false;
-    protected bool $flagZerofill = false;
-    protected bool $flagAutoIncrement = false;
-    protected bool $flagMultipleKey = false;
-    protected bool $flagNotNull = false;
-    protected bool $flagPartKey = false;
-    protected bool $flagPriKey = false;
-    protected bool $flagUniqueKey = false;
-    protected bool $flagNoDefaultValue = false;
-    protected bool $flagOnUpdateNow = false;
+    public string $name;
+    public string $orgname;
+    public string $table;
+    public string $orgtable;
+    public string $def;
+    public string $db;
+    public string $catalog;
+    public int $maxLength;
+    public int $length;
+    public int $charsetnr;
+    public int $flags;
+    public int $type;
+    public int $decimals;
+    public ?string $typeName;
+    public bool $flagBinary; // $isBinary
+    public bool $flagBlob;
+    public bool $flagEnum;
+    public bool $flagGroup;
+    public bool $flagNum;
+    public bool $flagSet;
+    public bool $flagTimestamp;
+    public bool $flagUnsigned;
+    public bool $flagZerofill;
+    public bool $flagAutoIncrement;
+    public bool $flagMultipleKey;
+    public bool $flagNotNull;
+    public bool $flagPartKey;
+    public bool $flagPriKey;
+    public bool $flagUniqueKey;
+    public bool $flagNoDefaultValue;
+    public bool $flagOnUpdateNow;
 
     public function __construct(\stdClass $field)
     {
@@ -92,16 +90,6 @@ class Field
         }
         $this->setTypeName();
         $this->setFlags();
-    }
-
-    public function __get(string $name) : mixed
-    {
-        if (\property_exists($this, $name)) {
-            return $this->{$name};
-        }
-        throw new Error(
-            'Undefined property: ' . static::class . '::$' . $name
-        );
     }
 
     protected function setTypeName() : void
@@ -142,56 +130,22 @@ class Field
 
     protected function setFlags() : void
     {
-        if ($this->flags & \MYSQLI_BINARY_FLAG) {
-            $this->flagBinary = true;
-        }
-        if ($this->flags & \MYSQLI_BLOB_FLAG) {
-            $this->flagBlob = true;
-        }
-        if ($this->flags & \MYSQLI_ENUM_FLAG) {
-            $this->flagEnum = true;
-        }
-        if ($this->flags & \MYSQLI_GROUP_FLAG) {
-            $this->flagGroup = true;
-        }
-        if ($this->flags & \MYSQLI_NUM_FLAG) {
-            $this->flagNum = true;
-        }
-        if ($this->flags & \MYSQLI_SET_FLAG) {
-            $this->flagSet = true;
-        }
-        if ($this->flags & \MYSQLI_TIMESTAMP_FLAG) {
-            $this->flagTimestamp = true;
-        }
-        if ($this->flags & \MYSQLI_UNSIGNED_FLAG) {
-            $this->flagUnsigned = true;
-        }
-        if ($this->flags & \MYSQLI_ZEROFILL_FLAG) {
-            $this->flagZerofill = true;
-        }
-        if ($this->flags & \MYSQLI_AUTO_INCREMENT_FLAG) {
-            $this->flagAutoIncrement = true;
-        }
-        if ($this->flags & \MYSQLI_MULTIPLE_KEY_FLAG) {
-            $this->flagMultipleKey = true;
-        }
-        if ($this->flags & \MYSQLI_NOT_NULL_FLAG) {
-            $this->flagNotNull = true;
-        }
-        if ($this->flags & \MYSQLI_PART_KEY_FLAG) {
-            $this->flagPartKey = true;
-        }
-        if ($this->flags & \MYSQLI_PRI_KEY_FLAG) {
-            $this->flagPriKey = true;
-        }
-        if ($this->flags & \MYSQLI_UNIQUE_KEY_FLAG) {
-            $this->flagUniqueKey = true;
-        }
-        if ($this->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG) {
-            $this->flagNoDefaultValue = true;
-        }
-        if ($this->flags & \MYSQLI_ON_UPDATE_NOW_FLAG) {
-            $this->flagOnUpdateNow = true;
-        }
+        $this->flagBinary = (bool) ($this->flags & \MYSQLI_BINARY_FLAG);
+        $this->flagBlob = (bool) ($this->flags & \MYSQLI_BLOB_FLAG);
+        $this->flagEnum = (bool) ($this->flags & \MYSQLI_ENUM_FLAG);
+        $this->flagGroup = (bool) ($this->flags & \MYSQLI_GROUP_FLAG);
+        $this->flagNum = (bool) ($this->flags & \MYSQLI_NUM_FLAG);
+        $this->flagSet = (bool) ($this->flags & \MYSQLI_SET_FLAG);
+        $this->flagTimestamp = (bool) ($this->flags & \MYSQLI_TIMESTAMP_FLAG);
+        $this->flagUnsigned = (bool) ($this->flags & \MYSQLI_UNSIGNED_FLAG);
+        $this->flagZerofill = (bool) ($this->flags & \MYSQLI_ZEROFILL_FLAG);
+        $this->flagAutoIncrement = (bool) ($this->flags & \MYSQLI_AUTO_INCREMENT_FLAG);
+        $this->flagMultipleKey = (bool) ($this->flags & \MYSQLI_MULTIPLE_KEY_FLAG);
+        $this->flagNotNull = (bool) ($this->flags & \MYSQLI_NOT_NULL_FLAG);
+        $this->flagPartKey = (bool) ($this->flags & \MYSQLI_PART_KEY_FLAG);
+        $this->flagPriKey = (bool) ($this->flags & \MYSQLI_PRI_KEY_FLAG);
+        $this->flagUniqueKey = (bool) ($this->flags & \MYSQLI_UNIQUE_KEY_FLAG);
+        $this->flagNoDefaultValue = (bool) ($this->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG);
+        $this->flagOnUpdateNow = (bool) ($this->flags & \MYSQLI_ON_UPDATE_NOW_FLAG);
     }
 }
