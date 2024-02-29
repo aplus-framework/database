@@ -10,3 +10,4 @@ parameters:
         - '#Call to protected method sql\(\) of class Framework\\Database\\Definition\\Table\\Indexes\\Index\.#'
         - '#Call to protected method sql\(\) of class Framework\\Database\\Definition\\Table\\TableDefinition\.#'
         - '#Cannot access offset [0-9]+ on array<int, Framework\\Database\\Result\\Field>\|false\.#'
+        - '#Class Framework\\Database\\Result\\Explain has an uninitialized readonly property#'
