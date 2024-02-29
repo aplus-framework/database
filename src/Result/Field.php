@@ -62,23 +62,23 @@ readonly class Field
     public int $type;
     public int $decimals;
     public ?string $typeName;
-    public bool $flagBinary; // $isBinary
-    public bool $flagBlob;
-    public bool $flagEnum;
-    public bool $flagGroup;
-    public bool $flagNum;
-    public bool $flagSet;
-    public bool $flagTimestamp;
-    public bool $flagUnsigned;
-    public bool $flagZerofill;
-    public bool $flagAutoIncrement;
-    public bool $flagMultipleKey;
-    public bool $flagNotNull;
-    public bool $flagPartKey;
-    public bool $flagPriKey;
-    public bool $flagUniqueKey;
-    public bool $flagNoDefaultValue;
-    public bool $flagOnUpdateNow;
+    public bool $isBinary;
+    public bool $isBlob;
+    public bool $isEnum;
+    public bool $isGroup;
+    public bool $isNum;
+    public bool $isSet;
+    public bool $isTimestamp;
+    public bool $isUnsigned;
+    public bool $isZerofill;
+    public bool $isAutoIncrement;
+    public bool $isMultipleKey;
+    public bool $isNotNull;
+    public bool $isPartKey;
+    public bool $isPriKey;
+    public bool $isUniqueKey;
+    public bool $isNoDefaultValue;
+    public bool $isOnUpdateNow;
 
     public function __construct(\stdClass $field)
     {
@@ -130,22 +130,22 @@ readonly class Field
 
     protected function setFlags() : void
     {
-        $this->flagBinary = (bool) ($this->flags & \MYSQLI_BINARY_FLAG);
-        $this->flagBlob = (bool) ($this->flags & \MYSQLI_BLOB_FLAG);
-        $this->flagEnum = (bool) ($this->flags & \MYSQLI_ENUM_FLAG);
-        $this->flagGroup = (bool) ($this->flags & \MYSQLI_GROUP_FLAG);
-        $this->flagNum = (bool) ($this->flags & \MYSQLI_NUM_FLAG);
-        $this->flagSet = (bool) ($this->flags & \MYSQLI_SET_FLAG);
-        $this->flagTimestamp = (bool) ($this->flags & \MYSQLI_TIMESTAMP_FLAG);
-        $this->flagUnsigned = (bool) ($this->flags & \MYSQLI_UNSIGNED_FLAG);
-        $this->flagZerofill = (bool) ($this->flags & \MYSQLI_ZEROFILL_FLAG);
-        $this->flagAutoIncrement = (bool) ($this->flags & \MYSQLI_AUTO_INCREMENT_FLAG);
-        $this->flagMultipleKey = (bool) ($this->flags & \MYSQLI_MULTIPLE_KEY_FLAG);
-        $this->flagNotNull = (bool) ($this->flags & \MYSQLI_NOT_NULL_FLAG);
-        $this->flagPartKey = (bool) ($this->flags & \MYSQLI_PART_KEY_FLAG);
-        $this->flagPriKey = (bool) ($this->flags & \MYSQLI_PRI_KEY_FLAG);
-        $this->flagUniqueKey = (bool) ($this->flags & \MYSQLI_UNIQUE_KEY_FLAG);
-        $this->flagNoDefaultValue = (bool) ($this->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG);
-        $this->flagOnUpdateNow = (bool) ($this->flags & \MYSQLI_ON_UPDATE_NOW_FLAG);
+        $this->isBinary = (bool) ($this->flags & \MYSQLI_BINARY_FLAG);
+        $this->isBlob = (bool) ($this->flags & \MYSQLI_BLOB_FLAG);
+        $this->isEnum = (bool) ($this->flags & \MYSQLI_ENUM_FLAG);
+        $this->isGroup = (bool) ($this->flags & \MYSQLI_GROUP_FLAG);
+        $this->isNum = (bool) ($this->flags & \MYSQLI_NUM_FLAG);
+        $this->isSet = (bool) ($this->flags & \MYSQLI_SET_FLAG);
+        $this->isTimestamp = (bool) ($this->flags & \MYSQLI_TIMESTAMP_FLAG);
+        $this->isUnsigned = (bool) ($this->flags & \MYSQLI_UNSIGNED_FLAG);
+        $this->isZerofill = (bool) ($this->flags & \MYSQLI_ZEROFILL_FLAG);
+        $this->isAutoIncrement = (bool) ($this->flags & \MYSQLI_AUTO_INCREMENT_FLAG);
+        $this->isMultipleKey = (bool) ($this->flags & \MYSQLI_MULTIPLE_KEY_FLAG);
+        $this->isNotNull = (bool) ($this->flags & \MYSQLI_NOT_NULL_FLAG);
+        $this->isPartKey = (bool) ($this->flags & \MYSQLI_PART_KEY_FLAG);
+        $this->isPriKey = (bool) ($this->flags & \MYSQLI_PRI_KEY_FLAG);
+        $this->isUniqueKey = (bool) ($this->flags & \MYSQLI_UNIQUE_KEY_FLAG);
+        $this->isNoDefaultValue = (bool) ($this->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG);
+        $this->isOnUpdateNow = (bool) ($this->flags & \MYSQLI_ON_UPDATE_NOW_FLAG);
     }
 }

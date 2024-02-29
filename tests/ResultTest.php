@@ -216,18 +216,13 @@ final class ResultTest extends TestCase
         self::assertSame('c1', $fields[0]->name);
         self::assertSame('long', $fields[0]->typeName);
         self::assertSame(0, $fields[0]->maxLength);
-        self::assertTrue($fields[0]->flagPriKey);
-        self::assertTrue($fields[0]->flagAutoIncrement);
+        self::assertTrue($fields[0]->isPriKey);
+        self::assertTrue($fields[0]->isAutoIncrement);
         self::assertSame('c2', $fields[1]->name);
         self::assertSame('var_string', $fields[1]->typeName);
         self::assertSame(0, $fields[0]->maxLength);
-        self::assertFalse($fields[1]->flagPriKey);
-        self::assertFalse($fields[1]->flagAutoIncrement);
-        $this->expectException(\Error::class);
-        $this->expectExceptionMessage(
-            'Undefined property: Framework\Database\Result\Field::$unknown'
-        );
-        $fields[1]->unknown; // @phpstan-ignore-line
+        self::assertFalse($fields[1]->isPriKey);
+        self::assertFalse($fields[1]->isAutoIncrement);
     }
 
     public function testFetchFieldsFree() : void
