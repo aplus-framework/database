@@ -21,6 +21,7 @@ use InvalidArgumentException;
  */
 class Delete extends Statement
 {
+    use Traits\Explain;
     use Traits\Join;
     use Traits\OrderBy;
     use Traits\Where;

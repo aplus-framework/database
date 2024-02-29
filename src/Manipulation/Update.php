@@ -22,6 +22,7 @@ use LogicException;
  */
 class Update extends Statement
 {
+    use Traits\Explain;
     use Traits\Join;
     use Traits\Set;
     use Traits\Where;

@@ -23,6 +23,7 @@ use LogicException;
  */
 class Select extends Statement
 {
+    use Traits\Explain;
     use Traits\Join;
     use Traits\GroupBy;
     use Traits\Having;
