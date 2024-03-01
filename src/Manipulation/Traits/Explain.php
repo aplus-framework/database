@@ -50,9 +50,9 @@ trait Explain
         if ($option !== null) {
             $opt = \strtoupper($option);
             if (!\in_array($opt, [
-                'EXTENDED',
-                'FORMAT=JSON',
-                'PARTITIONS',
+                static::EXP_EXTENDED,
+                static::EXP_FORMAT_JSON,
+                static::EXP_PARTITIONS,
             ], true)) {
                 throw new InvalidArgumentException('Invalid EXPLAIN option: ' . $option);
             }
