@@ -10,7 +10,6 @@ parameters:
         - '#Call to protected method sql\(\) of class Framework\\Database\\Definition\\Table\\Indexes\\IndexDefinition\.#'
         - '#Call to protected method sql\(\) of class Framework\\Database\\Definition\\Table\\Indexes\\Index\.#'
         - '#Call to protected method sql\(\) of class Framework\\Database\\Definition\\Table\\TableDefinition\.#'
-        - '#Cannot access offset [0-9]+ on array<int, Framework\\Database\\Result\\Field>\|false\.#'
         - '#Class Framework\\Database\\Result\\Field has an uninitialized readonly property#'
         - '#Class Framework\\Database\\Result\\Explain has an uninitialized readonly property#'
         - '#Readonly property Framework\\Database\\Result\\Field::\$[a-zA-Z0-9_]+ is assigned outside of the constructor.#'
