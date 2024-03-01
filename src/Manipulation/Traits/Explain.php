@@ -37,7 +37,11 @@ trait Explain
     public const string EXP_FORMAT_JSON = 'FORMAT=JSON';
 
     /**
+     * EXPLAIN provides information about statements.
+     *
      * @param string|null $option
+     *
+     * @see https://mariadb.com/kb/en/explain/
      *
      * @return array<int,Result>
      */
