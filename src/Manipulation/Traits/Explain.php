@@ -39,9 +39,9 @@ trait Explain
     /**
      * @param string|null $option
      *
-     * @return Result
+     * @return array<int,Result>
      */
-    public function explain(string $option = null) : Result
+    public function explain(string $option = null) : array
     {
         if ($option !== null) {
             $opt = \strtoupper($option);
@@ -55,7 +55,10 @@ trait Explain
             $option = ' ' . $opt;
         }
         $sql = 'EXPLAIN' . $option . \PHP_EOL . $this->sql();
-        $result = $this->database->query($sql)->fetch();
-        return new Result($result); // @phpstan-ignore-line
+        $results = [];
+        foreach ($this->database->query($sql)->fetchAll() as $row) {
+            $results[] = new Result($row); // @phpstan-ignore-line
+        }
+        return $results;
     }
 }
