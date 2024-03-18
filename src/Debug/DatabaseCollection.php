@@ -18,8 +18,5 @@ use Framework\Debug\Collection;
  */
 class DatabaseCollection extends Collection
 {
-    public function getIcon() : string
-    {
-        return (string) \file_get_contents(__DIR__ . '/icons/database.svg');
-    }
+    protected string $iconPath = __DIR__ . '/icons/database.svg';
 }
