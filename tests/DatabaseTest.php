@@ -385,19 +385,19 @@ final class DatabaseTest extends TestCase
     public function testInsertId() : void
     {
         $this->createDummyData();
-        self::assertSame(1, static::$database->insertId());
+        self::assertSame(1, static::$database->getInsertId());
         static::$database->exec(
             'INSERT INTO `t1` SET `c2` = "a"'
         );
-        self::assertSame(6, static::$database->insertId());
+        self::assertSame(6, static::$database->getInsertId());
         static::$database->exec(
             'INSERT INTO `t1` (`c2`) VALUES ("a"),("a"),("a")'
         );
-        self::assertSame(7, static::$database->insertId());
+        self::assertSame(7, static::$database->getInsertId());
         static::$database->exec(
             'INSERT INTO `t1` SET `c2` = "a"'
         );
-        self::assertSame(10, static::$database->insertId());
+        self::assertSame(10, static::$database->getInsertId());
     }
 
     public function testTransaction() : void
@@ -458,8 +458,8 @@ final class DatabaseTest extends TestCase
     public function testErrors() : void
     {
         $this->resetDatabase();
-        self::assertSame([], static::$database->errors());
-        self::assertNull(static::$database->error());
+        self::assertSame([], static::$database->getErrors());
+        self::assertNull(static::$database->getError());
         try {
             static::$database->use('Bar');
         } catch (\mysqli_sql_exception) {
@@ -471,21 +471,21 @@ final class DatabaseTest extends TestCase
                 'sqlstate' => '42000',
                 'error' => "Unknown database 'Bar'",
             ],
-        ], static::$database->errors());
-        self::assertSame("Unknown database 'Bar'", static::$database->error());
+        ], static::$database->getErrors());
+        self::assertSame("Unknown database 'Bar'", static::$database->getError());
     }
 
     public function testWarnings() : void
     {
-        self::assertSame(0, static::$database->warnings());
+        self::assertSame(0, static::$database->getWarningCount());
     }
 
     public function testLastQuery() : void
     {
         $sql = 'SELECT COUNT(*) FROM `t1`';
         static::$database->query($sql);
-        self::assertSame($sql, static::$database->lastQuery());
+        self::assertSame($sql, static::$database->getLastQuery());
         static::$database->exec($sql);
-        self::assertSame($sql, static::$database->lastQuery());
+        self::assertSame($sql, static::$database->getLastQuery());
     }
 }
