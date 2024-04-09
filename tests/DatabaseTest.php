@@ -477,7 +477,7 @@ final class DatabaseTest extends TestCase
 
     public function testWarnings() : void
     {
-        self::assertSame(0, static::$database->getWarningCount());
+        self::assertSame(0, static::$database->getWarningsCount());
     }
 
     public function testLastQuery() : void

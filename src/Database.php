@@ -345,7 +345,7 @@ class Database
         return $this->config;
     }
 
-    public function getWarningCount() : int
+    public function getWarningsCount() : int
     {
         return $this->mysqli->warning_count;
     }
