@@ -33,6 +33,7 @@ use JetBrains\PhpStorm\Language;
 use LogicException;
 use mysqli;
 use mysqli_sql_exception;
+use mysqli_warning;
 use RuntimeException;
 use SensitiveParameter;
 
@@ -348,6 +349,11 @@ class Database
     public function getWarningsCount() : int
     {
         return $this->mysqli->warning_count;
+    }
+
+    public function getWarnings() : false | mysqli_warning
+    {
+        return $this->mysqli->get_warnings();
     }
 
     /**
