@@ -199,7 +199,9 @@ class Database
         if ($this->failoverIndex === null) {
             $this->config = $config;
         }
-        \mysqli_report($config['report']);
+        if (isset($config['report'])) {
+            \mysqli_report($config['report']);
+        }
         $this->mysqli = new mysqli();
         foreach ($config['options'] as $option => $value) {
             $this->mysqli->options($option, $value);
