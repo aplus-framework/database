@@ -234,6 +234,6 @@ class Result
         foreach ($fields as &$field) {
             $field = new Field($field);
         }
-        return $fields;
+        return $fields; // @phpstan-ignore-line
     }
 }
