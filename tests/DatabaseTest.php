@@ -367,7 +367,7 @@ final class DatabaseTest extends TestCase
             PreparedStatement::class,
             static::$database->prepare('SELECT * FROM `t1` WHERE `c1` = ?')
         );
-        $this->expectException(\mysqli_sql_exception::class);
+        $this->expectException(mysqli_sql_exception::class);
         static::$database->prepare('FOO');
     }
 
@@ -441,7 +441,7 @@ final class DatabaseTest extends TestCase
             });
         } catch (\Exception $exception) {
             $schema = \getenv('DB_SCHEMA');
-            self::assertInstanceOf(\mysqli_sql_exception::class, $exception);
+            self::assertInstanceOf(mysqli_sql_exception::class, $exception);
             self::assertSame("Table '{$schema}.t1000' doesn't exist", $exception->getMessage());
         }
         self::assertSame(7, static::$database->exec('SELECT * FROM `t1`'));
@@ -450,7 +450,7 @@ final class DatabaseTest extends TestCase
     public function testUse() : void
     {
         static::$database->use(\getenv('DB_SCHEMA')); // @phpstan-ignore-line
-        $this->expectException(\mysqli_sql_exception::class);
+        $this->expectException(mysqli_sql_exception::class);
         $this->expectExceptionMessage("Unknown database 'Foo'");
         static::$database->use('Foo');
     }
@@ -462,7 +462,7 @@ final class DatabaseTest extends TestCase
         self::assertNull(static::$database->error());
         try {
             static::$database->use('Bar');
-        } catch (\mysqli_sql_exception) {
+        } catch (mysqli_sql_exception) {
             //
         }
         self::assertSame([
