@@ -132,8 +132,10 @@ class Result
         $class ??= $this->fetchClass;
         $constructor = $constructor ?: $this->fetchConstructor;
         if ($constructor) {
+            // @phpstan-ignore-next-line
             return $this->result->fetch_object($class, $constructor);
         }
+        // @phpstan-ignore-next-line
         return $this->result->fetch_object($class);
     }
 
