@@ -115,9 +115,16 @@ final class DatabaseTest extends TestCase
         }
     }
 
+    protected function mariadbHasSSL() : bool
+    {
+        $version = static::$database->getConnection()->get_server_info();
+        $version = \explode('-', $version, 2)[0];
+        return \version_compare($version, '11.4.0', '>=');
+    }
+
     public function testConnectionWithSSL() : void
     {
-        if (\getenv('DB_IMAGE') === 'mariadb') {
+        if (\getenv('DB_IMAGE') === 'mariadb' && !$this->mariadbHasSSL()) {
             $this->expectException(mysqli_sql_exception::class);
             $this->expectExceptionMessage('MySQL server has gone away');
         }
@@ -146,7 +153,7 @@ final class DatabaseTest extends TestCase
 
     public function testConnectionWithSSLNotVerified() : void
     {
-        if (\getenv('DB_IMAGE') === 'mariadb') {
+        if (\getenv('DB_IMAGE') === 'mariadb' && !$this->mariadbHasSSL()) {
             $this->expectException(mysqli_sql_exception::class);
             $this->expectExceptionMessage('MySQL server has gone away');
         }
