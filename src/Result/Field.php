@@ -9,78 +9,136 @@
  */
 namespace Framework\Database\Result;
 
-use Error;
-
 /**
  * Class Field.
  *
- * @property-read string $name The name of the column
- * @property-read string $orgname Original column name if an alias was specified
- * @property-read string $table The name of the table this field belongs to (if not calculated)
- * @property-read string $orgtable Original table name if an alias was specified
- * @property-read string $def The default value for this field, represented as a string
- * @property-read string $db
- * @property-read string $catalog
- * @property-read int $maxLength The maximum width of the field for the result set
- * @property-read int $length The width of the field, as specified in the table definition
- * @property-read int $charsetnr The character set number for the field
- * @property-read int $flags An integer representing the bit-flags for the field
- * @property-read int $type The data type used for this field
- * @property-read int $decimals The number of decimals used (for integer fields)
- * @property-read string|null $typeName The data type name
- * @property-read bool $flagBinary Tell if it has the MYSQLI_BINARY_FLAG bit-flag
- * @property-read bool $flagBlob Tell if it has the MYSQLI_BLOB_FLAG bit-flag
- * @property-read bool $flagEnum Tell if it has the MYSQLI_ENUM_FLAG bit-flag
- * @property-read bool $flagGroup Tell if it has the MYSQLI_GROUP_FLAG bit-flag
- * @property-read bool $flagNum Tell if it has the MYSQLI_NUM_FLAG bit-flag
- * @property-read bool $flagSet Tell if it has the MYSQLI_SET_FLAG bit-flag
- * @property-read bool $flagTimestamp Tell if it has the MYSQLI_TIMESTAMP_FLAG bit-flag
- * @property-read bool $flagUnsigned Tell if it has the MYSQLI_UNSIGNED_FLAG bit-flag
- * @property-read bool $flagZerofill Tell if it has the MYSQLI_ZEROFILL_FLAG bit-flag
- * @property-read bool $flagAutoIncrement Tell if it has the MYSQLI_AUTO_INCREMENT_FLAG bit-flag
- * @property-read bool $flagMultipleKey Tell if it has the MYSQLI_MULTIPLE_KEY_FLAG bit-flag
- * @property-read bool $flagNotNull Tell if it has the MYSQLI_NOT_NULL_FLAG bit-flag
- * @property-read bool $flagPartKey Tell if it has the MYSQLI_PART_KEY_FLAG bit-flag
- * @property-read bool $flagPriKey Tell if it has the MYSQLI_PRI_KEY_FLAG bit-flag
- * @property-read bool $flagUniqueKey Tell if it has the MYSQLI_UNIQUE_KEY_FLAG bit-flag
- * @property-read bool $flagNoDefaultValue Tell if it has the MYSQLI_NO_DEFAULT_VALUE_FLAG bit-flag
- * @property-read bool $flagOnUpdateNow Tell if it has the MYSQLI_ON_UPDATE_NOW_FLAG bit-flag
- *
  * @package database
  */
-class Field
+readonly class Field
 {
-    protected string $name;
-    protected string $orgname;
-    protected string $table;
-    protected string $orgtable;
-    protected string $def;
-    protected string $db;
-    protected string $catalog;
-    protected int $maxLength;
-    protected int $length;
-    protected int $charsetnr;
-    protected int $flags;
-    protected int $type;
-    protected int $decimals;
-    protected ?string $typeName;
-    protected bool $flagBinary = false;
-    protected bool $flagBlob = false;
-    protected bool $flagEnum = false;
-    protected bool $flagGroup = false;
-    protected bool $flagNum = false;
-    protected bool $flagSet = false;
-    protected bool $flagTimestamp = false;
-    protected bool $flagUnsigned = false;
-    protected bool $flagZerofill = false;
-    protected bool $flagAutoIncrement = false;
-    protected bool $flagMultipleKey = false;
-    protected bool $flagNotNull = false;
-    protected bool $flagPartKey = false;
-    protected bool $flagPriKey = false;
-    protected bool $flagUniqueKey = false;
-    protected bool $flagNoDefaultValue = false;
-    protected bool $flagOnUpdateNow = false;
+    /**
+     * The name of the column.
+     */
+    public string $name;
+    /**
+     * Original column name if an alias was specified.
+     */
+    public string $orgname;
+    /**
+     * The name of the table this field belongs to (if not calculated).
+     */
+    public string $table;
+    /**
+     * Original table name if an alias was specified.
+     */
+    public string $orgtable;
+    /**
+     * Reserved for default value, currently always "".
+     */
+    public string $def;
+    /**
+     * Database (since PHP 5.3.6).
+     */
+    public string $db;
+    /**
+     * The catalog name, always "def" (since PHP 5.3.6).
+     */
+    public string $catalog;
+    /**
+     * The maximum width of the field for the result set. As of PHP 8.1, this
+     * value is always 0.
+     */
+    public int $maxLength;
+    /**
+     * The width of the field, in bytes, as specified in the table definition.
+     * Note that this number (bytes) might differ from your table definition
+     * value (characters), depending on the character set you use. For example,
+     * the character set utf8 has 3 bytes per character, so varchar(10) will
+     * return a length of 30 for utf8 (10*3), but return 10 for latin1 (10*1).
+     */
+    public int $length;
+    /**
+     * The character set number (id) for the field.
+     */
+    public int $charsetnr;
+    /**
+     * An integer representing the bit-flags for the field.
+     */
+    public int $flags;
+    /**
+     * The data type used for this field.
+     */
+    public int $type;
+    /**
+     * The number of decimals used (for integer fields).
+     */
+    public int $decimals;
+    /**
+     * The name of the data type used for this field.
+     */
+    public ?string $typeName;
+    /**
+     * Tells if field is defined as BINARY.
+     */
+    public bool $isBinary;
+    /**
+     * Tells if field is defined as BLOB.
+     */
+    public bool $isBlob;
+    /**
+     * Tells if field is defined as ENUM.
+     */
+    public bool $isEnum;
+    /**
+     * Tells if field is part of GROUP BY.
+     */
+    public bool $isGroup;
+    /**
+     * Tells if field is defined as NUMERIC.
+     */
+    public bool $isNum;
+    /**
+     * Tells if field is defined as SET.
+     */
+    public bool $isSet;
+    /**
+     * Tells if field is defined as TIMESTAMP.
+     */
+    public bool $isTimestamp;
+    /**
+     * Tells if field is defined as UNSIGNED.
+     */
+    public bool $isUnsigned;
+    /**
+     * Tells if field is defined as ZEROFILL.
+     */
+    public bool $isZerofill;
+    /**
+     * Tells if field is defined as AUTO_INCREMENT.
+     */
+    public bool $isAutoIncrement;
+    /**
+     * Tells if field is part of an index.
+     */
+    public bool $isMultipleKey;
+    /**
+     * Tells if field is defined as NOT NULL.
+     */
+    public bool $isNotNull;
+    /**
+     * Tells if field is part of a multi-index.
+     */
+    public bool $isPartKey;
+    /**
+     * Tells if field is part of a primary index.
+     */
+    public bool $isPriKey;
+    /**
+     * Tells if field is part of a unique index.
+     */
+    public bool $isUniqueKey;
+    public bool $isNoDefaultValue;
+    public bool $isOnUpdateNow;
 
     public function __construct(\stdClass $field)
     {
@@ -92,16 +150,6 @@ class Field
         }
         $this->setTypeName();
         $this->setFlags();
-    }
-
-    public function __get(string $name) : mixed
-    {
-        if (\property_exists($this, $name)) {
-            return $this->{$name};
-        }
-        throw new Error(
-            'Undefined property: ' . static::class . '::$' . $name
-        );
     }
 
     protected function setTypeName() : void
@@ -142,56 +190,22 @@ class Field
 
     protected function setFlags() : void
     {
-        if ($this->flags & \MYSQLI_BINARY_FLAG) {
-            $this->flagBinary = true;
-        }
-        if ($this->flags & \MYSQLI_BLOB_FLAG) {
-            $this->flagBlob = true;
-        }
-        if ($this->flags & \MYSQLI_ENUM_FLAG) {
-            $this->flagEnum = true;
-        }
-        if ($this->flags & \MYSQLI_GROUP_FLAG) {
-            $this->flagGroup = true;
-        }
-        if ($this->flags & \MYSQLI_NUM_FLAG) {
-            $this->flagNum = true;
-        }
-        if ($this->flags & \MYSQLI_SET_FLAG) {
-            $this->flagSet = true;
-        }
-        if ($this->flags & \MYSQLI_TIMESTAMP_FLAG) {
-            $this->flagTimestamp = true;
-        }
-        if ($this->flags & \MYSQLI_UNSIGNED_FLAG) {
-            $this->flagUnsigned = true;
-        }
-        if ($this->flags & \MYSQLI_ZEROFILL_FLAG) {
-            $this->flagZerofill = true;
-        }
-        if ($this->flags & \MYSQLI_AUTO_INCREMENT_FLAG) {
-            $this->flagAutoIncrement = true;
-        }
-        if ($this->flags & \MYSQLI_MULTIPLE_KEY_FLAG) {
-            $this->flagMultipleKey = true;
-        }
-        if ($this->flags & \MYSQLI_NOT_NULL_FLAG) {
-            $this->flagNotNull = true;
-        }
-        if ($this->flags & \MYSQLI_PART_KEY_FLAG) {
-            $this->flagPartKey = true;
-        }
-        if ($this->flags & \MYSQLI_PRI_KEY_FLAG) {
-            $this->flagPriKey = true;
-        }
-        if ($this->flags & \MYSQLI_UNIQUE_KEY_FLAG) {
-            $this->flagUniqueKey = true;
-        }
-        if ($this->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG) {
-            $this->flagNoDefaultValue = true;
-        }
-        if ($this->flags & \MYSQLI_ON_UPDATE_NOW_FLAG) {
-            $this->flagOnUpdateNow = true;
-        }
+        $this->isBinary = (bool) ($this->flags & \MYSQLI_BINARY_FLAG);
+        $this->isBlob = (bool) ($this->flags & \MYSQLI_BLOB_FLAG);
+        $this->isEnum = (bool) ($this->flags & \MYSQLI_ENUM_FLAG);
+        $this->isGroup = (bool) ($this->flags & \MYSQLI_GROUP_FLAG);
+        $this->isNum = (bool) ($this->flags & \MYSQLI_NUM_FLAG);
+        $this->isSet = (bool) ($this->flags & \MYSQLI_SET_FLAG);
+        $this->isTimestamp = (bool) ($this->flags & \MYSQLI_TIMESTAMP_FLAG);
+        $this->isUnsigned = (bool) ($this->flags & \MYSQLI_UNSIGNED_FLAG);
+        $this->isZerofill = (bool) ($this->flags & \MYSQLI_ZEROFILL_FLAG);
+        $this->isAutoIncrement = (bool) ($this->flags & \MYSQLI_AUTO_INCREMENT_FLAG);
+        $this->isMultipleKey = (bool) ($this->flags & \MYSQLI_MULTIPLE_KEY_FLAG);
+        $this->isNotNull = (bool) ($this->flags & \MYSQLI_NOT_NULL_FLAG);
+        $this->isPartKey = (bool) ($this->flags & \MYSQLI_PART_KEY_FLAG);
+        $this->isPriKey = (bool) ($this->flags & \MYSQLI_PRI_KEY_FLAG);
+        $this->isUniqueKey = (bool) ($this->flags & \MYSQLI_UNIQUE_KEY_FLAG);
+        $this->isNoDefaultValue = (bool) ($this->flags & \MYSQLI_NO_DEFAULT_VALUE_FLAG);
+        $this->isOnUpdateNow = (bool) ($this->flags & \MYSQLI_ON_UPDATE_NOW_FLAG);
     }
 }

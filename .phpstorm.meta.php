@@ -417,3 +417,45 @@ expectedArguments(
     1,
     argumentsSet('operators')
 );
+registerArgumentsSet(
+    'explain_delete',
+    \Framework\Database\Manipulation\Delete::EXP_EXTENDED,
+    \Framework\Database\Manipulation\Delete::EXP_FORMAT_JSON,
+    \Framework\Database\Manipulation\Delete::EXP_PARTITIONS,
+    'EXTENDED',
+    'FORMAT=JSON',
+    'PARTITIONS',
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Delete::explain(),
+    0,
+    argumentsSet('explain_delete')
+);
+registerArgumentsSet(
+    'explain_select',
+    \Framework\Database\Manipulation\Select::EXP_EXTENDED,
+    \Framework\Database\Manipulation\Select::EXP_FORMAT_JSON,
+    \Framework\Database\Manipulation\Select::EXP_PARTITIONS,
+    'EXTENDED',
+    'FORMAT=JSON',
+    'PARTITIONS',
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Select::explain(),
+    0,
+    argumentsSet('explain_select')
+);
+registerArgumentsSet(
+    'explain_update',
+    \Framework\Database\Manipulation\Update::EXP_EXTENDED,
+    \Framework\Database\Manipulation\Update::EXP_FORMAT_JSON,
+    \Framework\Database\Manipulation\Update::EXP_PARTITIONS,
+    'EXTENDED',
+    'FORMAT=JSON',
+    'PARTITIONS',
+);
+expectedArguments(
+    \Framework\Database\Manipulation\Update::explain(),
+    0,
+    argumentsSet('explain_update')
+);

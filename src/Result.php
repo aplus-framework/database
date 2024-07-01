@@ -223,16 +223,13 @@ class Result
     /**
      * Returns an array of objects representing the fields in a result set.
      *
-     * @return array<int,Field>|false an array of objects which contains field
-     * definition information or false if no field information is available
+     * @return array<int,Field> an array of objects which contains field
+     * definition information
      */
-    public function fetchFields() : array | false
+    public function fetchFields() : array
     {
         $this->checkIsFree();
         $fields = $this->result->fetch_fields();
-        if ($fields === false) { // @phpstan-ignore-line
-            return false;
-        }
         foreach ($fields as &$field) {
             $field = new Field($field);
         }

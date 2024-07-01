@@ -9,6 +9,7 @@
  */
 namespace Tests\Database;
 
+#[\AllowDynamicProperties]
 class ResultEntity
 {
     public mixed $p1;
