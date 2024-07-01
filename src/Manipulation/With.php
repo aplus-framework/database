@@ -25,10 +25,8 @@ class With extends Statement
 {
     /**
      * @see https://mariadb.com/kb/en/recursive-common-table-expressions-overview/
-     *
-     * @var string
      */
-    public const OPT_RECURSIVE = 'RECURSIVE';
+    public const string OPT_RECURSIVE = 'RECURSIVE';
 
     protected function renderOptions() : ?string
     {

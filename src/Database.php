@@ -33,6 +33,7 @@ use JetBrains\PhpStorm\Language;
 use LogicException;
 use mysqli;
 use mysqli_sql_exception;
+use mysqli_warning;
 use RuntimeException;
 use SensitiveParameter;
 
@@ -198,7 +199,9 @@ class Database
         if ($this->failoverIndex === null) {
             $this->config = $config;
         }
-        \mysqli_report($config['report']);
+        if (isset($config['report'])) {
+            \mysqli_report($config['report']);
+        }
         $this->mysqli = new mysqli();
         foreach ($config['options'] as $option => $value) {
             $this->mysqli->options($option, $value);
@@ -345,9 +348,14 @@ class Database
         return $this->config;
     }
 
-    public function warnings() : int
+    public function getWarningsCount() : int
     {
         return $this->mysqli->warning_count;
+    }
+
+    public function getWarnings() : false | mysqli_warning
+    {
+        return $this->mysqli->get_warnings();
     }
 
     /**
@@ -355,7 +363,7 @@ class Database
      *
      * @return array<int,array<string,mixed>>
      */
-    public function errors() : array
+    public function getErrors() : array
     {
         return $this->mysqli->error_list;
     }
@@ -365,7 +373,7 @@ class Database
      *
      * @return string|null
      */
-    public function error() : ?string
+    public function getError() : ?string
     {
         return $this->mysqli->error ?: null;
     }
@@ -595,7 +603,7 @@ class Database
         return new With($this);
     }
 
-    public function lastQuery() : string
+    public function getLastQuery() : string
     {
         return $this->lastQuery;
     }
@@ -711,7 +719,7 @@ class Database
      *
      * @return int|string
      */
-    public function insertId() : int | string
+    public function getInsertId() : int | string
     {
         return $this->mysqli->insert_id;
     }
@@ -801,7 +809,7 @@ class Database
         $this->debugCollector->addData([
             'start' => $start,
             'end' => $end,
-            'statement' => $this->lastQuery(),
+            'statement' => $this->getLastQuery(),
             'rows' => $rows,
             'description' => $description,
         ]);

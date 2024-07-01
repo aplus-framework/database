@@ -33,10 +33,10 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "ext-mysqli": "*",
-        "aplus/debug": "^3.0",
-        "aplus/log": "^3.0"
+        "aplus/debug": "^4.0",
+        "aplus/log": "^4.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
