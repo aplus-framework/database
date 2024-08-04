@@ -87,6 +87,7 @@ Below is the default class configuration. Normally, only the ``username``, the
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_general_ci',
         'timezone' => '+00:00',
+        'init_queries' => true,
         'ssl' => [
             'enabled' => false,
             'verify' => true,

@@ -93,8 +93,12 @@ class Database
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306,
-        Logger $logger = null
+        Logger $logger = null,
+        DatabaseCollector $collector = null
     ) {
+        if ($collector) {
+            $this->setDebugCollector($collector);
+        }
         $this->logger = $logger;
         $this->connect($username, $password, $schema, $host, $port);
     }
@@ -128,6 +132,7 @@ class Database
         'charset' => 'string',
         'collation' => 'string',
         'timezone' => 'string',
+        'init_queries' => 'bool',
         'ssl' => 'array',
         'failover' => 'array',
         'options' => 'array',
@@ -147,6 +152,7 @@ class Database
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_general_ci',
             'timezone' => '+00:00',
+            'init_queries' => true,
             'ssl' => [
                 'enabled' => false,
                 'verify' => true,
@@ -246,8 +252,10 @@ class Database
             );
             return $this->connect($config);
         }
-        $this->setCollations($config['charset'], $config['collation']);
-        $this->setTimezone($config['timezone']);
+        if ($config['init_queries']) {
+            $this->setCollations($config['charset'], $config['collation']);
+            $this->setTimezone($config['timezone']);
+        }
         return $this;
     }
 
@@ -256,13 +264,21 @@ class Database
         $this->mysqli->set_charset($charset);
         $charset = $this->quote($charset);
         $collation = $this->quote($collation);
-        return $this->mysqli->real_query("SET NAMES {$charset} COLLATE {$collation}");
+        $statement = "SET NAMES {$charset} COLLATE {$collation}";
+        $this->lastQuery = $statement;
+        return isset($this->debugCollector)
+            ? $this->addToDebug(fn () => $this->mysqli->real_query($statement))
+            : $this->mysqli->real_query($statement);
     }
 
     protected function setTimezone(string $timezone) : bool
     {
         $timezone = $this->quote($timezone);
-        return $this->mysqli->real_query("SET time_zone = {$timezone}");
+        $statement = "SET time_zone = {$timezone}";
+        $this->lastQuery = $statement;
+        return isset($this->debugCollector)
+            ? $this->addToDebug(fn () => $this->mysqli->real_query($statement))
+            : $this->mysqli->real_query($statement);
     }
 
     /**
@@ -338,6 +354,7 @@ class Database
         'charset' => 'string',
         'collation' => 'string',
         'timezone' => 'string',
+        'init_queries' => 'bool',
         'ssl' => 'array',
         'failover' => 'array',
         'options' => 'array',
