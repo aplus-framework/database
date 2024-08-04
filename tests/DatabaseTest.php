@@ -10,6 +10,7 @@
 namespace Tests\Database;
 
 use Framework\Database\Database;
+use Framework\Database\Debug\DatabaseCollector;
 use Framework\Database\Definition\AlterSchema;
 use Framework\Database\Definition\AlterTable;
 use Framework\Database\Definition\CreateSchema;
@@ -113,6 +114,24 @@ final class DatabaseTest extends TestCase
                 $logger->getLastLog()->message
             );
         }
+    }
+
+    public function testConnectionWithDebugCollector() : void
+    {
+        $collector = new DatabaseCollector();
+        self::assertCount(0, $collector->getData());
+        $config = [
+            'username' => \getenv('DB_USERNAME'),
+            'password' => \getenv('DB_PASSWORD'),
+            'host' => \getenv('DB_HOST'),
+            'port' => \getenv('DB_PORT'),
+        ];
+        $database = new Database($config, collector: $collector);
+        self::assertCount(2, $collector->getData());
+        self::assertSame(
+            "SET time_zone = '+00:00'",
+            $database->getLastQuery()
+        );
     }
 
     protected function mariadbHasSSL() : bool

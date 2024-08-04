@@ -93,8 +93,12 @@ class Database
         string $schema = null,
         string $host = 'localhost',
         int $port = 3306,
-        Logger $logger = null
+        Logger $logger = null,
+        DatabaseCollector $collector = null
     ) {
+        if ($collector) {
+            $this->setDebugCollector($collector);
+        }
         $this->logger = $logger;
         $this->connect($username, $password, $schema, $host, $port);
     }
@@ -260,13 +264,21 @@ class Database
         $this->mysqli->set_charset($charset);
         $charset = $this->quote($charset);
         $collation = $this->quote($collation);
-        return $this->mysqli->real_query("SET NAMES {$charset} COLLATE {$collation}");
+        $statement = "SET NAMES {$charset} COLLATE {$collation}";
+        $this->lastQuery = $statement;
+        return isset($this->debugCollector)
+            ? $this->addToDebug(fn () => $this->mysqli->real_query($statement))
+            : $this->mysqli->real_query($statement);
     }
 
     protected function setTimezone(string $timezone) : bool
     {
         $timezone = $this->quote($timezone);
-        return $this->mysqli->real_query("SET time_zone = {$timezone}");
+        $statement = "SET time_zone = {$timezone}";
+        $this->lastQuery = $statement;
+        return isset($this->debugCollector)
+            ? $this->addToDebug(fn () => $this->mysqli->real_query($statement))
+            : $this->mysqli->real_query($statement);
     }
 
     /**
