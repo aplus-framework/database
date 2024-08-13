@@ -94,6 +94,9 @@ final class ResultTest extends TestCase
         $result = static::$database->query('SELECT * FROM `t1`');
         self::assertSame(1, $result->fetchRow(0)->c1);
         self::assertSame(4, $result->fetchRow(3)->c1);
+        $this->expectException(\OutOfRangeException::class);
+        $this->expectExceptionMessage('Invalid cursor offset: 5');
+        $result->fetchRow(5);
     }
 
     public function testFetchRowFree() : void
@@ -106,6 +109,9 @@ final class ResultTest extends TestCase
         $result = static::$database->query('SELECT * FROM `t1`');
         self::assertSame(1, $result->fetchArrayRow(0)['c1']);
         self::assertSame(4, $result->fetchArrayRow(3)['c1']);
+        $this->expectException(\OutOfRangeException::class);
+        $this->expectExceptionMessage('Invalid cursor offset: 5');
+        $result->fetchArrayRow(5);
     }
 
     public function testFetchArrayRowFree() : void
