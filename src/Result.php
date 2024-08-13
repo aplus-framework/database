@@ -164,9 +164,9 @@ class Result
      * @param string|null $class
      * @param mixed ...$constructor
      *
-     * @return object|null
+     * @return object
      */
-    public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object | null
+    public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object
     {
         $this->checkIsFree();
         $this->moveCursor($offset);
@@ -176,12 +176,12 @@ class Result
     /**
      * Fetches the current row as array and move the cursor to the next.
      *
-     * @return array<string,int|string|null>|null
+     * @return array<string, float|int|string|null>|null
      */
-    public function fetchArray() : ?array
+    public function fetchArray() : array | null
     {
         $this->checkIsFree();
-        return $this->result->fetch_assoc();
+        return $this->result->fetch_assoc(); // @phpstan-ignore-line
     }
 
     /**
@@ -200,13 +200,13 @@ class Result
      *
      * @param int $offset
      *
-     * @return array<string,int|string|null>
+     * @return array<string, float|int|string|null>
      */
     public function fetchArrayRow(int $offset) : array
     {
         $this->checkIsFree();
         $this->moveCursor($offset);
-        return $this->result->fetch_assoc();
+        return $this->result->fetch_assoc(); // @phpstan-ignore-line
     }
 
     /**
@@ -229,10 +229,10 @@ class Result
     public function fetchFields() : array
     {
         $this->checkIsFree();
-        $fields = $this->result->fetch_fields();
-        foreach ($fields as &$field) {
-            $field = new Field($field);
+        $fields = [];
+        foreach ($this->result->fetch_fields() as $field) {
+            $fields[] = new Field($field);
         }
-        return $fields; // @phpstan-ignore-line
+        return $fields;
     }
 }
