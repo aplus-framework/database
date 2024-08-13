@@ -164,7 +164,7 @@ class Result
      * @param string|null $class
      * @param mixed ...$constructor
      *
-     * @return object|null
+     * @return object
      */
     public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object
     {
@@ -176,7 +176,7 @@ class Result
     /**
      * Fetches the current row as array and move the cursor to the next.
      *
-     * @return array<string,int|string|null>|null
+     * @return array<string, float|int|string|null>|null
      */
     public function fetchArray() : array | null
     {
@@ -200,7 +200,7 @@ class Result
      *
      * @param int $offset
      *
-     * @return array<string,int|string|null>
+     * @return array<string, float|int|string|null>
      */
     public function fetchArrayRow(int $offset) : array
     {
