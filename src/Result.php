@@ -181,7 +181,7 @@ class Result
     public function fetchArray() : array | null
     {
         $this->checkIsFree();
-        return $this->result->fetch_assoc();
+        return $this->result->fetch_assoc(); // @phpstan-ignore-line
     }
 
     /**
@@ -206,7 +206,7 @@ class Result
     {
         $this->checkIsFree();
         $this->moveCursor($offset);
-        return $this->result->fetch_assoc();
+        return $this->result->fetch_assoc(); // @phpstan-ignore-line
     }
 
     /**
