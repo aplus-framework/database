@@ -229,10 +229,10 @@ class Result
     public function fetchFields() : array
     {
         $this->checkIsFree();
-        $fields = $this->result->fetch_fields();
-        foreach ($fields as &$field) {
-            $field = new Field($field);
+        $fields = [];
+        foreach ($this->result->fetch_fields() as $field) {
+            $fields[] = new Field($field);
         }
-        return $fields; // @phpstan-ignore-line
+        return $fields;
     }
 }
