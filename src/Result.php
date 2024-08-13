@@ -166,7 +166,7 @@ class Result
      *
      * @return object|null
      */
-    public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object | null
+    public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object
     {
         $this->checkIsFree();
         $this->moveCursor($offset);
@@ -178,7 +178,7 @@ class Result
      *
      * @return array<string,int|string|null>|null
      */
-    public function fetchArray() : ?array
+    public function fetchArray() : array | null
     {
         $this->checkIsFree();
         return $this->result->fetch_assoc();
