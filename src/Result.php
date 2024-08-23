@@ -126,7 +126,7 @@ class Result
      *
      * @return object|null
      */
-    public function fetch(string $class = null, mixed ...$constructor) : object | null
+    public function fetch(?string $class = null, mixed ...$constructor) : ?object
     {
         $this->checkIsFree();
         $class ??= $this->fetchClass;
@@ -147,7 +147,7 @@ class Result
      *
      * @return array<int,object>
      */
-    public function fetchAll(string $class = null, mixed ...$constructor) : array
+    public function fetchAll(?string $class = null, mixed ...$constructor) : array
     {
         $this->checkIsFree();
         $all = [];
@@ -166,7 +166,7 @@ class Result
      *
      * @return object
      */
-    public function fetchRow(int $offset, string $class = null, mixed ...$constructor) : object
+    public function fetchRow(int $offset, ?string $class = null, mixed ...$constructor) : object
     {
         $this->checkIsFree();
         $this->moveCursor($offset);
@@ -178,7 +178,7 @@ class Result
      *
      * @return array<string, float|int|string|null>|null
      */
-    public function fetchArray() : array | null
+    public function fetchArray() : ?array
     {
         $this->checkIsFree();
         return $this->result->fetch_assoc(); // @phpstan-ignore-line

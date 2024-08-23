@@ -196,16 +196,16 @@ class Select extends Statement
      *
      * Generally used with the FROM clause as column names.
      *
-     * @param array<string,Closure|string>|Closure|string $expression
-     * @param array<string,Closure|string>|Closure|string ...$expressions
+     * @param Closure|array<string,Closure|string>|string $expression
+     * @param Closure|array<string,Closure|string>|string ...$expressions
      *
      * @see https://mariadb.com/kb/en/select/#select-expressions
      *
      * @return static
      */
     public function expressions(
-        array | Closure | string $expression,
-        array | Closure | string ...$expressions
+        Closure | array | string $expression,
+        Closure | array | string ...$expressions
     ) : static {
         foreach ([$expression, ...$expressions] as $expression) {
             $this->sql['expressions'][] = $expression;
@@ -216,14 +216,14 @@ class Select extends Statement
     /**
      * Alias of the expressions method.
      *
-     * @param array<string,Closure|string>|Closure|string $expression
-     * @param array<string,Closure|string>|Closure|string ...$expressions
+     * @param Closure|array<string,Closure|string>|string $expression
+     * @param Closure|array<string,Closure|string>|string ...$expressions
      *
      * @return static
      */
     public function columns(
-        array | Closure | string $expression,
-        array | Closure | string ...$expressions
+        Closure | array | string $expression,
+        Closure | array | string ...$expressions
     ) : static {
         return $this->expressions($expression, ...$expressions);
     }
@@ -253,7 +253,7 @@ class Select extends Statement
      *
      * @return static
      */
-    public function limit(int $limit, int $offset = null) : static
+    public function limit(int $limit, ?int $offset = null) : static
     {
         return $this->setLimit($limit, $offset);
     }
@@ -302,7 +302,7 @@ class Select extends Statement
      */
     public function intoOutfile(
         string $filename,
-        string $charset = null,
+        ?string $charset = null,
         array $fieldsOptions = [],
         array $linesOptions = []
     ) : static {
@@ -426,7 +426,7 @@ class Select extends Statement
      *
      * @return static
      */
-    public function lockForUpdate(int $wait = null) : static
+    public function lockForUpdate(?int $wait = null) : static
     {
         $this->sql['lock'] = [
             'type' => 'FOR UPDATE',
@@ -442,7 +442,7 @@ class Select extends Statement
      *
      * @return static
      */
-    public function lockInShareMode(int $wait = null) : static
+    public function lockInShareMode(?int $wait = null) : static
     {
         $this->sql['lock'] = [
             'type' => 'LOCK IN SHARE MODE',

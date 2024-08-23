@@ -42,20 +42,20 @@ readonly class Explain
     /**
      * keys in table that could be used to find rows in the table.
      */
-    public string | null $possibleKeys;
+    public ?string $possibleKeys;
     /**
      * The name of the key that is used to retrieve rows. NULL is no key was used.
      */
-    public string | null $key;
+    public ?string $key;
     /**
      * How many bytes of the key that was used (shows if we are using only parts
      * of the multi-column key).
      */
-    public string | null $keyLen;
+    public ?string $keyLen;
     /**
      * The reference that is used as the key value.
      */
-    public string | null $ref;
+    public ?string $ref;
     /**
      * An estimate of how many rows we will find in the table for each key lookup.
      */

@@ -498,7 +498,7 @@ class AlterTable extends TableStatement
         return \implode(',' . \PHP_EOL, $renames);
     }
 
-    public function convertToCharset(string $charset, string $collation = null) : static
+    public function convertToCharset(string $charset, ?string $collation = null) : static
     {
         $this->sql['convert_to_charset'] = [
             'charset' => $charset,

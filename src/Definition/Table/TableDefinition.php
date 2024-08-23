@@ -42,7 +42,7 @@ class TableDefinition extends DefinitionPart
      * @param Database $database
      * @param string|null $condition
      */
-    public function __construct(Database $database, string $condition = null)
+    public function __construct(Database $database, ?string $condition = null)
     {
         $this->database = $database;
         $this->condition = $condition;
@@ -56,7 +56,7 @@ class TableDefinition extends DefinitionPart
      *
      * @return ColumnDefinition
      */
-    public function column(string $name, string $changeName = null) : ColumnDefinition
+    public function column(string $name, ?string $changeName = null) : ColumnDefinition
     {
         $definition = new ColumnDefinition($this->database);
         $this->columns[] = [
@@ -74,7 +74,7 @@ class TableDefinition extends DefinitionPart
      *
      * @return IndexDefinition
      */
-    public function index(string $name = null) : IndexDefinition
+    public function index(?string $name = null) : IndexDefinition
     {
         $definition = new IndexDefinition($this->database, $name);
         $this->indexes[] = [
@@ -97,7 +97,7 @@ class TableDefinition extends DefinitionPart
         return $this->checks[] = new Check($this->database, $expression);
     }
 
-    protected function renderColumns(string $prefix = null) : string
+    protected function renderColumns(?string $prefix = null) : string
     {
         if ($prefix) {
             $prefix .= ' COLUMN';
@@ -117,7 +117,7 @@ class TableDefinition extends DefinitionPart
         return \implode(',' . \PHP_EOL, $sql);
     }
 
-    protected function renderIndexes(string $prefix = null) : string
+    protected function renderIndexes(?string $prefix = null) : string
     {
         $sql = [];
         foreach ($this->indexes as $index) {
@@ -140,7 +140,7 @@ class TableDefinition extends DefinitionPart
         return \implode(',' . \PHP_EOL, $sql);
     }
 
-    protected function sql(string $prefix = null) : string
+    protected function sql(?string $prefix = null) : string
     {
         $sql = $this->renderColumns($prefix);
         $part = $this->renderIndexes($prefix);

@@ -158,7 +158,7 @@ abstract class TableStatement extends Statement
      *
      * @return static
      */
-    public function option(string $name, int | string $value = null) : static
+    public function option(string $name, int | string | null $value = null) : static
     {
         $this->sql['options'][$name] = $value;
         return $this;
@@ -533,7 +533,7 @@ abstract class TableStatement extends Statement
         string $optionName,
         string $originalValue,
         array $options,
-        string $value = null,
+        ?string $value = null,
         bool $getByKey = false
     ) : string {
         $value ??= $originalValue;

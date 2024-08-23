@@ -24,11 +24,11 @@ final class SelectTest extends TestCase
     }
 
     /**
-     * @param array<string,Closure|string>|Closure|string ...$from
+     * @param Closure|array<string,Closure|string>|string ...$from
      *
      * @return string
      */
-    protected function selectAllFrom(array | Closure | string ...$from) : string
+    protected function selectAllFrom(Closure | array | string ...$from) : string
     {
         return $this->select->columns('*')->from(...$from)->sql();
     }

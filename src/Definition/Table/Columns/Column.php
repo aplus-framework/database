@@ -30,7 +30,7 @@ abstract class Column extends DefinitionPart
     protected bool $null = false;
     protected bool $uniqueKey = false;
     protected bool $primaryKey = false;
-    protected bool | Closure | float | int | string | null $default;
+    protected Closure | bool | float | int | string | null $default;
     protected Closure $check;
     protected ?string $comment;
     protected bool $first = false;
@@ -108,11 +108,11 @@ abstract class Column extends DefinitionPart
     }
 
     /**
-     * @param bool|Closure|float|int|string|null $default
+     * @param Closure|bool|float|int|string|null $default
      *
      * @return static
      */
-    public function default(bool | Closure | float | int | string | null $default) : static
+    public function default(Closure | bool | float | int | string | null $default) : static
     {
         $this->default = $default;
         return $this;

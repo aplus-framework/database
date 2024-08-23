@@ -25,7 +25,7 @@ class StatementMock extends Statement
      *
      * @return static
      */
-    public function limit(int $limit, int $offset = null) : static
+    public function limit(int $limit, ?int $offset = null) : static
     {
         return $this->setLimit($limit, $offset);
     }
@@ -40,7 +40,7 @@ class StatementMock extends Statement
         return parent::renderIdentifier($column);
     }
 
-    public function renderAliasedIdentifier(array | Closure | string $column) : string
+    public function renderAliasedIdentifier(Closure | array | string $column) : string
     {
         return parent::renderAliasedIdentifier($column);
     }

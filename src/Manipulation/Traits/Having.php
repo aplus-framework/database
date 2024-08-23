@@ -572,7 +572,7 @@ trait Having
      * Adds a HAVING part.
      *
      * @param string $glue `AND` or `OR`
-     * @param array<array<mixed>|Closure|string>|Closure|string $column
+     * @param Closure|array<Closure|array<mixed>|string>|string $column
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`,
      * `LIKE`, `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`,
      * `IS NOT NULL` or `MATCH`
@@ -582,7 +582,7 @@ trait Having
      */
     private function addHaving(
         string $glue,
-        array | Closure | string $column,
+        Closure | array | string $column,
         string $operator,
         array $values
     ) : static {

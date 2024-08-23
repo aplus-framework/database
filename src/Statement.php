@@ -48,7 +48,7 @@ abstract class Statement implements \Stringable
      *
      * @return static
      */
-    public function reset(string $sql = null) : static
+    public function reset(?string $sql = null) : static
     {
         if ($sql === null) {
             unset($this->sql);
