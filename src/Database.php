@@ -89,12 +89,12 @@ class Database
         #[SensitiveParameter]
         array | string $username,
         #[SensitiveParameter]
-        string $password = null,
-        string $schema = null,
+        ?string $password = null,
+        ?string $schema = null,
         string $host = 'localhost',
         int $port = 3306,
-        Logger $logger = null,
-        DatabaseCollector $collector = null
+        ?Logger $logger = null,
+        ?DatabaseCollector $collector = null
     ) {
         if ($collector) {
             $this->setDebugCollector($collector);
@@ -187,8 +187,8 @@ class Database
         #[SensitiveParameter]
         array | string $username,
         #[SensitiveParameter]
-        string $password = null,
-        string $schema = null,
+        ?string $password = null,
+        ?string $schema = null,
         string $host = 'localhost',
         int $port = 3306
     ) : static {
@@ -415,7 +415,7 @@ class Database
      *
      * @return CreateSchema
      */
-    public function createSchema(string $schemaName = null) : CreateSchema
+    public function createSchema(?string $schemaName = null) : CreateSchema
     {
         $instance = new CreateSchema($this);
         if ($schemaName !== null) {
@@ -431,7 +431,7 @@ class Database
      *
      * @return DropSchema
      */
-    public function dropSchema(string $schemaName = null) : DropSchema
+    public function dropSchema(?string $schemaName = null) : DropSchema
     {
         $instance = new DropSchema($this);
         if ($schemaName !== null) {
@@ -447,7 +447,7 @@ class Database
      *
      * @return AlterSchema
      */
-    public function alterSchema(string $schemaName = null) : AlterSchema
+    public function alterSchema(?string $schemaName = null) : AlterSchema
     {
         $instance = new AlterSchema($this);
         if ($schemaName !== null) {
@@ -463,7 +463,7 @@ class Database
      *
      * @return CreateTable
      */
-    public function createTable(string $tableName = null) : CreateTable
+    public function createTable(?string $tableName = null) : CreateTable
     {
         $instance = new CreateTable($this);
         if ($tableName !== null) {
@@ -480,7 +480,7 @@ class Database
      *
      * @return DropTable
      */
-    public function dropTable(string $table = null, string ...$tables) : DropTable
+    public function dropTable(?string $table = null, string ...$tables) : DropTable
     {
         $instance = new DropTable($this);
         if ($table !== null) {
@@ -496,7 +496,7 @@ class Database
      *
      * @return AlterTable
      */
-    public function alterTable(string $tableName = null) : AlterTable
+    public function alterTable(?string $tableName = null) : AlterTable
     {
         $instance = new AlterTable($this);
         if ($tableName !== null) {
@@ -508,14 +508,14 @@ class Database
     /**
      * Call a DELETE statement.
      *
-     * @param array<string,Closure|string>|Closure|string|null $reference
-     * @param array<string,Closure|string>|Closure|string ...$references
+     * @param Closure|array<string,Closure|string>|string|null $reference
+     * @param Closure|array<string,Closure|string>|string ...$references
      *
      * @return Delete
      */
     public function delete(
-        array | Closure | string $reference = null,
-        array | Closure | string ...$references
+        Closure | array | string | null $reference = null,
+        Closure | array | string ...$references
     ) : Delete {
         $instance = new Delete($this);
         if ($reference !== null) {
@@ -531,7 +531,7 @@ class Database
      *
      * @return Insert
      */
-    public function insert(string $intoTable = null) : Insert
+    public function insert(?string $intoTable = null) : Insert
     {
         $instance = new Insert($this);
         if ($intoTable !== null) {
@@ -547,7 +547,7 @@ class Database
      *
      * @return LoadData
      */
-    public function loadData(string $intoTable = null) : LoadData
+    public function loadData(?string $intoTable = null) : LoadData
     {
         $instance = new LoadData($this);
         if ($intoTable !== null) {
@@ -563,7 +563,7 @@ class Database
      *
      * @return Replace
      */
-    public function replace(string $intoTable = null) : Replace
+    public function replace(?string $intoTable = null) : Replace
     {
         $instance = new Replace($this);
         if ($intoTable !== null) {
@@ -575,14 +575,14 @@ class Database
     /**
      * Call a SELECT statement.
      *
-     * @param array<string,Closure|string>|Closure|string|null $reference
-     * @param array<string,Closure|string>|Closure|string ...$references
+     * @param Closure|array<string,Closure|string>|string|null $reference
+     * @param Closure|array<string,Closure|string>|string ...$references
      *
      * @return Select
      */
     public function select(
-        array | Closure | string $reference = null,
-        array | Closure | string ...$references
+        Closure | array | string | null $reference = null,
+        Closure | array | string ...$references
     ) : Select {
         $instance = new Select($this);
         if ($reference !== null) {
@@ -594,14 +594,14 @@ class Database
     /**
      * Call a UPDATE statement.
      *
-     * @param array<string,Closure|string>|Closure|string|null $reference
-     * @param array<string,Closure|string>|Closure|string ...$references
+     * @param Closure|array<string,Closure|string>|string|null $reference
+     * @param Closure|array<string,Closure|string>|string ...$references
      *
      * @return Update
      */
     public function update(
-        array | Closure | string $reference = null,
-        array | Closure | string ...$references
+        Closure | array | string | null $reference = null,
+        Closure | array | string ...$references
     ) : Update {
         $instance = new Update($this);
         if ($reference !== null) {
@@ -773,7 +773,7 @@ class Database
      * the word "NULL". If is false, "FALSE". If is true, "TRUE". If is a string,
      * returns the quoted string. The types int or float returns the same input value.
      */
-    public function quote(float | bool | int | string | null $value) : float | int | string
+    public function quote(bool | float | int | string | null $value) : float | int | string
     {
         $type = \gettype($value);
         if ($type === 'string') {
@@ -818,7 +818,7 @@ class Database
 
     protected function finalizeAddToDebug(
         float $start,
-        string|null $description = null
+        ?string $description = null
     ) : void {
         $end = \microtime(true);
         $rows = $this->mysqli->affected_rows;

@@ -33,7 +33,7 @@ class IndexDefinition extends DefinitionPart
     protected ?string $name;
     protected ?Index $index = null;
 
-    public function __construct(Database $database, string $name = null)
+    public function __construct(Database $database, ?string $name = null)
     {
         $this->database = $database;
         $this->name = $name;

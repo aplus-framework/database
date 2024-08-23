@@ -76,7 +76,7 @@ abstract class Statement extends \Framework\Database\Statement
      *
      * @return static
      */
-    protected function setLimit(int $limit, int $offset = null) : static
+    protected function setLimit(int $limit, ?int $offset = null) : static
     {
         $this->sql['limit'] = [
             'limit' => $limit,
@@ -125,12 +125,12 @@ abstract class Statement extends \Framework\Database\Statement
     /**
      * Renders a column part with an optional alias name, AS clause.
      *
-     * @param array<string,Closure|string>|Closure|string $column The column name,
+     * @param Closure|array<string,Closure|string>|string $column The column name,
      * a subquery or an array where the index is the alias and the value is the column/subquery
      *
      * @return string
      */
-    protected function renderAliasedIdentifier(array | Closure | string $column) : string
+    protected function renderAliasedIdentifier(Closure | array | string $column) : string
     {
         if (\is_array($column)) {
             if (\count($column) !== 1) {

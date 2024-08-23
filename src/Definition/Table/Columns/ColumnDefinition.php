@@ -66,52 +66,52 @@ class ColumnDefinition extends DefinitionPart
         $this->database = $database;
     }
 
-    public function int(int $maximum = null) : IntColumn
+    public function int(?int $maximum = null) : IntColumn
     {
         return $this->column = new IntColumn($this->database, $maximum);
     }
 
-    public function bigint(int $maximum = null) : BigintColumn
+    public function bigint(?int $maximum = null) : BigintColumn
     {
         return $this->column = new BigintColumn($this->database, $maximum);
     }
 
-    public function tinyint(int $maximum = null) : TinyintColumn
+    public function tinyint(?int $maximum = null) : TinyintColumn
     {
         return $this->column = new TinyintColumn($this->database, $maximum);
     }
 
-    public function decimal(int $maximum = null, int $decimals = null) : DecimalColumn
+    public function decimal(?int $maximum = null, ?int $decimals = null) : DecimalColumn
     {
         return $this->column = new DecimalColumn($this->database, $maximum, $decimals);
     }
 
-    public function float(int $maximum = null, int $decimals = null) : FloatColumn
+    public function float(?int $maximum = null, ?int $decimals = null) : FloatColumn
     {
         return $this->column = new FloatColumn($this->database, $maximum, $decimals);
     }
 
-    public function mediumint(int $maximum = null) : MediumintColumn
+    public function mediumint(?int $maximum = null) : MediumintColumn
     {
         return $this->column = new MediumintColumn($this->database, $maximum);
     }
 
-    public function smallint(int $maximum = null) : SmallintColumn
+    public function smallint(?int $maximum = null) : SmallintColumn
     {
         return $this->column = new SmallintColumn($this->database, $maximum);
     }
 
-    public function boolean(int $maximum = null) : BooleanColumn
+    public function boolean(?int $maximum = null) : BooleanColumn
     {
         return $this->column = new BooleanColumn($this->database, $maximum);
     }
 
-    public function varchar(int $maximum = null) : VarcharColumn
+    public function varchar(?int $maximum = null) : VarcharColumn
     {
         return $this->column = new VarcharColumn($this->database, $maximum);
     }
 
-    public function char(int $maximum = null) : CharColumn
+    public function char(?int $maximum = null) : CharColumn
     {
         return $this->column = new CharColumn($this->database, $maximum);
     }
@@ -126,7 +126,7 @@ class ColumnDefinition extends DefinitionPart
         return $this->column = new SetColumn($this->database, $value, ...$values);
     }
 
-    public function text(int $maximum = null) : TextColumn
+    public function text(?int $maximum = null) : TextColumn
     {
         return $this->column = new TextColumn($this->database, $maximum);
     }

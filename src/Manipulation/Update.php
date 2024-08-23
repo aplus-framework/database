@@ -63,14 +63,14 @@ class Update extends Statement
     /**
      * Sets the table references.
      *
-     * @param array<string,Closure|string>|Closure|string $reference
-     * @param array<string,Closure|string>|Closure|string ...$references
+     * @param Closure|array<string,Closure|string>|string $reference
+     * @param Closure|array<string,Closure|string>|string ...$references
      *
      * @return static
      */
     public function table(
-        array | Closure | string $reference,
-        array | Closure | string ...$references
+        Closure | array | string $reference,
+        Closure | array | string ...$references
     ) : static {
         $this->sql['table'] = [];
         foreach ([$reference, ...$references] as $reference) {
@@ -151,7 +151,7 @@ class Update extends Statement
      *
      * @return int|string The number of affected rows
      */
-    public function run() : int|string
+    public function run() : int | string
     {
         return $this->database->exec($this->sql());
     }

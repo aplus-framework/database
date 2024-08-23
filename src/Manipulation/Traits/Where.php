@@ -22,17 +22,17 @@ trait Where
     /**
      * Appends an "AND $column $operator ...$values" condition in the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
+     * @param Closure|array<Closure|array<mixed>|string>|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param array<array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+     * @param Closure|array<Closure|array<mixed>|float|int|string|null>|float|int|string|null ...$values
      *
      * @return static
      */
     public function where(
-        array | Closure | string $column,
+        Closure | array | string $column,
         string $operator,
-        array | Closure | float | int | string | null ...$values
+        Closure | array | float | int | string | null ...$values
     ) : static {
         // @phpstan-ignore-next-line
         return $this->addWhere('AND', $column, $operator, $values);
@@ -41,17 +41,17 @@ trait Where
     /**
      * Appends a "OR $column $operator ...$values" condition in the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $column Closure for a subquery,
+     * @param Closure|array<Closure|array<mixed>|string>|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param array<array<mixed>|Closure|float|int|string|null>|Closure|float|int|string|null ...$values
+     * @param Closure|array<Closure|array<mixed>|float|int|string|null>|float|int|string|null ...$values
      *
      * @return static
      */
     public function orWhere(
-        array | Closure | string $column,
+        Closure | array | string $column,
         string $operator,
-        array | Closure | float | int | string | null ...$values
+        Closure | array | float | int | string | null ...$values
     ) : static {
         // @phpstan-ignore-next-line
         return $this->addWhere('OR', $column, $operator, $values);
@@ -584,8 +584,8 @@ trait Where
      * Appends an "AND MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
+     * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -593,8 +593,8 @@ trait Where
      * @return static
      */
     public function whereMatch(
-        array | Closure | string $columns,
-        array | Closure | string $against
+        Closure | array | string $columns,
+        Closure | array | string $against
     ) : static {
         return $this->where($columns, 'MATCH', $against);
     }
@@ -603,8 +603,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against IN NATURAL LANGUAGE MODE)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
+     * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -612,8 +612,8 @@ trait Where
      * @return static
      */
     public function orWhereMatch(
-        array | Closure | string $columns,
-        array | Closure | string $against
+        Closure | array | string $columns,
+        Closure | array | string $against
     ) : static {
         return $this->orWhere($columns, 'MATCH', $against);
     }
@@ -622,8 +622,8 @@ trait Where
      * Appends an "AND MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
+     * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -631,8 +631,8 @@ trait Where
      * @return static
      */
     public function whereMatchWithQueryExpansion(
-        array | Closure | string $columns,
-        array | Closure | string $against
+        Closure | array | string $columns,
+        Closure | array | string $against
     ) : static {
         return $this->where($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
     }
@@ -641,8 +641,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against WITH QUERY EXPANSION)" fulltext
      * searching in the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
+     * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -650,8 +650,8 @@ trait Where
      * @return static
      */
     public function orWhereMatchWithQueryExpansion(
-        array | Closure | string $columns,
-        array | Closure | string $against
+        Closure | array | string $columns,
+        Closure | array | string $against
     ) : static {
         return $this->orWhere($columns, 'MATCH', $against, 'WITH QUERY EXPANSION');
     }
@@ -660,8 +660,8 @@ trait Where
      * Appends an "AND MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
      * the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
+     * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -669,8 +669,8 @@ trait Where
      * @return static
      */
     public function whereMatchInBooleanMode(
-        array | Closure | string $columns,
-        array | Closure | string $against
+        Closure | array | string $columns,
+        Closure | array | string $against
     ) : static {
         return $this->where($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
     }
@@ -679,8 +679,8 @@ trait Where
      * Appends a "OR MATCH (...$columns) AGAINST ($against IN BOOLEAN MODE)" fulltext searching in
      * the WHERE clause.
      *
-     * @param array<array<mixed>|Closure|string>|Closure|string $columns Columns to MATCH
-     * @param array<array<mixed>|Closure|string>|Closure|string $against AGAINST expression
+     * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
+     * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
      * @see https://mariadb.com/kb/en/full-text-index-overview/
      * @see https://mariadb.com/kb/en/match-against/
@@ -688,8 +688,8 @@ trait Where
      * @return static
      */
     public function orWhereMatchInBooleanMode(
-        array | Closure | string $columns,
-        array | Closure | string $against
+        Closure | array | string $columns,
+        Closure | array | string $against
     ) : static {
         return $this->orWhere($columns, 'MATCH', $against, 'IN BOOLEAN MODE');
     }
@@ -698,7 +698,7 @@ trait Where
      * Adds a WHERE (or HAVING) part.
      *
      * @param string $glue `AND` or `OR`
-     * @param array<array<mixed>|Closure|string>|Closure|string $column
+     * @param Closure|array<Closure|array<mixed>|string>|string $column
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE`,
      * `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`, `IS NOT NULL` or `MATCH`
      * @param array<Closure|float|int|string|null> $values Values used by the operator
@@ -708,7 +708,7 @@ trait Where
      */
     private function addWhere(
         string $glue,
-        array | Closure | string $column,
+        Closure | array | string $column,
         string $operator,
         array $values,
         string $clause = 'where'
@@ -725,15 +725,15 @@ trait Where
     /**
      * Renders a MATCH AGAINST clause.
      *
-     * @param array<Closure|string>|Closure|string $columns
-     * @param array<string>|Closure|string $expression
+     * @param Closure|array<Closure|string>|string $columns
+     * @param Closure|array<string>|string $expression
      * @param string $modifier
      *
      * @return string
      */
     private function renderMatch(
-        array | Closure | string $columns,
-        array | Closure | string $expression,
+        Closure | array | string $columns,
+        Closure | array | string $expression,
         string $modifier = ''
     ) {
         $columns = $this->renderMatchColumns($columns);
@@ -745,11 +745,11 @@ trait Where
     }
 
     /**
-     * @param array<Closure|string>|Closure|string $columns
+     * @param Closure|array<Closure|string>|string $columns
      *
      * @return string
      */
-    private function renderMatchColumns(array | Closure | string $columns) : string
+    private function renderMatchColumns(Closure | array | string $columns) : string
     {
         if (\is_array($columns)) {
             foreach ($columns as &$column) {
@@ -766,12 +766,12 @@ trait Where
     }
 
     /**
-     * @param array<string>|Closure|string $expression
+     * @param Closure|array<string>|string $expression
      *
      * @return float|int|string
      */
     private function renderMatchExpression(
-        array | Closure | string $expression
+        Closure | array | string $expression
     ) : float | int | string {
         if (\is_array($expression)) {
             $expression = \implode(', ', $expression);
@@ -926,7 +926,7 @@ trait Where
     /**
      * Quote the input values or transform it in subqueries.
      *
-     * @param array<bool|Closure|float|int|string|null> $values
+     * @param array<Closure|bool|float|int|string|null> $values
      *
      * @return array<float|int|string> Each input value quoted or transformed in subquery
      */

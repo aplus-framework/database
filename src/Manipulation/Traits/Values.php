@@ -22,13 +22,13 @@ trait Values
     /**
      * Adds a row of values to the VALUES clause.
      *
-     * @param array<array<mixed>>|Closure|float|int|string|null $value
+     * @param Closure|array<array<mixed>>|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
      * @return static
      */
     public function values(
-        array | Closure | float | int | string | null $value,
+        Closure | array | float | int | string | null $value,
         Closure | float | int | string | null ...$values
     ) : static {
         if (!\is_array($value)) {

@@ -54,7 +54,7 @@ class PreparedStatement
      *
      * @return int|string
      */
-    public function exec(bool | float | int | string | null ...$params) : int|string
+    public function exec(bool | float | int | string | null ...$params) : int | string
     {
         $this->bindParams($params);
         $this->statement->execute();

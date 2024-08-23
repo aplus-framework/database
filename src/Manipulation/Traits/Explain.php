@@ -45,7 +45,7 @@ trait Explain
      *
      * @return array<int,Result>
      */
-    public function explain(string $option = null) : array
+    public function explain(?string $option = null) : array
     {
         if ($option !== null) {
             $opt = \strtoupper($option);

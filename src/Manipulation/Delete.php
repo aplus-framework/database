@@ -55,17 +55,17 @@ class Delete extends Statement
     /**
      * Sets the table references.
      *
-     * @param array<string,Closure|string>|Closure|string $reference The table
+     * @param Closure|array<string,Closure|string>|string $reference The table
      * name as string, a subquery as Closure or an array for aliased table where
      * the key is the alias name and the value is the table name or a subquery
-     * @param array<string,Closure|string>|Closure|string ...$references Extra
+     * @param Closure|array<string,Closure|string>|string ...$references Extra
      * references. Same values as $reference
      *
      * @return static
      */
     public function table(
-        array | Closure | string $reference,
-        array | Closure | string ...$references
+        Closure | array | string $reference,
+        Closure | array | string ...$references
     ) : static {
         $this->sql['table'] = [];
         foreach ([$reference, ...$references] as $reference) {
@@ -149,7 +149,7 @@ class Delete extends Statement
      *
      * @return int|string The number of affected rows
      */
-    public function run() : int|string
+    public function run() : int | string
     {
         return $this->database->exec($this->sql());
     }
