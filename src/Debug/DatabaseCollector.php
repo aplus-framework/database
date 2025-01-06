@@ -11,6 +11,7 @@ namespace Framework\Database\Debug;
 
 use Framework\Database\Database;
 use Framework\Debug\Collector;
+use Framework\Debug\Debugger;
 
 /**
  * Class DatabaseCollector.
@@ -65,7 +66,7 @@ class DatabaseCollector extends Collector
             <thead>
             <tr>
                 <th>#</th>
-                <th title="Seconds">Time</th>
+                <th title="Milliseconds">Time</th>
                 <th>Statement</th>
                 <th title="Affected rows or Rows in set">Rows</th>
             </tr>
@@ -74,7 +75,7 @@ class DatabaseCollector extends Collector
             <?php foreach ($this->getData() as $index => $item): ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <td><?= \round($item['end'] - $item['start'], 6) ?></td>
+                    <td><?= Debugger::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
                     <td>
                         <pre><code class="language-sql"><?=
                                 \htmlentities($item['statement'])

@@ -3,6 +3,7 @@
     <!-- cleancode -->
     <rule ref="rulesets/cleancode.xml">
         <exclude name="BooleanArgumentFlag"/>
+        <exclude name="StaticAccess"/>
     </rule>
     <!-- codesize -->
     <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
