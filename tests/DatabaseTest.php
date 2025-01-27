@@ -164,6 +164,13 @@ final class DatabaseTest extends TestCase
     protected function cipherStatus(Database $database) : void
     {
         $status = $database->query("SHOW STATUS LIKE 'ssl_cipher'")->fetchArray();
+        if (\getenv('DB_IMAGE') === 'mysql') {
+            self::assertSame([
+                'Variable_name' => 'Ssl_cipher',
+                'Value' => 'TLS_AES_128_GCM_SHA256',
+            ], $status);
+            return;
+        }
         self::assertSame([
             'Variable_name' => 'Ssl_cipher',
             'Value' => 'TLS_AES_256_GCM_SHA384',
