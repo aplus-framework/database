@@ -61,7 +61,9 @@ class DatabaseCollector extends Collector
             return \ob_get_clean(); // @phpstan-ignore-line
         }
         $count = \count($this->getData()); ?>
-        <p>Ran <?= $count ?> statement<?= $count === 1 ? '' : 's' ?>:</p>
+        <p>Ran <?= $count ?> statement<?= $count === 1 ? '' : 's' ?>
+            in <?= $this->getStatementsTime() ?> ms:
+        </p>
         <table>
             <thead>
             <tr>
@@ -90,6 +92,16 @@ class DatabaseCollector extends Collector
         </table>
         <?php
         return \ob_get_clean(); // @phpstan-ignore-line
+    }
+
+    protected function getStatementsTime() : float
+    {
+        $time = .0;
+        foreach ($this->getData() as $data) {
+            $total = $data['end'] - $data['start'];
+            $time += $total;
+        }
+        return Debugger::roundSecondsToMilliseconds($time);
     }
 
     protected function showHeader() : string
