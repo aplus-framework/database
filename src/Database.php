@@ -322,6 +322,10 @@ class Database
      * Pings the server, or tries to reconnect if the connection has gone down.
      *
      * @return bool
+     *
+     * @deprecated
+     *
+     * @codeCoverageIgnore
      */
     public function ping() : bool
     {
