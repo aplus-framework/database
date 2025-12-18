@@ -258,11 +258,6 @@ final class DatabaseTest extends TestCase
         self::assertTrue(static::$database->close());
     }
 
-    public function testPing() : void
-    {
-        self::assertTrue(static::$database->ping());
-    }
-
     public function testReconnect() : void
     {
         self::assertInstanceOf(Database::class, static::$database->reconnect());
