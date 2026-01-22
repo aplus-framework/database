@@ -35,12 +35,12 @@
     "require": {
         "php": ">=8.5",
         "ext-mysqli": "*",
-        "aplus/debug": "^4.3",
-        "aplus/log": "^4.0"
+        "aplus/debug": "^5.0",
+        "aplus/log": "^5.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "aplus/coding-standard": "^2.8",
+        "aplus/coding-standard": "^3.0",
         "ergebnis/composer-normalize": "^2.25",
         "jetbrains/phpstorm-attributes": "^1.0",
         "phpmd/phpmd": "^2.13",
