@@ -319,20 +319,6 @@ class Database
     }
 
     /**
-     * Pings the server, or tries to reconnect if the connection has gone down.
-     *
-     * @return bool
-     *
-     * @deprecated
-     *
-     * @codeCoverageIgnore
-     */
-    public function ping() : bool
-    {
-        return $this->mysqli->ping();
-    }
-
-    /**
      * Closes the current and opens a new connection with the last config.
      *
      * @return static
