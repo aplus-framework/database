@@ -33,7 +33,7 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.5",
         "ext-mysqli": "*",
         "aplus/debug": "^4.3",
         "aplus/log": "^4.0"

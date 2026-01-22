@@ -23,7 +23,7 @@ jobs:
           - 3306:3306
         options: --health-cmd="healthcheck.sh --su-mysql --connect --innodb_initialized" --health-interval=10s --health-timeout=5s --health-retries=3
 
-    name: PHP 8.3 - MariaDB
+    name: PHP 8.5 - MariaDB
 
     steps:
       - name: Checkout
@@ -32,7 +32,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: 8.5
           ini-values: mysqli.allow_local_infile=On
           tools: composer
           coverage: xdebug
