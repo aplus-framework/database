@@ -95,7 +95,8 @@ final class DatabaseCollectorTest extends TestCase
 
     public function testPort() : void
     {
-        $collector = new class() extends DatabaseCollector {
+        $collector = new class() extends DatabaseCollector
+        {
             protected function getHostInfo() : string
             {
                 return '127.0.0.1 via TCP/IP';
@@ -109,7 +110,8 @@ final class DatabaseCollectorTest extends TestCase
 
     public function testSocket() : void
     {
-        $collector = new class() extends DatabaseCollector {
+        $collector = new class() extends DatabaseCollector
+        {
             protected function getHostInfo() : string
             {
                 return 'Localhost via UNIX socket';
