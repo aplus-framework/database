@@ -12,6 +12,8 @@ namespace Tests\Database\Manipulation;
 use Closure;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Result;
+use Framework\Database\Result\Explain;
+use InvalidArgumentException;
 use Tests\Database\TestCase;
 
 final class SelectTest extends TestCase
@@ -60,7 +62,7 @@ final class SelectTest extends TestCase
     public function testInvalidOption() : void
     {
         $this->select->options('al');
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid option: al');
         $this->select->sql();
     }
@@ -177,7 +179,7 @@ final class SelectTest extends TestCase
     {
         $this->selectAllFrom('t1');
         $this->select->intoOutfile('/tmp/foo-bar', null, ['foo' => 'bar']);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid INTO OUTFILE fields option: foo');
         $this->select->sql();
     }
@@ -186,7 +188,7 @@ final class SelectTest extends TestCase
     {
         $this->selectAllFrom('t1');
         $this->select->intoOutfile('/tmp/foo-bar', null, [], ['foo' => 'bar']);
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid INTO OUTFILE lines option: foo');
         $this->select->sql();
     }
@@ -297,6 +299,29 @@ final class SelectTest extends TestCase
             $part . " ORDER BY `name` ASC, `id`\n",
             $this->select->orderByAsc('name')->orderBy('id')->sql()
         );
+    }
+
+    public function testExplain() : void
+    {
+        $results = $this->select->from('t1')->where('c1', '=', 1)->explain();
+        foreach ($results as $result) {
+            self::assertInstanceOf(Explain::class, $result);
+        }
+    }
+
+    public function testExplainWithOption() : void
+    {
+        $results = $this->select->from('t1')->where('c1', '=', 1)->explain(Select::EXP_EXTENDED);
+        foreach ($results as $result) {
+            self::assertInstanceOf(Explain::class, $result);
+        }
+    }
+
+    public function testExplainWithInvalidOption() : void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid EXPLAIN option: foo');
+        $this->select->from('t1')->explain('foo');
     }
 
     public function testRun() : void
