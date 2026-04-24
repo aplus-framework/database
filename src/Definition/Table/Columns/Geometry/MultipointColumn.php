@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class MultipointColumn.
  *
- * @see https://mariadb.com/kb/en/multipoint/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/multipoint
  *
  * @package database
  */

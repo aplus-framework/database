@@ -15,7 +15,7 @@ use LogicException;
 /**
  * Class Replace.
  *
- * @see https://mariadb.com/kb/en/replace/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/replace
  *
  * @package database
  */
@@ -26,11 +26,11 @@ class Replace extends Statement
     use Traits\Values;
 
     /**
-     * @see https://mariadb.com/kb/en/insert-delayed/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert-delayed
      */
     public const string OPT_DELAYED = 'DELAYED';
     /**
-     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/high_priority-and-low_priority
      */
     public const string OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 

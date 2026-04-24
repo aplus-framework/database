@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class Insert.
  *
- * @see https://mariadb.com/kb/en/insert/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert
  *
  * @package database
  */
@@ -27,21 +27,21 @@ class Insert extends Statement
     use Traits\Values;
 
     /**
-     * @see https://mariadb.com/kb/en/insert-delayed/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert-delayed
      */
     public const string OPT_DELAYED = 'DELAYED';
     /**
      * Convert errors to warnings, which will not stop inserts of additional rows.
      *
-     * @see https://mariadb.com/kb/en/insert-ignore/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert-ignore
      */
     public const string OPT_IGNORE = 'IGNORE';
     /**
-     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/high_priority-and-low_priority
      */
     public const string OPT_HIGH_PRIORITY = 'HIGH_PRIORITY';
     /**
-     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/high_priority-and-low_priority
      */
     public const string OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
@@ -143,7 +143,7 @@ class Insert extends Statement
      * @param array<string,Closure|float|int|string|null>|object $columns Column name
      * as key/property, column value/expression as value
      *
-     * @see https://mariadb.com/kb/en/insert-on-duplicate-key-update/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert-on-duplicate-key-update
      *
      * @return static
      */

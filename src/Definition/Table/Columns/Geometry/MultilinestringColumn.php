@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class MultilinestringColumn.
  *
- * @see https://mariadb.com/kb/en/multilinestring/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/multilinestring
  *
  * @package database
  */

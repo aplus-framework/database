@@ -15,7 +15,7 @@ use LogicException;
 /**
  * Class LoadData.
  *
- * @see https://mariadb.com/kb/en/load-data-infile/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/load-data-into-tables-or-index/load-data-infile
  *
  * @package database
  */
@@ -24,15 +24,15 @@ class LoadData extends Statement
     use Traits\Set;
 
     /**
-     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/high_priority-and-low_priority
      */
     public const string OPT_LOW_PRIORITY = 'LOW_PRIORITY';
     /**
-     * @see https://mariadb.com/kb/en/load-data-infile/#priority-and-concurrency
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/load-data-into-tables-or-index/load-data-infile#priority-and-concurrency
      */
     public const string OPT_CONCURRENT = 'CONCURRENT';
     /**
-     * @see https://mariadb.com/kb/en/load-data-infile/#load-data-local-infile
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/load-data-into-tables-or-index/load-data-infile#load-data-local-infile
      */
     public const string OPT_LOCAL = 'LOCAL';
 
@@ -106,7 +106,7 @@ class LoadData extends Statement
     /**
      * @param string $charset
      *
-     * @see https://mariadb.com/kb/en/supported-character-sets-and-collations/
+     * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/character-sets/supported-character-sets-and-collations
      *
      * @return static
      */

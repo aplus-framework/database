@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
 /**
  * Class SmallintColumn.
  *
- * @see https://mariadb.com/kb/en/smallint/
+ * @see https://mariadb.com/docs/server/reference/data-types/numeric-data-types/smallint
  *
  * @package database
  */

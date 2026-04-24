@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\Numeric;
 /**
  * Class BooleanColumn.
  *
- * @see https://mariadb.com/kb/en/boolean/
+ * @see https://mariadb.com/docs/server/reference/data-types/numeric-data-types/boolean
  *
  * @package database
  */

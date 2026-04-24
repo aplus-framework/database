@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class DropTable.
  *
- * @see https://mariadb.com/kb/en/drop-table/
+ * @see https://mariadb.com/docs/server/server-usage/tables/drop-table
  *
  * @package database
  */

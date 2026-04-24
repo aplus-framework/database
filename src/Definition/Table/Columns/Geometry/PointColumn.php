@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class PointColumn.
  *
- * @see https://mariadb.com/kb/en/point/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/point
  *
  * @package database
  */

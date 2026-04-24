@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class VarbinaryColumn.
  *
- * @see https://mariadb.com/kb/en/varbinary/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/varbinary
  *
  * @package database
  */

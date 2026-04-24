@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class MediumblobColumn.
  *
- * @see https://mariadb.com/kb/en/mediumblob/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/mediumblob
  *
  * @package database
  */

@@ -15,7 +15,7 @@ use InvalidArgumentException;
 /**
  * Class Delete.
  *
- * @see https://mariadb.com/kb/en/delete/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/delete
  *
  * @package database
  */
@@ -96,7 +96,7 @@ class Delete extends Statement
      *
      * @param int $limit
      *
-     * @see https://mariadb.com/kb/en/limit/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/limit
      *
      * @return static
      */

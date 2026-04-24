@@ -63,7 +63,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/equal
      *
      * @return static
      */
@@ -80,7 +80,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/equal
      *
      * @return static
      */
@@ -97,7 +97,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/not-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-equal
      *
      * @return static
      */
@@ -114,7 +114,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/not-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-equal
      *
      * @return static
      */
@@ -131,7 +131,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/null-safe-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/null-safe-equal
      *
      * @return static
      */
@@ -148,7 +148,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/null-safe-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/null-safe-equal
      *
      * @return static
      */
@@ -165,7 +165,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/less-than/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than
      *
      * @return static
      */
@@ -182,7 +182,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/less-than/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than
      *
      * @return static
      */
@@ -199,7 +199,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/less-than-or-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than-or-equal
      *
      * @return static
      */
@@ -216,7 +216,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/less-than-or-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than-or-equal
      *
      * @return static
      */
@@ -233,7 +233,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/greater-than/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than
      *
      * @return static
      */
@@ -250,7 +250,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/greater-than/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than
      *
      * @return static
      */
@@ -267,7 +267,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/greater-than-or-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than-or-equal
      *
      * @return static
      */
@@ -284,7 +284,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/greater-than-or-equal/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than-or-equal
      *
      * @return static
      */
@@ -301,7 +301,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/like/
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/like
      *
      * @return static
      */
@@ -316,7 +316,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/like/
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/like
      *
      * @return static
      */
@@ -333,7 +333,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/not-like/
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/not-like
      *
      * @return static
      */
@@ -350,7 +350,7 @@ trait Where
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param Closure|float|int|string|null $value
      *
-     * @see https://mariadb.com/kb/en/not-like/
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/not-like
      *
      * @return static
      */
@@ -368,7 +368,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/in/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/in
      *
      * @return static
      */
@@ -387,7 +387,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/in/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/in
      *
      * @return static
      */
@@ -406,7 +406,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/not-in/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-in
      *
      * @return static
      */
@@ -425,7 +425,7 @@ trait Where
      * @param Closure|float|int|string|null $value
      * @param Closure|float|int|string|null ...$values
      *
-     * @see https://mariadb.com/kb/en/not-in/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-in
      *
      * @return static
      */
@@ -444,7 +444,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/between-and/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and
      *
      * @return static
      */
@@ -463,7 +463,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/between-and/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and
      *
      * @return static
      */
@@ -482,7 +482,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/not-between/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-between
      *
      * @return static
      */
@@ -501,7 +501,7 @@ trait Where
      * @param Closure|float|int|string|null $min
      * @param Closure|float|int|string|null $max
      *
-     * @see https://mariadb.com/kb/en/not-between/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-between
      *
      * @return static
      */
@@ -518,7 +518,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/is-null/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/is-null
      *
      * @return static
      */
@@ -532,7 +532,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/is-null/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/is-null
      *
      * @return static
      */
@@ -546,7 +546,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/is-not-null/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/is-not-null
      *
      * @return static
      */
@@ -560,7 +560,7 @@ trait Where
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      *
-     * @see https://mariadb.com/kb/en/is-not-null/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/is-not-null
      *
      * @return static
      */
@@ -587,8 +587,8 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
      * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/match-against/
+     * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/match-against
      *
      * @return static
      */
@@ -606,8 +606,8 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
      * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/match-against/
+     * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/match-against
      *
      * @return static
      */
@@ -625,8 +625,8 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
      * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/match-against/
+     * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/match-against
      *
      * @return static
      */
@@ -644,8 +644,8 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
      * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/match-against/
+     * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/match-against
      *
      * @return static
      */
@@ -663,8 +663,8 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
      * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/match-against/
+     * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/match-against
      *
      * @return static
      */
@@ -682,8 +682,8 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $columns Columns to MATCH
      * @param Closure|array<Closure|array<mixed>|string>|string $against AGAINST expression
      *
-     * @see https://mariadb.com/kb/en/full-text-index-overview/
-     * @see https://mariadb.com/kb/en/match-against/
+     * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/match-against
      *
      * @return static
      */

@@ -15,7 +15,7 @@ use Framework\Database\Database;
 /**
  * Class Check.
  *
- * @see https://mariadb.com/kb/en/constraint/#check-constraints
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-definition/constraint#check-constraints
  *
  * @package database
  */

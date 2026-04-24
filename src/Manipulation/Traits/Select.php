@@ -25,7 +25,7 @@ trait Select
      *
      * @param Closure $select
      *
-     * @see https://mariadb.com/kb/en/insert-select/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert-select
      *
      * @return static
      */

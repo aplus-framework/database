@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class TinytextColumn.
  *
- * @see https://mariadb.com/kb/en/tinytext/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/tinytext
  *
  * @package database
  */

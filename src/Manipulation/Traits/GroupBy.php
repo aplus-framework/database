@@ -14,7 +14,7 @@ use Closure;
 /**
  * Trait GroupBy.
  *
- * @see https://mariadb.com/kb/en/group-by/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/group-by
  *
  * @package database
  *

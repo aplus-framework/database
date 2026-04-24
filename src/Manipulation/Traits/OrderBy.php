@@ -14,7 +14,7 @@ use Closure;
 /**
  * Trait OrderBy.
  *
- * @see https://mariadb.com/kb/en/order-by/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/order-by
  *
  * @package database
  */

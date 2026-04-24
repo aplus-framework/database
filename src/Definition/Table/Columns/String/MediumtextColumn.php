@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class MediumtextColumn.
  *
- * @see https://mariadb.com/kb/en/mediumtext/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/mediumtext
  *
  * @package database
  */

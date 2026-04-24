@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class LongtextColumn.
  *
- * @see https://mariadb.com/kb/en/longtext/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/longtext
  *
  * @package database
  */

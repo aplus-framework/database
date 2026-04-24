@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class YearColumn.
  *
- * @see https://mariadb.com/kb/en/year-data-type/
+ * @see https://mariadb.com/docs/server/reference/data-types/date-and-time-data-types/year-data-type
  *
  * @package database
  */

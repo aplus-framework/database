@@ -15,7 +15,7 @@ use LogicException;
 /**
  * Class ForeignKey.
  *
- * @see https://mariadb.com/kb/en/foreign-keys/
+ * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/foreign-keys
  *
  * @package database
  */

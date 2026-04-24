@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class TimestampColumn.
  *
- * @see https://mariadb.com/kb/en/timestamp/
+ * @see https://mariadb.com/docs/server/reference/data-types/date-and-time-data-types/timestamp
  *
  * @package database
  */

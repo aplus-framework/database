@@ -52,7 +52,7 @@ use Framework\Database\Definition\Table\DefinitionPart;
 /**
  * Class ColumnDefinition.
  *
- * @see https://mariadb.com/kb/en/create-table/#index-definitions
+ * @see https://mariadb.com/docs/server/server-usage/tables/create-table#index-definitions
  *
  * @package database
  */

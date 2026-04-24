@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class TextColumn.
  *
- * @see https://mariadb.com/kb/en/text/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/text
  *
  * @package database
  */

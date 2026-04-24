@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class MultipolygonColumn.
  *
- * @see https://mariadb.com/kb/en/multipolygon/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/multipolygon
  *
  * @package database
  */

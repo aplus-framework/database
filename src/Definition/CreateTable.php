@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class CreateTable.
  *
- * @see https://mariadb.com/kb/en/create-table/
+ * @see https://mariadb.com/docs/server/server-usage/tables/create-table
  *
  * @package database
  */

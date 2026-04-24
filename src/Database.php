@@ -736,7 +736,7 @@ class Database
      *
      * @param string $identifier
      *
-     * @see https://mariadb.com/kb/en/identifier-names/
+     * @see https://mariadb.com/docs/server/reference/sql-structure/sql-language-structure/identifier-names
      *
      * @return string
      */
@@ -755,7 +755,7 @@ class Database
      *
      * @param bool|float|int|string|null $value Value to be quoted
      *
-     * @see https://mariadb.com/kb/en/quote/
+     * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/quote
      *
      * @throws InvalidArgumentException For invalid value type
      *

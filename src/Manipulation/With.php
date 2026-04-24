@@ -17,14 +17,14 @@ use LogicException;
 /**
  * Class With.
  *
- * @see https://mariadb.com/kb/en/with/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/common-table-expressions/with
  *
  * @package database
  */
 class With extends Statement
 {
     /**
-     * @see https://mariadb.com/kb/en/recursive-common-table-expressions-overview/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/common-table-expressions/recursive-common-table-expressions-overview
      */
     public const string OPT_RECURSIVE = 'RECURSIVE';
 
@@ -50,8 +50,8 @@ class With extends Statement
      * @param Closure|string $table
      * @param Closure $alias
      *
-     * @see https://mariadb.com/kb/en/non-recursive-common-table-expressions-overview/
-     * @see https://mariadb.com/kb/en/recursive-common-table-expressions-overview/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/common-table-expressions/non-recursive-common-table-expressions-overview
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/common-table-expressions/recursive-common-table-expressions-overview
      *
      * @return static
      */

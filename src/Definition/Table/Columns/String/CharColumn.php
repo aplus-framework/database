@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class CharColumn.
  *
- * @see https://mariadb.com/kb/en/char/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/char
  *
  * @package database
  */

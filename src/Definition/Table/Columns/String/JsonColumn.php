@@ -12,7 +12,7 @@ namespace Framework\Database\Definition\Table\Columns\String;
 /**
  * Class JsonColumn.
  *
- * @see https://mariadb.com/kb/en/json-data-type/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/json
  *
  * @package database
  */

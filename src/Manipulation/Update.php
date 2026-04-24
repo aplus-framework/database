@@ -16,7 +16,7 @@ use LogicException;
 /**
  * Class Update.
  *
- * @see https://mariadb.com/kb/en/update/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/update
  *
  * @package database
  */
@@ -31,11 +31,11 @@ class Update extends Statement
     /**
      * Convert errors to warnings, which will not stop inserts of additional rows.
      *
-     * @see https://mariadb.com/kb/en/insert-ignore/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/inserting-loading-data/insert-ignore
      */
     public const string OPT_IGNORE = 'IGNORE';
     /**
-     * @see https://mariadb.com/kb/en/high_priority-and-low_priority/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/changing-deleting-data/high_priority-and-low_priority
      */
     public const string OPT_LOW_PRIORITY = 'LOW_PRIORITY';
 
@@ -96,7 +96,7 @@ class Update extends Statement
      *
      * @param int $limit
      *
-     * @see https://mariadb.com/kb/en/limit/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/limit
      *
      * @return static
      */

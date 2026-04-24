@@ -15,138 +15,138 @@ use InvalidArgumentException;
 /**
  * Class TableStatement.
  *
- * @see https://mariadb.com/kb/en/create-table/#table-options
+ * @see https://mariadb.com/docs/server/server-usage/tables/create-table#table-options
  *
  * @package database
  */
 abstract class TableStatement extends Statement
 {
     /**
-     * @see https://mariadb.com/kb/en/create-table/#storage-engine
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#storage-engine
      */
     public const string OPT_ENGINE = 'ENGINE';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#auto_increment
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#auto_increment
      */
     public const string OPT_AUTO_INCREMENT = 'AUTO_INCREMENT';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#avg_row_length
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#avg_row_length
      */
     public const string OPT_AVG_ROW_LENGTH = 'AVG_ROW_LENGTH';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#default-character-setcharset
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#default-character-set-charset
      */
     public const string OPT_CHARSET = 'CHARSET';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#checksumtable_checksum
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#checksum-table_checksum
      */
     public const string OPT_CHECKSUM = 'CHECKSUM';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#default-collate
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#default-collate
      */
     public const string OPT_COLLATE = 'COLLATE';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#comment
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#comment
      */
     public const string OPT_COMMENT = 'COMMENT';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#connection
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#connection
      */
     public const string OPT_CONNECTION = 'CONNECTION';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#data-directoryindex-directory
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#data-directory-index-directory
      */
     public const string OPT_DATA_DIRECTORY = 'DATA DIRECTORY';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#delay_key_write
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#delay_key_write
      */
     public const string OPT_DELAY_KEY_WRITE = 'DELAY_KEY_WRITE';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#encrypted
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#encrypted
      */
     public const string OPT_ENCRYPTED = 'ENCRYPTED';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#encryption_key_id
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#encryption_key_id
      */
     public const string OPT_ENCRYPTION_KEY_ID = 'ENCRYPTION_KEY_ID';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#ietf_quotes
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#ietf_quotes
      */
     public const string OPT_IETF_QUOTES = 'IETF_QUOTES';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#data-directoryindex-directory
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#data-directory-index-directory
      */
     public const string OPT_INDEX_DIRECTORY = 'INDEX DIRECTORY';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#insert_method
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#insert_method
      */
     public const string OPT_INSERT_METHOD = 'INSERT_METHOD';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#key_block_size
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#key_block_size
      */
     public const string OPT_KEY_BLOCK_SIZE = 'KEY_BLOCK_SIZE';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#min_rowsmax_rows
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#min_rows-max_rows
      */
     public const string OPT_MAX_ROWS = 'MAX_ROWS';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#min_rowsmax_rows
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#min_rows-max_rows
      */
     public const string OPT_MIN_ROWS = 'MIN_ROWS';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#pack_keys
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#pack_keys
      */
     public const string OPT_PACK_KEYS = 'PACK_KEYS';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#page_checksum
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#page_checksum
      */
     public const string OPT_PAGE_CHECKSUM = 'PAGE_CHECKSUM';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#page_compressed
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#page_compressed
      */
     public const string OPT_PAGE_COMPRESSED = 'PAGE_COMPRESSED';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#page_compression_level
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#page_compression_level
      */
     public const string OPT_PAGE_COMPRESSION_LEVEL = 'PAGE_COMPRESSION_LEVEL';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#password
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#password
      */
     public const string OPT_PASSWORD = 'PASSWORD';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#row_format
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#row_format
      */
     public const string OPT_ROW_FORMAT = 'ROW_FORMAT';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#sequence
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#sequence
      */
     public const string OPT_SEQUENCE = 'SEQUENCE';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#stats_auto_recalc
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#stats_auto_recalc
      */
     public const string OPT_STATS_AUTO_RECALC = 'STATS_AUTO_RECALC';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#stats_persistent
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#stats_persistent
      */
     public const string OPT_STATS_PERSISTENT = 'STATS_PERSISTENT';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#stats_sample_pages
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#stats_sample_pages
      */
     public const string OPT_STATS_SAMPLE_PAGES = 'STATS_SAMPLE_PAGES';
     /**
-     * @see https://mariadb.com/kb/en/create-tablespace/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-definition/create/create-tablespace
      */
     public const string OPT_TABLESPACE = 'TABLESPACE';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#transactional
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#transactional
      */
     public const string OPT_TRANSACTIONAL = 'TRANSACTIONAL';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#union
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#union
      */
     public const string OPT_UNION = 'UNION';
     /**
-     * @see https://mariadb.com/kb/en/create-table/#with-system-versioning
+     * @see https://mariadb.com/docs/server/server-usage/tables/create-table#with-system-versioning
      */
     public const string OPT_WITH_SYSTEM_VERSIONING = 'WITH SYSTEM VERSIONING';
 

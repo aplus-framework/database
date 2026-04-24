@@ -17,7 +17,7 @@ use LogicException;
 /**
  * Class AlterTable.
  *
- * @see https://mariadb.com/kb/en/alter-table/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/data-definition/alter/alter-table
  *
  * @package database
  */
@@ -559,7 +559,7 @@ class AlterTable extends TableStatement
     /**
      * @param string $type
      *
-     * @see https://mariadb.com/kb/en/alter-table/#lock
+     * @see https://mariadb.com/docs/server/reference/sql-statements/data-definition/alter/alter-table#lock
      * @see AlterTable::LOCK_DEFAULT
      * @see AlterTable::LOCK_EXCLUSIVE
      * @see AlterTable::LOCK_NONE
@@ -607,7 +607,7 @@ class AlterTable extends TableStatement
     /**
      * @param string $algo
      *
-     * @see https://mariadb.com/kb/en/innodb-online-ddl-overview/#algorithm
+     * @see https://mariadb.com/docs/server/server-usage/storage-engines/innodb/innodb-online-ddl/innodb-online-ddl-overview#algorithm#alter-algorithms
      * @see AlterTable::ALGO_COPY
      * @see AlterTable::ALGO_DEFAULT
      * @see AlterTable::ALGO_INPLACE

@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class BitColumn.
  *
- * @see https://mariadb.com/kb/en/bit/
+ * @see https://mariadb.com/docs/server/reference/data-types/numeric-data-types/bit
  *
  * @package database
  */

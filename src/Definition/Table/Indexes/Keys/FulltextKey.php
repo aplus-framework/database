@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Indexes\Index;
 /**
  * Class FulltextKey.
  *
- * @see https://mariadb.com/kb/en/full-text-index-overview/
+ * @see https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/optimization-and-indexes/full-text-indexes/full-text-index-overview
  *
  * @package database
  */

@@ -12,7 +12,7 @@ namespace Framework\Database\Result;
 /**
  * Class Explain.
  *
- * @see https://mariadb.com/kb/en/explain/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain
  *
  * @package database
  */
@@ -25,7 +25,7 @@ readonly class Explain
     /**
      * What kind of SELECT the table comes from.
      *
-     * @see https://mariadb.com/kb/en/explain/#select_type-column
+     * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain#select_type-column
      */
     public string $selectType;
     /**
@@ -36,7 +36,7 @@ readonly class Explain
     /**
      * How rows are found from the table (join type).
      *
-     * @see https://mariadb.com/kb/en/explain/#type-column
+     * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain#type-column
      */
     public string $type;
     /**
@@ -63,7 +63,7 @@ readonly class Explain
     /**
      * Extra information about this join.
      *
-     * @see https://mariadb.com/kb/en/explain/#extra-column
+     * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain#extra-column
      */
     public string $extra;
     /**
@@ -71,14 +71,14 @@ readonly class Explain
      * is a percentage estimate of the table rows that will be filtered by the
      * condition.
      *
-     * @see https://mariadb.com/kb/en/explain/#explain-extended
+     * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain#explain-extended
      */
     public float $filtered;
     /**
      * EXPLAIN FORMAT=JSON is a variant of EXPLAIN command that produces output
      * in JSON form.
      *
-     * @see https://mariadb.com/kb/en/explain-format-json/
+     * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain-format-json
      */
     public string $explain;
 

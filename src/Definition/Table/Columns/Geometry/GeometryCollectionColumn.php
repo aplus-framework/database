@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class GeometryCollectionColumn.
  *
- * @see https://mariadb.com/kb/en/geometrycollection/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/geometrycollection
  *
  * @package database
  */

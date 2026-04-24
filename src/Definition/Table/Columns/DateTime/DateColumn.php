@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class EnumColumn.
  *
- * @see https://mariadb.com/kb/en/date/
+ * @see https://mariadb.com/docs/server/reference/data-types/date-and-time-data-types/date
  *
  * @package database
  */

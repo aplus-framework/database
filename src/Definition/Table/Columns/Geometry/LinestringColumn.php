@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class LinestringColumn.
  *
- * @see https://mariadb.com/kb/en/linestring/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/linestring
  *
  * @package database
  */

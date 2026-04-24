@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class PolygonColumn.
  *
- * @see https://mariadb.com/kb/en/polygon/
+ * @see https://mariadb.com/docs/server/reference/sql-statements/geometry-constructors/geometry-constructors/polygon
  *
  * @package database
  */

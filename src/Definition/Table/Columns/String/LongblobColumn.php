@@ -14,7 +14,7 @@ use Framework\Database\Definition\Table\Columns\Column;
 /**
  * Class LongblobColumn.
  *
- * @see https://mariadb.com/kb/en/longblob/
+ * @see https://mariadb.com/docs/server/reference/data-types/string-data-types/longblob
  *
  * @package database
  */
