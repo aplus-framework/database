@@ -19,8 +19,6 @@ use LogicException;
  * @see  https://mariadb.com/docs/server/reference/sql-statements/data-manipulation/selecting-data/joins
  *
  * @package database
- *
- * @todo STRAIGHT_JOIN - https://mariadb.com/docs/server/ha-and-performance/optimization-and-tuning/query-optimizations/index-hints-how-to-force-query-plans
  */
 trait Join
 {
@@ -390,6 +388,33 @@ trait Join
     }
 
     /**
+     * Adds a JOIN clause with "STRAIGHT_JOIN $table".
+     *
+     * @param Closure|array<string,Closure|string>|string $table Table factor
+     *
+     * @return static
+     */
+    public function straightJoin(Closure | array | string $table) : static
+    {
+        return $this->setJoin($table, 'STRAIGHT_');
+    }
+
+    /**
+     * Adds a JOIN clause with "STRAIGHT_JOIN $table ON $conditional".
+     *
+     * @param Closure|array<string,Closure|string>|string $table Table factor
+     * @param Closure $conditional Conditional expression
+     *
+     * @return static
+     */
+    public function straightJoinOn(
+        Closure | array | string $table,
+        Closure $conditional
+    ) : static {
+        return $this->setJoin($table, 'STRAIGHT_', 'ON', $conditional);
+    }
+
+    /**
      * Sets the JOIN clause.
      *
      * @param Closure|array<string,Closure|string>|string $table The table factor
@@ -435,7 +460,7 @@ trait Join
                 $join['clause'],
                 $join['expression']
             );
-            if ($type) {
+            if ($type && $type !== 'STRAIGHT_') {
                 $type .= ' ';
             }
             if ($index > 0) {
@@ -508,6 +533,7 @@ trait Join
             'NATURAL LEFT OUTER',
             'NATURAL RIGHT',
             'NATURAL RIGHT OUTER',
+            'STRAIGHT_',
         ], true)) {
             return $result;
         }

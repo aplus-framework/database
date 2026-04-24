@@ -273,4 +273,19 @@ final class JoinTest extends TestCase
         $this->statement->naturalRightOuterJoin('t1');
         self::assertSame(' NATURAL RIGHT OUTER JOIN `t1`', $this->statement->renderJoin());
     }
+
+    public function testStraightJoin() : void
+    {
+        $this->statement->straightJoin('t1');
+        self::assertSame(' STRAIGHT_JOIN `t1`', $this->statement->renderJoin());
+    }
+
+    public function testStraightJoinOn() : void
+    {
+        $this->statement->straightJoinOn('t1', static fn () => 't1.id = t2.id');
+        self::assertSame(
+            ' STRAIGHT_JOIN `t1` ON (t1.id = t2.id)',
+            $this->statement->renderJoin()
+        );
+    }
 }
