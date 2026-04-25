@@ -311,6 +311,9 @@ final class SelectTest extends TestCase
 
     public function testExplainWithOption() : void
     {
+        if (\getenv('DB_IMAGE') === 'mysql') {
+            $this->markTestSkipped();
+        }
         $results = $this->select->from('t1')->where('c1', '=', 1)->explain(Select::EXP_EXTENDED);
         foreach ($results as $result) {
             self::assertInstanceOf(Explain::class, $result);

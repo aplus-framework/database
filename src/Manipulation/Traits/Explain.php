@@ -39,7 +39,7 @@ trait Explain
     /**
      * EXPLAIN provides information about statements.
      *
-     * @param string|null $option
+     * @param string|null $option WARNING: This feature is MariaDB only. It is not compatible with MySQL.
      *
      * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain
      *
