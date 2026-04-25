@@ -9,7 +9,7 @@
  */
 namespace Tests\Database;
 
-use Framework\Database\Result;
+use Framework\Database\Result\Result;
 
 final class PreparedStatementTest extends TestCase
 {

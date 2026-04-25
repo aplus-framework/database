@@ -25,7 +25,7 @@ use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
 use Framework\Database\PreparedStatement;
-use Framework\Database\Result;
+use Framework\Database\Result\Result;
 use Framework\Log\Loggers\FileLogger;
 use mysqli_sql_exception;
 

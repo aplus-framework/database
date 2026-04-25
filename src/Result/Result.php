@@ -7,9 +7,8 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database;
+namespace Framework\Database\Result;
 
-use Framework\Database\Result\Field;
 use LogicException;
 use mysqli_result;
 use OutOfBoundsException;

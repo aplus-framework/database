@@ -10,7 +10,7 @@
 namespace Framework\Database\Manipulation;
 
 use Closure;
-use Framework\Database\Result;
+use Framework\Database\Result\Result;
 use InvalidArgumentException;
 use LogicException;
 

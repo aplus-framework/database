@@ -11,7 +11,7 @@ namespace Tests\Database\Manipulation;
 
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\With;
-use Framework\Database\Result;
+use Framework\Database\Result\Result;
 use Tests\Database\TestCase;
 
 final class WithTest extends TestCase

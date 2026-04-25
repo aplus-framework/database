@@ -25,6 +25,7 @@ use Framework\Database\Manipulation\Replace;
 use Framework\Database\Manipulation\Select;
 use Framework\Database\Manipulation\Update;
 use Framework\Database\Manipulation\With;
+use Framework\Database\Result\Result;
 use Framework\Log\Logger;
 use Framework\Log\LogLevel;
 use InvalidArgumentException;

@@ -9,6 +9,7 @@
  */
 namespace Framework\Database;
 
+use Framework\Database\Result\Result;
 use InvalidArgumentException;
 use RuntimeException;
 

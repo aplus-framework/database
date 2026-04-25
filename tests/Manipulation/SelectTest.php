@@ -11,8 +11,8 @@ namespace Tests\Database\Manipulation;
 
 use Closure;
 use Framework\Database\Manipulation\Select;
-use Framework\Database\Result;
 use Framework\Database\Result\Explain;
+use Framework\Database\Result\Result;
 use InvalidArgumentException;
 use Tests\Database\TestCase;
 

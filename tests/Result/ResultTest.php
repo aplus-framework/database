@@ -7,9 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Tests\Database;
+namespace Tests\Database\Result;
 
-use Framework\Database\Result;
+use Framework\Database\Result\Result;
+use Tests\Database\TestCase;
 
 final class ResultTest extends TestCase
 {
