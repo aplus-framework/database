@@ -119,6 +119,13 @@ final class UpdateTest extends TestCase
         );
     }
 
+    public function testExplain() : void
+    {
+        $sql = $this->update->explain()->table('t1')->set(['name' => 'John'])->whereEqual('id', 1)->sql();
+        $expected = "EXPLAIN\nUPDATE\n `t1`\n SET `name` = 'John'\n WHERE `id` = 1\n";
+        self::assertSame($expected, $sql);
+    }
+
     public function testRun() : void
     {
         $this->createDummyData();

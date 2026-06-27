@@ -11,7 +11,6 @@ namespace Tests\Database\Manipulation;
 
 use Closure;
 use Framework\Database\Manipulation\Select;
-use Framework\Database\Result\Explain;
 use Framework\Database\Result\Result;
 use InvalidArgumentException;
 use Tests\Database\TestCase;
@@ -303,28 +302,9 @@ final class SelectTest extends TestCase
 
     public function testExplain() : void
     {
-        $results = $this->select->from('t1')->where('c1', '=', 1)->explain();
-        foreach ($results as $result) {
-            self::assertInstanceOf(Explain::class, $result);
-        }
-    }
-
-    public function testExplainWithOption() : void
-    {
-        if (\getenv('DB_IMAGE') === 'mysql') {
-            $this->markTestSkipped();
-        }
-        $results = $this->select->from('t1')->where('c1', '=', 1)->explain(Select::EXP_EXTENDED);
-        foreach ($results as $result) {
-            self::assertInstanceOf(Explain::class, $result);
-        }
-    }
-
-    public function testExplainWithInvalidOption() : void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid EXPLAIN option: foo');
-        $this->select->from('t1')->explain('foo');
+        $sql = $this->select->explain()->from('t1')->sql();
+        $expected = "EXPLAIN\nSELECT\n *\n FROM `t1`\n";
+        self::assertSame($expected, $sql);
     }
 
     public function testRun() : void

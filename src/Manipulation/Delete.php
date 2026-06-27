@@ -112,7 +112,12 @@ class Delete extends Statement
      */
     public function sql() : string
     {
-        $sql = 'DELETE' . \PHP_EOL;
+        $sql = '';
+        $part = $this->renderExplain();
+        if ($part) {
+            $sql .= $this->renderExplain();
+        }
+        $sql .= 'DELETE' . \PHP_EOL;
         $part = $this->renderOptions();
         if ($part) {
             $sql .= $part . \PHP_EOL;

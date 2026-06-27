@@ -96,6 +96,13 @@ final class DeleteTest extends TestCase
         );
     }
 
+     public function testExplain() : void
+     {
+        $sql = $this->delete->explain('format=json')->from('t1')->whereEqual('id', 1)->sql();
+        $expected = "EXPLAIN FORMAT=JSON\nDELETE\n FROM `t1`\n WHERE `id` = 1\n";
+        self::assertSame($expected, $sql);
+    }
+
     public function testRun() : void
     {
         $this->createDummyData();

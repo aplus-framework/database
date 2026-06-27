@@ -9,7 +9,6 @@
  */
 namespace Framework\Database\Manipulation\Traits;
 
-use Framework\Database\Result\Explain as Result;
 use InvalidArgumentException;
 
 /**
@@ -43,10 +42,13 @@ trait Explain
      *
      * @see https://mariadb.com/docs/server/reference/sql-statements/administrative-sql-statements/analyze-and-explain-statements/explain
      *
-     * @return array<int,Result>
+     * @return static
      */
-    public function explain(?string $option = null) : array
+    public function explain(?string $option = null) : static
     {
+        $this->sql['explain'] = [
+            'option' => null,
+        ];
         if ($option !== null) {
             $opt = \strtoupper($option);
             if (!\in_array($opt, [
@@ -56,13 +58,25 @@ trait Explain
             ], true)) {
                 throw new InvalidArgumentException('Invalid EXPLAIN option: ' . $option);
             }
-            $option = ' ' . $opt;
+            $this->sql['explain']['option'] = $opt;
         }
-        $sql = 'EXPLAIN' . $option . \PHP_EOL . $this->sql();
-        $results = [];
-        foreach ($this->database->query($sql)->fetchAll() as $row) {
-            $results[] = new Result($row); // @phpstan-ignore-line
+        return $this;
+    }
+
+    protected function hasExplain() : bool
+    {
+        return isset($this->sql['explain']);
+    }
+
+    protected function renderExplain() : ?string
+    {
+        if (!$this->hasExplain()) {
+           return null;
         }
-        return $results;
+        $option = '';
+        if (isset($this->sql['explain']['option'])) {
+            $option = ' ' . $this->sql['explain']['option'];
+        }
+        return 'EXPLAIN' . $option . \PHP_EOL;
     }
 }

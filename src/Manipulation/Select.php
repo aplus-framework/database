@@ -475,7 +475,12 @@ class Select extends Statement
      */
     public function sql() : string
     {
-        $sql = 'SELECT' . \PHP_EOL;
+        $sql = '';
+        $part = $this->renderExplain();
+        if ($part) {
+            $sql .= $this->renderExplain();
+        }
+        $sql .= 'SELECT' . \PHP_EOL;
         $part = $this->renderOptions();
         if ($part) {
             $sql .= $part . \PHP_EOL;
