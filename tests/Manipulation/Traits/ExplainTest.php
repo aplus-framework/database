@@ -26,7 +26,7 @@ final class ExplainTest extends TestCase
         self::assertNull($this->statement->renderExplain());
         $this->statement->explain();
         self::assertSame(
-            'EXPLAIN' . \PHP_EOL,
+            'EXPLAIN',
             $this->statement->renderExplain()
         );
     }
