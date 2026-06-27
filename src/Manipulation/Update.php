@@ -123,7 +123,7 @@ class Update extends Statement
         $sql = '';
         $part = $this->renderExplain();
         if ($part) {
-            $sql .= $this->renderExplain();
+            $sql .= $part . \PHP_EOL;
         }
         $sql .= 'UPDATE' . \PHP_EOL;
         $part = $this->renderOptions();

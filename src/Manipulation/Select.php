@@ -478,7 +478,7 @@ class Select extends Statement
         $sql = '';
         $part = $this->renderExplain();
         if ($part) {
-            $sql .= $this->renderExplain();
+            $sql .= $part . \PHP_EOL;
         }
         $sql .= 'SELECT' . \PHP_EOL;
         $part = $this->renderOptions();

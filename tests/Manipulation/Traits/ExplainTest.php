@@ -35,7 +35,7 @@ final class ExplainTest extends TestCase
     {
         $this->statement->explain('format=json');
         self::assertSame(
-            'EXPLAIN FORMAT=JSON' . \PHP_EOL,
+            'EXPLAIN FORMAT=JSON',
             $this->statement->renderExplain()
         );
     }

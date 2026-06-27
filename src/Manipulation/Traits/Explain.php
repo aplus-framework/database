@@ -77,6 +77,6 @@ trait Explain
         if (isset($this->sql['explain']['option'])) {
             $option = ' ' . $this->sql['explain']['option'];
         }
-        return 'EXPLAIN' . $option . \PHP_EOL;
+        return 'EXPLAIN' . $option;
     }
 }
