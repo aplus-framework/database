@@ -51,7 +51,7 @@ abstract class Statement implements \Stringable
     public function reset(?string $sql = null) : static
     {
         if ($sql === null) {
-            unset($this->sql);
+            $this->sql = [];
             return $this;
         }
         unset($this->sql[$sql]);

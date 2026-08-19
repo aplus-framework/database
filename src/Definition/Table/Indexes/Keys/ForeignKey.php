@@ -130,7 +130,7 @@ final class ForeignKey extends ConstraintKey
         throw new InvalidArgumentException("Invalid reference option: {$option}");
     }
 
-    protected function renderTypeAttributes() : ?string
+    protected function renderTypeAttributes() : string
     {
         return $this->renderReferences() . $this->renderOnDelete() . $this->renderOnUpdate();
     }

@@ -15,10 +15,10 @@ abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     protected static ?Database $database = null;
 
-    public function __construct(mixed ...$params)
+    public function __construct(string $name)
     {
         $this->setDatabase();
-        parent::__construct(...$params);
+        parent::__construct($name);
     }
 
     protected function setDatabase() : Database
