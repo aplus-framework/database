@@ -11,7 +11,7 @@ namespace Framework\Database\Debug;
 
 use Framework\Database\Database;
 use Framework\Debug\Collector;
-use Framework\Debug\Debugger;
+use Framework\Debug\Debugger as D;
 
 /**
  * Class DatabaseCollector.
@@ -77,15 +77,15 @@ class DatabaseCollector extends Collector
             <?php foreach ($this->getData() as $index => $item): ?>
                 <tr>
                     <td><?= $index + 1 ?></td>
-                    <td><?= Debugger::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
+                    <td><?= D::roundSecondsToMilliseconds($item['end'] - $item['start']) ?></td>
                     <td>
                         <pre><code class="language-sql"><?=
-                                \htmlentities($item['statement'])
+                                D::esc($item['statement'])
                 ?></code></pre>
                     </td>
                     <td<?= isset($item['description'])
-                        ? ' title="' . \htmlentities($item['description']) . '"'
-                        : ''?>><?= \htmlentities((string) $item['rows']) ?></td>
+                        ? ' title="' . D::esc($item['description']) . '"'
+                        : ''?>><?= D::esc($item['rows']) ?></td>
                 </tr>
             <?php endforeach ?>
             </tbody>
@@ -101,7 +101,7 @@ class DatabaseCollector extends Collector
             $total = $data['end'] - $data['start'];
             $time += $total;
         }
-        return Debugger::roundSecondsToMilliseconds($time);
+        return D::roundSecondsToMilliseconds($time);
     }
 
     protected function showHeader() : string
@@ -109,22 +109,22 @@ class DatabaseCollector extends Collector
         $config = $this->database->getConfig();
         \ob_start();
         ?>
-        <p title="<?= 'Connected to ' . \htmlentities($this->getHostInfo()) ?>">
+        <p title="<?= 'Connected to ' . D::esc($this->getHostInfo()) ?>">
             <strong>Host:</strong> <?= $config['host'] ?? 'localhost' ?>
         </p>
         <?php
         if (\str_contains($this->getHostInfo(), 'TCP/IP')) {
             if (isset($config['port'])) {
                 ?>
-                <p><strong>Port:</strong> <?= \htmlentities((string) $config['port']) ?></p>
+                <p><strong>Port:</strong> <?= D::esc($config['port']) ?></p>
                 <?php
             }
         } elseif (isset($config['socket'])) { ?>
-            <p><strong>Socket:</strong> <?= \htmlentities($config['socket']) ?></p>
+            <p><strong>Socket:</strong> <?= D::esc($config['socket']) ?></p>
             <?php
         }
         ?>
-        <p><strong>Server Info:</strong> <?= \htmlentities($this->getServerInfo()) ?></p>
+        <p><strong>Server Info:</strong> <?= D::esc($this->getServerInfo()) ?></p>
         <?php
         return \ob_get_clean(); // @phpstan-ignore-line
     }

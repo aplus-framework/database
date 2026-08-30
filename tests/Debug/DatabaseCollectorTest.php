@@ -11,6 +11,7 @@ namespace Tests\Database\Debug;
 
 use Framework\Database\Database;
 use Framework\Database\Debug\DatabaseCollector;
+use Framework\Debug\Debugger;
 use Tests\Database\TestCase;
 
 final class DatabaseCollectorTest extends TestCase
@@ -136,7 +137,7 @@ final class DatabaseCollectorTest extends TestCase
         $contents = $this->collector->getContents();
         self::assertStringContainsString('error', $contents);
         self::assertStringContainsString(
-            \htmlentities($data['description']),
+            Debugger::esc($data['description']),
             $contents
         );
     }
