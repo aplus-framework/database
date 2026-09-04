@@ -25,14 +25,14 @@ trait Having
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param string $operator
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @return static
      */
     public function having(
         Closure | string $column,
         string $operator,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->addHaving('AND', $column, $operator, $values);
     }
@@ -42,14 +42,14 @@ trait Having
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
      * @param string $operator
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @return static
      */
     public function orHaving(
         Closure | string $column,
         string $operator,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->addHaving('OR', $column, $operator, $values);
     }
@@ -58,7 +58,7 @@ trait Having
      * Appends an "AND $column = $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/equal
      *
@@ -66,7 +66,7 @@ trait Having
      */
     public function havingEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '=', $value);
     }
@@ -75,7 +75,7 @@ trait Having
      * Appends a "OR $column = $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/equal
      *
@@ -83,7 +83,7 @@ trait Having
      */
     public function orHavingEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '=', $value);
     }
@@ -92,7 +92,7 @@ trait Having
      * Appends an "AND $column != $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-equal
      *
@@ -100,7 +100,7 @@ trait Having
      */
     public function havingNotEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '!=', $value);
     }
@@ -109,7 +109,7 @@ trait Having
      * Appends a "OR $column != $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-equal
      *
@@ -117,7 +117,7 @@ trait Having
      */
     public function orHavingNotEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '!=', $value);
     }
@@ -126,7 +126,7 @@ trait Having
      * Appends an "AND $column <=> $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/null-safe-equal
      *
@@ -134,7 +134,7 @@ trait Having
      */
     public function havingNullSafeEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '<=>', $value);
     }
@@ -143,7 +143,7 @@ trait Having
      * Appends a "OR $column <=> $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/null-safe-equal
      *
@@ -151,7 +151,7 @@ trait Having
      */
     public function orHavingNullSafeEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '<=>', $value);
     }
@@ -160,7 +160,7 @@ trait Having
      * Appends an "AND $column < $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than
      *
@@ -168,7 +168,7 @@ trait Having
      */
     public function havingLessThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '<', $value);
     }
@@ -177,7 +177,7 @@ trait Having
      * Appends a "OR $column < $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than
      *
@@ -185,7 +185,7 @@ trait Having
      */
     public function orHavingLessThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '<', $value);
     }
@@ -194,7 +194,7 @@ trait Having
      * Appends an "AND $column <= $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than-or-equal
      *
@@ -202,7 +202,7 @@ trait Having
      */
     public function havingLessThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '<=', $value);
     }
@@ -211,7 +211,7 @@ trait Having
      * Appends a "OR $column <= $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than-or-equal
      *
@@ -219,7 +219,7 @@ trait Having
      */
     public function orHavingLessThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '<=', $value);
     }
@@ -228,7 +228,7 @@ trait Having
      * Appends an "AND $column > $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than
      *
@@ -236,7 +236,7 @@ trait Having
      */
     public function havingGreaterThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '>', $value);
     }
@@ -245,7 +245,7 @@ trait Having
      * Appends a "OR $column > $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than
      *
@@ -253,7 +253,7 @@ trait Having
      */
     public function orHavingGreaterThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '>', $value);
     }
@@ -262,7 +262,7 @@ trait Having
      * Appends an "AND $column >= $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than-or-equal
      *
@@ -270,7 +270,7 @@ trait Having
      */
     public function havingGreaterThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, '>=', $value);
     }
@@ -279,7 +279,7 @@ trait Having
      * Appends a "OR $column >= $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than-or-equal
      *
@@ -287,7 +287,7 @@ trait Having
      */
     public function orHavingGreaterThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, '>=', $value);
     }
@@ -296,7 +296,7 @@ trait Having
      * Appends an "AND $column LIKE $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/like
      *
@@ -304,7 +304,7 @@ trait Having
      */
     public function havingLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, 'LIKE', $value);
     }
@@ -313,7 +313,7 @@ trait Having
      * Appends a "OR $column LIKE $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/like
      *
@@ -321,7 +321,7 @@ trait Having
      */
     public function orHavingLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, 'LIKE', $value);
     }
@@ -330,7 +330,7 @@ trait Having
      * Appends an "AND $column NOT LIKE" $value condition.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/not-like
      *
@@ -338,7 +338,7 @@ trait Having
      */
     public function havingNotLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->having($column, 'NOT LIKE', $value);
     }
@@ -347,7 +347,7 @@ trait Having
      * Appends a "OR $column NOT LIKE $value" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/not-like
      *
@@ -355,7 +355,7 @@ trait Having
      */
     public function orHavingNotLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orHaving($column, 'NOT LIKE', $value);
     }
@@ -364,8 +364,8 @@ trait Having
      * Appends an "AND $column IN (...$values)" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/in
      *
@@ -373,8 +373,8 @@ trait Having
      */
     public function havingIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->having($column, 'IN', ...[$value, ...$values]);
     }
@@ -383,8 +383,8 @@ trait Having
      * Appends a "OR $column IN (...$values)" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/in
      *
@@ -392,8 +392,8 @@ trait Having
      */
     public function orHavingIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->orHaving($column, 'IN', ...[$value, ...$values]);
     }
@@ -402,8 +402,8 @@ trait Having
      * Appends an "AND $column NOT IN (...$values)" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-in
      *
@@ -411,8 +411,8 @@ trait Having
      */
     public function havingNotIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->having($column, 'NOT IN', ...[$value, ...$values]);
     }
@@ -421,8 +421,8 @@ trait Having
      * Appends a "OR $column NOT IN (...$values)" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-in
      *
@@ -430,8 +430,8 @@ trait Having
      */
     public function orHavingNotIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->orHaving($column, 'NOT IN', ...[$value, ...$values]);
     }
@@ -440,8 +440,8 @@ trait Having
      * Appends an "AND $column BETWEEN $min AND $max" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and
      *
@@ -449,8 +449,8 @@ trait Having
      */
     public function havingBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->having($column, 'BETWEEN', $min, $max);
     }
@@ -459,8 +459,8 @@ trait Having
      * Appends a "OR $column BETWEEN $min AND $max" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and
      *
@@ -468,8 +468,8 @@ trait Having
      */
     public function orHavingBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->orHaving($column, 'BETWEEN', $min, $max);
     }
@@ -478,8 +478,8 @@ trait Having
      * Appends an "AND $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-between
      *
@@ -487,8 +487,8 @@ trait Having
      */
     public function havingNotBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->having($column, 'NOT BETWEEN', $min, $max);
     }
@@ -497,8 +497,8 @@ trait Having
      * Appends a "OR $column NOT BETWEEN $min AND $max" condition in the HAVING clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-between
      *
@@ -506,8 +506,8 @@ trait Having
      */
     public function orHavingNotBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->orHaving($column, 'NOT BETWEEN', $min, $max);
     }
@@ -576,7 +576,7 @@ trait Having
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`,
      * `LIKE`, `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`,
      * `IS NOT NULL` or `MATCH`
-     * @param array<Closure|float|int|string|null> $values Values used by the operator
+     * @param array<Closure|bool|float|int|string|null> $values Values used by the operator
      *
      * @return static
      */

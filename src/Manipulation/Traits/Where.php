@@ -25,14 +25,14 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param Closure|array<Closure|array<mixed>|float|int|string|null>|float|int|string|null ...$values
+     * @param Closure|array<Closure|array<mixed>|float|int|string|null>|bool|float|int|string|null ...$values
      *
      * @return static
      */
     public function where(
         Closure | array | string $column,
         string $operator,
-        Closure | array | float | int | string | null ...$values
+        Closure | array | bool | float | int | string | null ...$values
     ) : static {
         // @phpstan-ignore-next-line
         return $this->addWhere('AND', $column, $operator, $values);
@@ -44,14 +44,14 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $column Closure for a subquery,
      * a string with the column name or an array with column names on WHERE MATCH clause
      * @param string $operator
-     * @param Closure|array<Closure|array<mixed>|float|int|string|null>|float|int|string|null ...$values
+     * @param Closure|array<Closure|array<mixed>|float|int|string|null>|bool|float|int|string|null ...$values
      *
      * @return static
      */
     public function orWhere(
         Closure | array | string $column,
         string $operator,
-        Closure | array | float | int | string | null ...$values
+        Closure | array | bool | float | int | string | null ...$values
     ) : static {
         // @phpstan-ignore-next-line
         return $this->addWhere('OR', $column, $operator, $values);
@@ -61,7 +61,7 @@ trait Where
      * Appends an "AND $column = $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/equal
      *
@@ -69,7 +69,7 @@ trait Where
      */
     public function whereEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '=', $value);
     }
@@ -78,7 +78,7 @@ trait Where
      * Appends a "OR $column = $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/equal
      *
@@ -86,7 +86,7 @@ trait Where
      */
     public function orWhereEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '=', $value);
     }
@@ -95,7 +95,7 @@ trait Where
      * Appends an "AND $column != $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-equal
      *
@@ -103,7 +103,7 @@ trait Where
      */
     public function whereNotEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '!=', $value);
     }
@@ -112,7 +112,7 @@ trait Where
      * Appends a "OR $column != $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-equal
      *
@@ -120,7 +120,7 @@ trait Where
      */
     public function orWhereNotEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '!=', $value);
     }
@@ -129,7 +129,7 @@ trait Where
      * Appends an "AND $column <=> $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/null-safe-equal
      *
@@ -137,7 +137,7 @@ trait Where
      */
     public function whereNullSafeEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '<=>', $value);
     }
@@ -146,7 +146,7 @@ trait Where
      * Appends a "OR $column <=> $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/null-safe-equal
      *
@@ -154,7 +154,7 @@ trait Where
      */
     public function orWhereNullSafeEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '<=>', $value);
     }
@@ -163,7 +163,7 @@ trait Where
      * Appends an "AND $column < $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than
      *
@@ -171,7 +171,7 @@ trait Where
      */
     public function whereLessThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '<', $value);
     }
@@ -180,7 +180,7 @@ trait Where
      * Appends a "OR $column < $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than
      *
@@ -188,7 +188,7 @@ trait Where
      */
     public function orWhereLessThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '<', $value);
     }
@@ -197,7 +197,7 @@ trait Where
      * Appends an "AND $column <= $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than-or-equal
      *
@@ -205,7 +205,7 @@ trait Where
      */
     public function whereLessThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '<=', $value);
     }
@@ -214,7 +214,7 @@ trait Where
      * Appends a "OR $column <= $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/less-than-or-equal
      *
@@ -222,7 +222,7 @@ trait Where
      */
     public function orWhereLessThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '<=', $value);
     }
@@ -231,7 +231,7 @@ trait Where
      * Appends an "AND $column > $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than
      *
@@ -239,7 +239,7 @@ trait Where
      */
     public function whereGreaterThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '>', $value);
     }
@@ -248,7 +248,7 @@ trait Where
      * Appends a "OR $column > $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than
      *
@@ -256,7 +256,7 @@ trait Where
      */
     public function orWhereGreaterThan(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '>', $value);
     }
@@ -265,7 +265,7 @@ trait Where
      * Appends an "AND $column >= $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than-or-equal
      *
@@ -273,7 +273,7 @@ trait Where
      */
     public function whereGreaterThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, '>=', $value);
     }
@@ -282,7 +282,7 @@ trait Where
      * Appends a "OR $column >= $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/greater-than-or-equal
      *
@@ -290,7 +290,7 @@ trait Where
      */
     public function orWhereGreaterThanOrEqual(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, '>=', $value);
     }
@@ -299,13 +299,13 @@ trait Where
      * Appends an "AND $column LIKE $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/like
      *
      * @return static
      */
-    public function whereLike(Closure | string $column, Closure | float | int | string | null $value) : static
+    public function whereLike(Closure | string $column, Closure | bool | float | int | string | null $value) : static
     {
         return $this->where($column, 'LIKE', $value);
     }
@@ -314,7 +314,7 @@ trait Where
      * Appends a "OR $column LIKE $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/like
      *
@@ -322,7 +322,7 @@ trait Where
      */
     public function orWhereLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, 'LIKE', $value);
     }
@@ -331,7 +331,7 @@ trait Where
      * Appends an "AND $column NOT LIKE $value" condition.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/not-like
      *
@@ -339,7 +339,7 @@ trait Where
      */
     public function whereNotLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->where($column, 'NOT LIKE', $value);
     }
@@ -348,7 +348,7 @@ trait Where
      * Appends a "OR $column NOT LIKE $value" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null $value
      *
      * @see https://mariadb.com/docs/server/reference/sql-functions/string-functions/not-like
      *
@@ -356,7 +356,7 @@ trait Where
      */
     public function orWhereNotLike(
         Closure | string $column,
-        Closure | float | int | string | null $value
+        Closure | bool | float | int | string | null $value
     ) : static {
         return $this->orWhere($column, 'NOT LIKE', $value);
     }
@@ -365,8 +365,8 @@ trait Where
      * Appends an "AND $column IN (...$values)" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/in
      *
@@ -374,8 +374,8 @@ trait Where
      */
     public function whereIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->where($column, 'IN', ...[$value, ...$values]);
     }
@@ -384,8 +384,8 @@ trait Where
      * Appends a "OR $column IN (...$values)" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/in
      *
@@ -393,8 +393,8 @@ trait Where
      */
     public function orWhereIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->orWhere($column, 'IN', ...[$value, ...$values]);
     }
@@ -403,8 +403,8 @@ trait Where
      * Appends an "AND $column NOT IN (...$values)" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-in
      *
@@ -412,8 +412,8 @@ trait Where
      */
     public function whereNotIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->where($column, 'NOT IN', ...[$value, ...$values]);
     }
@@ -422,8 +422,8 @@ trait Where
      * Appends a "OR $column NOT IN (...$values)" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $value
-     * @param Closure|float|int|string|null ...$values
+     * @param Closure|bool|float|int|string|null $value
+     * @param Closure|bool|float|int|string|null ...$values
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-in
      *
@@ -431,8 +431,8 @@ trait Where
      */
     public function orWhereNotIn(
         Closure | string $column,
-        Closure | float | int | string | null $value,
-        Closure | float | int | string | null ...$values
+        Closure | bool | float | int | string | null $value,
+        Closure | bool | float | int | string | null ...$values
     ) : static {
         return $this->orWhere($column, 'NOT IN', ...[$value, ...$values]);
     }
@@ -441,8 +441,8 @@ trait Where
      * Appends an "AND $column BETWEEN $min AND $max" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and
      *
@@ -450,8 +450,8 @@ trait Where
      */
     public function whereBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->where($column, 'BETWEEN', $min, $max);
     }
@@ -460,8 +460,8 @@ trait Where
      * Appends a "OR $column BETWEEN $min AND $max" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/between-and
      *
@@ -469,8 +469,8 @@ trait Where
      */
     public function orWhereBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->orWhere($column, 'BETWEEN', $min, $max);
     }
@@ -479,8 +479,8 @@ trait Where
      * Appends an "AND $column NOT BETWEEN $min AND $max" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-between
      *
@@ -488,8 +488,8 @@ trait Where
      */
     public function whereNotBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->where($column, 'NOT BETWEEN', $min, $max);
     }
@@ -498,8 +498,8 @@ trait Where
      * Appends a "OR $column NOT BETWEEN $min AND $max" condition in the WHERE clause.
      *
      * @param Closure|string $column Closure for a subquery or a string with the column name
-     * @param Closure|float|int|string|null $min
-     * @param Closure|float|int|string|null $max
+     * @param Closure|bool|float|int|string|null $min
+     * @param Closure|bool|float|int|string|null $max
      *
      * @see https://mariadb.com/docs/server/reference/sql-structure/operators/comparison-operators/not-between
      *
@@ -507,8 +507,8 @@ trait Where
      */
     public function orWhereNotBetween(
         Closure | string $column,
-        Closure | float | int | string | null $min,
-        Closure | float | int | string | null $max
+        Closure | bool | float | int | string | null $min,
+        Closure | bool | float | int | string | null $max
     ) : static {
         return $this->orWhere($column, 'NOT BETWEEN', $min, $max);
     }
@@ -701,7 +701,7 @@ trait Where
      * @param Closure|array<Closure|array<mixed>|string>|string $column
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE`,
      * `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL`, `IS NOT NULL` or `MATCH`
-     * @param array<Closure|float|int|string|null> $values Values used by the operator
+     * @param array<Closure|bool|float|int|string|null> $values Values used by the operator
      * @param string $clause `where` or `having`
      *
      * @return static
@@ -875,7 +875,7 @@ trait Where
      *
      * @param string $operator `=`, `<=>`, `!=`, `<>`, `>`, `>=`, `<`, `<=`, `LIKE`,
      * `NOT LIKE`, `IN`, `NOT IN`, `BETWEEN`, `NOT BETWEEN`, `IS NULL` or `IS NOT NULL`
-     * @param array<Closure|float|int|string|null> $values
+     * @param array<Closure|bool|float|int|string|null> $values
      *
      * @throws InvalidArgumentException for invalid comparison operator
      *

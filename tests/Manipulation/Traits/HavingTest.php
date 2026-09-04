@@ -63,6 +63,22 @@ final class HavingTest extends TestCase
         );
     }
 
+    public function testEqualWithBool() : void
+    {
+        $this->statement->havingEqual('email', 'user@mail.com');
+        self::assertSame(" HAVING `email` = 'user@mail.com'", $this->statement->renderHaving());
+        $this->statement->havingEqual('active', true);
+        self::assertSame(
+            " HAVING `email` = 'user@mail.com' AND `active` = TRUE",
+            $this->statement->renderHaving()
+        );
+        $this->statement->orHavingEqual('foo', false);
+        self::assertSame(
+            " HAVING `email` = 'user@mail.com' AND `active` = TRUE OR `foo` = FALSE",
+            $this->statement->renderHaving()
+        );
+    }
+
     public function testNotEqual() : void
     {
         $this->statement->havingNotEqual('email', 'user@mail.com');

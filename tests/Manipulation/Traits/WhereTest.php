@@ -168,6 +168,22 @@ final class WhereTest extends TestCase
         );
     }
 
+    public function testEqualWithBool() : void
+    {
+        $this->statement->whereEqual('email', 'user@mail.com');
+        self::assertSame(" WHERE `email` = 'user@mail.com'", $this->statement->renderWhere());
+        $this->statement->whereEqual('active', true);
+        self::assertSame(
+            " WHERE `email` = 'user@mail.com' AND `active` = TRUE",
+            $this->statement->renderWhere()
+        );
+        $this->statement->orWhereEqual('foo', false);
+        self::assertSame(
+            " WHERE `email` = 'user@mail.com' AND `active` = TRUE OR `foo` = FALSE",
+            $this->statement->renderWhere()
+        );
+    }
+
     public function testNotEqual() : void
     {
         $this->statement->whereNotEqual('email', 'user@mail.com');
