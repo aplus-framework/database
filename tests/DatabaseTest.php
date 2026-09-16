@@ -31,54 +31,52 @@ use mysqli_sql_exception;
 
 final class DatabaseTest extends TestCase
 {
+    /**
+     * @return array{
+     *      username: string,
+     *      password: string,
+     *      schema: string,
+     *      host: string,
+     *      port: int,
+     * }
+     */
+    protected function getConfig() : array
+    {
+        return [
+            'username' => (string) \getenv('DB_USERNAME'),
+            'password' => (string) \getenv('DB_PASSWORD'),
+            'schema' => (string) \getenv('DB_SCHEMA'),
+            'host' => (string) \getenv('DB_HOST'),
+            'port' => (int) \getenv('DB_PORT'),
+        ];
+    }
+
     public function testConnection() : void
     {
-        $database = new Database(
-            \getenv('DB_USERNAME'), // @phpstan-ignore-line
-            \getenv('DB_PASSWORD'), // @phpstan-ignore-line
-            \getenv('DB_SCHEMA'), // @phpstan-ignore-line
-            \getenv('DB_HOST'), // @phpstan-ignore-line
-            // @phpstan-ignore-next-line
-            \getenv('DB_PORT')
-        );
+        $database = new Database($this->getConfig());
         self::assertInstanceOf(Database::class, $database);
     }
 
     public function testConnectionWithArray() : void
     {
-        $database = new Database([
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-        ]);
+        $database = new Database($this->getConfig());
         self::assertInstanceOf(Database::class, $database);
     }
 
     public function testPersistentConnection() : void
     {
-        $database = new Database([
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-            'persistent' => true,
-        ]);
+        $config = $this->getConfig();
+        $config['persistent'] = true;
+        $database = new Database($config);
         self::assertInstanceOf(Database::class, $database);
     }
 
     public function testConnectionFail() : void
     {
+        $config = $this->getConfig();
+        $config['username'] = 'error-1';
         $this->expectException(mysqli_sql_exception::class);
-        new Database([
-            'username' => 'error-1',
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-        ]);
+        new Database($config);
     }
 
     public function testConnectionFailWithLogger() : void
@@ -86,13 +84,8 @@ final class DatabaseTest extends TestCase
         $file = \sys_get_temp_dir() . '/database.log';
         \touch($file);
         $logger = new FileLogger($file);
-        $config = [
-            'username' => 'error-1',
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-        ];
+        $config = $this->getConfig();
+        $config['username'] = 'error-1';
         try {
             new Database($config, logger: $logger);
         } catch (mysqli_sql_exception) {
@@ -120,13 +113,7 @@ final class DatabaseTest extends TestCase
     {
         $collector = new DatabaseCollector();
         self::assertCount(0, $collector->getData());
-        $config = [
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-        ];
-        $database = new Database($config, collector: $collector);
+        $database = new Database($this->getConfig(), collector: $collector);
         self::assertCount(2, $collector->getData());
         self::assertSame(
             "SET time_zone = '+00:00'",
@@ -147,16 +134,11 @@ final class DatabaseTest extends TestCase
             $this->expectException(mysqli_sql_exception::class);
             $this->expectExceptionMessage('MySQL server has gone away');
         }
-        $database = new Database([
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-            'ssl' => [
-                'enabled' => true,
-            ],
-        ]);
+        $config = $this->getConfig();
+        $config['ssl'] = [
+            'enabled' => true,
+        ];
+        $database = new Database($config);
         self::assertInstanceOf(Database::class, $database);
         $this->cipherStatus($database);
     }
@@ -183,62 +165,49 @@ final class DatabaseTest extends TestCase
             $this->expectException(mysqli_sql_exception::class);
             $this->expectExceptionMessage('MySQL server has gone away');
         }
-        $database = new Database([
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-            'ssl' => [
-                'enabled' => true,
-                'verify' => false,
-            ],
-        ]);
+        $config = $this->getConfig();
+        $config['ssl'] = [
+            'enabled' => true,
+            'verify' => false,
+        ];
+        $database = new Database($config);
         self::assertInstanceOf(Database::class, $database);
         $this->cipherStatus($database);
     }
 
     public function testConnectionWithFailover() : void
     {
-        $database = new Database([
-            'username' => 'error-1',
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-            'failover' => [
-                [
-                    'username' => 'error-3',
-                    'password' => 'error-2',
-                ],
-                [
-                    'username' => \getenv('DB_USERNAME'),
-                    'password' => \getenv('DB_PASSWORD'),
-                ],
+        $config = $this->getConfig();
+        $config['username'] = 'error-1';
+        $config['failover'] = [
+            [
+                'username' => 'error-3',
+                'password' => 'error-2',
             ],
-        ]);
+            [
+                'username' => (string) \getenv('DB_USERNAME'),
+                'password' => (string) \getenv('DB_PASSWORD'),
+            ],
+        ];
+        $database = new Database($config);
         self::assertInstanceOf(Database::class, $database);
     }
 
     public function testConnectionFailWithFailover() : void
     {
         $this->expectException(mysqli_sql_exception::class);
-        new Database([
-            'username' => 'error-1',
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-            'failover' => [
-                [
-                    'username' => 'error-3',
-                    'password' => 'error-2',
-                ],
-                [
-                    'password' => \getenv('DB_PASSWORD'),
-                ],
+        $config = $this->getConfig();
+        $config['username'] = 'error-1';
+        $config['failover'] = [
+            [
+                'username' => 'error-3',
+                'password' => 'error-2',
             ],
-        ]);
+            [
+                'password' => (string) \getenv('DB_PASSWORD'),
+            ],
+        ];
+        new Database($config);
     }
 
     public function testGetConnection() : void
@@ -272,16 +241,10 @@ final class DatabaseTest extends TestCase
     public function testOptions() : void
     {
         $this->createDummyData();
-        $config = [
-            'username' => \getenv('DB_USERNAME'),
-            'password' => \getenv('DB_PASSWORD'),
-            'schema' => \getenv('DB_SCHEMA'),
-            'host' => \getenv('DB_HOST'),
-            'port' => \getenv('DB_PORT'),
-        ];
+        $config = $this->getConfig();
         $database = new Database($config);
         self::assertSame(1, $database->query('SELECT `c1` FROM `t1` LIMIT 1')->fetch()->c1);
-        $config['options'][\MYSQLI_OPT_INT_AND_FLOAT_NATIVE] = false;
+        $config['options'][\MYSQLI_OPT_INT_AND_FLOAT_NATIVE] = 0;
         $database = new Database($config);
         self::assertSame('1', $database->query('SELECT `c1` FROM `t1` LIMIT 1')->fetch()->c1);
     }

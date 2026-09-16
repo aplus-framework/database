@@ -75,7 +75,32 @@ class Database
     /**
      * Database constructor.
      *
-     * @param array<string,mixed>|string $username
+     * @param array{
+     *      host?: string,
+     *      port?: int,
+     *      username?: string|null,
+     *      password?: string|null,
+     *      schema?: string|null,
+     *      socket?: string|null,
+     *      persistent?: bool,
+     *      engine?: string,
+     *      charset?: string,
+     *      collation?: string,
+     *      timezone?: string,
+     *      init_queries?: bool,
+     *      ssl?: array{
+     *          enabled:? bool,
+     *          verify?: bool,
+     *          key?: string|null,
+     *          cert?: string|null,
+     *          ca?: string|null,
+     *          capath?: string|null,
+     *          cipher?: string|null,
+     *      },
+     *      failover?: array<array<string,mixed>>,
+     *      options?: array<int,int|string>,
+     *      report?: int,
+     * }|string $username
      * @param string|null $password
      * @param string|null $schema
      * @param string $host
@@ -166,7 +191,7 @@ class Database
             'failover' => [],
             'options' => [
                 \MYSQLI_OPT_CONNECT_TIMEOUT => 10,
-                \MYSQLI_OPT_INT_AND_FLOAT_NATIVE => true,
+                \MYSQLI_OPT_INT_AND_FLOAT_NATIVE => 1,
                 \MYSQLI_OPT_LOCAL_INFILE => 1,
             ],
             'report' => \MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX,
