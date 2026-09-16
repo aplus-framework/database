@@ -110,15 +110,13 @@ class DatabaseCollector extends Collector
         \ob_start();
         ?>
         <p title="<?= 'Connected to ' . D::esc($this->getHostInfo()) ?>">
-            <strong>Host:</strong> <?= $config['host'] ?? 'localhost' ?>
+            <strong>Host:</strong> <?= $config['host'] ?>
         </p>
         <?php
         if (\str_contains($this->getHostInfo(), 'TCP/IP')) {
-            if (isset($config['port'])) {
                 ?>
                 <p><strong>Port:</strong> <?= D::esc($config['port']) ?></p>
                 <?php
-            }
         } elseif (isset($config['socket'])) { ?>
             <p><strong>Socket:</strong> <?= D::esc($config['socket']) ?></p>
             <?php

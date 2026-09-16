@@ -29,7 +29,6 @@ use Framework\Database\Result\Result;
 use Framework\Log\Logger;
 use Framework\Log\LogLevel;
 use InvalidArgumentException;
-use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Language;
 use LogicException;
 use mysqli;
@@ -83,7 +82,32 @@ class Database
      *
      * @see Database::makeConfig()
      *
-     * @var array<string,mixed>
+     * @var array{
+     *      host: string,
+     *      port: int,
+     *      username: string|null,
+     *      password: string|null,
+     *      schema: string|null,
+     *      socket: string|null,
+     *      persistent: bool,
+     *      engine: string,
+     *      charset: string,
+     *      collation: string,
+     *      timezone: string,
+     *      init_queries: bool,
+     *      ssl: array{
+     *          enabled: bool,
+     *          verify: bool,
+     *          key: string|null,
+     *          cert: string|null,
+     *          ca: string|null,
+     *          capath: string|null,
+     *          cipher: string|null,
+     *      },
+     *      failover: array<array<string,mixed>>,
+     *      options: array<int,int|string>,
+     *      report: int|null,
+     * } $config
      */
     protected array $config = self::DEFAULT_CONFIGS;
     /**
@@ -119,7 +143,7 @@ class Database
      *      timezone?: string,
      *      init_queries?: bool,
      *      ssl?: array{
-     *          enabled:? bool,
+     *          enabled?: bool,
      *          verify?: bool,
      *          key?: string|null,
      *          cert?: string|null,
@@ -129,7 +153,7 @@ class Database
      *      },
      *      failover?: array<array<string,mixed>>,
      *      options?: array<int,int|string>,
-     *      report?: int,
+     *      report?: int|null,
      * }|string $username
      * @param string|null $password
      * @param string|null $schema
@@ -174,26 +198,33 @@ class Database
      *
      * @param array<string,mixed> $config
      *
-     * @return array<string,mixed>
+     * @return array{
+     *      host: string,
+     *      port: int,
+     *      username: string|null,
+     *      password: string|null,
+     *      schema: string|null,
+     *      socket: string|null,
+     *      persistent: bool,
+     *      engine: string,
+     *      charset: string,
+     *      collation: string,
+     *      timezone: string,
+     *      init_queries: bool,
+     *      ssl: array{
+     *          enabled: bool,
+     *          verify: bool,
+     *          key: string|null,
+     *          cert: string|null,
+     *          ca: string|null,
+     *          capath: string|null,
+     *          cipher: string|null,
+     *      },
+     *      failover: array<array<string,mixed>>,
+     *      options: array<int,int|string>,
+     *      report: int|null,
+     * }
      */
-    #[ArrayShape([
-        'host' => 'string',
-        'port' => 'int',
-        'username' => 'string|null',
-        'password' => 'string|null',
-        'schema' => 'string|null',
-        'socket' => 'string|null',
-        'persistent' => 'bool',
-        'engine' => 'string',
-        'charset' => 'string',
-        'collation' => 'string',
-        'timezone' => 'string',
-        'init_queries' => 'bool',
-        'ssl' => 'array',
-        'failover' => 'array',
-        'options' => 'array',
-        'report' => 'int',
-    ])]
     protected function makeConfig(array $config) : array
     {
         // @phpstan-ignore-next-line
@@ -260,7 +291,7 @@ class Database
                 $config['username'],
                 $config['password'],
                 $config['schema'],
-                $config['port'] === null ? null : (int) $config['port'],
+                (int) $config['port'],
                 $config['socket'],
                 $flags
             );
@@ -358,26 +389,33 @@ class Database
     }
 
     /**
-     * @return array<string,mixed>
+     * @return array{
+     *      host: string,
+     *      port: int,
+     *      username: string|null,
+     *      password: string|null,
+     *      schema: string|null,
+     *      socket: string|null,
+     *      persistent: bool,
+     *      engine: string,
+     *      charset: string,
+     *      collation: string,
+     *      timezone: string,
+     *      init_queries: bool,
+     *      ssl: array{
+     *          enabled: bool,
+     *          verify: bool,
+     *          key: string|null,
+     *          cert: string|null,
+     *          ca: string|null,
+     *          capath: string|null,
+     *          cipher: string|null,
+     *      },
+     *      failover: array<array<string,mixed>>,
+     *      options: array<int,int|string>,
+     *      report: int,
+     * }
      */
-    #[ArrayShape([
-        'host' => 'string',
-        'port' => 'int',
-        'username' => 'string|null',
-        'password' => 'string|null',
-        'schema' => 'string|null',
-        'socket' => 'string|null',
-        'persistent' => 'bool',
-        'engine' => 'string',
-        'charset' => 'string',
-        'collation' => 'string',
-        'timezone' => 'string',
-        'init_queries' => 'bool',
-        'ssl' => 'array',
-        'failover' => 'array',
-        'options' => 'array',
-        'report' => 'int',
-    ])]
     public function getConfig() : array
     {
         return $this->config;
