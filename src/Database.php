@@ -45,6 +45,36 @@ use SensitiveParameter;
  */
 class Database
 {
+    protected const DEFAULT_CONFIGS = [
+        'host' => 'localhost',
+        'port' => 3306,
+        'username' => null,
+        'password' => null,
+        'schema' => null,
+        'socket' => null,
+        'persistent' => false,
+        'engine' => 'InnoDB',
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_general_ci',
+        'timezone' => '+00:00',
+        'init_queries' => true,
+        'ssl' => [
+            'enabled' => false,
+            'verify' => true,
+            'key' => null,
+            'cert' => null,
+            'ca' => null,
+            'capath' => null,
+            'cipher' => null,
+        ],
+        'failover' => [],
+        'options' => [
+            \MYSQLI_OPT_CONNECT_TIMEOUT => 10,
+            \MYSQLI_OPT_INT_AND_FLOAT_NATIVE => 1,
+            \MYSQLI_OPT_LOCAL_INFILE => 1,
+        ],
+        'report' => \MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX,
+    ];
     protected ?mysqli $mysqli;
     /**
      * Connection configurations.
@@ -55,7 +85,7 @@ class Database
      *
      * @var array<string,mixed>
      */
-    protected array $config = [];
+    protected array $config = self::DEFAULT_CONFIGS;
     /**
      * The current $config failover index to be used in a connection.
      *
@@ -166,36 +196,8 @@ class Database
     ])]
     protected function makeConfig(array $config) : array
     {
-        return \array_replace_recursive([
-            'host' => 'localhost',
-            'port' => 3306,
-            'username' => null,
-            'password' => null,
-            'schema' => null,
-            'socket' => null,
-            'persistent' => false,
-            'engine' => 'InnoDB',
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_general_ci',
-            'timezone' => '+00:00',
-            'init_queries' => true,
-            'ssl' => [
-                'enabled' => false,
-                'verify' => true,
-                'key' => null,
-                'cert' => null,
-                'ca' => null,
-                'capath' => null,
-                'cipher' => null,
-            ],
-            'failover' => [],
-            'options' => [
-                \MYSQLI_OPT_CONNECT_TIMEOUT => 10,
-                \MYSQLI_OPT_INT_AND_FLOAT_NATIVE => 1,
-                \MYSQLI_OPT_LOCAL_INFILE => 1,
-            ],
-            'report' => \MYSQLI_REPORT_ALL & ~\MYSQLI_REPORT_INDEX,
-        ], $config);
+        // @phpstan-ignore-next-line
+        return \array_replace_recursive(static::DEFAULT_CONFIGS, $config);
     }
 
     /**
