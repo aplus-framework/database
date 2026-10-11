@@ -11,6 +11,7 @@ namespace Tests\Database\Debug;
 
 use Framework\Database\Database;
 use Framework\Database\Debug\DatabaseCollector;
+use Framework\Debug\Activity;
 use Framework\Debug\Debugger;
 use Tests\Database\TestCase;
 
@@ -70,15 +71,9 @@ final class DatabaseCollectorTest extends TestCase
         $database = $this->makeDatabase();
         self::assertEmpty($this->collector->getActivities());
         $database->query('SELECT 1');
-        self::assertSame(
-            [
-                'collector',
-                'class',
-                'description',
-                'start',
-                'end',
-            ],
-            \array_keys($this->collector->getActivities()[0]) // @phpstan-ignore-line
+        self::assertInstanceOf(
+            Activity::class,
+            $this->collector->getActivities()[0] // @phpstan-ignore-line
         );
     }
 

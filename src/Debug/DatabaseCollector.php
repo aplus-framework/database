@@ -10,6 +10,7 @@
 namespace Framework\Database\Debug;
 
 use Framework\Database\Database;
+use Framework\Debug\Activity;
 use Framework\Debug\Collector;
 use Framework\Debug\Debugger as D;
 
@@ -37,13 +38,13 @@ class DatabaseCollector extends Collector
     {
         $activities = [];
         foreach ($this->getData() as $index => $data) {
-            $activities[] = [
-                'collector' => $this->getName(),
-                'class' => static::class,
-                'description' => 'Run statement ' . ($index + 1),
-                'start' => $data['start'],
-                'end' => $data['end'],
-            ];
+            $activities[] = new Activity(
+                collector: $this->getName(),
+                class: static::class,
+                description: 'Run statement ' . ($index + 1),
+                start: $data['start'],
+                end: $data['end'],
+            );
         }
         return $activities;
     }
