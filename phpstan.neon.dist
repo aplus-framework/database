@@ -4,6 +4,7 @@ parameters:
         - src
         - tests
     ignoreErrors:
+        - identifier: staticMethod.alreadyNarrowedType
         - '#Access to an undefined property object::\$[a-zA-Z0-9_]+\.#'
         - '#Access to an uninitialized readonly property Framework\\Database\\Result\\Field::#'
         - '#Call to protected method sql\(\) of class Framework\\Database\\Definition\\Table\\Columns\\Column\.#'
