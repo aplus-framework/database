@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\ConstraintKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\ConstraintKey;
 
 class ConstraintKeyMock extends ConstraintKey
 {

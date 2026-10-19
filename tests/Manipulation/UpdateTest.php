@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation;
 
-use Framework\Database\Manipulation\Update;
+use Aplus\Database\Manipulation\Update;
 use Tests\Database\TestCase;
 
 final class UpdateTest extends TestCase

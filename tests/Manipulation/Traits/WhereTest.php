@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation\Traits;
 
-use Framework\Database\Database;
+use Aplus\Database\Database;
 use Tests\Database\TestCase;
 
 final class WhereTest extends TestCase

@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\UniqueKey;
 use Tests\Database\TestCase;
 
 final class UniqueKeyTest extends TestCase

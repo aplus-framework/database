@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\FulltextKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\FulltextKey;
 use Tests\Database\TestCase;
 
 final class FulltextKeyTest extends TestCase

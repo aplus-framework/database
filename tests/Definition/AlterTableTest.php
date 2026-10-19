@@ -9,8 +9,8 @@
  */
 namespace Tests\Database\Definition;
 
-use Framework\Database\Definition\AlterTable;
-use Framework\Database\Definition\Table\TableDefinition;
+use Aplus\Database\Definition\AlterTable;
+use Aplus\Database\Definition\Table\TableDefinition;
 use Tests\Database\TestCase;
 
 final class AlterTableTest extends TestCase

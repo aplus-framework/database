@@ -9,9 +9,9 @@
  */
 namespace Tests\Database\Definition;
 
-use Framework\Database\Database;
-use Framework\Database\Definition\CreateTable;
-use Framework\Database\Definition\Table\TableDefinition;
+use Aplus\Database\Database;
+use Aplus\Database\Definition\CreateTable;
+use Aplus\Database\Definition\Table\TableDefinition;
 use Tests\Database\TestCase;
 
 final class CreateTableTest extends TestCase

@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition;
 
-use Framework\Database\Definition\DropTable;
+use Aplus\Database\Definition\DropTable;
 use Tests\Database\TestCase;
 
 final class DropTableTest extends TestCase

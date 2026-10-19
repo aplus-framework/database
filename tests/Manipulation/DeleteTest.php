@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation;
 
-use Framework\Database\Manipulation\Delete;
+use Aplus\Database\Manipulation\Delete;
 use Tests\Database\TestCase;
 
 final class DeleteTest extends TestCase

@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Debug;
 
-use Framework\Database\Debug\DatabaseCollection;
+use Aplus\Database\Debug\DatabaseCollection;
 use PHPUnit\Framework\TestCase;
 
 final class DatabaseCollectionTest extends TestCase

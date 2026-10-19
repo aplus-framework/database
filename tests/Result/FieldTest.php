@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Result;
 
-use Framework\Database\Result\Field;
+use Aplus\Database\Result\Field;
 use PHPUnit\Framework\TestCase;
 
 final class FieldTest extends TestCase

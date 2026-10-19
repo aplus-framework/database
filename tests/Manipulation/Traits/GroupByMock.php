@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation\Traits;
 
-use Framework\Database\Manipulation\Traits\GroupBy;
+use Aplus\Database\Manipulation\Traits\GroupBy;
 use Tests\Database\Manipulation\StatementMock;
 
 class GroupByMock extends StatementMock

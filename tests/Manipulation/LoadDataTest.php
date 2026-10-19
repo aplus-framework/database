@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation;
 
-use Framework\Database\Manipulation\LoadData;
+use Aplus\Database\Manipulation\LoadData;
 use Tests\Database\TestCase;
 
 final class LoadDataTest extends TestCase

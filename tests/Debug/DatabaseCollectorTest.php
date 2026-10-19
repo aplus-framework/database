@@ -9,10 +9,10 @@
  */
 namespace Tests\Database\Debug;
 
-use Framework\Database\Database;
-use Framework\Database\Debug\DatabaseCollector;
-use Framework\Debug\Activity;
-use Framework\Debug\Debugger;
+use Aplus\Database\Database;
+use Aplus\Database\Debug\DatabaseCollector;
+use Aplus\Debug\Activity;
+use Aplus\Debug\Debugger;
 use Tests\Database\TestCase;
 
 final class DatabaseCollectorTest extends TestCase

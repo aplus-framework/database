@@ -9,24 +9,24 @@
  */
 namespace Tests\Database;
 
-use Framework\Database\Database;
-use Framework\Database\Debug\DatabaseCollector;
-use Framework\Database\Definition\AlterSchema;
-use Framework\Database\Definition\AlterTable;
-use Framework\Database\Definition\CreateSchema;
-use Framework\Database\Definition\CreateTable;
-use Framework\Database\Definition\DropSchema;
-use Framework\Database\Definition\DropTable;
-use Framework\Database\Manipulation\Delete;
-use Framework\Database\Manipulation\Insert;
-use Framework\Database\Manipulation\LoadData;
-use Framework\Database\Manipulation\Replace;
-use Framework\Database\Manipulation\Select;
-use Framework\Database\Manipulation\Update;
-use Framework\Database\Manipulation\With;
-use Framework\Database\PreparedStatement;
-use Framework\Database\Result\Result;
-use Framework\Log\Loggers\FileLogger;
+use Aplus\Database\Database;
+use Aplus\Database\Debug\DatabaseCollector;
+use Aplus\Database\Definition\AlterSchema;
+use Aplus\Database\Definition\AlterTable;
+use Aplus\Database\Definition\CreateSchema;
+use Aplus\Database\Definition\CreateTable;
+use Aplus\Database\Definition\DropSchema;
+use Aplus\Database\Definition\DropTable;
+use Aplus\Database\Manipulation\Delete;
+use Aplus\Database\Manipulation\Insert;
+use Aplus\Database\Manipulation\LoadData;
+use Aplus\Database\Manipulation\Replace;
+use Aplus\Database\Manipulation\Select;
+use Aplus\Database\Manipulation\Update;
+use Aplus\Database\Manipulation\With;
+use Aplus\Database\PreparedStatement;
+use Aplus\Database\Result\Result;
+use Aplus\Log\Loggers\FileLogger;
 use mysqli_sql_exception;
 
 final class DatabaseTest extends TestCase

@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table;
 
-use Framework\Database\Definition\Table\TableStatement;
+use Aplus\Database\Definition\Table\TableStatement;
 
 final class TableStatementTest extends \Tests\Database\TestCase
 {

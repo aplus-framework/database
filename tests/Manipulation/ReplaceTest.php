@@ -9,8 +9,8 @@
  */
 namespace Tests\Database\Manipulation;
 
-use Framework\Database\Manipulation\Replace;
-use Framework\Database\Manipulation\Select;
+use Aplus\Database\Manipulation\Replace;
+use Aplus\Database\Manipulation\Select;
 use Tests\Database\TestCase;
 
 final class ReplaceTest extends TestCase

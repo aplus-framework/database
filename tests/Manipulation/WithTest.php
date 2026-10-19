@@ -9,9 +9,9 @@
  */
 namespace Tests\Database\Manipulation;
 
-use Framework\Database\Manipulation\Select;
-use Framework\Database\Manipulation\With;
-use Framework\Database\Result\Result;
+use Aplus\Database\Manipulation\Select;
+use Aplus\Database\Manipulation\With;
+use Aplus\Database\Result\Result;
 use Tests\Database\TestCase;
 
 final class WithTest extends TestCase

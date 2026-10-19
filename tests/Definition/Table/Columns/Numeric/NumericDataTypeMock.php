@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Columns\Numeric;
 
-use Framework\Database\Definition\Table\Columns\Numeric\NumericDataType;
+use Aplus\Database\Definition\Table\Columns\Numeric\NumericDataType;
 
 class NumericDataTypeMock extends NumericDataType
 {

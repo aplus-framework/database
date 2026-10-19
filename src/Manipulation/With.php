@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Manipulation;
+namespace Aplus\Database\Manipulation;
 
+use Aplus\Database\Result\Result;
 use Closure;
-use Framework\Database\Result\Result;
 use InvalidArgumentException;
 use LogicException;
 

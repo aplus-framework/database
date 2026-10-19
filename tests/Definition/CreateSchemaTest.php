@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition;
 
-use Framework\Database\Definition\CreateSchema;
+use Aplus\Database\Definition\CreateSchema;
 use Tests\Database\TestCase;
 
 final class CreateSchemaTest extends TestCase

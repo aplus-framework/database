@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Columns;
 
-use Framework\Database\Database;
+use Aplus\Database\Database;
 use Tests\Database\TestCase;
 
 final class ColumnTest extends TestCase

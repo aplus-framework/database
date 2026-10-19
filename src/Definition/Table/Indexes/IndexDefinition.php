@@ -7,16 +7,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Definition\Table\Indexes;
+namespace Aplus\Database\Definition\Table\Indexes;
 
-use Framework\Database\Database;
-use Framework\Database\Definition\Table\DefinitionPart;
-use Framework\Database\Definition\Table\Indexes\Keys\ForeignKey;
-use Framework\Database\Definition\Table\Indexes\Keys\FulltextKey;
-use Framework\Database\Definition\Table\Indexes\Keys\Key;
-use Framework\Database\Definition\Table\Indexes\Keys\PrimaryKey;
-use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
-use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
+use Aplus\Database\Database;
+use Aplus\Database\Definition\Table\DefinitionPart;
+use Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\FulltextKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\Key;
+use Aplus\Database\Definition\Table\Indexes\Keys\PrimaryKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\SpatialKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\UniqueKey;
 use RuntimeException;
 
 /**

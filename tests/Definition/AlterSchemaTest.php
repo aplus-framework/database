@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition;
 
-use Framework\Database\Definition\AlterSchema;
+use Aplus\Database\Definition\AlterSchema;
 use Tests\Database\TestCase;
 
 final class AlterSchemaTest extends TestCase

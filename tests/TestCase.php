@@ -9,7 +9,7 @@
  */
 namespace Tests\Database;
 
-use Framework\Database\Database;
+use Aplus\Database\Database;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {

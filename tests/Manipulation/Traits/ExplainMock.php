@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation\Traits;
 
-use Framework\Database\Manipulation\Traits\Explain;
+use Aplus\Database\Manipulation\Traits\Explain;
 use Tests\Database\Manipulation\StatementMock;
 
 class ExplainMock extends StatementMock

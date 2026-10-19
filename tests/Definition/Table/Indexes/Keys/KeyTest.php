@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\Key;
+use Aplus\Database\Definition\Table\Indexes\Keys\Key;
 use Tests\Database\TestCase;
 
 final class KeyTest extends TestCase

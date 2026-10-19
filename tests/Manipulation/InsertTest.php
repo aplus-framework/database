@@ -9,8 +9,8 @@
  */
 namespace Tests\Database\Manipulation;
 
-use Framework\Database\Manipulation\Insert;
-use Framework\Database\Manipulation\Select;
+use Aplus\Database\Manipulation\Insert;
+use Aplus\Database\Manipulation\Select;
 use Tests\Database\TestCase;
 
 final class InsertTest extends TestCase

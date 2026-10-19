@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\SpatialKey;
 use Tests\Database\TestCase;
 
 final class SpatialKeyTest extends TestCase

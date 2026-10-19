@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Definition\Table\Indexes;
+namespace Aplus\Database\Definition\Table\Indexes;
 
-use Framework\Database\Database;
-use Framework\Database\Definition\Table\DefinitionPart;
+use Aplus\Database\Database;
+use Aplus\Database\Definition\Table\DefinitionPart;
 use LogicException;
 
 /**

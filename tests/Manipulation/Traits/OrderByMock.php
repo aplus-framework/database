@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Manipulation\Traits;
 
-use Framework\Database\Manipulation\Traits\OrderBy;
+use Aplus\Database\Manipulation\Traits\OrderBy;
 use Tests\Database\Manipulation\StatementMock;
 
 class OrderByMock extends StatementMock

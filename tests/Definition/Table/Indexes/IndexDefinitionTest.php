@@ -9,13 +9,13 @@
  */
 namespace Tests\Database\Definition\Table\Indexes;
 
-use Framework\Database\Definition\Table\Indexes\IndexDefinition;
-use Framework\Database\Definition\Table\Indexes\Keys\ForeignKey;
-use Framework\Database\Definition\Table\Indexes\Keys\FulltextKey;
-use Framework\Database\Definition\Table\Indexes\Keys\Key;
-use Framework\Database\Definition\Table\Indexes\Keys\PrimaryKey;
-use Framework\Database\Definition\Table\Indexes\Keys\SpatialKey;
-use Framework\Database\Definition\Table\Indexes\Keys\UniqueKey;
+use Aplus\Database\Definition\Table\Indexes\IndexDefinition;
+use Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\FulltextKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\Key;
+use Aplus\Database\Definition\Table\Indexes\Keys\PrimaryKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\SpatialKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\UniqueKey;
 use Tests\Database\TestCase;
 
 final class IndexDefinitionTest extends TestCase

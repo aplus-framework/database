@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Columns\String;
 
-use Framework\Database\Definition\Table\Columns\String\StringDataType;
+use Aplus\Database\Definition\Table\Columns\String\StringDataType;
 
 class StringDataTypeMock extends StringDataType
 {

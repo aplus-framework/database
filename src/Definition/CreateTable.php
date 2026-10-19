@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Definition;
+namespace Aplus\Database\Definition;
 
-use Framework\Database\Definition\Table\TableDefinition;
-use Framework\Database\Definition\Table\TableStatement;
+use Aplus\Database\Definition\Table\TableDefinition;
+use Aplus\Database\Definition\Table\TableStatement;
 use LogicException;
 
 /**

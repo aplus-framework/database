@@ -9,8 +9,8 @@
  */
 namespace Tests\Database\Manipulation;
 
+use Aplus\Database\Manipulation\Statement;
 use Closure;
-use Framework\Database\Manipulation\Statement;
 
 class StatementMock extends Statement
 {

@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Manipulation;
+namespace Aplus\Database\Manipulation;
 
 use Closure;
 use InvalidArgumentException;
@@ -19,7 +19,7 @@ use InvalidArgumentException;
  *
  * @package database
  */
-abstract class Statement extends \Framework\Database\Statement
+abstract class Statement extends \Aplus\Database\Statement
 {
     /**
      * Sets the statement options.

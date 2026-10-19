@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table;
 
-class TableStatementMock extends \Framework\Database\Definition\Table\TableStatement
+class TableStatementMock extends \Aplus\Database\Definition\Table\TableStatement
 {
     public function sql() : string
     {

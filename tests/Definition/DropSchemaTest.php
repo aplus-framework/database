@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition;
 
-use Framework\Database\Definition\DropSchema;
+use Aplus\Database\Definition\DropSchema;
 use Tests\Database\TestCase;
 
 final class DropSchemaTest extends TestCase

@@ -7,10 +7,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Framework\Database\Definition\Table\Indexes\Keys;
+namespace Aplus\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Constraint;
-use Framework\Database\Definition\Table\Indexes\Index;
+use Aplus\Database\Definition\Table\Constraint;
+use Aplus\Database\Definition\Table\Indexes\Index;
 
 /**
  * Class ConstraintKey.

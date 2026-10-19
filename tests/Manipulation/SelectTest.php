@@ -9,9 +9,9 @@
  */
 namespace Tests\Database\Manipulation;
 
+use Aplus\Database\Manipulation\Select;
+use Aplus\Database\Result\Result;
 use Closure;
-use Framework\Database\Manipulation\Select;
-use Framework\Database\Result\Result;
 use InvalidArgumentException;
 use Tests\Database\TestCase;
 

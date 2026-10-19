@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\PrimaryKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\PrimaryKey;
 use Tests\Database\TestCase;
 
 final class PrimaryKeyTest extends TestCase

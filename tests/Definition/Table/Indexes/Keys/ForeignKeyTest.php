@@ -9,7 +9,7 @@
  */
 namespace Tests\Database\Definition\Table\Indexes\Keys;
 
-use Framework\Database\Definition\Table\Indexes\Keys\ForeignKey;
+use Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey;
 use Tests\Database\TestCase;
 
 final class ForeignKeyTest extends TestCase
