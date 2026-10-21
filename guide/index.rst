@@ -58,7 +58,7 @@ construction. You can use all parameters:
 
 .. code-block:: php
 
-    use Framework\Database\Database;
+    use Aplus\Database\Database;
 
     $database = new Database($username, $password, $schema, $host, $port, $logger);
 
@@ -66,7 +66,7 @@ Or, pass the configurations as an array in the first parameter:
 
 .. code-block:: php
 
-    use Framework\Database\Database;
+    use Aplus\Database\Database;
 
     $database = new Database($config);
 
@@ -441,7 +441,7 @@ Let's see an example below:
 
 .. code-block:: php
 
-    use Framework\Database\Manipulation\LoadData;
+    use Aplus\Database\Manipulation\LoadData;
 
     $database->loadData()
              ->infile('/home/developer/users.csv')
@@ -542,7 +542,7 @@ columns and indexes in it:
 
 .. code-block:: php
 
-    use Framework\Database\Definition\Table\TableDefinition;
+    use Aplus\Database\Definition\Table\TableDefinition;
 
     $database->createTable('Users')
              ->definition(function (TableDefinition $def) {
@@ -579,7 +579,7 @@ Users table:
 
 .. code-block:: php
 
-    use Framework\Database\Definition\Table\TableDefinition;
+    use Aplus\Database\Definition\Table\TableDefinition;
 
     $database->alterTable('Users')
              ->add(function (TableDefinition $def) {
