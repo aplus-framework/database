@@ -54,52 +54,52 @@ registerArgumentsSet(
     'utf8mb4',
 );
 expectedArguments(
-    \Framework\Database\Database::setCollations(),
+    \Aplus\Database\Database::setCollations(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Definition\AlterSchema::charset(),
+    \Aplus\Database\Definition\AlterSchema::charset(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Definition\AlterTable::charset(),
+    \Aplus\Database\Definition\AlterTable::charset(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Definition\AlterTable::convertToCharset(),
+    \Aplus\Database\Definition\AlterTable::convertToCharset(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Definition\CreateSchema::charset(),
+    \Aplus\Database\Definition\CreateSchema::charset(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Definition\Table\Columns\String\StringDataType::charset(),
+    \Aplus\Database\Definition\Table\Columns\String\StringDataType::charset(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\LoadData::charset(),
+    \Aplus\Database\Manipulation\LoadData::charset(),
     0,
     argumentsSet('charsets')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Select::intoOutfile(),
+    \Aplus\Database\Manipulation\Select::intoOutfile(),
     1,
     argumentsSet('charsets')
 );
 registerArgumentsSet(
     'definition_alter_table_algo',
-    \Framework\Database\Definition\AlterTable::ALGO_COPY,
-    \Framework\Database\Definition\AlterTable::ALGO_DEFAULT,
-    \Framework\Database\Definition\AlterTable::ALGO_INPLACE,
-    \Framework\Database\Definition\AlterTable::ALGO_INSTANT,
-    \Framework\Database\Definition\AlterTable::ALGO_NOCOPY,
+    \Aplus\Database\Definition\AlterTable::ALGO_COPY,
+    \Aplus\Database\Definition\AlterTable::ALGO_DEFAULT,
+    \Aplus\Database\Definition\AlterTable::ALGO_INPLACE,
+    \Aplus\Database\Definition\AlterTable::ALGO_INSTANT,
+    \Aplus\Database\Definition\AlterTable::ALGO_NOCOPY,
     'COPY',
     'DEFAULT',
     'INPLACE',
@@ -107,130 +107,130 @@ registerArgumentsSet(
     'NOCOPY',
 );
 expectedArguments(
-    \Framework\Database\Definition\AlterTable::algorithm(),
+    \Aplus\Database\Definition\AlterTable::algorithm(),
     0,
     argumentsSet('definition_alter_table_algo')
 );
 registerArgumentsSet(
     'definition_alter_table_lock',
-    \Framework\Database\Definition\AlterTable::LOCK_DEFAULT,
-    \Framework\Database\Definition\AlterTable::LOCK_EXCLUSIVE,
-    \Framework\Database\Definition\AlterTable::LOCK_NONE,
-    \Framework\Database\Definition\AlterTable::LOCK_SHARED,
+    \Aplus\Database\Definition\AlterTable::LOCK_DEFAULT,
+    \Aplus\Database\Definition\AlterTable::LOCK_EXCLUSIVE,
+    \Aplus\Database\Definition\AlterTable::LOCK_NONE,
+    \Aplus\Database\Definition\AlterTable::LOCK_SHARED,
     'DEFAULT',
     'EXCLUSIVE',
     'NONE',
     'SHARED',
 );
 expectedArguments(
-    \Framework\Database\Definition\AlterTable::lock(),
+    \Aplus\Database\Definition\AlterTable::lock(),
     0,
     argumentsSet('definition_alter_table_lock')
 );
 registerArgumentsSet(
     'manipulation_delete_opt',
-    \Framework\Database\Manipulation\Delete::OPT_IGNORE,
-    \Framework\Database\Manipulation\Delete::OPT_LOW_PRIORITY,
-    \Framework\Database\Manipulation\Delete::OPT_QUICK,
+    \Aplus\Database\Manipulation\Delete::OPT_IGNORE,
+    \Aplus\Database\Manipulation\Delete::OPT_LOW_PRIORITY,
+    \Aplus\Database\Manipulation\Delete::OPT_QUICK,
     'IGNORE',
     'LOW_PRIORITY',
     'QUICK',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Delete::options(),
+    \Aplus\Database\Manipulation\Delete::options(),
     0,
     argumentsSet('manipulation_delete_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Delete::options(),
+    \Aplus\Database\Manipulation\Delete::options(),
     1,
     argumentsSet('manipulation_delete_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Delete::options(),
+    \Aplus\Database\Manipulation\Delete::options(),
     2,
     argumentsSet('manipulation_delete_opt')
 );
 registerArgumentsSet(
     'manipulation_insert_opt',
-    \Framework\Database\Manipulation\Insert::OPT_DELAYED,
-    \Framework\Database\Manipulation\Insert::OPT_HIGH_PRIORITY,
-    \Framework\Database\Manipulation\Insert::OPT_IGNORE,
-    \Framework\Database\Manipulation\Insert::OPT_LOW_PRIORITY,
+    \Aplus\Database\Manipulation\Insert::OPT_DELAYED,
+    \Aplus\Database\Manipulation\Insert::OPT_HIGH_PRIORITY,
+    \Aplus\Database\Manipulation\Insert::OPT_IGNORE,
+    \Aplus\Database\Manipulation\Insert::OPT_LOW_PRIORITY,
     'DELAYED',
     'HIGH_PRIORITY',
     'IGNORE',
     'LOW_PRIORITY',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Insert::options(),
+    \Aplus\Database\Manipulation\Insert::options(),
     0,
     argumentsSet('manipulation_insert_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Insert::options(),
+    \Aplus\Database\Manipulation\Insert::options(),
     1,
     argumentsSet('manipulation_insert_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Insert::options(),
+    \Aplus\Database\Manipulation\Insert::options(),
     2,
     argumentsSet('manipulation_insert_opt')
 );
 registerArgumentsSet(
     'manipulation_load_data_opt',
-    \Framework\Database\Manipulation\LoadData::OPT_CONCURRENT,
-    \Framework\Database\Manipulation\LoadData::OPT_LOCAL,
-    \Framework\Database\Manipulation\LoadData::OPT_LOW_PRIORITY,
+    \Aplus\Database\Manipulation\LoadData::OPT_CONCURRENT,
+    \Aplus\Database\Manipulation\LoadData::OPT_LOCAL,
+    \Aplus\Database\Manipulation\LoadData::OPT_LOW_PRIORITY,
     'CONCURRENT',
     'LOCAL',
     'LOW_PRIORITY',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\LoadData::options(),
+    \Aplus\Database\Manipulation\LoadData::options(),
     0,
     argumentsSet('manipulation_load_data_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\LoadData::options(),
+    \Aplus\Database\Manipulation\LoadData::options(),
     1,
     argumentsSet('manipulation_load_data_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\LoadData::options(),
+    \Aplus\Database\Manipulation\LoadData::options(),
     2,
     argumentsSet('manipulation_load_data_opt')
 );
 registerArgumentsSet(
     'manipulation_replace_opt',
-    \Framework\Database\Manipulation\Replace::OPT_DELAYED,
-    \Framework\Database\Manipulation\Replace::OPT_LOW_PRIORITY,
+    \Aplus\Database\Manipulation\Replace::OPT_DELAYED,
+    \Aplus\Database\Manipulation\Replace::OPT_LOW_PRIORITY,
     'DELAYED',
     'LOW_PRIORITY',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Replace::options(),
+    \Aplus\Database\Manipulation\Replace::options(),
     0,
     argumentsSet('manipulation_replace_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Replace::options(),
+    \Aplus\Database\Manipulation\Replace::options(),
     1,
     argumentsSet('manipulation_replace_opt')
 );
 registerArgumentsSet(
     'manipulation_select_opt',
-    \Framework\Database\Manipulation\Select::OPT_ALL,
-    \Framework\Database\Manipulation\Select::OPT_DISTINCT,
-    \Framework\Database\Manipulation\Select::OPT_DISTINCTROW,
-    \Framework\Database\Manipulation\Select::OPT_HIGH_PRIORITY,
-    \Framework\Database\Manipulation\Select::OPT_SQL_BIG_RESULT,
-    \Framework\Database\Manipulation\Select::OPT_SQL_BUFFER_RESULT,
-    \Framework\Database\Manipulation\Select::OPT_SQL_CACHE,
-    \Framework\Database\Manipulation\Select::OPT_SQL_CALC_FOUND_ROWS,
-    \Framework\Database\Manipulation\Select::OPT_SQL_NO_CACHE,
-    \Framework\Database\Manipulation\Select::OPT_SQL_SMALL_RESULT,
-    \Framework\Database\Manipulation\Select::OPT_STRAIGHT_JOIN,
+    \Aplus\Database\Manipulation\Select::OPT_ALL,
+    \Aplus\Database\Manipulation\Select::OPT_DISTINCT,
+    \Aplus\Database\Manipulation\Select::OPT_DISTINCTROW,
+    \Aplus\Database\Manipulation\Select::OPT_HIGH_PRIORITY,
+    \Aplus\Database\Manipulation\Select::OPT_SQL_BIG_RESULT,
+    \Aplus\Database\Manipulation\Select::OPT_SQL_BUFFER_RESULT,
+    \Aplus\Database\Manipulation\Select::OPT_SQL_CACHE,
+    \Aplus\Database\Manipulation\Select::OPT_SQL_CALC_FOUND_ROWS,
+    \Aplus\Database\Manipulation\Select::OPT_SQL_NO_CACHE,
+    \Aplus\Database\Manipulation\Select::OPT_SQL_SMALL_RESULT,
+    \Aplus\Database\Manipulation\Select::OPT_STRAIGHT_JOIN,
     'ALL',
     'DISTINCT',
     'DISTINCTROW',
@@ -244,102 +244,102 @@ registerArgumentsSet(
     'STRAIGHT_JOIN',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Select::options(),
+    \Aplus\Database\Manipulation\Select::options(),
     0,
     argumentsSet('manipulation_select_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Select::options(),
+    \Aplus\Database\Manipulation\Select::options(),
     1,
     argumentsSet('manipulation_select_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Select::options(),
+    \Aplus\Database\Manipulation\Select::options(),
     2,
     argumentsSet('manipulation_select_opt')
 );
 registerArgumentsSet(
     'manipulation_update_opt',
-    \Framework\Database\Manipulation\Update::OPT_IGNORE,
-    \Framework\Database\Manipulation\Update::OPT_LOW_PRIORITY,
+    \Aplus\Database\Manipulation\Update::OPT_IGNORE,
+    \Aplus\Database\Manipulation\Update::OPT_LOW_PRIORITY,
     'IGNORE',
     'LOW_PRIORITY',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Update::options(),
+    \Aplus\Database\Manipulation\Update::options(),
     0,
     argumentsSet('manipulation_update_opt')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Update::options(),
+    \Aplus\Database\Manipulation\Update::options(),
     1,
     argumentsSet('manipulation_update_opt')
 );
 registerArgumentsSet(
     'manipulation_with_opt',
-    \Framework\Database\Manipulation\With::OPT_RECURSIVE,
+    \Aplus\Database\Manipulation\With::OPT_RECURSIVE,
     'RECURSIVE',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\With::options(),
+    \Aplus\Database\Manipulation\With::options(),
     0,
     argumentsSet('manipulation_with_opt')
 );
 registerArgumentsSet(
     'foreign_key_opt',
-    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_CASCADE,
-    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_NO_ACTION,
-    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_RESTRICT,
-    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_SET_NULL,
+    \Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_CASCADE,
+    \Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_NO_ACTION,
+    \Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_RESTRICT,
+    \Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey::OPT_SET_NULL,
     'CASCADE',
     'NO ACTION',
     'RESTRICT',
     'SET NULL',
 );
 expectedArguments(
-    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::onDelete(),
+    \Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey::onDelete(),
     0,
     argumentsSet('foreign_key_opt')
 );
 expectedArguments(
-    \Framework\Database\Definition\Table\Indexes\Keys\ForeignKey::onUpdate(),
+    \Aplus\Database\Definition\Table\Indexes\Keys\ForeignKey::onUpdate(),
     0,
     argumentsSet('foreign_key_opt')
 );
 registerArgumentsSet(
     'table_options',
-    \Framework\Database\Definition\Table\TableStatement::OPT_AUTO_INCREMENT,
-    \Framework\Database\Definition\Table\TableStatement::OPT_AVG_ROW_LENGTH,
-    \Framework\Database\Definition\Table\TableStatement::OPT_CHARSET,
-    \Framework\Database\Definition\Table\TableStatement::OPT_CHECKSUM,
-    \Framework\Database\Definition\Table\TableStatement::OPT_COLLATE,
-    \Framework\Database\Definition\Table\TableStatement::OPT_COMMENT,
-    \Framework\Database\Definition\Table\TableStatement::OPT_CONNECTION,
-    \Framework\Database\Definition\Table\TableStatement::OPT_DATA_DIRECTORY,
-    \Framework\Database\Definition\Table\TableStatement::OPT_DELAY_KEY_WRITE,
-    \Framework\Database\Definition\Table\TableStatement::OPT_ENCRYPTED,
-    \Framework\Database\Definition\Table\TableStatement::OPT_ENCRYPTION_KEY_ID,
-    \Framework\Database\Definition\Table\TableStatement::OPT_ENGINE,
-    \Framework\Database\Definition\Table\TableStatement::OPT_IETF_QUOTES,
-    \Framework\Database\Definition\Table\TableStatement::OPT_INDEX_DIRECTORY,
-    \Framework\Database\Definition\Table\TableStatement::OPT_INSERT_METHOD,
-    \Framework\Database\Definition\Table\TableStatement::OPT_KEY_BLOCK_SIZE,
-    \Framework\Database\Definition\Table\TableStatement::OPT_MAX_ROWS,
-    \Framework\Database\Definition\Table\TableStatement::OPT_MIN_ROWS,
-    \Framework\Database\Definition\Table\TableStatement::OPT_PACK_KEYS,
-    \Framework\Database\Definition\Table\TableStatement::OPT_PAGE_CHECKSUM,
-    \Framework\Database\Definition\Table\TableStatement::OPT_PAGE_COMPRESSED,
-    \Framework\Database\Definition\Table\TableStatement::OPT_PAGE_COMPRESSION_LEVEL,
-    \Framework\Database\Definition\Table\TableStatement::OPT_PASSWORD,
-    \Framework\Database\Definition\Table\TableStatement::OPT_ROW_FORMAT,
-    \Framework\Database\Definition\Table\TableStatement::OPT_SEQUENCE,
-    \Framework\Database\Definition\Table\TableStatement::OPT_STATS_AUTO_RECALC,
-    \Framework\Database\Definition\Table\TableStatement::OPT_STATS_PERSISTENT,
-    \Framework\Database\Definition\Table\TableStatement::OPT_STATS_SAMPLE_PAGES,
-    \Framework\Database\Definition\Table\TableStatement::OPT_TABLESPACE,
-    \Framework\Database\Definition\Table\TableStatement::OPT_TRANSACTIONAL,
-    \Framework\Database\Definition\Table\TableStatement::OPT_UNION,
-    \Framework\Database\Definition\Table\TableStatement::OPT_WITH_SYSTEM_VERSIONING,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_AUTO_INCREMENT,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_AVG_ROW_LENGTH,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_CHARSET,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_CHECKSUM,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_COLLATE,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_COMMENT,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_CONNECTION,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_DATA_DIRECTORY,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_DELAY_KEY_WRITE,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_ENCRYPTED,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_ENCRYPTION_KEY_ID,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_ENGINE,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_IETF_QUOTES,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_INDEX_DIRECTORY,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_INSERT_METHOD,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_KEY_BLOCK_SIZE,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_MAX_ROWS,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_MIN_ROWS,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_PACK_KEYS,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_PAGE_CHECKSUM,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_PAGE_COMPRESSED,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_PAGE_COMPRESSION_LEVEL,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_PASSWORD,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_ROW_FORMAT,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_SEQUENCE,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_STATS_AUTO_RECALC,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_STATS_PERSISTENT,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_STATS_SAMPLE_PAGES,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_TABLESPACE,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_TRANSACTIONAL,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_UNION,
+    \Aplus\Database\Definition\Table\TableStatement::OPT_WITH_SYSTEM_VERSIONING,
     'AUTO_INCREMENT',
     'AVG_ROW_LENGTH',
     'CHARSET',
@@ -374,7 +374,7 @@ registerArgumentsSet(
     'WITH SYSTEM VERSIONING',
 );
 expectedArguments(
-    \Framework\Database\Definition\Table\TableStatement::option(),
+    \Aplus\Database\Definition\Table\TableStatement::option(),
     0,
     argumentsSet('table_options')
 );
@@ -398,64 +398,64 @@ registerArgumentsSet(
     'IS NOT NULL',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Traits\Having::having(),
+    \Aplus\Database\Manipulation\Traits\Having::having(),
     1,
     argumentsSet('operators')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Traits\Having::orHaving(),
+    \Aplus\Database\Manipulation\Traits\Having::orHaving(),
     1,
     argumentsSet('operators')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Traits\Where::where(),
+    \Aplus\Database\Manipulation\Traits\Where::where(),
     1,
     argumentsSet('operators')
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Traits\Where::orWhere(),
+    \Aplus\Database\Manipulation\Traits\Where::orWhere(),
     1,
     argumentsSet('operators')
 );
 registerArgumentsSet(
     'explain_delete',
-    \Framework\Database\Manipulation\Delete::EXP_EXTENDED,
-    \Framework\Database\Manipulation\Delete::EXP_FORMAT_JSON,
-    \Framework\Database\Manipulation\Delete::EXP_PARTITIONS,
+    \Aplus\Database\Manipulation\Delete::EXP_EXTENDED,
+    \Aplus\Database\Manipulation\Delete::EXP_FORMAT_JSON,
+    \Aplus\Database\Manipulation\Delete::EXP_PARTITIONS,
     'EXTENDED',
     'FORMAT=JSON',
     'PARTITIONS',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Delete::explain(),
+    \Aplus\Database\Manipulation\Delete::explain(),
     0,
     argumentsSet('explain_delete')
 );
 registerArgumentsSet(
     'explain_select',
-    \Framework\Database\Manipulation\Select::EXP_EXTENDED,
-    \Framework\Database\Manipulation\Select::EXP_FORMAT_JSON,
-    \Framework\Database\Manipulation\Select::EXP_PARTITIONS,
+    \Aplus\Database\Manipulation\Select::EXP_EXTENDED,
+    \Aplus\Database\Manipulation\Select::EXP_FORMAT_JSON,
+    \Aplus\Database\Manipulation\Select::EXP_PARTITIONS,
     'EXTENDED',
     'FORMAT=JSON',
     'PARTITIONS',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Select::explain(),
+    \Aplus\Database\Manipulation\Select::explain(),
     0,
     argumentsSet('explain_select')
 );
 registerArgumentsSet(
     'explain_update',
-    \Framework\Database\Manipulation\Update::EXP_EXTENDED,
-    \Framework\Database\Manipulation\Update::EXP_FORMAT_JSON,
-    \Framework\Database\Manipulation\Update::EXP_PARTITIONS,
+    \Aplus\Database\Manipulation\Update::EXP_EXTENDED,
+    \Aplus\Database\Manipulation\Update::EXP_FORMAT_JSON,
+    \Aplus\Database\Manipulation\Update::EXP_PARTITIONS,
     'EXTENDED',
     'FORMAT=JSON',
     'PARTITIONS',
 );
 expectedArguments(
-    \Framework\Database\Manipulation\Update::explain(),
+    \Aplus\Database\Manipulation\Update::explain(),
     0,
     argumentsSet('explain_update')
 );
